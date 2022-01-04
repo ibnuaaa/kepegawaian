@@ -1,0 +1,90 @@
+.loader {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  margin: auto;
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+  /* margin: -75px 0 0 -75px; */
+  border: 6px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 6px solid #757575;
+  /* width: 60px;
+  height: 60px; */
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 }
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom {
+  from{ bottom:-100px; opacity:0 }
+  to{ bottom:0; opacity:1 }
+}
+
+@media (max-width: 768px) {
+    .loader {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid #757575;
+      left: 0px;
+      right: 0px;
+      top: 0px;
+      bottom: 0px;
+      margin: auto;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .loader {
+      width: 35px;
+      height: 35px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #757575;
+      left: 0px;
+      right: 0px;
+      top: 0px;
+      bottom: 0px;
+      margin: auto;
+    }
+}
+
+@media (min-width: 991.98px) {
+    .loader {
+        width: 60px;
+        height: 60px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #757575;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        margin: auto;
+    }
+}
