@@ -4,70 +4,50 @@
 @section('bodyClass', 'fixed-header menu-pin menu-behind')
 
 @section('content')
-    <div class="container-fluid container-fixed-lg">
-        <nav class="navbar navbar-default bg-transparent sm-padding-10 full-width p-t-0 p-b-0 m-b-0" role="navigation">
-            <div class="container-fluid full-width">
-                <div class="navbar-header text-center">
-                    <button type="button" class="navbar-toggle collapsed btn btn-link no-padding" data-toggle="collapse" data-target="#sub-nav">
-                        <i class="pg pg-more v-align-middle"></i>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <ul class="navbar-nav d-flex flex-row">
-                                <li class="nav-item">
-                                    <a href="{{ url('/position/new') }}"><i class="fas fa-plus"></i> Create</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
-                            <ul class="navbar-nav d-flex flex-row">
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
-                            <ul class="navbar-nav d-flex flex-row justify-content-sm-end">
-                                <li class="nav-item"><a href="#" class="p-r-10" onclick="$.Pages.setFullScreen(document.querySelector('html'));"><i class="fa fa-expand"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <div class="card card-white">
-            <div class="card-header ">
-                <div class="card-title">Position Data</div><br>
-            </div>
-            <div class="card-body">
-                @component('components.table', ['data' => $data, 'props' => []])
-                    @scopedslot('head', ($item))
-                        @if($item->label === 'ID')
-                            <th style="width: 3%">{{ $item->label }}</th>
-                        @elseif ($item->label === 'ACTION')
-                            <th style="width: 112px">{{ $item->label }}</th>
-                        @else
-                            <th style="width:{{$item->width}}px;">
-                                {{ $item->label }}
-                            </th>
-                        @endif
-                    @endscopedslot
-                    @scopedslot('record', ($item, $props))
-                        <tr>
-                            <td>
-                                <p style="white-space: normal !important; padding-left: {{$item->eselon_id * 20}}px;">
-                                    {{ $item->name }}
-                                </p>
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                    <a href="{{ url('/position/'.$item->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                    @endscopedslot
-                @endcomponent
-            </div>
+  <!-- PAGE-HEADER -->
+  <div class="page-header">
+      <h1 class="page-title">Jabatan</h1>
+      <div>
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Jabatan</li>
+          </ol>
+      </div>
+  </div>
+  <!-- PAGE-HEADER END -->
+
+  <!-- ROW-1 -->
+  <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+            @component('components.table', ['data' => $data, 'props' => []])
+                @scopedslot('head', ($item))
+                    @if($item->label === 'ID')
+                        <th style="width: 3%">{{ $item->label }}</th>
+                    @elseif ($item->label === 'ACTION')
+                        <th style="width: 112px">{{ $item->label }}</th>
+                    @else
+                        <th style="width:{{$item->width}}px;">
+                            {{ $item->label }}
+                        </th>
+                    @endif
+                @endscopedslot
+                @scopedslot('record', ($item, $props))
+                    <tr>
+                        <td>
+                            <p style="white-space: normal !important; padding-left: {{$item->eselon_id * 20}}px;">
+                                {{ $item->name }}
+                            </p>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ url('/position/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                @endscopedslot
+            @endcomponent
         </div>
     </div>
+    <!-- ROW-1 END -->
+</div>
 @endsection
-

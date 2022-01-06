@@ -1,98 +1,72 @@
-<!-- BEGIN SIDEBPANEL-->
-<nav class="page-sidebar" data-pages="sidebar">
-    <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
-    <div class="sidebar-overlay-slide from-top" id="appMenu">
-        <div class="row">
-            <div class="col-xs-6 no-padding">
-                <a href="#" class="p-l-40"><img src="/assets/img/demo/social_app.svg" alt="socail"></a>
+
+        <!--APP-SIDEBAR-->
+        <div class="sticky">
+            <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+            <div class="app-sidebar">
+                <div class="side-header">
+                    <a class="header-brand1" href="index.html">
+                        <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
+                        <img src="../assets/images/brand/logo-1.png" class="header-brand-img toggle-logo" alt="logo">
+                        <img src="../assets/images/brand/logo-2.png" class="header-brand-img light-logo" alt="logo">
+                        <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
+                    </a>
+                    <!-- LOGO -->
+                </div>
+                <div class="main-sidemenu">
+                    <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"/></svg></div>
+                    <ul class="side-menu">
+                        <li class="sub-category">
+                            <h3>Modul Utama</h3>
+                        </li>
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/'); !!}"><i class="side-menu__icon fe fe-home"></i><span class="side-menu__label">Dashboard</span></a>
+                        </li>
+                        @if (getPermissions('user')['checked'])
+                        <li class="sub-category">
+                            <h3>Manajemen Pengguna</h3>
+                        </li>
+
+
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Apps</span><i class="angle fe fe-chevron-right"></i></a>
+                            <ul class="slide-menu">
+                              @if (getPermissions('profile')['checked'])
+                              <li><a href="{!! url('/profile'); !!}" class="slide-item"> Profil User</a></li>
+                              @endif
+                              @if (getPermissions('position')['checked'])
+                              <li><a href="{!! url('/position'); !!}" class="slide-item"> Jabatan</a></li>
+                              @endif
+                              @if (getPermissions('change_password')['checked'])
+                              <li><a href="{!! url('/change_password'); !!}" class="slide-item"> Ganti Password</a></li>
+                              @endif
+                              @if (getPermissions('user')['checked'])
+                              <li><a href="{!! url('/user'); !!}" class="slide-item"> Semua Admin</a></li>
+                              @endif
+                            </ul>
+                        </li>
+                        @endif
+                        <li class="sub-category">
+                            <h3>Laporan</h3>
+                        </li>
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Divisi A</span><i class="angle fe fe-chevron-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a href="#" class="slide-item"> Laporan 1</a></li>
+                                <li><a href="#" class="slide-item"> Laporan 2</a></li>
+                                <li><a href="#" class="slide-item"> Laporan 3</a></li>
+                            </ul>
+                        </li>
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Divisi B</span><i class="angle fe fe-chevron-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a href="#" class="slide-item"> Laporan 1</a></li>
+                                <li><a href="#" class="slide-item"> Laporan 2</a></li>
+                                <li><a href="#" class="slide-item"> Laporan 3</a></li>
+                            </ul>
+                        </li>
+                      </ul>
+                    <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/></svg></div>
+                </div>
             </div>
-            <div class="col-xs-6 no-padding">
-                <a href="#" class="p-l-10"><img src="/assets/img/demo/email_app.svg" alt="socail"></a>
-            </div>
+            <!--/APP-SIDEBAR-->
         </div>
-        <div class="row">
-            <div class="col-xs-6 m-t-20 no-padding">
-                <a href="#" class="p-l-40"><img src="/assets/img/demo/calendar_app.svg" alt="socail"></a>
-            </div>
-            <div class="col-xs-6 m-t-20 no-padding">
-                <a href="#" class="p-l-10"><img src="/assets/img/demo/add_more.svg" alt="socail"></a>
-            </div>
-        </div>
-    </div>
-    <!-- END SIDEBAR MENU TOP TRAY CONTENT-->
-    <!-- BEGIN SIDEBAR MENU HEADER-->
-    <div class="sidebar-header">
-        <img src="/assets/img/logo_white.png" alt="logo" class="brand" data-src="/assets/img/logo_white.png" data-src-retina="/assets/img/logo_white_2x.png" width="78" height="22">
-        <div class="sidebar-header-controls">
-            <button type="button" class="btn btn-xs sidebar-slide-toggle btn-link m-l-20" data-pages-toggle="#appMenu"><i class="fa fa-angle-down fs-16"></i>
-            </button>
-            <button type="button" class="btn btn-link d-lg-inline-block d-xlg-inline-block d-md-inline-block d-sm-none d-none" data-toggle-pin="sidebar"><i class="fa fs-12"></i>
-            </button>
-        </div>
-    </div>
-    <!-- END SIDEBAR MENU HEADER-->
-    <!-- START SIDEBAR MENU -->
-    <div class="sidebar-menu">
-        <!-- BEGIN SIDEBAR MENU ITEMS-->
-        <ul class="menu-items">
-
-            <li class="m-t-30 ">
-                <a href="{!! url('/'); !!}" class="detailed">
-                    <span class="title">Dashboard</span>
-                </a>
-                <span class="icon-thumbnail"><i class="far fa-file"></i></span>
-            </li>
-
-            @if (getPermissions('user')['checked'])
-            <li class="">
-                <a href="javascript:;">
-                    <span class="title">User</span>
-                </a>
-                <span class="icon-thumbnail"><i class="fas fa-chevron-right"></i></span>
-                <ul class="sub-menu">
-                    @if (getPermissions('profile')['checked'])
-                    <li>
-                        <a href="{!! url('/profile'); !!}">Profil User</a>
-                        <span class="icon-thumbnail"><i class="fas fa-users"></i></span>
-                    </li>
-                    @endif
-                    @if (getPermissions('position')['checked'])
-                    <li>
-                        <a href="{!! url('/position'); !!}">Jabatan</a>
-                        <span class="icon-thumbnail"><i class="fas fa-tag"></i></span>
-                    </li>
-                    @endif
-                    @if (getPermissions('change_password')['checked'])
-                    <li>
-                        <a href="{!! url('/change_password'); !!}">Ganti Password</a>
-                        <span class="icon-thumbnail"><i class="fas fa-lock"></i></span>
-                    </li>
-                    @endif
-                    @if (getPermissions('user')['checked'])
-                    <li>
-                        <a href="{!! url('/user'); !!}">Semua Admin</a>
-                        <span class="icon-thumbnail"><i class="fas fa-user-friends"></i></span>
-                    </li>
-                    @endif
-                </ul>
-            </li>
-            @endif
-
-            <li class="">
-                <a href="{!! url('/logout'); !!}" class="detailed">
-                    <span class="title">Logout</span>
-                    <span class="details">Exit from the app</span>
-                </a>
-                <span class="icon-thumbnail"><i class="fas fa-sign-out-alt"></i></span>
-            </li>
-
-
-
-        </ul>
-        <div class="clearfix"></div>
-    </div>
-    <!-- END SIDEBAR MENU -->
-
-
-</nav>
-<!-- END SIDEBAR -->

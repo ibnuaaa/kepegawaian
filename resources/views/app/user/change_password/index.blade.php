@@ -4,10 +4,30 @@
 @section('bodyClass', 'fixed-header dashboard menu-pin menu-behind')
 
 @section('content')
-    <div class="container-fluid container-fixed-lg p-t-10">
-        <div class="card card-white">
-            <div class="card-body">
-                <form id="changePasswordForm">
+<!-- PAGE-HEADER -->
+<div class="page-header">
+    <h1 class="page-title">Ganti Password</h1>
+    <div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Ganti password</li>
+        </ol>
+    </div>
+</div>
+<!-- PAGE-HEADER END -->
+
+<!-- ROW-1 -->
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+              <div class="card card-white">
+                  <div class="card-header ">
+                      <div class="card-title">Form</div><br>
+                  </div>
+                  <div class="card-body">
+
+                    <form id="changePasswordForm">
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
@@ -55,9 +75,14 @@
                         </div>
                     </div>
                 </form>
-            </div>
+                  </div>
+
+              </div>
+          </div>
         </div>
     </div>
+    <!-- ROW-1 END -->
+</div>
 @endsection
 
 @section('script')

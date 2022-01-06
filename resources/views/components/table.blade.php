@@ -1,118 +1,134 @@
-<div class="blade-datatable table-responsive">
-    <div class="row blade-datatable-header">
-        <div class="col-12 blade-datatable-header-panel">
-            <div class="row">
-                <div class="col-8">
-                    <div class="blade-datatable-sort">
-                        <p>Show</p>
-                        <div class="dropdown dropdown-default">
-                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ isset($data['selected']) ? $data['selected'] : 10 }}
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{ fullUri([$data['key']."-show" => 10]) }}">10</a>
-                                <a class="dropdown-item" href="{{ fullUri([$data['key']."-show" => 25]) }}">25</a>
-                                <a class="dropdown-item" href="{{ fullUri([$data['key']."-show" => 50]) }}">50</a>
-                                <a class="dropdown-item" href="{{ fullUri([$data['key']."-show" => 100]) }}">100</a>
-                            </div>
+<div class="row row-sm">
+   <div class="col-lg-12">
+      <div class="card">
+         <div class="card-body">
+            <div class="table-responsive">
+               <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                  <div class="row">
+                     <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="responsive-datatable_length">
+                           <label>
+                              Show
+                              <select name="country" class="form-control form-select form-select-md" data-bs-placeholder="Select Country" onChange="getSelected(this)">
+                                  <option value="{{ fullUri([$data['key']."-show" => 10]) }}" {{ $data['selected'] == 10 ? 'selected=selected' : '' }}>10</option>
+                                  <option value="{{ fullUri([$data['key']."-show" => 25]) }}" {{ $data['selected'] == 25 ? 'selected=selected' : '' }}>25</option>
+                                  <option value="{{ fullUri([$data['key']."-show" => 50]) }}" {{ $data['selected'] == 50 ? 'selected=selected"' : '' }}>50</option>
+                                  <option value="{{ fullUri([$data['key']."-show" => 100]) }}" {{ $data['selected'] == 100 ? 'selected=selected' : '' }}>100</option>
+                              </select>
+                              entries
+                           </label>
                         </div>
-                        <p>Entries</p>
-                    </div>
-                </div>
-                <?php
-                if (!isset($data['unshow_filter'])) {
-                    ?>
-                    <div class="col-4">
-                        <form action="{{ fullUri() }}">
-                            <div class="input-group">
-                            <input  name="{{ $data['key'] }}-filter_search"
-                                placeholder="Search... {{ !empty($data['placeholder_search']) ? '('.$data['placeholder_search'].')' : '' }}"
-                                value="{{ isset($data['filter_search']) ? $data['filter_search'] : '' }}"
-                                class="form-control"
-                                type="text">
-                            <div class="input-group-append">
-                                <button type="submit" class="input-group-text info pointer"><i class="fa fa-search"></i></button>
-                            </div>
-                            </div>
-                        </from>
-                    </div>
-                    <?php
-                }
-                ?>
+                     </div>
+                     <div class="col-sm-12 col-md-6">
+                        <div id="responsive-datatable_filter" class="dataTables_filter"><label>
+                          <?php
+                          if (!isset($data['unshow_filter'])) {
+                              ?>
+                                  <form action="{{ fullUri() }}">
+                                      <div class="input-group">
+                                      <input  name="{{ $data['key'] }}-filter_search"
+                                          placeholder="Search... {{ !empty($data['placeholder_search']) ? '('.$data['placeholder_search'].')' : '' }}"
+                                          value="{{ isset($data['filter_search']) ? $data['filter_search'] : '' }}"
+                                          class="form-control"
+                                          type="text">
+                                      </div>
+                                  </from>
+                              <?php
+                          }
+                          ?>
+                        </label></div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <table class="table table-bordered text-nowrap border-bottom dataTable no-footer" id="responsive-datatable" role="grid" aria-describedby="responsive-datatable_info">
+                           <thead>
+                             <tr>
+                                 @foreach ($data['heads'] as $item)
+                                     @if(isset($head))
+                                         {{ $head($item) }}
+                                     @endif
+                                 @endforeach
+                             </tr>
+                           </thead>
+                           <tbody>
+                             @foreach ($data['records'] as $key => $item)
+                                 <?php
+                                     $take = 10;
+                                     if (!empty($data['selected'])) $take = $data['selected'];
+                                     $number = (($data['pageNow'] - 1)  * $take) + $key + 1 ;
+                                 ?>
+                                 @if(isset($record))
+                                     {{ $record($item, $props = isset($props) ? $props : [], $number, $data) }}
+                                 @endif
+                             @endforeach
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info" id="responsive-datatable_info" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
+                     </div>
+                     <div class="col-sm-12 col-md-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="responsive-datatable_paginate">
+
+                           <ul class="pagination">
+
+
+
+                              <li class="paginate_button page-item previous" id="responsive-datatable_previous">
+                                  @if (isset($data['paginate']->paginationNumber[0]['page']) && $data['pageNow'] <= $data['paginate']->paginationNumber[0]['page'])
+                                      <a aria-controls="responsive-datatable" data-dt-idx="0" tabindex="0" class="page-link">
+                                  @else
+                                      <a href="{{ fullUri([$data['key']."-page" => $data['pageNow'] - 1]) }}" aria-controls="responsive-datatable" data-dt-idx="0" tabindex="0" class="page-link">
+                                  @endif
+                                  Sebelumnya
+                                  </a>
+                              </li>
+
+                              @foreach ($data['paginate']->paginationNumber as $key => $value)
+                                  @if ($value['page'] == 0)
+                                      <li class="paginate_button page-item">
+                                          <a aria-controls="responsive-datatable" data-dt-idx="{{$key + 1}}" tabindex="0" class="page-link" >{{ $value['name'] }}</a>
+                                  @else
+                                      @if ($value['page'] == $data['pageNow'])
+                                          <li class="paginate_button page-item active">
+                                      @else
+                                          <li class="paginate_button page-item">
+                                      @endif
+                                      <a aria-controls="responsive-datatable" data-dt-idx="1" tabindex="0" class="page-link" href="{{ fullUri([$data['key']."-page" => $value['page']]) }}">{{ $value['name'] }}</a>
+                                  @endif
+
+                                  </li>
+                              @endforeach
+                              </li>
+
+
+                              <li class="paginate_button page-item next" id="responsive-datatable_next">
+                                  @if ($data['pageNow'] >= $data['paginate']->pages)
+                                      <a aria-controls="responsive-datatable" data-dt-idx="{{$key + 1}}" tabindex="0" class="page-link">
+                                  @else
+                                      <a aria-controls="responsive-datatable" data-dt-idx="{{$key + 1}}" tabindex="0" class="page-link" href="{{ fullUri([$data['key']."-page" => $data['pageNow'] + 1]) }}">
+                                  @endif
+                                  Selanjutnya
+                                  </a>
+                              </li>
+
+                           </ul>
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
-        </div>
-    </div>
-    <table class="table table-condensed table-bordered" style="width: 1200px !important; max-width: none;">
-        <thead>
-            <tr>
-                @foreach ($data['heads'] as $item)
-                    @if(isset($head))
-                        {{ $head($item) }}
-                    @endif
-                @endforeach
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($data['records'] as $key => $item)
-
-                <?php
-
-                    $take = 10;
-                    if (!empty($data['selected'])) $take = $data['selected'];
-
-                    $number = (($data['pageNow'] - 1)  * $take) + $key + 1 ;
-
-                ?>
-
-                @if(isset($record))
-                    {{ $record($item, $props = isset($props) ? $props : [], $number, $data) }}
-                @endif
-            @endforeach
-        </tbody>
-    </table>
-    <div class="row blade-datatable-footer">
-        <div class="blade-datatable-footer-panel">
-            <div class="blade-datatable-paginate">
-                <ul class="row" style="list-style: none;">
-                    <li class="paginate_button previous disabled">
-                        @if (isset($data['paginate']->paginationNumber[0]['page']) && $data['pageNow'] <= $data['paginate']->paginationNumber[0]['page'])
-                            <a>
-                        @else
-                            <a href="{{ fullUri([$data['key']."-page" => $data['pageNow'] - 1]) }}">
-                        @endif
-                            <i class="fas fa-chevron-left"></i>
-                        </a>
-                    </li>
-                    @foreach ($data['paginate']->paginationNumber as $value)
-                        @if ($value['page'] == 0)
-                            <li class="paginate_button">
-                                <a>{{ $value['name'] }}</a>
-                        @else
-                            @if ($value['page'] == $data['pageNow'])
-                                <li class="paginate_button active">
-                            @else
-                                <li class="paginate_button">
-                            @endif
-                            <a href="{{ fullUri([$data['key']."-page" => $value['page']]) }}">{{ $value['name'] }}</a>
-                        @endif
-                        </li>
-                    @endforeach
-                    <li class="paginate_button next">
-                        @if ($data['pageNow'] >= $data['paginate']->pages)
-                            <a>
-                        @else
-                            <a href="{{ fullUri([$data['key']."-page" => $data['pageNow'] + 1]) }}">
-                        @endif
-                            <i class="fas fa-chevron-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="blade-datatable-info">
-                @if ($data['show'])
-                Showing <b>1 to {{ $data['show'] }}</b> of {{ $data['total'] }} entries
-                @endif
-            </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>
+
+<script>
+function getSelected(e) {
+  location.href = $(e).val();
+}
+</script>

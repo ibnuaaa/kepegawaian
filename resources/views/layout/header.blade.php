@@ -1,40 +1,56 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <meta charset="utf-8" />
-    <title>e-Purchasing - RSPON</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
-    <link rel="apple-touch-icon" href="/pages/ico/60.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/pages/ico/76.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/pages/ico/120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/pages/ico/152.png">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta content="" name="description" />
-    <meta content="" name="author" />
-    <link href="/assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="/assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="/assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="/assets/plugins/nvd3/nv.d3.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="/assets/plugins/mapplic/css/mapplic.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/plugins/rickshaw/rickshaw.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/plugins/dropzone/css/dropzone.css" rel="stylesheet" type="text/css" />
-    <link href="/pages/css/pages-icons.css" rel="stylesheet" type="text/css">
-    <link href="/pages/css/themes/light.css?4" class="main-stylesheet" rel="stylesheet" type="text/css" />
-    <link href="/assets/plugins/formvalidation/dist/css/formValidation.min.css" rel="stylesheet">
-    <link href="/assets/plugins/fontawesome/css/all.min.css" rel="stylesheet">
-    <link href="/assets/css/spinkit.css" rel="stylesheet">
-    <link href="/assets/plugins/sweetalert/sweetalert2.min.css" rel="stylesheet">
-    <link href="/assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="/assets/plugins/summernote/css/summernote.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="/assets/css/style.css" rel="stylesheet">
-  </head>
-  <body class="@yield('bodyClass')">
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+
+    <!-- META DATA -->
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
+    <meta name="author" content="Spruko Technologies Private Limited">
+    <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/brand/favicon.ico" />
+
+    <!-- TITLE -->
+    <title>SIMPEG RSPON </title>
+
+    <!-- BOOTSTRAP CSS -->
+    <link id="style" href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- STYLE CSS -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <link href="/assets/css/dark-style.css" rel="stylesheet" />
+    <link href="/assets/css/transparent-style.css" rel="stylesheet">
+    <link href="/assets/css/skin-modes.css" rel="stylesheet" />
+
+    <!--C3 CHARTS CSS -->
+    <link href="/assets/plugins/charts-c3/c3-chart.css" rel="stylesheet" />
+
+    <!-- P-scroll bar css-->
+    <link href="/assets/plugins/p-scroll/perfect-scrollbar.css" rel="stylesheet" />
+
+    <!--- FONT-ICONS CSS -->
+    <link href="/assets/css/icons.css" rel="stylesheet" />
+
+    <!-- INTERNAL Jvectormap css -->
+    <link href="/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+
+    <!-- SIDEBAR CSS -->
+    <link href="/assets/plugins/sidebar/sidebar.css" rel="stylesheet">
+
+    <!-- SELECT2 CSS -->
+    <link href="/assets/plugins/select2/select2.min.css" rel="stylesheet" />
+
+    <!-- INTERNAL Data table css -->
+    <link href="/assets/plugins/datatable/css/dataTables.bootstrap5.css" rel="stylesheet" />
+    <link href="/assets/plugins/datatable/responsive.bootstrap5.css" rel="stylesheet" />
+
+    <!-- COLOR SKIN CSS -->
+    <link id="theme" rel="stylesheet" type="text/css" media="all" href="/assets/colors/color1.css" />
+
+</head>
+
+<body class="app sidebar-mini ltr light-mode">

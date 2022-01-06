@@ -60,8 +60,8 @@ class PositionController extends Controller
             })
             ->get('fetch');
 
-        if (isset($request['position-take'])) {
-            $selected = $request['position-take'];
+        if (isset($request['position-show'])) {
+            $selected = $request['position-show'];
         }
         else {
             $selected = 10;
@@ -81,6 +81,8 @@ class PositionController extends Controller
             ],
             'records' => []
         ];
+
+
 
         if ($Mail['records']) {
             $DataTable['records'] = $Mail['records'];

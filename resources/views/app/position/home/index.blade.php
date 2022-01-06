@@ -3,9 +3,6 @@
 @section('title', 'Dashboard')
 @section('bodyClass', 'fixed-header dashboard menu-pin menu-behind')
 
-@section('userManagementMenuClass', 'active')
-@section('userManagementRoleUserMenuClass', 'active')
-
 @section('content')
     <div class="container-fluid container-fixed-lg p-t-10">
         <nav class="navbar navbar-default bg-transparent sm-padding-10 full-width p-t-0 p-b-0 m-b-0" style="right: 50px;" role="navigation">
