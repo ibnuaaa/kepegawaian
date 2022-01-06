@@ -76,6 +76,7 @@ class PositionController extends Controller
             'selected' => $selected,
             'options' => $options,
             'heads' => [
+                (object)['name' => 'no', 'label' => 'no', 'width' => '900'],
                 (object)['name' => 'name', 'label' => 'Posisi', 'width' => '900'],
                 (object)['name' => 'action', 'label' => 'ACTION', 'width' => '100']
             ],
