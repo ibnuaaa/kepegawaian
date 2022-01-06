@@ -49,7 +49,7 @@
                         <p>{{ $item->created_at }}</p>
                     </td>
                     <td class="v-align-middle">
-                        <div class="btn-group">
+                        <div class="btn-group btn-group-sm">
                             <a href="{{ url('/user/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
                             <a href="{{ url('/user/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                             <a href="#modalDelete" data-toggle="modal" data-record-id="{{$item->id}}" data-record-name="{{$item->name}}" class="btn btn-danger">
@@ -81,10 +81,10 @@
                         <p>{{ $item->updated_at }}</p>
                     </td>
                     <td class="v-align-middle">
-                        <p>{{ $item->created_at }}</p>
+                        <p>{{ $item->created_at }}</p>asdasd
                     </td>
                     <td class="v-align-middle">
-                        <div class="btn-group">
+                        <div class="btn-group-xs">asdasd
                             <a href="{{ url('/user/'.$item->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
                             <a href="{{ url('/user/edit/'.$item->id) }}" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
                             <a href="#modalDelete" data-toggle="modal" data-record-id="{{$item->id}}" data-record-name="{{$item->name}}" class="btn btn-danger">
