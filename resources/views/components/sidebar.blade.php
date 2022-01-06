@@ -4,7 +4,7 @@
             <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
             <div class="app-sidebar">
                 <div class="side-header">
-                    <a class="header-brand1" href="index.html">
+                    <a class="header-brand1" href="/">
                         <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
                         <img src="../assets/images/brand/logo-1.png" class="header-brand-img toggle-logo" alt="logo">
                         <img src="../assets/images/brand/logo-2.png" class="header-brand-img light-logo" alt="logo">
@@ -23,21 +23,25 @@
                         </li>
                         @if (getPermissions('user')['checked'])
                         <li class="sub-category">
-                            <h3>Manajemen Pengguna</h3>
+                            <h3>Modul Pengguna</h3>
                         </li>
 
-
                         <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Apps</span><i class="angle fe fe-chevron-right"></i></a>
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">User</span><i class="angle fe fe-chevron-right"></i></a>
                             <ul class="slide-menu">
                               @if (getPermissions('profile')['checked'])
                               <li><a href="{!! url('/profile'); !!}" class="slide-item"> Profil User</a></li>
                               @endif
-                              @if (getPermissions('position')['checked'])
-                              <li><a href="{!! url('/position'); !!}" class="slide-item"> Jabatan</a></li>
-                              @endif
                               @if (getPermissions('change_password')['checked'])
                               <li><a href="{!! url('/change_password'); !!}" class="slide-item"> Ganti Password</a></li>
+                              @endif
+                            </ul>
+                        </li>
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Hak Akses</span><i class="angle fe fe-chevron-right"></i></a>
+                            <ul class="slide-menu">
+                              @if (getPermissions('position')['checked'])
+                              <li><a href="{!! url('/position'); !!}" class="slide-item"> Jabatan</a></li>
                               @endif
                               @if (getPermissions('user')['checked'])
                               <li><a href="{!! url('/user'); !!}" class="slide-item"> Semua Admin</a></li>
@@ -46,7 +50,7 @@
                         </li>
                         @endif
                         <li class="sub-category">
-                            <h3>Laporan</h3>
+                            <h3>Modul Laporan</h3>
                         </li>
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Divisi A</span><i class="angle fe fe-chevron-right"></i></a>
