@@ -5,7 +5,7 @@
             <div class="table-responsive">
                <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                   <div class="row">
-                     <div class="col-sm-12 col-md-6">
+                     <div class="col-sm-12 col-md-2">
                         <div class="dataTables_length" id="responsive-datatable_length">
                            <label>
                               Show
@@ -20,6 +20,9 @@
                         </div>
                      </div>
                      <div class="col-sm-12 col-md-6">
+                       <a href="/position/new" class="btn btn-primary">Tambah</a>
+                     </div>
+                     <div class="col-sm-12 col-md-4">
                         <div id="responsive-datatable_filter" class="dataTables_filter"><label>
                           <?php
                           if (!isset($data['unshow_filter'])) {
