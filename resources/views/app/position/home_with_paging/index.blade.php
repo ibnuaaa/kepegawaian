@@ -16,12 +16,16 @@
   </div>
   <!-- PAGE-HEADER END -->
 
+  @section('actionHeader')
+      asdasd
+  @endsection
+
   <!-- ROW-1 -->
   <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
             @component('components.table', ['data' => $data, 'props' => []])
                 @scopedslot('head', ($item))
-                    @if($item->label === 'ID')
+                    @if($item->label === 'no')
                         <th style="width: 3%">{{ $item->label }}</th>
                     @elseif ($item->label === 'ACTION')
                         <th style="width: 112px">{{ $item->label }}</th>
@@ -31,15 +35,20 @@
                         </th>
                     @endif
                 @endscopedslot
-                @scopedslot('record', ($item, $props))
+                @scopedslot('record', ($item, $props, $number))
                     <tr>
                         <td>
-                            <p style="white-space: normal !important; padding-left: {{$item->eselon_id * 20}}px;">
+                            <p>
+                                {{ $number }}
+                            </p>
+                        </td>
+                        <td>
+                            <p>
                                 {{ $item->name }}
                             </p>
                         </td>
                         <td>
-                            <div class="btn-group">
+                            <div class="btn-group-sm">
                                 <a href="{{ url('/position/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
                             </div>
                         </td>
