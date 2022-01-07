@@ -49,12 +49,7 @@ $(document).ready(function() {
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
             bootstrap: new FormValidation.plugins.Bootstrap(),
-            submitButton: new FormValidation.plugins.SubmitButton(),
-            icon: new FormValidation.plugins.Icon({
-                valid: 'fa fa-check',
-                invalid: 'fa fa-times',
-                validating: 'fa fa-refresh',
-            })
+            submitButton: new FormValidation.plugins.SubmitButton()
         }
     }).data('formValidation')
 

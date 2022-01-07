@@ -24,36 +24,36 @@
           <div class="card overflow-hidden">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-6 col-lg-2">
                         <div class="form-group">
                             <label>Nama</label>
                         </div>
                     </div>
-                    <div class="col-9">
+                    <div class="col-6 col-lg-10">
                         <div class="form-group form-group-default">
                             {{ $data->name }}
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-6 col-lg-2">
                         <div class="form-group">
                             <label>Jabatan</label>
                         </div>
                     </div>
-                    <div class="col-9">
+                    <div class="col-6 col-lg-10">
                         <div class="form-group form-group-default">
                             <?php echo $data->position['name']; ?>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-6 col-lg-2">
                         <div class="form-group">
                             <label>Username</label>
                         </div>
                     </div>
-                    <div class="col-9">
+                    <div class="col-6 col-lg-10">
                         <div class="form-group form-group-default">
                             {{ $data->username }}
                         </div>

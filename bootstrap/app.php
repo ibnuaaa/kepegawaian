@@ -50,4 +50,6 @@ $app->register(\Barryvdh\DomPDF\ServiceProvider::class);
 
 class_alias(\Barryvdh\DomPDF\Facade::class, 'PDF');
 
+$app->register(Laravel\Dusk\DuskServiceProvider::class);
+
 return $app;
