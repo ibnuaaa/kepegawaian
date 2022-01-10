@@ -19,15 +19,13 @@
 <!-- ROW-1 -->
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
-              <div class="card card-white">
-                  <div class="card-header ">
-                      <div class="card-title">Form</div><br>
-                  </div>
-                  <div class="card-body">
+          <div class="card card-white">
+              <div class="card-header ">
+                  <div class="card-title">Form</div><br>
+              </div>
+              <div class="card-body">
 
-                    <form id="changePasswordForm">
+                <form id="changePasswordForm">
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
@@ -75,10 +73,7 @@
                         </div>
                     </div>
                 </form>
-                  </div>
-
-              </div>
-          </div>
+            </div>
         </div>
     </div>
     <!-- ROW-1 END -->

@@ -16,6 +16,11 @@
 </div>
 <!-- PAGE-HEADER END -->
 
+@section('headerTableSection')
+  <a href="/user/new" class="btn btn-primary">Tambah User</a>
+@endsection
+
+
 <!-- ROW-1 -->
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">

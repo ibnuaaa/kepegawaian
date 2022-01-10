@@ -20,7 +20,7 @@
                         </div>
                      </div>
                      <div class="col-sm-12 col-md-6">
-                       <a href="/position/new" class="btn btn-primary">Tambah</a>
+                       @yield('headerTableSection')
                      </div>
                      <div class="col-sm-12 col-md-4">
                         <div id="responsive-datatable_filter" class="dataTables_filter"><label>

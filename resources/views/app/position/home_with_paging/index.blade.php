@@ -16,8 +16,8 @@
   </div>
   <!-- PAGE-HEADER END -->
 
-  @section('actionHeader')
-      asdasd
+  @section('headerTableSection')
+    <a href="/position/new" class="btn btn-primary">Tambah Jabatan</a>
   @endsection
 
   <!-- ROW-1 -->

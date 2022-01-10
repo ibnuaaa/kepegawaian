@@ -8,7 +8,7 @@
 
     <!-- PAGE-HEADER -->
     <div class="page-header">
-        <h1 class="page-title">Profil User</h1>
+        <h1 class="page-title">Buat Jabatan</h1>
         <div>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>

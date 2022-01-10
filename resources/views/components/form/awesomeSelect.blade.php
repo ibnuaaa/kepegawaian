@@ -1,4 +1,4 @@
-<select class="{{ !empty($class) ? $class : 'full-width'  }}" {!! isset($placeholder) ? 'data-placeholder="'.$placeholder.'"' : '' !!} name="{{ isset($name) ? $name : 'unknown' }}" data-init-plugin="select2" {{ isset($multiple) && $multiple ? 'multiple' : '' }} {!! isset($search) && $search ? '' : "data-minimum-results-for-search=\"Infinity\"" !!} {!! isset($onChange) && $onChange ? 'onChange="'.$onChange.'"' : '' !!} data-link="/user" {{ !empty($disabled) ? $disabled : '' }}>
+<select class="form-control form-select" {!! isset($placeholder) ? 'data-placeholder="'.$placeholder.'"' : '' !!} name="{{ isset($name) ? $name : 'unknown' }}" data-init-plugin="select2" {{ isset($multiple) && $multiple ? 'multiple' : '' }} {!! isset($search) && $search ? '' : "data-minimum-results-for-search=\"Infinity\"" !!} {!! isset($onChange) && $onChange ? 'onChange="'.$onChange.'"' : '' !!} data-link="/user" {{ !empty($disabled) ? $disabled : '' }}>
     @if (isset($items))
         @if (isset($placeholder))
             <option value="">{{ $placeholder }}</option>
