@@ -3,15 +3,15 @@
 2. MariaDB
 3. OS (Linux, Mac, Windows)
 
+# Development
 Development dapat menggunakan XAMPP yang didownload pada laman berikut ini :
+
 https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/7.3.33/
 
 # Editor
 Bisa menggunakan atom, sublime, maupun notepad++
 
-# Cara Instalasi
-
-Langkah melakukan instalasi :
+# Langkah melakukan instalasi :
 1. git clone <alamat repositori>
 2. cd kepegawaian-rspon
 3. php composer.phar install
@@ -19,7 +19,7 @@ Langkah melakukan instalasi :
 5. php artisan db:seed
 6. php artisan passport:install
 
-Contoh cara instalasi di windows dengan xampp
+# Contoh cara instalasi di windows dengan xampp
 1. git clone https://chaisir_ibnu@bitbucket.org/chaisir_ibnu/kepegawaian-rspon.git
 2. cd kepegawaian-rspon
 3. D:/xampp/php/php.exe composer.phar install
