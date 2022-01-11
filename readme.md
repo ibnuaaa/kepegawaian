@@ -1,21 +1,28 @@
-# Lumen PHP Framework
+# Requirements
+1. PHP 7.3
+2. MariaDB
+3. OS (Linux, Mac, Windows)
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+Development dapat menggunakan XAMPP yang didownload pada laman berikut ini :
+https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/7.3.33/
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+# Editor
+Bisa menggunakan atom, sublime, maupun notepad++
 
-## Official Documentation
+# Cara Instalasi
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+Langkah melakukan instalasi :
+1. git clone <alamat repositori>
+2. cd kepegawaian-rspon
+3. php composer.phar install
+4. php artisan migrate
+5. php artisan db:seed
+6. php artisan passport:install
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Contoh cara instalasi di windows dengan xampp
+1. git clone https://chaisir_ibnu@bitbucket.org/chaisir_ibnu/kepegawaian-rspon.git
+2. cd kepegawaian-rspon
+3. D:/xampp/php/php.exe composer.phar install
+4. D:/xampp/php/php.exe artisan migrate
+5. D:/xampp/php/php.exe artisan db:seed
+6. D:/xampp/php/php.exe artisan passport:install
