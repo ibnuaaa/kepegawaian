@@ -4,47 +4,30 @@
 @section('bodyClass', 'fixed-header dashboard menu-pin menu-behind')
 
 @section('content')
-    <div class="container-fluid container-fixed-lg p-t-10">
-        <nav class="navbar navbar-default bg-transparent sm-padding-10 full-width p-t-0 p-b-0 m-b-0" style="right: 50px;" role="navigation">
-            <div class="container-fluid full-width">
-                <div class="navbar-header text-center">
-                    <button type="button" class="navbar-toggle collapsed btn btn-link no-padding" data-toggle="collapse" data-target="#sub-nav">
-                        <i class="pg pg-more v-align-middle"></i>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <ul class="navbar-nav d-flex flex-row">
-                                <li class="nav-item">
-                                    <a href="{{ url('/position/new') }}"><i class="fas fa-plus"></i> Tambah Jabatan</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
-                            <ul class="navbar-nav d-flex flex-row">
-                            </ul>
-                        </div>
-                        <div class="col-sm-4" style="left: 100px;">
-                            <ul class="navbar-nav d-flex flex-row justify-content-sm-end">
-                                <li class="nav-item"><a href="#" class="p-r-10" onclick="$.Pages.setFullScreen(document.querySelector('html'));"><i class="fa fa-expand"></i> Fullscreen</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
+<div class="main-container container-fluid">
 
-        <div class="card card-white">
-            <div class="card-header ">
-                <div class="card-title">Data Jabatan</div><br>
-            </div>
-            <div class="card-body" style="overflow: scroll; overflow-y: hidden;">
-                <table id="basic" class="table-bordered table-condensed-custom" style="width:1900px !important;">
+    <!-- PAGE-HEADER -->
+    <div class="page-header">
+        <h1 class="page-title">Jabatan</h1>
+        <div>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Jabatan</li>
+            </ol>
+        </div>
+    </div>
+    <!-- PAGE-HEADER END -->
+
+    <!-- ROW-1 -->
+    <div class="row">
+      <div class="col-12">
+          <div class="card overflow-hidden">
+            <div class="card-body">
+                <table id="basic" class="table table-bordered table-condensed-custom" style="width:1900px !important;">
                     <thead>
                         <tr>
                             <th>JABATAN</th>
-                            <th>PEJABAT / NIP / ESELON</th>
+                            <th>NAMA PEGAWAI / NIP</th>
                             <th>AKSI</th>
                         </tr>
                     </thead>
@@ -60,7 +43,7 @@
                                 {{ $item->eselon_id < 5 ? $item->eselon_id : 'STAFF' }}
                             </td>
                             <td>
-                                <a href="{{ url('/position/'.$item->id) }}" class="btn btn-xs btn-success btn-table-action">Edit</a>
+                                <a href="{{ url('/user/edit/'.$item->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
                             </td>
                         </tr>
                             @foreach ($item->children as $item2)
@@ -70,11 +53,10 @@
                                 </td>
                                 <td style="white-space: nowrap;">
                                     {{ $item2->user ? $item2->user->name : '' }} /
-                                    {{ $item2->user ? $item2->user->username : '' }} /
-                                    {{ $item2->eselon_id < 5 ? 'ESELON ' . $item2->eselon_id : 'STAFF' }}
+                                    {{ $item2->user ? $item2->user->username : '' }}
                                 </td>
                                 <td>
-                                    <a href="{{ url('/position/' . $item2->id) }}" class="btn btn-xs btn-success btn-table-action">Edit</a>
+                                    <a href="{{ url('/user/edit/'.$item2->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
                                 </td>
                             </tr>
                             @foreach ($item2->children as $item3)
@@ -84,11 +66,10 @@
                                     </td>
                                     <td style="white-space: nowrap;">
                                         {{ $item3->user ? $item3->user->name : '' }} /
-                                        {{ $item3->user ? $item3->user->username : '' }} /
-                                        {{ $item3->eselon_id < 5 ? 'ESELON ' . $item3->eselon_id : 'STAFF' }}
+                                        {{ $item3->user ? $item3->user->username : '' }}
                                     </td>
                                     <td>
-                                        <a href="{{ url('/position/' . $item3->id) }}" class="btn btn-xs btn-success btn-table-action">Edit</a>
+                                        <a href="{{ url('/user/edit/'.$item3->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
                                     </td>
                                 </tr>
                                 @foreach ($item3->children as $item4)
@@ -98,11 +79,10 @@
                                         </td>
                                         <td style="white-space: nowrap;">
                                             {{ $item4->user ? $item4->user->name : '' }} /
-                                            {{ $item4->user ? $item4->user->username : '' }} /
-                                            {{ $item4->eselon_id < 5 ? 'ESELON ' . $item4->eselon_id : 'STAFF' }}
+                                            {{ $item4->user ? $item4->user->username : '' }}
                                         </td>
                                         <td>
-                                            <a href="{{ url('/position/' . $item4->id) }}" class="btn btn-xs btn-success btn-table-action">Edit</a>
+                                            <a href="{{ url('/user/edit/'.$item4->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
                                         </td>
                                     </tr>
                                     @foreach ($item4->children as $item5)
@@ -113,10 +93,9 @@
                                             <td>
                                                 {{ $item5->user ? $item5->user->name : '' }} /
                                                 {{ $item5->user ? $item5->user->username : '' }} /
-                                                {{ $item5->eselon_id < 5 ? 'ESELON ' . $item5->eselon_id : 'STAFF' }}
                                             </td>
                                             <td>
-                                                <a href="{{ url('/position/' . $item5->id) }}" class="btn btn-xs btn-success btn-table-action">Edit</a>
+                                                <a href="{{ url('/user/edit/'.$item5->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
                                             </td>
                                         </tr>
                                         @foreach ($item5->children as $item6)
@@ -134,7 +113,7 @@
 
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('/position/' . $item6->id) }}" class="btn btn-xs btn-success btn-table-action">Edit</a>
+                                                  <a href="{{ url('/user/edit/'.$item6->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -147,7 +126,10 @@
                 </table>
             </div>
         </div>
+        <!-- ROW-1 END -->
     </div>
+    </div>
+</div>
 @endsection
 
 @section('formValidationScript')

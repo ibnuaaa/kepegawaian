@@ -53,7 +53,8 @@
 <!-- CUSTOM JS -->
 <script src="/assets/js/custom.js"></script>
 
-
+<!-- Internal Treeview js -->
+<script src="/assets/plugins/jquery-simple-tree-table/jquery-simple-tree-table.js"></script>
 
 <script src="/assets/plugins/axios/dist/axios.min.js"></script>
 <script src="/assets/plugins/formvalidation/dist/js/FormValidation.min.js"></script>

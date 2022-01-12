@@ -32,6 +32,9 @@
     <!--C3 CHARTS CSS -->
     <link href="/assets/plugins/charts-c3/c3-chart.css" rel="stylesheet" />
 
+    <!--Internal  treeview -->
+    <link href="/assets/plugins/treeview/treeview.css" rel="stylesheet" type="text/css" />
+
     <!-- P-scroll bar css-->
     <link href="/assets/plugins/p-scroll/perfect-scrollbar.css" rel="stylesheet" />
 
