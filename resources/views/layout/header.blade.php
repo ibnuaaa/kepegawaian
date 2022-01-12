@@ -26,6 +26,9 @@
     <link href="/assets/css/transparent-style.css" rel="stylesheet">
     <link href="/assets/css/skin-modes.css" rel="stylesheet" />
 
+    <!--SWEET ALERT CSS-->
+    <link href="/assets/plugins/sweet-alert/sweetalert.css" rel="stylesheet" />
+
     <!--C3 CHARTS CSS -->
     <link href="/assets/plugins/charts-c3/c3-chart.css" rel="stylesheet" />
 

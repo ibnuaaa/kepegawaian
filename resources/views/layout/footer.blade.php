@@ -44,6 +44,9 @@
 <!-- SIDE-MENU JS-->
 <script src="/assets/plugins/sidemenu/sidemenu.js"></script>
 
+<!-- SWEET-ALERT JS -->
+<script src="../assets/plugins/sweet-alert/sweetalert.min.js"></script>
+
 <!-- Color Theme js -->
 <script src="/assets/js/themeColors.js"></script>
 
@@ -111,8 +114,10 @@
                     )
                     console.log(error.response)
                 }
+
                 if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
-                    Swal.fire({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+                    console.log('aa ss dd ')
+                    swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
                 }
                 if (error.response && error.response.data && error.response.data.errors) {
                     let errors = ''
@@ -129,7 +134,7 @@
                     }
                     if (error.response && error.response.status === 401) {
                     } else {
-                        Swal.fire({ title: 'Opps...', text: errors, type: 'error', confirmButtonText: 'Ok' })
+                        swal({ title: 'Opps...', text: errors, type: 'error', confirmButtonText: 'Ok' })
                     }
                 }
                 return Promise.reject(error)
