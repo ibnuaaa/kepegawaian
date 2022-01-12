@@ -119,6 +119,11 @@
                     console.log('aa ss dd ')
                     swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
                 }
+
+                if (Boolean(error) && Boolean(error.response) && Boolean(error.response.status) && error.response.status) {
+                    swal({ title: 'Opps! [Error ' + error.response.status + ']', text: 'Error Server', type: 'error', confirmButtonText: 'Ok' })
+                }
+
                 if (error.response && error.response.data && error.response.data.errors) {
                     let errors = ''
                     for (let i = 0; i < Object.keys(error.response.data.errors).length; i++) {
