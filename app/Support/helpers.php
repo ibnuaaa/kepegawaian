@@ -919,3 +919,41 @@ function terbilang($nilai) {
     return $hasil;
 }
 
+if ( ! function_exists('treeChild'))
+{
+    function treeChild($data, $dataParent){
+
+        $html = "";
+
+        if (!empty($data)) {
+
+            foreach ($data as $item) {
+
+                $html_user = '';
+
+                if (!empty($item->users)) {
+                  foreach ($item->users as $key => $user) {
+                      $html_user = $html_user  . ($user ? $user->name : '');
+                  }
+                }
+
+                $html .= '
+                  <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" class="td-' . $item->status . '">
+                      <td style="height: 10px !important;">
+                          ' . $item->name . '
+                      </td>
+                      <td>
+                        ' . $html_user . '
+                      </td>
+                      <td>
+                          <a href="'. url('/user/edit/'.$item->id) .'" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
+                      </td>
+                  </tr>
+                ' . (count($item->children) > 0 ? treeChild($item->children, $item) : '') ;
+            }
+        }
+
+        return $html;
+
+    }
+}
