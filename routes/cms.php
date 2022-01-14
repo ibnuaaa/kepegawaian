@@ -25,8 +25,12 @@ $router->get('/position/{id}', 'CMS\Position\PositionController@PositionEdit');
 $router->get('/golongan', 'CMS\Golongan\GolonganController@Home');
 $router->get('/golongan/new', 'CMS\Golongan\GolonganController@New');
 $router->get('/golongan/edit/{id}', 'CMS\Golongan\GolonganController@Edit');
-$router->get('/golongan/edit_harga/{id}', 'CMS\Golongan\GolonganController@EditHarga');
 $router->get('/golongan/{id}', 'CMS\Golongan\GolonganController@Detail');
+
+$router->get('/unit_kerja', 'CMS\UnitKerja\UnitKerjaController@Home');
+$router->get('/unit_kerja/new', 'CMS\UnitKerja\UnitKerjaController@New');
+$router->get('/unit_kerja/edit/{id}', 'CMS\UnitKerja\UnitKerjaController@Edit');
+$router->get('/unit_kerja/{id}', 'CMS\UnitKerja\UnitKerjaController@Detail');
 
 $router->get('/user', 'CMS\User\UserController@Home');
 $router->get('/user/new', 'CMS\User\UserController@New');

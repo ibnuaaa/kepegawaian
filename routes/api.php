@@ -55,6 +55,13 @@ $router->post($prefix.'/golongan', ['uses' => 'Golongan\GolonganController@Inser
 $router->put($prefix.'/golongan/{id}', ['uses' => 'Golongan\GolonganController@Update', 'middleware' => ['LogActivity:Golongan.Update','Golongan.Update']]);
 $router->delete($prefix.'/golongan/{id}', ['uses' => 'Golongan\GolonganController@Delete', 'middleware' => ['LogActivity:Golongan.Delete','Golongan.Delete']]);
 
+// unit_kerja
+$router->get($prefix.'/unit_kerja', ['uses' => 'UnitKerja\UnitKerjaBrowseController@get', 'middleware' => ['LogActivity:UnitKerja.View','ArrQuery']]);
+$router->get($prefix.'/unit_kerja/{query:.+}', ['uses' => 'UnitKerja\UnitKerjaBrowseController@get', 'middleware' => ['UnitKerja:UnitKerja.View','ArrQuery']]);
+$router->post($prefix.'/unit_kerja', ['uses' => 'UnitKerja\UnitKerjaController@Insert', 'middleware' => ['LogActivity:UnitKerja.Insert','UnitKerja.Insert']]);
+$router->put($prefix.'/unit_kerja/{id}', ['uses' => 'UnitKerja\UnitKerjaController@Update', 'middleware' => ['LogActivity:UnitKerja.Update','UnitKerja.Update']]);
+$router->delete($prefix.'/unit_kerja/{id}', ['uses' => 'UnitKerja\UnitKerjaController@Delete', 'middleware' => ['LogActivity:UnitKerja.Delete','UnitKerja.Delete']]);
+
 
 $router->post($prefix.'/user', ['uses' => 'User\UserController@Insert', 'middleware' => ['LogActivity:User.Insert','User.Insert']]);
 $router->put($prefix.'/user/change_password', ['uses' => 'User\UserController@ChangePassword', 'middleware' => ['LogActivity:User.ChangePassword','User.ChangePassword']]);

@@ -49,6 +49,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'Golongan.Update' => \App\Http\Middleware\Golongan\Update::class,
         'Golongan.Delete' => \App\Http\Middleware\Golongan\Delete::class,
 
+        'UnitKerja.Insert' => \App\Http\Middleware\UnitKerja\Insert::class,
+        'UnitKerja.Update' => \App\Http\Middleware\UnitKerja\Update::class,
+        'UnitKerja.Delete' => \App\Http\Middleware\UnitKerja\Delete::class,
+
         'Position.Insert' => \App\Http\Middleware\Position\Insert::class,
         'Position.Update' => \App\Http\Middleware\Position\Update::class,
         'Position.Delete' => \App\Http\Middleware\Position\Delete::class,
