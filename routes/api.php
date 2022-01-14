@@ -48,6 +48,14 @@ $router->post($prefix.'/config', ['uses' => 'Config\ConfigController@Insert', 'm
 $router->put($prefix.'/config/{id}', ['uses' => 'Config\ConfigController@Update', 'middleware' => ['LogActivity:Config.Update','Config.Update']]);
 $router->delete($prefix.'/config/{id}', ['uses' => 'Config\ConfigController@Delete', 'middleware' => ['LogActivity:Config.Delete','Config.Delete']]);
 
+// golongan
+$router->get($prefix.'/golongan', ['uses' => 'Golongan\GolonganBrowseController@get', 'middleware' => ['LogActivity:Golongan.View','ArrQuery']]);
+$router->get($prefix.'/golongan/{query:.+}', ['uses' => 'Golongan\GolonganBrowseController@get', 'middleware' => ['Golongan:Golongan.View','ArrQuery']]);
+$router->post($prefix.'/golongan', ['uses' => 'Golongan\GolonganController@Insert', 'middleware' => ['LogActivity:Golongan.Insert','Golongan.Insert']]);
+$router->put($prefix.'/golongan/{id}', ['uses' => 'Golongan\GolonganController@Update', 'middleware' => ['LogActivity:Golongan.Update','Golongan.Update']]);
+$router->delete($prefix.'/golongan/{id}', ['uses' => 'Golongan\GolonganController@Delete', 'middleware' => ['LogActivity:Golongan.Delete','Golongan.Delete']]);
+
+
 $router->post($prefix.'/user', ['uses' => 'User\UserController@Insert', 'middleware' => ['LogActivity:User.Insert','User.Insert']]);
 $router->put($prefix.'/user/change_password', ['uses' => 'User\UserController@ChangePassword', 'middleware' => ['LogActivity:User.ChangePassword','User.ChangePassword']]);
 $router->put($prefix.'/user/{id}', ['uses' => 'User\UserController@Update', 'middleware' => ['LogActivity:User.Update','User.Update']]);

@@ -45,6 +45,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'Config.Update' => \App\Http\Middleware\Config\Update::class,
         'Config.Delete' => \App\Http\Middleware\Config\Delete::class,
 
+        'Golongan.Insert' => \App\Http\Middleware\Golongan\Insert::class,
+        'Golongan.Update' => \App\Http\Middleware\Golongan\Update::class,
+        'Golongan.Delete' => \App\Http\Middleware\Golongan\Delete::class,
+
         'Position.Insert' => \App\Http\Middleware\Position\Insert::class,
         'Position.Update' => \App\Http\Middleware\Position\Update::class,
         'Position.Delete' => \App\Http\Middleware\Position\Delete::class,
