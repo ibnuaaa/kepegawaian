@@ -1,6 +1,6 @@
 <!-- GLOBAL-LOADER -->
 <div id="global-loader">
-    <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+    <img src="/assets/images/loader.svg" class="loader-img" alt="Loader">
 </div>
 <!-- /GLOBAL-LOADER -->
 
@@ -15,8 +15,8 @@
                     <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="#"></a>
                     <!-- sidebar-toggle-->
                     <a class="logo-horizontal " href="/">
-                        <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
-                        <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
+                        <img src="/assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
+                        <img src="/assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
                     </a>
                     <!-- LOGO -->
                     <div class="main-header-center ms-3 d-none d-lg-block">
@@ -301,7 +301,7 @@
                             <div class="pt-3 fw-semibold ps-5">Today</div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/2.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -312,7 +312,7 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/11.jpg"><span class="avatar-status bg-success"></span></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/11.jpg"><span class="avatar-status bg-success"></span></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -323,7 +323,7 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/10.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/10.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -334,7 +334,7 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/13.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/13.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -345,7 +345,7 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/12.jpg"><span class="avatar-status bg-success"></span></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/12.jpg"><span class="avatar-status bg-success"></span></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -356,7 +356,7 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/15.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/15.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -367,7 +367,7 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/4.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/4.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -379,7 +379,7 @@
                             <div class="pt-3 fw-semibold ps-5">Yesterday</div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/7.jpg"><span class="avatar-status bg-success"></span></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/7.jpg"><span class="avatar-status bg-success"></span></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -390,7 +390,7 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/9.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/9.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -401,7 +401,7 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/2.jpg"><span class="avatar-status bg-success"></span></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/2.jpg"><span class="avatar-status bg-success"></span></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -412,7 +412,7 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/9.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/9.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -423,7 +423,7 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/14.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/14.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -434,7 +434,7 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/11.jpg"></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/11.jpg"></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -445,7 +445,7 @@
                             </div>
                             <div class="list-group-item d-flex align-items-center">
                                 <div class="me-2">
-                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="../assets/images/users/4.jpg"><span class="avatar-status bg-success"></span></span>
+                                    <span class="avatar avatar-md brround cover-image" data-bs-image-src="/assets/images/users/4.jpg"><span class="avatar-status bg-success"></span></span>
                                 </div>
                                 <div class="">
                                     <a href="chat.html">
@@ -544,53 +544,53 @@
                         <div class="col-lg-6">
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio1"  checked="">
                             <label class="btn btn-country btn-lg btn-block" for="btnradio1">
-                            <span class="country-selector"><img alt="" src="../assets/images/flags/us_flag.jpg" class="me-3 language"></span>USA
+                            <span class="country-selector"><img alt="" src="/assets/images/flags/us_flag.jpg" class="me-3 language"></span>USA
                         </label>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio2" >
                             <label class="btn btn-country btn-lg btn-block" for="btnradio2">
-                            <span class="country-selector"><img alt="" src="../assets/images/flags/italy_flag.jpg" class="me-3 language"></span>Italy
+                            <span class="country-selector"><img alt="" src="/assets/images/flags/italy_flag.jpg" class="me-3 language"></span>Italy
                         </label>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio3" >
                             <label class="btn btn-country btn-lg btn-block" for="btnradio3">
-                            <span class="country-selector"><img alt="" src="../assets/images/flags/spain_flag.jpg" class="me-3 language"></span>Spain
+                            <span class="country-selector"><img alt="" src="/assets/images/flags/spain_flag.jpg" class="me-3 language"></span>Spain
                         </label>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio4" >
                             <label class="btn btn-country btn-lg btn-block" for="btnradio4">
-                            <span class="country-selector"><img alt="" src="../assets/images/flags/india_flag.jpg" class="me-3 language"></span>India
+                            <span class="country-selector"><img alt="" src="/assets/images/flags/india_flag.jpg" class="me-3 language"></span>India
                         </label>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio5" >
                             <label class="btn btn-country btn-lg btn-block" for="btnradio5">
-                            <span class="country-selector"><img alt="" src="../assets/images/flags/french_flag.jpg" class="me-3 language"></span>French
+                            <span class="country-selector"><img alt="" src="/assets/images/flags/french_flag.jpg" class="me-3 language"></span>French
                         </label>
                         </div>
                         <div class="col-lg-6">
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio7" >
                             <label class="btn btn-country btn-lg btn-block" for="btnradio7">
-                            <span class="country-selector"><img alt="" src="../assets/images/flags/russia_flag.jpg" class="me-3 language"></span>Russia
+                            <span class="country-selector"><img alt="" src="/assets/images/flags/russia_flag.jpg" class="me-3 language"></span>Russia
                         </label>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio8" >
                             <label class="btn btn-country btn-lg btn-block" for="btnradio8">
-                            <span class="country-selector"><img alt="" src="../assets/images/flags/germany_flag.jpg" class="me-3 language"></span>Germany
+                            <span class="country-selector"><img alt="" src="/assets/images/flags/germany_flag.jpg" class="me-3 language"></span>Germany
                         </label>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio9" >
                             <label class="btn btn-country btn-lg btn-block" for="btnradio9">
-                            <span class="country-selector"><img alt="" src="../assets/images/flags/argentina.jpg" class="me-3 language"></span>Argentina
+                            <span class="country-selector"><img alt="" src="/assets/images/flags/argentina.jpg" class="me-3 language"></span>Argentina
                         </label>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio10" >
                             <label class="btn btn-country btn-lg btn-block" for="btnradio10">
-                            <span class="country-selector"><img alt="" src="../assets/images/flags/malaysia.jpg" class="me-3 language"></span>Malaysia
+                            <span class="country-selector"><img alt="" src="/assets/images/flags/malaysia.jpg" class="me-3 language"></span>Malaysia
                         </label>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio11" >
                             <label class="btn btn-country btn-lg btn-block" for="btnradio11">
-                            <span class="country-selector"><img alt="" src="../assets/images/flags/turkey.jpg" class="me-3 language"></span>Turkey
+                            <span class="country-selector"><img alt="" src="/assets/images/flags/turkey.jpg" class="me-3 language"></span>Turkey
                         </label>
                         </div>
                     </div>

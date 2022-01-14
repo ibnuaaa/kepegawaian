@@ -45,7 +45,7 @@
 <script src="/assets/plugins/sidemenu/sidemenu.js"></script>
 
 <!-- SWEET-ALERT JS -->
-<script src="../assets/plugins/sweet-alert/sweetalert.min.js"></script>
+<script src="/assets/plugins/sweet-alert/sweetalert.min.js"></script>
 
 <!-- Color Theme js -->
 <script src="/assets/js/themeColors.js"></script>

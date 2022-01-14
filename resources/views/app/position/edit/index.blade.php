@@ -67,7 +67,6 @@
                             @foreach ($permissions as $KeyPermission => $permission)
                               <div class="row">
                                 @foreach ($permission as $KeyEach => $each)
-
                                 <div class="col-md-4 row">
                                     <div class="checkbox check-info col-md-1">
                                         <input type="checkbox" name="permission" {{$each->checked ? 'checked' : ''}} value="{{$each->id}}" id="checkbox-{{$each->id}}">
@@ -89,21 +88,21 @@
             <div class="card card-default card-action">
                 <div class="card-body">
                     <button id="saveAction" class="btn btn-block btn-success btn-cons m-b-10">
-                        <i class="fas fa-save"></i> Save
+                        <i class="fa fa-save"></i> Save
                     </button>
 
                     @if (!empty($data->status) && $data->status == 'active')
                     <button onClick="changeStatusPosition('inactive')" class="btn btn-block btn-danger btn-cons m-b-10">
-                        <i class="fas fa-check"></i> Inactive
+                        <i class="fa fa-check"></i> Inactive
                     </button>
                     @else
                     <button onClick="changeStatusPosition('active')" class="btn btn-block btn-primary btn-cons m-b-10">
-                        <i class="fas fa-check"></i> Active
+                        <i class="fa fa-check"></i> Active
                     </button>
                     @endif
 
 
-                    <a href="{{ url('/position') }}" class="btn btn-block btn-primary btn-cons m-b-10"><i class="fas fa-arrow-left"></i> Cancel</a>
+                    <a href="{{ url('/position') }}" class="btn btn-block btn-primary btn-cons m-b-10"><i class="fa fa-arrow-left"></i> Cancel</a>
                 </div>
             </div>
         </div>

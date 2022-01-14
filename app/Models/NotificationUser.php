@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Notificationuser extends Model
+class NotificationUser extends Model
 {
     use SoftDeletes;
     protected $table = 'notification_user';

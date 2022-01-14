@@ -5,10 +5,10 @@
             <div class="app-sidebar">
                 <div class="side-header">
                     <a class="header-brand1" href="/">
-                        <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
-                        <img src="../assets/images/brand/logo-1.png" class="header-brand-img toggle-logo" alt="logo">
-                        <img src="../assets/images/brand/logo-2.png" class="header-brand-img light-logo" alt="logo">
-                        <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
+                        <img src="/assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
+                        <img src="/assets/images/brand/logo-1.png" class="header-brand-img toggle-logo" alt="logo">
+                        <img src="/assets/images/brand/logo-2.png" class="header-brand-img light-logo" alt="logo">
+                        <img src="/assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
                     </a>
                     <!-- LOGO -->
                 </div>
@@ -35,17 +35,20 @@
                               @if (getPermissions('change_password')['checked'])
                               <li><a href="{!! url('/change_password'); !!}" class="slide-item"> Ganti Password</a></li>
                               @endif
-                            </ul>
-                        </li>
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Hak Akses</span><i class="angle fe fe-chevron-right"></i></a>
-                            <ul class="slide-menu">
                               @if (getPermissions('position')['checked'])
                               <li><a href="{!! url('/position'); !!}" class="slide-item"> Jabatan</a></li>
                               @endif
                               @if (getPermissions('user')['checked'])
                               <li><a href="{!! url('/user'); !!}" class="slide-item"> Semua Admin</a></li>
                               @endif
+                            </ul>
+                        </li>
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Master Data</span><i class="angle fe fe-chevron-right"></i></a>
+                            <ul class="slide-menu">
+                              <li><a href="{!! url('/golongan'); !!}" class="slide-item"> Golongan</a></li>
+                              <li><a href="{!! url('/indikator_kinerja'); !!}" class="slide-item"> Indikator Kinerja</a></li>
+                              <li><a href="{!! url('/unit_kerja'); !!}" class="slide-item"> Unit Kerja</a></li>
                             </ul>
                         </li>
                         @endif

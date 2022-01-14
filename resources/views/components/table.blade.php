@@ -78,7 +78,7 @@
 
                            <ul class="pagination">
 
-
+                             <?php $lastkey = 0; ?>
 
                               <li class="paginate_button page-item previous" id="responsive-datatable_previous">
                                   @if (isset($data['paginate']->paginationNumber[0]['page']) && $data['pageNow'] <= $data['paginate']->paginationNumber[0]['page'])
@@ -102,17 +102,16 @@
                                       @endif
                                       <a aria-controls="responsive-datatable" data-dt-idx="1" tabindex="0" class="page-link" href="{{ fullUri([$data['key']."-page" => $value['page']]) }}">{{ $value['name'] }}</a>
                                   @endif
-
                                   </li>
+                                  <?php $lastkey = $key + 1; ?>
                               @endforeach
                               </li>
 
-
                               <li class="paginate_button page-item next" id="responsive-datatable_next">
                                   @if ($data['pageNow'] >= $data['paginate']->pages)
-                                      <a aria-controls="responsive-datatable" data-dt-idx="{{$key + 1}}" tabindex="0" class="page-link">
+                                      <a aria-controls="responsive-datatable" data-dt-idx="{{$lastkey + 1}}" tabindex="0" class="page-link">
                                   @else
-                                      <a aria-controls="responsive-datatable" data-dt-idx="{{$key + 1}}" tabindex="0" class="page-link" href="{{ fullUri([$data['key']."-page" => $data['pageNow'] + 1]) }}">
+                                      <a aria-controls="responsive-datatable" data-dt-idx="{{$lastkey + 1}}" tabindex="0" class="page-link" href="{{ fullUri([$data['key']."-page" => $data['pageNow'] + 1]) }}">
                                   @endif
                                   Selanjutnya
                                   </a>
