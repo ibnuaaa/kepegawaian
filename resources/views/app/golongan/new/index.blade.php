@@ -11,7 +11,8 @@
         <h1 class="page-title">Buat Golongan</h1>
         <div>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="/golongan">Golongan</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Buat Golongan</li>
             </ol>
         </div>
@@ -20,7 +21,7 @@
 
     <!-- ROW-1 -->
     <div class="row">
-        <div class="col-9">
+        <div class="col-12 col-md-7 col-lg-8">
             <div class="card overflow-hidden">
                 <div class="card-body">
                     <form autocomplete="off" id="newGolonganForm">
@@ -32,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-12 col-md-5 col-lg-4">
             <div class="card card-default card-action">
                 <div class="card-body">
                     <button data-url-next="{{ UrlPrevious(url('/golongan')) }}" class="saveAction btn btn-block btn-success btn-cons m-b-10">

@@ -15,7 +15,7 @@
                                   <option value="{{ fullUri([$data['key']."-show" => 50]) }}" {{ $data['selected'] == 50 ? 'selected=selected"' : '' }}>50</option>
                                   <option value="{{ fullUri([$data['key']."-show" => 100]) }}" {{ $data['selected'] == 100 ? 'selected=selected' : '' }}>100</option>
                               </select>
-                              masukan
+                              data
                            </label>
                         </div>
                      </div>
@@ -71,7 +71,11 @@
                   </div>
                   <div class="row">
                      <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="responsive-datatable_info" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
+                        <div class="dataTables_info" id="responsive-datatable_info" role="status" aria-live="polite">
+                          @if ($data['show'])
+                          Menampilkan 1 - {{ $data['show'] }} dari {{ $data['total'] }} data
+                          @endif
+                        </div>
                      </div>
                      <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="responsive-datatable_paginate">

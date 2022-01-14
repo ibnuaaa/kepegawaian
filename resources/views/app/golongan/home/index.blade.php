@@ -6,7 +6,9 @@
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Golongan</h1>
+    <h1 class="page-title">Golongan <a href="/golongan/new" class="btn btn-primary btn-sm">
+      (+) Buat Golongan
+    </a></h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -15,10 +17,6 @@
     </div>
 </div>
 <!-- PAGE-HEADER END -->
-
-@section('headerTableSection')
-  <a href="/golongan/new" class="btn btn-primary">Tambah Golongan</a>
-@endsection
 
 <!-- ROW-1 -->
 <div class="row">
