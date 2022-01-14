@@ -73,6 +73,18 @@ class GolonganBrowseController extends Controller
             "$this->GolonganTable.created_at as golongan.created_at"
         );
 
+        if(!empty($request->get('sort'))) {
+            if(!empty($request->get('sort_type'))) {
+              if ($request->get('sort') == 'name') $Golongan->orderBy("$this->GolonganTable.name", $request->get('sort_type'));
+              if ($request->get('sort') == 'created_at') $Golongan->orderBy("$this->GolonganTable.created_at", $request->get('sort_type'));
+            } else {
+              $Golongan->orderBy("$this->GolonganTable.created_at", 'desc');
+            }
+        } else {
+            $Golongan->orderBy("$this->GolonganTable.created_at", 'desc');
+        }
+
+
        $Browse = $this->Browse($request, $Golongan, function ($data) use($request) {
             $data = $this->Manipulate($data);
             return $data;

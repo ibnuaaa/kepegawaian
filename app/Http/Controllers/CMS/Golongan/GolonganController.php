@@ -24,7 +24,7 @@ class GolonganController extends Controller
     {
         $TableKey = 'golongan-table';
 
-        $filter_search = $request->input($TableKey . '-filter_search');
+        $filter_search = $request->input('filter_search');
 
         if (isset($request['golongan-table-show'])) {
             $selected = $request['golongan-table-show'];
@@ -32,8 +32,10 @@ class GolonganController extends Controller
         else {
             $selected = 10;
         }
+
         $options = array(5,10,15,20);
         $Golongan = GolonganBrowseController::FetchBrowse($request)
+            ->where('take',  $selected)
             ->where('with.total', 'true');
 
         if (isset($filter_search)) {
@@ -56,10 +58,10 @@ class GolonganController extends Controller
             'selected' => $selected,
             'options' => $options,
             'heads' => [
-                (object)['name' => 'id', 'label' => 'ID'],
-                (object)['name' => 'name', 'label' => 'name'],
-                (object)['name' => 'created_at', 'label' => 'Created At'],
-                (object)['name' => 'action', 'label' => 'ACTION']
+                (object)['name' => 'No', 'label' => 'No'],
+                (object)['name' => 'name', 'label' => 'Nama Golongan'],
+                (object)['name' => 'created_at', 'label' => 'Terbuat Pada'],
+                (object)['name' => 'action', 'label' => 'Aksi']
             ],
             'records' => []
         ];

@@ -33,7 +33,6 @@ function sortBy(column, current_sort_type) {
 
     query.sort = column
 
-
     if(current_sort_type == '') query.sort_type = 'asc'
     else if(current_sort_type == 'asc') query.sort_type = 'desc'
     else if(current_sort_type == 'desc') query.sort_type = ''

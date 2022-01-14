@@ -11,8 +11,7 @@
         <h1 class="page-title">Dashboard</h1>
         <div>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="#">Home</a></li>
             </ol>
         </div>
     </div>

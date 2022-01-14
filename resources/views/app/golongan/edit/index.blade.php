@@ -11,8 +11,9 @@
       <h1 class="page-title">Edit Golongan</h1>
       <div>
           <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Buat Golongan</li>
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="/golongan">Golongan</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Edit Golongan</li>
           </ol>
       </div>
   </div>
@@ -41,9 +42,6 @@
                     <a href="{{ UrlPrevious(url('/golongan')) }}" class="btn btn-block btn-primary btn-cons m-b-10">
                         <i class="fa fa-arrow-left"></i> Cancel
                     </a>
-                    <button id="deleteOpenModal" class="btn btn-block btn-danger btn-cons">
-                        <i class="fa fa-trash"></i> Delete
-                    </button>
                 </div>
             </div>
         </div>

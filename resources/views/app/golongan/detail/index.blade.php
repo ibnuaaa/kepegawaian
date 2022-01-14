@@ -9,8 +9,9 @@
     <h1 class="page-title">Golongan</h1>
     <div>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Golongan</li>
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/golongan">Golongan</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Detail Golongan</li>
         </ol>
     </div>
 </div>
@@ -23,70 +24,15 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="font-montserrat all-caps hint-text">Golongan Detail</h2>
+                        <h2 class="font-montserrat all-caps hint-text">Detail Golongan</h2>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-2">
                         Nama
                     </div>
-                    <div class="col-md-6">
-                        {{ $data['name'] }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        Golonganname
-                    </div>
-                    <div class="col-md-6">
-                        {{ $data['golonganname'] }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        NIP
-                    </div>
-                    <div class="col-md-6">
-                        {{ $data['nip'] }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        Email / Nomor Telepon
-                    </div>
-                    <div class="col-md-6">
-                        {{ $data['email'] }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        Posisi
-                    </div>
-                    <div class="col-md-6">
-                        {{ $data['position']['name'] }}
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6 text-right">
-                        <span style="display: none" id="text_new_pass">
-                            Password Baru untuk golongan adalah
-                        </span>
-                        <span style="display: none; font-size: 30px" class="bold" id="new_pass">
-                        </span>
-                    </div>
-                    <div class="col-md-6">
-                        <!-- @if (!empty($data['status']) && $data['status'] == 'active')
-                        <input type="button" class="btn btn-danger pull-right" value="Inactive" onClick="inactiveGolongan('inactive')" />
-                        @else
-                        <input type="button" class="btn btn-primary pull-right" value="Active" onClick="inactiveGolongan('active')" />
-                        @endif -->
-                        <input type="button" class="btn btn-primary pull-right m-r-5" value="Reset Password" onClick="resetPassword()" />
+                    <div class="col-6 col-md-10">
+                        : {{ $data['name'] }}
                     </div>
                 </div>
             </div>

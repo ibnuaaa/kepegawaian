@@ -53,6 +53,9 @@
 <!-- CUSTOM JS -->
 <script src="/assets/js/custom.js"></script>
 
+<!-- QS JS -->
+<script src="/assets/js/qs.min.js"></script>
+
 <!-- Internal Treeview js -->
 <script src="/assets/plugins/jquery-simple-tree-table/jquery-simple-tree-table.js"></script>
 

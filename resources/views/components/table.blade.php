@@ -8,14 +8,14 @@
                      <div class="col-sm-12 col-md-2">
                         <div class="dataTables_length" id="responsive-datatable_length">
                            <label>
-                              Show
+                              Tampilkan
                               <select name="country" class="form-control form-select form-select-md" data-bs-placeholder="Select Country" onChange="getSelected(this)">
                                   <option value="{{ fullUri([$data['key']."-show" => 10]) }}" {{ $data['selected'] == 10 ? 'selected=selected' : '' }}>10</option>
                                   <option value="{{ fullUri([$data['key']."-show" => 25]) }}" {{ $data['selected'] == 25 ? 'selected=selected' : '' }}>25</option>
                                   <option value="{{ fullUri([$data['key']."-show" => 50]) }}" {{ $data['selected'] == 50 ? 'selected=selected"' : '' }}>50</option>
                                   <option value="{{ fullUri([$data['key']."-show" => 100]) }}" {{ $data['selected'] == 100 ? 'selected=selected' : '' }}>100</option>
                               </select>
-                              entries
+                              masukan
                            </label>
                         </div>
                      </div>
@@ -29,7 +29,7 @@
                               ?>
                                   <form action="{{ fullUri() }}">
                                       <div class="input-group">
-                                      <input  name="{{ $data['key'] }}-filter_search"
+                                      <input  name="filter_search"
                                           placeholder="Search... {{ !empty($data['placeholder_search']) ? '('.$data['placeholder_search'].')' : '' }}"
                                           value="{{ isset($data['filter_search']) ? $data['filter_search'] : '' }}"
                                           class="form-control"
@@ -80,12 +80,14 @@
 
                              <?php $lastkey = 0; ?>
 
+
+                              @if (isset($data['paginate']->paginationNumber[0]['page']) && $data['pageNow'] <= $data['paginate']->paginationNumber[0]['page'])
+                              <li class="paginate_button page-item previous disable" id="responsive-datatable_previous">
+                                  <a aria-controls="responsive-datatable" data-dt-idx="0" tabindex="0" class="page-link">
+                              @else
                               <li class="paginate_button page-item previous" id="responsive-datatable_previous">
-                                  @if (isset($data['paginate']->paginationNumber[0]['page']) && $data['pageNow'] <= $data['paginate']->paginationNumber[0]['page'])
-                                      <a aria-controls="responsive-datatable" data-dt-idx="0" tabindex="0" class="page-link">
-                                  @else
-                                      <a href="{{ fullUri([$data['key']."-page" => $data['pageNow'] - 1]) }}" aria-controls="responsive-datatable" data-dt-idx="0" tabindex="0" class="page-link">
-                                  @endif
+                                  <a href="{{ fullUri([$data['key']."-page" => $data['pageNow'] - 1]) }}" aria-controls="responsive-datatable" data-dt-idx="0" tabindex="0" class="page-link">
+                              @endif
                                   Sebelumnya
                                   </a>
                               </li>
@@ -107,10 +109,12 @@
                               @endforeach
                               </li>
 
-                              <li class="paginate_button page-item next" id="responsive-datatable_next">
+
                                   @if ($data['pageNow'] >= $data['paginate']->pages)
+                                  <li class="paginate_button page-item next disable" id="responsive-datatable_next">
                                       <a aria-controls="responsive-datatable" data-dt-idx="{{$lastkey + 1}}" tabindex="0" class="page-link">
                                   @else
+                                  <li class="paginate_button page-item next" id="responsive-datatable_next">
                                       <a aria-controls="responsive-datatable" data-dt-idx="{{$lastkey + 1}}" tabindex="0" class="page-link" href="{{ fullUri([$data['key']."-page" => $data['pageNow'] + 1]) }}">
                                   @endif
                                   Selanjutnya
