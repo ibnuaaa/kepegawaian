@@ -62,6 +62,13 @@ $router->post($prefix.'/unit_kerja', ['uses' => 'UnitKerja\UnitKerjaController@I
 $router->put($prefix.'/unit_kerja/{id}', ['uses' => 'UnitKerja\UnitKerjaController@Update', 'middleware' => ['LogActivity:UnitKerja.Update','UnitKerja.Update']]);
 $router->delete($prefix.'/unit_kerja/{id}', ['uses' => 'UnitKerja\UnitKerjaController@Delete', 'middleware' => ['LogActivity:UnitKerja.Delete','UnitKerja.Delete']]);
 
+// indikator_kinerja
+$router->get($prefix.'/indikator_kinerja', ['uses' => 'IndikatorKinerja\IndikatorKinerjaBrowseController@get', 'middleware' => ['LogActivity:IndikatorKinerja.View','ArrQuery']]);
+$router->get($prefix.'/indikator_kinerja/{query:.+}', ['uses' => 'IndikatorKinerja\IndikatorKinerjaBrowseController@get', 'middleware' => ['IndikatorKinerja:IndikatorKinerja.View','ArrQuery']]);
+$router->post($prefix.'/indikator_kinerja', ['uses' => 'IndikatorKinerja\IndikatorKinerjaController@Insert', 'middleware' => ['LogActivity:IndikatorKinerja.Insert','IndikatorKinerja.Insert']]);
+$router->put($prefix.'/indikator_kinerja/{id}', ['uses' => 'IndikatorKinerja\IndikatorKinerjaController@Update', 'middleware' => ['LogActivity:IndikatorKinerja.Update','IndikatorKinerja.Update']]);
+$router->delete($prefix.'/indikator_kinerja/{id}', ['uses' => 'IndikatorKinerja\IndikatorKinerjaController@Delete', 'middleware' => ['LogActivity:IndikatorKinerja.Delete','IndikatorKinerja.Delete']]);
+
 
 $router->post($prefix.'/user', ['uses' => 'User\UserController@Insert', 'middleware' => ['LogActivity:User.Insert','User.Insert']]);
 $router->put($prefix.'/user/change_password', ['uses' => 'User\UserController@ChangePassword', 'middleware' => ['LogActivity:User.ChangePassword','User.ChangePassword']]);

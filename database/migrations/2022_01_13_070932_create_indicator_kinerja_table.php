@@ -13,7 +13,7 @@ class CreateIndicatorKinerjaTable extends Migration
      */
     public function up()
     {
-        Schema::create('indikator_kerja', function (Blueprint $table) {
+        Schema::create('indikator_kinerja', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable()->default(NULL);
             $table->integer('position_id')->nullable()->default(NULL);

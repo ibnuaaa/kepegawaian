@@ -32,6 +32,11 @@ $router->get('/unit_kerja/new', 'CMS\UnitKerja\UnitKerjaController@New');
 $router->get('/unit_kerja/edit/{id}', 'CMS\UnitKerja\UnitKerjaController@Edit');
 $router->get('/unit_kerja/{id}', 'CMS\UnitKerja\UnitKerjaController@Detail');
 
+$router->get('/indikator_kinerja', 'CMS\IndikatorKinerja\IndikatorKinerjaController@Home');
+$router->get('/indikator_kinerja/new', 'CMS\IndikatorKinerja\IndikatorKinerjaController@New');
+$router->get('/indikator_kinerja/edit/{id}', 'CMS\IndikatorKinerja\IndikatorKinerjaController@Edit');
+$router->get('/indikator_kinerja/{id}', 'CMS\IndikatorKinerja\IndikatorKinerjaController@Detail');
+
 $router->get('/user', 'CMS\User\UserController@Home');
 $router->get('/user/new', 'CMS\User\UserController@New');
 $router->get('/user/edit/{id}', 'CMS\User\UserController@Edit');

@@ -53,6 +53,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'UnitKerja.Update' => \App\Http\Middleware\UnitKerja\Update::class,
         'UnitKerja.Delete' => \App\Http\Middleware\UnitKerja\Delete::class,
 
+        'IndikatorKinerja.Insert' => \App\Http\Middleware\IndikatorKinerja\Insert::class,
+        'IndikatorKinerja.Update' => \App\Http\Middleware\IndikatorKinerja\Update::class,
+        'IndikatorKinerja.Delete' => \App\Http\Middleware\IndikatorKinerja\Delete::class,
+
         'Position.Insert' => \App\Http\Middleware\Position\Insert::class,
         'Position.Update' => \App\Http\Middleware\Position\Update::class,
         'Position.Delete' => \App\Http\Middleware\Position\Delete::class,
