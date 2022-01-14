@@ -3,6 +3,6 @@
 Homestead.json
 Homestead.yaml
 .env
-/storage
 /public/adm
 /public/assets/img/qrcode/*
+/storage
