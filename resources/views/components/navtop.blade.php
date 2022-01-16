@@ -10,7 +10,7 @@
 
         <!-- app-Header -->
         <div class="app-header header sticky">
-            <div class="container-fluid main-container">
+            <div class="main-container">
                 <div class="d-flex">
                     <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="#"></a>
                     <!-- sidebar-toggle-->

@@ -4,103 +4,100 @@
 @section('bodyClass', 'fixed-header menu-pin menu-behind')
 
 @section('content')
-<div class="main-container container-fluid">
-
-    <!-- PAGE-HEADER -->
-    <div class="page-header">
-        <h1 class="page-title">Buat User</h1>
-        <div>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Profil User</li>
-            </ol>
-        </div>
+<!-- PAGE-HEADER -->
+<div class="page-header">
+    <h1 class="page-title">Buat User</h1>
+    <div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Profil User</li>
+        </ol>
     </div>
-    <!-- PAGE-HEADER END -->
+</div>
+<!-- PAGE-HEADER END -->
 
-    <!-- ROW-1 -->
-    <div class="row">
-        <div class="col-12 col-md-7 col-lg-8">
-            <div class="card overflow-hidden">
-                <div class="card-body">
-                    <form autocomplete="off" id="newUserForm">
-                        <div class=" row mb-4">
-                            <label class="col-md-3 form-label">Nama</label>
-                            <div class="col-md-9">
-                                <input name="name" value="" class="form-control" type="text" required>
-                            </div>
+<!-- ROW-1 -->
+<div class="row">
+    <div class="col-12 col-md-7 col-lg-8">
+        <div class="card overflow-hidden">
+            <div class="card-body">
+                <form autocomplete="off" id="newUserForm">
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Nama</label>
+                        <div class="col-md-9">
+                            <input name="name" value="" class="form-control" type="text" required>
                         </div>
-                        <div class=" row mb-4">
-                            <label class="col-md-3 form-label">Username</label>
-                            <div class="col-md-9">
-                                <input name="username" class="form-control" type="text" required>
-                            </div>
+                    </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Username</label>
+                        <div class="col-md-9">
+                            <input name="username" class="form-control" type="text" required>
                         </div>
-                        <div class=" row mb-4">
-                            <label class="col-md-3 form-label">NIP</label>
-                            <div class="col-md-9">
-                                <input name="nip" class="form-control" type="text" required>
-                            </div>
+                    </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">NIP</label>
+                        <div class="col-md-9">
+                            <input name="nip" class="form-control" type="text" required>
                         </div>
-                        <div class=" row mb-4">
-                            <label class="col-md-3 form-label">Password</label>
-                            <div class="col-md-9">
-                                <input autocomplete="new-password" name="password" class="form-control" type="password" required>
-                            </div>
+                    </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Password</label>
+                        <div class="col-md-9">
+                            <input autocomplete="new-password" name="password" class="form-control" type="password" required>
                         </div>
-                        <div class=" row mb-4">
-                            <label class="col-md-3 form-label">Konfirmasi Password</label>
-                            <div class="col-md-9">
-                                <input name="confirmPassword" class="form-control" type="password" required>
-                            </div>
+                    </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Konfirmasi Password</label>
+                        <div class="col-md-9">
+                            <input name="confirmPassword" class="form-control" type="password" required>
                         </div>
-                        <div class=" row mb-4">
-                            <label class="col-md-3 form-label">Email</label>
-                            <div class="col-md-9">
-                                <input name="email" class="form-control" type="text" required>
-                            </div>
+                    </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Email</label>
+                        <div class="col-md-9">
+                            <input name="email" class="form-control" type="text" required>
                         </div>
-                        <div class=" row mb-4">
-                            <label class="col-md-3 form-label">Position</label>
-                            <div class="col-md-9">
-                                @component('components.form.awesomeSelect', [
-                                    'name' => 'position_id',
-                                    'items' => $positions,
-                                    'selected' => 3
-                                ])
-                                @endcomponent
-                            </div>
+                    </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Position</label>
+                        <div class="col-md-9">
+                            @component('components.form.awesomeSelect', [
+                                'name' => 'position_id',
+                                'items' => $positions,
+                                'selected' => 3
+                            ])
+                            @endcomponent
                         </div>
-                        <div class=" row mb-4">
-                            <label class="col-md-3 form-label">Gender</label>
-                            <div class="col-md-9">
-                                @component('components.form.awesomeSelect', [
-                                    'name' => 'gender',
-                                    'items' => [['value' => 'male', 'label' => 'Male'], ['value' => 'female', 'label' => 'Female']],
-                                    'selected' => null
-                                ])
-                                @endcomponent
-                            </div>
+                    </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Gender</label>
+                        <div class="col-md-9">
+                            @component('components.form.awesomeSelect', [
+                                'name' => 'gender',
+                                'items' => [['value' => 'male', 'label' => 'Male'], ['value' => 'female', 'label' => 'Female']],
+                                'selected' => null
+                            ])
+                            @endcomponent
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="col-12 col-md-5 col-lg-4">
-            <div class="card card-default card-action">
-                <div class="card-body">
-                    <button data-url-next="{{ UrlPrevious(url('/user')) }}" class="saveAction btn btn-block btn-success btn-cons m-b-10">
-                        <i class="fa fa-save"></i>
-                        Save
-                    </button>
+    </div>
+    <div class="col-12 col-md-5 col-lg-4">
+        <div class="card card-default card-action">
+            <div class="card-body">
+                <button data-url-next="{{ UrlPrevious(url('/user')) }}" class="saveAction btn btn-block btn-success btn-cons m-b-10">
+                    <i class="fa fa-save"></i>
+                    Save
+                </button>
 
-                    <button data-is-recreate="true" class="saveAction btn btn-block btn-success btn-cons m-b-10">
-                        <i class="fa fa-save"></i>
-                        Save & New
-                    </button>
+                <button data-is-recreate="true" class="saveAction btn btn-block btn-success btn-cons m-b-10">
+                    <i class="fa fa-save"></i>
+                    Save & New
+                </button>
 
-                    <a href="{{ url('/user') }}" class="btn btn-block btn-primary btn-cons m-b-10"><i class="fa fa-arrow-left"></i> Cancel</a>
-                </div>
+                <a href="{{ url('/user') }}" class="btn btn-block btn-primary btn-cons m-b-10"><i class="fa fa-arrow-left"></i> Cancel</a>
             </div>
         </div>
     </div>
