@@ -26,43 +26,25 @@
               <div class="card-body">
 
                 <form id="changePasswordForm">
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Password Lama</label>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <div class="form-group form-group-default required">
-                                <input name="password" value="" class="form-control" type="password" placeholder="Password Lama" required>
-                            </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Password Lama</label>
+                        <div class="col-md-9">
+                            <input name="password" value="" class="form-control" type="password" placeholder="Password Lama" required>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Password Baru</label>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <div class="form-group form-group-default required">
-                                <input name="new_password" value="" class="form-control" type="password" placeholder="Passwor Baru" required>
-                            </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Password Baru</label>
+                        <div class="col-md-9">
+                            <input name="new_password" value="" class="form-control" type="password" placeholder="Passwor Baru" required>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Konfirmasi Password Baru</label>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <div class="form-group form-group-default required">
-                                <input name="new_password_confirmation" value="" class="form-control" type="password" placeholder="Konfirmasi Password baru" required>
-                            </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Konfirmasi Password Baru</label>
+                        <div class="col-md-9">
+                            <input name="new_password_confirmation" value="" class="form-control" type="password" placeholder="Konfirmasi Password baru" required>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class=" row mb-4">
                         <div class="col-3">
                         </div>
                         <div class="col-9">

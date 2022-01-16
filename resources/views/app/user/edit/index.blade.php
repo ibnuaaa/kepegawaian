@@ -26,34 +26,46 @@
                 </div>
                 <div class="card-body">
                     <form autocomplete="off" id="editUserForm">
-                        <div class="form-group form-group-default required ">
-                            <label>Nama</label>
-                            <input name="name" value="{{ $data['name'] }}" class="form-control" type="text" required>
+                        <div class=" row mb-4">
+                            <label class="col-md-3 form-label">Nama</label>
+                            <div class="col-md-9">
+                                <input name="name" value="{{ $data['name'] }}" class="form-control" type="text" required>
+                            </div>
                         </div>
-                        <div class="form-group form-group-default required ">
-                            <label>Username</label>
-                            <input name="username" value="{{ $data['username'] }}" class="form-control" type="text" required>
+                        <div class=" row mb-4">
+                            <label class="col-md-3 form-label">Username</label>
+                            <div class="col-md-9">
+                                <input name="username" value="{{ $data['username'] }}" class="form-control" type="text" required>
+                            </div>
                         </div>
-                        <div class="form-group form-group-default required ">
-                            <label>NIP</label>
-                            <input name="nip" value="{{ $data['nip'] }}" class="form-control" type="text" required>
+                        <div class=" row mb-4">
+                            <label class="col-md-3 form-label">NIP</label>
+                            <div class="col-md-9">
+                                <input name="nip" value="{{ $data['nip'] }}" class="form-control" type="text" required>
+                            </div>
                         </div>
-                        <div class="form-group required">
-                            <label class="">Position</label>
-                            @component('components.form.awesomeSelect', [
-                                'name' => 'position_id',
-                                'items' => $positions,
-                                'selected' => $data->position['id']
-                            ])
-                            @endcomponent
+                        <div class=" row mb-4">
+                            <label class="col-md-3 form-label">Position</label>
+                            <div class="col-md-9">
+                                @component('components.form.awesomeSelect', [
+                                    'name' => 'position_id',
+                                    'items' => $positions,
+                                    'selected' => $data->position['id']
+                                ])
+                                @endcomponent
+                            </div>
                         </div>
-                        <div class="form-group form-group-default">
-                            <label>Password</label>
-                            <input autocomplete="new-password" name="password" class="form-control" type="password">
+                        <div class=" row mb-4">
+                            <label class="col-md-3 form-label">Password</label>
+                            <div class="col-md-9">
+                                <input autocomplete="new-password" name="password" class="form-control" type="password">
+                            </div>
                         </div>
-                        <div class="form-group form-group-default">
-                            <label>Confirmation Password</label>
-                            <input name="confirmPassword" class="form-control" type="password">
+                        <div class=" row mb-4">
+                            <label class="col-md-3 form-label">Confirmation Password</label>
+                            <div class="col-md-9">
+                                <input name="confirmPassword" class="form-control" type="password">
+                            </div>
                         </div>
                     </form>
                 </div>
