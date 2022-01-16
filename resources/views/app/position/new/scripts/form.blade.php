@@ -35,13 +35,13 @@ $(document).ready(function() {
     const form = document.getElementById('editUserForm')
     const editUserForm = $('#editUserForm').formValidation({
         fields: {
-            name: {
-                validators: {
-                    notEmpty: {
-                        message: 'Nama Jabatan harus diisi'
-                    }
-                }
-            }
+            // name: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'Nama Jabatan harus diisi'
+            //         }
+            //     }
+            // }
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),

@@ -39,7 +39,7 @@
                               <li><a href="{!! url('/position'); !!}" class="slide-item"> Jabatan</a></li>
                               @endif
                               @if (getPermissions('user')['checked'])
-                              <li><a href="{!! url('/user'); !!}" class="slide-item"> Semua Admin</a></li>
+                              <li><a href="{!! url('/user'); !!}" class="slide-item"> User</a></li>
                               @endif
                             </ul>
                         </li>

@@ -7,7 +7,9 @@
 
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Buat Jabatan</h1>
+    <h1 class="page-title">
+        Buat Jabatan
+    </h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -23,25 +25,15 @@
         <div class="card overflow-hidden">
             <div class="card-body">
                 <form id="editUserForm">
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Nama</label>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <div class="form-group form-group-default required">
-                                <input name="name" value="" class="form-control" type="text" placeholder="" required>
-                            </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Nama</label>
+                        <div class="col-md-9">
+                            <input name="name" value="" class="form-control" type="text" placeholder="" required>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Turunan Dari</label>
-                            </div>
-                        </div>
-                        <div class="col-9">
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Turunan Dari</label>
+                        <div class="col-md-9">
                             <select name="parent_id" class="form-control">
                             </select>
                         </div>
