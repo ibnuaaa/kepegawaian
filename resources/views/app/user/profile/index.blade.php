@@ -6,7 +6,11 @@
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Profil User</h1>
+    <h1 class="page-title">Profil User
+      <a href="/profile/edit" class="btn btn-primary btn-sm">
+          Ubah Profil
+      </a>
+    </h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -21,19 +25,19 @@
   <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
       <div class="card overflow-hidden">
         <div class="card-body">
-            <div class="row">
+            <div class=" row">
                 <label class="col-md-2 form-label">Nama</label>
                 <div class="col-md-10">
                     {{ $data->name }}
                 </div>
             </div>
-            <div class="row">
+            <div class=" row">
                 <label class="col-md-2 form-label">Jabatan</label>
                 <div class="col-md-10">
                     <?php echo $data->position['name']; ?>
                 </div>
             </div>
-            <div class="row">
+            <div class=" row">
                 <label class="col-md-2 form-label">Username</label>
                 <div class="col-md-10">
                     {{ $data->username }}

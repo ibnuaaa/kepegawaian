@@ -41,7 +41,3 @@
 </div>
 
 @endsection
-
-@section('script')
-    @include('app.indikator_kinerja.detail.scripts.index')
-@endsection

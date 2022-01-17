@@ -39,9 +39,4 @@
         </div>
     </div>
 </div>
-
-@endsection
-
-@section('script')
-    @include('app.golongan.detail.scripts.index')
 @endsection

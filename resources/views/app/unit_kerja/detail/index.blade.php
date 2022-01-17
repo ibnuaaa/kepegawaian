@@ -41,7 +41,3 @@
 </div>
 
 @endsection
-
-@section('script')
-    @include('app.unit_kerja.detail.scripts.index')
-@endsection

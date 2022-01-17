@@ -49,6 +49,7 @@
                               <li><a href="{!! url('/golongan'); !!}" class="slide-item"> Golongan</a></li>
                               <li><a href="{!! url('/indikator_kinerja'); !!}" class="slide-item"> Indikator Kinerja</a></li>
                               <li><a href="{!! url('/unit_kerja'); !!}" class="slide-item"> Unit Kerja</a></li>
+                              <li><a href="{!! url('/pendidikan'); !!}" class="slide-item"> Pendidikan</a></li>
                             </ul>
                         </li>
                         @endif
