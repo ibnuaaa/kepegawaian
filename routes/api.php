@@ -62,6 +62,13 @@ $router->post($prefix.'/unit_kerja', ['uses' => 'UnitKerja\UnitKerjaController@I
 $router->put($prefix.'/unit_kerja/{id}', ['uses' => 'UnitKerja\UnitKerjaController@Update', 'middleware' => ['LogActivity:UnitKerja.Update','UnitKerja.Update']]);
 $router->delete($prefix.'/unit_kerja/{id}', ['uses' => 'UnitKerja\UnitKerjaController@Delete', 'middleware' => ['LogActivity:UnitKerja.Delete','UnitKerja.Delete']]);
 
+// unit_kerja
+$router->get($prefix.'/pendidikan', ['uses' => 'Pendidikan\PendidikanBrowseController@get', 'middleware' => ['LogActivity:Pendidikan.View','ArrQuery']]);
+$router->get($prefix.'/pendidikan/{query:.+}', ['uses' => 'Pendidikan\PendidikanBrowseController@get', 'middleware' => ['Pendidikan:Pendidikan.View','ArrQuery']]);
+$router->post($prefix.'/pendidikan', ['uses' => 'Pendidikan\PendidikanController@Insert', 'middleware' => ['LogActivity:Pendidikan.Insert','Pendidikan.Insert']]);
+$router->put($prefix.'/pendidikan/{id}', ['uses' => 'Pendidikan\PendidikanController@Update', 'middleware' => ['LogActivity:Pendidikan.Update','Pendidikan.Update']]);
+$router->delete($prefix.'/pendidikan/{id}', ['uses' => 'Pendidikan\PendidikanController@Delete', 'middleware' => ['LogActivity:Pendidikan.Delete','Pendidikan.Delete']]);
+
 // indikator_kinerja
 $router->get($prefix.'/indikator_kinerja', ['uses' => 'IndikatorKinerja\IndikatorKinerjaBrowseController@get', 'middleware' => ['LogActivity:IndikatorKinerja.View','ArrQuery']]);
 $router->get($prefix.'/indikator_kinerja/{query:.+}', ['uses' => 'IndikatorKinerja\IndikatorKinerjaBrowseController@get', 'middleware' => ['IndikatorKinerja:IndikatorKinerja.View','ArrQuery']]);

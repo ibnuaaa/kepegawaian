@@ -206,4 +206,51 @@ class UserController extends Controller
         ]);
     }
 
+    public function ProfileEdit(Request $request)
+    {
+
+        $id = MyAccount()->id;
+
+        $User = UserBrowseController::FetchBrowse($request)
+            ->equal('id', $id)->get('first');
+
+        $CategoryIds = [];
+        try {
+            foreach (explode(',', str_replace(' ', '', $User['records']->category_id)) as $key => $value) {
+                $CategoryIds[] = $value;
+            }
+        } catch (\Exception $e) {
+        }
+
+        if (!isset($User['records']->id)) {
+            throw new ModelNotFoundException('Not Found Batch');
+        }
+
+        $User = UserBrowseController::FetchBrowse($request)
+            ->equal('id', $id)->get('first');
+
+
+        $Position = PositionBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $Positions[] = [
+            'value' => '',
+            'label' => '-= Select Position =-'
+        ];
+
+        foreach ($Position['records'] as $key => $value) {
+            $Positions[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
+        return view('app.user.profile_edit.index', [
+            'categoryIds' => $CategoryIds,
+            'positions' => $Positions,
+            'data' => $User['records']
+        ]);
+    }
+
 }

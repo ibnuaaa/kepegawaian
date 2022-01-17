@@ -123,8 +123,8 @@ class UserBrowseController extends Controller
             "$this->PositionTable.id as position.id",
             "$this->PositionTable.name as position.name",
 
-       );
-       // ->with('profile_picture');
+       )
+       ->with('user_pendidikan');
 
 
         if(!empty($request->get('sort'))) {

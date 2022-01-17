@@ -26,48 +26,485 @@
                 </div>
                 <div class="card-body">
                   <div class="panel panel-primary">
+
                         <div class="tab-menu-heading tab-menu-heading-boxed">
                             <div class="tabs-menu-boxed">
                                 <ul class="nav panel-tabs">
-                                    <li><a href="#tab25" class="active" data-bs-toggle="tab">Personal</a></li>
-                                    <li><a href="#tab26" data-bs-toggle="tab">Pendidikan</a></li>
-                                    <li><a href="#tab27" data-bs-toggle="tab">Pelatihan</a></li>
-                                    <li><a href="#tab28" data-bs-toggle="tab">Keluarga</a></li>
-                                    <li><a href="#tab28" data-bs-toggle="tab">Riwayat Jabatan</a></li>
-                                    <li><a href="#tab28" data-bs-toggle="tab">Riwayat Golongan</a></li>
+                                    <li><a href="#tab-personal" class="active" data-bs-toggle="tab">Personal</a></li>
+                                    <li><a href="#tab-pendidikan" data-bs-toggle="tab">Pendidikan</a></li>
+                                    <li><a href="#tab-pelatihan" data-bs-toggle="tab">Pelatihan</a></li>
+                                    <li><a href="#tab-keluarga" data-bs-toggle="tab">Keluarga</a></li>
+                                    <li><a href="#tab-jabatan" data-bs-toggle="tab">Riwayat Jabatan</a></li>
+                                    <li><a href="#tab-golongan" data-bs-toggle="tab">Riwayat Golongan</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="panel-body tabs-menu-body">
                             <div class="tab-content">
-                                <div class="tab-pane active" id="tab25">
-                                    <div class="form-group form-group-default required ">
-                                        <label>Nama</label>
-                                        <input name="name" value="{{ $data['name'] }}" class="form-control" type="text" required>
+                                <div class="tab-pane active" id="tab-personal">
+
+                                    <h2>Personal</h2>
+
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Nama</label>
+                                        <div class="col-md-9">
+                                            <input name="name" value="{{ $data['name'] }}" class="form-control" type="text" required>
+                                        </div>
                                     </div>
-                                    <div class="form-group form-group-default required ">
-                                        <label>Username</label>
-                                        <input name="username" value="{{ $data['username'] }}" class="form-control" type="text" required>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Username</label>
+                                        <div class="col-md-9">
+                                            <input name="username" value="{{ $data['username'] }}" class="form-control" type="text" required>
+                                        </div>
                                     </div>
-                                    <div class="form-group form-group-default required ">
-                                        <label>NIP</label>
-                                        <input name="nip" value="{{ $data['nip'] }}" class="form-control" type="text" required>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">NIP</label>
+                                        <div class="col-md-9">
+                                            <input name="nip" value="{{ $data['nip'] }}" class="form-control" type="text" required>
+                                        </div>
                                     </div>
-                                    
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">No KTP</label>
+                                        <div class="col-md-9">
+                                            <input name="nip" value="{{ $data['no_ktp'] }}" class="form-control" type="text" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Tanggal Lahir</label>
+                                        <div class="col-md-9">
+                                            <input name="nip" value="{{ $data['tanggal_lahir'] }}" class="form-control" type="text" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Tempat Lahir</label>
+                                        <div class="col-md-9">
+                                            <input name="nip" value="{{ $data['tanggal_lahir'] }}" class="form-control" type="text" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Alamat</label>
+                                        <div class="col-md-9">
+                                            <input name="nip" value="{{ $data['alamat'] }}" class="form-control" type="text" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Kode Pos</label>
+                                        <div class="col-md-9">
+                                            <input name="nip" value="{{ $data['kode_pos'] }}" class="form-control" type="text" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Telepon</label>
+                                        <div class="col-md-9">
+                                            <input name="nip" value="{{ $data['telepon'] }}" class="form-control" type="text" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">HP</label>
+                                        <div class="col-md-9">
+                                            <input name="nip" value="{{ $data['hp'] }}" class="form-control" type="text" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">NPWP</label>
+                                        <div class="col-md-9">
+                                            <input name="nip" value="{{ $data['npwp'] }}" class="form-control" type="text" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">No Rekening</label>
+                                        <div class="col-md-9">
+                                            <input name="nip" value="{{ $data['no_rekening'] }}" class="form-control" type="text" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Golongan Darah</label>
+                                        <div class="col-md-9">
+                                            @component('components.form.awesomeSelect', [
+                                                'name' => 'golongan_darah',
+                                                'items' => [
+                                                    [
+                                                        'value' => 'A',
+                                                        'label' => 'A'
+                                                    ],
+                                                    [
+                                                        'value' => 'B',
+                                                        'label' => 'B'
+                                                    ],
+                                                    [
+                                                        'value' => 'AB',
+                                                        'label' => 'AB'
+                                                    ],
+                                                    [
+                                                        'value' => 'O',
+                                                        'label' => 'O'
+                                                    ]
+                                                ],
+                                                'selected' => $data->golongan_darah
+                                            ])
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Status Perkawinan</label>
+                                        <div class="col-md-9">
+                                            @component('components.form.awesomeSelect', [
+                                                'name' => 'status_perkawinan_id',
+                                                'items' => [
+                                                    [
+                                                        'value' => '1',
+                                                        'label' => 'Menikah'
+                                                    ],
+                                                    [
+                                                        'value' => '2',
+                                                        'label' => 'Belum Menikah'
+                                                    ],
+                                                    [
+                                                        'value' => '3',
+                                                        'label' => 'Janda/Duda'
+                                                    ]
+                                                ],
+                                                'selected' => $data->status_perkawinan_id
+                                            ])
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Golongan</label>
+                                        <div class="col-md-9">
+                                            {{ $data->golongan }}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Unit Kerja</label>
+                                        <div class="col-md-9">
+                                            {{ $data->unit_kerja }}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Pendidikan</label>
+                                        <div class="col-md-9">
+                                            {{ $data->pendidikan }}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Gender</label>
+                                        <div class="col-md-9">
+                                            @component('components.form.awesomeSelect', [
+                                                'name' => 'gender',
+                                                'items' => [
+                                                    [
+                                                        'value' => 'm',
+                                                        'label' => 'Laki-laki'
+                                                    ],
+                                                    [
+                                                        'value' => 'f',
+                                                        'label' => 'Perempuan'
+                                                    ],
+                                                ],
+                                                'selected' => $data->gender
+                                            ])
+                                            @endcomponent
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tab-pane" id="tab26">
-                                    <p> default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected
-                                        humour and the like</p>
-                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et</p>
+                                <div class="tab-pane" id="tab-pendidikan">
+                                    <h2>Pendidikan</h2>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th>
+                                                No
+                                            </th>
+                                            <th>
+                                                Nama Pendidikan
+                                            </th>
+                                            <th>
+                                                Detail Pendidikan
+                                            </th>
+                                            <th>
+                                                No Ijazah
+                                            </th>
+                                            <th>
+                                                Tahun Lulus
+                                            </th>
+                                            <th>
+                                                Foto Ijazah
+                                            </th>
+                                        </tr>
+                                        @foreach ($data->user_pendidikan as $key => $val)
+                                        <tr>
+                                            <td>
+                                                {{ $key + 1 }}
+                                            </td>
+                                            <td>
+                                                {{$val->pendidikan ? $val->pendidikan->name : ''}}
+                                            </td>
+                                            <td>
+                                                {{$val->pendidikan_detail}}
+                                            </td>
+                                            <td>
+                                                {{$val->no_ijazah ? $val->no_ijazah : ''}}
+                                            </td>
+                                            <td>
+                                                {{$val->tahun_lulus ? $val->tahun_lulus : ''}}
+                                            </td>
+                                            <td>
+                                                Foto Ijazah
+                                            </td>
+
+                                        </tr>
+                                        @endforeach
+                                    </table>
                                 </div>
-                                <div class="tab-pane" id="tab27">
-                                    <p>over the years, sometimes by accident, sometimes on purpose (injected humour and the like</p>
-                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et</p>
+                                <div class="tab-pane" id="tab-pelatihan">
+                                    <h2>Pelatihan</h2>
+
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th>
+                                                No
+                                            </th>
+                                            <th>
+                                                Nama Sertifikat
+                                            </th>
+                                            <th>
+                                                No Sertifikat
+                                            </th>
+                                            <th>
+                                                Tahun
+                                            </th>
+                                            <th>
+                                                Foto Sertifikat
+                                            </th>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                1
+                                            </td>
+                                            <td>
+                                                -
+                                            </td>
+                                            <td>
+                                                -
+                                            </td>
+                                            <td>
+                                                -
+                                            </td>
+                                            <td>
+                                                -
+                                            </td>
+                                        </tr>
+                                    </table>
+
                                 </div>
-                                <div class="tab-pane" id="tab28">
-                                    <p>page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes
-                                        by accident, sometimes on purpose (injected humour and the like</p>
-                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et</p>
+                                <div class="tab-pane" id="tab-keluarga">
+                                    <h2>Keluarga</h2>
+                                    <div class="table-responsive">
+                                        <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <th style="min-width: 80px;" rowspan="2">
+                                                        No
+                                                    </th>
+                                                    <th style="min-width: 200px;" rowspan="2">
+                                                        Nama Lengkap
+                                                    </th>
+                                                    <th style="min-width: 200px;" rowspan="2">
+                                                        NIK
+                                                    </th>
+                                                    <th style="min-width: 200px;" rowspan="2">
+                                                        Jenis Kelamin
+                                                    </th>
+                                                    <th style="min-width: 200px;" rowspan="2">
+                                                        Tempat Lahir
+                                                    </th>
+                                                    <th style="min-width: 200px;" rowspan="2">
+                                                        Tanggal Lahir
+                                                    </th>
+                                                    <th style="min-width: 200px;" rowspan="2">
+                                                        Agama
+                                                    </th>
+                                                    <th style="min-width: 200px;" rowspan="2">
+                                                        Pendidikan
+                                                    </th>
+                                                    <th style="min-width: 200px;" rowspan="2">
+                                                        Jenis Pekerjaan
+                                                    </th>
+                                                    <th style="min-width: 200px;" rowspan="2">
+                                                        Status Perkawinan
+                                                    </th>
+                                                    <th style="min-width: 200px;" rowspan="2">
+                                                        Status Hub Dalam Keluarga
+                                                    </th>
+                                                    <th style="min-width: 200px;" rowspan="2">
+                                                        Kewarganegaraan
+                                                    </th>
+                                                    <th colspan="2">
+                                                        Dok Imigrasi
+                                                    </th>
+                                                    <th colspan="2">
+                                                        Nama Orangtua
+                                                    </th>
+                                                </tr>
+
+                                                <tr>
+                                                    <th style="min-width: 200px;">No Paspor</th>
+                                                    <th style="min-width: 200px;">No Kitas / Kitap</th>
+                                                    <th style="min-width: 200px;">Ayah</th>
+                                                    <th style="min-width: 200px;">Ibu</th>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+
+                                                    </td>
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                    <td>
+                                                        2
+                                                    </td>
+                                                    <td>
+                                                        3
+                                                    </td>
+                                                    <td>
+                                                        4
+                                                    </td>
+                                                    <td>
+                                                        5
+                                                    </td>
+                                                    <td>
+                                                        6
+                                                    </td>
+                                                    <td>
+                                                        7
+                                                    </td>
+                                                    <td>
+                                                        8
+                                                    </td>
+                                                    <td>
+                                                        9
+                                                    </td>
+                                                    <td>
+                                                        10
+                                                    </td>
+                                                    <td>
+                                                        11
+                                                    </td>
+                                                    <td>
+                                                        12
+                                                    </td>
+                                                    <td>
+                                                        13
+                                                    </td>
+                                                    <td>
+                                                        14
+                                                    </td>
+                                                    <td>
+                                                        15
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab-jabatan">
+                                    <h2>Jabatan</h2>
+
+                                    <div class="table-responsive">
+                                        <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <th style="min-width: 80px;">
+                                                        No
+                                                    </th>
+                                                    <th style="min-width: 200px;">
+                                                        Nama jabatan
+                                                    </th>
+                                                    <th style="min-width: 200px;">
+                                                        Dari Tahun
+                                                    </th>
+                                                    <th style="min-width: 200px;">
+                                                        Sampai Tahun
+                                                    </th>
+                                                    <th style="min-width: 200px;">
+                                                        Unit Kerja
+                                                    </th>
+                                                    <th style="min-width: 200px;">
+                                                        TMT
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="tab-pane" id="tab-golongan">
+                                    <h2>Golongan</h2>
+
+                                    <div class="table-responsive">
+                                        <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <th style="min-width: 80px;">
+                                                        No
+                                                    </th>
+                                                    <th style="min-width: 200px;">
+                                                        Nama
+                                                    </th>
+                                                    <th style="min-width: 200px;">
+                                                        Dari Tahun
+                                                    </th>
+                                                    <th style="min-width: 200px;">
+                                                        Sampai Tahun
+                                                    </th>
+                                                    <th style="min-width: 200px;">
+                                                        TMT
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
