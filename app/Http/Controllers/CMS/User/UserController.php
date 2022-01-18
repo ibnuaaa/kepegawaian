@@ -139,19 +139,87 @@ class UserController extends Controller
 
     public function Profile(Request $request)
     {
-        $QueryRoute = QueryRoute($request);
-        $QueryRoute->ArrQuery->id = 'my';
-        $QueryRoute->ArrQuery->set = 'first';
-        $QueryRoute->ArrQuery->{'with.total'} = 'true';
-        $UserBrowseController = new UserBrowseController($QueryRoute);
-        $data = $UserBrowseController->get($QueryRoute);
+        $id = MyAccount()->id;
 
-        $profile_picture_key = "";
-        if(!empty($data->original['data']['records']->profile_picture->storage->key))
-        $profile_picture_key = $data->original['data']['records']->profile_picture->storage->key;
+        $User = UserBrowseController::FetchBrowse($request)
+            ->equal('id', $id)->get('first');
+
+        // Position
+        $Position = PositionBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $PositionList[] = [
+            'value' => '',
+            'label' => '-= Select Position =-'
+        ];
+
+        foreach ($Position['records'] as $key => $value) {
+            $PositionList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
+        // Pendidikan
+        $Pendidikan = PendidikanBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $PendidikanList[] = [
+            'value' => '',
+            'label' => '-= Select Pendidikan =-'
+        ];
+
+        foreach ($Pendidikan['records'] as $key => $value) {
+            $PendidikanList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
+        // Unit Kerja
+        $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $UnitKerjaList[] = [
+            'value' => '',
+            'label' => '-= Select Position =-'
+        ];
+
+        foreach ($UnitKerja['records'] as $key => $value) {
+            $UnitKerjaList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
+        // Golongan
+        $Golongan = GolonganBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $GolonganList[] = [
+            'value' => '',
+            'label' => '-= Select Golongan =-'
+        ];
+
+        foreach ($Golongan['records'] as $key => $value) {
+            $GolonganList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
+
         return view('app.user.profile.index', [
-            'data' => $data->original['data']['records'],
-            'profile_picture_key' => $profile_picture_key
+            'positions' => $PositionList,
+            'pendidikan' => $PendidikanList,
+            'unit_kerja' => $UnitKerjaList,
+            'golongan' => $GolonganList,
+            'tab' => 'personal',
+            'data' => $User['records']
         ]);
     }
 

@@ -27,10 +27,11 @@
                 <div class="card-body">
                   <div class="panel panel-primary">
 
-                    <div class="alert alert-info" role="alert">
-                        <span class="alert-inner--icon"><i class="fe fe-bell" ></i></span>
-                        <span class="alert-inner--text"><strong>Informasi !</strong> Silahkan melakukan perubahan data anda. Data yang anda ketik langsung tersimpan pada server. Data akan diverifikasi oleh administrator. </span>
-                    </div>
+                        <div class="alert alert-info" role="alert">
+                            <span class="alert-inner--icon"><i class="fe fe-bell" ></i></span>
+                            <span class="alert-inner--text"><strong>Informasi !</strong> Silahkan melakukan perubahan data anda. Data yang anda ketik langsung tersimpan pada server. Data akan diverifikasi oleh administrator. </span>
+                        </div>
+
 
                         <div class="tab-menu-heading tab-menu-heading-boxed">
                             <div class="tabs-menu-boxed">
@@ -614,6 +615,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>

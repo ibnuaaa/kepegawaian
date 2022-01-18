@@ -948,7 +948,77 @@ if ( ! function_exists('agama'))
         ];
 
         if ($id) {
-          $ret = [];
+          $ret = "";
+          foreach ($list as $key => $value) {
+
+
+            if ($value['value'] == $id) {
+              $ret = $value['label'];
+            }
+          }
+
+          return $ret;
+        }
+
+        return $list;
+    }
+}
+
+if ( ! function_exists('gender'))
+{
+    function gender($id = null)
+    {
+
+        $list = [
+          [
+            'value' => 'male',
+            'label' => 'Laki-laki',
+          ],
+          [
+            'value' => 'female',
+            'label' => 'Perempuan',
+          ]
+        ];
+
+        if ($id) {
+          $ret = "";
+          foreach ($list as $key => $value) {
+
+
+            if ($value['value'] == $id) {
+              $ret = $value['label'];
+            }
+          }
+
+          return $ret;
+        }
+
+        return $list;
+    }
+}
+
+if ( ! function_exists('status_perkawinan'))
+{
+    function status_perkawinan($id = null)
+    {
+
+        $list = [
+          [
+            'value' => '1',
+            'label' => 'Menikah',
+          ],
+          [
+            'value' => '2',
+            'label' => 'Belum Menikah',
+          ],
+          [
+            'value' => '3',
+            'label' => 'Janda / Duda',
+          ]
+        ];
+
+        if ($id) {
+          $ret = "";
           foreach ($list as $key => $value) {
 
 

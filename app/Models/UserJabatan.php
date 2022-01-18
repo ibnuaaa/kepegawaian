@@ -17,4 +17,9 @@ class UserJabatan extends Model
     {
         return $this->hasOne(UnitKerja::class, 'id', 'unit_kerja_id');
     }
+
+    public function position()
+    {
+        return $this->hasOne(Position::class, 'id', 'position_id');
+    }
 }
