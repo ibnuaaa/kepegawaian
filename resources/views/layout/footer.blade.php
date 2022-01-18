@@ -66,6 +66,8 @@
 <script src="/assets/plugins/formvalidation/dist/js/plugins/Tachyons.min.js"></script>
 <script src="/assets/plugins/loadingoverlay.min.js" type="text/javascript"></script>
 
+<script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+
 <script>
         // Dropzone.autoDiscover = false;
         window.getCookie = function(cname) {

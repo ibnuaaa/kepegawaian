@@ -57,6 +57,8 @@
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="/assets/colors/color1.css" />
 
+    <link href="/assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
+
 </head>
 
 <body class="app sidebar-mini ltr light-mode">

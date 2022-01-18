@@ -48,7 +48,7 @@
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Nama</label>
                                         <div class="col-md-9">
-                                            <input name="name" value="{{ $data['name'] }}" class="form-control" type="text" required>
+                                            <input name="name" value="{{ $data['name'] }}" onkeyup="savePersonal(this)" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -66,55 +66,55 @@
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">No KTP</label>
                                         <div class="col-md-9">
-                                            <input name="nip" value="{{ $data['no_ktp'] }}" class="form-control" type="text" required>
+                                            <input name="no_ktp" value="{{ $data['no_ktp'] }}" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Tanggal Lahir</label>
                                         <div class="col-md-9">
-                                            <input name="nip" value="{{ $data['tanggal_lahir'] }}" class="form-control" type="text" required>
+                                            <input name="tanggal_lahir" value="{{ $data['tanggal_lahir'] }}" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Tempat Lahir</label>
                                         <div class="col-md-9">
-                                            <input name="nip" value="{{ $data['tanggal_lahir'] }}" class="form-control" type="text" required>
+                                            <input name="tanggal_lahir" value="{{ $data['tanggal_lahir'] }}" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Alamat</label>
                                         <div class="col-md-9">
-                                            <input name="nip" value="{{ $data['alamat'] }}" class="form-control" type="text" required>
+                                            <input name="alamat" value="{{ $data['alamat'] }}" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Kode Pos</label>
                                         <div class="col-md-9">
-                                            <input name="nip" value="{{ $data['kode_pos'] }}" class="form-control" type="text" required>
+                                            <input name="kode_pos" value="{{ $data['kode_pos'] }}" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Telepon</label>
                                         <div class="col-md-9">
-                                            <input name="nip" value="{{ $data['telepon'] }}" class="form-control" type="text" required>
+                                            <input name="telepon" value="{{ $data['telepon'] }}" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">HP</label>
                                         <div class="col-md-9">
-                                            <input name="nip" value="{{ $data['hp'] }}" class="form-control" type="text" required>
+                                            <input name="hp" value="{{ $data['hp'] }}" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">NPWP</label>
                                         <div class="col-md-9">
-                                            <input name="nip" value="{{ $data['npwp'] }}" class="form-control" type="text" required>
+                                            <input name="npwp" value="{{ $data['npwp'] }}" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">No Rekening</label>
                                         <div class="col-md-9">
-                                            <input name="nip" value="{{ $data['no_rekening'] }}" class="form-control" type="text" required>
+                                            <input name="no_rekening" value="{{ $data['no_rekening'] }}" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -172,19 +172,19 @@
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Golongan</label>
                                         <div class="col-md-9">
-                                            {{ $data->golongan }}
+                                            {{ $data->user_golongan && count($data->user_golongan) > 0 ? $data->user_golongan[count($data->user_golongan) - 1]->golongan->name : '<Kosong>' }}
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Unit Kerja</label>
                                         <div class="col-md-9">
-                                            {{ $data->unit_kerja }}
+                                            {{ $data->user_jabatan && count($data->user_jabatan) > 0 ? $data->user_jabatan[count($data->user_jabatan) - 1]->unit_kerja->name : '<Kosong>' }}
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Pendidikan</label>
                                         <div class="col-md-9">
-                                            {{ $data->pendidikan }}
+                                            {{ $data->user_jabatan && count($data->user_pendidikan) > 0 ? $data->user_pendidikan[count($data->user_pendidikan) - 1]->pendidikan->name : '<Kosong>' }}
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -237,21 +237,24 @@
                                                 {{ $key + 1 }}
                                             </td>
                                             <td>
-                                                {{$val->pendidikan ? $val->pendidikan->name : ''}}
+                                                @component('components.form.awesomeSelect', [
+                                                    'name' => 'gender',
+                                                    'items' => $pendidikan,
+                                                    'selected' => $val->pendidikan_id
+                                                ])
+                                                @endcomponent
                                             </td>
                                             <td>
-                                                {{$val->pendidikan_detail}}
+                                                <input name="pendidikan_detail" value="{{ $val->pendidikan_detail }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                             </td>
                                             <td>
-                                                {{$val->no_ijazah ? $val->no_ijazah : ''}}
+                                                <input name="pendidikan_detail" value="{{$val->no_ijazah ? $val->no_ijazah : ''}}" data-id="{{ $val->id }}" class="form-control" type="text" required>
                                             </td>
                                             <td>
-                                                {{$val->tahun_lulus ? $val->tahun_lulus : ''}}
+                                                <input name="pendidikan_detail" value="{{$val->tahun_lulus ? $val->tahun_lulus : ''}}" data-id="{{ $val->id }}" class="form-control" type="text" required>
                                             </td>
                                             <td>
-                                                Foto Ijazah
                                             </td>
-
                                         </tr>
                                         @endforeach
                                     </table>
@@ -277,24 +280,25 @@
                                                 Foto Sertifikat
                                             </th>
                                         </tr>
-
+                                        @foreach ($data->user_pelatihan as $key => $val)
                                         <tr>
                                             <td>
-                                                1
+                                                {{ $key + 1 }}
                                             </td>
                                             <td>
-                                                -
+                                                <input name="pendidikan_detail" value="{{ $val->nama_sertifikat }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                             </td>
                                             <td>
-                                                -
+                                                <input name="pendidikan_detail" value="{{ $val->no_sertifikat }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                             </td>
                                             <td>
-                                                -
+                                                <input name="pendidikan_detail" value="{{ $val->tahun }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                             </td>
                                             <td>
-                                                -
+
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </table>
 
                                 </div>
@@ -355,56 +359,85 @@
                                                     <th style="min-width: 200px;">Ibu</th>
                                                 </tr>
 
+
+
+                                                @foreach ($data->user_keluarga as $key => $val)
                                                 <tr>
                                                     <td>
-
+                                                      {{ $key + 1 }}
                                                     </td>
                                                     <td>
-                                                        1
+                                                      <input name="pendidikan_detail" value="{{ $val->nama_lengkap }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        2
+                                                      <input name="pendidikan_detail" value="{{ $val->nik }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        3
+                                                        @component('components.form.awesomeSelect', [
+                                                            'name' => 'gender',
+                                                            'items' => [
+                                                              [
+                                                                'label' => 'Laki-laki',
+                                                                'value' => 'm',
+                                                              ],
+                                                              [
+                                                                'label' => 'Perempuan',
+                                                                'value' => 'f',
+                                                              ]
+                                                            ],
+                                                            'selected' => $val->jenis_kelamin
+                                                        ])
+                                                        @endcomponent
                                                     </td>
                                                     <td>
-                                                        4
+                                                        <input name="pendidikan_detail"  value="{{ $val->tempat_lahir }}" data-id="{{ $val->id }}" class="form-control datepicker" type="text" required>
                                                     </td>
                                                     <td>
-                                                        5
+                                                        <input name="pendidikan_detail" id="myDatepicker" value="{{ $val->tanggal_lahir }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        6
+                                                        @component('components.form.awesomeSelect', [
+                                                            'name' => 'gender',
+                                                            'items' => agama(),
+                                                            'selected' => $val->agama_id
+                                                        ])
+                                                        @endcomponent
                                                     </td>
                                                     <td>
-                                                        7
+                                                        @component('components.form.awesomeSelect', [
+                                                            'name' => 'pendidikan',
+                                                            'items' => $pendidikan,
+                                                            'selected' => $val->pendidikan_id
+                                                        ])
+                                                        @endcomponent
                                                     </td>
                                                     <td>
-                                                        8
+                                                        <input name="pendidikan_detail" value="{{ $val->jenis_pekerjaan }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        9
+                                                        <input name="pendidikan_detail" value="{{ $val->status_perkawinan }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        10
+                                                        <input name="pendidikan_detail" value="{{ $val->hubungan_keluarga }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        11
+                                                        <input name="pendidikan_detail" value="{{ $val->kewarganegaraan }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        12
+                                                        <input name="pendidikan_detail" value="{{ $val->no_paspor }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        13
+                                                        <input name="pendidikan_detail" value="{{ $val->no_kitas }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        14
+                                                        <input name="pendidikan_detail" value="{{ $val->ayah }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        15
+                                                        <input name="pendidikan_detail" value="{{ $val->ibu }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                 </tr>
+                                                @endforeach
+
                                             </table>
                                         </div>
                                     </div>
@@ -435,26 +468,38 @@
                                                         TMT
                                                     </th>
                                                 </tr>
+                                                @foreach ($data->user_jabatan as $key => $val)
                                                 <tr>
                                                     <td>
-                                                        1
+                                                        {{ $key + 1 }}
                                                     </td>
                                                     <td>
-                                                        1
+                                                        @component('components.form.awesomeSelect', [
+                                                            'name' => 'gender',
+                                                            'items' => $positions,
+                                                            'selected' => $val->position_id
+                                                        ])
+                                                        @endcomponent
                                                     </td>
                                                     <td>
-                                                        1
+                                                        <input name="pendidikan_detail" value="{{ $val->dari_tahun }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        1
+                                                        <input name="pendidikan_detail" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        1
+                                                        @component('components.form.awesomeSelect', [
+                                                            'name' => 'unit_kerja',
+                                                            'items' => $unit_kerja,
+                                                            'selected' => $val->unit_kerja_id
+                                                        ])
+                                                        @endcomponent
                                                     </td>
                                                     <td>
-                                                        1
+                                                        <input name="pendidikan_detail" value="{{ $val->tmt }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </table>
                                         </div>
                                     </div>
@@ -484,23 +529,30 @@
                                                         TMT
                                                     </th>
                                                 </tr>
+                                                @foreach ($data->user_golongan as $key => $val)
                                                 <tr>
                                                     <td>
-                                                        1
+                                                        {{ $key + 1 }}
                                                     </td>
                                                     <td>
-                                                        1
+                                                      @component('components.form.awesomeSelect', [
+                                                          'name' => 'gender',
+                                                          'items' => $golongan,
+                                                          'selected' => $val->golongan_id
+                                                      ])
+                                                      @endcomponent
                                                     </td>
                                                     <td>
-                                                        1
+                                                        <input name="pendidikan_detail" value="{{ $val->dari_tahun }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        1
+                                                        <input name="pendidikan_detail" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        1
+                                                        <input name="pendidikan_detail" value="{{ $val->tmt }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </table>
                                         </div>
                                     </div>
