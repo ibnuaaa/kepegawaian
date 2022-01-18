@@ -16,17 +16,18 @@ class Update extends BaseMiddleware
     {
         $this->Model->UserJabatan = UserJabatan::where('id', $this->Id)->first();
         if ($this->Model->UserJabatan) {
-          if ($this->_Request->input('pendidikan_id')) $this->Model->UserJabatan->pendidikan_id = $this->_Request->input('pendidikan_id');
-          if ($this->_Request->input('pendidikan_detail')) $this->Model->UserJabatan->pendidikan_detail = $this->_Request->input('pendidikan_detail');
-          if ($this->_Request->input('no_ijazah')) $this->Model->UserJabatan->no_ijazah = $this->_Request->input('no_ijazah');
-          if ($this->_Request->input('tahun_lulus')) $this->Model->UserJabatan->tahun_lulus = $this->_Request->input('tahun_lulus');
+          if ($this->_Request->input('position_id')) $this->Model->UserJabatan->position_id = $this->_Request->input('position_id');
+          if ($this->_Request->input('nama_jabatan')) $this->Model->UserJabatan->nama_jabatan = $this->_Request->input('nama_jabatan');
+          if ($this->_Request->input('dari_tahun')) $this->Model->UserJabatan->dari_tahun = $this->_Request->input('dari_tahun');
+          if ($this->_Request->input('sampai_tahun')) $this->Model->UserJabatan->sampai_tahun = $this->_Request->input('sampai_tahun');
+          if ($this->_Request->input('unit_kerja_id')) $this->Model->UserJabatan->unit_kerja_id = $this->_Request->input('unit_kerja_id');
+          if ($this->_Request->input('tmt')) $this->Model->UserJabatan->tmt = $this->_Request->input('tmt');
         }
     }
 
     private function Validation()
     {
         $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required'
         ]);
         if (!$this->Model->UserJabatan) {
             $this->Json::set('exception.key', 'NotFoundUserJabatan');

@@ -16,17 +16,15 @@ class Update extends BaseMiddleware
     {
         $this->Model->UserPelatihan = UserPelatihan::where('id', $this->Id)->first();
         if ($this->Model->UserPelatihan) {
-          if ($this->_Request->input('pendidikan_id')) $this->Model->UserPelatihan->pendidikan_id = $this->_Request->input('pendidikan_id');
-          if ($this->_Request->input('pendidikan_detail')) $this->Model->UserPelatihan->pendidikan_detail = $this->_Request->input('pendidikan_detail');
-          if ($this->_Request->input('no_ijazah')) $this->Model->UserPelatihan->no_ijazah = $this->_Request->input('no_ijazah');
-          if ($this->_Request->input('tahun_lulus')) $this->Model->UserPelatihan->tahun_lulus = $this->_Request->input('tahun_lulus');
+          if ($this->_Request->input('nama_sertifikat')) $this->Model->UserPelatihan->nama_sertifikat = $this->_Request->input('nama_sertifikat');
+          if ($this->_Request->input('no_sertifikat')) $this->Model->UserPelatihan->no_sertifikat = $this->_Request->input('no_sertifikat');
+          if ($this->_Request->input('tahun')) $this->Model->UserPelatihan->tahun = $this->_Request->input('tahun');
         }
     }
 
     private function Validation()
     {
         $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required'
         ]);
         if (!$this->Model->UserPelatihan) {
             $this->Json::set('exception.key', 'NotFoundUserPelatihan');

@@ -1,27 +1,133 @@
 <script>
 $(document).ready(function() {
-    $('body #myDatepicker').datepicker();
+    $('body #myDatepicker').datepicker({
+      format: 'yyyy-mm-dd',
+    });
 })
 
+// =======================================================================
 
-function savePersonal(e, field) {
+function savePersonal(e) {
 
+    var field = $(e).attr('name')
 
+    var data = new Object;
+    data[field] = $(e).val();
 
-  // const data = {
-  //   `${field}` : 'adasd'
-  // };
-  //
-  // showLoading()
-  // axios.put('/user', data).then((response) => {
-  //     location.reload()
-  // }).catch((error) => {
-  //     if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
-  //         swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
-  //         hideLoading()
-  //     }
-  // })
+    $(e).addClass('loadingField')
+    axios.put('/user/my', data).then((response) => {
+        // location.reload()
+        $(e).removeClass('loadingField')
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
+        }
+    })
 }
+
+function savePendidikan(e) {
+
+    var field = $(e).attr('name')
+    var id = $(e).attr('data-id')
+
+    var data = new Object;
+    data[field] = $(e).val();
+
+    $(e).addClass('loadingField')
+    axios.put('/user_pendidikan/' + id, data).then((response) => {
+        // location.reload()
+        $(e).removeClass('loadingField')
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
+        }
+    })
+}
+
+function savePelatihan(e) {
+
+    var field = $(e).attr('name')
+    var id = $(e).attr('data-id')
+
+    var data = new Object;
+    data[field] = $(e).val();
+
+    $(e).addClass('loadingField')
+    axios.put('/user_pelatihan/' + id, data).then((response) => {
+        // location.reload()
+        $(e).removeClass('loadingField')
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
+        }
+    })
+}
+
+function saveKeluarga(e) {
+
+    var field = $(e).attr('name')
+    var id = $(e).attr('data-id')
+
+    var data = new Object;
+    data[field] = $(e).val();
+
+    $(e).addClass('loadingField')
+    axios.put('/user_keluarga/' + id, data).then((response) => {
+        // location.reload()
+        $(e).removeClass('loadingField')
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
+        }
+    })
+}
+
+function saveJabatan(e) {
+
+    var field = $(e).attr('name')
+    var id = $(e).attr('data-id')
+
+    var data = new Object;
+    data[field] = $(e).val();
+
+    $(e).addClass('loadingField')
+    axios.put('/user_jabatan/' + id, data).then((response) => {
+        // location.reload()
+        $(e).removeClass('loadingField')
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
+        }
+    })
+}
+
+function saveGolongan(e) {
+
+    var field = $(e).attr('name')
+    var id = $(e).attr('data-id')
+
+    var data = new Object;
+    data[field] = $(e).val();
+
+    $(e).addClass('loadingField')
+    axios.put('/user_golongan/' + id, data).then((response) => {
+        // location.reload()
+        $(e).removeClass('loadingField')
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
+        }
+    })
+}
+
+
+// =======================================================================
 
 function saveNewUserPendidikan() {
       const data = {

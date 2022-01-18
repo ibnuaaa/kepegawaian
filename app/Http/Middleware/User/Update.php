@@ -16,6 +16,11 @@ class Update extends BaseMiddleware
 {
     private function Initiate($request)
     {
+
+        if ($this->Id == 'my') {
+           $this->Id = MyAccount()->id;
+        }
+
         $this->Model->User = User::where('id', $this->Id)->first();
         $password = $this->_Request->input('password');
         if (Hash::needsRehash($this->_Request->input('password'))) {
@@ -43,6 +48,7 @@ class Update extends BaseMiddleware
             !$this->_Request->input('unit_kerja_id') || $this->Model->User->unit_kerja_id = $this->_Request->input('unit_kerja_id');
             !$this->_Request->input('pendidikan_id') || $this->Model->User->pendidikan_id = $this->_Request->input('pendidikan_id');
             !$this->_Request->input('pendidikan_detail') || $this->Model->User->pendidikan_detail = $this->_Request->input('pendidikan_detail');
+            !$this->_Request->input('gender') || $this->Model->User->gender = $this->_Request->input('gender');
 
             if ($this->_Request->input('password')) {
                 $this->Model->User->password = $password;

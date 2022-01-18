@@ -26,7 +26,6 @@ class Update extends BaseMiddleware
     private function Validation()
     {
         $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required'
         ]);
         if (!$this->Model->UserPendidikan) {
             $this->Json::set('exception.key', 'NotFoundUserPendidikan');

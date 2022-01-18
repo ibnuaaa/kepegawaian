@@ -53,73 +53,73 @@
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Nama</label>
                                         <div class="col-md-9">
-                                            <input name="name" value="{{ $data['name'] }}" onkeyup="savePersonal(this, 'name')" class="form-control" type="text" required>
+                                            <input name="name" value="{{ $data['name'] }}" onChange="savePersonal(this)" onChange="savePersonal(this)" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Username</label>
                                         <div class="col-md-9">
-                                            <input name="username" value="{{ $data['username'] }}" class="form-control" type="text" required>
+                                            <input name="username" value="{{ $data['username'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">NIP</label>
                                         <div class="col-md-9">
-                                            <input name="nip" value="{{ $data['nip'] }}" class="form-control" type="text" required>
+                                            <input name="nip" value="{{ $data['nip'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">No KTP</label>
                                         <div class="col-md-9">
-                                            <input name="no_ktp" value="{{ $data['no_ktp'] }}" class="form-control" type="text" required>
+                                            <input name="no_ktp" value="{{ $data['no_ktp'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Tanggal Lahir</label>
                                         <div class="col-md-9">
-                                            <input name="tanggal_lahir" value="{{ $data['tanggal_lahir'] }}" class="form-control" type="text" required>
+                                            <input name="tanggal_lahir" id="myDatepicker" value="{{ $data['tanggal_lahir'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Tempat Lahir</label>
                                         <div class="col-md-9">
-                                            <input name="tanggal_lahir" value="{{ $data['tanggal_lahir'] }}" class="form-control" type="text" required>
+                                            <input name="tempat_lahir" value="{{ $data['tempat_lahir'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Alamat</label>
                                         <div class="col-md-9">
-                                            <input name="alamat" value="{{ $data['alamat'] }}" class="form-control" type="text" required>
+                                            <input name="alamat" value="{{ $data['alamat'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Kode Pos</label>
                                         <div class="col-md-9">
-                                            <input name="kode_pos" value="{{ $data['kode_pos'] }}" class="form-control" type="text" required>
+                                            <input name="kode_pos" value="{{ $data['kode_pos'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Telepon</label>
                                         <div class="col-md-9">
-                                            <input name="telepon" value="{{ $data['telepon'] }}" class="form-control" type="text" required>
+                                            <input name="telepon" value="{{ $data['telepon'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">HP</label>
                                         <div class="col-md-9">
-                                            <input name="hp" value="{{ $data['hp'] }}" class="form-control" type="text" required>
+                                            <input name="hp" value="{{ $data['hp'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">NPWP</label>
                                         <div class="col-md-9">
-                                            <input name="npwp" value="{{ $data['npwp'] }}" class="form-control" type="text" required>
+                                            <input name="npwp" value="{{ $data['npwp'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">No Rekening</label>
                                         <div class="col-md-9">
-                                            <input name="no_rekening" value="{{ $data['no_rekening'] }}" class="form-control" type="text" required>
+                                            <input name="no_rekening" value="{{ $data['no_rekening'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -145,6 +145,7 @@
                                                         'label' => 'O'
                                                     ]
                                                 ],
+                                                'onChange' => 'savePersonal(this)',
                                                 'selected' => $data->golongan_darah
                                             ])
                                             @endcomponent
@@ -169,6 +170,7 @@
                                                         'label' => 'Janda/Duda'
                                                     ]
                                                 ],
+                                                'onChange' => 'savePersonal(this)',
                                                 'selected' => $data->status_perkawinan_id
                                             ])
                                             @endcomponent
@@ -199,14 +201,15 @@
                                                 'name' => 'gender',
                                                 'items' => [
                                                     [
-                                                        'value' => 'm',
+                                                        'value' => 'male',
                                                         'label' => 'Laki-laki'
                                                     ],
                                                     [
-                                                        'value' => 'f',
+                                                        'value' => 'female',
                                                         'label' => 'Perempuan'
                                                     ],
                                                 ],
+                                                'onChange' => 'savePersonal(this)',
                                                 'selected' => $data->gender
                                             ])
                                             @endcomponent
@@ -243,20 +246,22 @@
                                             </td>
                                             <td>
                                                 @component('components.form.awesomeSelect', [
-                                                    'name' => 'gender',
+                                                    'name' => 'pendidikan_id',
                                                     'items' => $pendidikan,
-                                                    'selected' => $val->pendidikan_id
+                                                    'onChange' => 'savePendidikan(this)',
+                                                    'selected' => $val->pendidikan_id,
+                                                    'data_id' => $val->id
                                                 ])
                                                 @endcomponent
                                             </td>
                                             <td>
-                                                <input name="pendidikan_detail" value="{{ $val->pendidikan_detail }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                <input name="pendidikan_detail" value="{{ $val->pendidikan_detail }}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control " type="text" required>
                                             </td>
                                             <td>
-                                                <input name="pendidikan_detail" value="{{$val->no_ijazah ? $val->no_ijazah : ''}}" data-id="{{ $val->id }}" class="form-control" type="text" required>
+                                                <input name="no_ijazah" value="{{$val->no_ijazah ? $val->no_ijazah : ''}}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control" type="text" required>
                                             </td>
                                             <td>
-                                                <input name="pendidikan_detail" value="{{$val->tahun_lulus ? $val->tahun_lulus : ''}}" data-id="{{ $val->id }}" class="form-control" type="text" required>
+                                                <input name="tahun_lulus" value="{{$val->tahun_lulus ? $val->tahun_lulus : ''}}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control" type="text" required>
                                             </td>
                                             <td>
                                             </td>
@@ -296,13 +301,13 @@
                                                 {{ $key + 1 }}
                                             </td>
                                             <td>
-                                                <input name="pendidikan_detail" value="{{ $val->nama_sertifikat }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                <input name="nama_sertifikat" value="{{ $val->nama_sertifikat }}" data-id="{{ $val->id }}" onChange="savePelatihan(this)" class="form-control " type="text" required>
                                             </td>
                                             <td>
-                                                <input name="pendidikan_detail" value="{{ $val->no_sertifikat }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                <input name="no_sertifikat" value="{{ $val->no_sertifikat }}" data-id="{{ $val->id }}" onChange="savePelatihan(this)" class="form-control " type="text" required>
                                             </td>
                                             <td>
-                                                <input name="pendidikan_detail" value="{{ $val->tahun }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                <input name="tahun" value="{{ $val->tahun }}" data-id="{{ $val->id }}" onChange="savePelatihan(this)" class="form-control " type="text" required>
                                             </td>
                                             <td>
 
@@ -388,14 +393,14 @@
                                                       {{ $key + 1 }}
                                                     </td>
                                                     <td>
-                                                      <input name="pendidikan_detail" value="{{ $val->nama_lengkap }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                      <input name="nama_lengkap" value="{{ $val->nama_lengkap }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                      <input name="pendidikan_detail" value="{{ $val->nik }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                      <input name="nik" value="{{ $val->nik }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
                                                         @component('components.form.awesomeSelect', [
-                                                            'name' => 'gender',
+                                                            'name' => 'jenis_kelamin',
                                                             'items' => [
                                                               [
                                                                 'label' => 'Laki-laki',
@@ -406,55 +411,61 @@
                                                                 'value' => 'f',
                                                               ]
                                                             ],
-                                                            'selected' => $val->jenis_kelamin
+                                                            'onChange' => 'saveKeluarga(this)',
+                                                            'selected' => $val->jenis_kelamin,
+                                                            'data_id' => $val->id
                                                         ])
                                                         @endcomponent
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail"  value="{{ $val->tempat_lahir }}" data-id="{{ $val->id }}" class="form-control datepicker" type="text" required>
+                                                        <input name="tempat_lahir"  value="{{ $val->tempat_lahir }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control datepicker" type="text" required>
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" id="myDatepicker" value="{{ $val->tanggal_lahir }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="tanggal_lahir" id="myDatepicker" value="{{ $val->tanggal_lahir }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
                                                         @component('components.form.awesomeSelect', [
-                                                            'name' => 'gender',
+                                                            'name' => 'agama_id',
                                                             'items' => agama(),
-                                                            'selected' => $val->agama_id
+                                                            'onChange' => 'saveKeluarga(this)',
+                                                            'selected' => $val->agama_id,
+                                                            'data_id' => $val->id
                                                         ])
                                                         @endcomponent
                                                     </td>
                                                     <td>
                                                         @component('components.form.awesomeSelect', [
-                                                            'name' => 'pendidikan',
+                                                            'name' => 'pendidikan_id',
                                                             'items' => $pendidikan,
-                                                            'selected' => $val->pendidikan_id
+                                                            'onChange' => 'saveKeluarga(this)',
+                                                            'selected' => $val->pendidikan_id,
+                                                            'data_id' => $val->id
                                                         ])
                                                         @endcomponent
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->jenis_pekerjaan }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="jenis_pekerjaan" value="{{ $val->jenis_pekerjaan }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->status_perkawinan }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="status_perkawinan" value="{{ $val->status_perkawinan }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->hubungan_keluarga }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="hubungan_keluarga" value="{{ $val->hubungan_keluarga }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->kewarganegaraan }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="kewarganegaraan" value="{{ $val->kewarganegaraan }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->no_paspor }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="no_paspor" value="{{ $val->no_paspor }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control" type="text" required>
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->no_kitas }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="no_kitas" value="{{ $val->no_kitas }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->ayah }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="ayah" value="{{ $val->ayah }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->ibu }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="ibu" value="{{ $val->ibu }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -502,28 +513,32 @@
                                                     </td>
                                                     <td>
                                                         @component('components.form.awesomeSelect', [
-                                                            'name' => 'gender',
+                                                            'name' => 'position_id',
                                                             'items' => $positions,
-                                                            'selected' => $val->position_id
+                                                            'onChange' => 'saveJabatan(this)',
+                                                            'selected' => $val->position_id,
+                                                            'data_id' => $val->id
                                                         ])
                                                         @endcomponent
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->dari_tahun }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="dari_tahun" value="{{ $val->dari_tahun }}" data-id="{{ $val->id }}" onChange="saveJabatan(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="sampai_tahun" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" onChange="saveJabatan(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
                                                         @component('components.form.awesomeSelect', [
-                                                            'name' => 'unit_kerja',
+                                                            'name' => 'unit_kerja_id',
                                                             'items' => $unit_kerja,
-                                                            'selected' => $val->unit_kerja_id
+                                                            'onChange' => 'saveJabatan(this)',
+                                                            'selected' => $val->unit_kerja_id,
+                                                            'data_id' => $val->id
                                                         ])
                                                         @endcomponent
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->tmt }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="tmt" id="myDatepicker" value="{{ $val->tmt }}" data-id="{{ $val->id }}" onChange="saveJabatan(this)" class="form-control " type="text" required>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -568,20 +583,22 @@
                                                     </td>
                                                     <td>
                                                       @component('components.form.awesomeSelect', [
-                                                          'name' => 'gender',
+                                                          'name' => 'golongan_id',
                                                           'items' => $golongan,
-                                                          'selected' => $val->golongan_id
+                                                          'selected' => $val->golongan_id,
+                                                          'onChange' => 'saveGolongan(this)',
+                                                          'data_id' => $val->id
                                                       ])
                                                       @endcomponent
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->dari_tahun }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="dari_tahun" value="{{ $val->dari_tahun }}" data-id="{{ $val->id }}" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="sampai_tahun" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        <input name="pendidikan_detail" value="{{ $val->tmt }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                        <input name="tmt" value="{{ $val->tmt }}" data-id="{{ $val->id }}" id="myDatepicker" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                     </td>
                                                 </tr>
                                                 @endforeach

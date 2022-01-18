@@ -104,12 +104,50 @@ class UserBrowseController extends Controller
             }
        })
        ->leftJoin($this->PositionTable, "$this->PositionTable.id", "$this->UserTable.position_id")
+
+
+
+       // `no_ktp`
+       // `tanggal_lahir`
+       // `tempat_lahir`
+       // `alamat`
+       // `kode_pos`
+       // `telepon`
+       // `hp`
+       // `npwp`
+       // `no_rekening`
+       // `golongan_darah`
+       // `status_perkawinan_id`
+       // `golongan_id`
+       // `unit_kerja_id`
+       // `pendidikan_id`
+       // `pendidikan_detail`
+
+
        ->select(
             // User
             "$this->UserTable.id as user.id",
             "$this->UserTable.name as user.name",
             "$this->UserTable.username as user.username",
             "$this->UserTable.nip as user.nip",
+
+            "$this->UserTable.no_ktp as user.no_ktp",
+            "$this->UserTable.tanggal_lahir as user.tanggal_lahir",
+            "$this->UserTable.tempat_lahir as user.tempat_lahir",
+            "$this->UserTable.alamat as user.alamat",
+            "$this->UserTable.kode_pos as user.kode_pos",
+            "$this->UserTable.telepon as user.telepon",
+            "$this->UserTable.hp as user.hp",
+            "$this->UserTable.npwp as user.npwp",
+            "$this->UserTable.no_rekening as user.no_rekening",
+            "$this->UserTable.golongan_darah as user.golongan_darah",
+            "$this->UserTable.status_perkawinan_id as user.status_perkawinan_id",
+
+            "$this->UserTable.golongan_id as user.golongan_id",
+            "$this->UserTable.unit_kerja_id as user.unit_kerja_id",
+            "$this->UserTable.pendidikan_id as user.pendidikan_id",
+            "$this->UserTable.pendidikan_detail as user.pendidikan_detail",
+
             "$this->UserTable.email as user.email",
             "$this->UserTable.gender as user.gender",
             "$this->UserTable.position_id as user.position_id",
@@ -117,6 +155,8 @@ class UserBrowseController extends Controller
             "$this->UserTable.remember_token as user.remember_token",
             "$this->UserTable.updated_at as user.updated_at",
             "$this->UserTable.created_at as user.created_at",
+            "$this->UserTable.deleted_at as user.deleted_at",
+
             "$this->UserTable.deleted_at as user.deleted_at",
 
             // User

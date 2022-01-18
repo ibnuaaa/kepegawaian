@@ -16,17 +16,16 @@ class Update extends BaseMiddleware
     {
         $this->Model->UserGolongan = UserGolongan::where('id', $this->Id)->first();
         if ($this->Model->UserGolongan) {
-          if ($this->_Request->input('pendidikan_id')) $this->Model->UserGolongan->pendidikan_id = $this->_Request->input('pendidikan_id');
-          if ($this->_Request->input('pendidikan_detail')) $this->Model->UserGolongan->pendidikan_detail = $this->_Request->input('pendidikan_detail');
-          if ($this->_Request->input('no_ijazah')) $this->Model->UserGolongan->no_ijazah = $this->_Request->input('no_ijazah');
-          if ($this->_Request->input('tahun_lulus')) $this->Model->UserGolongan->tahun_lulus = $this->_Request->input('tahun_lulus');
+          if ($this->_Request->input('golongan_id')) $this->Model->UserGolongan->golongan_id = $this->_Request->input('golongan_id');
+          if ($this->_Request->input('dari_tahun')) $this->Model->UserGolongan->dari_tahun = $this->_Request->input('dari_tahun');
+          if ($this->_Request->input('sampai_tahun')) $this->Model->UserGolongan->sampai_tahun = $this->_Request->input('sampai_tahun');
+          if ($this->_Request->input('tmt')) $this->Model->UserGolongan->tmt = $this->_Request->input('tmt');
         }
     }
 
     private function Validation()
     {
         $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required'
         ]);
         if (!$this->Model->UserGolongan) {
             $this->Json::set('exception.key', 'NotFoundUserGolongan');

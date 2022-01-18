@@ -174,6 +174,11 @@
     @yield('formValidationScript')
     <!-- END PAGE LEVEL JS -->
 
+    <style type="text/css">
+        .loadingField {
+            background: #fff3cd !important;
+        }
+    </style>
 </body>
 
 </html>

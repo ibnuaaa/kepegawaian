@@ -94,17 +94,6 @@ class UserController extends Controller
         return response()->json(Json::get(), 201);
     }
 
-    public function PlayerInsert(Request $request)
-    {
-        $Model = $request->Payload->all()['Model'];
-        $Model->User->password = Hash::make('Testing123');
-        $Model->User->save();
-
-        Json::set('data', [
-            'spin_player_id' => $Model->User->id
-        ]);
-        return response()->json(Json::get(), 201);
-    }
 
     public function Update(Request $request)
     {
@@ -115,37 +104,6 @@ class UserController extends Controller
         return response()->json(Json::get(), 202);
     }
 
-    public function PlayerGet(Request $request)
-    {
-        $Model = $request->Payload->all()['Model'];
-
-        Json::set('data', [
-            'player_id' => $Model->User->player_id
-        ]);
-        return response()->json(Json::get(), 202);
-    }
-
-    public function AvailableTickets(Request $request)
-    {
-        $UserCoupon = UserCouponBrowseController::FetchBrowse($request)
-            ->where('with.total', 'true')
-            ->where('for', 'available_ticket_per_user')
-            ->where('is_claimed', 'no')
-            ->where('website_id', MyAccount()->website_id)
-            ->get('fetch');
-
-        $items = [];
-        foreach ($UserCoupon['records'] as $key => $value) {
-            $item = [];
-            $item[] = (string) $value->player_id;
-            $item[] = $value->total_coupon;
-            $items[] = $item;
-        }
-
-
-        Json::set('data', $items);
-        return response()->json(Json::get(), 202);
-    }
 
     public function Delete(Request $request)
     {
