@@ -66,6 +66,27 @@ class MiddlewareServiceProvider extends ServiceProvider
         'Position.Delete' => \App\Http\Middleware\Position\Delete::class,
         'Position.ChangeStatus' => \App\Http\Middleware\Position\ChangeStatus::class,
 
+        'UserPendidikan.Insert' => \App\Http\Middleware\UserPendidikan\Insert::class,
+        'UserPendidikan.Update' => \App\Http\Middleware\UserPendidikan\Update::class,
+        'UserPendidikan.Delete' => \App\Http\Middleware\UserPendidikan\Delete::class,
+
+        'UserPelatihan.Insert' => \App\Http\Middleware\UserPelatihan\Insert::class,
+        'UserPelatihan.Update' => \App\Http\Middleware\UserPelatihan\Update::class,
+        'UserPelatihan.Delete' => \App\Http\Middleware\UserPelatihan\Delete::class,
+
+        'UserKeluarga.Insert' => \App\Http\Middleware\UserKeluarga\Insert::class,
+        'UserKeluarga.Update' => \App\Http\Middleware\UserKeluarga\Update::class,
+        'UserKeluarga.Delete' => \App\Http\Middleware\UserKeluarga\Delete::class,
+
+        'UserJabatan.Insert' => \App\Http\Middleware\UserJabatan\Insert::class,
+        'UserJabatan.Update' => \App\Http\Middleware\UserJabatan\Update::class,
+        'UserJabatan.Delete' => \App\Http\Middleware\UserJabatan\Delete::class,
+
+        'UserGolongan.Insert' => \App\Http\Middleware\UserGolongan\Insert::class,
+        'UserGolongan.Update' => \App\Http\Middleware\UserGolongan\Update::class,
+        'UserGolongan.Delete' => \App\Http\Middleware\UserGolongan\Delete::class,
+
+
         'User.Developer.Token' => \App\Http\Middleware\User\Developer\Token::class,
 
         'LogActivity' => \App\Http\Middleware\LogActivity::class,

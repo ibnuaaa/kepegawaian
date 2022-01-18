@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Middleware\UserPendidikan;
+namespace App\Http\Middleware\UserJabatan;
 
-use App\Models\UserPendidikan;
+use App\Models\UserJabatan;
 
 use Closure;
 use Validator;
@@ -13,12 +13,8 @@ class Insert extends BaseMiddleware
 {
     private function Initiate()
     {
-        $this->Model->UserPendidikan = new UserPendidikan();
-        $this->Model->UserPendidikan->user_id = $this->_Request->input('user_id');
-        $this->Model->UserPendidikan->pendidikan_id = $this->_Request->input('pendidikan_id');
-        $this->Model->UserPendidikan->pendidikan_detail = $this->_Request->input('pendidikan_detail');
-        $this->Model->UserPendidikan->no_ijazah = $this->_Request->input('no_ijazah');
-        $this->Model->UserPendidikan->tahun_lulus = $this->_Request->input('tahun_lulus');
+        $this->Model->UserJabatan = new UserJabatan();
+        $this->Model->UserJabatan->user_id = $this->_Request->input('user_id');
     }
 
     private function Validation()

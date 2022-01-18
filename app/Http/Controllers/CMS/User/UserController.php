@@ -189,7 +189,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function ProfileEdit(Request $request)
+    public function ProfileEdit(Request $request, $tab)
     {
 
         $id = MyAccount()->id;
@@ -219,7 +219,7 @@ class UserController extends Controller
             ->where('take','all')
             ->get('fetch');
 
-        $Pendidikans[] = [
+        $PendidikanList[] = [
             'value' => '',
             'label' => '-= Select Pendidikan =-'
         ];
@@ -271,7 +271,7 @@ class UserController extends Controller
             'pendidikan' => $PendidikanList,
             'unit_kerja' => $UnitKerjaList,
             'golongan' => $GolonganList,
-
+            'tab' => $tab,
             'data' => $User['records']
         ]);
     }

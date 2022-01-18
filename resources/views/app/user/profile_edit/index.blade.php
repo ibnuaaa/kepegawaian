@@ -27,28 +27,33 @@
                 <div class="card-body">
                   <div class="panel panel-primary">
 
+                    <div class="alert alert-info" role="alert">
+                        <span class="alert-inner--icon"><i class="fe fe-bell" ></i></span>
+                        <span class="alert-inner--text"><strong>Informasi !</strong> Silahkan melakukan perubahan data anda. Data yang anda ketik langsung tersimpan pada server. Data akan diverifikasi oleh administrator. </span>
+                    </div>
+
                         <div class="tab-menu-heading tab-menu-heading-boxed">
                             <div class="tabs-menu-boxed">
                                 <ul class="nav panel-tabs">
-                                    <li><a href="#tab-personal" class="active" data-bs-toggle="tab">Personal</a></li>
-                                    <li><a href="#tab-pendidikan" data-bs-toggle="tab">Pendidikan</a></li>
-                                    <li><a href="#tab-pelatihan" data-bs-toggle="tab">Pelatihan</a></li>
-                                    <li><a href="#tab-keluarga" data-bs-toggle="tab">Keluarga</a></li>
-                                    <li><a href="#tab-jabatan" data-bs-toggle="tab">Riwayat Jabatan</a></li>
-                                    <li><a href="#tab-golongan" data-bs-toggle="tab">Riwayat Golongan</a></li>
+                                    <li><a href="/profile/personal" {{ $tab == 'personal' ? 'class=active' : '' }}>Personal</a></li>
+                                    <li><a href="/profile/pendidikan" {{ $tab == 'pendidikan' ? 'class=active' : '' }}>Pendidikan</a></li>
+                                    <li><a href="/profile/pelatihan" {{ $tab == 'pelatihan' ? 'class=active' : '' }}>Pelatihan</a></li>
+                                    <li><a href="/profile/keluarga" {{ $tab == 'keluarga' ? 'class=active' : '' }}>Keluarga</a></li>
+                                    <li><a href="/profile/jabatan" {{ $tab == 'jabatan' ? 'class=active' : '' }}>Riwayat Jabatan</a></li>
+                                    <li><a href="/profile/golongan" {{ $tab == 'golongan' ? 'class=active' : '' }}>Riwayat Golongan</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="panel-body tabs-menu-body">
                             <div class="tab-content">
-                                <div class="tab-pane active" id="tab-personal">
+                                <div class="tab-pane {{ $tab == 'personal' ? 'active' : '' }}" id="tab-personal">
 
                                     <h2>Personal</h2>
 
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Nama</label>
                                         <div class="col-md-9">
-                                            <input name="name" value="{{ $data['name'] }}" onkeyup="savePersonal(this)" class="form-control" type="text" required>
+                                            <input name="name" value="{{ $data['name'] }}" onkeyup="savePersonal(this, 'name')" class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -172,19 +177,19 @@
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Golongan</label>
                                         <div class="col-md-9">
-                                            {{ $data->user_golongan && count($data->user_golongan) > 0 ? $data->user_golongan[count($data->user_golongan) - 1]->golongan->name : '<Kosong>' }}
+                                            {{ !empty($data->user_golongan[count($data->user_golongan) - 1]->golongan->name) ? $data->user_golongan[count($data->user_golongan) - 1]->golongan->name : '<Kosong>' }}
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Unit Kerja</label>
                                         <div class="col-md-9">
-                                            {{ $data->user_jabatan && count($data->user_jabatan) > 0 ? $data->user_jabatan[count($data->user_jabatan) - 1]->unit_kerja->name : '<Kosong>' }}
+                                            {{ !empty($data->user_jabatan[count($data->user_jabatan) - 1]->unit_kerja->name) ? $data->user_jabatan[count($data->user_jabatan) - 1]->unit_kerja->name : '<Kosong>' }}
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Pendidikan</label>
                                         <div class="col-md-9">
-                                            {{ $data->user_jabatan && count($data->user_pendidikan) > 0 ? $data->user_pendidikan[count($data->user_pendidikan) - 1]->pendidikan->name : '<Kosong>' }}
+                                            {{ !empty($data->user_pendidikan[count($data->user_pendidikan) - 1]->pendidikan->name)  ? $data->user_pendidikan[count($data->user_pendidikan) - 1]->pendidikan->name : '<Kosong>' }}
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -208,7 +213,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="tab-pendidikan">
+                                <div class="tab-pane  {{ $tab == 'pendidikan' ? 'active' : '' }}" id="tab-pendidikan">
                                     <h2>Pendidikan</h2>
                                     <table class="table table-bordered">
                                         <tr>
@@ -257,9 +262,14 @@
                                             </td>
                                         </tr>
                                         @endforeach
+                                        <tr>
+                                            <td colspan="6" class="text-center">
+                                                <input type="button" class="btn btn-primary" value="Tambah Riwayat Pendidikan" onclick="saveNewUserPendidikan()" />
+                                            </td>
+                                        </tr>
                                     </table>
                                 </div>
-                                <div class="tab-pane" id="tab-pelatihan">
+                                <div class="tab-pane  {{ $tab == 'pelatihan' ? 'active' : '' }}" id="tab-pelatihan">
                                     <h2>Pelatihan</h2>
 
                                     <table class="table table-bordered">
@@ -299,11 +309,22 @@
                                             </td>
                                         </tr>
                                         @endforeach
+                                        <tr>
+                                            <td colspan="5" class="text-center">
+                                                <input type="button" class="btn btn-primary" value="Tambah Riwayat Pelatihan" onclick="saveNewUserPelatihan()" />
+                                            </td>
+                                        </tr>
                                     </table>
 
                                 </div>
-                                <div class="tab-pane" id="tab-keluarga">
+                                <div class="tab-pane  {{ $tab == 'keluarga' ? 'active' : '' }}" id="tab-keluarga">
                                     <h2>Keluarga</h2>
+
+                                    <div class="alert alert-warning" role="alert">
+                                        <span class="alert-inner--icon"><i class="fe fe-info" style="color: #f7b731"></i></span>
+                                        <span class="alert-inner--text"><strong>Perhatian !</strong> Dimohon untuk mengisi form keluarga berdasarkan Kartu Keluarga anda! Terimakasih </span>
+                                    </div>
+
                                     <div class="table-responsive">
                                         <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                                             <table class="table table-bordered">
@@ -437,12 +458,18 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
-
+                                                <tr>
+                                                    <td colspan="6" class="text-center">
+                                                        <input type="button" class="btn btn-primary" value="Tambah Anggota Keluarga" onclick="saveNewUserKeluarga()" />
+                                                    </td>
+                                                    <td colspan="10" class="text-center">
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="tab-jabatan">
+                                <div class="tab-pane  {{ $tab == 'jabatan' ? 'active' : '' }}" id="tab-jabatan">
                                     <h2>Jabatan</h2>
 
                                     <div class="table-responsive">
@@ -500,13 +527,18 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
+                                                <tr>
+                                                    <td colspan="6" class="text-center">
+                                                        <input type="button" class="btn btn-primary" value="Tambah Riwayat Jabatan" onclick="saveNewUserJabatan()" />
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </div>
                                     </div>
 
 
                                 </div>
-                                <div class="tab-pane" id="tab-golongan">
+                                <div class="tab-pane  {{ $tab == 'golongan' ? 'active' : '' }}" id="tab-golongan">
                                     <h2>Golongan</h2>
 
                                     <div class="table-responsive">
@@ -553,6 +585,11 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
+                                                <tr>
+                                                    <td colspan="5" class="text-center">
+                                                        <input type="button" class="btn btn-primary" value="Tambah Riwayat Golongan" onclick="saveNewUserGolongan()" />
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </div>
                                     </div>

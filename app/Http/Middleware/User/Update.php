@@ -25,9 +25,24 @@ class Update extends BaseMiddleware
             !$this->_Request->input('username') || $this->Model->User->username = $this->_Request->input('username');
             !$this->_Request->input('name') || $this->Model->User->name = $this->_Request->input('name');
             !$this->_Request->input('address') || $this->Model->User->address = $this->_Request->input('address');
-            !$this->_Request->input('jenis_user') || $this->Model->User->jenis_user = $this->_Request->input('jenis_user');
             !$this->_Request->input('position_id') || $this->Model->User->position_id = $this->_Request->input('position_id');
             !$this->_Request->input('nip') || $this->Model->User->nip = $this->_Request->input('nip');
+
+            !$this->_Request->input('no_ktp') || $this->Model->User->no_ktp = $this->_Request->input('no_ktp');
+            !$this->_Request->input('tanggal_lahir') || $this->Model->User->tanggal_lahir = $this->_Request->input('tanggal_lahir');
+            !$this->_Request->input('tempat_lahir') || $this->Model->User->tempat_lahir = $this->_Request->input('tempat_lahir');
+            !$this->_Request->input('alamat') || $this->Model->User->alamat = $this->_Request->input('alamat');
+            !$this->_Request->input('kode_pos') || $this->Model->User->kode_pos = $this->_Request->input('kode_pos');
+            !$this->_Request->input('telepon') || $this->Model->User->telepon = $this->_Request->input('telepon');
+            !$this->_Request->input('hp') || $this->Model->User->hp = $this->_Request->input('hp');
+            !$this->_Request->input('npwp') || $this->Model->User->npwp = $this->_Request->input('npwp');
+            !$this->_Request->input('no_rekening') || $this->Model->User->no_rekening = $this->_Request->input('no_rekening');
+            !$this->_Request->input('golongan_darah') || $this->Model->User->golongan_darah = $this->_Request->input('golongan_darah');
+            !$this->_Request->input('status_perkawinan_id') || $this->Model->User->status_perkawinan_id = $this->_Request->input('status_perkawinan_id');
+            !$this->_Request->input('golongan_id') || $this->Model->User->golongan_id = $this->_Request->input('golongan_id');
+            !$this->_Request->input('unit_kerja_id') || $this->Model->User->unit_kerja_id = $this->_Request->input('unit_kerja_id');
+            !$this->_Request->input('pendidikan_id') || $this->Model->User->pendidikan_id = $this->_Request->input('pendidikan_id');
+            !$this->_Request->input('pendidikan_detail') || $this->Model->User->pendidikan_detail = $this->_Request->input('pendidikan_detail');
 
             if ($this->_Request->input('password')) {
                 $this->Model->User->password = $password;

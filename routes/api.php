@@ -62,6 +62,33 @@ $router->post($prefix.'/user_pendidikan', ['uses' => 'UserPendidikan\UserPendidi
 $router->put($prefix.'/user_pendidikan/{id}', ['uses' => 'UserPendidikan\UserPendidikanController@Update', 'middleware' => ['LogActivity:UserPendidikan.Update','UserPendidikan.Update']]);
 $router->delete($prefix.'/user_pendidikan/{id}', ['uses' => 'UserPendidikan\UserPendidikanController@Delete', 'middleware' => ['LogActivity:UserPendidikan.Delete','UserPendidikan.Delete']]);
 
+// user_pelatihan
+$router->get($prefix.'/user_pelatihan', ['uses' => 'UserPelatihan\UserPelatihanBrowseController@get', 'middleware' => ['LogActivity:UserPelatihan.View','ArrQuery']]);
+$router->get($prefix.'/user_pelatihan/{query:.+}', ['uses' => 'UserPelatihan\UserPelatihanBrowseController@get', 'middleware' => ['UserPelatihan:UserPelatihan.View','ArrQuery']]);
+$router->post($prefix.'/user_pelatihan', ['uses' => 'UserPelatihan\UserPelatihanController@Insert', 'middleware' => ['LogActivity:UserPelatihan.Insert','UserPelatihan.Insert']]);
+$router->put($prefix.'/user_pelatihan/{id}', ['uses' => 'UserPelatihan\UserPelatihanController@Update', 'middleware' => ['LogActivity:UserPelatihan.Update','UserPelatihan.Update']]);
+$router->delete($prefix.'/user_pelatihan/{id}', ['uses' => 'UserPelatihan\UserPelatihanController@Delete', 'middleware' => ['LogActivity:UserPelatihan.Delete','UserPelatihan.Delete']]);
+
+// user_keluarga
+$router->get($prefix.'/user_keluarga', ['uses' => 'UserKeluarga\UserKeluargaBrowseController@get', 'middleware' => ['LogActivity:UserKeluarga.View','ArrQuery']]);
+$router->get($prefix.'/user_keluarga/{query:.+}', ['uses' => 'UserKeluarga\UserKeluargaBrowseController@get', 'middleware' => ['UserKeluarga:UserKeluarga.View','ArrQuery']]);
+$router->post($prefix.'/user_keluarga', ['uses' => 'UserKeluarga\UserKeluargaController@Insert', 'middleware' => ['LogActivity:UserKeluarga.Insert','UserKeluarga.Insert']]);
+$router->put($prefix.'/user_keluarga/{id}', ['uses' => 'UserKeluarga\UserKeluargaController@Update', 'middleware' => ['LogActivity:UserKeluarga.Update','UserKeluarga.Update']]);
+$router->delete($prefix.'/user_keluarga/{id}', ['uses' => 'UserKeluarga\UserKeluargaController@Delete', 'middleware' => ['LogActivity:UserKeluarga.Delete','UserKeluarga.Delete']]);
+
+// user_jabatan
+$router->get($prefix.'/user_jabatan', ['uses' => 'UserJabatan\UserJabatanBrowseController@get', 'middleware' => ['LogActivity:UserJabatan.View','ArrQuery']]);
+$router->get($prefix.'/user_jabatan/{query:.+}', ['uses' => 'UserJabatan\UserJabatanBrowseController@get', 'middleware' => ['UserJabatan:UserJabatan.View','ArrQuery']]);
+$router->post($prefix.'/user_jabatan', ['uses' => 'UserJabatan\UserJabatanController@Insert', 'middleware' => ['LogActivity:UserJabatan.Insert','UserJabatan.Insert']]);
+$router->put($prefix.'/user_jabatan/{id}', ['uses' => 'UserJabatan\UserJabatanController@Update', 'middleware' => ['LogActivity:UserJabatan.Update','UserJabatan.Update']]);
+$router->delete($prefix.'/user_jabatan/{id}', ['uses' => 'UserJabatan\UserJabatanController@Delete', 'middleware' => ['LogActivity:UserJabatan.Delete','UserJabatan.Delete']]);
+
+// user_golongan
+$router->get($prefix.'/user_golongan', ['uses' => 'UserGolongan\UserGolonganBrowseController@get', 'middleware' => ['LogActivity:UserGolongan.View','ArrQuery']]);
+$router->get($prefix.'/user_golongan/{query:.+}', ['uses' => 'UserGolongan\UserGolonganBrowseController@get', 'middleware' => ['UserGolongan:UserGolongan.View','ArrQuery']]);
+$router->post($prefix.'/user_golongan', ['uses' => 'UserGolongan\UserGolonganController@Insert', 'middleware' => ['LogActivity:UserGolongan.Insert','UserGolongan.Insert']]);
+$router->put($prefix.'/user_golongan/{id}', ['uses' => 'UserGolongan\UserGolonganController@Update', 'middleware' => ['LogActivity:UserGolongan.Update','UserGolongan.Update']]);
+$router->delete($prefix.'/user_golongan/{id}', ['uses' => 'UserGolongan\UserGolonganController@Delete', 'middleware' => ['LogActivity:UserGolongan.Delete','UserGolongan.Delete']]);
 
 // unit_kerja
 $router->get($prefix.'/unit_kerja', ['uses' => 'UnitKerja\UnitKerjaBrowseController@get', 'middleware' => ['LogActivity:UnitKerja.View','ArrQuery']]);
@@ -70,7 +97,7 @@ $router->post($prefix.'/unit_kerja', ['uses' => 'UnitKerja\UnitKerjaController@I
 $router->put($prefix.'/unit_kerja/{id}', ['uses' => 'UnitKerja\UnitKerjaController@Update', 'middleware' => ['LogActivity:UnitKerja.Update','UnitKerja.Update']]);
 $router->delete($prefix.'/unit_kerja/{id}', ['uses' => 'UnitKerja\UnitKerjaController@Delete', 'middleware' => ['LogActivity:UnitKerja.Delete','UnitKerja.Delete']]);
 
-// unit_kerja
+// pendidikan
 $router->get($prefix.'/pendidikan', ['uses' => 'Pendidikan\PendidikanBrowseController@get', 'middleware' => ['LogActivity:Pendidikan.View','ArrQuery']]);
 $router->get($prefix.'/pendidikan/{query:.+}', ['uses' => 'Pendidikan\PendidikanBrowseController@get', 'middleware' => ['Pendidikan:Pendidikan.View','ArrQuery']]);
 $router->post($prefix.'/pendidikan', ['uses' => 'Pendidikan\PendidikanController@Insert', 'middleware' => ['LogActivity:Pendidikan.Insert','Pendidikan.Insert']]);
@@ -83,7 +110,6 @@ $router->get($prefix.'/indikator_kinerja/{query:.+}', ['uses' => 'IndikatorKiner
 $router->post($prefix.'/indikator_kinerja', ['uses' => 'IndikatorKinerja\IndikatorKinerjaController@Insert', 'middleware' => ['LogActivity:IndikatorKinerja.Insert','IndikatorKinerja.Insert']]);
 $router->put($prefix.'/indikator_kinerja/{id}', ['uses' => 'IndikatorKinerja\IndikatorKinerjaController@Update', 'middleware' => ['LogActivity:IndikatorKinerja.Update','IndikatorKinerja.Update']]);
 $router->delete($prefix.'/indikator_kinerja/{id}', ['uses' => 'IndikatorKinerja\IndikatorKinerjaController@Delete', 'middleware' => ['LogActivity:IndikatorKinerja.Delete','IndikatorKinerja.Delete']]);
-
 
 $router->post($prefix.'/user', ['uses' => 'User\UserController@Insert', 'middleware' => ['LogActivity:User.Insert','User.Insert']]);
 $router->put($prefix.'/user/change_password', ['uses' => 'User\UserController@ChangePassword', 'middleware' => ['LogActivity:User.ChangePassword','User.ChangePassword']]);
