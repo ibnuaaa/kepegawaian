@@ -124,7 +124,12 @@ class UserBrowseController extends Controller
             "$this->PositionTable.name as position.name",
 
        )
-       ->with('user_pendidikan');
+       ->with('user_pendidikan')
+       ->with('user_pelatihan')
+       ->with('user_keluarga')
+       ->with('user_jabatan')
+       ->with('user_golongan')
+       ;
 
 
         if(!empty($request->get('sort'))) {

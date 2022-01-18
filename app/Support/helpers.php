@@ -919,6 +919,52 @@ function terbilang($nilai) {
     return $hasil;
 }
 
+if ( ! function_exists('agama'))
+{
+    function agama($id = null)
+    {
+
+        $list = [
+          [
+            'value' => 1,
+            'label' => 'Islam',
+          ],
+          [
+            'value' => 2,
+            'label' => 'Kristen',
+          ],
+          [
+            'value' => 3,
+            'label' => 'Katolik',
+          ],
+          [
+            'value' => 4,
+            'label' => 'Hindu',
+          ],
+          [
+            'value' => 5,
+            'label' => 'Budha',
+          ]
+        ];
+
+        if ($id) {
+          $ret = [];
+          foreach ($list as $key => $value) {
+
+
+            if ($value['value'] == $id) {
+              $ret = $value['label'];
+            }
+          }
+
+          return $ret;
+        }
+
+        return $list;
+    }
+}
+
+
 if ( ! function_exists('treeChild'))
 {
     function treeChild($data, $dataParent){

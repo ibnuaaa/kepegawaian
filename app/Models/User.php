@@ -42,7 +42,27 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function user_pendidikan()
     {
-        return $this->hasMany(UserPendidikan::class, 'user_id', 'user.id')->with('user')->with('pendidikan');
+        return $this->hasMany(UserPendidikan::class, 'user_id', 'user.id')->with('pendidikan');
+    }
+
+    public function user_pelatihan()
+    {
+        return $this->hasMany(UserPelatihan::class, 'user_id', 'user.id');
+    }
+
+    public function user_keluarga()
+    {
+        return $this->hasMany(UserKeluarga::class, 'user_id', 'user.id');
+    }
+
+    public function user_jabatan()
+    {
+        return $this->hasMany(UserJabatan::class, 'user_id', 'user.id')->with('unit_kerja');
+    }
+
+    public function user_golongan()
+    {
+        return $this->hasMany(UserGolongan::class, 'user_id', 'user.id')->with('golongan');
     }
 
 }

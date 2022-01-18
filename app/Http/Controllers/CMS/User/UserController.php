@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\CMS\User;
 
 use App\Http\Controllers\User\UserBrowseController;
-use App\Http\Controllers\UserCoupon\UserCouponBrowseController;
-use App\Http\Controllers\RouletteWheelData\RouletteWheelDataBrowseController;
-
 use App\Http\Controllers\Position\PositionBrowseController;
-use App\Http\Controllers\Blast\UserPhoneNumber\UserPhoneNumberBrowseController;
-use App\Http\Controllers\Blast\Category\CategoryBrowseController;
 
-use App\Http\Controllers\Blast\UserPhoneNumber\View\NotesBrowseController;
+use App\Http\Controllers\Golongan\GolonganBrowseController;
+use App\Http\Controllers\Pendidikan\PendidikanBrowseController;
+use App\Http\Controllers\UnitKerja\UnitKerjaBrowseController;
+
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -164,20 +162,6 @@ class UserController extends Controller
 
     public function Edit(Request $request, $id)
     {
-        $User = UserBrowseController::FetchBrowse($request)
-            ->equal('id', $id)->get('first');
-
-        $CategoryIds = [];
-        try {
-            foreach (explode(',', str_replace(' ', '', $User['records']->category_id)) as $key => $value) {
-                $CategoryIds[] = $value;
-            }
-        } catch (\Exception $e) {
-        }
-
-        if (!isset($User['records']->id)) {
-            throw new ModelNotFoundException('Not Found Batch');
-        }
 
         $User = UserBrowseController::FetchBrowse($request)
             ->equal('id', $id)->get('first');
@@ -200,7 +184,6 @@ class UserController extends Controller
         }
 
         return view('app.user.edit.index', [
-            'categoryIds' => $CategoryIds,
             'positions' => $Positions,
             'data' => $User['records']
         ]);
@@ -214,41 +197,81 @@ class UserController extends Controller
         $User = UserBrowseController::FetchBrowse($request)
             ->equal('id', $id)->get('first');
 
-        $CategoryIds = [];
-        try {
-            foreach (explode(',', str_replace(' ', '', $User['records']->category_id)) as $key => $value) {
-                $CategoryIds[] = $value;
-            }
-        } catch (\Exception $e) {
-        }
-
-        if (!isset($User['records']->id)) {
-            throw new ModelNotFoundException('Not Found Batch');
-        }
-
-        $User = UserBrowseController::FetchBrowse($request)
-            ->equal('id', $id)->get('first');
-
-
+        // Position
         $Position = PositionBrowseController::FetchBrowse($request)
             ->where('take','all')
             ->get('fetch');
 
-        $Positions[] = [
+        $PositionList[] = [
             'value' => '',
             'label' => '-= Select Position =-'
         ];
 
         foreach ($Position['records'] as $key => $value) {
-            $Positions[] = [
+            $PositionList[] = [
                 'value' => $value->id,
                 'label' => $value->name
             ];
         }
 
+        // Pendidikan
+        $Pendidikan = PendidikanBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $Pendidikans[] = [
+            'value' => '',
+            'label' => '-= Select Pendidikan =-'
+        ];
+
+        foreach ($Pendidikan['records'] as $key => $value) {
+            $PendidikanList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
+        // Unit Kerja
+        $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $UnitKerjaList[] = [
+            'value' => '',
+            'label' => '-= Select Position =-'
+        ];
+
+        foreach ($UnitKerja['records'] as $key => $value) {
+            $UnitKerjaList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
+        // Golongan
+        $Golongan = GolonganBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $GolonganList[] = [
+            'value' => '',
+            'label' => '-= Select Golongan =-'
+        ];
+
+        foreach ($Golongan['records'] as $key => $value) {
+            $GolonganList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
+
         return view('app.user.profile_edit.index', [
-            'categoryIds' => $CategoryIds,
-            'positions' => $Positions,
+            'positions' => $PositionList,
+            'pendidikan' => $PendidikanList,
+            'unit_kerja' => $UnitKerjaList,
+            'golongan' => $GolonganList,
+
             'data' => $User['records']
         ]);
     }
