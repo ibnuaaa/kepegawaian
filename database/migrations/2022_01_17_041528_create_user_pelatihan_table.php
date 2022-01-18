@@ -15,6 +15,7 @@ class CreateUserPelatihanTable extends Migration
     {
         Schema::create('user_pelatihan', function (Blueprint $table) {
           $table->increments('id');
+          $table->integer('user_id')->nullable()->default(NULL);
           $table->string('nama_sertifikat')->nullable()->default(NULL);
           $table->string('no_sertifikat')->nullable()->default(NULL);
           $table->string('tahun')->nullable()->default(NULL);

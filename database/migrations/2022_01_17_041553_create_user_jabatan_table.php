@@ -15,7 +15,9 @@ class CreateUserJabatanTable extends Migration
     {
         Schema::create('user_jabatan', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama_jabatan')->nullable()->default(NULL);
+            $table->integer('user_id')->nullable()->default(NULL);
+            $table->integer('position_id')->nullable()->default(NULL);
+            $table->string('detail_jabatan')->nullable()->default(NULL);
             $table->string('dari_tahun')->nullable()->default(NULL);
             $table->string('sampai_tahun')->nullable()->default(NULL);
             $table->integer('unit_kerja_id')->nullable()->default(NULL);

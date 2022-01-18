@@ -15,6 +15,7 @@ class CreateUserGolonganTable extends Migration
     {
         Schema::create('user_golongan', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->nullable()->default(NULL);
             $table->string('nama_golongan')->nullable()->default(NULL);
             $table->string('dari_tahun')->nullable()->default(NULL);
             $table->string('sampai_tahun')->nullable()->default(NULL);
