@@ -1,16 +1,31 @@
 <script>
 
-function remove(d) {
-    var id = d.dataset.id
-    if (confirm("Apakah Anda yakin menghapus data ?")) {
-        axios.delete('/position/' + id).then((response) => {
-            window.location = '/position'
-        }).catch((error) => {
-            if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
-                swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
-            }
-        })
+function remove(id, name) {
+
+  swal({
+      title: "Konfirmasi",
+      text: "Ingin menghapus ?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonText: 'Ya, Hapus',
+      cancelButtonText: 'Batal'
+  }, function(isConfirmed) {
+    console.log(isConfirmed)
+
+    if (isConfirmed) {
+      showLoading()
+      axios.delete('/position/' + id).then((response) => {
+          const { data } = response.data
+          window.location.reload()
+      }).catch((error) => {
+          if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+              swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+          }
+      })
     }
+  });
+
+  return false;
 }
 
 
