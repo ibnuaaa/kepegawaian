@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     $('select[name=parent_id]').select2({
         ajax: {
-            url: window.apiUrl + '/position/status/active',
+            url: window.apiUrl + '/position',
             headers: {
                 'Authorization': window.axios.defaults.headers['Authorization']
             },
@@ -63,7 +63,7 @@ $(document).ready(function() {
 
                 axios.post('/position', data).then((response) => {
                     const { data } = response.data
-                    window.location = '/position/paging'
+                    window.location = '/position'
                 }).catch((error) => {
                     if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
                         swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
