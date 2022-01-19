@@ -65,4 +65,18 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany(UserGolongan::class, 'user_id', 'user.id')->with('golongan');
     }
 
+    public function foto_ktp()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'user.id')
+                    ->where('object', 'foto_ktp')
+                    ->with('storage');
+    }
+
+    public function foto_npwp()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'user.id')
+                    ->where('object', 'foto_npwp')
+                    ->with('storage');
+    }
+
 }

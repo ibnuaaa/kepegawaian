@@ -210,11 +210,11 @@ function saveNewUserGolongan() {
 }
 
 
-function prepareUpload(el) {
+function prepareUpload(el, object_type) {
   var files = $(el)[0].files;
   var preview = $(el).siblings("#img-preview");
   for (i = 0; i < files.length; i++) {
-    uploadFile(files[i], preview, 'foto_produk');
+    uploadFile(files[i], preview, object_type);
   }
 }
 
@@ -264,7 +264,7 @@ function appendImage(preview, data) {
 
     img = "";
     if(data.extension.toLowerCase() == 'jpg' || data.extension.toLowerCase() == 'png' || data.extension.toLowerCase() == 'bmp')
-    img = "<img src='"+window.apiUrl+"/tmp/"+data.key+"."+data.extension+"' style='height:80px;'/>";
+    img = "<img src='"+window.apiUrl+"/tmp/"+data.key+"."+data.extension+"' style='max-height:200px;'/>";
     else
     img = "<i class='fas fa-file' style='height:80px;font-size:80px;'></i>";
 

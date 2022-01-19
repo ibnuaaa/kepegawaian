@@ -221,27 +221,31 @@
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Foto KTP</label>
                                         <div class="col-md-9">
-                                            <input type="file" onchange="prepareUpload(this);" multiple>
-                                            <div class="img-preview" id="img-preview">
+                                            <input type="file" onchange="prepareUpload(this, 'foto_ktp');" multiple>
+                                            <div style="clear: both;"></div>
+                                            <div class="img-preview mt-2" id="img-preview">
 
-                                                @if (!empty($data->foto_ktp->storage->original_name))
-                                                <img style="max-width: 100px" src="/api/tmp/{{$data->foto_produk->storage->original_name}}" />
+                                                @if (!empty($data->foto_ktp))
+                                                    @foreach ($data->foto_ktp as $key => $val)
+                                                        <img style="max-height: 200px" src="/api/tmp/{{$val->storage->original_name}}" />
+                                                    @endforeach
                                                 @endif
 
                                                 <div style="clear: both;"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group form-group-default required ">
+                                    <div class="row mb-4">
                                         <label class="col-md-2 form-label">Foto NPWP</label>
                                         <div class="col-md-9">
-                                            <input type="file" onchange="prepareUpload(this);" multiple>
-                                            <div class="img-preview" id="img-preview">
-
-                                                @if (!empty($data->foto_npwp->storage->original_name))
-                                                <img style="max-width: 100px" src="/api/tmp/{{$data->foto_produk->storage->original_name}}" />
+                                            <input type="file" onchange="prepareUpload(this, 'foto_npwp');" multiple>
+                                            <div style="clear: both;"></div>
+                                            <div class="img-preview mt-2" id="img-preview">
+                                                @if (!empty($data->foto_npwp))
+                                                    @foreach ($data->foto_npwp as $key => $val)
+                                                        <img style="max-height: 200px" src="/api/tmp/{{$val->storage->original_name}}" />
+                                                    @endforeach
                                                 @endif
-
                                                 <div style="clear: both;"></div>
                                             </div>
                                        </div>

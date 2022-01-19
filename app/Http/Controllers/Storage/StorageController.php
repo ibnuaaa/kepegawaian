@@ -21,7 +21,7 @@ use App\Support\Response\Json;
 use App\Support\Generate\Hash as GenerateKey;
 use Illuminate\Support\Facades\Input;
 use App\Models\Images;
-use App\Models\MailDocument;
+use App\Models\Document;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Controller;
@@ -89,9 +89,9 @@ class StorageController extends Controller
     public function Fetch(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $MailDocument = MailDocument::where('storage_id', $Model->Storage->id)->first();
+        $Document = Document::where('storage_id', $Model->Storage->id)->first();
 
-        $Path = $MailDocument->object . '_' . $MailDocument->object_id . '/' . $Model->Storage->original_name;
+        $Path = $Document->object . '_' . $Document->object_id . '/' . $Model->Storage->original_name;
         $File = Storage::disk('local')->get($Path);
 
         $attachment = "";
@@ -109,9 +109,9 @@ class StorageController extends Controller
     public function Preview(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $MailDocument = MailDocument::where('storage_id', $Model->Storage->id)->first();
+        $Document = Document::where('storage_id', $Model->Storage->id)->first();
 
-        $Path = $MailDocument->object . '_' . $MailDocument->object_id . '/' . $Model->Storage->original_name;
+        $Path = $Document->object . '_' . $Document->object_id . '/' . $Model->Storage->original_name;
         $File = Storage::disk('local')->get($Path);
 
         $attachment = "";
@@ -143,7 +143,7 @@ class StorageController extends Controller
     public function Delete(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $Model->MailDocument->delete();
+        $Model->Document->delete();
 
         Json::set('data', 'Success Delete');
         return response()->json(Json::get(), 202);
@@ -200,11 +200,15 @@ class StorageController extends Controller
         // }
         $Storage->save();
 
-        $MailDocument = new MailDocument();
-        $MailDocument->object_id = $ObjectId;
-        $MailDocument->object = $Object;
-        $MailDocument->storage_id = $Storage->id;
-        $MailDocument->save();
+        if (in_array($Object, ['foto_ktp', 'foto_npwp'])) {
+            Document::where('object', $Object)->delete();
+        }
+
+        $Document = new Document();
+        $Document->object_id = $ObjectId;
+        $Document->object = $Object;
+        $Document->storage_id = $Storage->id;
+        $Document->save();
 
         Json::set('data', $this->SyncData($request, $Storage->id));
         return response()->json(Json::get(), 201);
