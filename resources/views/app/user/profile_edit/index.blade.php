@@ -32,7 +32,6 @@
                             <span class="alert-inner--text"><strong>Informasi !</strong> Silahkan melakukan perubahan data anda. Data yang anda ketik langsung tersimpan pada server. Data akan diverifikasi oleh administrator. </span>
                         </div>
 
-
                         <div class="tab-menu-heading tab-menu-heading-boxed">
                             <div class="tabs-menu-boxed">
                                 <ul class="nav panel-tabs">
@@ -47,10 +46,13 @@
                         </div>
                         <div class="panel-body tabs-menu-body">
                             <div class="tab-content">
+
+
+                                <!-- =========================================================== -->
+                                <!-- TAB PERSONAL -->
+                                <!-- =========================================================== -->
                                 <div class="tab-pane {{ $tab == 'personal' ? 'active' : '' }}" id="tab-personal">
-
                                     <h2>Personal</h2>
-
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Nama</label>
                                         <div class="col-md-9">
@@ -216,7 +218,40 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Foto KTP</label>
+                                        <div class="col-md-9">
+                                            <input type="file" onchange="prepareUpload(this);" multiple>
+                                            <div class="img-preview" id="img-preview">
+
+                                                @if (!empty($data->foto_ktp->storage->original_name))
+                                                <img style="max-width: 100px" src="/api/tmp/{{$data->foto_produk->storage->original_name}}" />
+                                                @endif
+
+                                                <div style="clear: both;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-default required ">
+                                        <label class="col-md-2 form-label">Foto NPWP</label>
+                                        <div class="col-md-9">
+                                            <input type="file" onchange="prepareUpload(this);" multiple>
+                                            <div class="img-preview" id="img-preview">
+
+                                                @if (!empty($data->foto_npwp->storage->original_name))
+                                                <img style="max-width: 100px" src="/api/tmp/{{$data->foto_produk->storage->original_name}}" />
+                                                @endif
+
+                                                <div style="clear: both;"></div>
+                                            </div>
+                                       </div>
+                                    </div>
                                 </div>
+
+
+                                <!-- =========================================================== -->
+                                <!-- TAB PENDIDIKAN -->
+                                <!-- =========================================================== -->
                                 <div class="tab-pane  {{ $tab == 'pendidikan' ? 'active' : '' }}" id="tab-pendidikan">
                                     <h2>Pendidikan</h2>
                                     <table class="table table-bordered">
@@ -275,6 +310,11 @@
                                         </tr>
                                     </table>
                                 </div>
+
+
+                                <!-- =========================================================== -->
+                                <!-- TAB PELATIHAN -->
+                                <!-- =========================================================== -->
                                 <div class="tab-pane  {{ $tab == 'pelatihan' ? 'active' : '' }}" id="tab-pelatihan">
                                     <h2>Pelatihan</h2>
 
@@ -321,8 +361,12 @@
                                             </td>
                                         </tr>
                                     </table>
-
                                 </div>
+
+
+                                <!-- =========================================================== -->
+                                <!-- TAB KELUARGA -->
+                                <!-- =========================================================== -->
                                 <div class="tab-pane  {{ $tab == 'keluarga' ? 'active' : '' }}" id="tab-keluarga">
                                     <h2>Keluarga</h2>
 
@@ -481,6 +525,11 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+                                <!-- =========================================================== -->
+                                <!-- TAB JABATAN -->
+                                <!-- =========================================================== -->
                                 <div class="tab-pane  {{ $tab == 'jabatan' ? 'active' : '' }}" id="tab-jabatan">
                                     <h2>Jabatan</h2>
 
@@ -551,9 +600,12 @@
                                             </table>
                                         </div>
                                     </div>
-
-
                                 </div>
+
+
+                                <!-- =========================================================== -->
+                                <!-- TAB GOLONGAN -->
+                                <!-- =========================================================== -->
                                 <div class="tab-pane  {{ $tab == 'golongan' ? 'active' : '' }}" id="tab-golongan">
                                     <h2>Golongan</h2>
 
