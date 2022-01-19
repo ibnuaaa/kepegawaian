@@ -151,6 +151,7 @@ class UserBrowseController extends Controller
             "$this->UserTable.email as user.email",
             "$this->UserTable.gender as user.gender",
             "$this->UserTable.position_id as user.position_id",
+            "$this->UserTable.jabatan_id as user.jabatan_id",
             "$this->UserTable.address as user.address",
             "$this->UserTable.remember_token as user.remember_token",
             "$this->UserTable.updated_at as user.updated_at",

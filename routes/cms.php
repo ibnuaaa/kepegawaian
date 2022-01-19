@@ -22,6 +22,10 @@ $router->get('/position', 'CMS\Position\PositionController@Home');
 $router->get('/position/new/{position_id}', 'CMS\Position\PositionController@New');
 $router->get('/position/{id}', 'CMS\Position\PositionController@PositionEdit');
 
+$router->get('/jabatan', 'CMS\Jabatan\JabatanController@Home');
+$router->get('/jabatan/new/{jabatan_id}', 'CMS\Jabatan\JabatanController@New');
+$router->get('/jabatan/{id}', 'CMS\Jabatan\JabatanController@JabatanEdit');
+
 $router->get('/golongan', 'CMS\Golongan\GolonganController@Home');
 $router->get('/golongan/new', 'CMS\Golongan\GolonganController@New');
 $router->get('/golongan/edit/{id}', 'CMS\Golongan\GolonganController@Edit');

@@ -56,6 +56,17 @@
                         </div>
                     </div>
                     <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Jabatan</label>
+                        <div class="col-md-9">
+                            @component('components.form.awesomeSelect', [
+                                'name' => 'jabatan_id',
+                                'items' => $jabatan,
+                                'selected' => $data->jabatan['id']
+                            ])
+                            @endcomponent
+                        </div>
+                    </div>
+                    <div class=" row mb-4">
                         <label class="col-md-3 form-label">Password</label>
                         <div class="col-md-9">
                             <input autocomplete="new-password" name="password" class="form-control" type="password">

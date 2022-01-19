@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CMS\User;
 
 use App\Http\Controllers\User\UserBrowseController;
 use App\Http\Controllers\Position\PositionBrowseController;
+use App\Http\Controllers\Jabatan\JabatanBrowseController;
 
 use App\Http\Controllers\Golongan\GolonganBrowseController;
 use App\Http\Controllers\Pendidikan\PendidikanBrowseController;
@@ -97,12 +98,10 @@ class UserController extends Controller
             ->where('take','all')
             ->get('fetch');
 
-        if (MyAccount()->position_id == 10) {
-            $Positions[] = [
-                'value' => '',
-                'label' => '-= Select Position =-'
-            ];
-        }
+          $Positions[] = [
+              'value' => '',
+              'label' => '-= Select Position =-'
+          ];
 
         foreach ($Position['records'] as $key => $value) {
             $Positions[] = [
@@ -111,8 +110,28 @@ class UserController extends Controller
             ];
         }
 
+        $Jabatan = JabatanBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+          $JabatanList[] = [
+              'value' => '',
+              'label' => '-= Select Jabatan =-'
+          ];
+
+        foreach ($Jabatan['records'] as $key => $value) {
+            $JabatanList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
+
+
         return view('app.user.new.index', [
             'positions' => $Positions,
+            'jabatan' => $JabatanList,
+
         ]);
     }
 
@@ -231,6 +250,9 @@ class UserController extends Controller
     public function Edit(Request $request, $id)
     {
 
+
+
+
         $User = UserBrowseController::FetchBrowse($request)
             ->equal('id', $id)->get('first');
 
@@ -251,9 +273,28 @@ class UserController extends Controller
             ];
         }
 
+
+
+        $Jabatan = JabatanBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+          $JabatanList[] = [
+              'value' => '',
+              'label' => '-= Select Jabatan =-'
+          ];
+
+        foreach ($Jabatan['records'] as $key => $value) {
+            $JabatanList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
         return view('app.user.edit.index', [
-            'positions' => $Positions,
-            'data' => $User['records']
+          'positions' => $Positions,
+          'jabatan' => $JabatanList,
+          'data' => $User['records']
         ]);
     }
 

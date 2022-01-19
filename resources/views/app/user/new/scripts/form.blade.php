@@ -123,6 +123,7 @@ $(document).ready(function() {
                 const email = $('input[name="email"]')
                 const password = $('input[name="password"]')
                 const position_id = $('select[name="position_id"]')
+                const jabatan_id = $('select[name="jabatan_id"]')
                 const gender = $('select[name="gender"]')
                 const golongan = $('input[name="golongan"]')
                 const jenis_user = $('.jenis_user_radio input[name="jenis_user"]:checked')
@@ -134,6 +135,7 @@ $(document).ready(function() {
                     email: email.val(),
                     password: password.val(),
                     position_id: position_id.val(),
+                    jabatan_id: jabatan_id.val(),
                     gender: gender.val(),
                     golongan: golongan.val(),
                     nip: nip.val(),

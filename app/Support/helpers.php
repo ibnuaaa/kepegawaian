@@ -1090,3 +1090,51 @@ if ( ! function_exists('treeChild'))
 
     }
 }
+
+
+
+if ( ! function_exists('treeChildJabatan'))
+{
+    function treeChildJabatan($data, $dataParent){
+
+        $html = "";
+
+        if (!empty($data)) {
+
+            foreach ($data as $item) {
+
+                $html_user = '';
+
+                if (!empty($item->users)) {
+                  foreach ($item->users as $key => $user) {
+                      $html_user = $html_user  . ($user ? $user->name : '');
+                  }
+                }
+
+                $html .= '
+                  <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" class="td-' . $item->status . '">
+                      <td style="height: 10px !important;">
+                          ' . $item->name . '
+                      </td>
+                      <td>
+                        ' . $html_user . '
+                      </td>
+                      <td>
+                          <a href="'. url('/jabatan/'.$item->id) .'" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
+                          <a href="'. url('/jabatan/new/'.$item->id) .'" class="btn btn-primary btn-sm">
+                              (+) Buat Jabatan
+                          </a>
+                          <a onClick="return remove('.$item->id.')" href="#" class="btn btn-danger btn-sm">
+                              <i class="fa fa-trash"></i>
+                          </a>
+
+                      </td>
+                  </tr>
+                ' . (count($item->children) > 0 ? treeChildJabatan($item->children, $item) : '') ;
+            }
+        }
+
+        return $html;
+
+    }
+}

@@ -18,11 +18,9 @@ $router->delete($prefix.'/user/{id}', ['uses' => 'User\UserController@Delete', '
 // Developer
 $router->post($prefix.'/user/{id}/developer/token', ['uses' => 'User\UserController@DeveloperToken', 'middleware' => ['User.Developer.Token']]);
 
-/* Blast Position */
 // getters
 $router->get($prefix.'/position', ['uses' => 'Position\PositionBrowseController@get', 'middleware' => ['LogActivity:Position.View','ArrQuery']]);
 $router->get($prefix.'/position/{query:.+}', ['uses' => 'Position\PositionBrowseController@get', 'middleware' => ['LogActivity:Position.View','ArrQuery']]);
-
 
 // actions
 $router->post($prefix.'/position', ['uses' => 'Position\PositionController@Insert', 'middleware' => ['LogActivity:Position.Insert','Position.Insert']]);
@@ -30,6 +28,12 @@ $router->put($prefix.'/position/{id}', ['uses' => 'Position\PositionController@U
 $router->delete($prefix.'/position/{id}', ['uses' => 'Position\PositionController@Delete', 'middleware' => ['LogActivity:Position.Delete','Position.Delete']]);
 $router->post($prefix.'/position/change_status', ['uses' => 'Position\PositionController@ChangeStatus', 'middleware' => ['LogActivity:Position.ChangeStatus','Position.ChangeStatus']]);
 
+// getters
+$router->get($prefix.'/jabatan', ['uses' => 'Jabatan\JabatanBrowseController@get', 'middleware' => ['LogActivity:Jabatan.View','ArrQuery']]);
+$router->get($prefix.'/jabatan/{query:.+}', ['uses' => 'Jabatan\JabatanBrowseController@get', 'middleware' => ['LogActivity:Jabatan.View','ArrQuery']]);
+$router->post($prefix.'/jabatan', ['uses' => 'Jabatan\JabatanController@Insert', 'middleware' => ['LogActivity:Jabatan.Insert','Jabatan.Insert']]);
+$router->put($prefix.'/jabatan/{id}', ['uses' => 'Jabatan\JabatanController@Update', 'middleware' => ['LogActivity:Jabatan.Update','Jabatan.Update']]);
+$router->delete($prefix.'/jabatan/{id}', ['uses' => 'Jabatan\JabatanController@Delete', 'middleware' => ['LogActivity:Jabatan.Delete','Jabatan.Delete']]);
 
 $router->post($prefix.'/upload', ['uses' => 'File\FileController@Upload', 'middleware' => ['LogActivity:File.Upload','File.Upload']]);
 

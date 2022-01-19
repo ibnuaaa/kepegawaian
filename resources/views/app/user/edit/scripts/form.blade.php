@@ -4,54 +4,54 @@ $(document).ready(function() {
     const form = document.getElementById('editUserForm')
     const editUserForm = $('#editUserForm').formValidation({
         fields: {
-            username: {
-                validators: {
-                    notEmpty: {
-                        message: 'The username is required'
-                    },
-                    stringLength: {
-                        min: 3,
-                        max: 191,
-                        message: 'The username must be more than 3 and less than 131 characters long',
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_]+$/,
-                        message: 'The username can only consist of alphabetical, number and underscore',
-                    }
-                }
-            },
-            password: {
-                validators: {
-                    stringLength: {
-                        min: 6,
-                        message: 'The password must have at least 6 characters',
-                    }
-                }
-            },
-            confirmPassword: {
-                validators: {
-                    identical: {
-                        compare: function() {
-                            return form.querySelector('input[name="password"]').value
-                        },
-                        message: 'The password and its confirm are not the same'
-                    }
-                }
-            },
-            position: {
-                validators: {
-                    notEmpty: {
-                        message: 'The position name is required'
-                    }
-                }
-            },
-            gender: {
-                validators: {
-                    notEmpty: {
-                        message: 'The gender name is required'
-                    }
-                }
-            }
+            // username: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'The username is required'
+            //         },
+            //         stringLength: {
+            //             min: 3,
+            //             max: 191,
+            //             message: 'The username must be more than 3 and less than 131 characters long',
+            //         },
+            //         regexp: {
+            //             regexp: /^[a-zA-Z0-9_]+$/,
+            //             message: 'The username can only consist of alphabetical, number and underscore',
+            //         }
+            //     }
+            // },
+            // password: {
+            //     validators: {
+            //         stringLength: {
+            //             min: 6,
+            //             message: 'The password must have at least 6 characters',
+            //         }
+            //     }
+            // },
+            // confirmPassword: {
+            //     validators: {
+            //         identical: {
+            //             compare: function() {
+            //                 return form.querySelector('input[name="password"]').value
+            //             },
+            //             message: 'The password and its confirm are not the same'
+            //         }
+            //     }
+            // },
+            // position: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'The position name is required'
+            //         }
+            //     }
+            // },
+            // gender: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'The gender name is required'
+            //         }
+            //     }
+            // }
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -72,6 +72,7 @@ $(document).ready(function() {
                 const nik = $('input[name="nik"]')
                 const password = $('input[name="password"]')
                 const position_id = $('select[name="position_id"]')
+                const jabatan_id = $('select[name="jabatan_id"]')
                 const gender = $('select[name="gender"]')
                 const status = $('select[name="status"]')
                 const website_id = $('select[name="website_id"]')
@@ -84,6 +85,7 @@ $(document).ready(function() {
                     username: username.val(),
                     nik: nik.val(),
                     position_id: position_id.val(),
+                    jabatan_id: jabatan_id.val(),
                     gender: gender.val(),
                     status: status.val(),
                     website_id: website_id.val(),

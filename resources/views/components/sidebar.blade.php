@@ -36,7 +36,7 @@
                               <li><a href="{!! url('/change_password'); !!}" class="slide-item"> Ganti Password</a></li>
                               @endif
                               @if (getPermissions('position')['checked'])
-                              <li><a href="{!! url('/position'); !!}" class="slide-item"> Jabatan</a></li>
+                              <li><a href="{!! url('/position'); !!}" class="slide-item"> Hak Akses</a></li>
                               @endif
                               @if (getPermissions('user')['checked'])
                               <li><a href="{!! url('/user'); !!}" class="slide-item"> User</a></li>
@@ -49,6 +49,7 @@
                               <li><a href="{!! url('/golongan'); !!}" class="slide-item"> Golongan</a></li>
                               <li><a href="{!! url('/indikator_kinerja'); !!}" class="slide-item"> Indikator Kinerja</a></li>
                               <li><a href="{!! url('/unit_kerja'); !!}" class="slide-item"> Unit Kerja</a></li>
+                              <li><a href="{!! url('/jabatan'); !!}" class="slide-item"> Jabatan</a></li>
                               <li><a href="{!! url('/pendidikan'); !!}" class="slide-item"> Pendidikan</a></li>
                             </ul>
                         </li>

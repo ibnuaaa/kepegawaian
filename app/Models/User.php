@@ -40,6 +40,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasOne(Position::class, 'id', 'position_id')->with('parents');
     }
 
+    public function jabatan()
+    {
+        return $this->hasOne(Jabatan::class, 'id', 'jabatan_id')->with('parents');
+    }
+
     public function user_pendidikan()
     {
         return $this->hasMany(UserPendidikan::class, 'user_id', 'user.id')->with('pendidikan');

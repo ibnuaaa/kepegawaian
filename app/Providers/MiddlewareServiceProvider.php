@@ -66,6 +66,11 @@ class MiddlewareServiceProvider extends ServiceProvider
         'Position.Delete' => \App\Http\Middleware\Position\Delete::class,
         'Position.ChangeStatus' => \App\Http\Middleware\Position\ChangeStatus::class,
 
+        'Jabatan.Insert' => \App\Http\Middleware\Jabatan\Insert::class,
+        'Jabatan.Update' => \App\Http\Middleware\Jabatan\Update::class,
+        'Jabatan.Delete' => \App\Http\Middleware\Jabatan\Delete::class,
+        'Jabatan.ChangeStatus' => \App\Http\Middleware\Jabatan\ChangeStatus::class,
+
         'UserPendidikan.Insert' => \App\Http\Middleware\UserPendidikan\Insert::class,
         'UserPendidikan.Update' => \App\Http\Middleware\UserPendidikan\Update::class,
         'UserPendidikan.Delete' => \App\Http\Middleware\UserPendidikan\Delete::class,

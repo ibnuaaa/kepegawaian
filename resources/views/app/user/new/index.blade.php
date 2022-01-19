@@ -59,12 +59,23 @@
                         </div>
                     </div>
                     <div class=" row mb-4">
-                        <label class="col-md-3 form-label">Position</label>
+                        <label class="col-md-3 form-label">Hak Akses</label>
                         <div class="col-md-9">
                             @component('components.form.awesomeSelect', [
                                 'name' => 'position_id',
                                 'items' => $positions,
-                                'selected' => 3
+                                'selected' => null
+                            ])
+                            @endcomponent
+                        </div>
+                    </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Position</label>
+                        <div class="col-md-9">
+                            @component('components.form.awesomeSelect', [
+                                'name' => 'jabatan_id',
+                                'items' => $jabatan,
+                                'selected' => null
                             ])
                             @endcomponent
                         </div>
