@@ -36,9 +36,12 @@
                             Turunan Dari
                         </label>
                         <div class="col-md-9">
-                            <select name="parent_id" class="form-control">
-                                <option value="{{  $data->parent ? $data->parent->id : '' }}">{{  $data->parent ? $data->parent->name : '' }}</option>
-                            </select>
+                          @component('components.form.awesomeSelect', [
+                              'name' => 'parent_id',
+                              'items' => $positions,
+                              'selected' => null
+                          ])
+                          @endcomponent
                         </div>
                     </div>
                     <div class=" row mb-4">

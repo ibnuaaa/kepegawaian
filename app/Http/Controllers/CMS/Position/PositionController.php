@@ -124,6 +124,7 @@ class PositionController extends Controller
 
     public function PositionEdit(Request $request, $id)
     {
+
         $Position = PositionBrowseController::FetchBrowse($request)
             ->equal('id', $id)->get('first');
 
@@ -136,11 +137,16 @@ class PositionController extends Controller
 
         $Permissions = $Permission['records']->chunk(3);
 
+        $PositionList = PositionBrowseController::FetchBrowse($request)
+            ->equal('take', 'all')->equal('with.total', true)->get();
+          
+        $PositionSelect = FormSelect($PositionList['records'], true);
 
         return view('app.position.edit.index', [
             'data' => $Position['records'],
             'select' => ['positions' => []],
-            'permissions' => $Permissions
+            'permissions' => $Permissions,
+            'positions' => $PositionSelect
         ]);
     }
 

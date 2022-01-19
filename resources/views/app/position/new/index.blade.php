@@ -52,7 +52,7 @@
                 <button id="saveAction" class="btn btn-block btn-success btn-cons m-b-10">
                     <i class="fa fa-save"></i> Save
                 </button>
-                <a href="{{ url('/position/paging') }}" class="btn btn-block btn-primary btn-cons m-b-10"><i class="fa fa-arrow-left"></i> Cancel</a>
+                <a href="{{ url('/position') }}" class="btn btn-block btn-primary btn-cons m-b-10"><i class="fa fa-arrow-left"></i> Cancel</a>
             </div>
         </div>
     </div>

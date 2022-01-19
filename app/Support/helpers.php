@@ -376,12 +376,22 @@ if ( ! function_exists('FormSelect'))
 {
     function FormSelect($Data, $toArray = false, $value = 'id', $label = 'name')
     {
+
+        // die();
+
         $options = $Data->map(function($item) use($value, $label) {
             return [ 'value' => $item->{$value}, 'label' => $item->{$label} ];
         });
+
         if ($toArray) {
-            return $options->toArray();
+            $result = array_merge([[
+              'label' => '-= Pilih =-',
+              'value' => '',
+            ]], $options->toArray());
+
+            return $result;
         }
+
         return $options;
     }
 }

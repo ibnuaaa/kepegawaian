@@ -1,34 +1,34 @@
 <script>
 $(document).ready(function() {
 
-    $('select[name=parent_id]').select2({
-        ajax: {
-            url: window.apiUrl + '/position',
-            headers: {
-                'Authorization': window.axios.defaults.headers['Authorization']
-            },
-            dataType: 'json',
-            delay: 50,
-            cache: true,
-            data: function (params) {
-                return {
-                    q: params.term,
-                    page: params.page
-                };
-            },
-            processResults: function (data) {
-                return {
-                    results: $.map(data.data.records, function (item) {
-                        return {
-                            text: item.name,
-                            id: item.id
-                        }
-                    })
-                };
-            }
-        },
-        minimumInputLength: 1,
-    });
+    // $('select[name=parent_id]').select2({
+    //     ajax: {
+    //         url: window.apiUrl + '/position',
+    //         headers: {
+    //             'Authorization': window.axios.defaults.headers['Authorization']
+    //         },
+    //         dataType: 'json',
+    //         delay: 50,
+    //         cache: true,
+    //         data: function (params) {
+    //             return {
+    //                 q: params.term,
+    //                 page: params.page
+    //             };
+    //         },
+    //         processResults: function (data) {
+    //             return {
+    //                 results: $.map(data.data.records, function (item) {
+    //                     return {
+    //                         text: item.name,
+    //                         id: item.id
+    //                     }
+    //                 })
+    //             };
+    //         }
+    //     },
+    //     minimumInputLength: 1,
+    // });
 
 
 

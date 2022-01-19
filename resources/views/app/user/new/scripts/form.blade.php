@@ -45,22 +45,22 @@ $(document).ready(function() {
             //         }
             //     }
             // },
-            username: {
-                validators: {
-                    notEmpty: {
-                        message: 'The username is required'
-                    },
-                    stringLength: {
-                        min: 3,
-                        max: 191,
-                        message: 'The username must be more than 3 and less than 131 characters long',
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_]+$/,
-                        message: 'The username can only consist of alphabetical, number and underscore',
-                    }
-                }
-            },
+            // username: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'The username is required'
+            //         },
+            //         stringLength: {
+            //             min: 3,
+            //             max: 191,
+            //             message: 'The username must be more than 3 and less than 131 characters long',
+            //         },
+            //         regexp: {
+            //             regexp: /^[a-zA-Z0-9_]+$/,
+            //             message: 'The username can only consist of alphabetical, number and underscore',
+            //         }
+            //     }
+            // },
             // email: {
             //     validators: {
             //         notEmpty: {
@@ -71,51 +71,37 @@ $(document).ready(function() {
             //         }
             //     }
             // },
-            password: {
-                validators: {
-                    notEmpty: {
-                        message: 'The password is required'
-                    },
-                    stringLength: {
-                        min: 6,
-                        message: 'The password must have at least 6 characters',
-                    },
-                }
-            },
-            confirmPassword: {
-                validators: {
-                    notEmpty: {
-                        message: 'The password is required'
-                    },
-                    identical: {
-                        compare: function() {
-                            return form.querySelector('input[name="password"]').value
-                        },
-                        message: 'The password and its confirm are not the same'
-                    }
-                }
-            },
-            position_id: {
-                validators: {
-                    notEmpty: {
-                        message: 'The position name is required'
-                    }
-                }
-            },
-            website_id: {
-                validators: {
-                    notEmpty: {
-                        message: 'The Wbsite name is required'
-                    }
-                }
-            },
-            gender: {
-                validators: {
-                    notEmpty: {
-                        message: 'The gender name is required'
-                    }
-                }
-            }
+            // password: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'The password is required'
+            //         },
+            //         stringLength: {
+            //             min: 6,
+            //             message: 'The password must have at least 6 characters',
+            //         },
+            //     }
+            // },
+            // confirmPassword: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'The password is required'
+            //         },
+            //         identical: {
+            //             compare: function() {
+            //                 return form.querySelector('input[name="password"]').value
+            //             },
+            //             message: 'The password and its confirm are not the same'
+            //         }
+            //     }
+            // },
+            // position_id: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'The position name is required'
+            //         }
+            //     }
+            // },
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -124,9 +110,9 @@ $(document).ready(function() {
         }
     }).data('formValidation')
 
-    form.querySelector('input[name="password"]').addEventListener('input', function() {
-        newUserForm.revalidateField('confirmPassword')
-    })
+    // form.querySelector('input[name="password"]').addEventListener('input', function() {
+    //     newUserForm.revalidateField('confirmPassword')
+    // })
 
     $('.saveAction').click(function() {
         const { urlNext, isRecreate } = $(this).data()
