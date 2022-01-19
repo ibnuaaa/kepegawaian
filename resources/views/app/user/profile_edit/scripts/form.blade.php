@@ -275,7 +275,4 @@ function appendImage(preview, data) {
         + "</div>");
     }
 
-
-
-
 </script>
