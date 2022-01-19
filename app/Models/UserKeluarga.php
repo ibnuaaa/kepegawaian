@@ -12,4 +12,6 @@ class UserKeluarga extends Model
 {
     use SoftDeletes;
     protected $table = 'user_keluarga';
+
+    
 }

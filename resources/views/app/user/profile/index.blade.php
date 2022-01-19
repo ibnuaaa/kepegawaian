@@ -159,6 +159,46 @@
                                       {{ $data->gender ? gender($data->gender) : '' }}
                                   </div>
                               </div>
+
+
+                              <div class="row mb-4">
+                                  <label class="col-md-2 form-label">Foto KTP</label>
+                                  <div class="col-md-9">
+                                      <div class="img-preview mt-2" id="img-preview">
+                                          @if (!empty($data->foto_ktp))
+                                              @foreach ($data->foto_ktp as $key => $val)
+                                                  <img style="max-height: 200px" src="/api/tmp/{{$val->storage->original_name}}" />
+                                              @endforeach
+                                          @endif
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="row mb-4">
+                                  <label class="col-md-2 form-label">Foto NPWP</label>
+                                  <div class="col-md-9">
+                                      <div class="img-preview mt-2" id="img-preview">
+                                          @if (!empty($data->foto_npwp))
+                                              @foreach ($data->foto_npwp as $key => $val)
+                                                  <img style="max-height: 200px" src="/api/tmp/{{$val->storage->original_name}}" />
+                                              @endforeach
+                                          @endif
+                                      </div>
+                                 </div>
+                              </div>
+
+                              <div class="row mb-4">
+                                  <label class="col-md-2 form-label">Foto BPJS</label>
+                                  <div class="col-md-9">
+                                      <div class="img-preview mt-2" id="img-preview">
+                                          @if (!empty($data->foto_bpjs))
+                                              @foreach ($data->foto_bpjs as $key => $val)
+                                                  <img style="max-height: 200px" src="/api/tmp/{{$val->storage->original_name}}" />
+                                              @endforeach
+                                          @endif
+                                      </div>
+                                 </div>
+                              </div>
+
                           </div>
                           <div class="tab-pane  {{ $tab == 'pendidikan' ? 'active' : '' }}" id="tab-pendidikan">
                               <h2>Pendidikan</h2>
@@ -179,9 +219,6 @@
                                       <th>
                                           Tahun Lulus
                                       </th>
-                                      <th>
-                                          Foto Ijazah
-                                      </th>
                                   </tr>
                                   @foreach ($data->user_pendidikan as $key => $val)
                                   <tr>
@@ -200,15 +237,19 @@
                                       <td>
                                           {{$val->tahun_lulus ? $val->tahun_lulus : ''}}
                                       </td>
-                                      <td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="5">
+                                          <div class="img-preview mt-2" id="img-preview">
+                                              @if (!empty($val->foto_ijazah))
+                                                  @foreach ($val->foto_ijazah as $key => $val)
+                                                      <img style="max-height: 200px" src="/api/tmp/{{$val->storage->original_name}}" />
+                                                  @endforeach
+                                              @endif
+                                          </div>
                                       </td>
                                   </tr>
                                   @endforeach
-                                  <tr>
-                                      <td colspan="6" class="text-center">
-                                          <input type="button" class="btn btn-primary" value="Tambah Riwayat Pendidikan" onclick="saveNewUserPendidikan()" />
-                                      </td>
-                                  </tr>
                               </table>
                           </div>
                           <div class="tab-pane  {{ $tab == 'pelatihan' ? 'active' : '' }}" id="tab-pelatihan">
@@ -228,9 +269,6 @@
                                       <th>
                                           Tahun
                                       </th>
-                                      <th>
-                                          Foto Sertifikat
-                                      </th>
                                   </tr>
                                   @foreach ($data->user_pelatihan as $key => $val)
                                   <tr>
@@ -246,22 +284,34 @@
                                       <td>
                                           {{ $val->tahun }}
                                       </td>
-                                      <td>
-
+                                  </tr>
+                                  <tr>
+                                      <td colspan="4">
+                                          <div class="img-preview mt-2" id="img-preview">
+                                              @if (!empty($val->foto_sertifikat))
+                                                  @foreach ($val->foto_sertifikat as $key => $val)
+                                                      <img style="max-height: 200px" src="/api/tmp/{{$val->storage->original_name}}" />
+                                                  @endforeach
+                                              @endif
+                                          </div>
                                       </td>
                                   </tr>
                                   @endforeach
-                                  <tr>
-                                      <td colspan="5" class="text-center">
-                                          <input type="button" class="btn btn-primary" value="Tambah Riwayat Pelatihan" onclick="saveNewUserPelatihan()" />
-                                      </td>
-                                  </tr>
                               </table>
 
                           </div>
                           <div class="tab-pane  {{ $tab == 'keluarga' ? 'active' : '' }}" id="tab-keluarga">
                               <h2>Keluarga</h2>
+                              <br/>
+                              <h4>Foto Kartu Keluarga</h4>
+                              <div class="img-preview mt-2 mb-5" id="img-preview">
+                                  @if (!empty($data->foto_kk))
+                                      @foreach ($data->foto_kk as $key => $val)
+                                          <img style="max-height: 200px" src="/api/tmp/{{$val->storage->original_name}}" />
+                                      @endforeach
+                                  @endif
 
+                              </div>
                               <div class="table-responsive">
                                   <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                                       <table class="table table-bordered">
@@ -371,13 +421,6 @@
                                               </td>
                                           </tr>
                                           @endforeach
-                                          <tr>
-                                              <td colspan="6" class="text-center">
-                                                  <input type="button" class="btn btn-primary" value="Tambah Anggota Keluarga" onclick="saveNewUserKeluarga()" />
-                                              </td>
-                                              <td colspan="10" class="text-center">
-                                              </td>
-                                          </tr>
                                       </table>
                                   </div>
                               </div>
@@ -430,11 +473,6 @@
                                               </td>
                                           </tr>
                                           @endforeach
-                                          <tr>
-                                              <td colspan="6" class="text-center">
-                                                  <input type="button" class="btn btn-primary" value="Tambah Riwayat Jabatan" onclick="saveNewUserJabatan()" />
-                                              </td>
-                                          </tr>
                                       </table>
                                   </div>
                               </div>
@@ -483,11 +521,6 @@
                                               </td>
                                           </tr>
                                           @endforeach
-                                          <tr>
-                                              <td colspan="5" class="text-center">
-                                                  <input type="button" class="btn btn-primary" value="Tambah Riwayat Golongan" onclick="saveNewUserGolongan()" />
-                                              </td>
-                                          </tr>
                                       </table>
                                   </div>
                               </div>

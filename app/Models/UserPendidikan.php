@@ -22,4 +22,11 @@ class UserPendidikan extends Model
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+    public function foto_ijazah()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'id')
+                    ->where('object', 'foto_ijazah')
+                    ->with('storage');
+    }
 }

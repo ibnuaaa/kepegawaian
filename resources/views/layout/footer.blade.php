@@ -169,6 +169,69 @@
 
         })
 
+
+
+        function prepareUpload(el, object_type, id) {
+            var files = $(el)[0].files;
+            var preview = $(el).siblings("#img-preview");
+            for (i = 0; i < files.length; i++) {
+              uploadFile(files[i], preview, object_type, id);
+            }
+        }
+
+        var files = [];
+        function uploadFile(file, preview, object, id) {
+          showLoading()
+          var formData = new FormData();
+          formData.append('file', file);
+
+            $.ajax({
+                url: window.apiUrl + '/upload',
+                    type: 'post',
+                    data: formData,
+                    beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', window.axios.defaults.headers['Authorization'])
+                },
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                    // START SAVE LAMPIRAN
+                    const data_storage = {
+                        object: object,
+                        object_id: id,
+                        file: JSON.stringify(response.data)
+                    };
+
+                    axios.post('/storage/save', data_storage).then((response) => {
+                        hideLoading()
+                    }).catch((error) => {
+                        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+                            Swal.fire({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+                            hideLoading()
+                        }
+                    })
+
+                    appendImage(preview, response.data)
+                }
+            });
+        }
+
+        function appendImage(preview, data) {
+
+            img = "";
+            if(data.extension.toLowerCase() == 'jpg' || data.extension.toLowerCase() == 'png' || data.extension.toLowerCase() == 'bmp')
+            img = "<img src='"+window.apiUrl+"/tmp/"+data.key+"."+data.extension+"' style='max-height:200px;'/>";
+            else
+            img = "<i class='fas fa-file' style='height:80px;font-size:80px;'></i>";
+
+            preview.html("<div style='float:left;position:relative;'>"
+                + "<button class='btn btn-danger btn-xs' onClick='removeNode(this)' style='position:absolute;left:3px;border:solid 1px;' data-key='"+data.key+"'>"
+                + "<i class='fa fa-trash'></i></button>"
+                + img
+                + "</div>");
+        }
+
     </script>
     @yield('script')
     @yield('formValidationScript')

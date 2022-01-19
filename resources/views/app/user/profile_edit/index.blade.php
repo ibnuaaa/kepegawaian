@@ -221,7 +221,7 @@
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Foto KTP</label>
                                         <div class="col-md-9">
-                                            <input type="file" onchange="prepareUpload(this, 'foto_ktp');" multiple>
+                                            <input type="file" onchange="prepareUpload(this, 'foto_ktp', '{{ $data['id'] }}');" multiple>
                                             <div style="clear: both;"></div>
                                             <div class="img-preview mt-2" id="img-preview">
 
@@ -238,7 +238,7 @@
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Foto NPWP</label>
                                         <div class="col-md-9">
-                                            <input type="file" onchange="prepareUpload(this, 'foto_npwp');" multiple>
+                                            <input type="file" onchange="prepareUpload(this, 'foto_npwp', '{{ $data['id'] }}');" multiple>
                                             <div style="clear: both;"></div>
                                             <div class="img-preview mt-2" id="img-preview">
                                                 @if (!empty($data->foto_npwp))
@@ -250,6 +250,23 @@
                                             </div>
                                        </div>
                                     </div>
+
+                                    <div class="row mb-4">
+                                        <label class="col-md-2 form-label">Foto BPJS</label>
+                                        <div class="col-md-9">
+                                            <input type="file" onchange="prepareUpload(this, 'foto_bpjs', '{{ $data['id'] }}');" multiple>
+                                            <div style="clear: both;"></div>
+                                            <div class="img-preview mt-2" id="img-preview">
+                                                @if (!empty($data->foto_bpjs))
+                                                    @foreach ($data->foto_bpjs as $key => $val)
+                                                        <img style="max-height: 200px" src="/api/tmp/{{$val->storage->original_name}}" />
+                                                    @endforeach
+                                                @endif
+                                                <div style="clear: both;"></div>
+                                            </div>
+                                       </div>
+                                    </div>
+
                                 </div>
 
 
@@ -274,9 +291,6 @@
                                             </th>
                                             <th>
                                                 Tahun Lulus
-                                            </th>
-                                            <th>
-                                                Foto Ijazah
                                             </th>
                                         </tr>
                                         @foreach ($data->user_pendidikan as $key => $val)
@@ -303,12 +317,24 @@
                                             <td>
                                                 <input name="tahun_lulus" value="{{$val->tahun_lulus ? $val->tahun_lulus : ''}}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control" type="text" required>
                                             </td>
-                                            <td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">
+                                                <input type="file" onchange="prepareUpload(this, 'foto_ijazah', '{{ $val->id }}');" multiple>
+                                                <div style="clear: both;"></div>
+                                                <div class="img-preview mt-2" id="img-preview">
+                                                    @if (!empty($val->foto_ijazah))
+                                                        @foreach ($val->foto_ijazah as $key => $val)
+                                                            <img style="max-height: 200px" src="/api/tmp/{{$val->storage->original_name}}" />
+                                                        @endforeach
+                                                    @endif
+                                                    <div style="clear: both;"></div>
+                                                </div>
                                             </td>
                                         </tr>
                                         @endforeach
                                         <tr>
-                                            <td colspan="6" class="text-center">
+                                            <td colspan="5" class="text-center">
                                                 <input type="button" class="btn btn-primary" value="Tambah Riwayat Pendidikan" onclick="saveNewUserPendidikan()" />
                                             </td>
                                         </tr>
@@ -336,9 +362,6 @@
                                             <th>
                                                 Tahun
                                             </th>
-                                            <th>
-                                                Foto Sertifikat
-                                            </th>
                                         </tr>
                                         @foreach ($data->user_pelatihan as $key => $val)
                                         <tr>
@@ -354,13 +377,24 @@
                                             <td>
                                                 <input name="tahun" value="{{ $val->tahun }}" data-id="{{ $val->id }}" onChange="savePelatihan(this)" class="form-control " type="text" required>
                                             </td>
-                                            <td>
-
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <input type="file" onchange="prepareUpload(this, 'foto_sertifikat', '{{ $val->id }}');" multiple>
+                                                <div style="clear: both;"></div>
+                                                <div class="img-preview mt-2" id="img-preview">
+                                                    @if (!empty($val->foto_sertifikat))
+                                                        @foreach ($val->foto_sertifikat as $key => $val)
+                                                            <img style="max-height: 200px" src="/api/tmp/{{$val->storage->original_name}}" />
+                                                        @endforeach
+                                                    @endif
+                                                    <div style="clear: both;"></div>
+                                                </div>
                                             </td>
                                         </tr>
                                         @endforeach
                                         <tr>
-                                            <td colspan="5" class="text-center">
+                                            <td colspan="4" class="text-center">
                                                 <input type="button" class="btn btn-primary" value="Tambah Riwayat Pelatihan" onclick="saveNewUserPelatihan()" />
                                             </td>
                                         </tr>
@@ -373,7 +407,21 @@
                                 <!-- =========================================================== -->
                                 <div class="tab-pane  {{ $tab == 'keluarga' ? 'active' : '' }}" id="tab-keluarga">
                                     <h2>Keluarga</h2>
+                                    <br/>
+                                    <h4>Upload Foto KK</h4>
+                                    <input type="file" onchange="prepareUpload(this, 'foto_kk', '{{ $data['id'] }}');" multiple>
+                                    <div style="clear: both;"></div>
+                                    <div class="img-preview mt-2" id="img-preview">
+                                        @if (!empty($data->foto_kk))
+                                            @foreach ($data->foto_kk as $key => $val)
+                                                <img style="max-height: 200px" src="/api/tmp/{{$val->storage->original_name}}" />
+                                            @endforeach
+                                        @endif
+                                        <div style="clear: both;"></div>
+                                    </div>
 
+                                    <div style="clear: both;"></div>
+                                    <br />
                                     <div class="alert alert-warning" role="alert">
                                         <span class="alert-inner--icon"><i class="fe fe-info" style="color: #f7b731"></i></span>
                                         <span class="alert-inner--text"><strong>Perhatian !</strong> Dimohon untuk mengisi form keluarga berdasarkan Kartu Keluarga anda! Terimakasih </span>

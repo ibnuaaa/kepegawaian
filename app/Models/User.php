@@ -79,4 +79,18 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
                     ->with('storage');
     }
 
+    public function foto_kk()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'user.id')
+                    ->where('object', 'foto_kk')
+                    ->with('storage');
+    }
+
+    public function foto_bpjs()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'user.id')
+                    ->where('object', 'foto_bpjs')
+                    ->with('storage');
+    }
+
 }
