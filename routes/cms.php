@@ -17,9 +17,9 @@ $router->get('/logout', 'CMS\Authentication\AuthenticationController@Logout');
 $router->get('/', 'CMS\Home\HomeController@Home');
 $router->get('/coupon/new', 'CMS\Home\HomeController@NewCoupon');
 
-$router->get('/position/paging', 'CMS\Position\PositionController@Home');
-$router->get('/position', 'CMS\Position\PositionController@HomeWithPaging');
-$router->get('/position/new', 'CMS\Position\PositionController@New');
+$router->get('/position/paging', 'CMS\Position\PositionController@HomeWithPaging');
+$router->get('/position', 'CMS\Position\PositionController@Home');
+$router->get('/position/new/{position_id}', 'CMS\Position\PositionController@New');
 $router->get('/position/{id}', 'CMS\Position\PositionController@PositionEdit');
 
 $router->get('/golongan', 'CMS\Golongan\GolonganController@Home');

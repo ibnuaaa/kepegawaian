@@ -1062,7 +1062,10 @@ if ( ! function_exists('treeChild'))
                         ' . $html_user . '
                       </td>
                       <td>
-                          <a href="'. url('/user/edit/'.$item->id) .'" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
+                          <a href="'. url('/position/'.$item->id) .'" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
+                          <a href="'. url('/position/new/'.$item->id) .'" class="btn btn-primary btn-sm">
+                              (+) Buat Jabatan
+                          </a>
                       </td>
                   </tr>
                 ' . (count($item->children) > 0 ? treeChild($item->children, $item) : '') ;

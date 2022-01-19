@@ -1,18 +1,18 @@
 @extends('layout.app')
 
-@section('title', 'IndikatorKinerja')
+@section('title', 'Indikator Kinerja')
 @section('bodyClass', 'fixed-header menu-pin menu-behind')
 
 @section('content')
 
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Buat IndikatorKinerja</h1>
+    <h1 class="page-title">Buat Indikator Kinerja</h1>
     <div>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item"><a href="/indikator_kinerja">IndikatorKinerja</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Buat IndikatorKinerja</li>
+          <li class="breadcrumb-item"><a href="/indikator_kinerja">Indikator Kinerja</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Buat Indikator Kinerja</li>
         </ol>
     </div>
 </div>

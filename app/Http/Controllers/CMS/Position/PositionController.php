@@ -109,14 +109,17 @@ class PositionController extends Controller
         return view('app.position.home_with_paging.index', $ParseData);
     }
 
-    public function New(Request $request)
+    public function New(Request $request, $position_id)
     {
-        // $Position = PositionBrowseController::FetchBrowse($request)
-        //     ->equal('status', 'active')->equal('take', 'all')->equal('with.total', true)->get();
+        $Position = PositionBrowseController::FetchBrowse($request)
+            ->equal('take', 'all')->equal('with.total', true)->get();
 
-        // $PositionSelect = FormSelect($Position['records'], true);
+        $PositionSelect = FormSelect($Position['records'], true);
 
-        return view('app.position.new.index');
+        return view('app.position.new.index', [
+          'positions' => $PositionSelect,
+          'selected_position_id' => $position_id
+        ]);
     }
 
     public function PositionEdit(Request $request, $id)

@@ -3,13 +3,13 @@ $(document).ready(function() {
     const form = document.getElementById('editUserForm')
     const editUserForm = $('#editUserForm').formValidation({
         fields: {
-            name: {
-                validators: {
-                    notEmpty: {
-                        message: 'Nama Jabatan harus diisi'
-                    }
-                }
-            }
+            // name: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'Nama Jabatan harus diisi'
+            //         }
+            //     }
+            // }
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -101,7 +101,7 @@ function changeStatusPosition(status) {
     }).then((response) => {
         // console.log(response)
         // location.reload()
-        location.href = "{{ url('/position/paging') }}"
+        location.href = "{{ url('/position') }}"
     }).catch((error) => {
         if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
             swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })

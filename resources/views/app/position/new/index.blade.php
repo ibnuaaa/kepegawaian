@@ -34,8 +34,12 @@
                     <div class=" row mb-4">
                         <label class="col-md-3 form-label">Turunan Dari</label>
                         <div class="col-md-9">
-                            <select name="parent_id" class="form-control">
-                            </select>
+                            @component('components.form.awesomeSelect', [
+                                'name' => 'parent_id',
+                                'items' => $positions,
+                                'selected' => $selected_position_id
+                            ])
+                            @endcomponent
                         </div>
                     </div>
                 </form>

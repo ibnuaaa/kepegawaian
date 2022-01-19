@@ -6,7 +6,12 @@
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Jabatan</h1>
+    <h1 class="page-title">
+      Jabatan
+      <a href="/position/new/0" class="btn btn-primary btn-sm">
+          (+) Buat Jabatan
+      </a>
+    </h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
