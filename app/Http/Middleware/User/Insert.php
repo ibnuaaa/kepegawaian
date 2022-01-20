@@ -22,6 +22,9 @@ class Insert extends BaseMiddleware
         $this->Model->User->password = $this->_Request->input('password');
         $this->Model->User->position_id = $this->_Request->input('position_id');
         $this->Model->User->jabatan_id = $this->_Request->input('jabatan_id');
+        $this->Model->User->golongan_id = $this->_Request->input('golongan_id');
+        $this->Model->User->unit_kerja_id = $this->_Request->input('unit_kerja_id');
+
         $this->Model->User->gender = $this->_Request->input('gender');
         $this->Model->User->nip = $this->_Request->input('nip');
 

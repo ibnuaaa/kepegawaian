@@ -124,6 +124,8 @@ $(document).ready(function() {
                 const password = $('input[name="password"]')
                 const position_id = $('select[name="position_id"]')
                 const jabatan_id = $('select[name="jabatan_id"]')
+                const golongan_id = $('select[name="golongan_id"]')
+                const unit_kerja_id = $('select[name="unit_kerja_id"]')
                 const gender = $('select[name="gender"]')
                 const golongan = $('input[name="golongan"]')
                 const jenis_user = $('.jenis_user_radio input[name="jenis_user"]:checked')

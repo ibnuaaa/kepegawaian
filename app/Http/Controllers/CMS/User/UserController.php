@@ -100,7 +100,7 @@ class UserController extends Controller
 
           $Positions[] = [
               'value' => '',
-              'label' => '-= Select Position =-'
+              'label' => '-= Pilih Hak Akses =-'
           ];
 
         foreach ($Position['records'] as $key => $value) {
@@ -114,10 +114,10 @@ class UserController extends Controller
             ->where('take','all')
             ->get('fetch');
 
-          $JabatanList[] = [
-              'value' => '',
-              'label' => '-= Select Jabatan =-'
-          ];
+        $JabatanList[] = [
+            'value' => '',
+            'label' => '-= Pilih Jabatan =-'
+        ];
 
         foreach ($Jabatan['records'] as $key => $value) {
             $JabatanList[] = [
@@ -127,15 +127,32 @@ class UserController extends Controller
         }
 
 
+        // Unit Kerja
+        $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
 
+        $UnitKerjaList[] = [
+            'value' => '',
+            'label' => '-= Pilih Unit Kerja =-'
+        ];
+
+        foreach ($UnitKerja['records'] as $key => $value) {
+            $UnitKerjaList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
+        // Golongan
         $Golongan = GolonganBrowseController::FetchBrowse($request)
             ->where('take','all')
             ->get('fetch');
 
-          $GolonganList[] = [
-              'value' => '',
-              'label' => '-= Pilih Golongan =-'
-          ];
+        $GolonganList[] = [
+            'value' => '',
+            'label' => '-= Pilih Golongan =-'
+        ];
 
         foreach ($Golongan['records'] as $key => $value) {
             $GolonganList[] = [
@@ -147,9 +164,12 @@ class UserController extends Controller
 
 
 
+
         return view('app.user.new.index', [
             'positions' => $Positions,
             'jabatan' => $JabatanList,
+            'unit_kerja' => $UnitKerjaList,
+            'golongan' => $GolonganList,
 
         ]);
     }
@@ -189,7 +209,7 @@ class UserController extends Controller
 
         $PositionList[] = [
             'value' => '',
-            'label' => '-= Select Position =-'
+            'label' => '-= Pilih Hak Akses =-'
         ];
 
         foreach ($Position['records'] as $key => $value) {
@@ -206,7 +226,7 @@ class UserController extends Controller
 
         $PendidikanList[] = [
             'value' => '',
-            'label' => '-= Select Pendidikan =-'
+            'label' => '-= Pilih Pendidikan =-'
         ];
 
         foreach ($Pendidikan['records'] as $key => $value) {
@@ -223,7 +243,7 @@ class UserController extends Controller
 
         $UnitKerjaList[] = [
             'value' => '',
-            'label' => '-= Select Position =-'
+            'label' => '-= Pilih Position =-'
         ];
 
         foreach ($UnitKerja['records'] as $key => $value) {
@@ -240,7 +260,7 @@ class UserController extends Controller
 
         $GolonganList[] = [
             'value' => '',
-            'label' => '-= Select Golongan =-'
+            'label' => '-= Pilih Golongan =-'
         ];
 
         foreach ($Golongan['records'] as $key => $value) {
@@ -282,7 +302,7 @@ class UserController extends Controller
 
         $Positions[] = [
             'value' => '',
-            'label' => '-= Select Position =-'
+            'label' => '-= Pilih Position =-'
         ];
 
         foreach ($Position['records'] as $key => $value) {
@@ -298,10 +318,10 @@ class UserController extends Controller
             ->where('take','all')
             ->get('fetch');
 
-          $JabatanList[] = [
-              'value' => '',
-              'label' => '-= Select Jabatan =-'
-          ];
+        $JabatanList[] = [
+            'value' => '',
+            'label' => '-= Pilih Jabatan =-'
+        ];
 
         foreach ($Jabatan['records'] as $key => $value) {
             $JabatanList[] = [
@@ -310,9 +330,47 @@ class UserController extends Controller
             ];
         }
 
+        // Unit Kerja
+        $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $UnitKerjaList[] = [
+            'value' => '',
+            'label' => '-= Pilih Position =-'
+        ];
+
+        foreach ($UnitKerja['records'] as $key => $value) {
+            $UnitKerjaList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
+        // Golongan
+        $Golongan = GolonganBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $GolonganList[] = [
+            'value' => '',
+            'label' => '-= Pilih Golongan =-'
+        ];
+
+        foreach ($Golongan['records'] as $key => $value) {
+            $GolonganList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
+
+
         return view('app.user.edit.index', [
           'positions' => $Positions,
           'jabatan' => $JabatanList,
+          'golongan' => $GolonganList,
+          'unit_kerja' => $UnitKerjaList,
           'data' => $User['records']
         ]);
     }
@@ -332,7 +390,7 @@ class UserController extends Controller
 
         $PositionList[] = [
             'value' => '',
-            'label' => '-= Select Position =-'
+            'label' => '-= Pilih Position =-'
         ];
 
         foreach ($Position['records'] as $key => $value) {
@@ -349,7 +407,7 @@ class UserController extends Controller
 
         $JabatanList[] = [
             'value' => '',
-            'label' => '-= Select Jabatan =-'
+            'label' => '-= Pilih Jabatan =-'
         ];
 
         foreach ($Jabatan['records'] as $key => $value) {
@@ -366,7 +424,7 @@ class UserController extends Controller
 
         $PendidikanList[] = [
             'value' => '',
-            'label' => '-= Select Pendidikan =-'
+            'label' => '-= Pilih Pendidikan =-'
         ];
 
         foreach ($Pendidikan['records'] as $key => $value) {
@@ -383,7 +441,7 @@ class UserController extends Controller
 
         $UnitKerjaList[] = [
             'value' => '',
-            'label' => '-= Select Position =-'
+            'label' => '-= Pilih Position =-'
         ];
 
         foreach ($UnitKerja['records'] as $key => $value) {
@@ -400,7 +458,7 @@ class UserController extends Controller
 
         $GolonganList[] = [
             'value' => '',
-            'label' => '-= Select Golongan =-'
+            'label' => '-= Pilih Golongan =-'
         ];
 
         foreach ($Golongan['records'] as $key => $value) {

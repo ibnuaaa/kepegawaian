@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class=" row mb-4">
-                        <label class="col-md-3 form-label">Position</label>
+                        <label class="col-md-3 form-label">Jabatan</label>
                         <div class="col-md-9">
                             @component('components.form.awesomeSelect', [
                                 'name' => 'jabatan_id',
@@ -86,7 +86,7 @@
                             @component('components.form.awesomeSelect', [
                                 'name' => 'unit_kerja_id',
                                 'items' => $unit_kerja,
-                                'selected' => $data->unit_kerja_id
+                                'selected' => null
                             ])
                             @endcomponent
                         </div>
@@ -97,7 +97,7 @@
                             @component('components.form.awesomeSelect', [
                                 'name' => 'golongan_id',
                                 'items' => $golongan,
-                                'selected' => $data->golongan_id
+                                'selected' => null
                             ])
                             @endcomponent
                         </div>
@@ -107,7 +107,7 @@
                         <div class="col-md-9">
                             @component('components.form.awesomeSelect', [
                                 'name' => 'gender',
-                                'items' => [['value' => 'male', 'label' => 'Male'], ['value' => 'female', 'label' => 'Female']],
+                                'items' => [['value' => 'male', 'label' => 'Laki-laki'], ['value' => 'female', 'label' => 'Perempuan']],
                                 'selected' => null
                             ])
                             @endcomponent
