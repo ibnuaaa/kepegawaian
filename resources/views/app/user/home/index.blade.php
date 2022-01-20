@@ -62,7 +62,7 @@
                         <p>{{ $item->username }}</p>
                     </td>
                     <td class="v-align-middle ">
-                        <p>{{ $item->position['name'] }}</p>
+                        <p>{{ !empty($item->jabatan['name']) ? $item->jabatan['name'] : '' }}</p>
                     </td>
                     <td class="v-align-middle">
                         <p>{{ $item->created_at }}</p>

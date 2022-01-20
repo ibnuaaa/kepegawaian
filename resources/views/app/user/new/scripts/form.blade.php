@@ -138,6 +138,8 @@ $(document).ready(function() {
                     password: password.val(),
                     position_id: position_id.val(),
                     jabatan_id: jabatan_id.val(),
+                    unit_kerja_id: unit_kerja_id.val(),
+                    golongan_id: golongan_id.val(),
                     gender: gender.val(),
                     golongan: golongan.val(),
                     nip: nip.val(),
