@@ -6,12 +6,12 @@
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">IndikatorKinerja</h1>
+    <h1 class="page-title">Indikator Kinerja</h1>
     <div>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="/indikator_kinerja">IndikatorKinerja</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Detail IndikatorKinerja</li>
+          <li class="breadcrumb-item"><a href="/indikator_kinerja">Indikator Kinerja</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Detail Indikator Kinerja</li>
         </ol>
     </div>
 </div>
@@ -24,7 +24,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="font-montserrat all-caps hint-text">Detail IndikatorKinerja</h2>
+                        <h2 class="font-montserrat all-caps hint-text">Detail Indikator Kinerja</h2>
                     </div>
                 </div>
                 <div class="row">

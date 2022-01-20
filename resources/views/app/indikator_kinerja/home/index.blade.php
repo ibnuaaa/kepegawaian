@@ -7,15 +7,15 @@
 <!-- PAGE-HEADER -->
 <div class="page-header">
     <h1 class="page-title">
-      IndikatorKinerja
+      Indikator Kinerja
       <a href="/indikator_kinerja/new/0" class="btn btn-primary btn-sm">
-          (+) Buat IndikatorKinerja
+          (+) Buat Indikator Kinerja
       </a>
     </h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">IndikatorKinerja</li>
+            <li class="breadcrumb-item active" aria-current="page">Indikator Kinerja</li>
         </ol>
     </div>
 </div>

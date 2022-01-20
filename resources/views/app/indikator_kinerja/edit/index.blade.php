@@ -7,11 +7,11 @@
 
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Edit IndikatorKinerja</h1>
+    <h1 class="page-title">Edit Indikator Kinerja</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit IndikatorKinerja</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Indikator Kinerja</li>
         </ol>
     </div>
 </div>

@@ -8,7 +8,7 @@
 <!-- PAGE-HEADER -->
 <div class="page-header">
     <h1 class="page-title">
-        Buat IndikatorKinerja
+        Buat Indikator Kinerja
     </h1>
     <div>
         <ol class="breadcrumb">
