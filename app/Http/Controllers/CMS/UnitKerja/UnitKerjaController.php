@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers\CMS\UnitKerja;
 
-use App\Http\Controllers\UnitKerja\UnitKerjaBrowseController;
-
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-
 use DB;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
@@ -16,101 +12,132 @@ use App\Support\Generate\Hash as KeyGenerator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\UnitKerja;
+
+
+use App\Http\Controllers\UnitKerja\UnitKerjaBrowseController;
 
 class UnitKerjaController extends Controller
 {
     public function Home(Request $request)
     {
-        $TableKey = 'unit_kerja-table';
+        $Browse = UnitKerja::tree();
 
-        $filter_search = $request->input('filter_search');
+        $ParseData = [
+            'data' => $Browse
+        ];
 
-        if (isset($request['unit_kerja-table-show'])) {
-            $selected = $request['unit_kerja-table-show'];
+        return view('app.unit_kerja.home.index', $ParseData);
+    }
+
+    public function HomeWithPaging(Request $request)
+    {
+        $TableKey = 'unit_kerja';
+
+        $filter_search = $request->input($TableKey . '-filter_search');
+
+        if (isset($request['unit_kerja-take'])) {
+            $selected = $request['unit_kerja-take'];
         }
         else {
             $selected = 10;
         }
-
         $options = array(5,10,15,20);
-        $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
-            ->where('take',  $selected)
+        $Mail = UnitKerjaBrowseController::FetchBrowse($request)
             ->where('with.total', 'true');
 
         if (isset($filter_search)) {
-            $UnitKerja = $UnitKerja->where('search', $filter_search);
+            $Mail = $Mail->where('search', $filter_search);
         }
 
-        $UnitKerja = $UnitKerja->middleware(function($fetch) use($request, $TableKey) {
+        $Take = ___TableGetTake($request, $TableKey);
+
+        $request->ArrQuery->take = $Take;
+        $Mail = $Mail->middleware(function($fetch) use($request, $TableKey) {
                 $fetch->equal('skip', ___TableGetSkip($request, $TableKey, $fetch->QueryRoute->ArrQuery->take));
                 return $fetch;
             })
             ->get('fetch');
 
-        $Take = ___TableGetTake($request, $TableKey);
+        if (isset($request['unit_kerja-show'])) {
+            $selected = $request['unit_kerja-show'];
+        }
+        else {
+            $selected = 10;
+        }
+
         $DataTable = [
             'key' => $TableKey,
             'filter_search' => $filter_search,
-            'placeholder_search' => "",
+            'placeholder_search' => "Nama, UnitKerja",
             'pageNow' => ___TableGetCurrentPage($request, $TableKey),
-            'paginate' => ___TablePaginate((int)$UnitKerja['total'], (int)$UnitKerja['query']->take, ___TableGetCurrentPage($request, $TableKey)),
+            'paginate' => ___TablePaginate((int)$Mail['total'], (int)$Mail['query']->take, ___TableGetCurrentPage($request, $TableKey)),
             'selected' => $selected,
             'options' => $options,
             'heads' => [
-                (object)['name' => 'No', 'label' => 'No'],
-                (object)['name' => 'name', 'label' => 'Nama Unit Kerja'],
-                (object)['name' => 'created_at', 'label' => 'Terbuat Pada'],
-                (object)['name' => 'action', 'label' => 'Aksi']
+                (object)['name' => 'no', 'label' => 'no', 'width' => '900'],
+                (object)['name' => 'name', 'label' => 'Posisi', 'width' => '900'],
+                (object)['name' => 'action', 'label' => 'ACTION', 'width' => '100']
             ],
             'records' => []
         ];
 
-        if ($UnitKerja['records']) {
-            $DataTable['records'] = $UnitKerja['records'];
-            $DataTable['total'] = $UnitKerja['total'];
-            $DataTable['show'] = $UnitKerja['show'];
+
+
+        if ($Mail['records']) {
+            $DataTable['records'] = $Mail['records'];
+            $DataTable['total'] = $Mail['total'];
+            $DataTable['show'] = $Mail['show'];
+
+            $DataTable['totalpage'] = (int)(ceil($DataTable['total'] / $selected)) ;
+            $DataTable['startentries'] = (($DataTable['pageNow'] - 1 ) * $selected) + 1;
+            $DataTable['endentries'] = $DataTable['startentries'] + ($selected - 1);
+            if ($DataTable['endentries'] > $DataTable['total']){
+                $DataTable['endentries'] = $DataTable['total'];
+            }
+            if ($DataTable['pageNow'] > $DataTable['totalpage']){
+                $DataTable['pageNow'] = $DataTable['totalpage'];
+            }
         }
+
 
         $ParseData = [
             'data' => $DataTable,
             'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0
         ];
-        return view('app.unit_kerja.home.index', $ParseData);
+        return view('app.unit_kerja.home_with_paging.index', $ParseData);
     }
 
-    public function New(Request $request)
+    public function New(Request $request, $unit_kerja_id)
     {
+        $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
+            ->equal('take', 'all')->equal('with.total', true)->get();
+
+        $UnitKerjaSelect = FormSelect($UnitKerja['records'], true);
+
         return view('app.unit_kerja.new.index', [
-            'select' => [],
+          'unit_kerja' => $UnitKerjaSelect,
+          'selected_unit_kerja_id' => $unit_kerja_id
         ]);
     }
 
-    public function Detail(Request $request, $id)
+    public function UnitKerjaEdit(Request $request, $id)
     {
-        $QueryRoute = QueryRoute($request);
-        $QueryRoute->ArrQuery->id = $id;
-        $QueryRoute->ArrQuery->set = 'first';
-        $QueryRoute->ArrQuery->{'with.total'} = 'true';
-        $UnitKerjaBrowseController = new UnitKerjaBrowseController($QueryRoute);
-        $data = $UnitKerjaBrowseController->get($QueryRoute);
 
-        return view('app.unit_kerja.detail.index', [ 'data' => $data->original['data']['records'] ]);
-    }
-
-    public function Edit(Request $request, $id)
-    {
         $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
             ->equal('id', $id)->get('first');
 
+        $UnitKerjaList = UnitKerjaBrowseController::FetchBrowse($request)
+            ->equal('take', 'all')->equal('with.total', true)->get();
 
-        if (!isset($UnitKerja['records']->id)) {
-            throw new ModelNotFoundException('Not Found Batch');
-        }
+        $UnitKerjaSelect = FormSelect($UnitKerjaList['records'], true);
+
         return view('app.unit_kerja.edit.index', [
-            'select' => [],
-            'data' => $UnitKerja['records']
+            'data' => $UnitKerja['records'],
+            'select' => ['unit_kerja' => []],
+            'unit_kerja' => $UnitKerjaSelect
         ]);
     }
+
 
 }

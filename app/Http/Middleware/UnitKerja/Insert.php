@@ -16,12 +16,14 @@ class Insert extends BaseMiddleware
         $this->Model->UnitKerja = new UnitKerja();
 
         $this->Model->UnitKerja->name = $this->_Request->input('name');
+        if($this->_Request->input('parent_id')) $this->Model->UnitKerja->parent_id = $this->_Request->input('parent_id');
+
     }
 
     private function Validation()
     {
         $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required'
+            'name' => 'required',
         ]);
         if ($validator->fails()) {
             $this->Json::set('errors', $validator->errors());

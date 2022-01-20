@@ -32,9 +32,9 @@ $router->get('/golongan/edit/{id}', 'CMS\Golongan\GolonganController@Edit');
 $router->get('/golongan/{id}', 'CMS\Golongan\GolonganController@Detail');
 
 $router->get('/unit_kerja', 'CMS\UnitKerja\UnitKerjaController@Home');
-$router->get('/unit_kerja/new', 'CMS\UnitKerja\UnitKerjaController@New');
-$router->get('/unit_kerja/edit/{id}', 'CMS\UnitKerja\UnitKerjaController@Edit');
-$router->get('/unit_kerja/{id}', 'CMS\UnitKerja\UnitKerjaController@Detail');
+$router->get('/unit_kerja/new/{unit_kerja_id}', 'CMS\UnitKerja\UnitKerjaController@New');
+$router->get('/unit_kerja/{id}', 'CMS\UnitKerja\UnitKerjaController@UnitKerjaEdit');
+
 
 $router->get('/pendidikan', 'CMS\Pendidikan\PendidikanController@Home');
 $router->get('/pendidikan/new', 'CMS\Pendidikan\PendidikanController@New');

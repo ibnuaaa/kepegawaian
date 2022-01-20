@@ -1138,3 +1138,50 @@ if ( ! function_exists('treeChildJabatan'))
 
     }
 }
+
+
+if ( ! function_exists('treeChildUnitKerja'))
+{
+    function treeChildUnitKerja($data, $dataParent){
+
+        $html = "";
+
+        if (!empty($data)) {
+
+            foreach ($data as $item) {
+
+                $html_user = '';
+
+                if (!empty($item->users)) {
+                  foreach ($item->users as $key => $user) {
+                      $html_user = $html_user  . ($user ? $user->name : '');
+                  }
+                }
+
+                $html .= '
+                  <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" class="td-' . $item->status . '">
+                      <td style="height: 10px !important;">
+                          ' . $item->name . '
+                      </td>
+                      <td>
+                        ' . $html_user . '
+                      </td>
+                      <td>
+                          <a href="'. url('/unit_kerja/'.$item->id) .'" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
+                          <a href="'. url('/unit_kerja/new/'.$item->id) .'" class="btn btn-primary btn-sm">
+                              (+) Buat Unit Kerja
+                          </a>
+                          <a onClick="return remove('.$item->id.')" href="#" class="btn btn-danger btn-sm">
+                              <i class="fa fa-trash"></i>
+                          </a>
+
+                      </td>
+                  </tr>
+                ' . (count($item->children) > 0 ? treeChildUnitKerja($item->children, $item) : '') ;
+            }
+        }
+
+        return $html;
+
+    }
+}

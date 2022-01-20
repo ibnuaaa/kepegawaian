@@ -72,9 +72,9 @@ $(document).ready(function() {
                 const nip = $('input[name="nip"]')
                 const password = $('input[name="password"]')
                 const email = $('input[name="email"]')
+                const position_id = $('select[name="position_id"]')
 
                 const nik = $('input[name="nik"]')
-                const position_id = $('select[name="position_id"]')
                 const golongan_id = $('select[name="golongan_id"]')
                 const unit_kerja_id = $('select[name="unit_kerja_id"]')
                 const jabatan_id = $('select[name="jabatan_id"]')
