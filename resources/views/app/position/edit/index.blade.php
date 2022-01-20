@@ -7,11 +7,11 @@
 
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Edit Jabatan</h1>
+    <h1 class="page-title">Edit Hak Akses</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit Jabatan</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Hak Akses</li>
         </ol>
     </div>
 </div>
@@ -25,7 +25,7 @@
                 <form id="editUserForm">
                     <div class=" row mb-4">
                         <label class="col-md-3 form-label">
-                            Nama Jabatan
+                            Nama Hak Akses
                         </label>
                         <div class="col-md-9">
                             <input name="name" value="{{ $data->name }}" class="form-control" type="text" placeholder="" required>

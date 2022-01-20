@@ -24,13 +24,17 @@
         <div class="card overflow-hidden">
             <div class="card-body">
                 <form autocomplete="off" id="newGolonganForm">
-                    <div class="form-group form-group-default required ">
-                        <label class="form-label">Pangkat</label>
-                        <input name="pangkat" value="" class="form-control" type="text" required>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Pangkat</label>
+                        <div class="col-md-9">
+                            <input name="pangkat" value="" class="form-control" type="text" required>
+                        </div>
                     </div>
-                    <div class="form-group form-group-default required ">
-                        <label class="form-label">Golongan</label>
-                        <input name="golongan" value="" class="form-control" type="text" required>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Golongan</label>
+                        <div class="col-md-9">
+                            <input name="golongan" value="" class="form-control" type="text" required>
+                        </div>
                     </div>
                 </form>
             </div>

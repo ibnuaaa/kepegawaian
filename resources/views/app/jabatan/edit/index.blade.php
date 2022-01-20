@@ -44,20 +44,7 @@
                           @endcomponent
                         </div>
                     </div>
-                    <div class=" row mb-4">
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Status</label>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            @if (!empty($data['status']) && $data['status'] == 'active')
-                            <input type="button" class="btn btn-primary btn-xs" value="Active" />
-                            @else
-                            <input type="button" class="btn btn-danger btn-xs" value="Inctive" />
-                            @endif
-                        </div>
-                    </div>
+
                 </form>
             </div>
         </div>

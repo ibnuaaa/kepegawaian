@@ -7,15 +7,15 @@
   <!-- PAGE-HEADER -->
   <div class="page-header">
       <h1 class="page-title">
-          Jabatan
+          Hak Akses
           <a href="/position/new/0" class="btn btn-primary btn-sm">
-              (+) Buat Jabatan
+              (+) Buat Hak Akses
           </a>
       </h1>
       <div>
           <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Jabatan</li>
+              <li class="breadcrumb-item active" aria-current="page">Hak Akses</li>
           </ol>
       </div>
   </div>
@@ -50,8 +50,8 @@
                         </td>
                         <td>
                             <div class="btn-group">
-                                <a href="{{ url('/position/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                                <a onClick="return remove('{{$item->id}}')" href="#" class="btn btn-danger">
+                                <a href="{{ url('/position/'.$item->id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                                <a onClick="return remove('{{$item->id}}')" href="#" class="btn btn-danger btn-sm">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </div>

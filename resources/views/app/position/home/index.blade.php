@@ -9,13 +9,13 @@
     <h1 class="page-title">
       Jabatan
       <a href="/position/new/0" class="btn btn-primary btn-sm">
-          (+) Buat Jabatan
+          (+) Buat Hak Akses
       </a>
     </h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Jabatan</li>
+            <li class="breadcrumb-item active" aria-current="page">Hak Akses</li>
         </ol>
     </div>
 </div>
@@ -29,7 +29,7 @@
               <table id="basic" class="table table-bordered table-condensed-custom" style="width:1900px !important;">
                   <thead>
                       <tr>
-                          <th>JABATAN</th>
+                          <th>HAK AKSES</th>
                           <th>NAMA PEGAWAI / NIP</th>
                           <th>AKSI</th>
                       </tr>

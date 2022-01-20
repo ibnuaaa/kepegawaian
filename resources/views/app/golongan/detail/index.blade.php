@@ -29,10 +29,18 @@
                 </div>
                 <div class="row">
                     <div class="col-6 col-md-2">
-                        Nama
+                        Pangkat
                     </div>
                     <div class="col-6 col-md-10">
-                        : {{ $data['name'] }}
+                        : {{ $data['pangkat'] }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 col-md-2">
+                        Golongan
+                    </div>
+                    <div class="col-6 col-md-10">
+                        : {{ $data['golongan'] }}
                     </div>
                 </div>
             </div>

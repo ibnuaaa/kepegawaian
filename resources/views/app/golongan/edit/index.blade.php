@@ -24,13 +24,17 @@
       <div class="card overflow-hidden">
           <div class="card-body">
               <form autocomplete="off" id="editGolonganForm">
-                  <div class="form-group form-group-default required ">
+                  <div class=" row mb-4">
                       <label class="form-label">Pangkat</label>
-                      <input name="pangkat" value="{{ $data['pangkat'] }}" class="form-control" type="text" required>
+                      <div class="col-md-9">
+                          <input name="pangkat" value="{{ $data['pangkat'] }}" class="form-control" type="text" required>
+                      </div>
                   </div>
-                  <div class="form-group form-group-default required ">
+                  <div class=" row mb-4">
                       <label class="form-label">Golongan</label>
-                      <input name="golongan" value="{{ $data['golongan'] }}" class="form-control" type="text" required>
+                      <div class="col-md-9">
+                          <input name="golongan" value="{{ $data['golongan'] }}" class="form-control" type="text" required>
+                      </div>
                   </div>
               </form>
             </div>
