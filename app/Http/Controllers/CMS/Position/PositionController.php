@@ -70,7 +70,7 @@ class PositionController extends Controller
         $DataTable = [
             'key' => $TableKey,
             'filter_search' => $filter_search,
-            'placeholder_search' => "Nama, Position",
+            'placeholder_search' => "",
             'pageNow' => ___TableGetCurrentPage($request, $TableKey),
             'paginate' => ___TablePaginate((int)$Mail['total'], (int)$Mail['query']->take, ___TableGetCurrentPage($request, $TableKey)),
             'selected' => $selected,
