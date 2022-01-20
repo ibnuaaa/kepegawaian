@@ -4,7 +4,7 @@ function remove(id, name) {
 
   swal({
       title: "Konfirmasi",
-      text: "Ingin menghapus ?",
+      text: "Ingin menghapus "+name+" ?",
       type: "warning",
       showCancelButton: true,
       confirmButtonText: 'Ya, Hapus',

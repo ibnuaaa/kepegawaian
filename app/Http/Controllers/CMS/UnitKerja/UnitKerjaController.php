@@ -110,13 +110,10 @@ class UnitKerjaController extends Controller
 
     public function New(Request $request, $unit_kerja_id)
     {
-        $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
-            ->equal('take', 'all')->equal('with.total', true)->get();
-
-        $UnitKerjaSelect = FormSelect($UnitKerja['records'], true);
+        $Browse = UnitKerja::tree();
 
         return view('app.unit_kerja.new.index', [
-          'unit_kerja' => $UnitKerjaSelect,
+          'unit_kerja' => $Browse,
           'selected_unit_kerja_id' => $unit_kerja_id
         ]);
     }

@@ -1140,6 +1140,23 @@ if ( ! function_exists('treeChildJabatan'))
 }
 
 
+if ( ! function_exists('treeSelectUnitKerja'))
+{
+    function treeSelectUnitKerja($data, $dataParent, $selected_id=0){
+
+        $html = "";
+        if (!empty($data)) {
+            foreach ($data as $item) {
+
+                $html .= '<option value="'.$item->id.'"  '.($item->id ==  $selected_id? 'selected=selected' : '').'>'.$item->name.'</option>' . (count($item->children) > 0 ? treeSelectUnitKerja($item->children, $item, $selected_id) : '') ;
+            }
+        }
+
+        return $html;
+
+    }
+}
+
 if ( ! function_exists('treeChildUnitKerja'))
 {
     function treeChildUnitKerja($data, $dataParent){
@@ -1171,7 +1188,7 @@ if ( ! function_exists('treeChildUnitKerja'))
                           <a href="'. url('/unit_kerja/new/'.$item->id) .'" class="btn btn-primary btn-sm">
                               (+) Buat Unit Kerja
                           </a>
-                          <a onClick="return remove('.$item->id.')" href="#" class="btn btn-danger btn-sm">
+                          <a onClick=\'return remove('.$item->id.', "'.$item->name.'")\' href="#" class="btn btn-danger btn-sm">
                               <i class="fa fa-trash"></i>
                           </a>
 
