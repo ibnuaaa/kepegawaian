@@ -1,12 +1,5 @@
 <script>
 
-$('#modalDelete').on('show.bs.modal', function(e) {
-    const { recordId, recordName } = $(e.relatedTarget).data()
-    $('#deleteAction').click(function() {
-
-    })
-})
-
 // filter
 $('#filterAction').click(function() {
     const filter_search = $('input[name="filter_search"]').val()

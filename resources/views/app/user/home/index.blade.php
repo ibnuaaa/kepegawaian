@@ -71,7 +71,7 @@
                         <div class="btn-group btn-group-sm">
                             <a href="{{ url('/user/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
                             <a href="{{ url('/user/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                            <a href="#modalDelete" data-toggle="modal" data-record-id="{{$item->id}}" data-record-name="{{$item->name}}" class="btn btn-danger">
+                            <a onClick="return remove('{{$item->id}}','{{ $item->name }}')" href="#" class="btn btn-danger">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </div>
