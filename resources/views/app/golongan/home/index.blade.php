@@ -54,7 +54,10 @@
                         <p>{{ $number }}</p>
                     </td>
                     <td class="v-align-middle ">
-                        <p>{{ $item->name }}</p>
+                        <p>{{ $item->pangkat }} </p>
+                    </td>
+                    <td class="v-align-middle ">
+                        <p>{{ $item->golongan }}</p>
                     </td>
                     <td class="v-align-middle">
                         <p>{{ $item->created_at }}</p>

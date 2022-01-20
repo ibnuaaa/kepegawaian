@@ -16,14 +16,16 @@ class Update extends BaseMiddleware
     {
         $this->Model->Golongan = Golongan::where('id', $this->Id)->first();
         if ($this->Model->Golongan) {
-            $this->Model->Golongan->name = $this->_Request->input('name');
-        }
+            $this->Model->Golongan->pangkat = $this->_Request->input('pangkat');
+            $this->Model->Golongan->golongan = $this->_Request->input('golongan');
+      }
     }
 
     private function Validation()
     {
         $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required'
+          'pangkat' => 'required',
+          'golongan' => 'required'
         ]);
         if (!$this->Model->Golongan) {
             $this->Json::set('exception.key', 'NotFoundGolongan');

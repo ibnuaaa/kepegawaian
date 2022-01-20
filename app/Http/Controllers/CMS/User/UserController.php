@@ -157,7 +157,7 @@ class UserController extends Controller
         foreach ($Golongan['records'] as $key => $value) {
             $GolonganList[] = [
                 'value' => $value->id,
-                'label' => $value->name
+                'label' => $value->pangkat . '/' . $value->golongan
             ];
         }
 
@@ -266,7 +266,7 @@ class UserController extends Controller
         foreach ($Golongan['records'] as $key => $value) {
             $GolonganList[] = [
                 'value' => $value->id,
-                'label' => $value->name
+                'label' => $value->pangkat . '/' . $value->golongan
             ];
         }
 
@@ -360,7 +360,7 @@ class UserController extends Controller
         foreach ($Golongan['records'] as $key => $value) {
             $GolonganList[] = [
                 'value' => $value->id,
-                'label' => $value->name
+                'label' => $value->pangkat . '/' . $value->golongan
             ];
         }
 
@@ -464,7 +464,7 @@ class UserController extends Controller
         foreach ($Golongan['records'] as $key => $value) {
             $GolonganList[] = [
                 'value' => $value->id,
-                'label' => $value->name
+                'label' => $value->pangkat . '/' . $value->golongan
             ];
         }
 

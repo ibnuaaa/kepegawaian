@@ -70,11 +70,15 @@ class GolonganBrowseController extends Controller
             // Golongan
             "$this->GolonganTable.id as golongan.id",
             "$this->GolonganTable.name as golongan.name",
+            "$this->GolonganTable.pangkat as golongan.pangkat",
+            "$this->GolonganTable.golongan as golongan.golongan",
             "$this->GolonganTable.created_at as golongan.created_at"
         );
 
         if(!empty($request->get('sort'))) {
             if(!empty($request->get('sort_type'))) {
+              if ($request->get('sort') == 'pangkat') $Golongan->orderBy("$this->GolonganTable.pangkat", $request->get('sort_type'));
+              if ($request->get('sort') == 'golongan') $Golongan->orderBy("$this->GolonganTable.golongan", $request->get('sort_type'));
               if ($request->get('sort') == 'name') $Golongan->orderBy("$this->GolonganTable.name", $request->get('sort_type'));
               if ($request->get('sort') == 'created_at') $Golongan->orderBy("$this->GolonganTable.created_at", $request->get('sort_type'));
             } else {

@@ -25,8 +25,12 @@
           <div class="card-body">
               <form autocomplete="off" id="editGolonganForm">
                   <div class="form-group form-group-default required ">
-                      <label class="form-label">Nama</label>
-                      <input name="name" value="{{ $data['name'] }}" class="form-control" type="text" required>
+                      <label class="form-label">Pangkat</label>
+                      <input name="pangkat" value="{{ $data['pangkat'] }}" class="form-control" type="text" required>
+                  </div>
+                  <div class="form-group form-group-default required ">
+                      <label class="form-label">Golongan</label>
+                      <input name="golongan" value="{{ $data['golongan'] }}" class="form-control" type="text" required>
                   </div>
               </form>
             </div>

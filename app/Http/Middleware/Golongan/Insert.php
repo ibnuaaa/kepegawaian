@@ -15,13 +15,15 @@ class Insert extends BaseMiddleware
     {
         $this->Model->Golongan = new Golongan();
 
-        $this->Model->Golongan->name = $this->_Request->input('name');
+        $this->Model->Golongan->pangkat = $this->_Request->input('pangkat');
+        $this->Model->Golongan->golongan = $this->_Request->input('golongan');
     }
 
     private function Validation()
     {
         $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required'
+          'pangkat' => 'required',
+          'golongan' => 'required'
         ]);
         if ($validator->fails()) {
             $this->Json::set('errors', $validator->errors());

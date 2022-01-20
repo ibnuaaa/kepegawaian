@@ -4,13 +4,13 @@ $(document).ready(function() {
     const form = document.getElementById('newGolonganForm')
     const newGolonganForm = $('#newGolonganForm').formValidation({
         fields: {
-            name: {
-                validators: {
-                    notEmpty: {
-                        message: 'Nama Golongan Harus diisi'
-                    }
-                }
-            },
+            // name: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'Nama Golongan Harus diisi'
+            //         }
+            //     }
+            // },
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -24,10 +24,12 @@ $(document).ready(function() {
         const { urlNext, isRecreate } = $(this).data()
         newGolonganForm.validate().then(function(status) {
             if (status === 'Valid') {
-                const name = $('input[name="name"]')
+                const pangkat = $('input[name="pangkat"]')
+                const golongan = $('input[name="golongan"]')
 
                 axios.post('/golongan', {
-                    name: name.val(),
+                  pangkat: pangkat.val(),
+                  golongan: golongan.val(),
                 }).then((response) => {
                     const { data } = response.data
                     if (!isRecreate) {

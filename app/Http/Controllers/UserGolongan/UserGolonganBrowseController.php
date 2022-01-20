@@ -68,9 +68,9 @@ class UserGolonganBrowseController extends Controller
         })
         ->select(
             // UserGolongan
-            "$this->UserGolonganTable.id as user_pendidikan.id",
-            "$this->UserGolonganTable.name as user_pendidikan.name",
-            "$this->UserGolonganTable.created_at as user_pendidikan.created_at"
+            "$this->UserGolonganTable.id as user_golongan.id",
+            "$this->UserGolonganTable.name as user_golongan.name",
+            "$this->UserGolonganTable.created_at as user_golongan.created_at"
         );
 
         if(!empty($request->get('sort'))) {
@@ -97,7 +97,7 @@ class UserGolonganBrowseController extends Controller
     {
         return $records->map(function ($item) {
             foreach ($item->getAttributes() as $key => $value) {
-                $this->Group($item, $key, 'user_pendidikan.', $item);
+                $this->Group($item, $key, 'user_golongan.', $item);
             }
             return $item;
         });

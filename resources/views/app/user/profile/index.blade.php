@@ -508,7 +508,7 @@
                                                   {{ $key + 1 }}
                                               </td>
                                               <td>
-                                                {{$val->golongan->name}}
+                                                {{$val->golongan->pangkat}}/{{$val->golongan->golongan}}
                                               </td>
                                               <td>
                                                   {{ $val->dari_tahun }}

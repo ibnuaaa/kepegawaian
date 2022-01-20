@@ -25,8 +25,12 @@
             <div class="card-body">
                 <form autocomplete="off" id="newGolonganForm">
                     <div class="form-group form-group-default required ">
-                        <label class="form-label">Nama</label>
-                        <input name="name" value="" class="form-control" type="text" required>
+                        <label class="form-label">Pangkat</label>
+                        <input name="pangkat" value="" class="form-control" type="text" required>
+                    </div>
+                    <div class="form-group form-group-default required ">
+                        <label class="form-label">Golongan</label>
+                        <input name="golongan" value="" class="form-control" type="text" required>
                     </div>
                 </form>
             </div>

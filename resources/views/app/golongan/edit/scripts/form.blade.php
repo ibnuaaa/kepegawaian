@@ -4,13 +4,13 @@ $(document).ready(function() {
     const form = document.getElementById('editGolonganForm')
     const editGolonganForm = $('#editGolonganForm').formValidation({
         fields: {
-            name: {
-                validators: {
-                    notEmpty: {
-                        message: 'The golonganname is required'
-                    }
-                }
-            }
+            // name: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'The golonganname is required'
+            //         }
+            //     }
+            // }
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -22,10 +22,12 @@ $(document).ready(function() {
     $('#saveAction').click(function() {
         editGolonganForm.validate().then(function(status) {
             if (status === 'Valid') {
-                const name = $('input[name="name"]')
+                const pangkat = $('input[name="pangkat"]')
+                const golongan = $('input[name="golongan"]')
 
                 const data = {
-                    name: name.val(),
+                  pangkat: pangkat.val(),
+                  golongan: golongan.val(),
                 }
 
                 axios.put('/golongan/{{$data['id']}}', data).then((response) => {
