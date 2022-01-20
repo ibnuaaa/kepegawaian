@@ -1,16 +1,47 @@
 <script>
 $(document).ready(function() {
 
-    const form = document.getElementById('newIndikatorKinerjaForm')
-    const newIndikatorKinerjaForm = $('#newIndikatorKinerjaForm').formValidation({
+    // $('select[name=parent_id]').select2({
+    //     ajax: {
+    //         url: window.apiUrl + '/indikator_kinerja',
+    //         headers: {
+    //             'Authorization': window.axios.defaults.headers['Authorization']
+    //         },
+    //         dataType: 'json',
+    //         delay: 50,
+    //         cache: true,
+    //         data: function (params) {
+    //             return {
+    //                 q: params.term,
+    //                 page: params.page
+    //             };
+    //         },
+    //         processResults: function (data) {
+    //             return {
+    //                 results: $.map(data.data.records, function (item) {
+    //                     return {
+    //                         text: item.name,
+    //                         id: item.id
+    //                     }
+    //                 })
+    //             };
+    //         }
+    //     },
+    //     minimumInputLength: 1,
+    // });
+
+
+
+    const form = document.getElementById('editUserForm')
+    const editUserForm = $('#editUserForm').formValidation({
         fields: {
-            name: {
-                validators: {
-                    notEmpty: {
-                        message: 'Nama IndikatorKinerja Harus diisi'
-                    }
-                }
-            },
+            // name: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'Nama IndikatorKinerja harus diisi'
+            //         }
+            //     }
+            // }
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -19,22 +50,20 @@ $(document).ready(function() {
         }
     }).data('formValidation')
 
-
-    $('.saveAction').click(function() {
-        const { urlNext, isRecreate } = $(this).data()
-        newIndikatorKinerjaForm.validate().then(function(status) {
+    $('#saveAction').click(function() {
+        editUserForm.validate().then(function(status) {
             if (status === 'Valid') {
                 const name = $('input[name="name"]')
+                const parent_id = $('select[name="parent_id"]')
 
-                axios.post('/indikator_kinerja', {
+                const data = {
                     name: name.val(),
-                }).then((response) => {
+                    parent_id: parent_id.val()
+                }
+
+                axios.post('/indikator_kinerja', data).then((response) => {
                     const { data } = response.data
-                    if (!isRecreate) {
-                        window.location = urlNext
-                    } else {
-                        window.location.reload()
-                    }
+                    window.location = '/indikator_kinerja'
                 }).catch((error) => {
                     if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
                         swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })

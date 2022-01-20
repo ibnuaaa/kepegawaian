@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers\IndikatorKinerja;
 
+
+
 use App\Models\IndikatorKinerja;
+use App\Models\IndikatorKinerjaPermission;
+
 
 use App\Traits\Browse;
+
+use Carbon\Carbon;
 
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
@@ -20,34 +26,36 @@ class IndikatorKinerjaController extends Controller
 
     protected $search = [
         'id',
-        'code',
-        'name'
+        'name',
+        'updated_at',
+        'created_at'
     ];
     public function get(Request $request)
     {
         $IndikatorKinerja = IndikatorKinerja::where(function ($query) use($request) {
-            if (isset($request->ArrQuery->id)) {
-                if ($request->ArrQuery->id === 'my') {
-                    $query->where('id', $request->information()->id);
-                } else {
-                    $query->where('id', $request->ArrQuery->id);
-                }
-            }
             if (isset($request->ArrQuery->search)) {
                $search = '%' . $request->ArrQuery->search . '%';
-               if (isset($request->ArrQuery->for) && ($request->ArrQuery->for === 'select')) {
-                  $query->where('code', 'like', $search);
-                  $query->orWhere('name', 'like', $search);
-               } else {
-                   $query->where(function ($query) use($search) {
-                       foreach ($this->search as $key => $value) {
-                           $query->orWhere($value, 'like', $search);
-                       }
-                   });
-               }
+               $query->where(function ($query) use($search) {
+                   foreach ($this->search as $key => $value) {
+                       $query->orWhere($value, 'like', $search);
+                   }
+               });
+
            }
         });
         $Browse = $this->Browse($request, $IndikatorKinerja, function ($data) use($request) {
+            if (isset($request->ArrQuery->for) && ($request->ArrQuery->for === 'select')) {
+                return $data->map(function($IndikatorKinerja) {
+                    return [ 'value' => $IndikatorKinerja->id, 'label' => $IndikatorKinerja->name ];
+                });
+            } else {
+                $data->map(function($IndikatorKinerja) {
+                    if (isset($IndikatorKinerja->point->balance)) {
+                        $IndikatorKinerja->point->balance = (double)$IndikatorKinerja->point->balance;
+                    }
+                    return $IndikatorKinerja;
+                });
+            }
             return $data;
         });
         Json::set('data', $Browse);
@@ -72,10 +80,30 @@ class IndikatorKinerjaController extends Controller
         return response()->json(Json::get(), 202);
     }
 
+    public function ChangeStatus(Request $request)
+    {
+        $Model = $request->Payload->all()['Model'];
+        $Model->IndikatorKinerja->save();
+
+        Json::set('data', $this->SyncData($request, $Model->IndikatorKinerja->id));
+        return response()->json(Json::get(), 202);
+    }
+
     public function Delete(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
         $Model->IndikatorKinerja->delete();
+        return response()->json(Json::get(), 202);
+    }
+
+    public function DeveloperToken(Request $request)
+    {
+        $Model = $request->Payload->all()['Model'];
+
+        Json::set('data', [
+            'token_type' => 'Bearer',
+            'access_token' => $Model->IndikatorKinerja->createToken('ServiceAccessToken', ['blast'])->accessToken
+        ]);
         return response()->json(Json::get(), 202);
     }
 

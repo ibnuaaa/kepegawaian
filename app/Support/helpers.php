@@ -1202,3 +1202,60 @@ if ( ! function_exists('treeChildUnitKerja'))
 
     }
 }
+
+if ( ! function_exists('treeSelectIndikatorKinerja'))
+{
+    function treeSelectIndikatorKinerja($data, $dataParent, $selected_id=0){
+
+        $html = "";
+        if (!empty($data)) {
+            foreach ($data as $item) {
+
+                $html .= '<option value="'.$item->id.'"  '.($item->id ==  $selected_id? 'selected=selected' : '').'>'.$item->name.'</option>' . (count($item->children) > 0 ? treeSelectUnitKerja($item->children, $item, $selected_id) : '') ;
+            }
+        }
+
+        return $html;
+
+    }
+}
+
+
+if ( ! function_exists('treeChildIndikatorKinerja'))
+{
+    function treeChildIndikatorKinerja($data, $dataParent){
+
+        $html = "";
+
+        if (!empty($data)) {
+
+            foreach ($data as $item) {
+
+
+                $html .= '
+                  <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" class="td-' . $item->status . '">
+                      <td style="height: 10px !important;">
+                          ' . $item->name . '
+                      </td>
+                      <td>
+
+                      </td>
+                      <td>
+                          <a href="'. url('/indikator_kinerja/'.$item->id) .'" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
+                          <a href="'. url('/indikator_kinerja/new/'.$item->id) .'" class="btn btn-primary btn-sm">
+                              (+) Buat Indikator Kinerja
+                          </a>
+                          <a onClick=\'return remove('.$item->id.', "'.$item->name.'")\' href="#" class="btn btn-danger btn-sm">
+                              <i class="fa fa-trash"></i>
+                          </a>
+
+                      </td>
+                  </tr>
+                ' . (count($item->children) > 0 ? treeChildIndikatorKinerja($item->children, $item) : '') ;
+            }
+        }
+
+        return $html;
+
+    }
+}

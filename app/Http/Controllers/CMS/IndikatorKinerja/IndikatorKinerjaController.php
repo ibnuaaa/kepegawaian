@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers\CMS\IndikatorKinerja;
 
-use App\Http\Controllers\IndikatorKinerja\IndikatorKinerjaBrowseController;
-
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-
 use DB;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
@@ -16,101 +12,131 @@ use App\Support\Generate\Hash as KeyGenerator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\IndikatorKinerja;
+
+
+use App\Http\Controllers\IndikatorKinerja\IndikatorKinerjaBrowseController;
 
 class IndikatorKinerjaController extends Controller
 {
     public function Home(Request $request)
     {
-        $TableKey = 'indikator_kinerja-table';
+        $Browse = IndikatorKinerja::tree();
 
-        $filter_search = $request->input('filter_search');
+        $ParseData = [
+            'data' => $Browse
+        ];
 
-        if (isset($request['indikator_kinerja-table-show'])) {
-            $selected = $request['indikator_kinerja-table-show'];
+
+        return view('app.indikator_kinerja.home.index', $ParseData);
+    }
+
+    public function HomeWithPaging(Request $request)
+    {
+        $TableKey = 'indikator_kinerja';
+
+        $filter_search = $request->input($TableKey . '-filter_search');
+
+        if (isset($request['indikator_kinerja-take'])) {
+            $selected = $request['indikator_kinerja-take'];
         }
         else {
             $selected = 10;
         }
-
         $options = array(5,10,15,20);
-        $IndikatorKinerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
-            ->where('take',  $selected)
+        $Mail = IndikatorKinerjaBrowseController::FetchBrowse($request)
             ->where('with.total', 'true');
 
         if (isset($filter_search)) {
-            $IndikatorKinerja = $IndikatorKinerja->where('search', $filter_search);
+            $Mail = $Mail->where('search', $filter_search);
         }
 
-        $IndikatorKinerja = $IndikatorKinerja->middleware(function($fetch) use($request, $TableKey) {
+        $Take = ___TableGetTake($request, $TableKey);
+
+        $request->ArrQuery->take = $Take;
+        $Mail = $Mail->middleware(function($fetch) use($request, $TableKey) {
                 $fetch->equal('skip', ___TableGetSkip($request, $TableKey, $fetch->QueryRoute->ArrQuery->take));
                 return $fetch;
             })
             ->get('fetch');
 
-        $Take = ___TableGetTake($request, $TableKey);
+        if (isset($request['indikator_kinerja-show'])) {
+            $selected = $request['indikator_kinerja-show'];
+        }
+        else {
+            $selected = 10;
+        }
+
         $DataTable = [
             'key' => $TableKey,
             'filter_search' => $filter_search,
-            'placeholder_search' => "",
+            'placeholder_search' => "Nama, IndikatorKinerja",
             'pageNow' => ___TableGetCurrentPage($request, $TableKey),
-            'paginate' => ___TablePaginate((int)$IndikatorKinerja['total'], (int)$IndikatorKinerja['query']->take, ___TableGetCurrentPage($request, $TableKey)),
+            'paginate' => ___TablePaginate((int)$Mail['total'], (int)$Mail['query']->take, ___TableGetCurrentPage($request, $TableKey)),
             'selected' => $selected,
             'options' => $options,
             'heads' => [
-                (object)['name' => 'No', 'label' => 'No'],
-                (object)['name' => 'name', 'label' => 'Nama Indikator Kinerja'],
-                (object)['name' => 'created_at', 'label' => 'Terbuat Pada'],
-                (object)['name' => 'action', 'label' => 'Aksi']
+                (object)['name' => 'no', 'label' => 'no', 'width' => '900'],
+                (object)['name' => 'name', 'label' => 'Posisi', 'width' => '900'],
+                (object)['name' => 'action', 'label' => 'ACTION', 'width' => '100']
             ],
             'records' => []
         ];
 
-        if ($IndikatorKinerja['records']) {
-            $DataTable['records'] = $IndikatorKinerja['records'];
-            $DataTable['total'] = $IndikatorKinerja['total'];
-            $DataTable['show'] = $IndikatorKinerja['show'];
+
+
+        if ($Mail['records']) {
+            $DataTable['records'] = $Mail['records'];
+            $DataTable['total'] = $Mail['total'];
+            $DataTable['show'] = $Mail['show'];
+
+            $DataTable['totalpage'] = (int)(ceil($DataTable['total'] / $selected)) ;
+            $DataTable['startentries'] = (($DataTable['pageNow'] - 1 ) * $selected) + 1;
+            $DataTable['endentries'] = $DataTable['startentries'] + ($selected - 1);
+            if ($DataTable['endentries'] > $DataTable['total']){
+                $DataTable['endentries'] = $DataTable['total'];
+            }
+            if ($DataTable['pageNow'] > $DataTable['totalpage']){
+                $DataTable['pageNow'] = $DataTable['totalpage'];
+            }
         }
+
 
         $ParseData = [
             'data' => $DataTable,
             'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0
         ];
-        return view('app.indikator_kinerja.home.index', $ParseData);
+        return view('app.indikator_kinerja.home_with_paging.index', $ParseData);
     }
 
-    public function New(Request $request)
+    public function New(Request $request, $indikator_kinerja_id)
     {
+        $Browse = IndikatorKinerja::tree();
+
         return view('app.indikator_kinerja.new.index', [
-            'select' => [],
+          'indikator_kinerja' => $Browse,
+          'selected_indikator_kinerja_id' => $indikator_kinerja_id
         ]);
     }
 
-    public function Detail(Request $request, $id)
+    public function IndikatorKinerjaEdit(Request $request, $id)
     {
-        $QueryRoute = QueryRoute($request);
-        $QueryRoute->ArrQuery->id = $id;
-        $QueryRoute->ArrQuery->set = 'first';
-        $QueryRoute->ArrQuery->{'with.total'} = 'true';
-        $IndikatorKinerjaBrowseController = new IndikatorKinerjaBrowseController($QueryRoute);
-        $data = $IndikatorKinerjaBrowseController->get($QueryRoute);
 
-        return view('app.indikator_kinerja.detail.index', [ 'data' => $data->original['data']['records'] ]);
-    }
-
-    public function Edit(Request $request, $id)
-    {
         $IndikatorKinerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
             ->equal('id', $id)->get('first');
 
+        $IndikatorKinerjaList = IndikatorKinerjaBrowseController::FetchBrowse($request)
+            ->equal('take', 'all')->equal('with.total', true)->get();
 
-        if (!isset($IndikatorKinerja['records']->id)) {
-            throw new ModelNotFoundException('Not Found Batch');
-        }
+        $IndikatorKinerjaSelect = FormSelect($IndikatorKinerjaList['records'], true);
+
+        $IndikatorKinerjaTree = IndikatorKinerja::tree();
+
         return view('app.indikator_kinerja.edit.index', [
-            'select' => [],
-            'data' => $IndikatorKinerja['records']
+            'data' => $IndikatorKinerja['records'],
+            'indikator_kinerja' => $IndikatorKinerjaTree
         ]);
     }
+
 
 }

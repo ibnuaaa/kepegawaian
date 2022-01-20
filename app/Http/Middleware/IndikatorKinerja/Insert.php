@@ -16,12 +16,14 @@ class Insert extends BaseMiddleware
         $this->Model->IndikatorKinerja = new IndikatorKinerja();
 
         $this->Model->IndikatorKinerja->name = $this->_Request->input('name');
+        if($this->_Request->input('parent_id')) $this->Model->IndikatorKinerja->parent_id = $this->_Request->input('parent_id');
+
     }
 
     private function Validation()
     {
         $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required'
+            'name' => 'required',
         ]);
         if ($validator->fails()) {
             $this->Json::set('errors', $validator->errors());
