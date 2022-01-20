@@ -54,24 +54,11 @@
                             </ul>
                         </li>
                         @endif
-                        <li class="sub-category">
-                            <h3>Modul Laporan</h3>
-                        </li>
                         <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Divisi A</span><i class="angle fe fe-chevron-right"></i></a>
-                            <ul class="slide-menu">
-                                <li><a href="#" class="slide-item"> Laporan 1</a></li>
-                                <li><a href="#" class="slide-item"> Laporan 2</a></li>
-                                <li><a href="#" class="slide-item"> Laporan 3</a></li>
-                            </ul>
-                        </li>
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Divisi B</span><i class="angle fe fe-chevron-right"></i></a>
-                            <ul class="slide-menu">
-                                <li><a href="#" class="slide-item"> Laporan 1</a></li>
-                                <li><a href="#" class="slide-item"> Laporan 2</a></li>
-                                <li><a href="#" class="slide-item"> Laporan 3</a></li>
-                            </ul>
+                            <a class="side-menu__item" data-bs-toggle="slide" href="/logout">
+                              <i class="side-menu__icon fe fe-log-out"></i>
+                              <span class="side-menu__label">Logout</span>
+                            </a>
                         </li>
                       </ul>
                     <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/></svg></div>
