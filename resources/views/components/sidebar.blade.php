@@ -21,11 +21,10 @@
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/'); !!}"><i class="side-menu__icon fe fe-home"></i><span class="side-menu__label">Dashboard</span></a>
                         </li>
-                        @if (getPermissions('user')['checked'])
+                        @if (getPermissions('modul_pengguna')['checked'])
                         <li class="sub-category">
                             <h3>Modul Pengguna</h3>
                         </li>
-
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">User</span><i class="angle fe fe-chevron-right"></i></a>
                             <ul class="slide-menu">
@@ -35,7 +34,7 @@
                               @if (getPermissions('change_password')['checked'])
                               <li><a href="{!! url('/change_password'); !!}" class="slide-item"> Ganti Password</a></li>
                               @endif
-                              @if (getPermissions('position')['checked'])
+                              @if (getPermissions('hak_akses')['checked'])
                               <li><a href="{!! url('/position'); !!}" class="slide-item"> Hak Akses</a></li>
                               @endif
                               @if (getPermissions('user')['checked'])
@@ -43,14 +42,27 @@
                               @endif
                             </ul>
                         </li>
+                        @endif
+
+                        @if (getPermissions('master_data')['checked'])
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Master Data</span><i class="angle fe fe-chevron-right"></i></a>
                             <ul class="slide-menu">
+                              @if (getPermissions('golongan')['checked'])
                               <li><a href="{!! url('/golongan'); !!}" class="slide-item"> Golongan</a></li>
+                              @endif
+                              @if (getPermissions('indikator_kinerja')['checked'])
                               <li><a href="{!! url('/indikator_kinerja'); !!}" class="slide-item"> Indikator Kinerja</a></li>
+                              @endif
+                              @if (getPermissions('unit_kerja')['checked'])
                               <li><a href="{!! url('/unit_kerja'); !!}" class="slide-item"> Unit Kerja</a></li>
+                              @endif
+                              @if (getPermissions('jabatan')['checked'])
                               <li><a href="{!! url('/jabatan'); !!}" class="slide-item"> Jabatan</a></li>
+                              @endif
+                              @if (getPermissions('pendidikan')['checked'])
                               <li><a href="{!! url('/pendidikan'); !!}" class="slide-item"> Pendidikan</a></li>
+                              @endif
                             </ul>
                         </li>
                         @endif

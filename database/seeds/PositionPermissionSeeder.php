@@ -74,32 +74,8 @@ class PositionPermissionSeeder extends Seeder
             ],
             [
                 'id' => 11,
-                'position_id' => 3,
-                'permission_id' => 1,
-                'created_at' => Carbon::now()
-            ],
-            [
-                'id' => 12,
-                'position_id' => 3,
-                'permission_id' => 5,
-                'created_at' => Carbon::now()
-            ],
-            [
-                'id' => 13,
-                'position_id' => 3,
-                'permission_id' => 6,
-                'created_at' => Carbon::now()
-            ],
-            [
-                'id' => 14,
                 'position_id' => 1,
                 'permission_id' => 11,
-                'created_at' => Carbon::now()
-            ],
-            [
-                'id' => 15,
-                'position_id' => 1,
-                'permission_id' => 12,
                 'created_at' => Carbon::now()
             ]
         ])->keyBy($this->key);
@@ -110,15 +86,21 @@ class PositionPermissionSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        $Exists = DB::table('position_permissions')
-            ->whereIn($this->key, $this->PositionPermissions
-            ->pluck($this->key)->all())
-            ->get()->keyBy($this->key);
+     public function run()
+     {
+         foreach ($this->PositionPermissions as $key => $value) {
+             $Exists = DB::table('position_permissions')
+                 ->where('position_id', $value['position_id'])
+                 ->where('permission_id', $value['permission_id'])
+                 ->first();
 
-        $New = $this->PositionPermissions->diffKeys($Exists->toArray())->values();
-        DB::table('position_permissions')->insert($New->all());
-
-    }
+             if (!$Exists) {
+                 DB::table('position_permissions')
+                 ->insert([
+                     'position_id' => $value['position_id'],
+                     'permission_id' => $value['permission_id'],
+                 ]);
+             }
+         }
+     }
 }

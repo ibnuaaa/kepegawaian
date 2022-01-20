@@ -14,26 +14,26 @@ class PermissionSeeder extends Seeder
         $this->Permissions = collect([
             [
                 'id' => 1,
-                'name' => 'material_request',
-                'label' => 'material_request',
+                'name' => 'modul_pengguna',
+                'label' => 'modul_pengguna',
                 'created_at' => Carbon::now()
             ],
             [
                 'id' => 2,
-                'name' => 'master_data',
-                'label' => 'master_data',
+                'name' => 'profile',
+                'label' => 'profile',
                 'created_at' => Carbon::now()
             ],
             [
                 'id' => 3,
-                'name' => 'material',
-                'label' => 'material',
+                'name' => 'change_password',
+                'label' => 'change_password',
                 'created_at' => Carbon::now()
             ],
             [
                 'id' => 4,
-                'name' => 'distributor',
-                'label' => 'distributor',
+                'name' => 'hak_akses',
+                'label' => 'hak_akses',
                 'created_at' => Carbon::now()
             ],
             [
@@ -44,20 +44,38 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'id' => 6,
-                'name' => 'profile',
-                'label' => 'profile',
+                'name' => 'master_data',
+                'label' => 'master_data',
                 'created_at' => Carbon::now()
             ],
             [
                 'id' => 7,
-                'name' => 'position',
-                'label' => 'position',
+                'name' => 'golongan',
+                'label' => 'golongan',
                 'created_at' => Carbon::now()
             ],
             [
                 'id' => 8,
-                'name' => 'change_password',
-                'label' => 'change_password',
+                'name' => 'indikator_kinerja',
+                'label' => 'indikator_kinerja',
+                'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 9,
+                'name' => 'unit_kerja',
+                'label' => 'unit_kerja',
+                'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 10,
+                'name' => 'jabatan',
+                'label' => 'jabatan',
+                'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 11,
+                'name' => 'pendidikan',
+                'label' => 'pendidikan',
                 'created_at' => Carbon::now()
             ]
         ])->keyBy($this->key);
@@ -68,15 +86,27 @@ class PermissionSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        $Exists = DB::table('permissions')
-            ->whereIn($this->key, $this->Permissions
-            ->pluck($this->key)->all())
-            ->get()->keyBy($this->key);
+     public function run()
+     {
+         foreach ($this->Permissions as $key => $value) {
+             $Exists = DB::table('permissions')
+                 ->where('id', $value['id'])->first();
 
-        $New = $this->Permissions->diffKeys($Exists->toArray())->values();
-        DB::table('permissions')->insert($New->all());
-
-    }
+             if ($Exists) {
+                 DB::table('permissions')
+                 ->where('id', $value['id'])
+                 ->update([
+                     'name' => $value['name'],
+                     'label' => $value['label'],
+                 ]);
+             } else {
+                 DB::table('permissions')
+                 ->insert([
+                     'id' => $value['id'],
+                     'name' => $value['name'],
+                     'label' => $value['label'],
+                 ]);
+             }
+         }
+     }
 }
