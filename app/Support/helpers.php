@@ -1091,7 +1091,22 @@ if ( ! function_exists('treeChild'))
     }
 }
 
+if ( ! function_exists('treeSelectJabatan'))
+{
+    function treeSelectJabatan($data, $dataParent, $selected_id=0){
 
+        $html = "";
+        if (!empty($data)) {
+            foreach ($data as $item) {
+
+                $html .= '<option value="'.$item->id.'"  '.($item->id ==  $selected_id? 'selected=selected' : '').'>'.$item->name.'</option>' . (count($item->children) > 0 ? treeSelectJabatan($item->children, $item, $selected_id) : '') ;
+            }
+        }
+
+        return $html;
+
+    }
+}
 
 if ( ! function_exists('treeChildJabatan'))
 {

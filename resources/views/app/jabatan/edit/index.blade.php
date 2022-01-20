@@ -36,12 +36,10 @@
                             Turunan Dari
                         </label>
                         <div class="col-md-9">
-                          @component('components.form.awesomeSelect', [
-                              'name' => 'parent_id',
-                              'items' => $jabatan,
-                              'selected' => null
-                          ])
-                          @endcomponent
+                            <select class="form-control form-select" name="parent_id">
+                              <option value="">-= Pilih Jabatan =-</option>
+                              {!! !empty($jabatan) && count($jabatan) > 0 ? treeSelectJabatan($jabatan, '', $data->parent_id) : '' !!}
+                            </select>
                         </div>
                     </div>
 

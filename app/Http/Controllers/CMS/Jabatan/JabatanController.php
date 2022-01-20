@@ -110,13 +110,10 @@ class JabatanController extends Controller
 
     public function New(Request $request, $jabatan_id)
     {
-        $Jabatan = JabatanBrowseController::FetchBrowse($request)
-            ->equal('take', 'all')->equal('with.total', true)->get();
-
-        $JabatanSelect = FormSelect($Jabatan['records'], true);
+        $Browse = Jabatan::tree();
 
         return view('app.jabatan.new.index', [
-          'jabatan' => $JabatanSelect,
+          'jabatan' => $Browse,
           'selected_jabatan_id' => $jabatan_id
         ]);
     }
@@ -127,15 +124,12 @@ class JabatanController extends Controller
         $Jabatan = JabatanBrowseController::FetchBrowse($request)
             ->equal('id', $id)->get('first');
 
-        $JabatanList = JabatanBrowseController::FetchBrowse($request)
-            ->equal('take', 'all')->equal('with.total', true)->get();
-
-        $JabatanSelect = FormSelect($JabatanList['records'], true);
+        $JabatanTree = Jabatan::tree();
 
         return view('app.jabatan.edit.index', [
             'data' => $Jabatan['records'],
             'select' => ['jabatan' => []],
-            'jabatan' => $JabatanSelect
+            'jabatan' => $JabatanTree
         ]);
     }
 
