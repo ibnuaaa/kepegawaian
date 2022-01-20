@@ -49,8 +49,11 @@
                             </p>
                         </td>
                         <td>
-                            <div class="btn-group-sm">
+                            <div class="btn-group">
                                 <a href="{{ url('/position/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                <a onClick="return remove('{{$item->id}}')" href="#" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </a>
                             </div>
                         </td>
                     </tr>
@@ -60,4 +63,8 @@
     </div>
     <!-- ROW-1 END -->
 </div>
+@endsection
+
+@section('script')
+    @include('app.position.home_with_paging.scripts.index')
 @endsection
