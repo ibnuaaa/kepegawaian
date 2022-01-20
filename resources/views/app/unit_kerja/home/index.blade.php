@@ -29,7 +29,7 @@
               <table id="basic" class="table table-bordered table-condensed-custom">
                   <thead>
                       <tr>
-                          <th style="width: 45%;">JABATAN</th>
+                          <th style="width: 45%;">UNIT KERJA</th>
                           <th style="width: 30%;">NAMA PEGAWAI / NIP</th>
                           <th style="width: 180px;">AKSI</th>
                       </tr>
