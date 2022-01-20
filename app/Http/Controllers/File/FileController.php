@@ -27,6 +27,13 @@ class FileController extends Controller
         $File = $request->Payload->all()['File'];
         $NameFile = $File->getClientOriginalName();
         $ExtensionFile = $File->getClientOriginalExtension();
+
+        if ($ExtensionFile !=  'pdf') {
+          Json::set('exception.code', 'MustPdf');
+          Json::set('exception.message', trans('validation.'.Json::get('exception.code')));
+          return response()->json(Json::get(), 400);
+        }
+
         $KeyName = GenerateKey::Random('', 64);
         $Name = "$KeyName.$ExtensionFile";
         $StoragePath = Storage::disk('temporary')->getAdapter()->getPathPrefix();

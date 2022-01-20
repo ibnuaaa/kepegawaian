@@ -196,6 +196,8 @@
                 processData: false,
                 success: function(response) {
 
+                    console.log(response)
+
                     // START SAVE LAMPIRAN
                     const data_storage = {
                         object: object,
@@ -213,6 +215,14 @@
                     })
 
                     appendImage(preview, response.data)
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                  hideLoading()
+                  if (xhr.status == 400) {
+                    if (xhr.responseJSON && xhr.responseJSON.exception && xhr.responseJSON.exception.message) {
+                        swal({ title: 'Opps!', text: xhr.responseJSON.exception.message, type: 'error', confirmButtonText: 'Ok' })
+                    }
+                  }
                 }
             });
         }
@@ -223,11 +233,11 @@
             if(data.extension.toLowerCase() == 'jpg' || data.extension.toLowerCase() == 'png' || data.extension.toLowerCase() == 'bmp')
             img = "<img src='"+window.apiUrl+"/tmp/"+data.key+"."+data.extension+"' style='max-height:200px;'/>";
             else
-            img = "<i class='fas fa-file' style='height:80px;font-size:80px;'></i>";
+            img = "<i class='fa fa-file-pdf-o' style='font-size: 50px'></i>";
 
             preview.html("<div style='float:left;position:relative;'>"
-                + "<button class='btn btn-danger btn-xs' onClick='removeNode(this)' style='position:absolute;left:3px;border:solid 1px;' data-key='"+data.key+"'>"
-                + "<i class='fa fa-trash'></i></button>"
+                // + "<button class='btn btn-danger btn-xs' onClick='removeNode(this)' style='position:absolute;left:3px;border:solid 1px;' data-key='"+data.key+"'>"
+                // + "<i class='fa fa-trash'></i></button>"
                 + img
                 + "</div>");
         }
