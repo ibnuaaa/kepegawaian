@@ -44,20 +44,7 @@
                           @endcomponent
                         </div>
                     </div>
-                    <div class=" row mb-4">
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Status</label>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            @if (!empty($data['status']) && $data['status'] == 'active')
-                            <input type="button" class="btn btn-primary btn-xs" value="Active" />
-                            @else
-                            <input type="button" class="btn btn-danger btn-xs" value="Inctive" />
-                            @endif
-                        </div>
-                    </div>
+
                     <div class="form-group-attached form-group-default">
                         <label>ACCESS MENU</label>
                         @foreach ($permissions as $KeyPermission => $permission)
@@ -86,17 +73,6 @@
                 <button id="saveAction" class="btn btn-block btn-success btn-cons m-b-10">
                     <i class="fa fa-save"></i> Save
                 </button>
-
-                @if (!empty($data->status) && $data->status == 'active')
-                <button onClick="changeStatusPosition('inactive')" class="btn btn-block btn-danger btn-cons m-b-10">
-                    <i class="fa fa-check"></i> Inactive
-                </button>
-                @else
-                <button onClick="changeStatusPosition('active')" class="btn btn-block btn-primary btn-cons m-b-10">
-                    <i class="fa fa-check"></i> Active
-                </button>
-                @endif
-
 
                 <a href="{{ url('/position') }}" class="btn btn-block btn-primary btn-cons m-b-10"><i class="fa fa-arrow-left"></i> Cancel</a>
             </div>

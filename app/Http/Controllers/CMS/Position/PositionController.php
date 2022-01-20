@@ -111,6 +111,7 @@ class PositionController extends Controller
 
     public function New(Request $request, $position_id)
     {
+
         $Position = PositionBrowseController::FetchBrowse($request)
             ->equal('take', 'all')->equal('with.total', true)->get();
 
@@ -139,7 +140,7 @@ class PositionController extends Controller
 
         $PositionList = PositionBrowseController::FetchBrowse($request)
             ->equal('take', 'all')->equal('with.total', true)->get();
-          
+
         $PositionSelect = FormSelect($PositionList['records'], true);
 
         return view('app.position.edit.index', [
