@@ -59,7 +59,8 @@ class GolonganController extends Controller
             'options' => $options,
             'heads' => [
                 (object)['name' => 'No', 'label' => 'No'],
-                (object)['name' => 'name', 'label' => 'Nama Golongan'],
+                (object)['name' => 'pangkat', 'label' => 'Nama Pangkat'],
+                (object)['name' => 'golongan', 'label' => 'Golongan'],
                 (object)['name' => 'created_at', 'label' => 'Terbuat Pada'],
                 (object)['name' => 'action', 'label' => 'Aksi']
             ],
