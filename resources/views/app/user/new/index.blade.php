@@ -81,6 +81,28 @@
                         </div>
                     </div>
                     <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Unit Kerja</label>
+                        <div class="col-md-9">
+                            @component('components.form.awesomeSelect', [
+                                'name' => 'unit_kerja_id',
+                                'items' => $unit_kerja,
+                                'selected' => $data->unit_kerja_id
+                            ])
+                            @endcomponent
+                        </div>
+                    </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Golongan</label>
+                        <div class="col-md-9">
+                            @component('components.form.awesomeSelect', [
+                                'name' => 'golongan_id',
+                                'items' => $golongan,
+                                'selected' => $data->golongan_id
+                            ])
+                            @endcomponent
+                        </div>
+                    </div>
+                    <div class=" row mb-4">
                         <label class="col-md-3 form-label">Gender</label>
                         <div class="col-md-9">
                             @component('components.form.awesomeSelect', [

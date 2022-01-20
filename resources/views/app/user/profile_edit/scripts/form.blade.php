@@ -7,6 +7,35 @@ $(document).ready(function() {
 
 // =======================================================================
 
+function remove(id, name, table_name) {
+
+  swal({
+      title: "Konfirmasi",
+      text: "Ingin menghapus data " + name + " ?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonText: 'Ya, Hapus',
+      cancelButtonText: 'Batal'
+  }, function(isConfirmed) {
+
+    if (isConfirmed) {
+      showLoading()
+      axios.delete('/user_' + table_name + '/'+id).then((response) => {
+          const { data } = response.data
+          location.href = '/profile/{{ $tab }}'
+      }).catch((error) => {
+          if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+              swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+          }
+      })
+    }
+  });
+
+  return false;
+}
+
+// =======================================================================
+
 function savePersonal(e) {
 
     var field = $(e).attr('name')

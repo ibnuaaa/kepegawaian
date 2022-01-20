@@ -128,6 +128,25 @@ class UserController extends Controller
 
 
 
+        $Golongan = GolonganBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+          $GolonganList[] = [
+              'value' => '',
+              'label' => '-= Pilih Golongan =-'
+          ];
+
+        foreach ($Golongan['records'] as $key => $value) {
+            $GolonganList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
+
+
+
         return view('app.user.new.index', [
             'positions' => $Positions,
             'jabatan' => $JabatanList,
@@ -323,6 +342,23 @@ class UserController extends Controller
             ];
         }
 
+        // Jabatan
+        $Jabatan = JabatanBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $JabatanList[] = [
+            'value' => '',
+            'label' => '-= Select Jabatan =-'
+        ];
+
+        foreach ($Jabatan['records'] as $key => $value) {
+            $JabatanList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
         // Pendidikan
         $Pendidikan = PendidikanBrowseController::FetchBrowse($request)
             ->where('take','all')
@@ -377,6 +413,7 @@ class UserController extends Controller
 
         return view('app.user.profile_edit.index', [
             'positions' => $PositionList,
+            'jabatan' => $JabatanList,
             'pendidikan' => $PendidikanList,
             'unit_kerja' => $UnitKerjaList,
             'golongan' => $GolonganList,

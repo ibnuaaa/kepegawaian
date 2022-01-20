@@ -292,10 +292,13 @@
                                             <th>
                                                 Tahun Lulus
                                             </th>
+                                            <th>
+                                                Aksi
+                                            </th>
                                         </tr>
                                         @foreach ($data->user_pendidikan as $key => $val)
                                         <tr>
-                                            <td>
+                                            <td rowspan="2">
                                                 {{ $key + 1 }}
                                             </td>
                                             <td>
@@ -317,9 +320,15 @@
                                             <td>
                                                 <input name="tahun_lulus" value="{{$val->tahun_lulus ? $val->tahun_lulus : ''}}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control" type="text" required>
                                             </td>
+                                            <td rowspan="2">
+                                              <a onClick="return remove('{{$val->id}}','{{!empty($val->pendidikan->name) ? $val->pendidikan->name : ''}}', 'pendidikan')" href="#" class="btn btn-danger">
+                                                  <i class="fa fa-trash"></i>
+                                              </a>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5">
+                                            <td colspan="4">
+                                                <h4>Upload Foto Ijazah :</h4>
                                                 <input type="file" onchange="prepareUpload(this, 'foto_ijazah', '{{ $val->id }}');" multiple>
                                                 <div style="clear: both;"></div>
                                                 <div class="img-preview mt-2" id="img-preview">
@@ -334,7 +343,7 @@
                                         </tr>
                                         @endforeach
                                         <tr>
-                                            <td colspan="5" class="text-center">
+                                            <td colspan="6" class="text-center">
                                                 <input type="button" class="btn btn-primary" value="Tambah Riwayat Pendidikan" onclick="saveNewUserPendidikan()" />
                                             </td>
                                         </tr>
@@ -365,7 +374,7 @@
                                         </tr>
                                         @foreach ($data->user_pelatihan as $key => $val)
                                         <tr>
-                                            <td>
+                                            <td rowspan="2">
                                                 {{ $key + 1 }}
                                             </td>
                                             <td>
@@ -377,9 +386,14 @@
                                             <td>
                                                 <input name="tahun" value="{{ $val->tahun }}" data-id="{{ $val->id }}" onChange="savePelatihan(this)" class="form-control " type="text" required>
                                             </td>
+                                            <td rowspan="2">
+                                              <a onClick="return remove('{{$val->id}}','{{!empty($val->nama_sertifikat) ? $val->nama_sertifikat : ''}}', 'pelatihan')" href="#" class="btn btn-danger">
+                                                  <i class="fa fa-trash"></i>
+                                              </a>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4">
+                                            <td colspan="3">
                                                 <input type="file" onchange="prepareUpload(this, 'foto_sertifikat', '{{ $val->id }}');" multiple>
                                                 <div style="clear: both;"></div>
                                                 <div class="img-preview mt-2" id="img-preview">
@@ -394,7 +408,7 @@
                                         </tr>
                                         @endforeach
                                         <tr>
-                                            <td colspan="4" class="text-center">
+                                            <td colspan="5" class="text-center">
                                                 <input type="button" class="btn btn-primary" value="Tambah Riwayat Pelatihan" onclick="saveNewUserPelatihan()" />
                                             </td>
                                         </tr>
@@ -472,6 +486,9 @@
                                                     </th>
                                                     <th colspan="2">
                                                         Nama Orangtua
+                                                    </th>
+                                                    <th rowspan="2">
+                                                        Aksi
                                                     </th>
                                                 </tr>
 
@@ -564,13 +581,18 @@
                                                     <td>
                                                         <input name="ibu" value="{{ $val->ibu }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                     </td>
+                                                    <td>
+                                                      <a onClick="return remove('{{$val->id}}','{{!empty($val->nama_lengkap) ? $val->nama_lengkap : ''}}', 'keluarga')" href="#" class="btn btn-danger">
+                                                          <i class="fa fa-trash"></i>
+                                                      </a>
+                                                    </td>
                                                 </tr>
                                                 @endforeach
                                                 <tr>
                                                     <td colspan="6" class="text-center">
                                                         <input type="button" class="btn btn-primary" value="Tambah Anggota Keluarga" onclick="saveNewUserKeluarga()" />
                                                     </td>
-                                                    <td colspan="10" class="text-center">
+                                                    <td colspan="11" class="text-center">
                                                     </td>
                                                 </tr>
                                             </table>
@@ -607,6 +629,9 @@
                                                     <th style="min-width: 200px;">
                                                         TMT
                                                     </th>
+                                                    <th style="min-width: 200px;">
+                                                        Aksi
+                                                    </th>
                                                 </tr>
                                                 @foreach ($data->user_jabatan as $key => $val)
                                                 <tr>
@@ -615,10 +640,10 @@
                                                     </td>
                                                     <td>
                                                         @component('components.form.awesomeSelect', [
-                                                            'name' => 'position_id',
-                                                            'items' => $positions,
+                                                            'name' => 'jabatan_id',
+                                                            'items' => $jabatan,
                                                             'onChange' => 'saveJabatan(this)',
-                                                            'selected' => $val->position_id,
+                                                            'selected' => $val->jabatan_id,
                                                             'data_id' => $val->id
                                                         ])
                                                         @endcomponent
@@ -642,10 +667,15 @@
                                                     <td>
                                                         <input name="tmt" id="myDatepicker" value="{{ $val->tmt }}" data-id="{{ $val->id }}" onChange="saveJabatan(this)" class="form-control " type="text" required>
                                                     </td>
+                                                    <td>
+                                                      <a onClick="return remove('{{$val->id}}','{{!empty($val->jabatan->name) ? $val->jabatan->name : ''}}', 'jabatan')" href="#" class="btn btn-danger">
+                                                          <i class="fa fa-trash"></i>
+                                                      </a>
+                                                    </td>
                                                 </tr>
                                                 @endforeach
                                                 <tr>
-                                                    <td colspan="6" class="text-center">
+                                                    <td colspan="7" class="text-center">
                                                         <input type="button" class="btn btn-primary" value="Tambah Riwayat Jabatan" onclick="saveNewUserJabatan()" />
                                                     </td>
                                                 </tr>
@@ -680,6 +710,9 @@
                                                     <th style="min-width: 200px;">
                                                         TMT
                                                     </th>
+                                                    <th style="min-width: 200px;">
+                                                        Aksi
+                                                    </th>
                                                 </tr>
                                                 @foreach ($data->user_golongan as $key => $val)
                                                 <tr>
@@ -705,10 +738,15 @@
                                                     <td>
                                                         <input name="tmt" value="{{ $val->tmt }}" data-id="{{ $val->id }}" id="myDatepicker" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                     </td>
+                                                    <td>
+                                                      <a onClick="return remove('{{$val->id}}','{{!empty($val->golongan->name) ? $val->golongan->name : ''}}', 'golongan')" href="#" class="btn btn-danger">
+                                                          <i class="fa fa-trash"></i>
+                                                      </a>
+                                                    </td>
                                                 </tr>
                                                 @endforeach
                                                 <tr>
-                                                    <td colspan="5" class="text-center">
+                                                    <td colspan="6" class="text-center">
                                                         <input type="button" class="btn btn-primary" value="Tambah Riwayat Golongan" onclick="saveNewUserGolongan()" />
                                                     </td>
                                                 </tr>

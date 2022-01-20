@@ -26,12 +26,12 @@
     <div class="col-12">
         <div class="card overflow-hidden">
           <div class="card-body">
-              <table id="basic" class="table table-bordered table-condensed-custom" style="width:1900px !important;">
+              <table id="basic" class="table table-bordered table-condensed-custom">
                   <thead>
                       <tr>
-                          <th>JABATAN</th>
-                          <th>NAMA PEGAWAI / NIP</th>
-                          <th>AKSI</th>
+                          <th style="width: 50%;">JABATAN</th>
+                          <th style="width: 30%;">NAMA PEGAWAI / NIP</th>
+                          <th style="width: 100px;">AKSI</th>
                       </tr>
                   </thead>
                   <tbody>

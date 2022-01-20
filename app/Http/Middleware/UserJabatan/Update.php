@@ -16,7 +16,7 @@ class Update extends BaseMiddleware
     {
         $this->Model->UserJabatan = UserJabatan::where('id', $this->Id)->first();
         if ($this->Model->UserJabatan) {
-          if ($this->_Request->input('position_id')) $this->Model->UserJabatan->position_id = $this->_Request->input('position_id');
+          if ($this->_Request->input('jabatan_id')) $this->Model->UserJabatan->jabatan_id = $this->_Request->input('jabatan_id');
           if ($this->_Request->input('nama_jabatan')) $this->Model->UserJabatan->nama_jabatan = $this->_Request->input('nama_jabatan');
           if ($this->_Request->input('dari_tahun')) $this->Model->UserJabatan->dari_tahun = $this->_Request->input('dari_tahun');
           if ($this->_Request->input('sampai_tahun')) $this->Model->UserJabatan->sampai_tahun = $this->_Request->input('sampai_tahun');

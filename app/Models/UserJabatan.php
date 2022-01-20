@@ -18,8 +18,8 @@ class UserJabatan extends Model
         return $this->hasOne(UnitKerja::class, 'id', 'unit_kerja_id');
     }
 
-    public function position()
+    public function jabatan()
     {
-        return $this->hasOne(Position::class, 'id', 'position_id');
+        return $this->hasOne(Jabatan::class, 'id', 'jabatan_id');
     }
 }
