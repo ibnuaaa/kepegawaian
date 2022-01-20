@@ -56,7 +56,7 @@
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">Nama</label>
                                         <div class="col-md-9">
-                                            <input name="name" value="{{ $data['name'] }}" onChange="savePersonal(this)" onChange="savePersonal(this)" class="form-control" type="text" required>
+                                            <input name="name" value="{{ $data['name'] }}" disabled class="form-control" type="text">
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -68,7 +68,7 @@
                                     <div class="row mb-4">
                                         <label class="col-md-2 form-label">NIP</label>
                                         <div class="col-md-9">
-                                            <input name="nip" value="{{ $data['nip'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
+                                            <input name="nip" value="{{ $data['nip'] }}" disabled class="form-control" type="text" required>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
