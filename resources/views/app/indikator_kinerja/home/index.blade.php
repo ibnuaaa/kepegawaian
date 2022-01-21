@@ -9,7 +9,8 @@
     <h1 class="page-title">
       Indikator Kinerja
       <a href="/indikator_kinerja/new/0" class="btn btn-primary btn-sm">
-          (+) Buat Indikator Kinerja
+          <i class="fa fa-plus"></i>
+          Buat Indikator Kinerja
       </a>
     </h1>
     <div>

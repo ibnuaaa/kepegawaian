@@ -8,7 +8,8 @@
 <div class="page-header">
     <h1 class="page-title">Pendidikan
         <a href="/pendidikan/new" class="btn btn-primary btn-sm">
-          (+) Buat Pendidikan
+          <i class="fa fa-plus"></i>
+          Buat Pendidikan
         </a>
     </h1>
     <div>

@@ -8,6 +8,7 @@
 <div class="page-header">
     <h1 class="page-title">Profil User
       <a href="/profile/personal" class="btn btn-primary btn-sm">
+          <i class="fa fa-pencil"></i>
           Ubah Profil
       </a>
     </h1>

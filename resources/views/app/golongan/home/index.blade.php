@@ -8,7 +8,7 @@
 <div class="page-header">
     <h1 class="page-title">Golongan
         <a href="/golongan/new" class="btn btn-primary btn-sm">
-          (+) Buat Golongan
+          <i class="fa fa-plus"></i> Buat Golongan
         </a>
     </h1>
     <div>

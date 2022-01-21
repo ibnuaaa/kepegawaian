@@ -9,7 +9,8 @@
     <h1 class="page-title">
       Jabatan
       <a href="/jabatan/new/0" class="btn btn-primary btn-sm">
-          (+) Buat Jabatan
+          <i class="fa fa-plus"></i>
+          Buat Jabatan
       </a>
     </h1>
     <div>

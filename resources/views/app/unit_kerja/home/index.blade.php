@@ -7,15 +7,16 @@
 <!-- PAGE-HEADER -->
 <div class="page-header">
     <h1 class="page-title">
-      UnitKerja
+      Unit Kerja
       <a href="/unit_kerja/new/0" class="btn btn-primary btn-sm">
-          (+) Buat UnitKerja
+          <i class="fa fa-plus"></i>
+          Buat Unit Kerja
       </a>
     </h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">UnitKerja</li>
+            <li class="breadcrumb-item active" aria-current="page">Unit Kerja</li>
         </ol>
     </div>
 </div>

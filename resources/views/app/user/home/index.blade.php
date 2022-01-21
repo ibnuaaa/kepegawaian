@@ -9,7 +9,8 @@
     <h1 class="page-title">
         User
         <a href="/user/new" class="btn btn-primary btn-sm">
-            (+) Buat User
+            <i class="fa fa-plus"></i>
+            Buat User
         </a>
     </h1>
     <div>

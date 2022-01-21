@@ -9,7 +9,8 @@
       <h1 class="page-title">
           UnitKerja
           <a href="/unit_kerja/new" class="btn btn-primary btn-sm">
-              (+) Buat UnitKerja
+              <i class="fa fa-plus"></i>
+              Buat UnitKerja
           </a>
       </h1>
       <div>

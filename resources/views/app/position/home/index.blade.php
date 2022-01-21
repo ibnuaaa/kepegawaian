@@ -9,7 +9,8 @@
     <h1 class="page-title">
       Jabatan
       <a href="/position/new/0" class="btn btn-primary btn-sm">
-          (+) Buat Hak Akses
+          <i class="fa fa-plus"></i>
+          Buat Hak Akses
       </a>
     </h1>
     <div>
