@@ -27,8 +27,5 @@ class AddPangkatColumnToGolonganTable extends Migration
      */
     public function down()
     {
-        Schema::table('golongan', function (Blueprint $table) {
-            //
-        });
     }
 }

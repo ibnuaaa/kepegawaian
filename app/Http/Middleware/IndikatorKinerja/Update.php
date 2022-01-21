@@ -17,6 +17,7 @@ class Update extends BaseMiddleware
 
         if ($this->Model->IndikatorKinerja) {
             $this->Model->IndikatorKinerja->name = $this->_Request->input('name');
+            $this->Model->IndikatorKinerja->unit_kerja_id = $this->_Request->input('unit_kerja_id');
 
             if($this->_Request->input('parent_id')) $this->Model->IndikatorKinerja->parent_id = $this->_Request->input('parent_id');
         }

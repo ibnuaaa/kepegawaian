@@ -25,7 +25,7 @@
                 <form id="editUserForm">
                     <div class=" row mb-4">
                         <label class="col-md-3 form-label">
-                            Nama UnitKerja
+                            Nama Unit Kerja
                         </label>
                         <div class="col-md-9">
                             <input name="name" value="{{ $data->name }}" class="form-control" type="text" placeholder="" required>
@@ -42,20 +42,6 @@
                               'selected' => null
                           ])
                           @endcomponent
-                        </div>
-                    </div>
-                    <div class=" row mb-4">
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Status</label>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            @if (!empty($data['status']) && $data['status'] == 'active')
-                            <input type="button" class="btn btn-primary btn-xs" value="Active" />
-                            @else
-                            <input type="button" class="btn btn-danger btn-xs" value="Inctive" />
-                            @endif
                         </div>
                     </div>
                 </form>

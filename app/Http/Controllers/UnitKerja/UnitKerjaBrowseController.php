@@ -72,6 +72,10 @@ class UnitKerjaBrowseController extends Controller
                     $request->ArrQuery->set = 'first';
                 }
 
+                if (isset($request->ArrQuery->null_parent_id)) {
+                    $query->whereNull("$this->UnitKerjaTable.parent_id");
+                }
+
                 if (isset($request->ArrQuery->parent_id)) {
                     $query->where("$this->UnitKerjaTable.parent_id", $request->ArrQuery->parent_id);
                 }

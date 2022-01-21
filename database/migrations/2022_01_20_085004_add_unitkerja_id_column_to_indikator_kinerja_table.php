@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddParentIdColumnToIndikatorKinerjaTable extends Migration
+class AddUnitkerjaIdColumnToIndikatorKinerjaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,6 +15,7 @@ class AddParentIdColumnToIndikatorKinerjaTable extends Migration
     {
         Schema::table('indikator_kinerja', function (Blueprint $table) {
             //
+            $table->string('unit_kerja_id')->nullable()->default(null)->after('name');
         });
     }
 
@@ -25,8 +26,5 @@ class AddParentIdColumnToIndikatorKinerjaTable extends Migration
      */
     public function down()
     {
-        Schema::table('indikator_kinerja', function (Blueprint $table) {
-            //
-        });
     }
 }

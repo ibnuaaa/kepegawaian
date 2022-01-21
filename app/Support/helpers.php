@@ -1253,7 +1253,7 @@ if ( ! function_exists('treeChildIndikatorKinerja'))
                           ' . $item->name . '
                       </td>
                       <td>
-
+                          '. (!empty($item->unit_kerja->name) ? $item->unit_kerja->name : '') .'
                       </td>
                       <td>
                           <a href="'. url('/indikator_kinerja/'.$item->id) .'" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>

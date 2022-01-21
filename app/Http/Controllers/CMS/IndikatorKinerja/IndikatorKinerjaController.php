@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
 use App\Models\IndikatorKinerja;
+use App\Models\UnitKerja;
 
 
 use App\Http\Controllers\IndikatorKinerja\IndikatorKinerjaBrowseController;
+use App\Http\Controllers\UnitKerja\UnitKerjaBrowseController;
 
 class IndikatorKinerjaController extends Controller
 {
@@ -111,11 +113,31 @@ class IndikatorKinerjaController extends Controller
 
     public function New(Request $request, $indikator_kinerja_id)
     {
-        $Browse = IndikatorKinerja::tree();
+
+        $IndikatorKinerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
+            ->where('id', $indikator_kinerja_id)
+            ->get();
+
+        $unit_kerja_id = 0;
+
+        if (!empty($IndikatorKinerja['records']->unit_kerja_id)) {
+            $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
+                ->where('parent_id', $IndikatorKinerja['records']->unit_kerja_id)
+                ->get();
+
+        } else {
+            $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
+                ->where('null_parent_id', true)
+                ->get();
+        }
+
+        $UnitKerjaSelect = FormSelect($UnitKerja['records'], true);
 
         return view('app.indikator_kinerja.new.index', [
-          'indikator_kinerja' => $Browse,
-          'selected_indikator_kinerja_id' => $indikator_kinerja_id
+            'unit_kerja' => $UnitKerjaSelect,
+            'selected_unit_kerja_id' => $unit_kerja_id,
+            'parent_id' => $indikator_kinerja_id,
+            'parent_indikator_kinerja' => $IndikatorKinerja['records']
         ]);
     }
 
@@ -131,9 +153,11 @@ class IndikatorKinerjaController extends Controller
         $IndikatorKinerjaSelect = FormSelect($IndikatorKinerjaList['records'], true);
 
         $IndikatorKinerjaTree = IndikatorKinerja::tree();
+        $UnitKerjaTree = UnitKerja::tree();
 
         return view('app.indikator_kinerja.edit.index', [
             'data' => $IndikatorKinerja['records'],
+            'unit_kerja' => $UnitKerjaTree,
             'indikator_kinerja' => $IndikatorKinerjaTree
         ]);
     }

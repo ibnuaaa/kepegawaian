@@ -30,7 +30,7 @@
                   <thead>
                       <tr>
                           <th style="width: 45%;">INDIKATOR KINERJA</th>
-                          <th style="width: 30%;">NAMA PEGAWAI / NIP</th>
+                          <th style="width: 30%;">UNIT KERJA</th>
                           <th style="width: 180px;">AKSI</th>
                       </tr>
                   </thead>

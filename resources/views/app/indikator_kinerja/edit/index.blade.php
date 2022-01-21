@@ -25,7 +25,7 @@
                 <form id="editUserForm">
                     <div class=" row mb-4">
                         <label class="col-md-3 form-label">
-                            Nama IndikatorKinerja
+                            Nama Indikator Kinerja
                         </label>
                         <div class="col-md-9">
                             <input name="name" value="{{ $data->name }}" class="form-control" type="text" placeholder="" required>
@@ -36,10 +36,7 @@
                             Turunan Dari
                         </label>
                         <div class="col-md-9">
-                            <select class="form-control form-select" name="parent_id">
-                              <option value="">-= Pilih Indikator Kinerja =-</option>
-                              {!! !empty($indikator_kinerja) && count($indikator_kinerja) > 0 ? treeSelectIndikatorKinerja($indikator_kinerja, '', $data->parent_id) : '' !!}
-                            </select>
+                            Kosong
                         </div>
                     </div>
                 </form>

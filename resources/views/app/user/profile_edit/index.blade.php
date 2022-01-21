@@ -228,7 +228,9 @@
 
                                                 @if (!empty($data->foto_ktp))
                                                     @foreach ($data->foto_ktp as $key => $val)
-                                                        <img style="max-height: 200px" src="/api/preview/{{$val->storage->key}}" />
+                                                        <a href="/api/preview/{{$val->storage->key}}">
+                                                            <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
+                                                        </a>
                                                     @endforeach
                                                 @endif
 
@@ -244,7 +246,9 @@
                                             <div class="img-preview mt-2" id="img-preview">
                                                 @if (!empty($data->foto_npwp))
                                                     @foreach ($data->foto_npwp as $key => $val)
-                                                        <img style="max-height: 200px" src="/api/preview/{{$val->storage->key}}" />
+                                                        <a href="/api/preview/{{$val->storage->key}}">
+                                                            <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
+                                                        </a>
                                                     @endforeach
                                                 @endif
                                                 <div style="clear: both;"></div>
@@ -260,7 +264,9 @@
                                             <div class="img-preview mt-2" id="img-preview">
                                                 @if (!empty($data->foto_bpjs))
                                                     @foreach ($data->foto_bpjs as $key => $val)
-                                                        <img style="max-height: 200px" src="/api/preview/{{$val->storage->key}}" />
+                                                        <a href="/api/preview/{{$val->storage->key}}">
+                                                            <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
+                                                        </a>
                                                     @endforeach
                                                 @endif
                                                 <div style="clear: both;"></div>

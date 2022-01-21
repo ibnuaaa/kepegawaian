@@ -17,6 +17,7 @@ class Insert extends BaseMiddleware
 
         $this->Model->IndikatorKinerja->name = $this->_Request->input('name');
         if($this->_Request->input('parent_id')) $this->Model->IndikatorKinerja->parent_id = $this->_Request->input('parent_id');
+        $this->Model->IndikatorKinerja->unit_kerja_id = $this->_Request->input('unit_kerja_id');
 
     }
 

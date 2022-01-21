@@ -26,18 +26,27 @@
             <div class="card-body">
                 <form id="editUserForm">
                     <div class=" row mb-4">
-                        <label class="col-md-3 form-label">Nama</label>
+                        <label class="col-md-3 form-label">Nama Indikator Kinerja</label>
                         <div class="col-md-9">
                             <input name="name" value="" class="form-control" type="text" placeholder="" required>
                         </div>
                     </div>
                     <div class=" row mb-4">
                         <label class="col-md-3 form-label">Turunan Dari</label>
+                        <div class="col-md-9 pt-2">
+                            {{ !empty($parent_indikator_kinerja->name) ? $parent_indikator_kinerja->name : '< Kosong >' }}
+                        </div>
+                    </div>
+
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Unit Kerja</label>
                         <div class="col-md-9">
-                            <select class="form-control form-select" name="parent_id">
-                              <option value="">-= Pilih Unit Kerja =-</option>
-                              {!! !empty($indikator_kinerja) && count($indikator_kinerja) > 0 ? treeSelectIndikatorKinerja($indikator_kinerja, '', $selected_indikator_kinerja_id) : '' !!}
-                            </select>
+                            @component('components.form.awesomeSelect', [
+                                'name' => 'unit_kerja_id',
+                                'items' => $unit_kerja,
+                                'selected' => null
+                            ])
+                            @endcomponent
                         </div>
                     </div>
                 </form>
