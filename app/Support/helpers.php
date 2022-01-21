@@ -1032,10 +1032,6 @@ if ( ! function_exists('perspektif'))
           [
             'value' => '4',
             'label' => 'Financial',
-          ],
-          [
-            'value' => '5',
-            'label' => 'Internal Bussiness Process',
           ]
         ];
 
