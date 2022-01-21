@@ -36,7 +36,7 @@
                             Turunan Dari
                         </label>
                         <div class="col-md-9 pt-2">
-                            {{ !empty($data->parent->name) ? $data->parent->name : '' }}
+                            {{ !empty($data->parent->name) ? $data->parent->name : '< Kosong >' }}
                         </div>
                     </div>
                     <div class=" row mb-4">
