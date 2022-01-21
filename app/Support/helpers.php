@@ -1007,6 +1007,55 @@ if ( ! function_exists('gender'))
     }
 }
 
+if ( ! function_exists('perspektif'))
+{
+    function perspektif($id = null)
+    {
+
+        $list = [
+          [
+            'value' => '',
+            'label' => '-= Pilih =-',
+          ],
+          [
+            'value' => '1',
+            'label' => 'Stakeholders',
+          ],
+          [
+            'value' => '2',
+            'label' => 'Internal Business Process',
+          ],
+          [
+            'value' => '3',
+            'label' => 'Learning & Growth',
+          ],
+          [
+            'value' => '4',
+            'label' => 'Financial',
+          ],
+          [
+            'value' => '5',
+            'label' => 'Internal Bussiness Process',
+          ]
+        ];
+
+        if ($id) {
+          $ret = "";
+          foreach ($list as $key => $value) {
+
+
+            if ($value['value'] == $id) {
+              $ret = $value['label'];
+            }
+          }
+
+          return $ret;
+        }
+
+        return $list;
+    }
+}
+
 if ( ! function_exists('status_perkawinan'))
 {
     function status_perkawinan($id = null)
@@ -1252,6 +1301,18 @@ if ( ! function_exists('treeChildIndikatorKinerja'))
                         '.(($prefix ? ($prefix .'.') : ''). $num).'
                       </td>
                       <td style="height: 10px !important;">
+                          '.
+
+                          ( !empty($item->perspektif_id) ?
+                          '
+                          <a href="#" class="tag tag-blue">
+                            '.($item->perspektif_id ? perspektif($item->perspektif_id) : '' ).'
+                          </a>
+                          <br />
+                          ' : ''
+                          )
+                          .'
+
                           ' . $item->name . '
                       </td>
                       <td>

@@ -144,6 +144,7 @@ class IndikatorKinerjaController extends Controller
     public function IndikatorKinerjaEdit(Request $request, $id)
     {
 
+
         $IndikatorKinerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
             ->equal('id', $id)->get('first');
 
@@ -152,12 +153,36 @@ class IndikatorKinerjaController extends Controller
 
         $IndikatorKinerjaSelect = FormSelect($IndikatorKinerjaList['records'], true);
 
+
+
+
+
+        $IndikatorKinerjaParent = IndikatorKinerjaBrowseController::FetchBrowse($request)
+            ->where('id', $IndikatorKinerja['records']->parent_id)
+            ->get();
+
+        $unit_kerja_id = 0;
+
+        if (!empty($IndikatorKinerjaParent['records']->unit_kerja_id)) {
+            $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
+                ->where('parent_id', $IndikatorKinerjaParent['records']->unit_kerja_id)
+                ->get();
+
+        } else {
+            $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
+                ->where('null_parent_id', true)
+                ->get();
+        }
+
+        $UnitKerjaSelect = FormSelect($UnitKerja['records'], true);
+
+
+
         $IndikatorKinerjaTree = IndikatorKinerja::tree();
-        $UnitKerjaTree = UnitKerja::tree();
 
         return view('app.indikator_kinerja.edit.index', [
             'data' => $IndikatorKinerja['records'],
-            'unit_kerja' => $UnitKerjaTree,
+            'unit_kerja' => $UnitKerjaSelect,
             'indikator_kinerja' => $IndikatorKinerjaTree
         ]);
     }

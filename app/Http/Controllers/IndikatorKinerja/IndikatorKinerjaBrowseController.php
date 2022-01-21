@@ -138,6 +138,7 @@ class IndikatorKinerjaBrowseController extends Controller
                 "$this->IndikatorKinerjaTable.name as indikator_kinerja.name",
                 "$this->IndikatorKinerjaTable.parent_id as indikator_kinerja.parent_id",
                 "$this->IndikatorKinerjaTable.unit_kerja_id as indikator_kinerja.unit_kerja_id",
+                "$this->IndikatorKinerjaTable.perspektif_id as indikator_kinerja.perspektif_id",
 
                 "$this->IndikatorKinerjaTable.updated_at as indikator_kinerja.updated_at",
                 "$this->IndikatorKinerjaTable.created_at as indikator_kinerja.created_at",

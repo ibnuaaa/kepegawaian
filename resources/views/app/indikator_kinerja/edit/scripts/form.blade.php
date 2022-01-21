@@ -53,29 +53,15 @@ $(document).ready(function() {
             if (status === 'Valid') {
                 const name = $('input[name="name"]')
                 const parent_id = $('select[name="parent_id"]')
-                const permission = $('input[name="permission"]:checked')
-
-                <?php for ($i=1;$i<=9;$i++): ?>
-                const header_{{$i}} = $('input[name="header_{{$i}}"]')
-                <?php endfor; ?>
-
-                const checkedPermission = []
-                for (var i = 0; i < permission.length; i++) {
-                  checkedPermission.push(parseInt($(permission[i]).val()))
-                }
+                const perspektif_id = $('select[name="perspektif_id"]')
+                const unit_kerja_id = $('select[name="unit_kerja_id"]')
 
                 const data = {
                     name: name.val(),
                     parent_id: parent_id.val(),
-
-                    <?php for ($i=1;$i<=9;$i++): ?>
-                    header_{{$i}} : header_{{$i}}.val(),
-                    <?php endfor; ?>
-
-                    permissions: checkedPermission
+                    unit_kerja_id: unit_kerja_id.val(),
+                    perspektif_id: perspektif_id.val(),
                 }
-
-                // console.log(data);
 
                 showLoading()
                 axios.put('/indikator_kinerja/{{$data->id}}', data).then((response) => {

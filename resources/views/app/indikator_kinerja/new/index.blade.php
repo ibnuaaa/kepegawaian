@@ -49,6 +49,19 @@
                             @endcomponent
                         </div>
                     </div>
+                    @if (empty($parent_indikator_kinerja->name))
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Perspektif</label>
+                        <div class="col-md-9">
+                            @component('components.form.awesomeSelect', [
+                                'name' => 'perspektif_id',
+                                'items' => perspektif(),
+                                'selected' => null
+                            ])
+                            @endcomponent
+                        </div>
+                    </div>
+                    @endif
                 </form>
             </div>
         </div>

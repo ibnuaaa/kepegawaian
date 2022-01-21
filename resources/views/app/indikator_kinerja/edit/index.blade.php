@@ -39,6 +39,30 @@
                             Kosong
                         </div>
                     </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Unit Kerja</label>
+                        <div class="col-md-9">
+                            @component('components.form.awesomeSelect', [
+                                'name' => 'unit_kerja_id',
+                                'items' => $unit_kerja,
+                                'selected' => $data->unit_kerja_id
+                            ])
+                            @endcomponent
+                        </div>
+                    </div>
+                    @if (!$data->parent_id)
+                    <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Perspektif</label>
+                        <div class="col-md-9">
+                            @component('components.form.awesomeSelect', [
+                                'name' => 'perspektif_id',
+                                'items' => perspektif(),
+                                'selected' => $data->perspektif_id
+                            ])
+                            @endcomponent
+                        </div>
+                    </div>
+                    @endif
                 </form>
             </div>
         </div>

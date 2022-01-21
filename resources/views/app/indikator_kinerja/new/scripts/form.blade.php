@@ -54,12 +54,14 @@ $(document).ready(function() {
         editUserForm.validate().then(function(status) {
             if (status === 'Valid') {
                 const name = $('input[name="name"]')
+                const perspektif_id = $('select[name="perspektif_id"]')
                 const unit_kerja_id = $('select[name="unit_kerja_id"]')
 
                 const data = {
                     name: name.val(),
                     parent_id: '{{ $parent_id }}',
-                    unit_kerja_id: unit_kerja_id.val()
+                    unit_kerja_id: unit_kerja_id.val(),
+                    perspektif_id: perspektif_id.val()
                 }
 
                 axios.post('/indikator_kinerja', data).then((response) => {
