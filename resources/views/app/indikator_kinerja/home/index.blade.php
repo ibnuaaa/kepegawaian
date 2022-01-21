@@ -29,9 +29,9 @@
               <table id="basic" class="table table-bordered table-condensed-custom">
                   <thead>
                       <tr>
-                          <th style="width: 45%;">INDIKATOR KINERJA</th>
-                          <th style="width: 30%;">UNIT KERJA</th>
-                          <th style="width: 180px;">AKSI</th>
+                          <th style="width: 65%;">INDIKATOR KINERJA</th>
+                          <th style="width: 20%;">UNIT KERJA</th>
+                          <th style="width: 100px;">AKSI</th>
                       </tr>
                   </thead>
                   <tbody>

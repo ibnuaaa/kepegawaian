@@ -1258,7 +1258,7 @@ if ( ! function_exists('treeChildIndikatorKinerja'))
                       <td>
                           <a href="'. url('/indikator_kinerja/'.$item->id) .'" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
                           <a href="'. url('/indikator_kinerja/new/'.$item->id) .'" class="btn btn-primary btn-sm">
-                              (+) Buat Indikator Kinerja
+                              <i class="fa fa-plus"></i>
                           </a>
                           <a onClick=\'return remove('.$item->id.', "'.$item->name.'")\' href="#" class="btn btn-danger btn-sm">
                               <i class="fa fa-trash"></i>
