@@ -1249,7 +1249,7 @@ if ( ! function_exists('treeChildIndikatorKinerja'))
                 $html .= '
                   <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" class="td-' . $item->status . '">
                       <td style="height: 10px !important;white-space: nowrap;">
-                        '.($prefix .'.'. $num).'
+                        '.(($prefix ? ($prefix .'.') : ''). $num).'
                       </td>
                       <td style="height: 10px !important;">
                           ' . $item->name . '
