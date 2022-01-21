@@ -658,14 +658,10 @@
                                                         {{ $key + 1 }}
                                                     </td>
                                                     <td>
-                                                        @component('components.form.awesomeSelect', [
-                                                            'name' => 'jabatan_id',
-                                                            'items' => $jabatan,
-                                                            'onChange' => 'saveJabatan(this)',
-                                                            'selected' => $val->jabatan_id,
-                                                            'data_id' => $val->id
-                                                        ])
-                                                        @endcomponent
+                                                        <select class="form-control form-select" name="jabatan_id" onChange="saveJabatan(this)" data-id="{{ $val->id }}">
+                                                          <option value="">-= Pilih Jabatan =-</option>
+                                                          {!! !empty($jabatan) && count($jabatan) > 0 ? treeSelectJabatan($jabatan, '', $val->jabatan_id) : '' !!}
+                                                        </select>
                                                     </td>
                                                     <td>
                                                         <input name="dari_tahun" value="{{ $val->dari_tahun }}" data-id="{{ $val->id }}" onChange="saveJabatan(this)" class="form-control " type="text" required>
@@ -674,14 +670,10 @@
                                                         <input name="sampai_tahun" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" onChange="saveJabatan(this)" class="form-control " type="text" required>
                                                     </td>
                                                     <td>
-                                                        @component('components.form.awesomeSelect', [
-                                                            'name' => 'unit_kerja_id',
-                                                            'items' => $unit_kerja,
-                                                            'onChange' => 'saveJabatan(this)',
-                                                            'selected' => $val->unit_kerja_id,
-                                                            'data_id' => $val->id
-                                                        ])
-                                                        @endcomponent
+                                                        <select class="form-control form-select" name="unit_kerja_id" onChange="saveJabatan(this)" data-id="{{ $val->id }}">
+                                                          <option value="">-= Pilih Unit Kerja =-</option>
+                                                          {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', $val->unit_kerja_id) : '' !!}
+                                                        </select>
                                                     </td>
                                                     <td>
                                                         <input name="tmt" id="myDatepicker" value="{{ $val->tmt }}" data-id="{{ $val->id }}" onChange="saveJabatan(this)" class="form-control " type="text" required>

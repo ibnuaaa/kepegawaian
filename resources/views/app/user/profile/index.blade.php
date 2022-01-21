@@ -458,7 +458,7 @@
                                                   {{ $key + 1 }}
                                               </td>
                                               <td>
-                                                  {{ !empty($val->position->name) ? $val->position->name : '' }}
+                                                  {{ !empty($val->jabatan->name) ? $val->jabatan->name : '' }}
                                               </td>
                                               <td>
                                                   {{ $val->dari_tahun }}
@@ -509,7 +509,9 @@
                                                   {{ $key + 1 }}
                                               </td>
                                               <td>
-                                                {{$val->golongan->pangkat}}/{{$val->golongan->golongan}}
+                                                {{!empty($val->golongan->pangkat) ? $val->golongan->pangkat : ''}}
+                                                /
+                                                {{!empty($val->golongan->golongan) ? $val->golongan->golongan : ''}}
                                               </td>
                                               <td>
                                                   {{ $val->dari_tahun }}

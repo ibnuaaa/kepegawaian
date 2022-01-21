@@ -58,23 +58,19 @@
                     <div class=" row mb-4">
                         <label class="col-md-3 form-label">Jabatan</label>
                         <div class="col-md-9">
-                            @component('components.form.awesomeSelect', [
-                                'name' => 'jabatan_id',
-                                'items' => $jabatan,
-                                'selected' => $data->jabatan_id
-                            ])
-                            @endcomponent
+                            <select class="form-control form-select" name="jabatan_id">
+                              <option value="">-= Pilih Jabatan =-</option>
+                              {!! !empty($jabatan) && count($jabatan) > 0 ? treeSelectJabatan($jabatan, '', $data->jabatan_id) : '' !!}
+                            </select>
                         </div>
                     </div>
                     <div class=" row mb-4">
                         <label class="col-md-3 form-label">Unit Kerja</label>
                         <div class="col-md-9">
-                            @component('components.form.awesomeSelect', [
-                                'name' => 'unit_kerja_id',
-                                'items' => $unit_kerja,
-                                'selected' => $data->unit_kerja_id
-                            ])
-                            @endcomponent
+                            <select class="form-control form-select" name="unit_kerja_id">
+                              <option value="">-= Pilih Unit Kerja =-</option>
+                              {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', $data->unit_kerja_id) : '' !!}
+                            </select>
                         </div>
                     </div>
                     <div class=" row mb-4">

@@ -10,6 +10,8 @@ use App\Http\Controllers\Golongan\GolonganBrowseController;
 use App\Http\Controllers\Pendidikan\PendidikanBrowseController;
 use App\Http\Controllers\UnitKerja\UnitKerjaBrowseController;
 
+use App\Models\Jabatan;
+use App\Models\UnitKerja;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -110,39 +112,10 @@ class UserController extends Controller
             ];
         }
 
-        $Jabatan = JabatanBrowseController::FetchBrowse($request)
-            ->where('take','all')
-            ->get('fetch');
 
-        $JabatanList[] = [
-            'value' => '',
-            'label' => '-= Pilih Jabatan =-'
-        ];
+        $JabatanTree = Jabatan::tree();
+        $UnitKerjaTree = UnitKerja::tree();
 
-        foreach ($Jabatan['records'] as $key => $value) {
-            $JabatanList[] = [
-                'value' => $value->id,
-                'label' => $value->name
-            ];
-        }
-
-
-        // Unit Kerja
-        $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
-            ->where('take','all')
-            ->get('fetch');
-
-        $UnitKerjaList[] = [
-            'value' => '',
-            'label' => '-= Pilih Unit Kerja =-'
-        ];
-
-        foreach ($UnitKerja['records'] as $key => $value) {
-            $UnitKerjaList[] = [
-                'value' => $value->id,
-                'label' => $value->name
-            ];
-        }
 
         // Golongan
         $Golongan = GolonganBrowseController::FetchBrowse($request)
@@ -167,8 +140,8 @@ class UserController extends Controller
 
         return view('app.user.new.index', [
             'positions' => $Positions,
-            'jabatan' => $JabatanList,
-            'unit_kerja' => $UnitKerjaList,
+            'jabatan' => $JabatanTree,
+            'unit_kerja' => $UnitKerjaTree,
             'golongan' => $GolonganList,
 
         ]);
@@ -314,38 +287,9 @@ class UserController extends Controller
 
 
 
-        $Jabatan = JabatanBrowseController::FetchBrowse($request)
-            ->where('take','all')
-            ->get('fetch');
+        $JabatanTree = Jabatan::tree();
+        $UnitKerjaTree = UnitKerja::tree();
 
-        $JabatanList[] = [
-            'value' => '',
-            'label' => '-= Pilih Jabatan =-'
-        ];
-
-        foreach ($Jabatan['records'] as $key => $value) {
-            $JabatanList[] = [
-                'value' => $value->id,
-                'label' => $value->name
-            ];
-        }
-
-        // Unit Kerja
-        $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
-            ->where('take','all')
-            ->get('fetch');
-
-        $UnitKerjaList[] = [
-            'value' => '',
-            'label' => '-= Pilih Position =-'
-        ];
-
-        foreach ($UnitKerja['records'] as $key => $value) {
-            $UnitKerjaList[] = [
-                'value' => $value->id,
-                'label' => $value->name
-            ];
-        }
 
         // Golongan
         $Golongan = GolonganBrowseController::FetchBrowse($request)
@@ -368,9 +312,9 @@ class UserController extends Controller
 
         return view('app.user.edit.index', [
           'positions' => $Positions,
-          'jabatan' => $JabatanList,
+          'jabatan' => $JabatanTree,
           'golongan' => $GolonganList,
-          'unit_kerja' => $UnitKerjaList,
+          'unit_kerja' => $UnitKerjaTree,
           'data' => $User['records']
         ]);
     }
@@ -400,22 +344,8 @@ class UserController extends Controller
             ];
         }
 
-        // Jabatan
-        $Jabatan = JabatanBrowseController::FetchBrowse($request)
-            ->where('take','all')
-            ->get('fetch');
-
-        $JabatanList[] = [
-            'value' => '',
-            'label' => '-= Pilih Jabatan =-'
-        ];
-
-        foreach ($Jabatan['records'] as $key => $value) {
-            $JabatanList[] = [
-                'value' => $value->id,
-                'label' => $value->name
-            ];
-        }
+        $JabatanTree = Jabatan::tree();
+        $UnitKerjaTree = UnitKerja::tree();
 
         // Pendidikan
         $Pendidikan = PendidikanBrowseController::FetchBrowse($request)
@@ -434,22 +364,6 @@ class UserController extends Controller
             ];
         }
 
-        // Unit Kerja
-        $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
-            ->where('take','all')
-            ->get('fetch');
-
-        $UnitKerjaList[] = [
-            'value' => '',
-            'label' => '-= Pilih Position =-'
-        ];
-
-        foreach ($UnitKerja['records'] as $key => $value) {
-            $UnitKerjaList[] = [
-                'value' => $value->id,
-                'label' => $value->name
-            ];
-        }
 
         // Golongan
         $Golongan = GolonganBrowseController::FetchBrowse($request)
@@ -471,9 +385,9 @@ class UserController extends Controller
 
         return view('app.user.profile_edit.index', [
             'positions' => $PositionList,
-            'jabatan' => $JabatanList,
+            'jabatan' => $JabatanTree,
             'pendidikan' => $PendidikanList,
-            'unit_kerja' => $UnitKerjaList,
+            'unit_kerja' => $UnitKerjaTree,
             'golongan' => $GolonganList,
             'tab' => $tab,
             'data' => $User['records']
