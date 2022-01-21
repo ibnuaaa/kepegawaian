@@ -29,9 +29,9 @@
               <table id="basic" class="table table-bordered table-condensed-custom">
                   <thead>
                       <tr>
-                          <th style="width: 45%;">JABATAN</th>
-                          <th style="width: 30%;">NAMA PEGAWAI / NIP</th>
-                          <th style="width: 180px;">AKSI</th>
+                          <th style="width: 65%;">JABATAN</th>
+                          <th style="width: 20%;">NAMA PEGAWAI / NIP</th>
+                          <th style="width: 100px;">AKSI</th>
                       </tr>
                   </thead>
                   <tbody>

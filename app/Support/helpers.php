@@ -1074,7 +1074,7 @@ if ( ! function_exists('treeChild'))
                       <td>
                           <a href="'. url('/position/'.$item->id) .'" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
                           <a href="'. url('/position/new/'.$item->id) .'" class="btn btn-primary btn-sm">
-                              (+) Buat Jabatan
+                              <i class="fa fa-plus"></i>
                           </a>
                           <a onClick="return remove('.$item->id.')" href="#" class="btn btn-danger btn-sm">
                               <i class="fa fa-trash"></i>
@@ -1137,7 +1137,7 @@ if ( ! function_exists('treeChildJabatan'))
                       <td>
                           <a href="'. url('/jabatan/'.$item->id) .'" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
                           <a href="'. url('/jabatan/new/'.$item->id) .'" class="btn btn-primary btn-sm">
-                              (+) Buat Jabatan
+                              <i class="fa fa-plus"></i>
                           </a>
                           <a onClick="return remove('.$item->id.')" href="#" class="btn btn-danger btn-sm">
                               <i class="fa fa-trash"></i>
@@ -1201,7 +1201,7 @@ if ( ! function_exists('treeChildUnitKerja'))
                       <td>
                           <a href="'. url('/unit_kerja/'.$item->id) .'" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
                           <a href="'. url('/unit_kerja/new/'.$item->id) .'" class="btn btn-primary btn-sm">
-                              (+) Buat Unit Kerja
+                              <i class="fa fa-plus"></i>
                           </a>
                           <a onClick=\'return remove('.$item->id.', "'.$item->name.'")\' href="#" class="btn btn-danger btn-sm">
                               <i class="fa fa-trash"></i>
