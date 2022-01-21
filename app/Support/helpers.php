@@ -1238,17 +1238,19 @@ if ( ! function_exists('treeSelectIndikatorKinerja'))
 
 if ( ! function_exists('treeChildIndikatorKinerja'))
 {
-    function treeChildIndikatorKinerja($data, $dataParent){
+    function treeChildIndikatorKinerja($data, $dataParent, $prefix, $incr){
 
         $html = "";
-
         if (!empty($data)) {
+            foreach ($data as $key => $item) {
 
-            foreach ($data as $item) {
-
+                $num = $key + 1;
 
                 $html .= '
                   <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" class="td-' . $item->status . '">
+                      <td style="height: 10px !important;white-space: nowrap;">
+                        '.($prefix .'.'. $num).'
+                      </td>
                       <td style="height: 10px !important;">
                           ' . $item->name . '
                       </td>
@@ -1266,7 +1268,7 @@ if ( ! function_exists('treeChildIndikatorKinerja'))
 
                       </td>
                   </tr>
-                ' . (count($item->children) > 0 ? treeChildIndikatorKinerja($item->children, $item) : '') ;
+                ' . (count($item->children) > 0 ? treeChildIndikatorKinerja($item->children, $item,  (($prefix ? ($prefix .'.') : ''). $num), $num) : '') ;
             }
         }
 
