@@ -35,8 +35,8 @@
                         <label class="col-md-3 form-label">
                             Turunan Dari
                         </label>
-                        <div class="col-md-9">
-                            Kosong
+                        <div class="col-md-9 pt-2">
+                            {{ !empty($data->parent->name) ? $data->parent->name : '' }}
                         </div>
                     </div>
                     <div class=" row mb-4">

@@ -38,8 +38,7 @@ class IndikatorKinerja extends Model
 
     public function parent()
     {
-        return $this->hasOne(IndikatorKinerja::class, 'id', 'user.parent_id')
-            ->with('user');
+        return $this->hasOne(IndikatorKinerja::class, 'id', 'indikator_kinerja.parent_id');
     }
 
     public function parents()
