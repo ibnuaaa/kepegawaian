@@ -53,6 +53,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'Pendidikan.Update' => \App\Http\Middleware\Pendidikan\Update::class,
         'Pendidikan.Delete' => \App\Http\Middleware\Pendidikan\Delete::class,
 
+        'PenilaianPrestasiKerja.Insert' => \App\Http\Middleware\PenilaianPrestasiKerja\Insert::class,
+        'PenilaianPrestasiKerja.Update' => \App\Http\Middleware\PenilaianPrestasiKerja\Update::class,
+        'PenilaianPrestasiKerja.Delete' => \App\Http\Middleware\PenilaianPrestasiKerja\Delete::class,
+
         'UnitKerja.Insert' => \App\Http\Middleware\UnitKerja\Insert::class,
         'UnitKerja.Update' => \App\Http\Middleware\UnitKerja\Update::class,
         'UnitKerja.Delete' => \App\Http\Middleware\UnitKerja\Delete::class,
