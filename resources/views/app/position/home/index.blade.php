@@ -7,11 +7,11 @@
 <!-- PAGE-HEADER -->
 <div class="page-header">
     <h1 class="page-title">
-      Jabatan
-      <a href="/position/new/0" class="btn btn-primary btn-sm">
-          <i class="fa fa-plus"></i>
-          Buat Hak Akses
-      </a>
+        Jabatan
+        <a href="/position/new/0" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus"></i>
+            Buat Hak Akses
+        </a>
     </h1>
     <div>
         <ol class="breadcrumb">
@@ -26,30 +26,30 @@
 <div class="row">
     <div class="col-12">
         <div class="card overflow-hidden">
-          <div class="card-body">
-              <table id="basic" class="table table-bordered table-condensed-custom" style="width:1900px !important;">
-                  <thead>
-                      <tr>
-                          <th>HAK AKSES</th>
-                          <th>NAMA PEGAWAI / NIP</th>
-                          <th>AKSI</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                  {!! treeChild($data, '') !!}
-                  </tbody>
-              </table>
-          </div>
-      </div>
-      <!-- ROW-1 END -->
+            <div class="card-body">
+                <table id="basic" class="table table-bordered table-condensed-custom" style="width:1900px !important;">
+                    <thead>
+                        <tr>
+                            <th>HAK AKSES</th>
+                            <th>NAMA PEGAWAI / NIP</th>
+                            <th>AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {!! treeChild($data, '') !!}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- ROW-1 END -->
     </div>
 </div>
 @endsection
 
 @section('formValidationScript')
-    @include('app.position.home.scripts.form')
+@include('app.position.home.scripts.form')
 @endsection
 
 @section('script')
-    @include('app.position.home.style.style')
+@include('app.position.home.style.style')
 @endsection

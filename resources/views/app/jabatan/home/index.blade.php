@@ -7,11 +7,11 @@
 <!-- PAGE-HEADER -->
 <div class="page-header">
     <h1 class="page-title">
-      Jabatan
-      <a href="/jabatan/new/0" class="btn btn-primary btn-sm">
-          <i class="fa fa-plus"></i>
-          Buat Jabatan
-      </a>
+        Jabatan
+        <a href="/jabatan/new/0" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus"></i>
+            Buat Jabatan
+        </a>
     </h1>
     <div>
         <ol class="breadcrumb">
@@ -26,30 +26,30 @@
 <div class="row">
     <div class="col-12">
         <div class="card overflow-hidden">
-          <div class="card-body">
-              <table id="basic" class="table table-bordered table-condensed-custom">
-                  <thead>
-                      <tr>
-                          <th style="width: 65%;">JABATAN</th>
-                          <th style="width: 20%;">NAMA PEGAWAI / NIP</th>
-                          <th style="width: 100px;">AKSI</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                  {!! treeChildJabatan($data, '') !!}
-                  </tbody>
-              </table>
-          </div>
-      </div>
-      <!-- ROW-1 END -->
+            <div class="card-body">
+                <table id="basic" class="table table-bordered table-condensed-custom">
+                    <thead>
+                        <tr>
+                            <th style="width: 65%;">JABATAN</th>
+                            <th style="width: 20%;">NAMA PEGAWAI / NIP</th>
+                            <th style="width: 100px;">AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {!! treeChildJabatan($data, '') !!}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- ROW-1 END -->
     </div>
 </div>
 @endsection
 
 @section('formValidationScript')
-    @include('app.jabatan.home.scripts.form')
+@include('app.jabatan.home.scripts.form')
 @endsection
 
 @section('script')
-    @include('app.jabatan.home.style.style')
+@include('app.jabatan.home.style.style')
 @endsection

@@ -62,9 +62,9 @@
                         <label class="col-md-3 form-label">Hak Akses</label>
                         <div class="col-md-9">
                             @component('components.form.awesomeSelect', [
-                                'name' => 'position_id',
-                                'items' => $positions,
-                                'selected' => null
+                            'name' => 'position_id',
+                            'items' => $positions,
+                            'selected' => null
                             ])
                             @endcomponent
                         </div>
@@ -73,8 +73,8 @@
                         <label class="col-md-3 form-label">Jabatan</label>
                         <div class="col-md-9">
                             <select class="form-control form-select" name="jabatan_id">
-                              <option value="">-= Pilih Jabatan =-</option>
-                              {!! !empty($jabatan) && count($jabatan) > 0 ? treeSelectJabatan($jabatan, '', '') : '' !!}
+                                <option value="">-= Pilih Jabatan =-</option>
+                                {!! !empty($jabatan) && count($jabatan) > 0 ? treeSelectJabatan($jabatan, '', '') : '' !!}
                             </select>
                         </div>
                     </div>
@@ -82,8 +82,8 @@
                         <label class="col-md-3 form-label">Unit Kerja</label>
                         <div class="col-md-9">
                             <select class="form-control form-select" name="unit_kerja_id">
-                              <option value="">-= Pilih Unit Kerja =-</option>
-                              {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', '') : '' !!}
+                                <option value="">-= Pilih Unit Kerja =-</option>
+                                {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', '') : '' !!}
                             </select>
                         </div>
                     </div>
@@ -91,9 +91,9 @@
                         <label class="col-md-3 form-label">Golongan</label>
                         <div class="col-md-9">
                             @component('components.form.awesomeSelect', [
-                                'name' => 'golongan_id',
-                                'items' => $golongan,
-                                'selected' => null
+                            'name' => 'golongan_id',
+                            'items' => $golongan,
+                            'selected' => null
                             ])
                             @endcomponent
                         </div>
@@ -102,9 +102,9 @@
                         <label class="col-md-3 form-label">Gender</label>
                         <div class="col-md-9">
                             @component('components.form.awesomeSelect', [
-                                'name' => 'gender',
-                                'items' => [['value' => 'male', 'label' => 'Laki-laki'], ['value' => 'female', 'label' => 'Perempuan']],
-                                'selected' => null
+                            'name' => 'gender',
+                            'items' => [['value' => 'male', 'label' => 'Laki-laki'], ['value' => 'female', 'label' => 'Perempuan']],
+                            'selected' => null
                             ])
                             @endcomponent
                         </div>
@@ -134,9 +134,9 @@
 @endsection
 
 @section('script')
-    @include('app.user.new.scripts.index')
+@include('app.user.new.scripts.index')
 @endsection
 
 @section('formValidationScript')
-    @include('app.user.new.scripts.form')
+@include('app.user.new.scripts.form')
 @endsection

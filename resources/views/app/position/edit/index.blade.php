@@ -36,19 +36,19 @@
                             Turunan Dari
                         </label>
                         <div class="col-md-9">
-                          @component('components.form.awesomeSelect', [
-                              'name' => 'parent_id',
-                              'items' => $positions,
-                              'selected' => null
-                          ])
-                          @endcomponent
+                            @component('components.form.awesomeSelect', [
+                            'name' => 'parent_id',
+                            'items' => $positions,
+                            'selected' => null
+                            ])
+                            @endcomponent
                         </div>
                     </div>
 
                     <div class="form-group-attached form-group-default">
                         <label>ACCESS MENU</label>
                         @foreach ($permissions as $KeyPermission => $permission)
-                          <div class="row">
+                        <div class="row">
                             @foreach ($permission as $KeyEach => $each)
                             <div class="col-md-4 row">
                                 <div class="checkbox check-info col-3 col-md-1">
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                             @endforeach
-                          </div>
+                        </div>
                         @endforeach
                     </div>
                 </form>
@@ -84,5 +84,5 @@
 @endsection
 
 @section('formValidationScript')
-    @include('app.position.edit.scripts.form')
+@include('app.position.edit.scripts.form')
 @endsection

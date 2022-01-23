@@ -9,9 +9,9 @@
     <h1 class="page-title">Pendidikan</h1>
     <div>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="/pendidikan">Pendidikan</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Detail Pendidikan</li>
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/pendidikan">Pendidikan</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detail Pendidikan</li>
         </ol>
     </div>
 </div>

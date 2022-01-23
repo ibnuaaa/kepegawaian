@@ -36,12 +36,12 @@
                             Turunan Dari
                         </label>
                         <div class="col-md-9">
-                          @component('components.form.awesomeSelect', [
-                              'name' => 'parent_id',
-                              'items' => $unit_kerja,
-                              'selected' => null
-                          ])
-                          @endcomponent
+                            @component('components.form.awesomeSelect', [
+                            'name' => 'parent_id',
+                            'items' => $unit_kerja,
+                            'selected' => null
+                            ])
+                            @endcomponent
                         </div>
                     </div>
                 </form>
@@ -65,5 +65,5 @@
 @endsection
 
 @section('formValidationScript')
-    @include('app.unit_kerja.edit.scripts.form')
+@include('app.unit_kerja.edit.scripts.form')
 @endsection

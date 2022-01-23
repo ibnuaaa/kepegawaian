@@ -1,73 +1,81 @@
 <script>
+    function remove(id, name) {
 
-function remove(id, name) {
+        swal({
+            title: "Konfirmasi",
+            text: "Ingin menghapus data " + name + " ?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Hapus',
+            cancelButtonText: 'Batal'
+        }, function(isConfirmed) {
+            console.log(isConfirmed)
 
-  swal({
-      title: "Konfirmasi",
-      text: "Ingin menghapus data " + name + " ?",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonText: 'Ya, Hapus',
-      cancelButtonText: 'Batal'
-  }, function(isConfirmed) {
-    console.log(isConfirmed)
+            if (isConfirmed) {
+                showLoading()
+                axios.delete('/user/' + id).then((response) => {
+                    const {
+                        data
+                    } = response.data
+                    window.location.reload()
+                }).catch((error) => {
+                    if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+                        swal({
+                            title: 'Opps!',
+                            text: error.response.data.exception.message,
+                            type: 'error',
+                            confirmButtonText: 'Ok'
+                        })
+                    }
+                })
+            }
+        });
 
-    if (isConfirmed) {
-      showLoading()
-      axios.delete('/user/'+id).then((response) => {
-          const { data } = response.data
-          window.location.reload()
-      }).catch((error) => {
-          if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
-              swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
-          }
-      })
-    }
-  });
-
-  return false;
-}
-
-// filter
-$('#filterAction').click(function() {
-    const filter_search = $('input[name="filter_search"]').val()
-    const query = {}
-    if (filter_search) {
-        query.filter_search = filter_search
-    }
-    const href = '{{ url('/user') }}'
-    const queryString = Qs.stringify(query)
-    if (queryString) {
-        window.location = href + '?' + queryString
-    } else {
-        window.location = href
-    }
-    console.log(queryString);
-})
-
-function sortBy(column, current_sort_type) {
-    const filter_search = $('input[name="filter_search"]').val()
-    const query = {}
-    if (filter_search) {
-        query.filter_search = filter_search
+        return false;
     }
 
-    query.sort = column
+    // filter
+    $('#filterAction').click(function() {
+        const filter_search = $('input[name="filter_search"]').val()
+        const query = {}
+        if (filter_search) {
+            query.filter_search = filter_search
+        }
+        const href = '{{ url(' / user ') }}'
+        const queryString = Qs.stringify(query)
+        if (queryString) {
+            window.location = href + '?' + queryString
+        } else {
+            window.location = href
+        }
+        console.log(queryString);
+    })
+
+    function sortBy(column, current_sort_type) {
+        const filter_search = $('input[name="filter_search"]').val()
+        const query = {}
+        if (filter_search) {
+            query.filter_search = filter_search
+        }
+
+        query.sort = column
 
 
-    if(current_sort_type == '') query.sort_type = 'asc'
-    else if(current_sort_type == 'asc') query.sort_type = 'desc'
-    else if(current_sort_type == 'desc') query.sort_type = ''
+        if (current_sort_type == '') query.sort_type = 'asc'
+        else if (current_sort_type == 'asc') query.sort_type = 'desc'
+        else if (current_sort_type == 'desc') query.sort_type = ''
 
-    if (column != '{{ !empty($_GET['sort']) ? $_GET['sort'] : '' }}') query.sort_type = 'asc'
+        if (column != '{{ !empty($_GET['
+            sort ']) ? $_GET['
+            sort '] : '
+            ' }}') query.sort_type = 'asc'
 
-    const href = '{{ url('/user') }}'
-    const queryString = Qs.stringify(query)
-    if (queryString) {
-        window.location = href + '?' + queryString
-    } else {
-        window.location = href
+        const href = '{{ url(' / user ') }}'
+        const queryString = Qs.stringify(query)
+        if (queryString) {
+            window.location = href + '?' + queryString
+        } else {
+            window.location = href
+        }
     }
-}
-
 </script>

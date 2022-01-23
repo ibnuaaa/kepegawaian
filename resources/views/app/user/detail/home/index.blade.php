@@ -97,5 +97,5 @@
 @endsection
 
 @section('script')
-    @include('app.user.detail.home.scripts.index')
+@include('app.user.detail.home.scripts.index')
 @endsection

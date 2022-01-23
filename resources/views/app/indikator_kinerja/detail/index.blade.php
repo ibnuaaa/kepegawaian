@@ -9,9 +9,9 @@
     <h1 class="page-title">Indikator Kinerja</h1>
     <div>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="/indikator_kinerja">Indikator Kinerja</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Detail Indikator Kinerja</li>
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/indikator_kinerja">Indikator Kinerja</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detail Indikator Kinerja</li>
         </ol>
     </div>
 </div>

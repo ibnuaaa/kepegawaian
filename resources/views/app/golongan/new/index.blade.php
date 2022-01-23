@@ -10,8 +10,8 @@
     <h1 class="page-title">Buat Golongan</h1>
     <div>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item"><a href="/golongan">Golongan</a></li>
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="/golongan">Golongan</a></li>
             <li class="breadcrumb-item active" aria-current="page">Buat Golongan</li>
         </ol>
     </div>
@@ -62,5 +62,5 @@
 @endsection
 
 @section('formValidationScript')
-    @include('app.golongan.new.scripts.form')
+@include('app.golongan.new.scripts.form')
 @endsection

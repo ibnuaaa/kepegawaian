@@ -9,9 +9,9 @@
     <h1 class="page-title">Golongan</h1>
     <div>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="/golongan">Golongan</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Detail Golongan</li>
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/golongan">Golongan</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detail Golongan</li>
         </ol>
     </div>
 </div>

@@ -37,8 +37,8 @@
                         </label>
                         <div class="col-md-9">
                             <select class="form-control form-select" name="parent_id">
-                              <option value="">-= Pilih Jabatan =-</option>
-                              {!! !empty($jabatan) && count($jabatan) > 0 ? treeSelectJabatan($jabatan, '', $data->parent_id) : '' !!}
+                                <option value="">-= Pilih Jabatan =-</option>
+                                {!! !empty($jabatan) && count($jabatan) > 0 ? treeSelectJabatan($jabatan, '', $data->parent_id) : '' !!}
                             </select>
                         </div>
                     </div>
@@ -64,5 +64,5 @@
 @endsection
 
 @section('formValidationScript')
-    @include('app.jabatan.edit.scripts.form')
+@include('app.jabatan.edit.scripts.form')
 @endsection

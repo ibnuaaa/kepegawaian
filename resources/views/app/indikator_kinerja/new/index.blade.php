@@ -42,9 +42,9 @@
                         <label class="col-md-3 form-label">Unit Kerja</label>
                         <div class="col-md-9">
                             @component('components.form.awesomeSelect', [
-                                'name' => 'unit_kerja_id',
-                                'items' => $unit_kerja,
-                                'selected' => null
+                            'name' => 'unit_kerja_id',
+                            'items' => $unit_kerja,
+                            'selected' => null
                             ])
                             @endcomponent
                         </div>
@@ -54,9 +54,9 @@
                         <label class="col-md-3 form-label">Perspektif</label>
                         <div class="col-md-9">
                             @component('components.form.awesomeSelect', [
-                                'name' => 'perspektif_id',
-                                'items' => perspektif(),
-                                'selected' => null
+                            'name' => 'perspektif_id',
+                            'items' => perspektif(),
+                            'selected' => null
                             ])
                             @endcomponent
                         </div>
@@ -80,5 +80,5 @@
 @endsection
 
 @section('formValidationScript')
-    @include('app.indikator_kinerja.new.scripts.form')
+@include('app.indikator_kinerja.new.scripts.form')
 @endsection

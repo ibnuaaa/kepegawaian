@@ -19,11 +19,11 @@
 <!-- ROW-1 -->
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
-          <div class="card card-white">
-              <div class="card-header ">
-                  <div class="card-title">Form</div><br>
-              </div>
-              <div class="card-body">
+        <div class="card card-white">
+            <div class="card-header ">
+                <div class="card-title">Form</div><br>
+            </div>
+            <div class="card-body">
 
                 <form id="changePasswordForm">
                     <div class=" row mb-4">
@@ -63,5 +63,5 @@
 @endsection
 
 @section('script')
-    @include('app.user.change_password.scripts.form')
+@include('app.user.change_password.scripts.form')
 @endsection

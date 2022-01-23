@@ -10,8 +10,8 @@
     <h1 class="page-title">Buat Pendidikan</h1>
     <div>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item"><a href="/pendidikan">Pendidikan</a></li>
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="/pendidikan">Pendidikan</a></li>
             <li class="breadcrumb-item active" aria-current="page">Buat Pendidikan</li>
         </ol>
     </div>
@@ -54,5 +54,5 @@
 @endsection
 
 @section('formValidationScript')
-    @include('app.pendidikan.new.scripts.form')
+@include('app.pendidikan.new.scripts.form')
 @endsection

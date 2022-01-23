@@ -48,9 +48,9 @@
                         <label class="col-md-3 form-label">Hak Akses</label>
                         <div class="col-md-9">
                             @component('components.form.awesomeSelect', [
-                                'name' => 'position_id',
-                                'items' => $positions,
-                                'selected' => $data->position_id
+                            'name' => 'position_id',
+                            'items' => $positions,
+                            'selected' => $data->position_id
                             ])
                             @endcomponent
                         </div>
@@ -59,8 +59,8 @@
                         <label class="col-md-3 form-label">Jabatan</label>
                         <div class="col-md-9">
                             <select class="form-control form-select" name="jabatan_id">
-                              <option value="">-= Pilih Jabatan =-</option>
-                              {!! !empty($jabatan) && count($jabatan) > 0 ? treeSelectJabatan($jabatan, '', $data->jabatan_id) : '' !!}
+                                <option value="">-= Pilih Jabatan =-</option>
+                                {!! !empty($jabatan) && count($jabatan) > 0 ? treeSelectJabatan($jabatan, '', $data->jabatan_id) : '' !!}
                             </select>
                         </div>
                     </div>
@@ -68,8 +68,8 @@
                         <label class="col-md-3 form-label">Unit Kerja</label>
                         <div class="col-md-9">
                             <select class="form-control form-select" name="unit_kerja_id">
-                              <option value="">-= Pilih Unit Kerja =-</option>
-                              {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', $data->unit_kerja_id) : '' !!}
+                                <option value="">-= Pilih Unit Kerja =-</option>
+                                {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', $data->unit_kerja_id) : '' !!}
                             </select>
                         </div>
                     </div>
@@ -77,9 +77,9 @@
                         <label class="col-md-3 form-label">Golongan</label>
                         <div class="col-md-9">
                             @component('components.form.awesomeSelect', [
-                                'name' => 'golongan_id',
-                                'items' => $golongan,
-                                'selected' => $data->golongan_id
+                            'name' => 'golongan_id',
+                            'items' => $golongan,
+                            'selected' => $data->golongan_id
                             ])
                             @endcomponent
                         </div>
@@ -119,9 +119,9 @@
 @endsection
 
 @section('script')
-    @include('app.user.edit.scripts.index')
+@include('app.user.edit.scripts.index')
 @endsection
 
 @section('formValidationScript')
-    @include('app.user.edit.scripts.form')
+@include('app.user.edit.scripts.form')
 @endsection

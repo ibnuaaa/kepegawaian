@@ -35,9 +35,9 @@
                         <label class="col-md-3 form-label">Turunan Dari</label>
                         <div class="col-md-9">
                             @component('components.form.awesomeSelect', [
-                                'name' => 'parent_id',
-                                'items' => $positions,
-                                'selected' => $selected_position_id
+                            'name' => 'parent_id',
+                            'items' => $positions,
+                            'selected' => $selected_position_id
                             ])
                             @endcomponent
                         </div>
@@ -60,5 +60,5 @@
 @endsection
 
 @section('formValidationScript')
-    @include('app.position.new.scripts.form')
+@include('app.position.new.scripts.form')
 @endsection

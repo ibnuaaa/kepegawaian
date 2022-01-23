@@ -35,7 +35,7 @@
                     </span>
                     <!-- START Login Form -->
                     <form id="loginForm" class="p-t-15" role="form" style="opacity: 1 !important;">
-                        <div class="form-group form-group-default login100-form" >
+                        <div class="form-group form-group-default login100-form">
                             <div class="controls">
                                 <input type="text" name="username" placeholder="Email / NIP" class="form-control">
                             </div>
@@ -53,9 +53,9 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center text-center">
-                                <br/>
-                                <span style="color: #ffffff; font-size: 12px;font-weight: bold;color: #00AA00;" >
-                                &copy;2022 RS PUSAT OTAK NASIONAL
+                                <br />
+                                <span style="color: #ffffff; font-size: 12px;font-weight: bold;color: #00AA00;">
+                                    &copy;2022 RS PUSAT OTAK NASIONAL
                                 </span>
                             </div>
                         </div>
@@ -71,9 +71,9 @@
 @endsection
 
 @section('script')
-    @include('app.authentication.login.scripts.index')
+@include('app.authentication.login.scripts.index')
 @endsection
 
 @section('formValidationScript')
-    @include('app.authentication.login.scripts.form')
+@include('app.authentication.login.scripts.form')
 @endsection

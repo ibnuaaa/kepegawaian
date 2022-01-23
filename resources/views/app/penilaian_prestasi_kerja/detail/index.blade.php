@@ -9,9 +9,9 @@
     <h1 class="page-title">Penilaian Prestasi Kerja</h1>
     <div>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="/penilaian_prestasi_kerja">Penilaian Prestasi Kerja</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Detail Penilaian Prestasi Kerja</li>
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/penilaian_prestasi_kerja">Penilaian Prestasi Kerja</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detail Penilaian Prestasi Kerja</li>
         </ol>
     </div>
 </div>

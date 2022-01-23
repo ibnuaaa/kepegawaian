@@ -9,9 +9,9 @@
     <h1 class="page-title">UnitKerja</h1>
     <div>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="/unit_kerja">UnitKerja</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Detail UnitKerja</li>
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/unit_kerja">UnitKerja</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detail UnitKerja</li>
         </ol>
     </div>
 </div>
