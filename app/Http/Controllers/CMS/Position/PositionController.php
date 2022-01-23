@@ -37,29 +37,6 @@ class PositionController extends Controller
 
         $filter_search = $request->input($TableKey . '-filter_search');
 
-        if (isset($request['position-take'])) {
-            $selected = $request['position-take'];
-        }
-        else {
-            $selected = 10;
-        }
-        $options = array(5,10,15,20);
-        $Mail = PositionBrowseController::FetchBrowse($request)
-            ->where('with.total', 'true');
-
-        if (isset($filter_search)) {
-            $Mail = $Mail->where('search', $filter_search);
-        }
-
-        $Take = ___TableGetTake($request, $TableKey);
-
-        $request->ArrQuery->take = $Take;
-        $Mail = $Mail->middleware(function($fetch) use($request, $TableKey) {
-                $fetch->equal('skip', ___TableGetSkip($request, $TableKey, $fetch->QueryRoute->ArrQuery->take));
-                return $fetch;
-            })
-            ->get('fetch');
-
         if (isset($request['position-show'])) {
             $selected = $request['position-show'];
         }
@@ -67,12 +44,28 @@ class PositionController extends Controller
             $selected = 10;
         }
 
+
+        $options = array(5,10,15,20);
+        $Position = PositionBrowseController::FetchBrowse($request)
+            ->where('take',  $selected)
+            ->where('with.total', 'true');
+
+        if (isset($filter_search)) {
+            $Position = $Position->where('search', $filter_search);
+        }
+
+        $Position = $Position->middleware(function($fetch) use($request, $TableKey) {
+                $fetch->equal('skip', ___TableGetSkip($request, $TableKey, $fetch->QueryRoute->ArrQuery->take));
+                return $fetch;
+            })
+            ->get('fetch');
+
         $DataTable = [
             'key' => $TableKey,
             'filter_search' => $filter_search,
             'placeholder_search' => "",
             'pageNow' => ___TableGetCurrentPage($request, $TableKey),
-            'paginate' => ___TablePaginate((int)$Mail['total'], (int)$Mail['query']->take, ___TableGetCurrentPage($request, $TableKey)),
+            'paginate' => ___TablePaginate((int)$Position['total'], (int)$Position['query']->take, ___TableGetCurrentPage($request, $TableKey)),
             'selected' => $selected,
             'options' => $options,
             'heads' => [
@@ -85,10 +78,10 @@ class PositionController extends Controller
 
 
 
-        if ($Mail['records']) {
-            $DataTable['records'] = $Mail['records'];
-            $DataTable['total'] = $Mail['total'];
-            $DataTable['show'] = $Mail['show'];
+        if ($Position['records']) {
+            $DataTable['records'] = $Position['records'];
+            $DataTable['total'] = $Position['total'];
+            $DataTable['show'] = $Position['show'];
 
             $DataTable['totalpage'] = (int)(ceil($DataTable['total'] / $selected)) ;
             $DataTable['startentries'] = (($DataTable['pageNow'] - 1 ) * $selected) + 1;

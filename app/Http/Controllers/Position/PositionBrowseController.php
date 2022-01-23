@@ -155,12 +155,6 @@ class PositionBrowseController extends Controller
            if (!isset($request->ArrQuery->without_with)) {
                $Position->with('parent')
                ->with('parents');
-
-               if (isset($request->ArrQuery->for) && $request->ArrQuery->for == 'staff') {
-                   $Position->groupBy("$this->UserTable.id");
-               }else{
-                   $Position->with('user')->groupBy("$this->PositionTable.id");
-               }
            }
 
            $Browse = $this->Browse($request, $Position, function ($data) use($request) {
