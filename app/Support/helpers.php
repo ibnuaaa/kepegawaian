@@ -1301,7 +1301,7 @@ if ( ! function_exists('treeChildIndikatorKinerja'))
 
                           ( !empty($item->perspektif_id) ?
                           '
-                          <a href="#" class="tag tag-blue">
+                          <a href="#" class="tag tag-blue text-white">
                             '.($item->perspektif_id ? perspektif($item->perspektif_id) : '' ).'
                           </a>
                           <br />

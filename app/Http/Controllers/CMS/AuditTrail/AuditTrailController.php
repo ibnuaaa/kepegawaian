@@ -37,7 +37,6 @@ class AuditTrailController extends Controller
         }
         $options = array(5,10,15,20);
         $LogActivity = LogActivityBrowseController::FetchBrowse($request)
-            ->where('orderBy.blast_audit-trails.created_at', 'desc')
             ->where('with.total', 'true');
 
         if (isset($filter_search)) {

@@ -64,9 +64,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        // Passport::tokensCan([
-        //     'blast' => 'Blast'
-        // ]);
 
         app('view');
         app('blade.compiler')->directive('scopedslot', function ($expression) {
