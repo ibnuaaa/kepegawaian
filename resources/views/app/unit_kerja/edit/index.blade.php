@@ -39,7 +39,7 @@
                             @component('components.form.awesomeSelect', [
                             'name' => 'parent_id',
                             'items' => $unit_kerja,
-                            'selected' => null
+                            'selected' => $data->parent_id
                             ])
                             @endcomponent
                         </div>
