@@ -77,7 +77,7 @@
                             {{$val->name}}
                         </td>
                         <td>
-
+                            
                         </td>
                         <td>
 

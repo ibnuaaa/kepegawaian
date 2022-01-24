@@ -119,22 +119,11 @@ class IndikatorKinerjaController extends Controller
             ->get();
 
         $unit_kerja_id = 0;
+        $UnitKerjaTree = UnitKerja::tree();
 
-        if (!empty($IndikatorKinerja['records']->unit_kerja_id)) {
-            $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
-                ->where('parent_id', $IndikatorKinerja['records']->unit_kerja_id)
-                ->get();
-
-        } else {
-            $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
-                ->where('null_parent_id', true)
-                ->get();
-        }
-
-        $UnitKerjaSelect = FormSelect($UnitKerja['records'], true);
 
         return view('app.indikator_kinerja.new.index', [
-            'unit_kerja' => $UnitKerjaSelect,
+            'unit_kerja' => $UnitKerjaTree,
             'selected_unit_kerja_id' => $unit_kerja_id,
             'parent_id' => $indikator_kinerja_id,
             'parent_indikator_kinerja' => $IndikatorKinerja['records']
@@ -154,35 +143,12 @@ class IndikatorKinerjaController extends Controller
         $IndikatorKinerjaSelect = FormSelect($IndikatorKinerjaList['records'], true);
 
 
-
-
-
-        $IndikatorKinerjaParent = IndikatorKinerjaBrowseController::FetchBrowse($request)
-            ->where('id', $IndikatorKinerja['records']->parent_id)
-            ->get();
-
-        $unit_kerja_id = 0;
-
-        if (!empty($IndikatorKinerjaParent['records']->unit_kerja_id)) {
-            $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
-                ->where('parent_id', $IndikatorKinerjaParent['records']->unit_kerja_id)
-                ->get();
-
-        } else {
-            $UnitKerja = UnitKerjaBrowseController::FetchBrowse($request)
-                ->where('null_parent_id', true)
-                ->get();
-        }
-
-        $UnitKerjaSelect = FormSelect($UnitKerja['records'], true);
-
-
-
         $IndikatorKinerjaTree = IndikatorKinerja::tree();
+        $UnitKerjaTree = UnitKerja::tree();
 
         return view('app.indikator_kinerja.edit.index', [
             'data' => $IndikatorKinerja['records'],
-            'unit_kerja' => $UnitKerjaSelect,
+            'unit_kerja' => $UnitKerjaTree,
             'indikator_kinerja' => $IndikatorKinerjaTree
         ]);
     }

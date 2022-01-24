@@ -42,12 +42,10 @@
                     <div class=" row mb-4">
                         <label class="col-md-3 form-label">Unit Kerja</label>
                         <div class="col-md-9">
-                            @component('components.form.awesomeSelect', [
-                            'name' => 'unit_kerja_id',
-                            'items' => $unit_kerja,
-                            'selected' => $data->unit_kerja_id
-                            ])
-                            @endcomponent
+                            <select class="form-control form-select" name="unit_kerja_id">
+                                <option value="">-= Pilih Unit Kerja =-</option>
+                                {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', $data->unit_kerja_id) : '' !!}
+                            </select>
                         </div>
                     </div>
                     @if (!$data->parent_id)
