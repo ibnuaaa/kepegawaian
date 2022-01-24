@@ -77,10 +77,15 @@
                             {{$val->name}}
                         </td>
                         <td>
-                            
+
                         </td>
                         <td>
-
+                          <a href="/indikator_skp/edit/{{ $val->id }}" class=" btn btn-primary btn-sm">
+                              <i class="fa fa-edit"></i>
+                          </a>
+                          <a href="#" onclick="return remove('{{ $val->id }}','{{ $val->name }}')" class=" btn btn-danger btn-sm">
+                              <i class="fa fa-trash"></i>
+                          </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
