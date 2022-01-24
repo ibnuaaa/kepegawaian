@@ -1,32 +1,35 @@
 <?php
 
-namespace App\Http\Middleware\IndikatorKinerja;
+namespace App\Http\Middleware\IndikatorSkp;
 
-use App\Models\IndikatorKinerja;
+use App\Models\IndikatorSkp;
 
+use Illuminate\Support\Facades\Hash;
 use Closure;
 use Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Middleware\BaseMiddleware;
 
-class Insert extends BaseMiddleware
+class Update extends BaseMiddleware
 {
-    private function Initiate()
+    private function Initiate($request)
     {
-        $this->Model->IndikatorKinerja = new IndikatorKinerja();
-
-        $this->Model->IndikatorKinerja->name = $this->_Request->input('name');
-        if($this->_Request->input('parent_id')) $this->Model->IndikatorKinerja->parent_id = $this->_Request->input('parent_id');
-        $this->Model->IndikatorKinerja->unit_kerja_id = $this->_Request->input('unit_kerja_id');
-        $this->Model->IndikatorKinerja->perspektif_id = $this->_Request->input('perspektif_id');
-        $this->Model->IndikatorKinerja->tipe_indikator = 'iku';
+        $this->Model->IndikatorSkp = IndikatorSkp::where('id', $this->Id)->first();
+        if ($this->Model->IndikatorSkp) {
+            $this->Model->IndikatorSkp->name = $this->_Request->input('name');
+        }
     }
 
     private function Validation()
     {
         $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required',
+            'name' => 'required'
         ]);
+        if (!$this->Model->IndikatorSkp) {
+            $this->Json::set('exception.key', 'NotFoundIndikatorSkp');
+            $this->Json::set('exception.message', trans('validation.'.$this->Json::get('exception.key')));
+            return false;
+        }
         if ($validator->fails()) {
             $this->Json::set('errors', $validator->errors());
             return false;
@@ -36,7 +39,7 @@ class Insert extends BaseMiddleware
 
     public function handle($request, Closure $next)
     {
-        $this->Initiate();
+        $this->Initiate($request);
         if ($this->Validation()) {
             $this->Payload->put('Model', $this->Model);
             $this->_Request->merge(['Payload' => $this->Payload]);

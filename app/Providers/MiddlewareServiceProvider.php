@@ -65,6 +65,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'IndikatorKinerja.Update' => \App\Http\Middleware\IndikatorKinerja\Update::class,
         'IndikatorKinerja.Delete' => \App\Http\Middleware\IndikatorKinerja\Delete::class,
 
+        'IndikatorSkp.Insert' => \App\Http\Middleware\IndikatorSkp\Insert::class,
+        'IndikatorSkp.Update' => \App\Http\Middleware\IndikatorSkp\Update::class,
+        'IndikatorSkp.Delete' => \App\Http\Middleware\IndikatorSkp\Delete::class,
+
         'Position.Insert' => \App\Http\Middleware\Position\Insert::class,
         'Position.Update' => \App\Http\Middleware\Position\Update::class,
         'Position.Delete' => \App\Http\Middleware\Position\Delete::class,

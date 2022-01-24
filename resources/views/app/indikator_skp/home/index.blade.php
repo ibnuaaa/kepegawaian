@@ -1,21 +1,16 @@
 @extends('layout.app')
 
-@section('title', 'PenilaianPrestasiKerja')
+@section('title', 'IndikatorSkp')
 @section('bodyClass', 'fixed-header menu-pin menu-behind')
 
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Penilaian Prestasi Kerja &nbsp;
-        <a onclick="saveNew()" class="btn btn-primary btn-sm pull-right">
-            <i class="fa fa-plus"></i>
-            Buat
-        </a>
-    </h1>
+    <h1 class="page-title">Indikator Skp</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Penilaian Prestasi Kerja</li>
+            <li class="breadcrumb-item active" aria-current="page">Indikator Skp</li>
         </ol>
     </div>
 </div>
@@ -29,7 +24,7 @@
         @if($item->name === 'No')
         <th style="width: 3%">{{ $item->label }}</th>
         @elseif ($item->name === 'action')
-        <th style="width: 112px">{{ $item->label }}</th>
+        <th style="width: 50px">{{ $item->label }}</th>
         @else
         <th style="position: relative;cursor: pointer" onClick="sortBy('{{ $item->name }}', '{{ !empty($_GET['sort_type']) ? $_GET['sort_type'] : '' }}' )">
             {{ $item->label }}
@@ -55,18 +50,53 @@
                 <p>{{ $number }}</p>
             </td>
             <td class="v-align-middle ">
-                <p>Januari 2022</p>
-            </td>
-            <td class="v-align-middle">
-                <p>{{ $item->created_at }}</p>
+                <b>{{ $item->name }}</b>
+
+
+                <table class="table table-bordered bg-white table-sm">
+                    <tr>
+                        <th style="width: 5%;">
+                          No
+                        </th>
+                        <th style="width: 45%;">
+                          IKI
+                        </th>
+                        <th style="width: 45%;">
+                          User
+                        </th>
+                        <th style="width: 5%;">
+                          Aksi
+                        </th>
+                    </tr>
+                <?php  foreach($item->indikator_skp_child as $key => $val) : ?>
+                    <tr>
+                        <td>
+                            {{$key + 1}}
+                        </td>
+                        <td>
+                            {{$val->name}}
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                <tr>
+                    <td colspan="3" class="text-center">
+                        <a href="{{ url('/indikator_skp/new/'.$item->id) }}" class="btn btn-success btn-sm">
+                            <i class="fa fa-plus"></i>
+                            Tambah IKI
+                        </a>
+                    </td>
+                </tr>
+                </table>
             </td>
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
-                    <a href="{{ url('/penilaian_prestasi_kerja/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                    <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                    <a onClick="return remove('{{$item->id}}','{{ $item->name }}')" href="#" class="btn btn-danger">
-                        <i class="fa fa-trash"></i>
-                    </a>
+                    <a href="{{ url('/indikator_skp/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
                 </div>
             </td>
         </tr>
@@ -79,5 +109,5 @@
 @endsection
 
 @section('script')
-@include('app.penilaian_prestasi_kerja.home.scripts.index')
+@include('app.indikator_skp.home.scripts.index')
 @endsection

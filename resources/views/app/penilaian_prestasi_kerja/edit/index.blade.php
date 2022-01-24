@@ -92,17 +92,17 @@
     </div>
 </div>
 
-<div class="modal fade" id="largemodal" tabindex="-1" role="dialog">
+<div class="modal effect-sign" id="modalIndikatorKinerja" role="dialog">
     <div class="modal-dialog modal-lg " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Daftar Indikator Kinerja Individual</h5>
                 <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Modal body text goes here.</p>
+                <p>Test Modal</p>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

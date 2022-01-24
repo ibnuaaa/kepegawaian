@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Middleware\IndikatorKinerja;
+namespace App\Http\Middleware\IndikatorSkp;
 
-use App\Models\IndikatorKinerja;
+use App\Models\IndikatorSkp;
 
 use Closure;
 use Validator;
@@ -13,19 +13,20 @@ class Insert extends BaseMiddleware
 {
     private function Initiate()
     {
-        $this->Model->IndikatorKinerja = new IndikatorKinerja();
+        $this->Model->IndikatorSkp = new IndikatorSkp();
 
-        $this->Model->IndikatorKinerja->name = $this->_Request->input('name');
-        if($this->_Request->input('parent_id')) $this->Model->IndikatorKinerja->parent_id = $this->_Request->input('parent_id');
-        $this->Model->IndikatorKinerja->unit_kerja_id = $this->_Request->input('unit_kerja_id');
-        $this->Model->IndikatorKinerja->perspektif_id = $this->_Request->input('perspektif_id');
-        $this->Model->IndikatorKinerja->tipe_indikator = 'iku';
+        $this->Model->IndikatorSkp->name = $this->_Request->input('name');
+        $this->Model->IndikatorSkp->parent_id = $this->_Request->input('parent_id');
+        $this->Model->IndikatorSkp->created_user_id = MyAccount()->id;
+        $this->Model->IndikatorSkp->created_jabatan_id = MyAccount()->jabatan_id;
+        $this->Model->IndikatorSkp->tipe_indikator = 'iki';
+        $this->Model->IndikatorSkp->unit_kerja_id = MyAccount()->unit_kerja_id;
     }
 
     private function Validation()
     {
         $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required',
+            'name' => 'required'
         ]);
         if ($validator->fails()) {
             $this->Json::set('errors', $validator->errors());
