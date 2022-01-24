@@ -101,8 +101,19 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <p>Test Modal</p>
+            <div class="modal-body" id="body-modal-sasaran-kinerja">
+                <label class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="example-checkbox2" value="option2">
+                    <span class="custom-control-label">
+                        asdasdasd
+                    </span>
+                </label>
+                <label class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="example-checkbox2" value="option2">
+                    <span class="custom-control-label">
+                        asdasdasd
+                    </span>
+                </label>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

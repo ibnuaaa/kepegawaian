@@ -59,7 +59,7 @@
                           No
                         </th>
                         <th style="width: 45%;">
-                          IKI
+                          Indikator Kinerja
                         </th>
                         <th style="width: 45%;">
                           User
@@ -93,7 +93,7 @@
                     <td colspan="3" class="text-center">
                         <a href="{{ url('/indikator_skp/new/'.$item->id) }}" class="btn btn-success btn-sm">
                             <i class="fa fa-plus"></i>
-                            Tambah IKI
+                            Tambah Indikator Kinerja
                         </a>
                     </td>
                 </tr>

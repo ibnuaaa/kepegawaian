@@ -25,11 +25,11 @@
             <div class="card-body">
                 <form autocomplete="off" id="newIndikatorSkpForm">
                     <div class="form-group form-group-default required ">
-                        <label class="form-label">Deskripsi Indikator IKI : </label>
+                        <label class="form-label">Indikator Kinerja : </label>
                         <input name="name" value="" class="form-control" type="text" required>
                     </div>
                     <div class="form-group form-group-default required ">
-                        <label class="form-label">Turunan Dari IKU :</label>
+                        <label class="form-label">Turunan Dari Indikator Kinerja :</label>
                         <label>
                             {{ $indikator_kinerja->name }}
                         </label>

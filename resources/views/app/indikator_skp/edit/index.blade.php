@@ -7,12 +7,12 @@
 
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Edit IndikatorSkp</h1>
+    <h1 class="page-title">Edit Indikator Skp</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/indikator_skp">IndikatorSkp</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit IndikatorSkp</li>
+            <li class="breadcrumb-item"><a href="/indikator_skp">Indikator Skp</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Indikator Skp</li>
         </ol>
     </div>
 </div>
@@ -25,7 +25,7 @@
             <div class="card-body">
                 <form autocomplete="off" id="editIndikatorSkpForm">
                     <div class="form-group form-group-default required ">
-                        <label class="form-label">Nama</label>
+                        <label class="form-label">Indikator Kinerja</label>
                         <input name="name" value="{{ $data['name'] }}" class="form-control" type="text" required>
                     </div>
                 </form>
