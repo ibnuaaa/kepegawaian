@@ -1231,7 +1231,7 @@ if ( ! function_exists('treeChildUnitKerja'))
 
                 if (!empty($item->users)) {
                   foreach ($item->users as $key => $user) {
-                      $html_user = $html_user  . ($user ? $user->name : '');
+                      $html_user = $html_user  .'<br/>'. ($user ? $user->name : '');
                   }
                 }
 
