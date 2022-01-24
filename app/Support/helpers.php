@@ -1236,7 +1236,7 @@ if ( ! function_exists('treeChildUnitKerja'))
                 }
 
                 $html .= '
-                  <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" class="td-' . $item->status . '">
+                  <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '">
                       <td style="height: 10px !important;">
                           ' . $item->name . '
                       </td>
@@ -1255,6 +1255,34 @@ if ( ! function_exists('treeChildUnitKerja'))
                       </td>
                   </tr>
                 ' . (count($item->children) > 0 ? treeChildUnitKerja($item->children, $item) : '') ;
+            }
+        }
+
+        return $html;
+
+    }
+}
+
+if ( ! function_exists('treeChildUnitKerjaModal'))
+{
+    function treeChildUnitKerjaModal($data, $dataParent){
+
+        $html = "";
+
+        if (!empty($data)) {
+
+            foreach ($data as $item) {
+
+                $html .= '
+                  <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '">
+                  <td style="height: 10px !important;">
+                      ' . $item->name . '
+                  </td>
+                  <td>
+                      <a href="#" class="btn btn-success btn-sm" onclick=\'selectUnitKerja('.$item->id.',"'.$item->name.'");\'><i class="fa fa-check"></i> Pilih</a>
+                  </td>
+                  </tr>
+                ' . (count($item->children) > 0 ? treeChildUnitKerjaModal($item->children, $item) : '') ;
             }
         }
 

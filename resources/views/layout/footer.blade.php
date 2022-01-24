@@ -251,6 +251,10 @@
         .loadingField {
             background: #fff3cd !important;
         }
+
+        #basic a span {
+             display: none;
+        }
     </style>
 </body>
 

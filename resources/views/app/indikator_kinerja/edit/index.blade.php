@@ -42,10 +42,13 @@
                     <div class=" row mb-4">
                         <label class="col-md-3 form-label">Unit Kerja</label>
                         <div class="col-md-9">
-                            <select class="form-control form-select" name="unit_kerja_id">
-                                <option value="">-= Pilih Unit Kerja =-</option>
-                                {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', $data->unit_kerja_id) : '' !!}
-                            </select>
+                            <span id="span_unit_kerja">
+                            {{ !empty($data->unit_kerja->name) ? $data->unit_kerja->name : '< Kosong >' }}
+                            </span>
+                            &nbsp;&nbsp;
+                            <a href="#" onclick="return openModalUnitKerja()" class="btn btn-sm btn-primary">
+                                Pilih Unit Kerja ...
+                            </a>
                         </div>
                     </div>
                     @if (!$data->parent_id)
@@ -78,6 +81,37 @@
     </div>
 
 </div>
+
+
+<div class="modal effect-sign" id="modalUnitKerja" role="dialog">
+    <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Daftar Unit Kerja</h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="body-modal-sasaran-kinerja">
+                <table id="basic" class="table table-bordered table-condensed-custom">
+                    <thead>
+                        <tr>
+                            <th>UNIT KERJA</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {!! treeChildUnitKerjaModal($unit_kerja, '') !!}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @endsection
 

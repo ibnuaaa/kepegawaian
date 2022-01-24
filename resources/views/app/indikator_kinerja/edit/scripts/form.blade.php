@@ -1,5 +1,10 @@
 <script>
 $(document).ready(function() {
+
+  $('#basic').simpleTreeTable({
+    opened: [2]
+  });
+
     const form = document.getElementById('editUserForm')
     const editUserForm = $('#editUserForm').formValidation({
         fields: {
@@ -54,12 +59,11 @@ $(document).ready(function() {
                 const name = $('input[name="name"]')
                 const parent_id = $('select[name="parent_id"]')
                 const perspektif_id = $('select[name="perspektif_id"]')
-                const unit_kerja_id = $('select[name="unit_kerja_id"]')
 
                 const data = {
                     name: name.val(),
                     parent_id: parent_id.val(),
-                    unit_kerja_id: unit_kerja_id.val(),
+                    unit_kerja_id: g_unit_kerja_id,
                     perspektif_id: perspektif_id.val(),
                 }
 
@@ -79,19 +83,20 @@ $(document).ready(function() {
 
 })
 
-function changeStatusPosition(status) {
+function openModalUnitKerja() {
+    $('#modalUnitKerja').modal('show');
 
-    axios.post('/indikator_kinerja/change_status', {
-        indikator_kinerja_id: "{{$data['id']}}",
-        status: status
-    }).then((response) => {
-        // console.log(response)
-        // location.reload()
-        location.href = "{{ url('/indikator_kinerja') }}"
-    }).catch((error) => {
-        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
-            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
-        }
-    })
+    return false;
 }
+
+
+var g_unit_kerja_id = '{{ !empty($data->unit_kerja_id) ? $data->unit_kerja_id : '0' }}';
+function selectUnitKerja(unit_kerja_id, name) {
+    g_unit_kerja_id = unit_kerja_id
+
+    $('#span_unit_kerja').html(name);
+    $('#modalUnitKerja').modal('hide');
+}
+
+
 </script>

@@ -1,6 +1,10 @@
 <script>
 $(document).ready(function() {
 
+  $('#basic').simpleTreeTable({
+    opened: [2]
+  });
+
     // $('select[name=parent_id]').select2({
     //     ajax: {
     //         url: window.apiUrl + '/indikator_kinerja',
@@ -55,12 +59,11 @@ $(document).ready(function() {
             if (status === 'Valid') {
                 const name = $('input[name="name"]')
                 const perspektif_id = $('select[name="perspektif_id"]')
-                const unit_kerja_id = $('select[name="unit_kerja_id"]')
 
                 const data = {
                     name: name.val(),
                     parent_id: '{{ $parent_id }}',
-                    unit_kerja_id: unit_kerja_id.val(),
+                    unit_kerja_id: g_unit_kerja_id,
                     perspektif_id: perspektif_id.val()
                 }
 
@@ -77,4 +80,20 @@ $(document).ready(function() {
     })
 
 })
+
+function openModalUnitKerja() {
+    $('#modalUnitKerja').modal('show');
+
+    return false;
+}
+
+
+var g_unit_kerja_id = '0';
+function selectUnitKerja(unit_kerja_id, name) {
+    g_unit_kerja_id = unit_kerja_id
+
+    $('#span_unit_kerja').html(name);
+    $('#modalUnitKerja').modal('hide');
+}
+
 </script>
