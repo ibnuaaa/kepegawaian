@@ -25,7 +25,7 @@
             <div class="card-body">
                 <form autocomplete="off" id="newIndikatorSkpForm">
                     <div class="form-group form-group-default required ">
-                        <label class="form-label">Indikator Kinerja : </label>
+                        <label class="form-label">Nama {{$tipe_indikator}} : </label>
                         <input name="name" value="" class="form-control" type="text" required>
                     </div>
                     <div class="form-group form-group-default required ">

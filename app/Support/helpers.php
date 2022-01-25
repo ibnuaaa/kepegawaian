@@ -1361,3 +1361,51 @@ if ( ! function_exists('treeChildIndikatorKinerja'))
 
     }
 }
+
+
+
+if ( ! function_exists('treeChildIndikatorKinerjaModal'))
+{
+    function treeChildIndikatorKinerjaModal($data, $dataParent, $prefix, $incr){
+
+        $html = "";
+        if (!empty($data)) {
+            foreach ($data as $key => $item) {
+
+                $num = $key + 1;
+
+                $html .= '
+                  <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" class="td-' . $item->status . '">
+                      <td style="height: 10px !important;white-space: nowrap;">
+                        '.(($prefix ? ($prefix .'.') : ''). $num).'
+                      </td>
+                      <td style="height: 10px !important;">
+                          '.
+
+                          ( !empty($item->perspektif_id) ?
+                          '
+                          <a href="#" class="tag tag-blue text-white">
+                            '.($item->perspektif_id ? perspektif($item->perspektif_id) : '' ).'
+                          </a>
+                          <br />
+                          ' : ''
+                          )
+                          .'
+
+                          ' . $item->name . '
+                      </td>
+                      <td>
+                          '. (!empty($item->unit_kerja->name) ? $item->unit_kerja->name : '') .'
+                      </td>
+                      <td>
+                          <a href="#" onclick=\'return selectIndikatorKinerja("' . $item->id  . '")\'  class="btn btn-success btn-sm"><i class="fa fa-check"></i> Pilih</a>
+                      </td>
+                  </tr>
+                ' . (count($item->children) > 0 ? treeChildIndikatorKinerjaModal($item->children, $item,  (($prefix ? ($prefix .'.') : ''). $num), $num) : '') ;
+            }
+        }
+
+        return $html;
+
+    }
+}

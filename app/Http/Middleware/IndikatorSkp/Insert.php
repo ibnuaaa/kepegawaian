@@ -19,7 +19,7 @@ class Insert extends BaseMiddleware
         $this->Model->IndikatorSkp->parent_id = $this->_Request->input('parent_id');
         $this->Model->IndikatorSkp->created_user_id = MyAccount()->id;
         $this->Model->IndikatorSkp->created_jabatan_id = MyAccount()->jabatan_id;
-        $this->Model->IndikatorSkp->tipe_indikator = 'iki';
+        if (!empty($this->_Request->input('tipe_indikator'))) $this->Model->IndikatorSkp->tipe_indikator = $this->_Request->input('tipe_indikator');
         $this->Model->IndikatorSkp->unit_kerja_id = MyAccount()->unit_kerja_id;
     }
 

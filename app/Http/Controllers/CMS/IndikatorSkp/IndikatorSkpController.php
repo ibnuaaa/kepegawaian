@@ -80,12 +80,13 @@ class IndikatorSkpController extends Controller
         return view('app.indikator_skp.home.index', $ParseData);
     }
 
-    public function New(Request $request, $indikator_kinerja_id)
+    public function New(Request $request, $tipe_indikator, $indikator_kinerja_id)
     {
         $IndikatorSkp = IndikatorSkpBrowseController::FetchBrowse($request)
             ->equal('id', $indikator_kinerja_id)->get('first');
 
         return view('app.indikator_skp.new.index', [
+            'tipe_indikator' => $tipe_indikator,
             'indikator_kinerja_id' => $indikator_kinerja_id,
             'indikator_kinerja' => $IndikatorSkp['records']
         ]);

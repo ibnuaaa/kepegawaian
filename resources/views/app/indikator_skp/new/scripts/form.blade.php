@@ -24,11 +24,13 @@ $(document).ready(function() {
         const { urlNext, isRecreate } = $(this).data()
         newIndikatorSkpForm.validate().then(function(status) {
             if (status === 'Valid') {
-              const name = $('input[name="name"]')
+                const name = $('input[name="name"]')
 
                 axios.post('/indikator_skp', {
                     name: name.val(),
                     parent_id: '{{ $indikator_kinerja_id }}',
+                    tipe_indikator: '{{ $tipe_indikator }}',
+
                 }).then((response) => {
                     const { data } = response.data
                     if (!isRecreate) {

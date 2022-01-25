@@ -50,7 +50,7 @@
                 <p>{{ $number }}</p>
             </td>
             <td class="v-align-middle ">
-                <b>{{ $item->name }}</b>
+                <b class="text-red">{{ $item->name }}</b>
 
 
                 <table class="table table-bordered bg-white table-sm">
@@ -59,10 +59,7 @@
                           No
                         </th>
                         <th style="width: 45%;">
-                          Indikator Kinerja
-                        </th>
-                        <th style="width: 45%;">
-                          User
+                          Program & Kegiatan
                         </th>
                         <th style="width: 5%;">
                           Aksi
@@ -74,9 +71,42 @@
                             {{$key + 1}}
                         </td>
                         <td>
+                          <b class="text-blue">
                             {{$val->name}}
-                        </td>
-                        <td>
+                          </b>
+                            <table class="table table-bordered table-sm bg-white">
+                                <tr>
+                                    <th>
+                                        Kegiatan
+                                    </th>
+                                    <th style="width: 5%;">
+                                      Aksi
+                                    </th>
+                                </tr>
+                                <?php  foreach($val->kegiatan as $key2 => $val2) : ?>
+                                <tr>
+                                  <td>
+                                      {{$val2->name}}
+                                  </td>
+                                  <td>
+                                    <a href="/indikator_skp/edit/{{ $val2->id }}" class=" btn btn-primary btn-sm">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="#" onclick="return remove('{{ $val2->id }}','{{ $val2->name }}')" class=" btn btn-danger btn-sm">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                  </td>
+                                </tr>
+                                <?php endforeach; ?>
+                                <tr>
+                                    <td class="text-left" colspan="2">
+                                        <a href="{{ url('/indikator_skp/new/kegiatan/'.$val->id) }}" class="btn btn-success btn-sm">
+                                            <i class="fa fa-plus"></i>
+                                            Tambah Kegiatan
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
 
                         </td>
                         <td>
@@ -90,10 +120,10 @@
                     </tr>
                 <?php endforeach; ?>
                 <tr>
-                    <td colspan="3" class="text-center">
-                        <a href="{{ url('/indikator_skp/new/'.$item->id) }}" class="btn btn-success btn-sm">
+                    <td colspan="3" class="text-left">
+                        <a href="{{ url('/indikator_skp/new/program/'.$item->id) }}" class="btn btn-primary btn-sm">
                             <i class="fa fa-plus"></i>
-                            Tambah Indikator Kinerja
+                            Tambah Program
                         </a>
                     </td>
                 </tr>

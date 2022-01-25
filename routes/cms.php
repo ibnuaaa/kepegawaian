@@ -45,7 +45,7 @@ $router->get('/pendidikan/edit/{id}', 'CMS\Pendidikan\PendidikanController@Edit'
 $router->get('/pendidikan/{id}', 'CMS\Pendidikan\PendidikanController@Detail');
 
 $router->get('/indikator_skp', 'CMS\IndikatorSkp\IndikatorSkpController@Home');
-$router->get('/indikator_skp/new/{indikator_kinerja_id}', 'CMS\IndikatorSkp\IndikatorSkpController@New');
+$router->get('/indikator_skp/new/{tipe_indikator}/{indikator_kinerja_id}', 'CMS\IndikatorSkp\IndikatorSkpController@New');
 $router->get('/indikator_skp/edit/{id}', 'CMS\IndikatorSkp\IndikatorSkpController@Edit');
 $router->get('/indikator_skp/{id}', 'CMS\IndikatorSkp\IndikatorSkpController@Detail');
 
