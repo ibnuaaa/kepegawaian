@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\CMS\PenilaianPrestasiKerja;
 
 use App\Http\Controllers\PenilaianPrestasiKerja\PenilaianPrestasiKerjaBrowseController;
+use App\Http\Controllers\IndikatorKinerja\IndikatorKinerjaBrowseController;
+
 use App\Http\Controllers\Jabatan\JabatanBrowseController;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -110,11 +112,40 @@ class PenilaianPrestasiKerjaController extends Controller
 
         $IndikatorKinerjaTree = IndikatorKinerja::tree();
 
+        if ($Jabatan['records']->is_staff) {
+            // list semua indikator kerja dari kegiatan yang
+            $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
+                                ->where('unit_kerja_id', MyAccount()->unit_kerja_id)
+                                ->where('tipe_indikator', 'kegiatan')
+                                ->get('');
+
+            $indikator_kerja_ids = [];
+
+            foreach ($IndikatorKerja['records'] as $key2 => $value2) {
+                if(!empty($value2->id)) $indikator_kerja_ids[] = $value2->id;
+                $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
+            }
+        } else {
+
+        }
+
+
         return view('app.penilaian_prestasi_kerja.edit.index', [
             'select' => [],
             'data' => $PenilaianPrestasiKerja['records'],
+            'indikator_kerja_ids' => $indikator_kerja_ids,
             'jabatan' => $Jabatan['records'],
             'indikator_kinerja' => $IndikatorKinerjaTree
         ]);
+    }
+
+
+    public function tree($data, $last_array) {
+          if (empty( $data->id)) {
+              return $last_array;
+          } else {
+              $last_array[] = $data->id;
+              return $this->tree($data->parents, $last_array);
+          }
     }
 }

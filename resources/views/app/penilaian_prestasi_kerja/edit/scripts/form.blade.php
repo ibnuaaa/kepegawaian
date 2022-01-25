@@ -1,7 +1,9 @@
 <script>
 $(document).ready(function() {
 
-    
+    $('#basic').simpleTreeTable({
+      opened: [{{ implode(',',$indikator_kerja_ids) }}]
+    });
 
     const form = document.getElementById('editPenilaianPrestasiKerjaForm')
     const editPenilaianPrestasiKerjaForm = $('#editPenilaianPrestasiKerjaForm').formValidation({

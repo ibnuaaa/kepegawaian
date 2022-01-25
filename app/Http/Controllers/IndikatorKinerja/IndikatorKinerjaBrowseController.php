@@ -76,6 +76,14 @@ class IndikatorKinerjaBrowseController extends Controller
                     $query->where("$this->IndikatorKinerjaTable.parent_id", $request->ArrQuery->parent_id);
                 }
 
+                if (isset($request->ArrQuery->unit_kerja_id)) {
+                    $query->where("$this->IndikatorKinerjaTable.unit_kerja_id", $request->ArrQuery->unit_kerja_id);
+                }
+
+                if (isset($request->ArrQuery->tipe_indikator)) {
+                    $query->where("$this->IndikatorKinerjaTable.tipe_indikator", 'kegiatan');
+                }
+
                 if (isset($request->ArrQuery->id_not)) {
                     $query->where("$this->IndikatorKinerjaTable.id",'!=', $request->ArrQuery->id_not);
                 }
@@ -137,6 +145,7 @@ class IndikatorKinerjaBrowseController extends Controller
                 "$this->IndikatorKinerjaTable.id as indikator_kinerja.id",
                 "$this->IndikatorKinerjaTable.name as indikator_kinerja.name",
                 "$this->IndikatorKinerjaTable.parent_id as indikator_kinerja.parent_id",
+                "$this->IndikatorKinerjaTable.parent_id as parent_id",
                 "$this->IndikatorKinerjaTable.unit_kerja_id as indikator_kinerja.unit_kerja_id",
                 "$this->IndikatorKinerjaTable.perspektif_id as indikator_kinerja.perspektif_id",
 
@@ -147,7 +156,8 @@ class IndikatorKinerjaBrowseController extends Controller
 
            if (!isset($request->ArrQuery->without_with)) {
                $IndikatorKinerja->with('parent')
-               ->with('parents');
+               ->with('parents')
+               ->with('unit_kerja_with_parents');
            }
 
            $Browse = $this->Browse($request, $IndikatorKinerja, function ($data) use($request) {

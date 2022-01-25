@@ -112,7 +112,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {!! treeChildIndikatorKinerjaModal($indikator_kinerja, '', '', 0) !!}
+                        {!! treeChildIndikatorKinerjaModal($indikator_kinerja, '', '', 0, $indikator_kerja_ids) !!}
                     </tbody>
                 </table>
             </div>
