@@ -16,7 +16,12 @@ class Update extends BaseMiddleware
     {
         $this->Model->PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('id', $this->Id)->first();
         if ($this->Model->PenilaianPrestasiKerjaItem) {
-            $this->Model->PenilaianPrestasiKerjaItem->indikator_kinerja_id = $this->_Request->input('indikator_kinerja_id');
+            if(!empty($this->_Request->input('indikator_kinerja_id'))) $this->Model->PenilaianPrestasiKerjaItem->indikator_kinerja_id = $this->_Request->input('indikator_kinerja_id');
+            if(!empty($this->_Request->input('bobot'))) $this->Model->PenilaianPrestasiKerjaItem->bobot = $this->_Request->input('bobot');
+            if(!empty($this->_Request->input('target'))) $this->Model->PenilaianPrestasiKerjaItem->target = $this->_Request->input('target');
+            if(!empty($this->_Request->input('realisasi'))) $this->Model->PenilaianPrestasiKerjaItem->realisasi = $this->_Request->input('realisasi');
+            if(!empty($this->_Request->input('capaian'))) $this->Model->PenilaianPrestasiKerjaItem->capaian = $this->_Request->input('capaian');
+            if(!empty($this->_Request->input('nilai_kinerja'))) $this->Model->PenilaianPrestasiKerjaItem->nilai_kinerja = $this->_Request->input('nilai_kinerja');
         }
     }
 

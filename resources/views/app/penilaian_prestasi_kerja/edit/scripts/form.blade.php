@@ -109,4 +109,26 @@ function remove(id, name) {
   return false;
 }
 
+
+function saveSKP(e) {
+
+    var field = $(e).attr('name')
+    var id = $(e).attr('data-id')
+
+    var data = new Object;
+    data[field] = $(e).val();
+
+    $(e).addClass('loadingField')
+    axios.put('/penilaian_prestasi_kerja_item/' + id, data).then((response) => {
+        // location.reload()
+        $(e).removeClass('loadingField')
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
+        }
+    })
+}
+
+
 </script>
