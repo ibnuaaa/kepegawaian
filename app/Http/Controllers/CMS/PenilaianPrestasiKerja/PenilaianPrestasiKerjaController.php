@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CMS\PenilaianPrestasiKerja;
 
 use App\Http\Controllers\PenilaianPrestasiKerja\PenilaianPrestasiKerjaBrowseController;
+use App\Http\Controllers\Jabatan\JabatanBrowseController;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Support\Generate\Hash as KeyGenerator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+
+use App\Models\IndikatorKinerja;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -100,10 +103,18 @@ class PenilaianPrestasiKerjaController extends Controller
         if (!isset($PenilaianPrestasiKerja['records']->id)) {
             throw new ModelNotFoundException('Not Found Batch');
         }
+
+        // Get detail jabatan apakah dia staff atau bukan
+        $Jabatan = JabatanBrowseController::FetchBrowse($request)
+                    ->equal('id', MyAccount()->jabatan_id)->get('first');
+
+        $IndikatorKinerjaTree = IndikatorKinerja::tree();
+
         return view('app.penilaian_prestasi_kerja.edit.index', [
             'select' => [],
-            'data' => $PenilaianPrestasiKerja['records']
+            'data' => $PenilaianPrestasiKerja['records'],
+            'jabatan' => $Jabatan['records'],
+            'indikator_kinerja' => $IndikatorKinerjaTree
         ]);
     }
-
 }

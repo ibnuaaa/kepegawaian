@@ -1,6 +1,8 @@
 <script>
 $(document).ready(function() {
 
+    
+
     const form = document.getElementById('editPenilaianPrestasiKerjaForm')
     const editPenilaianPrestasiKerjaForm = $('#editPenilaianPrestasiKerjaForm').formValidation({
         fields: {
@@ -39,20 +41,24 @@ $(document).ready(function() {
         })
     })
 
-    $("#modalIndikatorKinerja").on('shown.bs.modal', function(){
-        axios.put('/penilaian_prestasi_kerja/{{$data['id']}}', data).then((response) => {
-            window.location = '{{ url('/penilaian_prestasi_kerja') }}';
-        }).catch((error) => {
-            if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
-                swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
-            }
-        })
+    $("#modalIndikatorKinerja").on('hide.bs.modal', function(){
+        showLoading()
+        location.reload()
     });
 })
 
-function saveNewIndikatorKinerja() {
+function openModalIndikatorKinerja() {
     $('#modalIndikatorKinerja').modal('show');
     return false;
 }
+
+function selectIndikatorKinerja(id) {
+
+
+
+    // $('#modalIndikatorKinerja').modal('hide');
+    return false;
+}
+
 
 </script>

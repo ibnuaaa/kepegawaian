@@ -79,7 +79,7 @@
 
                     <tr>
                         <td class="text-center" colspan="7">
-                            <a class="btn btn-primary btn-sm" href="#" onclick="return saveNewIndikatorKinerja();">
+                            <a class="btn btn-primary btn-sm" href="#" onclick="return openModalIndikatorKinerja();">
                                 <i class="fa fa-plus"></i>
                                 Tambah Indikator Kinerja
                             </a>
@@ -93,7 +93,7 @@
 </div>
 
 <div class="modal effect-sign" id="modalIndikatorKinerja" role="dialog">
-    <div class="modal-dialog modal-lg " role="document">
+    <div class="modal-dialog modal-xl " role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Daftar Indikator Kinerja Individual</h5>
@@ -102,18 +102,19 @@
                 </button>
             </div>
             <div class="modal-body" id="body-modal-sasaran-kinerja">
-                <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" name="example-checkbox2" value="option2">
-                    <span class="custom-control-label">
-                        asdasdasd
-                    </span>
-                </label>
-                <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" name="example-checkbox2" value="option2">
-                    <span class="custom-control-label">
-                        asdasdasd
-                    </span>
-                </label>
+                <table id="basic" class="table table-bordered table-condensed-custom">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>INDIKATOR KINERJA</th>
+                            <th style="width: 20%;">UNIT KERJA</th>
+                            <th style="width: 120px;">AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {!! treeChildIndikatorKinerjaModal($indikator_kinerja, '', '', 0) !!}
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
