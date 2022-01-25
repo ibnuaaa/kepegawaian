@@ -1389,7 +1389,7 @@ if ( ! function_exists('treeChildIndikatorKinerjaModal'))
                         </td>
                         <td>'.
 
-                            (in_array( $item->id ,$indikator_kerja_ids) && $item->tipe_indikator == 'kegiatan' ? '<a href="#" onclick=\'return selectIndikatorKinerja("' . $item->id  . '")\'  class="btn btn-success btn-sm"><i class="fa fa-check"></i> Pilih</a>' : '')
+                            (in_array( $item->id ,$indikator_kerja_ids) && $item->tipe_indikator == 'kegiatan' ? '<a href="#" onclick=\'return selectIndikatorKinerja(this, "' . $item->id  . '")\'  class="btn btn-success btn-sm"><i class="fa fa-check"></i> Pilih</a>' : '')
 
                         .'</td>
                     </tr>

@@ -54,9 +54,19 @@ function openModalIndikatorKinerja() {
     return false;
 }
 
-function selectIndikatorKinerja(id) {
+function selectIndikatorKinerja(e, id) {
 
+    $(e).removeClass('btn-success');
+    $(e).addClass('btn-warning');
+    $(e).addClass('btn-default');
 
+    $.growl.notice({
+        message: "Indikator telah berhasil ditambahkan"
+    });
+
+    $.growl.error({
+        message: "Indikator gagal ditambahkan"
+    });
 
     // $('#modalIndikatorKinerja').modal('hide');
     return false;

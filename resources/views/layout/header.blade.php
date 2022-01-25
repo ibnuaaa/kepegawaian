@@ -29,6 +29,10 @@
     <!--SWEET ALERT CSS-->
     <link href="/assets/plugins/sweet-alert/sweetalert.css" rel="stylesheet" />
 
+    <!-- INTERNAL Notifications  Css -->
+    <link href="/assets/plugins/notify/css/jquery.growl.css" rel="stylesheet" />
+    <link href="/assets/plugins/notify/css/notifIt.css" rel="stylesheet" />
+
     <!--C3 CHARTS CSS -->
     <link href="/assets/plugins/charts-c3/c3-chart.css" rel="stylesheet" />
 

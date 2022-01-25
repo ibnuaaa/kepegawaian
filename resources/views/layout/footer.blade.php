@@ -47,6 +47,9 @@
 <!-- SWEET-ALERT JS -->
 <script src="/assets/plugins/sweet-alert/sweetalert.min.js"></script>
 
+<script src="/assets/plugins/notify/js/jquery.growl.js"></script>
+<script src="/assets/plugins/notify/js/notifIt.js"></script>
+
 <!-- Color Theme js -->
 <script src="/assets/js/themeColors.js"></script>
 
@@ -253,7 +256,24 @@
         }
 
         #basic a span {
-             display: none;
+            display: none;
+        }
+
+        .table-condensed-custom td {
+            padding-top: 3px !important;
+            padding-bottom: 3px !important;
+            font-size: 13px !important;
+            vertical-align: top;
+        }
+
+        .td-inactive td {
+            color: #999 !important;
+            background: #eee;
+        }
+
+        .td-active td {
+            color: #000 !important;
+            background: #fff;
         }
     </style>
 </body>
