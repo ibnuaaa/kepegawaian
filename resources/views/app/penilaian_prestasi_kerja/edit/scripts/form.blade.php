@@ -56,21 +56,57 @@ function openModalIndikatorKinerja() {
 
 function selectIndikatorKinerja(e, id) {
 
+
+
+    var data = {
+        penilaian_prestasi_kerja_id: '{{ $data->id }}',
+        indikator_kinerja_id: id
+    }
+
     $(e).removeClass('btn-success');
     $(e).addClass('btn-warning');
-    $(e).addClass('btn-default');
-
-    $.growl.notice({
-        message: "Indikator telah berhasil ditambahkan"
-    });
-
-    $.growl.error({
-        message: "Indikator gagal ditambahkan"
-    });
+    axios.post('/penilaian_prestasi_kerja_item', data).then((response) => {
+        $(e).removeClass('btn-warning');
+        $(e).addClass('btn-default');
+        $.growl.notice({
+            message: "Indikator telah berhasil ditambahkan"
+        });
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+        }
+    })
 
     // $('#modalIndikatorKinerja').modal('hide');
     return false;
 }
 
+function remove(id, name) {
+
+  swal({
+      title: "Konfirmasi",
+      text: "Ingin menghapus data " + name + " ?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonText: 'Ya, Hapus',
+      cancelButtonText: 'Batal'
+  }, function(isConfirmed) {
+    console.log(isConfirmed)
+
+    if (isConfirmed) {
+      showLoading()
+      axios.delete('/penilaian_prestasi_kerja_item/'+id).then((response) => {
+          const { data } = response.data
+          window.location.reload()
+      }).catch((error) => {
+          if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+              swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+          }
+      })
+    }
+  });
+
+  return false;
+}
 
 </script>

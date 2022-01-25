@@ -146,15 +146,7 @@ return [
     ],
 
     'AdminCompanyRequired' => 'Harus menggunakan akun company',
-    'MoreThanOneDistributor' => 'Distributor lebih dari 1.',
-    'TglTerimaHarusDiisi' => 'Tanggal Terima Harus Diisi',
-    'NoBapbHarusDiisi' => 'No BAPB Harus Diisi',
-    'MaterialNoKontrakPayung' => 'Data Material Tidak Terhubung dengan Kontrak Payung (ERR 01)',
-    'KontrakPayungItemNotFound' => 'Data Material Tidak ada yang cocok dengan Kontrak payung manapun. (ERR 02)',
-    'MaterialNotFoundObjId' => 'Material Tidak ditemukan / Obj_id tidak sinkron (ERR 03)',
-    'EhrNotFoundObjId' => 'Barang tidak ditemukan di Stock status (ERR 04)',
-    'FoundSameMaterial' => 'Sudah ada material yang sama',
-    'MateriaKontrakpayungInemNol' => 'Harga Barang di kontrak payung 0 Rupiah',
+    'DuplicatePenilaianPrestasiKerjaItem' => 'Indikator Kinerja Sudah Ada.',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes

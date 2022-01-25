@@ -12,4 +12,10 @@ class PenilaianPrestasiKerja extends Model
 {
     use SoftDeletes;
     protected $table = 'penilaian_prestasi_kerja';
+
+    public function penilaian_prestasi_kerja_item()
+    {
+        return $this->hasMany(PenilaianPrestasiKerjaItem::class, 'penilaian_prestasi_kerja_id', 'id')->with('indikator_kinerja');
+    }
+
 }
