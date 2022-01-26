@@ -126,7 +126,7 @@ class PenilaianPrestasiKerjaController extends Controller
                 $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
             }
         } else {
-
+            $indikator_kerja_ids = [];
         }
 
 
