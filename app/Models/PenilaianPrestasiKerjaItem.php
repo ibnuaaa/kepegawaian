@@ -16,7 +16,7 @@ class PenilaianPrestasiKerjaItem extends Model
 
     public function indikator_kinerja()
     {
-        return $this->hasOne(IndikatorKinerja::class, 'id', 'indikator_kinerja_id');
+        return $this->hasOne(IndikatorSkp::class, 'id', 'indikator_kinerja_id')->with('indikator_skp_child');
     }
 
 }

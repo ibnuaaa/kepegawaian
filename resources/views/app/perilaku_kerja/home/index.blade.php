@@ -1,21 +1,20 @@
 @extends('layout.app')
 
-@section('title', 'PenilaianPrestasiKerja')
+@section('title', 'Golongan')
 @section('bodyClass', 'fixed-header menu-pin menu-behind')
 
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Penilaian Prestasi Kerja &nbsp;
-        <a onclick="saveNew()" class="btn btn-primary btn-sm pull-right">
-            <i class="fa fa-plus"></i>
-            Buat
+    <h1 class="page-title">Golongan
+        <a href="/golongan/new" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus"></i> Buat Golongan
         </a>
     </h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Penilaian Prestasi Kerja</li>
+            <li class="breadcrumb-item active" aria-current="page">Golongan</li>
         </ol>
     </div>
 </div>
@@ -24,7 +23,7 @@
 <!-- ROW-1 -->
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
-        @component('components.table', ['data' => $data, 'props' => ['jabatan' => $jabatan]])
+        @component('components.table', ['data' => $data, 'props' => []])
         @scopedslot('head', ($item))
         @if($item->name === 'No')
         <th style="width: 3%">{{ $item->label }}</th>
@@ -49,28 +48,27 @@
         </th>
         @endif
         @endscopedslot
-        @scopedslot('record', ($item, $props, $number, $data))
+        @scopedslot('record', ($item, $props, $number))
         <tr>
             <td class="v-align-middle ">
                 <p>{{ $number }}</p>
             </td>
             <td class="v-align-middle ">
-                <p>Januari 2022</p>
+                <p>{{ $item->pangkat }} </p>
+            </td>
+            <td class="v-align-middle ">
+                <p>{{ $item->golongan }}</p>
             </td>
             <td class="v-align-middle">
                 <p>{{ $item->created_at }}</p>
             </td>
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
-                    <a href="{{ url('/penilaian_prestasi_kerja/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                    <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                    <a href="{{ url('/golongan/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                    <a href="{{ url('/golongan/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                     <a onClick="return remove('{{$item->id}}','{{ $item->name }}')" href="#" class="btn btn-danger">
                         <i class="fa fa-trash"></i>
                     </a>
-
-                    @if (!$props['jabatan']->is_staff)
-                    <a href="{{ url('/indikator_skp/penilaian_prestasi_kerja/'.$item->id) }}" class="btn btn-success"><i class="fa fa-file"></i></a>
-                    @endif
                 </div>
             </td>
         </tr>
@@ -83,5 +81,5 @@
 @endsection
 
 @section('script')
-@include('app.penilaian_prestasi_kerja.home.scripts.index')
+@include('app.golongan.home.scripts.index')
 @endsection

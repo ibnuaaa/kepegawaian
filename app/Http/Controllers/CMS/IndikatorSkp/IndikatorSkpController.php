@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\CMS\IndikatorSkp;
 
 use App\Http\Controllers\IndikatorSkp\IndikatorSkpBrowseController;
+use App\Http\Controllers\PenilaianPrestasiKerja\PenilaianPrestasiKerjaBrowseController;
+use App\Http\Controllers\PenilaianPrestasiKerjaItem\PenilaianPrestasiKerjaItemBrowseController;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -20,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 
 class IndikatorSkpController extends Controller
 {
-    public function Home(Request $request)
+    public function Home(Request $request, $penilaian_prestasi_kerja_id)
     {
         $TableKey = 'indikator_skp-table';
 
@@ -34,21 +36,21 @@ class IndikatorSkpController extends Controller
         }
 
         $options = array(5,10,15,20);
-        $IndikatorSkp = IndikatorSkpBrowseController::FetchBrowse($request)
-            ->where('tipe_indikator',  'iku')
-            ->where('unit_kerja_id',  MyAccount()->unit_kerja_id)
-            ->where('take',  $selected)
-            ->where('with.total', 'true');
+        $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItemBrowseController::FetchBrowse($request)
+            // ->where('penilaian_prestasi_kerja_id', $penilaian_prestasi_kerja_id)
+            ->where('with.total', 'true')
+            ;
 
         if (isset($filter_search)) {
             $IndikatorSkp = $IndikatorSkp->where('search', $filter_search);
         }
 
-        $IndikatorSkp = $IndikatorSkp->middleware(function($fetch) use($request, $TableKey) {
+        $PenilaianPrestasiKerjaItem = $PenilaianPrestasiKerjaItem->middleware(function($fetch) use($request, $TableKey) {
                 $fetch->equal('skip', ___TableGetSkip($request, $TableKey, $fetch->QueryRoute->ArrQuery->take));
                 return $fetch;
             })
             ->get('fetch');
+
 
         $Take = ___TableGetTake($request, $TableKey);
         $DataTable = [
@@ -56,7 +58,7 @@ class IndikatorSkpController extends Controller
             'filter_search' => $filter_search,
             'placeholder_search' => "",
             'pageNow' => ___TableGetCurrentPage($request, $TableKey),
-            'paginate' => ___TablePaginate((int)$IndikatorSkp['total'], (int)$IndikatorSkp['query']->take, ___TableGetCurrentPage($request, $TableKey)),
+            'paginate' => ___TablePaginate((int)$PenilaianPrestasiKerjaItem['total'], (int)$PenilaianPrestasiKerjaItem['query']->take, ___TableGetCurrentPage($request, $TableKey)),
             'selected' => $selected,
             'options' => $options,
             'heads' => [
@@ -67,11 +69,15 @@ class IndikatorSkpController extends Controller
             'records' => []
         ];
 
-        if ($IndikatorSkp['records']) {
-            $DataTable['records'] = $IndikatorSkp['records'];
-            $DataTable['total'] = $IndikatorSkp['total'];
-            $DataTable['show'] = $IndikatorSkp['show'];
+        if ($PenilaianPrestasiKerjaItem['records']) {
+            $DataTable['records'] = $PenilaianPrestasiKerjaItem['records'];
+            $DataTable['total'] = $PenilaianPrestasiKerjaItem['total'];
+            $DataTable['show'] = $PenilaianPrestasiKerjaItem['show'];
         }
+
+
+        // cetak($PenilaianPrestasiKerjaItem['records']->toArray());
+        // die();
 
         $ParseData = [
             'data' => $DataTable,
@@ -118,5 +124,8 @@ class IndikatorSkpController extends Controller
             'data' => $IndikatorSkp['records']
         ]);
     }
+
+
+
 
 }

@@ -77,9 +77,15 @@ class PenilaianPrestasiKerjaController extends Controller
             $DataTable['show'] = $PenilaianPrestasiKerja['show'];
         }
 
+
+        // Get detail jabatan apakah dia staff atau bukan
+        $Jabatan = JabatanBrowseController::FetchBrowse($request)
+                    ->equal('id', MyAccount()->jabatan_id)->get('first');
+
         $ParseData = [
             'data' => $DataTable,
-            'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0
+            'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0,
+            'jabatan' => $Jabatan['records'],
         ];
         return view('app.penilaian_prestasi_kerja.home.index', $ParseData);
     }
@@ -113,7 +119,8 @@ class PenilaianPrestasiKerjaController extends Controller
         $IndikatorKinerjaTree = IndikatorKinerja::tree();
 
         if ($Jabatan['records']->is_staff) {
-            // list semua indikator kerja dari kegiatan yang
+
+            // list semua indikator kerja dari kegiatan yang ada di dalam 1 unit kerja
             $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
                                 ->where('unit_kerja_id', MyAccount()->unit_kerja_id)
                                 ->where('tipe_indikator', 'kegiatan')
@@ -125,17 +132,36 @@ class PenilaianPrestasiKerjaController extends Controller
                 if(!empty($value2->id)) $indikator_kerja_ids[] = $value2->id;
                 $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
             }
-        } else {
-            $indikator_kerja_ids = [];
-        }
 
+
+            $tipe_indikator_ditampilkan = 'kegiatan';
+
+        } else {
+
+            // list semua indikator kerja buat kepala bagian, kepala sub bagian, kepala instalasi
+            $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
+                                // ->where('unit_kerja_id', MyAccount()->unit_kerja_id)
+                                // ->where('tipe_indikator', 'iku')
+                                ->where('take', 100000)
+                                ->get('all');
+
+            $indikator_kerja_ids = [];
+
+            foreach ($IndikatorKerja['records'] as $key2 => $value2) {
+                if(!empty($value2->id)) $indikator_kerja_ids[] = $value2->id;
+                $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
+            }
+
+            $tipe_indikator_ditampilkan = 'iku';
+        }
 
         return view('app.penilaian_prestasi_kerja.edit.index', [
             'select' => [],
             'data' => $PenilaianPrestasiKerja['records'],
             'indikator_kerja_ids' => $indikator_kerja_ids,
             'jabatan' => $Jabatan['records'],
-            'indikator_kinerja' => $IndikatorKinerjaTree
+            'indikator_kinerja' => $IndikatorKinerjaTree,
+            'tipe_indikator_ditampilkan' => $tipe_indikator_ditampilkan
         ]);
     }
 

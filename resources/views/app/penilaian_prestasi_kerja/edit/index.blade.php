@@ -41,7 +41,7 @@
                               No
                           </th>
                           <th class="text-center" style="min-width: 200px;">
-                              Nama Indikator
+                              Indikator Kinerja Utama
                           </th>
                           <th class="text-center">
                               Bobot
@@ -125,6 +125,67 @@
                           </td>
                       </tr>
 
+                      <tr>
+                          <td class="text-center" colspan="2">
+                              Jumlah nilai indikator kinerja utama
+                          </td>
+                          <td>
+                          </td>
+                          <td>
+                          </td>
+                          <td>
+                          </td>
+                          <td>
+                          </td>
+                          <td>
+                          </td>
+                          <td class="text-center">
+                          </td>
+                      </tr>
+
+
+                      <tr>
+                          <th class="text-center" colspan="7">
+                              <br />
+                          </th>
+                      </tr>
+
+                      <tr>
+                          <th class="text-center" colspan="7">
+                              2. Indikator Perilaku Kerja (30%)
+                          </th>
+                      </tr>
+
+                      <tr>
+                          <th class="text-center">
+                              No
+                          </th>
+                          <th class="text-center" style="min-width: 200px;">
+                              Indikator
+                          </th>
+                          <th class="text-center">
+                              Bobot
+                          </th>
+                          <th class="text-center">
+                              Target
+                          </th>
+                          <th class="text-center">
+                              Realisasi
+                          </th>
+                          <th class="text-center">
+                              Capaian
+                          </th>
+                          <th class="text-center">
+                              Nilai Kinerja
+                          </th>
+                          <th class="text-center">
+                              Aksi
+                          </th>
+                      </tr>
+
+
+
+
                   </table>
 
                     </div>
@@ -158,7 +219,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {!! treeChildIndikatorKinerjaModal($indikator_kinerja, '', '', 0, $indikator_kerja_ids) !!}
+                                {!! treeChildIndikatorKinerjaModal($indikator_kinerja, '', '', 0, $indikator_kerja_ids, $tipe_indikator_ditampilkan) !!}
                             </tbody>
                         </table>
                     </div>

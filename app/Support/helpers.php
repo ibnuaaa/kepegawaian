@@ -1366,16 +1366,18 @@ if ( ! function_exists('treeChildIndikatorKinerja'))
 
 if ( ! function_exists('treeChildIndikatorKinerjaModal'))
 {
-    function treeChildIndikatorKinerjaModal($data, $dataParent, $prefix, $incr, $indikator_kerja_ids){
+    function treeChildIndikatorKinerjaModal($data, $dataParent, $prefix, $incr, $indikator_kerja_ids, $tipe_indikator_ditampilkan) {
 
         $html = "";
 
+          // cetak($indikator_kerja_ids);
+          // die();
 
           if (!empty($data)) {
               foreach ($data as $key => $item) {
 
                   $num = $key + 1;
-                  if (in_array( $item->id ,$indikator_kerja_ids)) {
+                  // if (in_array( $item->id ,$indikator_kerja_ids)) {
                   $html .= '
                     <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" >
                         <td style="height: 10px !important;white-space: nowrap;">
@@ -1387,14 +1389,12 @@ if ( ! function_exists('treeChildIndikatorKinerjaModal'))
                         <td>
                             '. (!empty($item->unit_kerja->name) ? $item->unit_kerja->name : '') .'
                         </td>
-                        <td>'.
-
-                            (in_array( $item->id ,$indikator_kerja_ids) && $item->tipe_indikator == 'kegiatan' ? '<a href="#" onclick=\'return selectIndikatorKinerja(this, "' . $item->id  . '")\'  class="btn btn-success btn-sm"><i class="fa fa-check"></i> Pilih</a>' : '')
-
+                        <td>' .
+                            (in_array( $item->id ,$indikator_kerja_ids) && $item->tipe_indikator == $tipe_indikator_ditampilkan ? '<a href="#" onclick=\'return selectIndikatorKinerja(this, "' . $item->id  . '")\'  class="btn btn-success btn-sm"><i class="fa fa-check"></i> Pilih</a>' : '')
                         .'</td>
                     </tr>
-                  ' . (count($item->children) > 0 ? treeChildIndikatorKinerjaModal($item->children, $item,  (($prefix ? ($prefix .'.') : ''). $num), $num, $indikator_kerja_ids) : '') ;
-              }
+                  ' . (count($item->children) > 0 ? treeChildIndikatorKinerjaModal($item->children, $item,  (($prefix ? ($prefix .'.') : ''). $num), $num, $indikator_kerja_ids, $tipe_indikator_ditampilkan) : '') ;
+              // }
           }
         }
 

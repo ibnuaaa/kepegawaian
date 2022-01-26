@@ -50,7 +50,7 @@
                 <p>{{ $number }}</p>
             </td>
             <td class="v-align-middle ">
-                <b class="text-red">{{ $item->name }}</b>
+                <b class="text-red">{{ !empty($item->indikator_kinerja->name) ? $item->indikator_kinerja->name : '' }}</b>
 
 
                 <table class="table table-bordered bg-white table-sm">
@@ -65,7 +65,7 @@
                           Aksi
                         </th>
                     </tr>
-                <?php  foreach($item->indikator_skp_child as $key => $val) : ?>
+                <?php  foreach($item->indikator_kinerja->indikator_skp_child as $key => $val) : ?>
                     <tr>
                         <td>
                             {{$key + 1}}
@@ -121,7 +121,7 @@
                 <?php endforeach; ?>
                 <tr>
                     <td colspan="3" class="text-left">
-                        <a href="{{ url('/indikator_skp/new/program/'.$item->id) }}" class="btn btn-primary btn-sm">
+                        <a href="{{ url('/indikator_skp/new/program/'.$item->indikator_kinerja->id) }}" class="btn btn-primary btn-sm">
                             <i class="fa fa-plus"></i>
                             Tambah Program
                         </a>
@@ -131,7 +131,7 @@
             </td>
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
-                    <a href="{{ url('/indikator_skp/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                    <a href="{{ url('/indikator_skp/'.$item->indikator_kinerja->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
                 </div>
             </td>
         </tr>

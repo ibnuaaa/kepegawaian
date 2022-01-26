@@ -81,7 +81,7 @@ class IndikatorKinerjaBrowseController extends Controller
                 }
 
                 if (isset($request->ArrQuery->tipe_indikator)) {
-                    $query->where("$this->IndikatorKinerjaTable.tipe_indikator", 'kegiatan');
+                    $query->where("$this->IndikatorKinerjaTable.tipe_indikator", $request->ArrQuery->tipe_indikator);
                 }
 
                 if (isset($request->ArrQuery->id_not)) {

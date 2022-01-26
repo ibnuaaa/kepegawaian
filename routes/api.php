@@ -67,6 +67,14 @@ $router->post($prefix.'/golongan', ['uses' => 'Golongan\GolonganController@Inser
 $router->put($prefix.'/golongan/{id}', ['uses' => 'Golongan\GolonganController@Update', 'middleware' => ['LogActivity:Golongan.Update','Golongan.Update']]);
 $router->delete($prefix.'/golongan/{id}', ['uses' => 'Golongan\GolonganController@Delete', 'middleware' => ['LogActivity:Golongan.Delete','Golongan.Delete']]);
 
+// perilaku_kerja
+$router->get($prefix.'/perilaku_kerja', ['uses' => 'PerilakuKerja\PerilakuKerjaBrowseController@get', 'middleware' => ['LogActivity:PerilakuKerja.View','ArrQuery']]);
+$router->get($prefix.'/perilaku_kerja/{query:.+}', ['uses' => 'PerilakuKerja\PerilakuKerjaBrowseController@get', 'middleware' => ['PerilakuKerja:PerilakuKerja.View','ArrQuery']]);
+$router->post($prefix.'/perilaku_kerja', ['uses' => 'PerilakuKerja\PerilakuKerjaController@Insert', 'middleware' => ['LogActivity:PerilakuKerja.Insert','PerilakuKerja.Insert']]);
+$router->put($prefix.'/perilaku_kerja/{id}', ['uses' => 'PerilakuKerja\PerilakuKerjaController@Update', 'middleware' => ['LogActivity:PerilakuKerja.Update','PerilakuKerja.Update']]);
+$router->delete($prefix.'/perilaku_kerja/{id}', ['uses' => 'PerilakuKerja\PerilakuKerjaController@Delete', 'middleware' => ['LogActivity:PerilakuKerja.Delete','PerilakuKerja.Delete']]);
+
+
 // user_pendidikan
 $router->get($prefix.'/user_pendidikan', ['uses' => 'UserPendidikan\UserPendidikanBrowseController@get', 'middleware' => ['LogActivity:UserPendidikan.View','ArrQuery']]);
 $router->get($prefix.'/user_pendidikan/{query:.+}', ['uses' => 'UserPendidikan\UserPendidikanBrowseController@get', 'middleware' => ['UserPendidikan:UserPendidikan.View','ArrQuery']]);

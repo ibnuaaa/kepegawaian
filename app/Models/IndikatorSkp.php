@@ -15,7 +15,7 @@ class IndikatorSkp extends Model
 
     public function indikator_skp_child()
     {
-        return $this->hasMany(IndikatorSkp::class, 'parent_id', 'indikator_skp.id')->with('kegiatan');
+        return $this->hasMany(IndikatorSkp::class, 'parent_id', 'id')->with('kegiatan');
     }
 
     public function kegiatan()

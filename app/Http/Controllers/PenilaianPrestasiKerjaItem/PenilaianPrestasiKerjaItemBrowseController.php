@@ -48,6 +48,10 @@ class PenilaianPrestasiKerjaItemBrowseController extends Controller
                 $query->where("$this->PenilaianPrestasiKerjaItemTable.id", $request->ArrQuery->id);
             }
 
+            if (isset($request->ArrQuery->penilaian_prestasi_kerja_id)) {
+                $query->where("$this->PenilaianPrestasiKerjaItemTable.penilaian_prestasi_kerja_id", $request->ArrQuery->penilaian_prestasi_kerja_id);
+            }
+
             if (!empty($request->get('q'))) {
                 $query->where(function ($query) use($request) {
                     $query->where("$this->PenilaianPrestasiKerjaItemTable.name", 'like', '%'.$request->get('name').'%');
@@ -68,10 +72,10 @@ class PenilaianPrestasiKerjaItemBrowseController extends Controller
         })
         ->select(
             // PenilaianPrestasiKerjaItem
-            "$this->PenilaianPrestasiKerjaItemTable.id as pendidikan.id",
-            "$this->PenilaianPrestasiKerjaItemTable.name as pendidikan.name",
-            "$this->PenilaianPrestasiKerjaItemTable.created_at as pendidikan.created_at"
-        );
+            "$this->PenilaianPrestasiKerjaItemTable.id as penilaian_restasi_kerja_item.id",
+            "$this->PenilaianPrestasiKerjaItemTable.indikator_kinerja_id as indikator_kinerja_id",
+            "$this->PenilaianPrestasiKerjaItemTable.created_at as penilaian_restasi_kerja_item.created_at"
+        )->with('indikator_kinerja');
 
         if(!empty($request->get('sort'))) {
             if(!empty($request->get('sort_type'))) {
@@ -97,7 +101,7 @@ class PenilaianPrestasiKerjaItemBrowseController extends Controller
     {
         return $records->map(function ($item) {
             foreach ($item->getAttributes() as $key => $value) {
-                $this->Group($item, $key, 'pendidikan.', $item);
+                $this->Group($item, $key, 'penilaian_restasi_kerja_item.', $item);
             }
             return $item;
         });
