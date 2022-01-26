@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Golongan;
+namespace App\Http\Controllers\PerilakuKerja;
 
-use App\Models\Golongan;
+use App\Models\PerilakuKerja;
 
 use App\Traits\Browse;
 
@@ -14,7 +14,7 @@ use App\Support\Generate\Hash as KeyGenerator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
-class GolonganController extends Controller
+class PerilakuKerjaController extends Controller
 {
     use Browse;
 
@@ -25,7 +25,7 @@ class GolonganController extends Controller
     ];
     public function get(Request $request)
     {
-        $Golongan = Golongan::where(function ($query) use($request) {
+        $PerilakuKerja = PerilakuKerja::where(function ($query) use($request) {
             if (isset($request->ArrQuery->id)) {
                 if ($request->ArrQuery->id === 'my') {
                     $query->where('id', $request->information()->id);
@@ -47,7 +47,7 @@ class GolonganController extends Controller
                }
            }
         });
-        $Browse = $this->Browse($request, $Golongan, function ($data) use($request) {
+        $Browse = $this->Browse($request, $PerilakuKerja, function ($data) use($request) {
             return $data;
         });
         Json::set('data', $Browse);
@@ -57,25 +57,25 @@ class GolonganController extends Controller
     public function Insert(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $Model->Golongan->save();
+        $Model->PerilakuKerja->save();
 
-        Json::set('data', $this->SyncData($request, $Model->Golongan->id));
+        Json::set('data', $this->SyncData($request, $Model->PerilakuKerja->id));
         return response()->json(Json::get(), 201);
     }
 
     public function Update(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $Model->Golongan->save();
+        $Model->PerilakuKerja->save();
 
-        Json::set('data', $this->SyncData($request, $Model->Golongan->id));
+        Json::set('data', $this->SyncData($request, $Model->PerilakuKerja->id));
         return response()->json(Json::get(), 202);
     }
 
     public function Delete(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $Model->Golongan->delete();
+        $Model->PerilakuKerja->delete();
         return response()->json(Json::get(), 202);
     }
 

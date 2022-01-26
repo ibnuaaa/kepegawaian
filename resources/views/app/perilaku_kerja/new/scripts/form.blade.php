@@ -1,16 +1,16 @@
 <script>
 $(document).ready(function() {
 
-    const form = document.getElementById('newGolonganForm')
-    const newGolonganForm = $('#newGolonganForm').formValidation({
+    const form = document.getElementById('newPerilakuKerjaForm')
+    const newPerilakuKerjaForm = $('#newPerilakuKerjaForm').formValidation({
         fields: {
-            // name: {
-            //     validators: {
-            //         notEmpty: {
-            //             message: 'Nama Golongan Harus diisi'
-            //         }
-            //     }
-            // },
+            name: {
+                validators: {
+                    notEmpty: {
+                        message: 'Nama PerilakuKerja Harus diisi'
+                    }
+                }
+            },
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -22,14 +22,12 @@ $(document).ready(function() {
 
     $('.saveAction').click(function() {
         const { urlNext, isRecreate } = $(this).data()
-        newGolonganForm.validate().then(function(status) {
+        newPerilakuKerjaForm.validate().then(function(status) {
             if (status === 'Valid') {
-                const pangkat = $('input[name="pangkat"]')
-                const golongan = $('input[name="golongan"]')
+                const name = $('input[name="name"]')
 
-                axios.post('/golongan', {
-                  pangkat: pangkat.val(),
-                  golongan: golongan.val(),
+                axios.post('/perilaku_kerja', {
+                    name: name.val(),
                 }).then((response) => {
                     const { data } = response.data
                     if (!isRecreate) {

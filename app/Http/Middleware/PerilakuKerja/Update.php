@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Middleware\Golongan;
+namespace App\Http\Middleware\PerilakuKerja;
 
-use App\Models\Golongan;
+use App\Models\PerilakuKerja;
 
 use Illuminate\Support\Facades\Hash;
 use Closure;
@@ -14,21 +14,19 @@ class Update extends BaseMiddleware
 {
     private function Initiate($request)
     {
-        $this->Model->Golongan = Golongan::where('id', $this->Id)->first();
-        if ($this->Model->Golongan) {
-            $this->Model->Golongan->pangkat = $this->_Request->input('pangkat');
-            $this->Model->Golongan->golongan = $this->_Request->input('golongan');
-      }
+        $this->Model->PerilakuKerja = PerilakuKerja::where('id', $this->Id)->first();
+        if ($this->Model->PerilakuKerja) {
+            $this->Model->PerilakuKerja->name = $this->_Request->input('name');
+        }
     }
 
     private function Validation()
     {
         $validator = Validator::make($this->_Request->all(), [
-          'pangkat' => 'required',
-          'golongan' => 'required'
+            'name' => 'required'
         ]);
-        if (!$this->Model->Golongan) {
-            $this->Json::set('exception.key', 'NotFoundGolongan');
+        if (!$this->Model->PerilakuKerja) {
+            $this->Json::set('exception.key', 'NotFoundPerilakuKerja');
             $this->Json::set('exception.message', trans('validation.'.$this->Json::get('exception.key')));
             return false;
         }

@@ -77,6 +77,12 @@ class PermissionSeeder extends Seeder
                 'name' => 'pendidikan',
                 'label' => 'pendidikan',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 12,
+                'name' => 'perilaku_kerja',
+                'label' => 'perilaku_kerja',
+                'created_at' => Carbon::now()
             ]
         ])->keyBy($this->key);
     }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\CMS\Golongan;
+namespace App\Http\Controllers\CMS\PerilakuKerja;
 
-use App\Http\Controllers\Golongan\GolonganBrowseController;
+use App\Http\Controllers\PerilakuKerja\PerilakuKerjaBrowseController;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -18,31 +18,31 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
 
-class GolonganController extends Controller
+class PerilakuKerjaController extends Controller
 {
     public function Home(Request $request)
     {
-        $TableKey = 'golongan-table';
+        $TableKey = 'perilaku_kerja-table';
 
         $filter_search = $request->input('filter_search');
 
-        if (isset($request['golongan-table-show'])) {
-            $selected = $request['golongan-table-show'];
+        if (isset($request['perilaku_kerja-table-show'])) {
+            $selected = $request['perilaku_kerja-table-show'];
         }
         else {
             $selected = 10;
         }
 
         $options = array(5,10,15,20);
-        $Golongan = GolonganBrowseController::FetchBrowse($request)
+        $PerilakuKerja = PerilakuKerjaBrowseController::FetchBrowse($request)
             ->where('take',  $selected)
             ->where('with.total', 'true');
 
         if (isset($filter_search)) {
-            $Golongan = $Golongan->where('search', $filter_search);
+            $PerilakuKerja = $PerilakuKerja->where('search', $filter_search);
         }
 
-        $Golongan = $Golongan->middleware(function($fetch) use($request, $TableKey) {
+        $PerilakuKerja = $PerilakuKerja->middleware(function($fetch) use($request, $TableKey) {
                 $fetch->equal('skip', ___TableGetSkip($request, $TableKey, $fetch->QueryRoute->ArrQuery->take));
                 return $fetch;
             })
@@ -54,35 +54,34 @@ class GolonganController extends Controller
             'filter_search' => $filter_search,
             'placeholder_search' => "",
             'pageNow' => ___TableGetCurrentPage($request, $TableKey),
-            'paginate' => ___TablePaginate((int)$Golongan['total'], (int)$Golongan['query']->take, ___TableGetCurrentPage($request, $TableKey)),
+            'paginate' => ___TablePaginate((int)$PerilakuKerja['total'], (int)$PerilakuKerja['query']->take, ___TableGetCurrentPage($request, $TableKey)),
             'selected' => $selected,
             'options' => $options,
             'heads' => [
                 (object)['name' => 'No', 'label' => 'No'],
-                (object)['name' => 'pangkat', 'label' => 'Nama Pangkat'],
-                (object)['name' => 'golongan', 'label' => 'Golongan'],
+                (object)['name' => 'name', 'label' => 'Nama PerilakuKerja'],
                 (object)['name' => 'created_at', 'label' => 'Terbuat Pada'],
                 (object)['name' => 'action', 'label' => 'Aksi']
             ],
             'records' => []
         ];
 
-        if ($Golongan['records']) {
-            $DataTable['records'] = $Golongan['records'];
-            $DataTable['total'] = $Golongan['total'];
-            $DataTable['show'] = $Golongan['show'];
+        if ($PerilakuKerja['records']) {
+            $DataTable['records'] = $PerilakuKerja['records'];
+            $DataTable['total'] = $PerilakuKerja['total'];
+            $DataTable['show'] = $PerilakuKerja['show'];
         }
 
         $ParseData = [
             'data' => $DataTable,
             'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0
         ];
-        return view('app.golongan.home.index', $ParseData);
+        return view('app.perilaku_kerja.home.index', $ParseData);
     }
 
     public function New(Request $request)
     {
-        return view('app.golongan.new.index', [
+        return view('app.perilaku_kerja.new.index', [
             'select' => [],
         ]);
     }
@@ -93,24 +92,24 @@ class GolonganController extends Controller
         $QueryRoute->ArrQuery->id = $id;
         $QueryRoute->ArrQuery->set = 'first';
         $QueryRoute->ArrQuery->{'with.total'} = 'true';
-        $GolonganBrowseController = new GolonganBrowseController($QueryRoute);
-        $data = $GolonganBrowseController->get($QueryRoute);
+        $PerilakuKerjaBrowseController = new PerilakuKerjaBrowseController($QueryRoute);
+        $data = $PerilakuKerjaBrowseController->get($QueryRoute);
 
-        return view('app.golongan.detail.index', [ 'data' => $data->original['data']['records'] ]);
+        return view('app.perilaku_kerja.detail.index', [ 'data' => $data->original['data']['records'] ]);
     }
 
     public function Edit(Request $request, $id)
     {
-        $Golongan = GolonganBrowseController::FetchBrowse($request)
+        $PerilakuKerja = PerilakuKerjaBrowseController::FetchBrowse($request)
             ->equal('id', $id)->get('first');
 
 
-        if (!isset($Golongan['records']->id)) {
+        if (!isset($PerilakuKerja['records']->id)) {
             throw new ModelNotFoundException('Not Found Batch');
         }
-        return view('app.golongan.edit.index', [
+        return view('app.perilaku_kerja.edit.index', [
             'select' => [],
-            'data' => $Golongan['records']
+            'data' => $PerilakuKerja['records']
         ]);
     }
 

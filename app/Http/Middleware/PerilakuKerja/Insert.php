@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Middleware\Golongan;
+namespace App\Http\Middleware\PerilakuKerja;
 
-use App\Models\Golongan;
+use App\Models\PerilakuKerja;
 
 use Closure;
 use Validator;
@@ -13,17 +13,15 @@ class Insert extends BaseMiddleware
 {
     private function Initiate()
     {
-        $this->Model->Golongan = new Golongan();
+        $this->Model->PerilakuKerja = new PerilakuKerja();
 
-        $this->Model->Golongan->pangkat = $this->_Request->input('pangkat');
-        $this->Model->Golongan->golongan = $this->_Request->input('golongan');
+        $this->Model->PerilakuKerja->name = $this->_Request->input('name');
     }
 
     private function Validation()
     {
         $validator = Validator::make($this->_Request->all(), [
-          'pangkat' => 'required',
-          'golongan' => 'required'
+            'name' => 'required'
         ]);
         if ($validator->fails()) {
             $this->Json::set('errors', $validator->errors());

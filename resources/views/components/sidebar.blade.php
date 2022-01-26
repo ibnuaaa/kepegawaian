@@ -67,6 +67,9 @@
                               @if (getPermissions('pendidikan')['checked'])
                               <li><a href="{!! url('/pendidikan'); !!}" class="slide-item"> Pendidikan</a></li>
                               @endif
+                              @if (getPermissions('perilaku_kerja')['checked'])
+                              <li><a href="{!! url('/perilaku_kerja'); !!}" class="slide-item"> Perilaku Kerja</a></li>
+                              @endif
 
                             </ul>
                         </li>

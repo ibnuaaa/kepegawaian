@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Golongan;
+namespace App\Http\Controllers\PerilakuKerja;
 
-use App\Models\Golongan;
+use App\Models\PerilakuKerja;
 
 use App\Traits\Browse;
-use App\Traits\Golongan\GolonganCollection;
+use App\Traits\PerilakuKerja\PerilakuKerjaCollection;
 
 use Carbon\Carbon;
 use Illuminate\Http\Response;
@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Auth;
 
 use DB;
 
-class GolonganBrowseController extends Controller
+class PerilakuKerjaBrowseController extends Controller
 {
-    use Browse, GolonganCollection {
-        GolonganCollection::__construct as private __GolonganCollectionConstruct;
+    use Browse, PerilakuKerjaCollection {
+        PerilakuKerjaCollection::__construct as private __PerilakuKerjaCollectionConstruct;
     }
 
     protected $search = [
@@ -33,7 +33,7 @@ class GolonganBrowseController extends Controller
         if ($request) {
             $this->_Request = $request;
         }
-        $this->__GolonganCollectionConstruct();
+        $this->__PerilakuKerjaCollectionConstruct();
     }
 
     public function get(Request $request)
@@ -43,14 +43,14 @@ class GolonganBrowseController extends Controller
             $request->ArrQuery->take = 5000;
         }
 
-        $Golongan = Golongan::where(function ($query) use($request) {
+        $PerilakuKerja = PerilakuKerja::where(function ($query) use($request) {
             if (isset($request->ArrQuery->id)) {
-                $query->where("$this->GolonganTable.id", $request->ArrQuery->id);
+                $query->where("$this->PerilakuKerjaTable.id", $request->ArrQuery->id);
             }
 
             if (!empty($request->get('q'))) {
                 $query->where(function ($query) use($request) {
-                    $query->where("$this->GolonganTable.name", 'like', '%'.$request->get('name').'%');
+                    $query->where("$this->PerilakuKerjaTable.name", 'like', '%'.$request->get('name').'%');
                 });
             }
 
@@ -67,29 +67,25 @@ class GolonganBrowseController extends Controller
             }
         })
         ->select(
-            // Golongan
-            "$this->GolonganTable.id as golongan.id",
-            "$this->GolonganTable.name as golongan.name",
-            "$this->GolonganTable.pangkat as golongan.pangkat",
-            "$this->GolonganTable.golongan as golongan.golongan",
-            "$this->GolonganTable.created_at as golongan.created_at"
+            // PerilakuKerja
+            "$this->PerilakuKerjaTable.id as perilaku_kerja.id",
+            "$this->PerilakuKerjaTable.name as perilaku_kerja.name",
+            "$this->PerilakuKerjaTable.created_at as perilaku_kerja.created_at"
         );
 
         if(!empty($request->get('sort'))) {
             if(!empty($request->get('sort_type'))) {
-              if ($request->get('sort') == 'pangkat') $Golongan->orderBy("$this->GolonganTable.pangkat", $request->get('sort_type'));
-              if ($request->get('sort') == 'golongan') $Golongan->orderBy("$this->GolonganTable.golongan", $request->get('sort_type'));
-              if ($request->get('sort') == 'name') $Golongan->orderBy("$this->GolonganTable.name", $request->get('sort_type'));
-              if ($request->get('sort') == 'created_at') $Golongan->orderBy("$this->GolonganTable.created_at", $request->get('sort_type'));
+              if ($request->get('sort') == 'name') $PerilakuKerja->orderBy("$this->PerilakuKerjaTable.name", $request->get('sort_type'));
+              if ($request->get('sort') == 'created_at') $PerilakuKerja->orderBy("$this->PerilakuKerjaTable.created_at", $request->get('sort_type'));
             } else {
-              $Golongan->orderBy("$this->GolonganTable.created_at", 'desc');
+              $PerilakuKerja->orderBy("$this->PerilakuKerjaTable.created_at", 'desc');
             }
         } else {
-            $Golongan->orderBy("$this->GolonganTable.created_at", 'desc');
+            $PerilakuKerja->orderBy("$this->PerilakuKerjaTable.created_at", 'desc');
         }
 
 
-       $Browse = $this->Browse($request, $Golongan, function ($data) use($request) {
+       $Browse = $this->Browse($request, $PerilakuKerja, function ($data) use($request) {
             $data = $this->Manipulate($data);
             return $data;
        });
@@ -101,7 +97,7 @@ class GolonganBrowseController extends Controller
     {
         return $records->map(function ($item) {
             foreach ($item->getAttributes() as $key => $value) {
-                $this->Group($item, $key, 'golongan.', $item);
+                $this->Group($item, $key, 'perilaku_kerja.', $item);
             }
             return $item;
         });

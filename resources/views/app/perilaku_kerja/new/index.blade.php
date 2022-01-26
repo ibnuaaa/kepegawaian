@@ -1,18 +1,18 @@
 @extends('layout.app')
 
-@section('title', 'Golongan')
+@section('title', 'PerilakuKerja')
 @section('bodyClass', 'fixed-header menu-pin menu-behind')
 
 @section('content')
 
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Buat Golongan</h1>
+    <h1 class="page-title">Buat PerilakuKerja</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="/golongan">Golongan</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Buat Golongan</li>
+            <li class="breadcrumb-item"><a href="/perilaku_kerja">PerilakuKerja</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Buat PerilakuKerja</li>
         </ol>
     </div>
 </div>
@@ -23,18 +23,10 @@
     <div class="col-12 col-md-7 col-lg-8">
         <div class="card overflow-hidden">
             <div class="card-body">
-                <form autocomplete="off" id="newGolonganForm">
-                    <div class=" row mb-4">
-                        <label class="col-md-3 form-label">Pangkat</label>
-                        <div class="col-md-9">
-                            <input name="pangkat" value="" class="form-control" type="text" required>
-                        </div>
-                    </div>
-                    <div class=" row mb-4">
-                        <label class="col-md-3 form-label">Golongan</label>
-                        <div class="col-md-9">
-                            <input name="golongan" value="" class="form-control" type="text" required>
-                        </div>
+                <form autocomplete="off" id="newPerilakuKerjaForm">
+                    <div class="form-group form-group-default required ">
+                        <label class="form-label">Nama</label>
+                        <input name="name" value="" class="form-control" type="text" required>
                     </div>
                 </form>
             </div>
@@ -43,7 +35,7 @@
     <div class="col-12 col-md-5 col-lg-4">
         <div class="card card-default card-action">
             <div class="card-body">
-                <button data-url-next="{{ UrlPrevious(url('/golongan')) }}" class="saveAction btn btn-block btn-success btn-cons m-b-10">
+                <button data-url-next="{{ UrlPrevious(url('/perilaku_kerja')) }}" class="saveAction btn btn-block btn-success btn-cons m-b-10">
                     <i class="fa fa-save"></i>
                     Save
                 </button>
@@ -53,7 +45,7 @@
                     Save & New
                 </button>
 
-                <a href="{{ url('/golongan') }}" class="btn btn-block btn-primary btn-cons m-b-10"><i class="fa fa-arrow-left"></i> Cancel</a>
+                <a href="{{ url('/perilaku_kerja') }}" class="btn btn-block btn-primary btn-cons m-b-10"><i class="fa fa-arrow-left"></i> Cancel</a>
             </div>
         </div>
     </div>
@@ -62,5 +54,5 @@
 @endsection
 
 @section('formValidationScript')
-@include('app.golongan.new.scripts.form')
+@include('app.perilaku_kerja.new.scripts.form')
 @endsection

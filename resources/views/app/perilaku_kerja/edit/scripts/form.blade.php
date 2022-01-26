@@ -1,16 +1,16 @@
 <script>
 $(document).ready(function() {
 
-    const form = document.getElementById('editGolonganForm')
-    const editGolonganForm = $('#editGolonganForm').formValidation({
+    const form = document.getElementById('editPerilakuKerjaForm')
+    const editPerilakuKerjaForm = $('#editPerilakuKerjaForm').formValidation({
         fields: {
-            // name: {
-            //     validators: {
-            //         notEmpty: {
-            //             message: 'The golonganname is required'
-            //         }
-            //     }
-            // }
+            name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The perilaku_kerjaname is required'
+                    }
+                }
+            }
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -20,18 +20,16 @@ $(document).ready(function() {
     }).data('formValidation')
 
     $('#saveAction').click(function() {
-        editGolonganForm.validate().then(function(status) {
+        editPerilakuKerjaForm.validate().then(function(status) {
             if (status === 'Valid') {
-                const pangkat = $('input[name="pangkat"]')
-                const golongan = $('input[name="golongan"]')
+                const name = $('input[name="name"]')
 
                 const data = {
-                  pangkat: pangkat.val(),
-                  golongan: golongan.val(),
+                    name: name.val(),
                 }
 
-                axios.put('/golongan/{{$data['id']}}', data).then((response) => {
-                    window.location = '{{ url('/golongan') }}';
+                axios.put('/perilaku_kerja/{{$data['id']}}', data).then((response) => {
+                    window.location = '{{ url('/perilaku_kerja') }}';
                 }).catch((error) => {
                     if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
                         swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
@@ -49,9 +47,9 @@ $('#deleteOpenModal').click(function() {
     $('#modalDelete').modal('show')
 })
 $('#deleteAction').click(function() {
-    axios.delete('/golongan/{{$data['id']}}').then((response) => {
+    axios.delete('/perilaku_kerja/{{$data['id']}}').then((response) => {
         const { data } = response.data
-        window.location = '{{ UrlPrevious(url('/golongan')) }}'
+        window.location = '{{ UrlPrevious(url('/perilaku_kerja')) }}'
         $('#modalDelete').modal('hide')
     }).catch((error) => {
         if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {

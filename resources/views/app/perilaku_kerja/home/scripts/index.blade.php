@@ -1,5 +1,12 @@
 <script>
 
+$('#modalDelete').on('show.bs.modal', function(e) {
+    const { recordId, recordName } = $(e.relatedTarget).data()
+    $('#deleteAction').click(function() {
+
+    })
+})
+
 // filter
 $('#filterAction').click(function() {
     const filter_search = $('input[name="filter_search"]').val()
@@ -7,7 +14,7 @@ $('#filterAction').click(function() {
     if (filter_search) {
         query.filter_search = filter_search
     }
-    const href = '{{ url('/golongan') }}'
+    const href = '{{ url('/perilaku_kerja') }}'
     const queryString = Qs.stringify(query)
     if (queryString) {
         window.location = href + '?' + queryString
@@ -32,7 +39,7 @@ function sortBy(column, current_sort_type) {
 
     if (column != '{{ !empty($_GET['sort']) ? $_GET['sort'] : '' }}') query.sort_type = 'asc'
 
-    const href = '{{ url('/golongan') }}'
+    const href = '{{ url('/perilaku_kerja') }}'
     const queryString = Qs.stringify(query)
     if (queryString) {
         window.location = href + '?' + queryString
@@ -55,7 +62,7 @@ function remove(id, name) {
 
     if (isConfirmed) {
       showLoading()
-      axios.delete('/golongan/'+id).then((response) => {
+      axios.delete('/perilaku_kerja/'+id).then((response) => {
           const { data } = response.data
           window.location.reload()
       }).catch((error) => {

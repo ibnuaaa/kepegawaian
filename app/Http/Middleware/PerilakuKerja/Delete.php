@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Middleware\Golongan;
+namespace App\Http\Middleware\PerilakuKerja;
 
-use App\Models\Golongan;
+use App\Models\PerilakuKerja;
 
 use Closure;
 use Validator;
@@ -13,14 +13,14 @@ class Delete extends BaseMiddleware
 {
     private function Initiate($request)
     {
-        $this->Model->Golongan = Golongan::find($this->Id);
+        $this->Model->PerilakuKerja = PerilakuKerja::find($this->Id);
     }
 
     private function Validation()
     {
         $validator = Validator::make([ 'id' => $this->Id ], $this->Rules);
-        if (!$this->Model->Golongan) {
-            $this->Json::set('exception.code', 'NotFoundGolongan');
+        if (!$this->Model->PerilakuKerja) {
+            $this->Json::set('exception.code', 'NotFoundPerilakuKerja');
             $this->Json::set('exception.message', trans('validation.'.$this->Json::get('exception.code')));
             return false;
         }

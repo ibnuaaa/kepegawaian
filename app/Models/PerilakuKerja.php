@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Golongan extends Model
+class PerilakuKerja extends Model
 {
     use SoftDeletes;
-    protected $table = 'golongan';
+    protected $table = 'perilaku_kerja';
 }

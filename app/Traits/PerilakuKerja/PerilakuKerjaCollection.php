@@ -1,28 +1,28 @@
 <?php
 
-namespace App\Traits\Golongan;
+namespace App\Traits\PerilakuKerja;
 
 /* Models */
-use App\Models\Golongan;
+use App\Models\PerilakuKerja;
 
 use DB;
 
-trait GolonganCollection
+trait PerilakuKerjaCollection
 {
     public function __construct()
     {
-        $this->GolonganModel = Golongan::class;
-        $this->GolonganTable = getTable($this->GolonganModel);
+        $this->PerilakuKerjaModel = PerilakuKerja::class;
+        $this->PerilakuKerjaTable = getTable($this->PerilakuKerjaModel);
     }
 
-    public function GetGolonganDetails($Golongans)
+    public function GetPerilakuKerjaDetails($PerilakuKerjas)
     {
-        $GolonganID = $Golongans->pluck('id');
+        $PerilakuKerjaID = $PerilakuKerjas->pluck('id');
 
-        $Golongans->map(function($Golongan) {
-            return $Golongan;
+        $PerilakuKerjas->map(function($PerilakuKerja) {
+            return $PerilakuKerja;
         });
-        return $Golongans;
+        return $PerilakuKerjas;
     }
 
 }
