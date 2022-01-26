@@ -29,7 +29,33 @@
                    <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
 
 
+
                       <table class="table table-bordered table-sm">
+
+                          <tr>
+                              <td style="width: 80px;" colspan="2">
+                                  <select class="form-control form-select">
+                                      <option>
+                                          Januari
+                                      </option>
+                                  </select>
+
+                              </td>
+                          </tr>
+
+                          <tr>
+                              <td style="width: 80px;" colspan="2">
+
+                                  <select class="form-control form-select">
+                                      <option>
+                                          -= Pilih Tahun =-
+                                      </option>
+                                      <option>
+                                          2022
+                                      </option>
+                                  </select>
+                              </td>
+                          </tr>
 
                           <tr>
                               <th class="text-center" colspan="8">
