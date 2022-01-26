@@ -20,7 +20,7 @@
 <!-- ROW-1 -->
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
-        @component('components.table', ['data' => $data, 'props' => []])
+        @component('components.table', ['data' => $data, 'props' => ['penilaian_prestasi_kerja_id' => $penilaian_prestasi_kerja_id]])
         @scopedslot('head', ($item))
         @if($item->name === 'No')
         <th style="width: 3%">{{ $item->label }}</th>
@@ -90,7 +90,7 @@
                                       {{$val2->name}}
                                   </td>
                                   <td>
-                                    <a href="/indikator_skp/edit/{{ $val2->id }}" class=" btn btn-primary btn-sm">
+                                    <a href="/indikator_skp/edit/{{ $val2->id }}/{{$props['penilaian_prestasi_kerja_id']}}" class=" btn btn-primary btn-sm">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <a href="#" onclick="return remove('{{ $val2->id }}','{{ $val2->name }}')" class=" btn btn-danger btn-sm">
@@ -101,7 +101,7 @@
                                 <?php endforeach; ?>
                                 <tr>
                                     <td class="text-left" colspan="2">
-                                        <a href="{{ url('/indikator_skp/new/kegiatan/'.$val->id) }}" class="btn btn-success btn-sm">
+                                        <a href="{{ url('/indikator_skp/new/kegiatan/'.$val->id.'/'.$props['penilaian_prestasi_kerja_id']) }}" class="btn btn-success btn-sm">
                                             <i class="fa fa-plus"></i>
                                             Tambah Kegiatan
                                         </a>
@@ -111,7 +111,7 @@
 
                         </td>
                         <td>
-                          <a href="/indikator_skp/edit/{{ $val->id }}" class=" btn btn-primary btn-sm">
+                          <a href="/indikator_skp/edit/{{ $val->id }}/{{$props['penilaian_prestasi_kerja_id']}}" class=" btn btn-primary btn-sm">
                               <i class="fa fa-edit"></i>
                           </a>
                           <a href="#" onclick="return remove('{{ $val->id }}','{{ $val->name }}')" class=" btn btn-danger btn-sm">
@@ -120,9 +120,12 @@
                         </td>
                     </tr>
                 <?php endforeach; ?>
+
+
+
                 <tr>
                     <td colspan="3" class="text-left">
-                        <a href="{{ url('/indikator_skp/new/program/'.$item->indikator_kinerja->id) }}" class="btn btn-primary btn-sm">
+                        <a href="{{ url('/indikator_skp/new/program/'.$item->indikator_kinerja->id.'/'.$props['penilaian_prestasi_kerja_id']) }}" class="btn btn-primary btn-sm">
                             <i class="fa fa-plus"></i>
                             Tambah Program
                         </a>

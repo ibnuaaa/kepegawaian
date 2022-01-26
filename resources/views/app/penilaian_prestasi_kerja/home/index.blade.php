@@ -83,5 +83,5 @@
 @endsection
 
 @section('script')
-@include('app.penilaian_prestasi_kerja.indikator_skp.scripts.index')
+@include('app.penilaian_prestasi_kerja.home.scripts.index')
 @endsection

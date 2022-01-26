@@ -51,7 +51,7 @@
                     Save & New
                 </button>
 
-                <a href="{{ url('/indikator_skp') }}" class="btn btn-block btn-primary btn-cons m-b-10"><i class="fa fa-arrow-left"></i> Cancel</a>
+                <a href="{{ url('/penilaian_prestasi_kerja/id/' . $penilaian_prestasi_kerja_id) }}" class="btn btn-block btn-primary btn-cons m-b-10"><i class="fa fa-arrow-left"></i> Cancel</a>
             </div>
         </div>
     </div>

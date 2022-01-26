@@ -88,8 +88,11 @@ class PenilaianPrestasiKerjaController extends Controller
 
         $ParseData = [
             'data' => $DataTable,
-            'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0
+            'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0,
+            'penilaian_prestasi_kerja_id' => $penilaian_prestasi_kerja_id
         ];
+
+
         return view('app.penilaian_prestasi_kerja.indikator_skp.index', $ParseData);
     }
 

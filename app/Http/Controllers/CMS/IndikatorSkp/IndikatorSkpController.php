@@ -22,9 +22,9 @@ use Illuminate\Support\Facades\Auth;
 
 class IndikatorSkpController extends Controller
 {
-    
 
-    public function New(Request $request, $tipe_indikator, $indikator_kinerja_id)
+
+    public function New(Request $request, $tipe_indikator, $indikator_kinerja_id, $penilaian_prestasi_kerja_id)
     {
         $IndikatorSkp = IndikatorSkpBrowseController::FetchBrowse($request)
             ->equal('id', $indikator_kinerja_id)->get('first');
@@ -32,7 +32,8 @@ class IndikatorSkpController extends Controller
         return view('app.indikator_skp.new.index', [
             'tipe_indikator' => $tipe_indikator,
             'indikator_kinerja_id' => $indikator_kinerja_id,
-            'indikator_kinerja' => $IndikatorSkp['records']
+            'indikator_kinerja' => $IndikatorSkp['records'],
+            'penilaian_prestasi_kerja_id' => $penilaian_prestasi_kerja_id
         ]);
     }
 

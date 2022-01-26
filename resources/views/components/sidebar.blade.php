@@ -55,6 +55,9 @@
                               @if (getPermissions('indikator_kinerja')['checked'])
                               <li><a href="{!! url('/indikator_kinerja'); !!}" class="slide-item"> Indikator Kinerja</a></li>
                               @endif
+                              @if (getPermissions('perilaku_kerja')['checked'])
+                              <li><a href="{!! url('/perilaku_kerja'); !!}" class="slide-item"> Perilaku Kerja</a></li>
+                              @endif
                               @if (getPermissions('unit_kerja')['checked'])
                               <li><a href="{!! url('/unit_kerja'); !!}" class="slide-item"> Unit Kerja</a></li>
                               @endif
@@ -64,6 +67,7 @@
                               @if (getPermissions('pendidikan')['checked'])
                               <li><a href="{!! url('/pendidikan'); !!}" class="slide-item"> Pendidikan</a></li>
                               @endif
+
                             </ul>
                         </li>
                         @endif

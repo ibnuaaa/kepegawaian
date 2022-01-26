@@ -77,6 +77,7 @@ class IndikatorSkpBrowseController extends Controller
         ->select(
             // IndikatorSkp
             "$this->IndikatorSkpTable.id as indikator_skp.id",
+            "$this->IndikatorSkpTable.parent_id as indikator_skp.parent_id",
             "$this->IndikatorSkpTable.name as indikator_skp.name",
             "$this->IndikatorSkpTable.created_at as indikator_skp.created_at"
         )->with('indikator_skp_child');
