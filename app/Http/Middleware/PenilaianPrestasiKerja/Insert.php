@@ -4,6 +4,7 @@ namespace App\Http\Middleware\PenilaianPrestasiKerja;
 
 use App\Models\PenilaianPrestasiKerja;
 use App\Models\PerilakuKerja;
+use App\Models\Jabatan;
 
 use Closure;
 use Validator;
@@ -20,6 +21,9 @@ class Insert extends BaseMiddleware
         $this->Model->PenilaianPrestasiKerja->bulan = date('m');
         $this->Model->PenilaianPrestasiKerja->tahun = date('Y');
 
+
+        $this->Model->PenilaianPrestasiKerja->jabatan_id = MyAccount()->jabatan_id;
+        $this->Model->PenilaianPrestasiKerja->unit_kerja_id = MyAccount()->unit_kerja_id;
 
     }
 

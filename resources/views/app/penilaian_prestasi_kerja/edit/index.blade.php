@@ -114,7 +114,7 @@
                                   Unit Kerja
                               </td>
                               <td colspan=3>
-                                  {{ $data->user->unit_kerja->name }}
+                                  {{ !empty($data->unit_kerja->name) ? $data->unit_kerja->name : '' }}
                               </td>
                           </tr>
                           <tr>
@@ -122,13 +122,13 @@
                                   Nip
                               </td>
                               <td colspan=3>
-                                  {{ $data->user->jabatan->name }}
+                                  {{ $data->user->nip }}
                               </td>
                               <td>
                                   Jabatan
                               </td>
                               <td colspan=3>
-                                  {{ $data->user->nip }}
+                                  {{ !empty($data->jabatan->name) ? $data->jabatan->name : '' }}
                               </td>
                           </tr>
 
