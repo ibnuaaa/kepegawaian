@@ -1377,7 +1377,7 @@ if ( ! function_exists('treeChildIndikatorKinerjaModal'))
               foreach ($data as $key => $item) {
 
                   $num = $key + 1;
-                  // if (in_array( $item->id ,$indikator_kerja_ids)) {
+                  if (in_array( $item->id ,$indikator_kerja_ids)) {
                   $html .= '
                     <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" >
                         <td style="height: 10px !important;white-space: nowrap;">
@@ -1394,7 +1394,7 @@ if ( ! function_exists('treeChildIndikatorKinerjaModal'))
                         .'</td>
                     </tr>
                   ' . (count($item->children) > 0 ? treeChildIndikatorKinerjaModal($item->children, $item,  (($prefix ? ($prefix .'.') : ''). $num), $num, $indikator_kerja_ids, $tipe_indikator_ditampilkan) : '') ;
-              // }
+              }
           }
         }
 
