@@ -37,7 +37,7 @@ class IndikatorSkpController extends Controller
 
         $options = array(5,10,15,20);
         $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItemBrowseController::FetchBrowse($request)
-            // ->where('penilaian_prestasi_kerja_id', $penilaian_prestasi_kerja_id)
+            ->where('penilaian_prestasi_kerja_id', $penilaian_prestasi_kerja_id)
             ->where('with.total', 'true')
             ;
 
