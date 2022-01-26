@@ -52,6 +52,10 @@ class PenilaianPrestasiKerjaItemBrowseController extends Controller
                 $query->where("$this->PenilaianPrestasiKerjaItemTable.penilaian_prestasi_kerja_id", $request->ArrQuery->penilaian_prestasi_kerja_id);
             }
 
+            if (isset($request->ArrQuery->type)) {
+                $query->where("$this->PenilaianPrestasiKerjaItemTable.type", $request->ArrQuery->type);
+            }
+
             if (!empty($request->get('q'))) {
                 $query->where(function ($query) use($request) {
                     $query->where("$this->PenilaianPrestasiKerjaItemTable.name", 'like', '%'.$request->get('name').'%');

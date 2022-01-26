@@ -30,196 +30,261 @@
 
 
                       <table class="table table-bordered table-sm">
-                      <tr>
-                          <th class="text-center" colspan="7">
-                              1. Indikator Sasaran Kinerja Pegawai (70%)
-                          </th>
-                      </tr>
+                          <tr>
+                              <th class="text-center" colspan="7">
+                                  1. Indikator Sasaran Kinerja Pegawai (70%)
+                              </th>
+                          </tr>
 
-                      <tr>
-                          <th class="text-center">
-                              No
-                          </th>
-                          <th class="text-center" style="min-width: 200px;">
-                              Indikator Kinerja Utama
-                          </th>
-                          <th class="text-center">
-                              Bobot
-                          </th>
-                          <th class="text-center">
-                              Target
-                          </th>
-                          <th class="text-center">
-                              Realisasi
-                          </th>
-                          <th class="text-center">
-                              Capaian
-                          </th>
-                          <th class="text-center">
-                              Nilai Kinerja
-                          </th>
-                          <th class="text-center">
-                              Aksi
-                          </th>
-                      </tr>
-                      <tr>
-                          <th class="text-center fs-8">
-                              1
-                          </th>
-                          <th class="text-center fs-8">
-                              2
-                          </th>
-                          <th class="text-center fs-8">
-                              3
-                          </th>
-                          <th class="text-center fs-8">
-                              4
-                          </th>
-                          <th class="text-center fs-8">
-                              5
-                          </th>
-                          <th class="text-center fs-8">
-                              6 = 5/4
-                          </th>
-                          <th class="text-center fs-8">
-                              7 = 6*3
-                          </th>
-                          <th>
+                          <tr>
+                              <th class="text-center">
+                                  No
+                              </th>
+                              <th class="text-center" style="min-width: 200px;">
+                                  Indikator Kinerja Utama
+                              </th>
+                              <th class="text-center">
+                                  Bobot
+                              </th>
+                              <th class="text-center">
+                                  Target
+                              </th>
+                              <th class="text-center">
+                                  Realisasi
+                              </th>
+                              <th class="text-center">
+                                  Capaian
+                              </th>
+                              <th class="text-center">
+                                  Nilai Kinerja
+                              </th>
+                              <th class="text-center">
+                                  Aksi
+                              </th>
+                          </tr>
+                          <tr>
+                              <th class="text-center fs-8">
+                                  1
+                              </th>
+                              <th class="text-center fs-8">
+                                  2
+                              </th>
+                              <th class="text-center fs-8">
+                                  3
+                              </th>
+                              <th class="text-center fs-8">
+                                  4
+                              </th>
+                              <th class="text-center fs-8">
+                                  5
+                              </th>
+                              <th class="text-center fs-8">
+                                  6 = 5/4
+                              </th>
+                              <th class="text-center fs-8">
+                                  7 = 6*3
+                              </th>
+                              <th>
 
-                          </th>
-                      </tr>
-                      @foreach ($data->penilaian_prestasi_kerja_item as $key => $val)
-                      <tr>
-                          <td class="text-center">
-                              {{$key + 1}}
-                          </td>
-                          <td>
-                              {{!empty($val->indikator_kinerja->name) ? $val->indikator_kinerja->name : ''}}
-                          </td>
-                          <td>
-                              <input type="text" name="bobot" class="form-control" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                          </td>
-                          <td>
-                              <input type="text" name="target" class="form-control" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                          </td>
-                          <td>
-                              <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                          </td>
-                          <td>
-                              <input type="text" name="capaian" class="form-control" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                          </td>
-                          <td>
-                              <input type="text" name="nilai_kinerja" class="form-control" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                          </td>
-                          <td class="text-center">
-                              <a class="btn btn-danger btn-sm" href="#" onclick="return remove('{{ $val->id }}','{{!empty($val->indikator_kinerja->name) ? $val->indikator_kinerja->name : ''}}')"><i class="fa fa-trash"></i></a>
-                          </td>
-                      </tr>
-                      @endforeach
-                      <tr>
-                          <td class="text-left" colspan="7">
-                              <a class="btn btn-primary btn-sm" href="#" onclick="return openModalIndikatorKinerja();">
-                                  <i class="fa fa-plus"></i>
-                                  Tambah Indikator Kinerja
-                              </a>
-                          </td>
-                      </tr>
+                              </th>
+                          </tr>
+                          @foreach ($data->penilaian_prestasi_kerja_item as $key => $val)
+                          <tr>
+                              <td class="text-center">
+                                  {{$key + 1}}
+                              </td>
+                              <td>
+                                  {{!empty($val->indikator_kinerja->name) ? $val->indikator_kinerja->name : ''}}
+                              </td>
+                              <td>
+                                  <input type="text" name="bobot" class="form-control" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              </td>
+                              <td>
+                                  <input type="text" name="target" class="form-control" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              </td>
+                              <td>
+                                  <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              </td>
+                              <td>
+                                  <input type="text" name="capaian" class="form-control" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              </td>
+                              <td>
+                                  <input type="text" name="nilai_kinerja" class="form-control" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              </td>
+                              <td class="text-center">
+                                  <a class="btn btn-danger btn-sm" href="#" onclick="return remove('{{ $val->id }}','{{!empty($val->indikator_kinerja->name) ? $val->indikator_kinerja->name : ''}}')"><i class="fa fa-trash"></i></a>
+                              </td>
+                          </tr>
+                          @endforeach
+                          <tr>
+                              <td class="text-left" colspan="7">
+                                  <a class="btn btn-primary btn-sm" href="#" onclick="return openModalIndikatorKinerja();">
+                                      <i class="fa fa-plus"></i>
+                                      Tambah Indikator Kinerja
+                                  </a>
+                              </td>
+                          </tr>
 
-                      <tr>
-                          <td class="text-center" colspan="2">
-                              Jumlah nilai indikator kinerja utama
-                          </td>
-                          <td>
-                          </td>
-                          <td>
-                          </td>
-                          <td>
-                          </td>
-                          <td>
-                          </td>
-                          <td>
-                          </td>
-                          <td class="text-center">
-                          </td>
-                      </tr>
-
-
-                      <tr>
-                          <th class="text-center" colspan="7">
-                              <br />
-                          </th>
-                      </tr>
-
-                      <tr>
-                          <th class="text-center" colspan="7">
-                              2. Indikator Perilaku Kerja (30%)
-                          </th>
-                      </tr>
-
-                      <tr>
-                          <th class="text-center">
-                              No
-                          </th>
-                          <th class="text-center" style="min-width: 200px;">
-                              Indikator
-                          </th>
-                          <th class="text-center">
-                              Bobot
-                          </th>
-                          <th class="text-center">
-                              Target
-                          </th>
-                          <th class="text-center">
-                              Realisasi
-                          </th>
-                          <th class="text-center">
-                              Capaian
-                          </th>
-                          <th class="text-center">
-                              Nilai Kinerja
-                          </th>
-                          <th class="text-center">
-                              Aksi
-                          </th>
-                      </tr>
+                          <tr>
+                              <td class="text-center" colspan="2">
+                                  Jumlah nilai indikator kinerja utama
+                              </td>
+                              <td>
+                              </td>
+                              <td>
+                              </td>
+                              <td>
+                              </td>
+                              <td>
+                              </td>
+                              <td>
+                              </td>
+                              <td class="text-center">
+                              </td>
+                          </tr>
 
 
-                      @foreach ($data->penilaian_perilaku_kerja as $key => $val)
-                      <tr>
-                          <td class="text-center">
-                              {{$key + 1}}
-                          </td>
-                          <td>
-                              {{!empty($val->perilaku_kerja->name) ? $val->perilaku_kerja->name : ''}}
-                          </td>
-                          <td>
-                              <input type="text" name="bobot" class="form-control" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                          </td>
-                          <td>
-                              <input type="text" name="target" class="form-control" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                          </td>
-                          <td>
-                              <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                          </td>
-                          <td>
-                              <input type="text" name="capaian" class="form-control" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                          </td>
-                          <td>
-                              <input type="text" name="nilai_kinerja" class="form-control" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                          </td>
-                          <td class="text-center">
-                          </td>
-                      </tr>
-                      @endforeach
+                          <tr>
+                              <th class="text-center" colspan="7">
+                                  <br />
+                              </th>
+                          </tr>
+
+                          <tr>
+                              <th class="text-center" colspan="7">
+                                  2. Indikator Perilaku Kerja (30%)
+                              </th>
+                          </tr>
+
+                          <tr>
+                              <th class="text-center">
+                                  No
+                              </th>
+                              <th class="text-center" style="min-width: 200px;">
+                                  Indikator
+                              </th>
+                              <th class="text-center">
+                                  Bobot
+                              </th>
+                              <th class="text-center">
+                                  Target
+                              </th>
+                              <th class="text-center">
+                                  Realisasi
+                              </th>
+                              <th class="text-center">
+                                  Capaian
+                              </th>
+                              <th class="text-center">
+                                  Nilai Kinerja
+                              </th>
+                          </tr>
+
+
+                          @foreach ($data->penilaian_perilaku_kerja as $key => $val)
+                          <tr>
+                              <td class="text-center">
+                                  {{$key + 1}}
+                              </td>
+                              <td>
+                                  {{!empty($val->perilaku_kerja->name) ? $val->perilaku_kerja->name : ''}}
+                              </td>
+                              <td class="text-center">
+                                  {{ $val->bobot }}
+                              </td>
+                              <td class="text-center">
+                                  {{ $val->target }}
+                              </td>
+                              <td class="text-center">
+                                  {{ $val->realisasi }}
+                              </td>
+                              <td class="text-center">
+                                  {{ $val->capaian }}
+                              </td>
+                              <td class="text-center">
+                                  {{ $val->nilai_kinerja }}
+                              </td>
+                          </tr>
+                          @endforeach
 
 
 
+                          <tr>
+                              <th class="text-center" colspan="7">
+                                  <br />
+                              </th>
+                          </tr>
 
-                  </table>
+                          <tr>
+                              <th class="text-center" colspan="7">
+                                  3. Kegiatan
+                              </th>
+                          </tr>
 
+                          <tr>
+                              <th class="text-center">
+                                  No
+                              </th>
+                              <th class="text-center" style="min-width: 200px;">
+                                  Kegiatan
+                              </th>
+                              <th class="text-center">
+                                  Bobot
+                              </th>
+                              <th class="text-center">
+                                  Target
+                              </th>
+                              <th class="text-center">
+                                  Realisasi
+                              </th>
+                              <th class="text-center">
+                                  Capaian
+                              </th>
+                              <th class="text-center">
+                                  Nilai Kinerja
+                              </th>
+                          </tr>
+
+                          @foreach ($data->penilaian_tambahan as $key => $val)
+                          <tr>
+                              <td class="text-center">
+                                  {{ $key+1 }}
+                              </td>
+                              <td>
+                                  <input type="text" name="indikator_kinerja_text" class="form-control" value="{{ $val->indikator_kinerja_text }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" >
+                              </td>
+                              <td>
+                                  <input type="text" name="bobot" class="form-control" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              </td>
+                              <td>
+                                  <input type="text" name="target" class="form-control" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              </td>
+                              <td>
+                                  <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              </td>
+                              <td>
+                                  <input type="text" name="capaian" class="form-control" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              </td>
+                              <td>
+                                  <input type="text" name="nilai_kinerja" class="form-control" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              </td>
+                              <td class="text-center">
+                                  <a class="btn btn-danger btn-sm" href="#" onclick="return remove('{{ $val->id }}','{{!empty($val->indikator_kinerja->name) ? $val->indikator_kinerja->name : ''}}')"><i class="fa fa-trash"></i></a>
+                              </td>
+                          </tr>
+                          @endforeach
+                          <tr>
+                              <td class="text-left" colspan="7">
+                                  <a class="btn btn-primary btn-sm" href="#" onclick="return saveNewIndikatorTambahan();">
+                                      <i class="fa fa-plus"></i>
+                                      Tambah Kegiatan
+                                  </a>
+                              </td>
+                          </tr>
+
+                      </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

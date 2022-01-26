@@ -54,6 +54,10 @@ $router->get('/penilaian_prestasi_kerja', 'CMS\PenilaianPrestasiKerja\PenilaianP
 $router->get('/penilaian_prestasi_kerja/edit/{id}', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Edit');
 $router->get('/penilaian_prestasi_kerja/{id}', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Detail');
 
+$router->get('/penilaian_perilaku_kerja', 'CMS\PenilaianPerilakuKerja\PenilaianPerilakuKerjaController@Home');
+$router->get('/penilaian_perilaku_kerja/edit/{id}', 'CMS\PenilaianPerilakuKerja\PenilaianPerilakuKerjaController@Edit');
+$router->get('/penilaian_perilaku_kerja/{id}', 'CMS\PenilaianPerilakuKerja\PenilaianPerilakuKerjaController@Detail');
+
 $router->get('/perilaku_kerja', 'CMS\PerilakuKerja\PerilakuKerjaController@Home');
 $router->get('/perilaku_kerja/new', 'CMS\PerilakuKerja\PerilakuKerjaController@New');
 $router->get('/perilaku_kerja/edit/{id}', 'CMS\PerilakuKerja\PerilakuKerjaController@Edit');

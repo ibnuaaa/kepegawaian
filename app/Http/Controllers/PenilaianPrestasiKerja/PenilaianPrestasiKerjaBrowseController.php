@@ -38,7 +38,7 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
 
     public function get(Request $request)
     {
-      
+
         $Now = Carbon::now();
         if (!isset($request->OriginalArrQuery->take)) {
             $request->ArrQuery->take = 5000;
@@ -47,6 +47,43 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
         $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where(function ($query) use($request) {
             if (isset($request->ArrQuery->id)) {
                 $query->where("$this->PenilaianPrestasiKerjaTable.id", $request->ArrQuery->id);
+            }
+
+            if (isset($request->ArrQuery->user_id)) {
+                $query->where("$this->PenilaianPrestasiKerjaTable.user_id", $request->ArrQuery->user_id);
+            }
+
+            if (isset($request->ArrQuery->for)) {
+                if ($request->ArrQuery->for == 'penilaian_perilaku') {
+                  $query->where(function ($query) use($request) {
+                        $query->where(function ($query) use($request) {
+                            $query->whereHas("user", function ($query) use($request) {
+                                $query->whereHas("jabatan", function ($query) use($request) {
+                                    $query->where('is_staff', 1);
+                                });
+                            });
+                            $query->whereHas("user", function ($query) use($request) {
+                                $query->where('unit_kerja_id', MyAccount()->unit_kerja_id);
+                            });
+                        });
+
+
+                        $query->orWhere(function ($query) use($request) {
+                            $query->whereHas("user", function ($query) use($request) {
+                              $query->whereHas("unit_kerja", function ($query) use($request) {
+                                  $query->where('parent_id', MyAccount()->unit_kerja_id);
+                              });
+                            });
+
+                            $query->whereHas("user", function ($query) use($request) {
+                                $query->whereHas("jabatan", function ($query) use($request) {
+                                    $query->whereNull('is_staff');
+                                    $query->orWhere('is_staff', 0);
+                                });
+                            });
+                        });
+                    });
+                }
             }
 
             if (!empty($request->get('q'))) {
@@ -71,6 +108,7 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
             // PenilaianPrestasiKerja
             "$this->PenilaianPrestasiKerjaTable.id as penilaian_prestasi_kerja.id",
             "$this->PenilaianPrestasiKerjaTable.name as penilaian_prestasi_kerja.name",
+            "$this->PenilaianPrestasiKerjaTable.user_id as user_id",
             "$this->PenilaianPrestasiKerjaTable.created_at as penilaian_prestasi_kerja.created_at"
         );
 

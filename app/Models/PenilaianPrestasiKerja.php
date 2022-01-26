@@ -28,5 +28,10 @@ class PenilaianPrestasiKerja extends Model
         return $this->hasMany(PenilaianPrestasiKerjaItem::class, 'penilaian_prestasi_kerja_id', 'id')->where('type', 'tambahan');
     }
 
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
 
 }

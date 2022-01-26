@@ -131,6 +131,14 @@ $router->post($prefix.'/penilaian_prestasi_kerja', ['uses' => 'PenilaianPrestasi
 $router->put($prefix.'/penilaian_prestasi_kerja/{id}', ['uses' => 'PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Update', 'middleware' => ['LogActivity:PenilaianPrestasiKerja.Update','PenilaianPrestasiKerja.Update']]);
 $router->delete($prefix.'/penilaian_prestasi_kerja/{id}', ['uses' => 'PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Delete', 'middleware' => ['LogActivity:PenilaianPrestasiKerja.Delete','PenilaianPrestasiKerja.Delete']]);
 
+// penilaian_perilaku_kerja
+$router->get($prefix.'/penilaian_perilaku_kerja', ['uses' => 'PenilaianPerilakuKerja\PenilaianPerilakuKerjaBrowseController@get', 'middleware' => ['LogActivity:PenilaianPerilakuKerja.View','ArrQuery']]);
+$router->get($prefix.'/penilaian_perilaku_kerja/{query:.+}', ['uses' => 'PenilaianPerilakuKerja\PenilaianPerilakuKerjaBrowseController@get', 'middleware' => ['PenilaianPerilakuKerja:PenilaianPerilakuKerja.View','ArrQuery']]);
+$router->post($prefix.'/penilaian_perilaku_kerja', ['uses' => 'PenilaianPerilakuKerja\PenilaianPerilakuKerjaController@Insert', 'middleware' => ['LogActivity:PenilaianPerilakuKerja.Insert','PenilaianPerilakuKerja.Insert']]);
+$router->put($prefix.'/penilaian_perilaku_kerja/{id}', ['uses' => 'PenilaianPerilakuKerja\PenilaianPerilakuKerjaController@Update', 'middleware' => ['LogActivity:PenilaianPerilakuKerja.Update','PenilaianPerilakuKerja.Update']]);
+$router->delete($prefix.'/penilaian_perilaku_kerja/{id}', ['uses' => 'PenilaianPerilakuKerja\PenilaianPerilakuKerjaController@Delete', 'middleware' => ['LogActivity:PenilaianPerilakuKerja.Delete','PenilaianPerilakuKerja.Delete']]);
+
+
 // penilaian_prestasi_kerja_item
 $router->get($prefix.'/penilaian_prestasi_kerja_item', ['uses' => 'PenilaianPrestasiKerjaItem\PenilaianPrestasiKerjaItemBrowseController@get', 'middleware' => ['LogActivity:PenilaianPrestasiKerjaItem.View','ArrQuery']]);
 $router->get($prefix.'/penilaian_prestasi_kerja_item/{query:.+}', ['uses' => 'PenilaianPrestasiKerjaItem\PenilaianPrestasiKerjaItemBrowseController@get', 'middleware' => ['PenilaianPrestasiKerjaItem:PenilaianPrestasiKerjaItem.View','ArrQuery']]);

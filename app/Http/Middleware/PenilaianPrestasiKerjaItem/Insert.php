@@ -16,7 +16,7 @@ class Insert extends BaseMiddleware
         $this->Model->PenilaianPrestasiKerjaItem = new PenilaianPrestasiKerjaItem();
         $this->Model->PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id = $this->_Request->input('penilaian_prestasi_kerja_id');
         $this->Model->PenilaianPrestasiKerjaItem->indikator_kinerja_id = $this->_Request->input('indikator_kinerja_id');
-        $this->Model->PenilaianPrestasiKerjaItem->type = 'skp';
+        $this->Model->PenilaianPrestasiKerjaItem->type = $this->_Request->input('type');
         $this->Model->PenilaianPrestasiKerjaItem->user_id = MyAccount()->id;
     }
 
@@ -26,14 +26,17 @@ class Insert extends BaseMiddleware
           'penilaian_prestasi_kerja_id' => 'required'
         ]);
 
-        $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('penilaian_prestasi_kerja_id', $this->_Request->input('penilaian_prestasi_kerja_id'))->
-            where('indikator_kinerja_id',  $this->_Request->input('indikator_kinerja_id'))->first();
+        if ($this->_Request->input('type') == 'skp') {
+            $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('penilaian_prestasi_kerja_id', $this->_Request->input('penilaian_prestasi_kerja_id'))->
+                where('indikator_kinerja_id',  $this->_Request->input('indikator_kinerja_id'))->first();
 
-        if (!empty($PenilaianPrestasiKerjaItem)) {
-            $this->Json::set('exception.key', 'DuplicatePenilaianPrestasiKerjaItem');
-            $this->Json::set('exception.message', trans('validation.'.$this->Json::get('exception.key')));
-            return false;
+            if (!empty($PenilaianPrestasiKerjaItem)) {
+                $this->Json::set('exception.key', 'DuplicatePenilaianPrestasiKerjaItem');
+                $this->Json::set('exception.message', trans('validation.'.$this->Json::get('exception.key')));
+                return false;
+            }
         }
+
 
         if ($validator->fails()) {
             $this->Json::set('errors', $validator->errors());

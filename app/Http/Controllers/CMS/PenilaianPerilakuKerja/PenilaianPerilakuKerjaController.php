@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\CMS\PenilaianPrestasiKerja;
+namespace App\Http\Controllers\CMS\PenilaianPerilakuKerja;
 
 use App\Http\Controllers\PenilaianPrestasiKerja\PenilaianPrestasiKerjaBrowseController;
 use App\Http\Controllers\IndikatorKinerja\IndikatorKinerjaBrowseController;
-use App\Http\Controllers\PenilaianPrestasiKerjaItem\PenilaianPrestasiKerjaItemBrowseController;
+use App\Http\Controllers\PenilaianPerilakuKerjaItem\PenilaianPerilakuKerjaItemBrowseController;
 
 
 use App\Http\Controllers\Jabatan\JabatanBrowseController;
@@ -25,103 +25,34 @@ use App\Models\IndikatorKinerja;
 
 use Illuminate\Support\Facades\Auth;
 
-class PenilaianPrestasiKerjaController extends Controller
+class PenilaianPerilakuKerjaController extends Controller
 {
-
-
-    public function IndikatorSkp(Request $request, $penilaian_prestasi_kerja_id)
-    {
-        $TableKey = 'indikator_skp-table';
-
-        $filter_search = $request->input('filter_search');
-
-        if (isset($request['indikator_skp-table-show'])) {
-            $selected = $request['indikator_skp-table-show'];
-        }
-        else {
-            $selected = 10;
-        }
-
-        $options = array(5,10,15,20);
-        $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItemBrowseController::FetchBrowse($request)
-            ->where('type', 'skp')
-            ->where('penilaian_prestasi_kerja_id', $penilaian_prestasi_kerja_id)
-            ->where('with.total', 'true')
-            ;
-
-        if (isset($filter_search)) {
-            $IndikatorSkp = $IndikatorSkp->where('search', $filter_search);
-        }
-
-        $PenilaianPrestasiKerjaItem = $PenilaianPrestasiKerjaItem->middleware(function($fetch) use($request, $TableKey) {
-                $fetch->equal('skip', ___TableGetSkip($request, $TableKey, $fetch->QueryRoute->ArrQuery->take));
-                return $fetch;
-            })
-            ->get('fetch');
-
-
-        $Take = ___TableGetTake($request, $TableKey);
-        $DataTable = [
-            'key' => $TableKey,
-            'filter_search' => $filter_search,
-            'placeholder_search' => "",
-            'pageNow' => ___TableGetCurrentPage($request, $TableKey),
-            'paginate' => ___TablePaginate((int)$PenilaianPrestasiKerjaItem['total'], (int)$PenilaianPrestasiKerjaItem['query']->take, ___TableGetCurrentPage($request, $TableKey)),
-            'selected' => $selected,
-            'options' => $options,
-            'heads' => [
-                (object)['name' => 'No', 'label' => 'No'],
-                (object)['name' => 'name', 'label' => 'Nama Indikator Kinerja'],
-                (object)['name' => 'action', 'label' => 'Aksi']
-            ],
-            'records' => []
-        ];
-
-        if ($PenilaianPrestasiKerjaItem['records']) {
-            $DataTable['records'] = $PenilaianPrestasiKerjaItem['records'];
-            $DataTable['total'] = $PenilaianPrestasiKerjaItem['total'];
-            $DataTable['show'] = $PenilaianPrestasiKerjaItem['show'];
-        }
-
-
-        // cetak($PenilaianPrestasiKerjaItem['records']->toArray());
-        // die();
-
-        $ParseData = [
-            'data' => $DataTable,
-            'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0,
-            'penilaian_prestasi_kerja_id' => $penilaian_prestasi_kerja_id
-        ];
-
-
-        return view('app.penilaian_prestasi_kerja.indikator_skp.index', $ParseData);
-    }
 
 
     public function Home(Request $request)
     {
-        $TableKey = 'penilaian_prestasi_kerja-table';
+        $TableKey = 'penilaian_perilaku_kerja-table';
 
         $filter_search = $request->input('filter_search');
 
-        if (isset($request['penilaian_prestasi_kerja-table-show'])) {
-            $selected = $request['penilaian_prestasi_kerja-table-show'];
+        if (isset($request['penilaian_perilaku_kerja-table-show'])) {
+            $selected = $request['penilaian_perilaku_kerja-table-show'];
         }
         else {
             $selected = 10;
         }
 
         $options = array(5,10,15,20);
-        $PenilaianPrestasiKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
-            ->where('take',  $selected)
-            ->where('user_id',  MyAccount()->id)
+        $PenilaianPerilakuKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
+            ->where('take', $selected)
+            ->where('for', 'penilaian_perilaku')
             ->where('with.total', 'true');
 
         if (isset($filter_search)) {
-            $PenilaianPrestasiKerja = $PenilaianPrestasiKerja->where('search', $filter_search);
+            $PenilaianPerilakuKerja = $PenilaianPerilakuKerja->where('search', $filter_search);
         }
 
-        $PenilaianPrestasiKerja = $PenilaianPrestasiKerja->middleware(function($fetch) use($request, $TableKey) {
+        $PenilaianPerilakuKerja = $PenilaianPerilakuKerja->middleware(function($fetch) use($request, $TableKey) {
                 $fetch->equal('skip', ___TableGetSkip($request, $TableKey, $fetch->QueryRoute->ArrQuery->take));
                 return $fetch;
             })
@@ -133,26 +64,26 @@ class PenilaianPrestasiKerjaController extends Controller
             'filter_search' => $filter_search,
             'placeholder_search' => "",
             'pageNow' => ___TableGetCurrentPage($request, $TableKey),
-            'paginate' => ___TablePaginate((int)$PenilaianPrestasiKerja['total'], (int)$PenilaianPrestasiKerja['query']->take, ___TableGetCurrentPage($request, $TableKey)),
+            'paginate' => ___TablePaginate((int)$PenilaianPerilakuKerja['total'], (int)$PenilaianPerilakuKerja['query']->take, ___TableGetCurrentPage($request, $TableKey)),
             'selected' => $selected,
             'options' => $options,
             'heads' => [
                 (object)['name' => 'No', 'label' => 'No'],
                 (object)['name' => 'bulan', 'label' => 'Bulan - Tahun'],
+                (object)['name' => 'nama', 'label' => 'nama'],
                 (object)['name' => 'created_at', 'label' => 'Terbuat Pada'],
                 (object)['name' => 'action', 'label' => 'Aksi']
             ],
             'records' => []
         ];
 
-        if ($PenilaianPrestasiKerja['records']) {
-            $DataTable['records'] = $PenilaianPrestasiKerja['records'];
-            $DataTable['total'] = $PenilaianPrestasiKerja['total'];
-            $DataTable['show'] = $PenilaianPrestasiKerja['show'];
+        if ($PenilaianPerilakuKerja['records']) {
+            $DataTable['records'] = $PenilaianPerilakuKerja['records'];
+            $DataTable['total'] = $PenilaianPerilakuKerja['total'];
+            $DataTable['show'] = $PenilaianPerilakuKerja['show'];
         }
 
-
-        // Get detail jabatan apakah dia staff atau bukan
+        // Get detail jabatan apakah dia staff atau bukan dengan cara lihat is_staff nya
         $Jabatan = JabatanBrowseController::FetchBrowse($request)
                     ->equal('id', MyAccount()->jabatan_id)->get('first');
 
@@ -161,7 +92,7 @@ class PenilaianPrestasiKerjaController extends Controller
             'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0,
             'jabatan' => $Jabatan['records'],
         ];
-        return view('app.penilaian_prestasi_kerja.home.index', $ParseData);
+        return view('app.penilaian_perilaku_kerja.home.index', $ParseData);
     }
 
     public function Detail(Request $request, $id)
@@ -173,18 +104,18 @@ class PenilaianPrestasiKerjaController extends Controller
         $PenilaianPrestasiKerjaBrowseController = new PenilaianPrestasiKerjaBrowseController($QueryRoute);
         $data = $PenilaianPrestasiKerjaBrowseController->get($QueryRoute);
 
-        return view('app.penilaian_prestasi_kerja.detail.index', [ 'data' => $data->original['data']['records'] ]);
+        return view('app.penilaian_perilaku_kerja.detail.index', [ 'data' => $data->original['data']['records'] ]);
     }
 
     public function Edit(Request $request, $id)
     {
-        $PenilaianPrestasiKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
+        $PenilaianPerilakuKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
             ->equal('id', $id)
             ->get('first');
 
 
 
-        if (!isset($PenilaianPrestasiKerja['records']->id)) {
+        if (!isset($PenilaianPerilakuKerja['records']->id)) {
             throw new ModelNotFoundException('Not Found Batch');
         }
 
@@ -234,9 +165,9 @@ class PenilaianPrestasiKerjaController extends Controller
 
 
 
-        return view('app.penilaian_prestasi_kerja.edit.index', [
+        return view('app.penilaian_perilaku_kerja.edit.index', [
             'select' => [],
-            'data' => $PenilaianPrestasiKerja['records'],
+            'data' => $PenilaianPerilakuKerja['records'],
             'indikator_kerja_ids' => $indikator_kerja_ids,
             'jabatan' => $Jabatan['records'],
             'indikator_kinerja' => $IndikatorKinerjaTree,
