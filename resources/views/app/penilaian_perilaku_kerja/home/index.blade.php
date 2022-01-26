@@ -51,7 +51,7 @@
                 <p>{{ $number }}</p>
             </td>
             <td class="v-align-middle ">
-                <p>2021 - Januari</p>
+                <p>{{ !empty($item->bulan) ? monthIndo($item->bulan) : '' }} {{ $item->tahun }}</p>
             </td>
             <td class="v-align-middle ">
                 <p>{{ !empty($item->user->name) ? $item->user->name : '' }}</p>

@@ -55,7 +55,7 @@
                 <p>{{ $number }}</p>
             </td>
             <td class="v-align-middle ">
-                <p>Januari 2022</p>
+                <p>{{ !empty($item->bulan) ? monthIndo($item->bulan) : '' }} {{ $item->tahun }}</p>
             </td>
             <td class="v-align-middle">
                 <p>{{ $item->created_at }}</p>

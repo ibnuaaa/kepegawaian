@@ -17,8 +17,10 @@ class Insert extends BaseMiddleware
         $this->Model->PenilaianPrestasiKerja = new PenilaianPrestasiKerja();
 
         $this->Model->PenilaianPrestasiKerja->user_id = MyAccount()->id;
+        $this->Model->PenilaianPrestasiKerja->bulan = date('m');
+        $this->Model->PenilaianPrestasiKerja->tahun = date('Y');
 
-        
+
     }
 
     private function Validation()

@@ -34,26 +34,65 @@
 
                           <tr>
                               <td style="width: 80px;" colspan="2">
-                                  <select class="form-control form-select">
-                                      <option>
-                                          Januari
-                                      </option>
-                                  </select>
+                                    @component('components.form.awesomeSelect', [
+                                      'name' => 'bulan',
+                                      'items' => [[
+                                          'label' => '-= Bulan =-',
+                                          'value' => ''
+                                      ],[
+                                          'label' => 'Januari',
+                                          'value' => '1'
+                                      ],[
+                                          'label' => 'Februari',
+                                          'value' => '2'
+                                      ],[
+                                          'label' => 'Maret',
+                                          'value' => '3'
+                                      ],[
+                                          'label' => 'April',
+                                          'value' => '4'
+                                      ],[
+                                          'label' => 'Mei',
+                                          'value' => '5'
+                                      ],[
+                                          'label' => 'Juni',
+                                          'value' => '6'
+                                      ],[
+                                          'label' => 'Juli',
+                                          'value' => '7'
+                                      ],[
+                                          'label' => 'Agustus',
+                                          'value' => '8'
+                                      ],[
+                                          'label' => 'September',
+                                          'value' => '9'
+                                      ],[
+                                          'label' => 'Oktober',
+                                          'value' => '10'
+                                      ],[
+                                          'label' => 'November',
+                                          'value' => '11'
+                                      ],[
+                                          'label' => 'Desember',
+                                          'value' => '12'
+                                      ]],
+                                      'selected' => $data->bulan
+                                  ])
+                                  @endcomponent
 
                               </td>
                           </tr>
 
                           <tr>
                               <td style="width: 80px;" colspan="2">
-
-                                  <select class="form-control form-select">
-                                      <option>
-                                          -= Pilih Tahun =-
-                                      </option>
-                                      <option>
-                                          2022
-                                      </option>
-                                  </select>
+                                    <select class="form-control form-select">
+                                        <option>-= Pilih Tahun =-</option>
+                                        @for ($i= date('Y'); $i >= 2022; $i--)
+                                        <option value="{{$i}}" {{ $i == $data->tahun ? 'selected=selected' : '' }}>
+                                            {{$i}}
+                                        </option>
+                                        @endfor
+                                    </select>
                               </td>
                           </tr>
 
