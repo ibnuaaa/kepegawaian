@@ -10,6 +10,7 @@
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="/penilaian_prestasi_kerja">Penilaian SKP</a></li>
             <li class="breadcrumb-item active" aria-current="page">Indikator Skp</li>
         </ol>
     </div>
@@ -144,5 +145,5 @@
 @endsection
 
 @section('script')
-@include('app.indikator_skp.home.scripts.index')
+@include('app.penilaian_prestasi_kerja.indikator_skp.scripts.index')
 @endsection

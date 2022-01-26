@@ -44,12 +44,12 @@ $router->get('/pendidikan/new', 'CMS\Pendidikan\PendidikanController@New');
 $router->get('/pendidikan/edit/{id}', 'CMS\Pendidikan\PendidikanController@Edit');
 $router->get('/pendidikan/{id}', 'CMS\Pendidikan\PendidikanController@Detail');
 
-$router->get('/indikator_skp/penilaian_prestasi_kerja/{penilaian_prestasi_kerja_id}', 'CMS\IndikatorSkp\IndikatorSkpController@Home');
 // $router->get('/indikator_skp', 'CMS\IndikatorSkp\IndikatorSkpController@Home');
 $router->get('/indikator_skp/new/{tipe_indikator}/{indikator_kinerja_id}', 'CMS\IndikatorSkp\IndikatorSkpController@New');
 $router->get('/indikator_skp/edit/{id}', 'CMS\IndikatorSkp\IndikatorSkpController@Edit');
 $router->get('/indikator_skp/{id}', 'CMS\IndikatorSkp\IndikatorSkpController@Detail');
 
+$router->get('/penilaian_prestasi_kerja/id/{penilaian_prestasi_kerja_id}', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@IndikatorSkp');
 $router->get('/penilaian_prestasi_kerja', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Home');
 $router->get('/penilaian_prestasi_kerja/edit/{id}', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Edit');
 $router->get('/penilaian_prestasi_kerja/{id}', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Detail');

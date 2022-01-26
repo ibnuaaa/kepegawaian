@@ -69,7 +69,7 @@
                     </a>
 
                     @if (!$props['jabatan']->is_staff)
-                    <a href="{{ url('/indikator_skp/penilaian_prestasi_kerja/'.$item->id) }}" class="btn btn-success"><i class="fa fa-file"></i></a>
+                    <a href="{{ url('/penilaian_prestasi_kerja/id/'.$item->id) }}" class="btn btn-success"><i class="fa fa-file"></i></a>
                     @endif
                 </div>
             </td>
@@ -83,5 +83,5 @@
 @endsection
 
 @section('script')
-@include('app.penilaian_prestasi_kerja.home.scripts.index')
+@include('app.penilaian_prestasi_kerja.indikator_skp.scripts.index')
 @endsection

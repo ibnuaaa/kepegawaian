@@ -77,16 +77,6 @@ class PenilaianPrestasiKerjaItemBrowseController extends Controller
             "$this->PenilaianPrestasiKerjaItemTable.created_at as penilaian_restasi_kerja_item.created_at"
         )->with('indikator_kinerja');
 
-        if(!empty($request->get('sort'))) {
-            if(!empty($request->get('sort_type'))) {
-              if ($request->get('sort') == 'name') $PenilaianPrestasiKerjaItem->orderBy("$this->PenilaianPrestasiKerjaItemTable.name", $request->get('sort_type'));
-              if ($request->get('sort') == 'created_at') $PenilaianPrestasiKerjaItem->orderBy("$this->PenilaianPrestasiKerjaItemTable.created_at", $request->get('sort_type'));
-            } else {
-              $PenilaianPrestasiKerjaItem->orderBy("$this->PenilaianPrestasiKerjaItemTable.created_at", 'desc');
-            }
-        } else {
-            $PenilaianPrestasiKerjaItem->orderBy("$this->PenilaianPrestasiKerjaItemTable.created_at", 'desc');
-        }
 
 
        $Browse = $this->Browse($request, $PenilaianPrestasiKerjaItem, function ($data) use($request) {

@@ -22,69 +22,7 @@ use Illuminate\Support\Facades\Auth;
 
 class IndikatorSkpController extends Controller
 {
-    public function Home(Request $request, $penilaian_prestasi_kerja_id)
-    {
-        $TableKey = 'indikator_skp-table';
-
-        $filter_search = $request->input('filter_search');
-
-        if (isset($request['indikator_skp-table-show'])) {
-            $selected = $request['indikator_skp-table-show'];
-        }
-        else {
-            $selected = 10;
-        }
-
-        $options = array(5,10,15,20);
-        $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItemBrowseController::FetchBrowse($request)
-            ->where('penilaian_prestasi_kerja_id', $penilaian_prestasi_kerja_id)
-            ->where('with.total', 'true')
-            ;
-
-        if (isset($filter_search)) {
-            $IndikatorSkp = $IndikatorSkp->where('search', $filter_search);
-        }
-
-        $PenilaianPrestasiKerjaItem = $PenilaianPrestasiKerjaItem->middleware(function($fetch) use($request, $TableKey) {
-                $fetch->equal('skip', ___TableGetSkip($request, $TableKey, $fetch->QueryRoute->ArrQuery->take));
-                return $fetch;
-            })
-            ->get('fetch');
-
-
-        $Take = ___TableGetTake($request, $TableKey);
-        $DataTable = [
-            'key' => $TableKey,
-            'filter_search' => $filter_search,
-            'placeholder_search' => "",
-            'pageNow' => ___TableGetCurrentPage($request, $TableKey),
-            'paginate' => ___TablePaginate((int)$PenilaianPrestasiKerjaItem['total'], (int)$PenilaianPrestasiKerjaItem['query']->take, ___TableGetCurrentPage($request, $TableKey)),
-            'selected' => $selected,
-            'options' => $options,
-            'heads' => [
-                (object)['name' => 'No', 'label' => 'No'],
-                (object)['name' => 'name', 'label' => 'Nama Indikator Kinerja'],
-                (object)['name' => 'action', 'label' => 'Aksi']
-            ],
-            'records' => []
-        ];
-
-        if ($PenilaianPrestasiKerjaItem['records']) {
-            $DataTable['records'] = $PenilaianPrestasiKerjaItem['records'];
-            $DataTable['total'] = $PenilaianPrestasiKerjaItem['total'];
-            $DataTable['show'] = $PenilaianPrestasiKerjaItem['show'];
-        }
-
-
-        // cetak($PenilaianPrestasiKerjaItem['records']->toArray());
-        // die();
-
-        $ParseData = [
-            'data' => $DataTable,
-            'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0
-        ];
-        return view('app.indikator_skp.home.index', $ParseData);
-    }
+    
 
     public function New(Request $request, $tipe_indikator, $indikator_kinerja_id)
     {
