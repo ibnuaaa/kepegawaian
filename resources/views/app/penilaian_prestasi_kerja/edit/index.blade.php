@@ -30,8 +30,51 @@
 
 
                       <table class="table table-bordered table-sm">
+
                           <tr>
-                              <th class="text-center" colspan="7">
+                              <th class="text-center" colspan="8">
+                                  Identitas Pegawai
+                              </th>
+                          </tr>
+
+
+                          <tr>
+                              <td>
+                                  Nama
+                              </td>
+                              <td colspan=3>
+                                  {{ $data->user->name }}
+                              </td>
+                              <td>
+                                  Unit Kerja
+                              </td>
+                              <td colspan=3>
+                                  {{ $data->user->unit_kerja->name }}
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  Nip
+                              </td>
+                              <td colspan=3>
+                                  {{ $data->user->jabatan->name }}
+                              </td>
+                              <td>
+                                  Jabatan
+                              </td>
+                              <td colspan=3>
+                                  {{ $data->user->nip }}
+                              </td>
+                          </tr>
+
+
+                          <tr>
+                              <th class="text-center" colspan="8">
+                              </th>
+                          </tr>
+
+                          <tr>
+                              <th class="text-center" colspan="8">
                                   1. Indikator Sasaran Kinerja Pegawai (70%)
                               </th>
                           </tr>
@@ -117,7 +160,7 @@
                           </tr>
                           @endforeach
                           <tr>
-                              <td class="text-left" colspan="7">
+                              <td class="text-left" colspan="8">
                                   <a class="btn btn-primary btn-sm" href="#" onclick="return openModalIndikatorKinerja();">
                                       <i class="fa fa-plus"></i>
                                       Tambah Indikator Kinerja
@@ -145,13 +188,13 @@
 
 
                           <tr>
-                              <th class="text-center" colspan="7">
+                              <th class="text-center" colspan="8">
                                   <br />
                               </th>
                           </tr>
 
                           <tr>
-                              <th class="text-center" colspan="7">
+                              <th class="text-center" colspan="8">
                                   2. Indikator Perilaku Kerja (30%)
                               </th>
                           </tr>
@@ -210,14 +253,14 @@
 
 
                           <tr>
-                              <th class="text-center" colspan="7">
+                              <th class="text-center" colspan="8">
                                   <br />
                               </th>
                           </tr>
 
                           <tr>
-                              <th class="text-center" colspan="7">
-                                  3. Kegiatan
+                              <th class="text-center" colspan="8">
+                                  3. Kinerja Tambahan
                               </th>
                           </tr>
 
@@ -226,7 +269,7 @@
                                   No
                               </th>
                               <th class="text-center" style="min-width: 200px;">
-                                  Kegiatan
+                                  Jenis & Nama Kegiatan
                               </th>
                               <th class="text-center">
                                   Bobot
