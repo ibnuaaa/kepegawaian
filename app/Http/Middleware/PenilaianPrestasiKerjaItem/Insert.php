@@ -16,6 +16,7 @@ class Insert extends BaseMiddleware
         $this->Model->PenilaianPrestasiKerjaItem = new PenilaianPrestasiKerjaItem();
         $this->Model->PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id = $this->_Request->input('penilaian_prestasi_kerja_id');
         $this->Model->PenilaianPrestasiKerjaItem->indikator_kinerja_id = $this->_Request->input('indikator_kinerja_id');
+        $this->Model->PenilaianPrestasiKerjaItem->type = 'skp';
         $this->Model->PenilaianPrestasiKerjaItem->user_id = MyAccount()->id;
     }
 

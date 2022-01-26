@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\PenilaianPrestasiKerja;
 
 use App\Models\PenilaianPrestasiKerja;
+use App\Models\PerilakuKerja;
+use App\Models\PenilaianPrestasiKerjaItem;
+
 
 use App\Traits\Browse;
 
@@ -58,6 +61,18 @@ class PenilaianPrestasiKerjaController extends Controller
     {
         $Model = $request->Payload->all()['Model'];
         $Model->PenilaianPrestasiKerja->save();
+
+        $PerilakuKerja = PerilakuKerja::all();
+
+        foreach ($PerilakuKerja as $key => $value) {
+            $PenilaianPrestasiKerjaItem = new PenilaianPrestasiKerjaItem();
+            $PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id = $Model->PenilaianPrestasiKerja->id;
+            $PenilaianPrestasiKerjaItem->user_id = MyAccount()->id;
+            $PenilaianPrestasiKerjaItem->perilaku_kerja_id = $value->id;
+            $PenilaianPrestasiKerjaItem->type = 'perilaku_kerja';
+            $PenilaianPrestasiKerjaItem->save();
+        }
+
 
         Json::set('data', $this->SyncData($request, $Model->PenilaianPrestasiKerja->id));
         return response()->json(Json::get(), 201);

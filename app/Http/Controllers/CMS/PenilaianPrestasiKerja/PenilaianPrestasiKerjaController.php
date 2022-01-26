@@ -177,7 +177,9 @@ class PenilaianPrestasiKerjaController extends Controller
     public function Edit(Request $request, $id)
     {
         $PenilaianPrestasiKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
-            ->equal('id', $id)->get('first');
+            ->equal('id', $id)
+            ->get('first');
+
 
 
         if (!isset($PenilaianPrestasiKerja['records']->id)) {
@@ -194,10 +196,11 @@ class PenilaianPrestasiKerjaController extends Controller
 
             // list semua indikator kerja dari kegiatan yang ada di dalam 1 unit kerja
             $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
-                                ->where('unit_kerja_id', MyAccount()->unit_kerja_id)
+                                // ->where('unit_kerja_id', MyAccount()->unit_kerja_id)
                                 ->where('tipe_indikator', 'kegiatan')
                                 ->get('');
-
+            // cetak($IndikatorKerja['records']->toArray());
+            // die();
             $indikator_kerja_ids = [];
 
             foreach ($IndikatorKerja['records'] as $key2 => $value2) {
@@ -226,6 +229,8 @@ class PenilaianPrestasiKerjaController extends Controller
 
             $tipe_indikator_ditampilkan = 'iku';
         }
+
+
 
         return view('app.penilaian_prestasi_kerja.edit.index', [
             'select' => [],

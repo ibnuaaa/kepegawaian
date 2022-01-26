@@ -3,6 +3,7 @@
 namespace App\Http\Middleware\PenilaianPrestasiKerja;
 
 use App\Models\PenilaianPrestasiKerja;
+use App\Models\PerilakuKerja;
 
 use Closure;
 use Validator;
@@ -16,6 +17,8 @@ class Insert extends BaseMiddleware
         $this->Model->PenilaianPrestasiKerja = new PenilaianPrestasiKerja();
 
         $this->Model->PenilaianPrestasiKerja->user_id = MyAccount()->id;
+
+        
     }
 
     private function Validation()

@@ -38,6 +38,7 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
 
     public function get(Request $request)
     {
+      
         $Now = Carbon::now();
         if (!isset($request->OriginalArrQuery->take)) {
             $request->ArrQuery->take = 5000;
