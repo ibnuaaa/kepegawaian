@@ -91,16 +91,12 @@ class PositionBrowseController extends Controller
                 if (!empty($request->get('q'))) {
                     $query->where(function ($query) use($request) {
                         $query->where("$this->PositionTable.name", 'like', '%'.$request->get('q').'%');
-                        $query->orWhere("$this->UserTable.name", 'like', '%'.$request->get('q').'%');
-                        $query->orWhere("$this->UserTable.username", 'like', '%'.$request->get('q').'%');
                     });
                 }
 
                 if (!empty($request->ArrQuery->search)) {
                     $query->where(function ($query) use($request) {
                         $query->where("$this->PositionTable.name", 'like', '%'.$request->ArrQuery->search.'%');
-                        $query->orWhere("$this->UserTable.name", 'like', '%'.$request->ArrQuery->search.'%');
-                        $query->orWhere("$this->UserTable.username", 'like', '%'.$request->ArrQuery->search.'%');
                     });
                 }
 
@@ -142,15 +138,10 @@ class PositionBrowseController extends Controller
                 "$this->PositionTable.name as user.name",
                 "$this->PositionTable.parent_id as user.parent_id",
                 "$this->PositionTable.status as user.status",
-                "$this->UserTable.name as user.pejabat",
-                "$this->UserTable.username as user.nip",
-                "$this->UserTable.id as user.user_id",
-
                 "$this->PositionTable.updated_at as user.updated_at",
                 "$this->PositionTable.created_at as user.created_at",
                 "$this->PositionTable.deleted_at as user.deleted_at"
-           )
-           ->leftJoin($this->UserTable, "$this->UserTable.position_id", "$this->PositionTable.id");
+           );
 
            if (!isset($request->ArrQuery->without_with)) {
                $Position->with('parent')
