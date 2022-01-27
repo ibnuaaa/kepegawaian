@@ -36,6 +36,7 @@
                               <td style="width: 80px;" colspan="2">
                                     @component('components.form.awesomeSelect', [
                                       'name' => 'bulan',
+                                      'disabled' => 'disabled',
                                       'items' => [[
                                           'label' => '-= Bulan =-',
                                           'value' => ''
@@ -85,7 +86,7 @@
 
                           <tr>
                               <td style="width: 80px;" colspan="2">
-                                    <select class="form-control form-select">
+                                    <select class="form-control form-select" disabled="disabled">
                                         <option>-= Pilih Tahun =-</option>
                                         @for ($i= date('Y'); $i >= 2022; $i--)
                                         <option value="{{$i}}" {{ $i == $data->tahun ? 'selected=selected' : '' }}>
