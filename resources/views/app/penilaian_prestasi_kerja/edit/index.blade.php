@@ -394,10 +394,20 @@
                       </table>
                     </div>
                 </div>
+                @if ($jabatan->is_staff == 1)
+                @else
+                  <a href="/penilaian_prestasi_kerja/id/{{$data['id']}}" class="btn btn-primary btn-sm pull-right" >
+                      Buat Progrem & Kegiatan
+                      <i class="fa fa-angle-right"></i>
+                  </a>
+                @endif
             </div>
         </div>
     </div>
 </div>
+
+
+
 
 <div class="modal effect-sign" id="modalIndikatorKinerja" role="dialog">
     <div class="modal-dialog modal-xl " role="document">

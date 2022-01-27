@@ -141,6 +141,7 @@
         </tr>
         @endscopedslot
         @endcomponent
+
     </div>
 </div>
 <!-- ROW-1 END -->

@@ -55,16 +55,25 @@
                              </tr>
                            </thead>
                            <tbody>
-                             @foreach ($data['records'] as $key => $item)
-                                 <?php
-                                     $take = 10;
-                                     if (!empty($data['selected'])) $take = $data['selected'];
-                                     $number = (($data['pageNow'] - 1)  * $take) + $key + 1 ;
-                                 ?>
-                                 @if(isset($record))
-                                     {{ $record($item, $props = isset($props) ? $props : [], $number, $data) }}
-                                 @endif
-                             @endforeach
+
+                            @if (empty($data['records']) || count($data['records']) == 0)
+                                <tr>
+                                    <td colspan="{{count($data['heads'])}}" class="text-center">
+                                        Data Kosong
+                                    </td>
+                                </tr>
+                             @else
+                                 @foreach ($data['records'] as $key => $item)
+                                     <?php
+                                         $take = 10;
+                                         if (!empty($data['selected'])) $take = $data['selected'];
+                                         $number = (($data['pageNow'] - 1)  * $take) + $key + 1 ;
+                                     ?>
+                                     @if(isset($record))
+                                         {{ $record($item, $props = isset($props) ? $props : [], $number, $data) }}
+                                     @endif
+                                 @endforeach
+                             @endif
                            </tbody>
                         </table>
                      </div>
