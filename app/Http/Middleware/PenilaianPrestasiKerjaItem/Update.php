@@ -21,8 +21,23 @@ class Update extends BaseMiddleware
             if(!empty($this->_Request->input('bobot'))) $this->Model->PenilaianPrestasiKerjaItem->bobot = $this->_Request->input('bobot');
             if(!empty($this->_Request->input('target'))) $this->Model->PenilaianPrestasiKerjaItem->target = $this->_Request->input('target');
             if(!empty($this->_Request->input('realisasi'))) $this->Model->PenilaianPrestasiKerjaItem->realisasi = $this->_Request->input('realisasi');
+
+            if ($this->Model->PenilaianPrestasiKerjaItem->bobot && $target = $this->Model->PenilaianPrestasiKerjaItem->target && $realisasi = $this->Model->PenilaianPrestasiKerjaItem->realisasi) {
+
+                $bobot = $this->Model->PenilaianPrestasiKerjaItem->bobot;
+                $target = $this->Model->PenilaianPrestasiKerjaItem->target;
+                $realisasi = $this->Model->PenilaianPrestasiKerjaItem->realisasi;
+
+                $capaian = $realisasi / $target;
+                $nilai_kinerja = $capaian / $bobot;
+
+                $this->Model->PenilaianPrestasiKerjaItem->capaian = $capaian;
+                $this->Model->PenilaianPrestasiKerjaItem->nilai_kinerja = $nilai_kinerja;
+            }
+
             if(!empty($this->_Request->input('capaian'))) $this->Model->PenilaianPrestasiKerjaItem->capaian = $this->_Request->input('capaian');
             if(!empty($this->_Request->input('nilai_kinerja'))) $this->Model->PenilaianPrestasiKerjaItem->nilai_kinerja = $this->_Request->input('nilai_kinerja');
+
         }
     }
 
