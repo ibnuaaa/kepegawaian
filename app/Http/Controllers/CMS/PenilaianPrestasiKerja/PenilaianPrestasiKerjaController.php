@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CMS\PenilaianPrestasiKerja;
 use App\Http\Controllers\PenilaianPrestasiKerja\PenilaianPrestasiKerjaBrowseController;
 use App\Http\Controllers\IndikatorKinerja\IndikatorKinerjaBrowseController;
 use App\Http\Controllers\PenilaianPrestasiKerjaItem\PenilaianPrestasiKerjaItemBrowseController;
+use App\Http\Controllers\PenilaianLogbook\PenilaianLogbookBrowseController;
 
 
 use App\Http\Controllers\Jabatan\JabatanBrowseController;
@@ -60,6 +61,7 @@ class PenilaianPrestasiKerjaController extends Controller
             ->get('fetch');
 
 
+
         $Take = ___TableGetTake($request, $TableKey);
         $DataTable = [
             'key' => $TableKey,
@@ -84,8 +86,6 @@ class PenilaianPrestasiKerjaController extends Controller
         }
 
 
-        // cetak($PenilaianPrestasiKerjaItem['records']->toArray());
-        // die();
 
         $ParseData = [
             'data' => $DataTable,
@@ -175,6 +175,32 @@ class PenilaianPrestasiKerjaController extends Controller
 
         return view('app.penilaian_prestasi_kerja.detail.index', [ 'data' => $data->original['data']['records'] ]);
     }
+
+    public function Logbook(Request $request, $id)
+    {
+        $PenilaianPrestasiKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
+            ->equal('id', $id)
+            ->get('first');
+
+        $num_days = cal_days_in_month(CAL_GREGORIAN, $PenilaianPrestasiKerja['records']->bulan, $PenilaianPrestasiKerja['records']->tahun);
+
+        $PenilaianLogbook = PenilaianLogbookBrowseController::FetchBrowse($request)
+            ->equal('penilaian_prestasi_kerja_id', $id)
+            ->get();
+
+        $nilai = [];
+        foreach ($PenilaianLogbook['records'] as $key => $value) {
+          $nilai[$value->indikator_kinerja_id][$value->tanggal] = $value->nilai;
+        }
+
+        return view('app.penilaian_prestasi_kerja.logbook.index', [
+          'data' => $PenilaianPrestasiKerja['records'],
+          'num_days' => $num_days,
+          'nilai' => $nilai
+        ]);
+    }
+
+
 
     public function Edit(Request $request, $id)
     {

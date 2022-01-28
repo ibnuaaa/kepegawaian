@@ -20,9 +20,9 @@
                         </li>
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/'); !!}"><i class="side-menu__icon fe fe-home"></i><span class="side-menu__label">Dashboard</span></a>
-                            <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/penilaian_prestasi_kerja'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Prestasi Kerja</span></a>
+                            <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/penilaian_prestasi_kerja'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Penilaian Prestasi</span></a>
                             @if (getPermissions('penilaian_perilaku_kerja')['checked'])
-                            <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/penilaian_perilaku_kerja'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Perilaku Kerja</span></a>
+                            <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/penilaian_perilaku_kerja'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Penilaian Perilaku</span></a>
                             @endif
                         </li>
                         @if (getPermissions('modul_pengguna')['checked'])

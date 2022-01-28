@@ -29,6 +29,115 @@
                    <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
 
 
+                     <table class="table table-bordered table-sm">
+                           <tr>
+                               <td style="width: 80px;" colspan="2">
+                                     @component('components.form.awesomeSelect', [
+                                       'name' => 'bulan',
+                                       'disabled' => 'disabled',
+                                       'items' => [[
+                                           'label' => '-= Bulan =-',
+                                           'value' => ''
+                                       ],[
+                                           'label' => 'Januari',
+                                           'value' => '1'
+                                       ],[
+                                           'label' => 'Februari',
+                                           'value' => '2'
+                                       ],[
+                                           'label' => 'Maret',
+                                           'value' => '3'
+                                       ],[
+                                           'label' => 'April',
+                                           'value' => '4'
+                                       ],[
+                                           'label' => 'Mei',
+                                           'value' => '5'
+                                       ],[
+                                           'label' => 'Juni',
+                                           'value' => '6'
+                                       ],[
+                                           'label' => 'Juli',
+                                           'value' => '7'
+                                       ],[
+                                           'label' => 'Agustus',
+                                           'value' => '8'
+                                       ],[
+                                           'label' => 'September',
+                                           'value' => '9'
+                                       ],[
+                                           'label' => 'Oktober',
+                                           'value' => '10'
+                                       ],[
+                                           'label' => 'November',
+                                           'value' => '11'
+                                       ],[
+                                           'label' => 'Desember',
+                                           'value' => '12'
+                                       ]],
+                                       'selected' => $data->bulan
+                                   ])
+                                   @endcomponent
+
+                               </td>
+                           </tr>
+
+                           <tr>
+                               <td style="width: 80px;" colspan="2">
+                                     <select class="form-control form-select" disabled="disabled">
+                                         <option>-= Pilih Tahun =-</option>
+                                         @for ($i= date('Y'); $i >= 2022; $i--)
+                                         <option value="{{$i}}" {{ $i == $data->tahun ? 'selected=selected' : '' }}>
+                                             {{$i}}
+                                         </option>
+                                         @endfor
+                                     </select>
+                               </td>
+                           </tr>
+
+                           <tr>
+                               <th class="text-center" colspan="8">
+                                   Identitas Pegawai
+                               </th>
+                           </tr>
+
+
+                           <tr>
+                               <td>
+                                   Nama
+                               </td>
+                               <td colspan=3>
+                                   {{ $data->user->name }}
+                               </td>
+                               <td>
+                                   Unit Kerja
+                               </td>
+                               <td colspan=3>
+                                   {{ !empty($data->unit_kerja->name) ? $data->unit_kerja->name : '' }}
+                               </td>
+                           </tr>
+                           <tr>
+                               <td>
+                                   Nip
+                               </td>
+                               <td colspan=3>
+                                   {{ $data->user->nip }}
+                               </td>
+                               <td>
+                                   Jabatan
+                               </td>
+                               <td colspan=3>
+                                   {{ !empty($data->jabatan->name) ? $data->jabatan->name : '' }}
+                               </td>
+                           </tr>
+                       </table>
+
+
+
+
+
+                       
+
                       <table class="table table-bordered table-sm">
 
 

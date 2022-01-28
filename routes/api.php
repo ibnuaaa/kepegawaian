@@ -117,6 +117,14 @@ $router->post($prefix.'/pendidikan', ['uses' => 'Pendidikan\PendidikanController
 $router->put($prefix.'/pendidikan/{id}', ['uses' => 'Pendidikan\PendidikanController@Update', 'middleware' => ['LogActivity:Pendidikan.Update','Pendidikan.Update']]);
 $router->delete($prefix.'/pendidikan/{id}', ['uses' => 'Pendidikan\PendidikanController@Delete', 'middleware' => ['LogActivity:Pendidikan.Delete','Pendidikan.Delete']]);
 
+// penilaian_logbook
+$router->get($prefix.'/penilaian_logbook', ['uses' => 'PenilaianLogbook\PenilaianLogbookBrowseController@get', 'middleware' => ['LogActivity:PenilaianLogbook.View','ArrQuery']]);
+$router->get($prefix.'/penilaian_logbook/{query:.+}', ['uses' => 'PenilaianLogbook\PenilaianLogbookBrowseController@get', 'middleware' => ['PenilaianLogbook:PenilaianLogbook.View','ArrQuery']]);
+$router->post($prefix.'/penilaian_logbook', ['uses' => 'PenilaianLogbook\PenilaianLogbookController@Insert', 'middleware' => ['LogActivity:PenilaianLogbook.Insert','PenilaianLogbook.Insert']]);
+$router->put($prefix.'/penilaian_logbook', ['uses' => 'PenilaianLogbook\PenilaianLogbookController@Update', 'middleware' => ['LogActivity:PenilaianLogbook.Update','PenilaianLogbook.Update']]);
+$router->delete($prefix.'/penilaian_logbook/{id}', ['uses' => 'PenilaianLogbook\PenilaianLogbookController@Delete', 'middleware' => ['LogActivity:PenilaianLogbook.Delete','PenilaianLogbook.Delete']]);
+
+
 // pendidikan
 $router->get($prefix.'/indikator_', ['uses' => 'IndikatorSkp\IndikatorSkpBrowseController@get', 'middleware' => ['LogActivity:IndikatorSkp.View','ArrQuery']]);
 $router->get($prefix.'/indikator_/{query:.+}', ['uses' => 'IndikatorSkp\IndikatorSkpBrowseController@get', 'middleware' => ['IndikatorSkp:IndikatorSkp.View','ArrQuery']]);
