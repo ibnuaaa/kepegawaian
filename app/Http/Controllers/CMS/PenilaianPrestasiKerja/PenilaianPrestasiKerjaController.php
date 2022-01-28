@@ -185,7 +185,8 @@ class PenilaianPrestasiKerjaController extends Controller
         $num_days = cal_days_in_month(CAL_GREGORIAN, $PenilaianPrestasiKerja['records']->bulan, $PenilaianPrestasiKerja['records']->tahun);
 
         $PenilaianLogbook = PenilaianLogbookBrowseController::FetchBrowse($request)
-            ->equal('penilaian_prestasi_kerja_id', $id)
+            ->where('penilaian_prestasi_kerja_id', $id)
+            ->where('take', '100000')
             ->get();
 
         $nilai = [];
