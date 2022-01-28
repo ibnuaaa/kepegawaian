@@ -15,9 +15,9 @@ class Update extends BaseMiddleware
     private function Initiate($request)
     {
         $this->Model->PenilaianLogbook = PenilaianLogbook::where('indikator_kinerja_id',  $this->_Request->input('indikator_kinerja_id'))
-        ->where('tanggal',  $this->_Request->input('tanggal'))
-        ->where('penilaian_prestasi_kerja_id',  $this->_Request->input('penilaian_prestasi_kerja_id'))
-        ->first();
+            ->where('tanggal',  $this->_Request->input('tanggal'))
+            ->where('penilaian_prestasi_kerja_id',  $this->_Request->input('penilaian_prestasi_kerja_id'))
+            ->first();
 
         if (!$this->Model->PenilaianLogbook) {
           $this->Model->PenilaianLogbook = new PenilaianLogbook();

@@ -161,6 +161,7 @@
                               <th class="text-center">
                                   Realisasi
                               </th>
+
                               <th class="text-center">
                                   Capaian
                               </th>
@@ -211,8 +212,8 @@
                               <td>
                                   <input type="text" name="target" class="form-control" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
-                              <td>
-                                  <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              <td class="text-center">
+                                  {{ $val->realisasi }}
                               </td>
                               <td>
                                   <input type="text" name="capaian" id="capaian_{{$val->id}}" class="form-control" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
@@ -369,7 +370,7 @@
                                   <input type="text" name="target" class="form-control" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td>
-                                  <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" disabled="disabled"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td>
                                   <input type="text" name="capaian" class="form-control" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
@@ -441,6 +442,14 @@
             <div class="modal-footer">
             </div>
         </div>
+    </div>
+</div>
+
+<div class="popover popover-primary bs-popover-top">
+    <div class="popover-arrow"></div>
+    <h3 class="popover-header">Popover top</h3>
+    <div class="popover-body">
+        <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
     </div>
 </div>
 

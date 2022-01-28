@@ -6,7 +6,7 @@
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Penilaian Prestasi Kerja</h1>
+    <h1 class="page-title">Logbook</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -149,6 +149,9 @@
                                     {{ $i+1 }}
                                 </th>
                                 @endfor
+                                <th class="text-center">
+                                    Total
+                                </th>
                             </tr>
 
                             @foreach ($data->penilaian_prestasi_kerja_item as $key => $value)
@@ -161,6 +164,9 @@
                                         <input type="text" class="form-control" value="{{ !empty($nilai[$value->indikator_kinerja_id][$i+1]) ? $nilai[$value->indikator_kinerja_id][$i+1] : '' }}" style="width: 60px; text-align:center;" onchange="saveLogbook(this, '{{ $value->indikator_kinerja_id }}', '{{ $i + 1 }}')">
                                     </td>
                                     @endfor
+                                    <td id="total_{{ $value->indikator_kinerja_id }}" class="text-center" style="padding-top: 10px !important;">
+                                      {{$value->realisasi}}
+                                    </td>
                                 </tr>
                             @endforeach
                         </table>

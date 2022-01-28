@@ -190,7 +190,7 @@ class PenilaianPrestasiKerjaController extends Controller
 
         $nilai = [];
         foreach ($PenilaianLogbook['records'] as $key => $value) {
-          $nilai[$value->indikator_kinerja_id][$value->tanggal] = $value->nilai;
+            $nilai[$value->indikator_kinerja_id][$value->tanggal] = floatval($value->nilai);
         }
 
         return view('app.penilaian_prestasi_kerja.logbook.index', [

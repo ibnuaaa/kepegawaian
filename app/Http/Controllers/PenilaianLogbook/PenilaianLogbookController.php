@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\PenilaianLogbook;
 
 use App\Models\PenilaianLogbook;
+use App\Models\PenilaianPrestasiKerja;
+use App\Models\PenilaianPrestasiKerjaItem;
 
 use App\Traits\Browse;
 
@@ -68,7 +70,36 @@ class PenilaianLogbookController extends Controller
         $Model = $request->Payload->all()['Model'];
         $Model->PenilaianLogbook->save();
 
-        Json::set('data', $this->SyncData($request, $Model->PenilaianLogbook->id));
+        $PenilaianLogbook = PenilaianLogbook::where('indikator_kinerja_id',  $Model->PenilaianLogbook->indikator_kinerja_id)
+            ->where('penilaian_prestasi_kerja_id',  $Model->PenilaianLogbook->penilaian_prestasi_kerja_id)
+            ->get();
+
+        $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where('id',$Model->PenilaianLogbook->penilaian_prestasi_kerja_id)->first();
+
+        $num_days = cal_days_in_month(CAL_GREGORIAN, $PenilaianPrestasiKerja->bulan, $PenilaianPrestasiKerja->tahun);
+
+        $nilai = [];
+        foreach ($PenilaianLogbook as $key => $value) {
+          $nilai[$value->tanggal] = floatval($value->nilai);
+        }
+
+        $total = 0;
+        for ($tanggal=1; $tanggal <= $num_days; $tanggal++) {
+          if (!empty($nilai[$tanggal])) $total += $nilai[$tanggal];
+        }
+
+        $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('indikator_kinerja_id', $Model->PenilaianLogbook->indikator_kinerja_id)
+            ->where('indikator_kinerja_id', $Model->PenilaianLogbook->indikator_kinerja_id)
+            ->where('penilaian_prestasi_kerja_id', $Model->PenilaianLogbook->penilaian_prestasi_kerja_id)
+            ->first();
+        $PenilaianPrestasiKerjaItem->realisasi = $total;
+        $PenilaianPrestasiKerjaItem->save();
+
+        Json::set('data', [
+            'detail' => $this->SyncData($request, $Model->PenilaianLogbook->id),
+            'total' => $total
+        ]);
+
         return response()->json(Json::get(), 202);
     }
 
