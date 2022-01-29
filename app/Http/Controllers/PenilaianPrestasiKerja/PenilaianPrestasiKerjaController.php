@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\PenilaianPrestasiKerja;
 
 use App\Models\PenilaianPrestasiKerja;
-use App\Models\PerilakuKerja;
+use App\Models\IndikatorTetap;
 use App\Models\PenilaianPrestasiKerjaItem;
 
 
@@ -62,14 +62,14 @@ class PenilaianPrestasiKerjaController extends Controller
         $Model = $request->Payload->all()['Model'];
         $Model->PenilaianPrestasiKerja->save();
 
-        $PerilakuKerja = PerilakuKerja::all();
+        $IndikatorTetap = IndikatorTetap::all();
 
-        foreach ($PerilakuKerja as $key => $value) {
+        foreach ($IndikatorTetap as $key => $value) {
             $PenilaianPrestasiKerjaItem = new PenilaianPrestasiKerjaItem();
             $PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id = $Model->PenilaianPrestasiKerja->id;
             $PenilaianPrestasiKerjaItem->user_id = MyAccount()->id;
-            $PenilaianPrestasiKerjaItem->perilaku_kerja_id = $value->id;
-            $PenilaianPrestasiKerjaItem->type = 'perilaku_kerja';
+            $PenilaianPrestasiKerjaItem->indikator_tetap_id = $value->id;
+            $PenilaianPrestasiKerjaItem->type = $value->type;
             $PenilaianPrestasiKerjaItem->save();
         }
 

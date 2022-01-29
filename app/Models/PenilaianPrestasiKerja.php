@@ -23,6 +23,11 @@ class PenilaianPrestasiKerja extends Model
         return $this->hasMany(PenilaianPrestasiKerjaItem::class, 'penilaian_prestasi_kerja_id', 'id')->where('type', 'perilaku_kerja');
     }
 
+    public function penilaian_kualitas()
+    {
+        return $this->hasMany(PenilaianPrestasiKerjaItem::class, 'penilaian_prestasi_kerja_id', 'id')->where('type', 'kualitas');
+    }
+
     public function penilaian_tambahan()
     {
         return $this->hasMany(PenilaianPrestasiKerjaItem::class, 'penilaian_prestasi_kerja_id', 'id')->where('type', 'tambahan');

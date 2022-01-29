@@ -19,9 +19,9 @@ class PenilaianPrestasiKerjaItem extends Model
         return $this->hasOne(IndikatorSkp::class, 'id', 'indikator_kinerja_id')->with('indikator_skp_child');
     }
 
-    public function perilaku_kerja()
+    public function indikator_tetap()
     {
-        return $this->hasOne(PerilakuKerja::class, 'id', 'perilaku_kerja_id');
+        return $this->hasOne(IndikatorTetap::class, 'id', 'indikator_tetap_id');
     }
 
 }

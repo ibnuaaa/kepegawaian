@@ -297,7 +297,7 @@
                                   {{$key + 1}}
                               </td>
                               <td>
-                                  {{!empty($val->perilaku_kerja->name) ? $val->perilaku_kerja->name : ''}}
+                                  {{!empty($val->indikator_tetap->name) ? $val->indikator_tetap->name : ''}}
                               </td>
                               <td class="text-center">
                                   {{ $val->bobot }}
@@ -390,6 +390,72 @@
                                       Tambah Kegiatan
                                   </a>
                               </td>
+                          </tr>
+
+
+                          <tr>
+                              <th class="text-center" colspan="8">
+                                  4. Kualitas
+                              </th>
+                          </tr>
+
+                          <tr>
+                              <th class="text-center">
+                                  No
+                              </th>
+                              <th class="text-center" style="min-width: 200px;">
+                                  Indikator
+                              </th>
+                              <th class="text-center">
+                                  Bobot
+                              </th>
+                              <th class="text-center">
+                                  Target
+                              </th>
+                              <th class="text-center">
+                                  Realisasi
+                              </th>
+                              <th class="text-center">
+                                  Capaian
+                              </th>
+                              <th class="text-center">
+                                  Nilai Kinerja
+                              </th>
+                          </tr>
+
+
+                          @foreach ($data->penilaian_kualitas as $key => $val)
+                          <tr>
+                              <td class="text-center">
+                                  {{$key + 1}}
+                              </td>
+                              <td>
+                                  {{!empty($val->indikator_tetap->name) ? $val->indikator_tetap->name : ''}}
+                              </td>
+                              <td class="text-center">
+                                  {{ $val->bobot }}
+                              </td>
+                              <td class="text-center">
+                                  {{ $val->target }}
+                              </td>
+                              <td class="text-center">
+                                  {{ $val->realisasi }}
+                              </td>
+                              <td class="text-center">
+                                  {{ $val->capaian }}
+                              </td>
+                              <td class="text-center">
+                                  {{ $val->nilai_kinerja }}
+                              </td>
+                          </tr>
+                          @endforeach
+
+
+
+                          <tr>
+                              <th class="text-center" colspan="8">
+                                  <br />
+                              </th>
                           </tr>
 
                       </table>
