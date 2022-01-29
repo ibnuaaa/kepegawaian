@@ -1,16 +1,16 @@
 <script>
 $(document).ready(function() {
 
-    const form = document.getElementById('newPerilakuKerjaForm')
-    const newPerilakuKerjaForm = $('#newPerilakuKerjaForm').formValidation({
+    const form = document.getElementById('newIndikatorTetapForm')
+    const newIndikatorTetapForm = $('#newIndikatorTetapForm').formValidation({
         fields: {
-            name: {
-                validators: {
-                    notEmpty: {
-                        message: 'Nama PerilakuKerja Harus diisi'
-                    }
-                }
-            },
+            // name: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'Nama IndikatorTetap Harus diisi'
+            //         }
+            //     }
+            // },
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -22,12 +22,14 @@ $(document).ready(function() {
 
     $('.saveAction').click(function() {
         const { urlNext, isRecreate } = $(this).data()
-        newPerilakuKerjaForm.validate().then(function(status) {
+        newIndikatorTetapForm.validate().then(function(status) {
             if (status === 'Valid') {
                 const name = $('input[name="name"]')
+                const type = $('select[name="type"]')
 
-                axios.post('/perilaku_kerja', {
-                    name: name.val(),
+                axios.post('/indikator_tetap', {
+                  name: name.val(),
+                  type: type.val(),
                 }).then((response) => {
                     const { data } = response.data
                     if (!isRecreate) {

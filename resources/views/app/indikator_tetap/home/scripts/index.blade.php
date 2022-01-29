@@ -14,7 +14,7 @@ $('#filterAction').click(function() {
     if (filter_search) {
         query.filter_search = filter_search
     }
-    const href = '{{ url('/perilaku_kerja') }}'
+    const href = '{{ url('/indikator_tetap') }}'
     const queryString = Qs.stringify(query)
     if (queryString) {
         window.location = href + '?' + queryString
@@ -39,7 +39,7 @@ function sortBy(column, current_sort_type) {
 
     if (column != '{{ !empty($_GET['sort']) ? $_GET['sort'] : '' }}') query.sort_type = 'asc'
 
-    const href = '{{ url('/perilaku_kerja') }}'
+    const href = '{{ url('/indikator_tetap') }}'
     const queryString = Qs.stringify(query)
     if (queryString) {
         window.location = href + '?' + queryString
@@ -62,7 +62,7 @@ function remove(id, name) {
 
     if (isConfirmed) {
       showLoading()
-      axios.delete('/perilaku_kerja/'+id).then((response) => {
+      axios.delete('/indikator_tetap/'+id).then((response) => {
           const { data } = response.data
           window.location.reload()
       }).catch((error) => {

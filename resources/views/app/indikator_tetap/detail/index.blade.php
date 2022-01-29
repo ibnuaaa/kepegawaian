@@ -1,17 +1,17 @@
 @extends('layout.app')
 
-@section('title', 'PerilakuKerja '.$data['name'])
+@section('title', 'IndikatorTetap '.$data['name'])
 @section('bodyClass', 'fixed-header menu-pin menu-behind')
 
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">PerilakuKerja</h1>
+    <h1 class="page-title">Indikator Tetap</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/perilaku_kerja">PerilakuKerja</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Detail PerilakuKerja</li>
+            <li class="breadcrumb-item"><a href="/indikator_tetap">Indikator Tetap</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detail Indikator Tetap</li>
         </ol>
     </div>
 </div>
@@ -24,7 +24,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="font-montserrat all-caps hint-text">Detail PerilakuKerja</h2>
+                        <h2 class="font-montserrat all-caps hint-text">Detail Indikator Tetap</h2>
                     </div>
                 </div>
                 <div class="row">

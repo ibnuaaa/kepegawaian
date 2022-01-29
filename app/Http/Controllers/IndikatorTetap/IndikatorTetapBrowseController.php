@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\PerilakuKerja;
+namespace App\Http\Controllers\IndikatorTetap;
 
-use App\Models\PerilakuKerja;
+use App\Models\IndikatorTetap;
 
 use App\Traits\Browse;
-use App\Traits\PerilakuKerja\PerilakuKerjaCollection;
+use App\Traits\IndikatorTetap\IndikatorTetapCollection;
 
 use Carbon\Carbon;
 use Illuminate\Http\Response;
@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Auth;
 
 use DB;
 
-class PerilakuKerjaBrowseController extends Controller
+class IndikatorTetapBrowseController extends Controller
 {
-    use Browse, PerilakuKerjaCollection {
-        PerilakuKerjaCollection::__construct as private __PerilakuKerjaCollectionConstruct;
+    use Browse, IndikatorTetapCollection {
+        IndikatorTetapCollection::__construct as private __IndikatorTetapCollectionConstruct;
     }
 
     protected $search = [
@@ -33,7 +33,7 @@ class PerilakuKerjaBrowseController extends Controller
         if ($request) {
             $this->_Request = $request;
         }
-        $this->__PerilakuKerjaCollectionConstruct();
+        $this->__IndikatorTetapCollectionConstruct();
     }
 
     public function get(Request $request)
@@ -43,14 +43,14 @@ class PerilakuKerjaBrowseController extends Controller
             $request->ArrQuery->take = 5000;
         }
 
-        $PerilakuKerja = PerilakuKerja::where(function ($query) use($request) {
+        $IndikatorTetap = IndikatorTetap::where(function ($query) use($request) {
             if (isset($request->ArrQuery->id)) {
-                $query->where("$this->PerilakuKerjaTable.id", $request->ArrQuery->id);
+                $query->where("$this->IndikatorTetapTable.id", $request->ArrQuery->id);
             }
 
             if (!empty($request->get('q'))) {
                 $query->where(function ($query) use($request) {
-                    $query->where("$this->PerilakuKerjaTable.name", 'like', '%'.$request->get('name').'%');
+                    $query->where("$this->IndikatorTetapTable.name", 'like', '%'.$request->get('name').'%');
                 });
             }
 
@@ -67,25 +67,26 @@ class PerilakuKerjaBrowseController extends Controller
             }
         })
         ->select(
-            // PerilakuKerja
-            "$this->PerilakuKerjaTable.id as perilaku_kerja.id",
-            "$this->PerilakuKerjaTable.name as perilaku_kerja.name",
-            "$this->PerilakuKerjaTable.created_at as perilaku_kerja.created_at"
+            // IndikatorTetap
+            "$this->IndikatorTetapTable.id as indikator_tetap.id",
+            "$this->IndikatorTetapTable.name as indikator_tetap.name",
+            "$this->IndikatorTetapTable.type as indikator_tetap.type",
+            "$this->IndikatorTetapTable.created_at as indikator_tetap.created_at"
         );
 
         if(!empty($request->get('sort'))) {
             if(!empty($request->get('sort_type'))) {
-              if ($request->get('sort') == 'name') $PerilakuKerja->orderBy("$this->PerilakuKerjaTable.name", $request->get('sort_type'));
-              if ($request->get('sort') == 'created_at') $PerilakuKerja->orderBy("$this->PerilakuKerjaTable.created_at", $request->get('sort_type'));
+              if ($request->get('sort') == 'name') $IndikatorTetap->orderBy("$this->IndikatorTetapTable.name", $request->get('sort_type'));
+              if ($request->get('sort') == 'created_at') $IndikatorTetap->orderBy("$this->IndikatorTetapTable.created_at", $request->get('sort_type'));
             } else {
-              $PerilakuKerja->orderBy("$this->PerilakuKerjaTable.created_at", 'desc');
+              $IndikatorTetap->orderBy("$this->IndikatorTetapTable.created_at", 'desc');
             }
         } else {
-            $PerilakuKerja->orderBy("$this->PerilakuKerjaTable.created_at", 'desc');
+            $IndikatorTetap->orderBy("$this->IndikatorTetapTable.created_at", 'desc');
         }
 
 
-       $Browse = $this->Browse($request, $PerilakuKerja, function ($data) use($request) {
+       $Browse = $this->Browse($request, $IndikatorTetap, function ($data) use($request) {
             $data = $this->Manipulate($data);
             return $data;
        });
@@ -97,7 +98,7 @@ class PerilakuKerjaBrowseController extends Controller
     {
         return $records->map(function ($item) {
             foreach ($item->getAttributes() as $key => $value) {
-                $this->Group($item, $key, 'perilaku_kerja.', $item);
+                $this->Group($item, $key, 'indikator_tetap.', $item);
             }
             return $item;
         });

@@ -370,7 +370,7 @@
                                   <input type="text" name="target" class="form-control" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td>
-                                  <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" disabled="disabled"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}"   data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td>
                                   <input type="text" name="capaian" class="form-control" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">

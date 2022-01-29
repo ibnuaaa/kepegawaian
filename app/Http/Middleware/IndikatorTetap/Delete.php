@@ -1,39 +1,34 @@
 <?php
 
-namespace App\Http\Middleware\PerilakuKerja;
+namespace App\Http\Middleware\IndikatorTetap;
 
-use App\Models\PerilakuKerja;
+use App\Models\IndikatorTetap;
 
-use Illuminate\Support\Facades\Hash;
 use Closure;
 use Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Middleware\BaseMiddleware;
 
-class Update extends BaseMiddleware
+class Delete extends BaseMiddleware
 {
     private function Initiate($request)
     {
-        $this->Model->PerilakuKerja = PerilakuKerja::where('id', $this->Id)->first();
-        if ($this->Model->PerilakuKerja) {
-            $this->Model->PerilakuKerja->name = $this->_Request->input('name');
-        }
+        $this->Model->IndikatorTetap = IndikatorTetap::find($this->Id);
     }
 
     private function Validation()
     {
-        $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required'
-        ]);
-        if (!$this->Model->PerilakuKerja) {
-            $this->Json::set('exception.key', 'NotFoundPerilakuKerja');
-            $this->Json::set('exception.message', trans('validation.'.$this->Json::get('exception.key')));
+        $validator = Validator::make([ 'id' => $this->Id ], $this->Rules);
+        if (!$this->Model->IndikatorTetap) {
+            $this->Json::set('exception.code', 'NotFoundIndikatorTetap');
+            $this->Json::set('exception.message', trans('validation.'.$this->Json::get('exception.code')));
             return false;
         }
         if ($validator->fails()) {
             $this->Json::set('errors', $validator->errors());
             return false;
         }
+
         return true;
     }
 

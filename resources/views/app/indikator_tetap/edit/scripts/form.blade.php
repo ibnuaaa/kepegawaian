@@ -1,16 +1,16 @@
 <script>
 $(document).ready(function() {
 
-    const form = document.getElementById('editPerilakuKerjaForm')
-    const editPerilakuKerjaForm = $('#editPerilakuKerjaForm').formValidation({
+    const form = document.getElementById('editIndikatorTetapForm')
+    const editIndikatorTetapForm = $('#editIndikatorTetapForm').formValidation({
         fields: {
-            name: {
-                validators: {
-                    notEmpty: {
-                        message: 'The perilaku_kerjaname is required'
-                    }
-                }
-            }
+            // name: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'The indikator_tetapname is required'
+            //         }
+            //     }
+            // }
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -20,16 +20,18 @@ $(document).ready(function() {
     }).data('formValidation')
 
     $('#saveAction').click(function() {
-        editPerilakuKerjaForm.validate().then(function(status) {
+        editIndikatorTetapForm.validate().then(function(status) {
             if (status === 'Valid') {
                 const name = $('input[name="name"]')
+                const type = $('select[name="type"]')
 
                 const data = {
-                    name: name.val(),
+                  name: name.val(),
+                  type: type.val(),
                 }
 
-                axios.put('/perilaku_kerja/{{$data['id']}}', data).then((response) => {
-                    window.location = '{{ url('/perilaku_kerja') }}';
+                axios.put('/indikator_tetap/{{$data['id']}}', data).then((response) => {
+                    window.location = '{{ url('/indikator_tetap') }}';
                 }).catch((error) => {
                     if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
                         swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
@@ -47,9 +49,9 @@ $('#deleteOpenModal').click(function() {
     $('#modalDelete').modal('show')
 })
 $('#deleteAction').click(function() {
-    axios.delete('/perilaku_kerja/{{$data['id']}}').then((response) => {
+    axios.delete('/indikator_tetap/{{$data['id']}}').then((response) => {
         const { data } = response.data
-        window.location = '{{ UrlPrevious(url('/perilaku_kerja')) }}'
+        window.location = '{{ UrlPrevious(url('/indikator_tetap')) }}'
         $('#modalDelete').modal('hide')
     }).catch((error) => {
         if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {

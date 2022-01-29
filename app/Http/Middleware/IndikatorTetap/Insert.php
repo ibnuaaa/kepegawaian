@@ -1,40 +1,39 @@
 <?php
 
-namespace App\Http\Middleware\PerilakuKerja;
+namespace App\Http\Middleware\IndikatorTetap;
 
-use App\Models\PerilakuKerja;
+use App\Models\IndikatorTetap;
 
 use Closure;
 use Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Middleware\BaseMiddleware;
 
-class Delete extends BaseMiddleware
+class Insert extends BaseMiddleware
 {
-    private function Initiate($request)
+    private function Initiate()
     {
-        $this->Model->PerilakuKerja = PerilakuKerja::find($this->Id);
+        $this->Model->IndikatorTetap = new IndikatorTetap();
+
+        $this->Model->IndikatorTetap->name = $this->_Request->input('name');
+        $this->Model->IndikatorTetap->type = $this->_Request->input('type');
     }
 
     private function Validation()
     {
-        $validator = Validator::make([ 'id' => $this->Id ], $this->Rules);
-        if (!$this->Model->PerilakuKerja) {
-            $this->Json::set('exception.code', 'NotFoundPerilakuKerja');
-            $this->Json::set('exception.message', trans('validation.'.$this->Json::get('exception.code')));
-            return false;
-        }
+        $validator = Validator::make($this->_Request->all(), [
+            'name' => 'required',
+        ]);
         if ($validator->fails()) {
             $this->Json::set('errors', $validator->errors());
             return false;
         }
-
         return true;
     }
 
     public function handle($request, Closure $next)
     {
-        $this->Initiate($request);
+        $this->Initiate();
         if ($this->Validation()) {
             $this->Payload->put('Model', $this->Model);
             $this->_Request->merge(['Payload' => $this->Payload]);

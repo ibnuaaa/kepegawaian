@@ -80,8 +80,8 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'id' => 12,
-                'name' => 'perilaku_kerja',
-                'label' => 'perilaku_kerja',
+                'name' => 'indikator_tetap',
+                'label' => 'indikator_tetap',
                 'created_at' => Carbon::now()
             ],
             [

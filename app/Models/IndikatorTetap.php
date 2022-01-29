@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PerilakuKerja extends Model
+class IndikatorTetap extends Model
 {
     use SoftDeletes;
-    protected $table = 'perilaku_kerja';
+    protected $table = 'indikator_tetap';
 }

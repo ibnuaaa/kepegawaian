@@ -57,9 +57,9 @@ class MiddlewareServiceProvider extends ServiceProvider
         'PenilaianLogbook.Update' => \App\Http\Middleware\PenilaianLogbook\Update::class,
         'PenilaianLogbook.Delete' => \App\Http\Middleware\PenilaianLogbook\Delete::class,
 
-        'PerilakuKerja.Insert' => \App\Http\Middleware\PerilakuKerja\Insert::class,
-        'PerilakuKerja.Update' => \App\Http\Middleware\PerilakuKerja\Update::class,
-        'PerilakuKerja.Delete' => \App\Http\Middleware\PerilakuKerja\Delete::class,
+        'IndikatorTetap.Insert' => \App\Http\Middleware\IndikatorTetap\Insert::class,
+        'IndikatorTetap.Update' => \App\Http\Middleware\IndikatorTetap\Update::class,
+        'IndikatorTetap.Delete' => \App\Http\Middleware\IndikatorTetap\Delete::class,
 
         'PenilaianPrestasiKerja.Insert' => \App\Http\Middleware\PenilaianPrestasiKerja\Insert::class,
         'PenilaianPrestasiKerja.Update' => \App\Http\Middleware\PenilaianPrestasiKerja\Update::class,

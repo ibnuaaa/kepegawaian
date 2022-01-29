@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\PerilakuKerja;
+namespace App\Http\Controllers\IndikatorTetap;
 
-use App\Models\PerilakuKerja;
+use App\Models\IndikatorTetap;
 
 use App\Traits\Browse;
 
@@ -14,7 +14,7 @@ use App\Support\Generate\Hash as KeyGenerator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
-class PerilakuKerjaController extends Controller
+class IndikatorTetapController extends Controller
 {
     use Browse;
 
@@ -25,7 +25,7 @@ class PerilakuKerjaController extends Controller
     ];
     public function get(Request $request)
     {
-        $PerilakuKerja = PerilakuKerja::where(function ($query) use($request) {
+        $IndikatorTetap = IndikatorTetap::where(function ($query) use($request) {
             if (isset($request->ArrQuery->id)) {
                 if ($request->ArrQuery->id === 'my') {
                     $query->where('id', $request->information()->id);
@@ -47,7 +47,7 @@ class PerilakuKerjaController extends Controller
                }
            }
         });
-        $Browse = $this->Browse($request, $PerilakuKerja, function ($data) use($request) {
+        $Browse = $this->Browse($request, $IndikatorTetap, function ($data) use($request) {
             return $data;
         });
         Json::set('data', $Browse);
@@ -57,25 +57,25 @@ class PerilakuKerjaController extends Controller
     public function Insert(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $Model->PerilakuKerja->save();
+        $Model->IndikatorTetap->save();
 
-        Json::set('data', $this->SyncData($request, $Model->PerilakuKerja->id));
+        Json::set('data', $this->SyncData($request, $Model->IndikatorTetap->id));
         return response()->json(Json::get(), 201);
     }
 
     public function Update(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $Model->PerilakuKerja->save();
+        $Model->IndikatorTetap->save();
 
-        Json::set('data', $this->SyncData($request, $Model->PerilakuKerja->id));
+        Json::set('data', $this->SyncData($request, $Model->IndikatorTetap->id));
         return response()->json(Json::get(), 202);
     }
 
     public function Delete(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $Model->PerilakuKerja->delete();
+        $Model->IndikatorTetap->delete();
         return response()->json(Json::get(), 202);
     }
 

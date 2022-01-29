@@ -68,11 +68,11 @@ $router->put($prefix.'/golongan/{id}', ['uses' => 'Golongan\GolonganController@U
 $router->delete($prefix.'/golongan/{id}', ['uses' => 'Golongan\GolonganController@Delete', 'middleware' => ['LogActivity:Golongan.Delete','Golongan.Delete']]);
 
 // perilaku_kerja
-$router->get($prefix.'/perilaku_kerja', ['uses' => 'PerilakuKerja\PerilakuKerjaBrowseController@get', 'middleware' => ['LogActivity:PerilakuKerja.View','ArrQuery']]);
-$router->get($prefix.'/perilaku_kerja/{query:.+}', ['uses' => 'PerilakuKerja\PerilakuKerjaBrowseController@get', 'middleware' => ['PerilakuKerja:PerilakuKerja.View','ArrQuery']]);
-$router->post($prefix.'/perilaku_kerja', ['uses' => 'PerilakuKerja\PerilakuKerjaController@Insert', 'middleware' => ['LogActivity:PerilakuKerja.Insert','PerilakuKerja.Insert']]);
-$router->put($prefix.'/perilaku_kerja/{id}', ['uses' => 'PerilakuKerja\PerilakuKerjaController@Update', 'middleware' => ['LogActivity:PerilakuKerja.Update','PerilakuKerja.Update']]);
-$router->delete($prefix.'/perilaku_kerja/{id}', ['uses' => 'PerilakuKerja\PerilakuKerjaController@Delete', 'middleware' => ['LogActivity:PerilakuKerja.Delete','PerilakuKerja.Delete']]);
+$router->get($prefix.'/indikator_tetap', ['uses' => 'IndikatorTetap\IndikatorTetapBrowseController@get', 'middleware' => ['LogActivity:IndikatorTetap.View','ArrQuery']]);
+$router->get($prefix.'/indikator_tetap/{query:.+}', ['uses' => 'IndikatorTetap\IndikatorTetapBrowseController@get', 'middleware' => ['IndikatorTetap:IndikatorTetap.View','ArrQuery']]);
+$router->post($prefix.'/indikator_tetap', ['uses' => 'IndikatorTetap\IndikatorTetapController@Insert', 'middleware' => ['LogActivity:IndikatorTetap.Insert','IndikatorTetap.Insert']]);
+$router->put($prefix.'/indikator_tetap/{id}', ['uses' => 'IndikatorTetap\IndikatorTetapController@Update', 'middleware' => ['LogActivity:IndikatorTetap.Update','IndikatorTetap.Update']]);
+$router->delete($prefix.'/indikator_tetap/{id}', ['uses' => 'IndikatorTetap\IndikatorTetapController@Delete', 'middleware' => ['LogActivity:IndikatorTetap.Delete','IndikatorTetap.Delete']]);
 
 
 // user_pendidikan

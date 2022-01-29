@@ -1,21 +1,21 @@
 @extends('layout.app')
 
-@section('title', 'PerilakuKerja')
+@section('title', 'IndikatorTetap')
 @section('bodyClass', 'fixed-header menu-pin menu-behind')
 
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">PerilakuKerja
-        <a href="/perilaku_kerja/new" class="btn btn-primary btn-sm">
+    <h1 class="page-title">Indikator Tetap
+        <a href="/indikator_tetap/new" class="btn btn-primary btn-sm">
             <i class="fa fa-plus"></i>
-            Buat PerilakuKerja
+            Buat Indikator Tetap
         </a>
     </h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">PerilakuKerja</li>
+            <li class="breadcrumb-item active" aria-current="page">Indikator Tetap</li>
         </ol>
     </div>
 </div>
@@ -62,8 +62,8 @@
             </td>
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
-                    <a href="{{ url('/perilaku_kerja/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                    <a href="{{ url('/perilaku_kerja/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                    <a href="{{ url('/indikator_tetap/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                    <a href="{{ url('/indikator_tetap/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                     <a onClick="return remove('{{$item->id}}','{{ $item->name }}')" href="#" class="btn btn-danger">
                         <i class="fa fa-trash"></i>
                     </a>
@@ -79,5 +79,5 @@
 @endsection
 
 @section('script')
-@include('app.perilaku_kerja.home.scripts.index')
+@include('app.indikator_tetap.home.scripts.index')
 @endsection

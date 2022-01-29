@@ -59,10 +59,10 @@ $router->get('/penilaian_perilaku_kerja', 'CMS\PenilaianPerilakuKerja\PenilaianP
 $router->get('/penilaian_perilaku_kerja/edit/{id}', 'CMS\PenilaianPerilakuKerja\PenilaianPerilakuKerjaController@Edit');
 $router->get('/penilaian_perilaku_kerja/{id}', 'CMS\PenilaianPerilakuKerja\PenilaianPerilakuKerjaController@Detail');
 
-$router->get('/perilaku_kerja', 'CMS\PerilakuKerja\PerilakuKerjaController@Home');
-$router->get('/perilaku_kerja/new', 'CMS\PerilakuKerja\PerilakuKerjaController@New');
-$router->get('/perilaku_kerja/edit/{id}', 'CMS\PerilakuKerja\PerilakuKerjaController@Edit');
-$router->get('/perilaku_kerja/{id}', 'CMS\PerilakuKerja\PerilakuKerjaController@Detail');
+$router->get('/indikator_tetap', 'CMS\IndikatorTetap\IndikatorTetapController@Home');
+$router->get('/indikator_tetap/new', 'CMS\IndikatorTetap\IndikatorTetapController@New');
+$router->get('/indikator_tetap/edit/{id}', 'CMS\IndikatorTetap\IndikatorTetapController@Edit');
+$router->get('/indikator_tetap/{id}', 'CMS\IndikatorTetap\IndikatorTetapController@Detail');
 
 $router->get('/user', 'CMS\User\UserController@Home');
 $router->get('/user/new', 'CMS\User\UserController@New');
