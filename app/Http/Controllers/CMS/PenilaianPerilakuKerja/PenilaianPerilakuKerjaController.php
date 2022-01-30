@@ -121,7 +121,7 @@ class PenilaianPerilakuKerjaController extends Controller
 
         // Get detail jabatan apakah dia staff atau bukan
         $Jabatan = JabatanBrowseController::FetchBrowse($request)
-                    ->equal('id', MyAccount()->jabatan_id)->get('first');
+                    ->equal('id', $PenilaianPerilakuKerja['records']->jabatan_id)->get('first');
 
         $IndikatorKinerjaTree = IndikatorKinerja::tree();
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PenilaianPrestasiKerja;
 
 use App\Models\PenilaianPrestasiKerja;
 use App\Models\IndikatorTetap;
+use App\Models\Jabatan;
 use App\Models\PenilaianPrestasiKerjaItem;
 
 
@@ -62,17 +63,33 @@ class PenilaianPrestasiKerjaController extends Controller
         $Model = $request->Payload->all()['Model'];
         $Model->PenilaianPrestasiKerja->save();
 
-        $IndikatorTetap = IndikatorTetap::all();
+        $IndikatorTetapPerilakuKerja = IndikatorTetap::where('type', 'perilaku_kerja')->get();
+        foreach ($IndikatorTetapPerilakuKerja as $key => $value) {
 
-        foreach ($IndikatorTetap as $key => $value) {
             $PenilaianPrestasiKerjaItem = new PenilaianPrestasiKerjaItem();
             $PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id = $Model->PenilaianPrestasiKerja->id;
             $PenilaianPrestasiKerjaItem->user_id = MyAccount()->id;
             $PenilaianPrestasiKerjaItem->indikator_tetap_id = $value->id;
             $PenilaianPrestasiKerjaItem->type = $value->type;
             $PenilaianPrestasiKerjaItem->save();
+
         }
 
+        $Jabatan = Jabatan::where('id', MyAccount()->jabatan_id)->first();
+
+        if ($Jabatan->is_staff) {
+            $IndikatorTetapKualitas = IndikatorTetap::where('type', 'kualitas')->get();
+            foreach ($IndikatorTetapKualitas as $key => $value) {
+
+                $PenilaianPrestasiKerjaItem = new PenilaianPrestasiKerjaItem();
+                $PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id = $Model->PenilaianPrestasiKerja->id;
+                $PenilaianPrestasiKerjaItem->user_id = MyAccount()->id;
+                $PenilaianPrestasiKerjaItem->indikator_tetap_id = $value->id;
+                $PenilaianPrestasiKerjaItem->type = $value->type;
+                $PenilaianPrestasiKerjaItem->save();
+
+            }
+        }
 
         Json::set('data', $this->SyncData($request, $Model->PenilaianPrestasiKerja->id));
         return response()->json(Json::get(), 201);

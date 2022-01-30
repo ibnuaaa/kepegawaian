@@ -392,7 +392,7 @@
                               </td>
                           </tr>
 
-
+                          @if ($jabatan->is_staff == 1)
                           <tr>
                               <th class="text-center" colspan="8">
                                   4. Kualitas
@@ -457,6 +457,9 @@
                                   <br />
                               </th>
                           </tr>
+                          @endif
+
+
 
                       </table>
                     </div>
