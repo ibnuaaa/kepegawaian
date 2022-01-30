@@ -75,6 +75,26 @@ function savePendidikan(e) {
     })
 }
 
+function saveJabatanFungsional(e) {
+
+    var field = $(e).attr('name')
+    var id = $(e).attr('data-id')
+
+    var data = new Object;
+    data[field] = $(e).val();
+
+    $(e).addClass('loadingField')
+    axios.put('/user_jabatan_fungsional/' + id, data).then((response) => {
+        // location.reload()
+        $(e).removeClass('loadingField')
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
+        }
+    })
+}
+
 function savePelatihan(e) {
 
     var field = $(e).attr('name')
@@ -165,6 +185,22 @@ function saveNewUserPendidikan() {
 
       showLoading()
       axios.post('/user_pendidikan', data).then((response) => {
+          location.reload()
+      }).catch((error) => {
+          if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+              swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+              hideLoading()
+          }
+      })
+}
+
+function saveNewUserJabatanFungsional() {
+      const data = {
+        user_id : '{{ MyAccount()->id }}'
+      };
+
+      showLoading()
+      axios.post('/user_jabatan_fungsional', data).then((response) => {
           location.reload()
       }).catch((error) => {
           if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {

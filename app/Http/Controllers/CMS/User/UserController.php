@@ -8,6 +8,7 @@ use App\Http\Controllers\Jabatan\JabatanBrowseController;
 
 use App\Http\Controllers\Golongan\GolonganBrowseController;
 use App\Http\Controllers\Pendidikan\PendidikanBrowseController;
+use App\Http\Controllers\JabatanFungsional\JabatanFungsionalBrowseController;
 use App\Http\Controllers\UnitKerja\UnitKerjaBrowseController;
 
 use App\Models\Jabatan;
@@ -364,6 +365,23 @@ class UserController extends Controller
             ];
         }
 
+        // JabatanFungsional
+        $JabatanFungsional = JabatanFungsionalBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $JabatanFungsionalList[] = [
+            'value' => '',
+            'label' => '-= Pilih Jabatan Fungsional =-'
+        ];
+
+        foreach ($JabatanFungsional['records'] as $key => $value) {
+            $JabatanFungsionalList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
 
         // Golongan
         $Golongan = GolonganBrowseController::FetchBrowse($request)
@@ -387,6 +405,7 @@ class UserController extends Controller
             'positions' => $PositionList,
             'jabatan' => $JabatanTree,
             'pendidikan' => $PendidikanList,
+            'jabatan_fungsional' => $JabatanFungsionalList,
             'unit_kerja' => $UnitKerjaTree,
             'golongan' => $GolonganList,
             'tab' => $tab,

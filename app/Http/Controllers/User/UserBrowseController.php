@@ -169,6 +169,7 @@ class UserBrowseController extends Controller
        ->with('user_pelatihan')
        ->with('user_keluarga')
        ->with('user_jabatan')
+       ->with('user_jabatan_fungsional')
        ->with('user_golongan')
        ->with('foto_ktp')
        ->with('foto_npwp')

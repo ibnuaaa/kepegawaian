@@ -353,7 +353,7 @@
                                     </tr>
                                     @endforeach
                                     <tr>
-                                        <td colspan="6" class="text-center">
+                                        <td colspan="6" class="text-left">
                                             <input type="button" class="btn btn-primary" value="Tambah Riwayat Pendidikan" onclick="saveNewUserPendidikan()" />
                                         </td>
                                     </tr>
@@ -425,7 +425,7 @@
 
                                     @endforeach
                                     <tr>
-                                        <td colspan="5" class="text-center">
+                                        <td colspan="5" class="text-left">
                                             <input type="button" class="btn btn-primary" value="Tambah Riwayat Pelatihan" onclick="saveNewUserPelatihan()" />
                                         </td>
                                     </tr>
@@ -608,7 +608,7 @@
                                             </tr>
                                             @endforeach
                                             <tr>
-                                                <td colspan="6" class="text-center">
+                                                <td colspan="6" class="text-left">
                                                     <input type="button" class="btn btn-primary" value="Tambah Anggota Keluarga" onclick="saveNewUserKeluarga()" />
                                                 </td>
                                                 <td colspan="11" class="text-center">
@@ -624,7 +624,7 @@
                             <!-- TAB JABATAN -->
                             <!-- =========================================================== -->
                             <div class="tab-pane  {{ $tab == 'jabatan' ? 'active' : '' }}" id="tab-jabatan">
-                                <h2>Jabatan</h2>
+                                <h2>Jabatan Struktural</h2>
 
                                 <div class="table-responsive">
                                     <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
@@ -686,13 +686,74 @@
                                             </tr>
                                             @endforeach
                                             <tr>
-                                                <td colspan="7" class="text-center">
+                                                <td colspan="7" class="text-left">
                                                     <input type="button" class="btn btn-primary" value="Tambah Riwayat Jabatan" onclick="saveNewUserJabatan()" />
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
                                 </div>
+
+                                <br /><br />
+                                <h2>Jabatan Fungsional</h2>
+
+                                <div class="table-responsive">
+                                    <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <th style="min-width: 80px;">
+                                                    No
+                                                </th>
+                                                <th style="min-width: 200px;">
+                                                    Nama jabatan
+                                                </th>
+                                                <th style="min-width: 200px;">
+                                                    Dari Tahun
+                                                </th>
+                                                <th style="min-width: 200px;">
+                                                    Sampai Tahun
+                                                </th>
+                                                <th style="min-width: 200px;">
+                                                    Aksi
+                                                </th>
+                                            </tr>
+                                            @foreach ($data->user_jabatan_fungsional as $key => $val)
+                                            <tr>
+                                                <td>
+                                                    {{ $key + 1 }}
+                                                </td>
+                                                <td>
+                                                    @component('components.form.awesomeSelect', [
+                                                    'name' => 'jabatan_fungsional_id',
+                                                    'items' => $jabatan_fungsional,
+                                                    'onChange' => 'saveJabatanFungsional(this)',
+                                                    'selected' => $val->jabatan_fungsional_id,
+                                                    'data_id' => $val->id
+                                                    ])
+                                                    @endcomponent
+                                                </td>
+                                                <td>
+                                                    <input name="dari_tahun" value="{{ $val->dari_tahun }}" data-id="{{ $val->id }}" onChange="saveJabatanFungsional(this)" class="form-control " type="text" required>
+                                                </td>
+                                                <td>
+                                                    <input name="sampai_tahun" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" onChange="saveJabatanFungsional(this)" class="form-control " type="text" required>
+                                                </td>
+                                                <td>
+                                                    <a onClick="return remove('{{$val->id}}','{{!empty($val->jabatan_fungsional->name) ? $val->jabatan_fungsional->name : ''}}', 'jabatan_fungsional')" href="#" class="btn btn-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            <tr>
+                                                <td colspan="7" class="text-left">
+                                                    <input type="button" class="btn btn-primary" value="Tambah Riwayat Jabatan Fungsional" onclick="saveNewUserJabatanFungsional()" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
                             </div>
 
 
@@ -757,7 +818,7 @@
                                             </tr>
                                             @endforeach
                                             <tr>
-                                                <td colspan="6" class="text-center">
+                                                <td colspan="6" class="text-left">
                                                     <input type="button" class="btn btn-primary" value="Tambah Riwayat Golongan" onclick="saveNewUserGolongan()" />
                                                 </td>
                                             </tr>
