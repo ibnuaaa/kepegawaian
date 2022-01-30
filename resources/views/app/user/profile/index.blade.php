@@ -137,19 +137,19 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label class="col-md-2 form-label">Golongan</label>
+                                <label class="col-md-2 form-label">Golongan (Terakhir)</label>
                                 <div class="col-md-9">
                                     {{ !empty($data->user_golongan[count($data->user_golongan) - 1]->golongan->name) ? $data->user_golongan[count($data->user_golongan) - 1]->golongan->name : '<Kosong>' }}
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label class="col-md-2 form-label">Unit Kerja</label>
+                                <label class="col-md-2 form-label">Unit Kerja (Terakhir)</label>
                                 <div class="col-md-9">
                                     {{ !empty($data->user_jabatan[count($data->user_jabatan) - 1]->unit_kerja->name) ? $data->user_jabatan[count($data->user_jabatan) - 1]->unit_kerja->name : '<Kosong>' }}
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label class="col-md-2 form-label">Pendidikan</label>
+                                <label class="col-md-2 form-label">Pendidikan (Terakhir)</label>
                                 <div class="col-md-9">
                                     {{ !empty($data->user_pendidikan[count($data->user_pendidikan) - 1]->pendidikan->name)  ? $data->user_pendidikan[count($data->user_pendidikan) - 1]->pendidikan->name : '<Kosong>' }}
                                 </div>
@@ -427,7 +427,7 @@
                             </div>
                         </div>
                         <div class="tab-pane  {{ $tab == 'jabatan' ? 'active' : '' }}" id="tab-jabatan">
-                            <h2>Jabatan</h2>
+                            <h2>Jabatan Struktural</h2>
 
                             <div class="table-responsive">
                                 <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
@@ -477,6 +477,54 @@
                                     </table>
                                 </div>
                             </div>
+
+
+                            <br /><br />
+                            <h2>Jabatan Fungsional</h2>
+
+                            <div class="table-responsive">
+                                <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th style="min-width: 80px;">
+                                                No
+                                            </th>
+                                            <th style="min-width: 200px;">
+                                                Nama jabatan
+                                            </th>
+                                            <th style="min-width: 200px;">
+                                                Dari Tahun
+                                            </th>
+                                            <th style="min-width: 200px;">
+                                                Sampai Tahun
+                                            </th>
+                                        </tr>
+                                        @foreach ($data->user_jabatan_fungsional as $key => $val)
+                                        <tr>
+                                            <td>
+                                                {{ $key + 1 }}
+                                            </td>
+                                            <td>
+                                                {{ !empty($val->jabatan_fungsional->name) ? $val->jabatan_fungsional->name : '' }}
+                                            </td>
+                                            <td>
+                                                {{ $val->dari_tahun }}
+                                            </td>
+                                            <td>
+                                                {{ $val->sampai_tahun }}
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td colspan="7" class="text-left">
+                                                <input type="button" class="btn btn-primary" value="Tambah Riwayat Jabatan Fungsional" onclick="saveNewUserJabatanFungsional()" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+
 
 
                         </div>

@@ -78,6 +78,7 @@ $(document).ready(function() {
                 const golongan_id = $('select[name="golongan_id"]')
                 const unit_kerja_id = $('select[name="unit_kerja_id"]')
                 const jabatan_id = $('select[name="jabatan_id"]')
+                const jabatan_fungsional_id = $('select[name="jabatan_fungsional_id"]')
                 const gender = $('select[name="gender"]')
                 const jenis_user = $('.jenis_user_radio input[name="jenis_user"]:checked')
 
@@ -87,6 +88,7 @@ $(document).ready(function() {
                     nik: nik.val(),
                     position_id: position_id.val(),
                     jabatan_id: jabatan_id.val(),
+                    jabatan_fungsional_id: jabatan_fungsional_id.val(),
                     gender: gender.val(),
                     golongan_id: golongan_id.val(),
                     unit_kerja_id: unit_kerja_id.val(),

@@ -32,6 +32,7 @@ class Update extends BaseMiddleware
             !$this->_Request->input('address') || $this->Model->User->address = $this->_Request->input('address');
             !$this->_Request->input('position_id') || $this->Model->User->position_id = $this->_Request->input('position_id');
             !$this->_Request->input('jabatan_id') || $this->Model->User->jabatan_id = $this->_Request->input('jabatan_id');
+            !$this->_Request->input('jabatan_fungsional_id') || $this->Model->User->jabatan_fungsional_id = $this->_Request->input('jabatan_fungsional_id');
             !$this->_Request->input('nip') || $this->Model->User->nip = $this->_Request->input('nip');
 
             !$this->_Request->input('no_ktp') || $this->Model->User->no_ktp = $this->_Request->input('no_ktp');
