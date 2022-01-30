@@ -129,7 +129,11 @@
                                   Jabatan
                               </td>
                               <td colspan=3>
+                                  @if (!empty($data->jabatan->is_staff) && $data->jabatan->is_staff)
+                                  {{ !empty($data->jabatan_fungsional->name) ? $data->jabatan_fungsional->name : '' }}
+                                  @else
                                   {{ !empty($data->jabatan->name) ? $data->jabatan->name : '' }}
+                                  @endif
                               </td>
                           </tr>
 

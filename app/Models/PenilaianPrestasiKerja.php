@@ -43,6 +43,11 @@ class PenilaianPrestasiKerja extends Model
         return $this->hasOne(Jabatan::class, 'id', 'jabatan_id');
     }
 
+    public function jabatan_fungsional()
+    {
+        return $this->hasOne(JabatanFungsional::class, 'id', 'jabatan_fungsional_id');
+    }
+
     public function unit_kerja()
     {
         return $this->hasOne(UnitKerja::class, 'id', 'unit_kerja_id');

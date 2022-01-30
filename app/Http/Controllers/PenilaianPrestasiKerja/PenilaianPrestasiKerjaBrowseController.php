@@ -111,6 +111,7 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
             "$this->PenilaianPrestasiKerjaTable.user_id as user_id",
             "$this->PenilaianPrestasiKerjaTable.unit_kerja_id as unit_kerja_id",
             "$this->PenilaianPrestasiKerjaTable.jabatan_id as jabatan_id",
+            "$this->PenilaianPrestasiKerjaTable.jabatan_fungsional_id as jabatan_fungsional_id",
             "$this->PenilaianPrestasiKerjaTable.bulan as bulan",
             "$this->PenilaianPrestasiKerjaTable.tahun as tahun",
             "$this->PenilaianPrestasiKerjaTable.created_at as penilaian_prestasi_kerja.created_at"

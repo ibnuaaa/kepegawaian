@@ -103,7 +103,6 @@ class UserBrowseController extends Controller
                });
             }
        })
-       ->leftJoin($this->PositionTable, "$this->PositionTable.id", "$this->UserTable.position_id")
 
 
 
@@ -152,19 +151,16 @@ class UserBrowseController extends Controller
             "$this->UserTable.gender as user.gender",
             "$this->UserTable.position_id as user.position_id",
             "$this->UserTable.jabatan_id as user.jabatan_id",
+            "$this->UserTable.jabatan_fungsional_id as user.jabatan_fungsional_id",
             "$this->UserTable.address as user.address",
             "$this->UserTable.remember_token as user.remember_token",
             "$this->UserTable.updated_at as user.updated_at",
             "$this->UserTable.created_at as user.created_at",
             "$this->UserTable.deleted_at as user.deleted_at",
 
-            "$this->UserTable.deleted_at as user.deleted_at",
-
-            // User
-            "$this->PositionTable.id as position.id",
-            "$this->PositionTable.name as position.name",
-
+            "$this->UserTable.deleted_at as user.deleted_at"
        )
+       ->with('jabatan_fungsional')
        ->with('user_pendidikan')
        ->with('user_pelatihan')
        ->with('user_keluarga')

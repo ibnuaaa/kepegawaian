@@ -23,6 +23,7 @@ class Insert extends BaseMiddleware
 
 
         $this->Model->PenilaianPrestasiKerja->jabatan_id = MyAccount()->jabatan_id;
+        $this->Model->PenilaianPrestasiKerja->jabatan_fungsional_id = MyAccount()->jabatan_fungsional_id;
         $this->Model->PenilaianPrestasiKerja->unit_kerja_id = MyAccount()->unit_kerja_id;
 
     }

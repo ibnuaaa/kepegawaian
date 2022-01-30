@@ -135,13 +135,29 @@ class UserController extends Controller
             ];
         }
 
+        // Jabatan Fungsional
+        $JabatanFungsional = JabatanFungsionalBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
 
+        $JabatanFungsionalList[] = [
+            'value' => '',
+            'label' => '-= Pilih Jabatan Fungsional =-'
+        ];
+
+        foreach ($JabatanFungsional['records'] as $key => $value) {
+            $JabatanFungsionalList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
 
 
 
         return view('app.user.new.index', [
             'positions' => $Positions,
             'jabatan' => $JabatanTree,
+            'jabatan_fungsional' => $JabatanFungsionalList,
             'unit_kerja' => $UnitKerjaTree,
             'golongan' => $GolonganList,
 
@@ -309,11 +325,27 @@ class UserController extends Controller
             ];
         }
 
+        // Jabatan Fungsional
+        $JabatanFungsional = JabatanFungsionalBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
 
+        $JabatanFungsionalList[] = [
+            'value' => '',
+            'label' => '-= Pilih Jabatan Fungsional =-'
+        ];
+
+        foreach ($JabatanFungsional['records'] as $key => $value) {
+            $JabatanFungsionalList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
 
         return view('app.user.edit.index', [
           'positions' => $Positions,
           'jabatan' => $JabatanTree,
+          'jabatan_fungsional' => $JabatanFungsionalList,
           'golongan' => $GolonganList,
           'unit_kerja' => $UnitKerjaTree,
           'data' => $User['records']
