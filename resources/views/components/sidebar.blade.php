@@ -67,6 +67,9 @@
                               @if (getPermissions('jabatan')['checked'])
                               <li><a href="{!! url('/jabatan'); !!}" class="slide-item"> Jabatan</a></li>
                               @endif
+                              @if (getPermissions('jabatan_fungsional')['checked'])
+                              <li><a href="{!! url('/jabatan_fungsional'); !!}" class="slide-item"> Jabatan Fungsional</a></li>
+                              @endif
                               @if (getPermissions('pendidikan')['checked'])
                               <li><a href="{!! url('/pendidikan'); !!}" class="slide-item"> Pendidikan</a></li>
                               @endif

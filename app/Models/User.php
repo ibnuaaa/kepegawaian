@@ -70,6 +70,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany(UserJabatan::class, 'user_id', 'user.id')->with('unit_kerja')->with('jabatan');
     }
 
+    public function user_jabatan_fungsional()
+    {
+        return $this->hasMany(UserJabatanFungsional::class, 'user_id', 'user.id')->with('jabatan_fungsional');
+    }
+
     public function user_golongan()
     {
         return $this->hasMany(UserGolongan::class, 'user_id', 'user.id')->with('golongan');

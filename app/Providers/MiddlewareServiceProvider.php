@@ -53,6 +53,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'Pendidikan.Update' => \App\Http\Middleware\Pendidikan\Update::class,
         'Pendidikan.Delete' => \App\Http\Middleware\Pendidikan\Delete::class,
 
+        'JabatanFungsional.Insert' => \App\Http\Middleware\JabatanFungsional\Insert::class,
+        'JabatanFungsional.Update' => \App\Http\Middleware\JabatanFungsional\Update::class,
+        'JabatanFungsional.Delete' => \App\Http\Middleware\JabatanFungsional\Delete::class,
+
         'PenilaianLogbook.Insert' => \App\Http\Middleware\PenilaianLogbook\Insert::class,
         'PenilaianLogbook.Update' => \App\Http\Middleware\PenilaianLogbook\Update::class,
         'PenilaianLogbook.Delete' => \App\Http\Middleware\PenilaianLogbook\Delete::class,
@@ -94,6 +98,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'UserPendidikan.Insert' => \App\Http\Middleware\UserPendidikan\Insert::class,
         'UserPendidikan.Update' => \App\Http\Middleware\UserPendidikan\Update::class,
         'UserPendidikan.Delete' => \App\Http\Middleware\UserPendidikan\Delete::class,
+
+        'UserJabatanFungsional.Insert' => \App\Http\Middleware\UserJabatanFungsional\Insert::class,
+        'UserJabatanFungsional.Update' => \App\Http\Middleware\UserJabatanFungsional\Update::class,
+        'UserJabatanFungsional.Delete' => \App\Http\Middleware\UserJabatanFungsional\Delete::class,
 
         'UserPelatihan.Insert' => \App\Http\Middleware\UserPelatihan\Insert::class,
         'UserPelatihan.Update' => \App\Http\Middleware\UserPelatihan\Update::class,
