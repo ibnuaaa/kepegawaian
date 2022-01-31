@@ -518,14 +518,6 @@
     </div>
 </div>
 
-<div class="popover popover-primary bs-popover-top">
-    <div class="popover-arrow"></div>
-    <h3 class="popover-header">Popover top</h3>
-    <div class="popover-body">
-        <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
-    </div>
-</div>
-
 @endsection
 
 @section('formValidationScript')
