@@ -137,7 +137,6 @@
                                 </div>
                             </div>
 
-
                             <div class=" row mb-4">
                                 <label class="col-md-2 form-label">Jabatan</label>
                                 <div class="col-md-9">
@@ -162,7 +161,6 @@
                                     {{!empty($data->jabatan_fungsional->name) ? $data->jabatan_fungsional->name : ''}}
                                 </div>
                             </div>
-
 
                             <div class="row mb-4">
                                 <label class="col-md-2 form-label">Pendidikan (Terakhir)</label>

@@ -52,7 +52,7 @@ $router->get('/jabatan_fungsional/{id}', 'CMS\JabatanFungsional\JabatanFungsiona
 
 // $router->get('/indikator_skp', 'CMS\IndikatorSkp\IndikatorSkpController@Home');
 $router->get('/indikator_skp/new/{tipe_indikator}/{indikator_kinerja_id}/{penilaian_prestasi_kerja_id}', 'CMS\IndikatorSkp\IndikatorSkpController@New');
-$router->get('/indikator_skp/edit/{id}/{{indikator_kinerja_id}}/{penilaian_prestasi_kerja_id}', 'CMS\IndikatorSkp\IndikatorSkpController@Edit');
+$router->get('/indikator_skp/edit/{id}/{penilaian_prestasi_kerja_id}', 'CMS\IndikatorSkp\IndikatorSkpController@Edit');
 $router->get('/indikator_skp/{id}', 'CMS\IndikatorSkp\IndikatorSkpController@Detail');
 
 $router->get('/penilaian_prestasi_kerja/id/{penilaian_prestasi_kerja_id}', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@IndikatorSkp');
