@@ -96,13 +96,13 @@
                         </div>
                     </div>
                     <div class=" row mb-4">
-                        <label class="col-md-3 form-label">Password</label>
+                        <label class="col-md-3 form-label">Password (Tidak Wajib)</label>
                         <div class="col-md-9">
                             <input autocomplete="new-password" name="password" class="form-control" type="password">
                         </div>
                     </div>
                     <div class=" row mb-4">
-                        <label class="col-md-3 form-label">Confirmation Password</label>
+                        <label class="col-md-3 form-label">Confirmation Password (Tidak Wajib)</label>
                         <div class="col-md-9">
                             <input name="confirmPassword" class="form-control" type="password">
                         </div>

@@ -161,6 +161,7 @@ class UserBrowseController extends Controller
             "$this->UserTable.deleted_at as user.deleted_at"
        )
        ->with('jabatan_fungsional')
+       ->with('golongan')
        ->with('user_pendidikan')
        ->with('user_pelatihan')
        ->with('user_keluarga')

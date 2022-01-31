@@ -180,20 +180,55 @@
                                         @endcomponent
                                     </div>
                                 </div>
-                                <div class="row mb-4">
-                                    <label class="col-md-2 form-label">Golongan</label>
+
+
+
+                                <div class=" row mb-4">
+                                    <label class="col-md-2 form-label">Jabatan</label>
                                     <div class="col-md-9">
-                                        {{ !empty($data->user_golongan[count($data->user_golongan) - 1]->golongan->name) ? $data->user_golongan[count($data->user_golongan) - 1]->golongan->name : '<Kosong>' }}
+                                        <select class="form-control form-select" name="jabatan_id" onChange="savePersonal(this)">
+                                            <option value="">-= Pilih Jabatan =-</option>
+                                            {!! !empty($jabatan) && count($jabatan) > 0 ? treeSelectJabatan($jabatan, '', $data->jabatan_id) : '' !!}
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class=" row mb-4">
                                     <label class="col-md-2 form-label">Unit Kerja</label>
                                     <div class="col-md-9">
-                                        {{ !empty($data->user_jabatan[count($data->user_jabatan) - 1]->unit_kerja->name) ? $data->user_jabatan[count($data->user_jabatan) - 1]->unit_kerja->name : '<Kosong>' }}
+                                        <select class="form-control form-select" name="unit_kerja_id" onChange="savePersonal(this)">
+                                            <option value="">-= Pilih Unit Kerja =-</option>
+                                            {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', $data->unit_kerja_id) : '' !!}
+                                        </select>
                                     </div>
                                 </div>
+                                <div class=" row mb-4">
+                                    <label class="col-md-2 form-label">Golongan</label>
+                                    <div class="col-md-9">
+                                        @component('components.form.awesomeSelect', [
+                                        'name' => 'golongan_id',
+                                        'onChange' => 'savePersonal(this)',
+                                        'items' => $golongan,
+                                        'selected' => $data->golongan_id
+                                        ])
+                                        @endcomponent
+                                    </div>
+                                </div>
+                                <div class=" row mb-4">
+                                    <label class="col-md-2 form-label">Jabatan Fungsional</label>
+                                    <div class="col-md-9">
+                                        @component('components.form.awesomeSelect', [
+                                        'name' => 'jabatan_fungsional_id',
+                                        'onChange' => 'savePersonal(this)',
+                                        'items' => $jabatan_fungsional,
+                                        'selected' => $data->jabatan_fungsional_id
+                                        ])
+                                        @endcomponent
+                                    </div>
+                                </div>
+
+
                                 <div class="row mb-4">
-                                    <label class="col-md-2 form-label">Pendidikan</label>
+                                    <label class="col-md-2 form-label">Pendidikan Terakhir</label>
                                     <div class="col-md-9">
                                         {{ !empty($data->user_pendidikan[count($data->user_pendidikan) - 1]->pendidikan->name)  ? $data->user_pendidikan[count($data->user_pendidikan) - 1]->pendidikan->name : '<Kosong>' }}
                                     </div>

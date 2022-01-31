@@ -136,18 +136,34 @@
                                     {{ $data->status_perkawinan_id ? status_perkawinan($data->status_perkawinan_id) : '' }}
                                 </div>
                             </div>
-                            <div class="row mb-4">
-                                <label class="col-md-2 form-label">Golongan (Terakhir)</label>
+
+
+                            <div class=" row mb-4">
+                                <label class="col-md-2 form-label">Jabatan</label>
                                 <div class="col-md-9">
-                                    {{ !empty($data->user_golongan[count($data->user_golongan) - 1]->golongan->name) ? $data->user_golongan[count($data->user_golongan) - 1]->golongan->name : '<Kosong>' }}
+                                    {{!empty($data->jabatan->name) ? $data->jabatan->name : ''}}
                                 </div>
                             </div>
-                            <div class="row mb-4">
-                                <label class="col-md-2 form-label">Unit Kerja (Terakhir)</label>
+                            <div class=" row mb-4">
+                                <label class="col-md-2 form-label">Unit Kerja</label>
                                 <div class="col-md-9">
-                                    {{ !empty($data->user_jabatan[count($data->user_jabatan) - 1]->unit_kerja->name) ? $data->user_jabatan[count($data->user_jabatan) - 1]->unit_kerja->name : '<Kosong>' }}
+                                    {{$data->unit_kerja->name}}
                                 </div>
                             </div>
+                            <div class=" row mb-4">
+                                <label class="col-md-2 form-label">Golongan</label>
+                                <div class="col-md-9">
+                                    {{!empty($data->golongan->pangkat) ? ($data->golongan->pangkat .'/'. $data->golongan->golongan) : ''}}
+                                </div>
+                            </div>
+                            <div class=" row mb-4">
+                                <label class="col-md-2 form-label">Jabatan Fungsional</label>
+                                <div class="col-md-9">
+                                    {{!empty($data->jabatan_fungsional->name) ? $data->jabatan_fungsional->name : ''}}
+                                </div>
+                            </div>
+
+
                             <div class="row mb-4">
                                 <label class="col-md-2 form-label">Pendidikan (Terakhir)</label>
                                 <div class="col-md-9">
