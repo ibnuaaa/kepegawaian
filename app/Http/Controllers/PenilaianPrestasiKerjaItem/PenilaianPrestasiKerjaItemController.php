@@ -59,6 +59,16 @@ class PenilaianPrestasiKerjaItemController extends Controller
     public function Insert(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
+
+
+        $IndikatorKinerja = IndikatorKinerja::where('id', $Model->PenilaianPrestasiKerjaItem->indikator_kinerja_id)->first();
+
+        $Model->PenilaianPrestasiKerjaItem->bobot = $IndikatorKinerja->bobot;
+        $Model->PenilaianPrestasiKerjaItem->target = $IndikatorKinerja->target;
+        $Model->PenilaianPrestasiKerjaItem->realisasi = $IndikatorKinerja->realisasi;
+        $Model->PenilaianPrestasiKerjaItem->capaian = $IndikatorKinerja->capaian;
+        $Model->PenilaianPrestasiKerjaItem->nilai_kinerja = $IndikatorKinerja->nilai_kinerja;
+
         $Model->PenilaianPrestasiKerjaItem->save();
 
         Json::set('data', $this->SyncData($request, $Model->PenilaianPrestasiKerjaItem->id));
@@ -73,19 +83,8 @@ class PenilaianPrestasiKerjaItemController extends Controller
         $IndikatorKinerjaProgram = IndikatorKinerja::where('id', $Model->PenilaianPrestasiKerjaItem->indikator_kinerja_id)->with('parents')->first();
 
         if (!empty($IndikatorKinerjaProgram->tipe_indikator) && $IndikatorKinerjaProgram->tipe_indikator == 'kegiatan') {
-            // Get parent_id Indikator
-
-
-
-
-
-
             //  buat direksi & kabag / atasannya kepala ruang &  kasubag
-
             $this->CalculateParents($IndikatorKinerjaProgram, 0);
-
-
-
         }
 
         Json::set('data', $this->SyncData($request, $Model->PenilaianPrestasiKerjaItem->id));
@@ -102,10 +101,8 @@ class PenilaianPrestasiKerjaItemController extends Controller
 
         $indikator_id_iku = $IndikatorKinerjaIku->parent_id;
 
-
-
         // dibawabh iku ada program dan kegiatan apa aja
-        // mencari semua .program
+        // mencari semua program atau iku bawahnya
         $IndikatorKinerjaIkuChild = IndikatorKinerja::where('parent_id', $indikator_id_iku)->get();
 
         $dataTotal['bobot'] = 0;
@@ -114,10 +111,8 @@ class PenilaianPrestasiKerjaItemController extends Controller
         $dataTotal['capaian'] = 0;
         $dataTotal['nilai_kinerja'] = 0;
 
+        // list program yang dibuat kepala instalasi
         foreach ($IndikatorKinerjaIkuChild as $key => $value) {
-
-
-
             if ($is_atasan) {
               $dataTotal = $this->GetPenilaianItemAtasan($value->id, $dataTotal);
             } else {
@@ -148,9 +143,19 @@ class PenilaianPrestasiKerjaItemController extends Controller
             $PenilaianPrestasiKerjaItemAtasanUpdate->bobot = $dataTotal['bobot'];
             $PenilaianPrestasiKerjaItemAtasanUpdate->target = $dataTotal['target'];
             $PenilaianPrestasiKerjaItemAtasanUpdate->realisasi = $dataTotal['realisasi'];
-            $PenilaianPrestasiKerjaItemAtasanUpdate->capaian = $dataTotal['realisasi']/$dataTotal['target'];
+            if(!empty($dataTotal['target'])) $PenilaianPrestasiKerjaItemAtasanUpdate->capaian = $dataTotal['realisasi']/$dataTotal['target'];
             $PenilaianPrestasiKerjaItemAtasanUpdate->nilai_kinerja = $PenilaianPrestasiKerjaItemAtasanUpdate->capaian * $dataTotal['bobot'];
             $PenilaianPrestasiKerjaItemAtasanUpdate->save();
+        }
+
+        $IndikatorKinerjaAtasan = IndikatorKinerja::where('id' , $indikator_id_iku)->first();
+        if (!empty($IndikatorKinerjaAtasan)) {
+            $IndikatorKinerjaAtasan->bobot = $dataTotal['bobot'];
+            $IndikatorKinerjaAtasan->target = $dataTotal['target'];
+            $IndikatorKinerjaAtasan->realisasi = $dataTotal['realisasi'];
+            if(!empty($dataTotal['target']))  $IndikatorKinerjaAtasan->capaian = $dataTotal['realisasi']/$dataTotal['target'];
+            $IndikatorKinerjaAtasan->nilai_kinerja = $IndikatorKinerjaAtasan->capaian * $dataTotal['bobot'];
+            $IndikatorKinerjaAtasan->save();
         }
 
         if (!empty($IndikatorKinerjaProgram->parents)) $this->CalculateParents($IndikatorKinerjaProgram->parents, 1);
@@ -160,6 +165,13 @@ class PenilaianPrestasiKerjaItemController extends Controller
 
 
       $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::leftJoin('indikator_kinerja', 'indikator_kinerja.id', '=', 'penilaian_prestasi_kerja_item.indikator_kinerja_id')
+                                      ->select(
+                                        'penilaian_prestasi_kerja_item.bobot',
+                                        'penilaian_prestasi_kerja_item.target',
+                                        'penilaian_prestasi_kerja_item.realisasi',
+                                        'penilaian_prestasi_kerja_item.capaian',
+                                        'penilaian_prestasi_kerja_item.nilai_kinerja'
+                                      )
                                       ->leftJoin('penilaian_prestasi_kerja', 'penilaian_prestasi_kerja.id', '=', 'penilaian_prestasi_kerja_item.penilaian_prestasi_kerja_id')
                                       ->where('indikator_kinerja_id' , $id)
                                       ->whereNull('indikator_kinerja.deleted_at')
