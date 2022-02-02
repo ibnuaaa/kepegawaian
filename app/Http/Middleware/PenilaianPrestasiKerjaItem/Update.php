@@ -29,7 +29,7 @@ class Update extends BaseMiddleware
                 $realisasi = $this->Model->PenilaianPrestasiKerjaItem->realisasi;
 
                 $capaian = $realisasi / $target;
-                $nilai_kinerja = $capaian / $bobot;
+                $nilai_kinerja = $capaian * $bobot;
 
                 $this->Model->PenilaianPrestasiKerjaItem->capaian = $capaian;
                 $this->Model->PenilaianPrestasiKerjaItem->nilai_kinerja = $nilai_kinerja;

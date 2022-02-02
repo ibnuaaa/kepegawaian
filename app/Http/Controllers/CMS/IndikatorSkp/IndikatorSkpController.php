@@ -49,7 +49,7 @@ class IndikatorSkpController extends Controller
         return view('app.indikator_skp.detail.index', [ 'data' => $data->original['data']['records'] ]);
     }
 
-    public function Edit(Request $request, $id)
+    public function Edit(Request $request, $id, $penilaian_prestasi_kerja_id)
     {
         $IndikatorSkp = IndikatorSkpBrowseController::FetchBrowse($request)
             ->equal('id', $id)->get('first');
@@ -60,7 +60,8 @@ class IndikatorSkpController extends Controller
         }
         return view('app.indikator_skp.edit.index', [
             'select' => [],
-            'data' => $IndikatorSkp['records']
+            'data' => $IndikatorSkp['records'],
+            'penilaian_prestasi_kerja_id' => $penilaian_prestasi_kerja_id
         ]);
     }
 

@@ -202,7 +202,9 @@
 
                               </th>
                           </tr>
+                          <?php $total_nilai_kinerja = 0; ?>
                           @foreach ($data->penilaian_prestasi_kerja_item as $key => $val)
+                          <?php $total_nilai_kinerja += $val->nilai_kinerja; ?>
                           <tr>
                               <td class="text-center">
                                   {{$key + 1}}
@@ -246,6 +248,7 @@
                               <td>
                               </td>
                               <td class="text-center">
+                                  {{$total_nilai_kinerja}}
                               </td>
                           </tr>
 

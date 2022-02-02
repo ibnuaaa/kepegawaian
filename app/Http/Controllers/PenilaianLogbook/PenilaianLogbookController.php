@@ -93,7 +93,27 @@ class PenilaianLogbookController extends Controller
             ->where('penilaian_prestasi_kerja_id', $Model->PenilaianLogbook->penilaian_prestasi_kerja_id)
             ->first();
         $PenilaianPrestasiKerjaItem->realisasi = $total;
+
+
+
+        if ($PenilaianPrestasiKerjaItem->bobot && $target = $PenilaianPrestasiKerjaItem->target && $realisasi = $PenilaianPrestasiKerjaItem->realisasi) {
+
+            $bobot = $PenilaianPrestasiKerjaItem->bobot;
+            $target = $PenilaianPrestasiKerjaItem->target;
+            $realisasi = $PenilaianPrestasiKerjaItem->realisasi;
+
+            $capaian = $realisasi / $target;
+            $nilai_kinerja = $capaian * $bobot;
+
+            $PenilaianPrestasiKerjaItem->capaian = $capaian;
+            $PenilaianPrestasiKerjaItem->nilai_kinerja = $nilai_kinerja;
+        }
+
         $PenilaianPrestasiKerjaItem->save();
+
+
+
+
 
         Json::set('data', [
             'detail' => $this->SyncData($request, $Model->PenilaianLogbook->id),

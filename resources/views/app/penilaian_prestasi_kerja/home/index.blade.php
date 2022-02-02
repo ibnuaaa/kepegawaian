@@ -67,8 +67,9 @@
                     <a onClick="return remove('{{$item->id}}','{{ $item->name }}')" href="#" class="btn btn-danger">
                         <i class="fa fa-trash"></i>
                     </a>
+                    @if (!empty($props['jabatan']->is_staff) && $props['jabatan']->is_staff)
                     <a href="{{ url('/penilaian_prestasi_kerja/logbook/'.$item->id) }}" class="btn btn-primary"><i class="fa fa-list-alt"></i></a>
-
+                    @endif
                     @if (!$props['jabatan']->is_staff)
                     <a href="{{ url('/penilaian_prestasi_kerja/id/'.$item->id) }}" class="btn btn-success"><i class="fa fa-file"></i></a>
                     @endif
