@@ -63,11 +63,13 @@ class PenilaianPrestasiKerjaItemController extends Controller
 
         $IndikatorKinerja = IndikatorKinerja::where('id', $Model->PenilaianPrestasiKerjaItem->indikator_kinerja_id)->first();
 
-        $Model->PenilaianPrestasiKerjaItem->bobot = $IndikatorKinerja->bobot;
-        $Model->PenilaianPrestasiKerjaItem->target = $IndikatorKinerja->target;
-        $Model->PenilaianPrestasiKerjaItem->realisasi = $IndikatorKinerja->realisasi;
-        $Model->PenilaianPrestasiKerjaItem->capaian = $IndikatorKinerja->capaian;
-        $Model->PenilaianPrestasiKerjaItem->nilai_kinerja = $IndikatorKinerja->nilai_kinerja;
+        if (!empty($IndikatorKinerja)) {
+          $Model->PenilaianPrestasiKerjaItem->bobot = $IndikatorKinerja->bobot;
+          $Model->PenilaianPrestasiKerjaItem->target = $IndikatorKinerja->target;
+          $Model->PenilaianPrestasiKerjaItem->realisasi = $IndikatorKinerja->realisasi;
+          $Model->PenilaianPrestasiKerjaItem->capaian = $IndikatorKinerja->capaian;
+          $Model->PenilaianPrestasiKerjaItem->nilai_kinerja = $IndikatorKinerja->nilai_kinerja;
+        }
 
         $Model->PenilaianPrestasiKerjaItem->save();
 
