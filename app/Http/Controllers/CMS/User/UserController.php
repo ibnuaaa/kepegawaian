@@ -352,10 +352,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function ProfileEdit(Request $request, $tab)
+    public function ProfileEdit(Request $request, $tab, $id = 'me')
     {
-
-        $id = MyAccount()->id;
+        $profilePage = false;
+        if ($id == 'me') {
+            $profilePage = true;
+            $id = MyAccount()->id;
+        }
 
         $User = UserBrowseController::FetchBrowse($request)
             ->equal('id', $id)->get('first');
@@ -441,7 +444,8 @@ class UserController extends Controller
             'unit_kerja' => $UnitKerjaTree,
             'golongan' => $GolonganList,
             'tab' => $tab,
-            'data' => $User['records']
+            'data' => $User['records'],
+            'id' => $profilePage ? '' : $id
         ]);
     }
 

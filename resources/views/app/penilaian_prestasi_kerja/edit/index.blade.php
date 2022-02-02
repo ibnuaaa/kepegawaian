@@ -24,11 +24,8 @@
         <div class="card overflow-scrolln">
             <div class="card-body">
 
-
                 <div class="table-responsive">
                    <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-
-
 
                       <table class="table table-bordered table-sm">
 

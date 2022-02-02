@@ -77,6 +77,7 @@ $router->get('/user/{id}', 'CMS\User\UserController@Detail');
 
 $router->get('/profile', 'CMS\User\UserController@Profile');
 $router->get('/profile/{tab}', 'CMS\User\UserController@ProfileEdit');
+$router->get('/profile/{tab}/{id}', 'CMS\User\UserController@ProfileEdit');
 $router->get('/change_password', 'CMS\User\UserController@ChangePassword');
 
 $router->get('/notifikasi', 'CMS\Notifikasi\NotifikasiController@Home');

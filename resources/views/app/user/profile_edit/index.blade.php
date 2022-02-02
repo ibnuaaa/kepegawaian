@@ -36,12 +36,12 @@
                     <div class="tab-menu-heading tab-menu-heading-boxed">
                         <div class="tabs-menu-boxed">
                             <ul class="nav panel-tabs">
-                                <li><a href="/profile/personal" {{ $tab == 'personal' ? 'class=active' : '' }}>Personal</a></li>
-                                <li><a href="/profile/pendidikan" {{ $tab == 'pendidikan' ? 'class=active' : '' }}>Pendidikan</a></li>
-                                <li><a href="/profile/pelatihan" {{ $tab == 'pelatihan' ? 'class=active' : '' }}>Pelatihan</a></li>
-                                <li><a href="/profile/keluarga" {{ $tab == 'keluarga' ? 'class=active' : '' }}>Keluarga</a></li>
-                                <li><a href="/profile/jabatan" {{ $tab == 'jabatan' ? 'class=active' : '' }}>Riwayat Jabatan</a></li>
-                                <li><a href="/profile/golongan" {{ $tab == 'golongan' ? 'class=active' : '' }}>Riwayat Golongan</a></li>
+                                <li><a href="/profile/personal/{{$id}}" {{ $tab == 'personal' ? 'class=active' : '' }}>Personal</a></li>
+                                <li><a href="/profile/pendidikan/{{$id}}" {{ $tab == 'pendidikan' ? 'class=active' : '' }}>Pendidikan</a></li>
+                                <li><a href="/profile/pelatihan/{{$id}}" {{ $tab == 'pelatihan' ? 'class=active' : '' }}>Pelatihan</a></li>
+                                <li><a href="/profile/keluarga/{{$id}}" {{ $tab == 'keluarga' ? 'class=active' : '' }}>Keluarga</a></li>
+                                <li><a href="/profile/jabatan/{{$id}}" {{ $tab == 'jabatan' ? 'class=active' : '' }}>Riwayat Jabatan</a></li>
+                                <li><a href="/profile/golongan/{{$id}}" {{ $tab == 'golongan' ? 'class=active' : '' }}>Riwayat Golongan</a></li>
                             </ul>
                         </div>
                     </div>
@@ -862,6 +862,9 @@
                                 </div>
 
                             </div>
+
+
+
                         </div>
                     </div>
 

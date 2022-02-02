@@ -180,7 +180,7 @@ function saveGolongan(e) {
 
 function saveNewUserPendidikan() {
       const data = {
-        user_id : '{{ MyAccount()->id }}'
+        user_id : '{{ $data->id }}'
       };
 
       showLoading()
@@ -196,7 +196,7 @@ function saveNewUserPendidikan() {
 
 function saveNewUserJabatanFungsional() {
       const data = {
-        user_id : '{{ MyAccount()->id }}'
+        user_id : '{{ $data->id }}'
       };
 
       showLoading()
@@ -212,7 +212,7 @@ function saveNewUserJabatanFungsional() {
 
 function saveNewUserPelatihan() {
       const data = {
-        user_id : '{{ MyAccount()->id }}'
+        user_id : '{{ $data->id }}'
       };
 
       showLoading()
@@ -228,7 +228,7 @@ function saveNewUserPelatihan() {
 
 function saveNewUserKeluarga() {
       const data = {
-        user_id : '{{ MyAccount()->id }}'
+        user_id : '{{ $data->id }}'
       };
 
       showLoading()
@@ -244,7 +244,7 @@ function saveNewUserKeluarga() {
 
 function saveNewUserJabatan() {
       const data = {
-        user_id : '{{ MyAccount()->id }}'
+        user_id : '{{ $data->id }}'
       };
 
       showLoading()
@@ -260,7 +260,7 @@ function saveNewUserJabatan() {
 
 function saveNewUserGolongan() {
       const data = {
-        user_id : '{{ MyAccount()->id }}'
+        user_id : '{{ $data->id }}'
       };
 
       showLoading()
