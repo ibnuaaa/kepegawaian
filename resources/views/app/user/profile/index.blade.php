@@ -7,7 +7,7 @@
 <!-- PAGE-HEADER -->
 <div class="page-header">
     <h1 class="page-title">Profil User
-        <a href="/profile/personal" class="btn btn-primary btn-sm">
+        <a href="#" onClick="ubahProfil()" class="btn btn-primary btn-sm">
             <i class="fa fa-pencil"></i>
             Ubah Profil
         </a>
@@ -541,11 +541,6 @@
                                             </td>
                                         </tr>
                                         @endforeach
-                                        <tr>
-                                            <td colspan="7" class="text-left">
-                                                <input type="button" class="btn btn-primary" value="Tambah Riwayat Jabatan Fungsional" onclick="saveNewUserJabatanFungsional()" />
-                                            </td>
-                                        </tr>
                                     </table>
                                 </div>
                             </div>

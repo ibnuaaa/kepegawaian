@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CMS\User;
 
 use App\Http\Controllers\User\UserBrowseController;
+use App\Http\Controllers\UserRequest\UserRequestBrowseController;
 use App\Http\Controllers\Position\PositionBrowseController;
 use App\Http\Controllers\Jabatan\JabatanBrowseController;
 
@@ -354,14 +355,21 @@ class UserController extends Controller
 
     public function ProfileEdit(Request $request, $tab, $id = 'me')
     {
-        $profilePage = false;
+
+        $profilePageMy = false;
         if ($id == 'me') {
-            $profilePage = true;
+            $profilePageMy = true;
             $id = MyAccount()->id;
         }
 
-        $User = UserBrowseController::FetchBrowse($request)
-            ->equal('id', $id)->get('first');
+        if ($profilePageMy) {
+            $User = UserRequestBrowseController::FetchBrowse($request)
+                ->equal('user_id', $id)->get('first');
+        } else {
+
+            $User = UserBrowseController::FetchBrowse($request)
+                ->equal('id', $id)->get('first');
+        }
 
         // Position
         $Position = PositionBrowseController::FetchBrowse($request)
@@ -445,7 +453,7 @@ class UserController extends Controller
             'golongan' => $GolonganList,
             'tab' => $tab,
             'data' => $User['records'],
-            'id' => $profilePage ? '' : $id
+            'id' => $profilePageMy ? '' : $id
         ]);
     }
 

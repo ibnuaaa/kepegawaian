@@ -57,7 +57,7 @@
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">Nama</label>
                                     <div class="col-md-9">
-                                        <input name="name" value="{{ $data['name'] }}" disabled class="form-control" type="text">
+                                        {{ MyAccount()->name }}
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -69,7 +69,7 @@
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">NIP</label>
                                     <div class="col-md-9">
-                                        <input name="nip" value="{{ $data['nip'] }}" disabled class="form-control" type="text" required>
+                                        {{ MyAccount()->nip }}
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -257,13 +257,13 @@
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">Foto KTP</label>
                                     <div class="col-md-9">
-                                        <input type="file" onchange="prepareUpload(this, 'foto_ktp', '{{ $data['id'] }}');" multiple>
+                                        <input type="file" onchange="prepareUpload(this, 'foto_ktp{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}');" multiple>
                                         <div style="clear: both;"></div>
                                         <div class="img-preview mt-2" id="img-preview">
 
                                             @if (!empty($data->foto_ktp))
-                                            @foreach ($data->foto_ktp as $key => $val)
-                                            <a href="/api/preview/{{$val->storage->key}}">
+                                            @foreach ($data->foto_ktp as $key => $val2)
+                                            <a href="/api/preview/{{$val2->storage->key}}">
                                                 <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
                                             </a>
                                             @endforeach
@@ -276,12 +276,12 @@
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">Foto NPWP</label>
                                     <div class="col-md-9">
-                                        <input type="file" onchange="prepareUpload(this, 'foto_npwp', '{{ $data['id'] }}');" multiple>
+                                        <input type="file" onchange="prepareUpload(this, 'foto_npwp{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}');" multiple>
                                         <div style="clear: both;"></div>
                                         <div class="img-preview mt-2" id="img-preview">
                                             @if (!empty($data->foto_npwp))
-                                            @foreach ($data->foto_npwp as $key => $val)
-                                            <a href="/api/preview/{{$val->storage->key}}">
+                                            @foreach ($data->foto_npwp as $key => $val2)
+                                            <a href="/api/preview/{{$val2->storage->key}}">
                                                 <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
                                             </a>
                                             @endforeach
@@ -294,12 +294,12 @@
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">Foto BPJS</label>
                                     <div class="col-md-9">
-                                        <input type="file" onchange="prepareUpload(this, 'foto_bpjs', '{{ $data['id'] }}');" multiple>
+                                        <input type="file" onchange="prepareUpload(this, 'foto_bpjs{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}');" multiple>
                                         <div style="clear: both;"></div>
                                         <div class="img-preview mt-2" id="img-preview">
                                             @if (!empty($data->foto_bpjs))
-                                            @foreach ($data->foto_bpjs as $key => $val)
-                                            <a href="/api/preview/{{$val->storage->key}}">
+                                            @foreach ($data->foto_bpjs as $key => $val2)
+                                            <a href="/api/preview/{{$val2->storage->key}}">
                                                 <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
                                             </a>
                                             @endforeach
@@ -366,12 +366,12 @@
                                             <input name="tahun_lulus" value="{{$val->tahun_lulus ? $val->tahun_lulus : ''}}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control" type="text" required>
                                         </td>
                                         <td>
-                                            <input type="file" onchange="prepareUpload(this, 'foto_ijazah', '{{ $val->id }}');" multiple>
+                                            <input type="file" onchange="prepareUpload(this, 'foto_ijazah{{ !$id ? '_request' : '' }}', '{{ $val->id }}');" multiple>
                                             <div style="clear: both;"></div>
                                             <div class="img-preview mt-2" id="img-preview">
                                                 @if (!empty($val->foto_ijazah))
-                                                @foreach ($val->foto_ijazah as $key => $val)
-                                                <a href="/api/preview/{{$val->storage->key}}">
+                                                @foreach ($val->foto_ijazah as $key => $val2)
+                                                <a href="/api/preview/{{$val2->storage->key}}">
                                                     <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
                                                 </a>
                                                 @endforeach
@@ -438,12 +438,12 @@
                                             <input name="tahun" value="{{ $val->tahun }}" data-id="{{ $val->id }}" onChange="savePelatihan(this)" class="form-control " type="text" required>
                                         </td>
                                         <td>
-                                            <input type="file" onchange="prepareUpload(this, 'foto_sertifikat', '{{ $val->id }}');" multiple>
+                                            <input type="file" onchange="prepareUpload(this, 'foto_sertifikat{{ !$id ? '_request' : '' }}', '{{ $val->id }}');" multiple>
                                             <div style="clear: both;"></div>
                                             <div class="img-preview mt-2" id="img-preview">
                                                 @if (!empty($val->foto_sertifikat))
-                                                @foreach ($val->foto_sertifikat as $key => $val)
-                                                <a href="/api/preview/{{$val->storage->key}}">
+                                                @foreach ($val->foto_sertifikat as $key => $val2)
+                                                <a href="/api/preview/{{$val2->storage->key}}">
                                                     <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
                                                 </a>
                                                 @endforeach
@@ -475,12 +475,12 @@
                                 <h2>Keluarga</h2>
                                 <br />
                                 <h4>Upload Foto KK (PDF)</h4>
-                                <input type="file" onchange="prepareUpload(this, 'foto_kk', '{{ $data['id'] }}');" multiple>
+                                <input type="file" onchange="prepareUpload(this, 'foto_kk{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}');" multiple>
                                 <div style="clear: both;"></div>
                                 <div class="img-preview mt-2" id="img-preview">
                                     @if (!empty($data->foto_kk))
-                                    @foreach ($data->foto_kk as $key => $val)
-                                    <a href="/api/preview/{{$val->storage->key}}">
+                                    @foreach ($data->foto_kk as $key => $val2)
+                                    <a href="/api/preview/{{$val2->storage->key}}">
                                         <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
                                     </a>
                                     @endforeach
@@ -863,8 +863,14 @@
 
                             </div>
 
-
-
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="pull-right">
+                              <a href="#" onClick="return approve()" class="btn btn-info"><i class="fa fa-check"></i> Setujui <span class="d-none d-sm-inline">Perubahan Data</span></a>
+                              <a href="#" class="btn btn-danger"><i class="fa fa-times"></i> Tolak <span class="d-none d-sm-inline">Perubahan Data</span></a>
+                            </div>
                         </div>
                     </div>
 

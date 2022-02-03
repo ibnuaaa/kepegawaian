@@ -41,6 +41,11 @@ class MiddlewareServiceProvider extends ServiceProvider
         'User.Password' => \App\Http\Middleware\User\Password::class,
         'User.Delete' => \App\Http\Middleware\User\Delete::class,
 
+        'UserRequest.CheckExist' => \App\Http\Middleware\UserRequest\CheckExist::class,
+        'UserRequest.Update' => \App\Http\Middleware\UserRequest\Update::class,
+        'UserRequest.Approve' => \App\Http\Middleware\UserRequest\Approve::class,
+
+
         'Config.Insert' => \App\Http\Middleware\Config\Insert::class,
         'Config.Update' => \App\Http\Middleware\Config\Update::class,
         'Config.Delete' => \App\Http\Middleware\Config\Delete::class,
@@ -119,6 +124,29 @@ class MiddlewareServiceProvider extends ServiceProvider
         'UserGolongan.Update' => \App\Http\Middleware\UserGolongan\Update::class,
         'UserGolongan.Delete' => \App\Http\Middleware\UserGolongan\Delete::class,
 
+        'UserPendidikanRequest.Insert' => \App\Http\Middleware\UserPendidikanRequest\Insert::class,
+        'UserPendidikanRequest.Update' => \App\Http\Middleware\UserPendidikanRequest\Update::class,
+        'UserPendidikanRequest.Delete' => \App\Http\Middleware\UserPendidikanRequest\Delete::class,
+
+        'UserJabatanFungsionalRequest.Insert' => \App\Http\Middleware\UserJabatanFungsionalRequest\Insert::class,
+        'UserJabatanFungsionalRequest.Update' => \App\Http\Middleware\UserJabatanFungsionalRequest\Update::class,
+        'UserJabatanFungsionalRequest.Delete' => \App\Http\Middleware\UserJabatanFungsionalRequest\Delete::class,
+
+        'UserPelatihanRequest.Insert' => \App\Http\Middleware\UserPelatihanRequest\Insert::class,
+        'UserPelatihanRequest.Update' => \App\Http\Middleware\UserPelatihanRequest\Update::class,
+        'UserPelatihanRequest.Delete' => \App\Http\Middleware\UserPelatihanRequest\Delete::class,
+
+        'UserKeluargaRequest.Insert' => \App\Http\Middleware\UserKeluargaRequest\Insert::class,
+        'UserKeluargaRequest.Update' => \App\Http\Middleware\UserKeluargaRequest\Update::class,
+        'UserKeluargaRequest.Delete' => \App\Http\Middleware\UserKeluargaRequest\Delete::class,
+
+        'UserJabatanRequest.Insert' => \App\Http\Middleware\UserJabatanRequest\Insert::class,
+        'UserJabatanRequest.Update' => \App\Http\Middleware\UserJabatanRequest\Update::class,
+        'UserJabatanRequest.Delete' => \App\Http\Middleware\UserJabatanRequest\Delete::class,
+
+        'UserGolonganRequest.Insert' => \App\Http\Middleware\UserGolonganRequest\Insert::class,
+        'UserGolonganRequest.Update' => \App\Http\Middleware\UserGolonganRequest\Update::class,
+        'UserGolonganRequest.Delete' => \App\Http\Middleware\UserGolonganRequest\Delete::class,
 
         'User.Developer.Token' => \App\Http\Middleware\User\Developer\Token::class,
 

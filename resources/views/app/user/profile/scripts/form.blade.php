@@ -111,7 +111,6 @@ function uploadFile(file, preview) {
         processData: false,
         success: function(response) {
 
-
             const data_storage = {
                 object: 'profile',
                 object_id: '{{$data->id}}',
@@ -138,4 +137,17 @@ function uploadFile(file, preview) {
 function appendImage(preview, data) {
     preview.html("<img src='"+window.apiUrl+"/tmp/"+data.key+"."+data.extension+"' style='height:80px;'/>");
 }
+
+function ubahProfil() {
+  showLoading()
+  axios.put('/user_request/check_exist').then((response) => {
+    location.href = 'profile/personal'
+  }).catch((error) => {
+      if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+          swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+          hideLoading()
+      }
+  })
+}
+
 </script>
