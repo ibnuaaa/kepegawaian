@@ -43,6 +43,7 @@ class MiddlewareServiceProvider extends ServiceProvider
 
         'UserRequest.CheckExist' => \App\Http\Middleware\UserRequest\CheckExist::class,
         'UserRequest.Update' => \App\Http\Middleware\UserRequest\Update::class,
+        'UserRequest.RequestApproval' => \App\Http\Middleware\UserRequest\RequestApproval::class,
         'UserRequest.Approve' => \App\Http\Middleware\UserRequest\Approve::class,
 
 

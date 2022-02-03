@@ -153,12 +153,12 @@ class UserRequestController extends Controller
     public function CheckExist(Request $request)
     {
 
-        $UserRequest = UserRequest::where('user_id', MyAccount()->id)->whereIn('status', ['need_approval', 'new'])->first();
+        $UserRequest = UserRequest::where('user_id', MyAccount()->id)->whereIn('status', ['request_approval', 'new'])->first();
 
-        if ($UserRequest && $UserRequest->status == 'need_approval') {
-            $this->Json::set('exception.code', 'NeedApprovalUser');
-            $this->Json::set('exception.message', trans('validation.'.$this->Json::get('exception.code')));
-            return false;
+        if ($UserRequest && $UserRequest->status == 'request_approval') {
+            Json::set('exception.code', 'NeedApprovalUser');
+            Json::set('exception.message', trans('validation.'.Json::get('exception.code')));
+            return response()->json(Json::get(), 400);
         }
 
         $User = User::where('id', MyAccount()->id)->first();
@@ -489,6 +489,15 @@ class UserRequestController extends Controller
           }
         }
 
+        $Model->UserRequest->save();
+
+        Json::set('data', 'oke');
+        return response()->json(Json::get(), 202);
+    }
+
+    public function RequestApproval(Request $request)
+    {
+        $Model = $request->Payload->all()['Model'];
         $Model->UserRequest->save();
 
         Json::set('data', 'oke');

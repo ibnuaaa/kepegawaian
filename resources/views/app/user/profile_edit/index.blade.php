@@ -868,6 +868,7 @@
                             <br>
                             <br>
                             <div class="pull-right">
+                              <a href="#" onClick="return request_approval()" class="btn btn-info"><i class="fa fa-check"></i> Minta Persetujuan</a>
                               <a href="#" onClick="return approve()" class="btn btn-info"><i class="fa fa-check"></i> Setujui <span class="d-none d-sm-inline">Perubahan Data</span></a>
                               <a href="#" class="btn btn-danger"><i class="fa fa-times"></i> Tolak <span class="d-none d-sm-inline">Perubahan Data</span></a>
                             </div>

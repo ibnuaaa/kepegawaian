@@ -160,7 +160,7 @@ class PenilaianPerilakuKerjaController extends Controller
                 $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
             }
 
-            $tipe_indikator_ditampilkan = 'iku';
+            $tipe_indikator_ditampilkan = ['iku', 'program'];
         }
 
 

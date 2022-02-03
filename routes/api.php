@@ -14,6 +14,7 @@ $router->post($prefix.'/user/reset_password', ['uses' => 'User\UserController@Re
 $router->post($prefix.'/user/change_status', ['uses' => 'User\UserController@ChangeStatus', 'middleware' => ['LogActivity:User.ChangeStatus','User.ChangeStatus']]);
 
 $router->put($prefix.'/user_request/check_exist', ['uses' => 'UserRequest\UserRequestController@CheckExist', 'middleware' => ['LogActivity:UserRequest.Update','UserRequest.CheckExist']]);
+$router->post($prefix.'/user_request/request_approval', ['uses' => 'UserRequest\UserRequestController@RequestApproval', 'middleware' => ['LogActivity:UserRequest.RequestApproval','UserRequest.RequestApproval']]);
 $router->post($prefix.'/user_request/approve', ['uses' => 'UserRequest\UserRequestController@Approve', 'middleware' => ['LogActivity:UserRequest.Approve','UserRequest.Approve']]);
 $router->get($prefix.'/user_request', ['uses' => 'UserRequest\UserRequestBrowseController@get', 'middleware' => ['LogActivity:UserRequest.View','ArrQuery']]);
 $router->get($prefix.'/user_request/{query:.+}', ['uses' => 'UserRequest\UserRequestBrowseController@get', 'middleware' => ['LogActivity:UserRequest.View','ArrQuery']]);

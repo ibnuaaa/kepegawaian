@@ -296,7 +296,25 @@ function approve() {
       }
 
       axios.post('/user_request/approve', data).then((response) => {
-          // location.href= '/profile'
+          location.href= '/profile'
+          // console.log(response.data)
+      }).catch((error) => {
+          if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+              swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+              hideLoading()
+          }
+      })
+}
+
+function request_approval() {
+      showLoading()
+
+      var data = {
+        id: '{{ $data->id }}'
+      }
+
+      axios.post('/user_request/request_approval', data).then((response) => {
+          location.href= '/profile'
           // console.log(response.data)
       }).catch((error) => {
           if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
