@@ -36,7 +36,7 @@ class UserController extends Controller
 
         $TableKey = 'user-table';
 
-        $filter_search = $request->input($TableKey . '-filter_search');
+        $filter_search = $request->input('filter_search');
 
         if (isset($request['user-table-show'])) {
             $selected = $request['user-table-show'];
