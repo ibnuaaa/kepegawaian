@@ -239,7 +239,7 @@ class PenilaianPrestasiKerjaController extends Controller
             }
 
 
-            $tipe_indikator_ditampilkan = 'kegiatan';
+            $tipe_indikator_ditampilkan = ['kegiatan'];
 
         } else {
 
@@ -257,7 +257,7 @@ class PenilaianPrestasiKerjaController extends Controller
                 $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
             }
 
-            $tipe_indikator_ditampilkan = 'iku';
+            $tipe_indikator_ditampilkan = ['iku','program'];
         }
 
 

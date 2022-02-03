@@ -1390,7 +1390,7 @@ if ( ! function_exists('treeChildIndikatorKinerjaModal'))
                             '. (!empty($item->unit_kerja->name) ? $item->unit_kerja->name : '') .'
                         </td>
                         <td>' .
-                            (in_array( $item->id ,$indikator_kerja_ids) && $item->tipe_indikator == $tipe_indikator_ditampilkan ? '<a href="#" onclick=\'return selectIndikatorKinerja(this, "' . $item->id  . '")\'  class="btn btn-success btn-sm"><i class="fa fa-check"></i> Pilih</a>' : '')
+                            (in_array( $item->id ,$indikator_kerja_ids) && in_array($item->tipe_indikator, $tipe_indikator_ditampilkan) ? '<a href="#" onclick=\'return selectIndikatorKinerja(this, "' . $item->id  . '")\'  class="btn btn-success btn-sm"><i class="fa fa-check"></i> Pilih</a>' : '')
                         .'</td>
                     </tr>
                   ' . (count($item->children) > 0 ? treeChildIndikatorKinerjaModal($item->children, $item,  (($prefix ? ($prefix .'.') : ''). $num), $num, $indikator_kerja_ids, $tipe_indikator_ditampilkan) : '') ;
