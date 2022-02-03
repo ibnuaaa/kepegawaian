@@ -225,7 +225,7 @@ class PenilaianPrestasiKerjaController extends Controller
 
             // list semua indikator kerja dari kegiatan yang ada di dalam 1 unit kerja
             $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
-                                // ->where('unit_kerja_id', MyAccount()->unit_kerja_id)
+                                ->where('unit_kerja_id', MyAccount()->unit_kerja_id)
                                 ->where('take', 100000)
                                 ->where('tipe_indikator', 'kegiatan')
                                 ->get();
