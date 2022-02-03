@@ -524,44 +524,6 @@
     </div>
 </div>
 
-
-
-
-<div class="modal effect-sign" id="modalIndikatorKinerja" role="dialog">
-    <div class="modal-dialog modal-xl " role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Daftar Indikator Kinerja Individual</h5>
-                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body" id="body-modal-sasaran-kinerja">
-                <div class="table-responsive">
-                   <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-
-                        <table id="basic" class="table table-bordered table-condensed-custom">
-                            <thead>
-                                <tr>
-                                    <th>NO</th>
-                                    <th style="width: 50%;">INDIKATOR KINERJA</th>
-                                    <th style="width: 40%;">UNIT KERJA</th>
-                                    <th style="width: 120px;">AKSI</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {!! treeChildIndikatorKinerjaModal($indikator_kinerja, '', '', 0, $indikator_kerja_ids, $tipe_indikator_ditampilkan) !!}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
-
 @endsection
 
 @section('formValidationScript')
