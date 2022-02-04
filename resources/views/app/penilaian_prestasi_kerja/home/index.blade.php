@@ -62,7 +62,7 @@
             </td>
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
-                    <a href="{{ url('/penilaian_prestasi_kerja/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                    <a href="{{ url('/penilaian_prestasi_kerja/pdf/'.$item->id) }}" class="btn btn-info"><i class="fa fa-file-pdf-o"></i></a>
                     <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                     <a onClick="return remove('{{$item->id}}','{{ $item->name }}')" href="#" class="btn btn-danger">
                         <i class="fa fa-trash"></i>

@@ -27,6 +27,8 @@ use App\Models\UnitKerja;
 
 use Illuminate\Support\Facades\Auth;
 
+use Barryvdh\DomPDF\Facade as PDF;
+
 class PenilaianPrestasiKerjaController extends Controller
 {
 
@@ -290,6 +292,97 @@ class PenilaianPrestasiKerjaController extends Controller
             'indikator_kinerja' => $IndikatorKinerjaTree,
             'tipe_indikator_ditampilkan' => $tipe_indikator_ditampilkan
         ]);
+    }
+
+
+    public function Pdf(Request $request, $id)
+    {
+        $PenilaianPrestasiKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
+            ->equal('id', $id)
+            ->get('first');
+
+
+
+        if (!isset($PenilaianPrestasiKerja['records']->id)) {
+            throw new ModelNotFoundException('Not Found Batch');
+        }
+
+        // Get detail jabatan apakah dia staff atau bukan
+        $Jabatan = JabatanBrowseController::FetchBrowse($request)
+                    ->equal('id', $PenilaianPrestasiKerja['records']->jabatan_id)->get('first');
+
+        $IndikatorKinerjaTree = IndikatorKinerja::tree();
+
+        if ($Jabatan['records']->group_jabatan == 4) {
+
+          $UnitKerjaParent = UnitKerja::where('id', MyAccount()->unit_kerja_id)->first();
+
+          $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
+                              ->where('unit_kerja_id', $UnitKerjaParent->parent_id)
+                              ->where('take', 100000)
+                              ->where('tipe_indikator', 'program')
+                              ->get();
+
+          $indikator_kerja_ids = [];
+
+          foreach ($IndikatorKerja['records'] as $key2 => $value2) {
+              if(!empty($value2->id)) $indikator_kerja_ids[] = $value2->id;
+              $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
+          }
+
+          $tipe_indikator_ditampilkan = ['program'];
+
+        } else if ($Jabatan['records']->is_staff) {
+
+            // list semua indikator kerja dari kegiatan yang ada di dalam 1 unit kerja
+            $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
+                                ->where('unit_kerja_id', MyAccount()->unit_kerja_id)
+                                ->where('take', 100000)
+                                ->where('tipe_indikator', 'kegiatan')
+                                ->get();
+            // cetak($IndikatorKerja['records']->toArray());
+            // die();
+            $indikator_kerja_ids = [];
+
+            foreach ($IndikatorKerja['records'] as $key2 => $value2) {
+                if(!empty($value2->id)) $indikator_kerja_ids[] = $value2->id;
+                $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
+            }
+
+
+            $tipe_indikator_ditampilkan = ['kegiatan'];
+
+        } else {
+
+            // list semua indikator kerja buat kepala bagian, kepala sub bagian, kepala instalasi
+            $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
+                                // ->where('unit_kerja_id', MyAccount()->unit_kerja_id)
+                                // ->where('tipe_indikator', 'iku')
+                                ->where('take', 100000)
+                                ->get();
+
+            $indikator_kerja_ids = [];
+
+            foreach ($IndikatorKerja['records'] as $key2 => $value2) {
+                if(!empty($value2->id)) $indikator_kerja_ids[] = $value2->id;
+                $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
+            }
+
+            $tipe_indikator_ditampilkan = ['iku','program'];
+        }
+
+        $pdf = PDF::loadView('app.penilaian_prestasi_kerja.pdf.index', [
+          'select' => [],
+          'data' => $PenilaianPrestasiKerja['records'],
+          'indikator_kerja_ids' => $indikator_kerja_ids,
+          'jabatan' => $Jabatan['records'],
+          'indikator_kinerja' => $IndikatorKinerjaTree,
+          'tipe_indikator_ditampilkan' => $tipe_indikator_ditampilkan
+        ]);
+        $pdf->setPaper('a4', 'portrait');
+        return $pdf->stream();
+
+
     }
 
 

@@ -44,7 +44,6 @@ $router->get('/user_request/new', 'CMS\UserRequest\UserRequestController@New');
 $router->get('/user_request/edit/{id}', 'CMS\UserRequest\UserRequestController@Edit');
 $router->get('/user_request/{id}', 'CMS\UserRequest\UserRequestController@Detail');
 
-
 $router->get('/pendidikan', 'CMS\Pendidikan\PendidikanController@Home');
 $router->get('/pendidikan/new', 'CMS\Pendidikan\PendidikanController@New');
 $router->get('/pendidikan/edit/{id}', 'CMS\Pendidikan\PendidikanController@Edit');
@@ -64,6 +63,7 @@ $router->get('/indikator_skp/{id}', 'CMS\IndikatorSkp\IndikatorSkpController@Det
 $router->get('/penilaian_prestasi_kerja/id/{penilaian_prestasi_kerja_id}', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@IndikatorSkp');
 $router->get('/penilaian_prestasi_kerja', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Home');
 $router->get('/penilaian_prestasi_kerja/edit/{id}', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Edit');
+$router->get('/penilaian_prestasi_kerja/pdf/{id}', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Pdf');
 $router->get('/penilaian_prestasi_kerja/{id}', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Detail');
 $router->get('/penilaian_prestasi_kerja/logbook/{id}', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Logbook');
 
