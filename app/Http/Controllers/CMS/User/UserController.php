@@ -453,7 +453,8 @@ class UserController extends Controller
             'golongan' => $GolonganList,
             'tab' => $tab,
             'data' => $User['records'],
-            'id' => $profilePageMy ? '' : $id
+            'id' => $profilePageMy ? '' : $id,
+            'page' => 'profile'
         ]);
     }
 

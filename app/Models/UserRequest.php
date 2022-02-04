@@ -25,6 +25,11 @@ class UserRequest extends Model
         return $this->hasOne(Jabatan::class, 'id', 'jabatan_id')->with('parents');
     }
 
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user.user_id');
+    }
+
     public function jabatan_fungsional()
     {
         return $this->hasOne(JabatanFungsional::class, 'id', 'user.jabatan_fungsional_id');
@@ -37,7 +42,7 @@ class UserRequest extends Model
 
     public function user_pendidikan()
     {
-        return $this->hasMany(UserPendidikanRequest::class, 'user_request_id', 'user.id')->with('pendidikan');
+        return $this->hasMany(UserPendidikanRequest::class, 'user_request_id', 'user.id')->with('pendidikan')->withTrashed();
     }
 
     public function user_pelatihan()

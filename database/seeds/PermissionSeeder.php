@@ -95,6 +95,12 @@ class PermissionSeeder extends Seeder
                 'name' => 'jabatan_fungsional',
                 'label' => 'jabatan_fungsional',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 15,
+                'name' => 'user_request',
+                'label' => 'user_request',
+                'created_at' => Carbon::now()
             ]
         ])->keyBy($this->key);
     }

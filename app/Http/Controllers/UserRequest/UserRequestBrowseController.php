@@ -56,8 +56,8 @@ class UserRequestBrowseController extends Controller
             }
 
 
-            if (isset($request->ArrQuery->status)) {
-                $query->where("$this->UserRequestTable.status", $request->ArrQuery->status);
+            if (isset($request->ArrQuery->status_in)) {
+                $query->whereIn("$this->UserRequestTable.status", $request->ArrQuery->status_in);
             }
 
             if (isset($request->ArrQuery->user_ids)) {
@@ -104,6 +104,7 @@ class UserRequestBrowseController extends Controller
             // UserRequest
             "$this->UserRequestTable.id as user.id",
             "$this->UserRequestTable.username as user.username",
+            "$this->UserRequestTable.user_id as user.user_id",
             "$this->UserRequestTable.nip as user.nip",
 
             "$this->UserRequestTable.no_ktp as user.no_ktp",
@@ -128,6 +129,7 @@ class UserRequestBrowseController extends Controller
             "$this->UserRequestTable.updated_at as user.updated_at",
             "$this->UserRequestTable.created_at as user.created_at",
             "$this->UserRequestTable.deleted_at as user.deleted_at",
+            "$this->UserRequestTable.status as user.status",
 
             "$this->UserRequestTable.deleted_at as user.deleted_at"
        )
@@ -143,6 +145,7 @@ class UserRequestBrowseController extends Controller
        ->with('foto_npwp')
        ->with('foto_kk')
        ->with('foto_bpjs')
+       ->with('user')
        ;
 
 

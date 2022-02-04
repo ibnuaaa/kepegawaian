@@ -4,6 +4,14 @@ $(document).ready(function() {
       format: 'yyyy-mm-dd',
     });
 
+    @if($page == 'user_request')
+    $(".panel-body :input").prop("disabled", true);
+    $(".panel-body :select").prop("disabled", true);
+    @else
+    $(".bg-deleted :input").prop("disabled", true);
+    $(".bg-deleted :select").prop("disabled", true);
+
+    @endif
 })
 
 // =======================================================================
@@ -288,6 +296,7 @@ function saveNewUserGolongan() {
 
 // ================================================================
 
+
 function approve() {
       showLoading()
 
@@ -296,7 +305,11 @@ function approve() {
       }
 
       axios.post('/user_request/approve', data).then((response) => {
+          @if($page == 'profile')
           location.href= '/profile'
+          @else
+          location.href= '/user_request'
+          @endif
           // console.log(response.data)
       }).catch((error) => {
           if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {

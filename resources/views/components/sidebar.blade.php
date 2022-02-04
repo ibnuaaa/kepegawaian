@@ -24,6 +24,9 @@
                             @if (getPermissions('penilaian_perilaku_kerja')['checked'])
                             <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/penilaian_perilaku_kerja'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Penilaian Perilaku</span></a>
                             @endif
+                            @if (getPermissions('user_request')['checked'])
+                            <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/user_request'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Approval SDM</span></a>
+                            @endif
                         </li>
                         @if (getPermissions('modul_pengguna')['checked'])
                         <li class="sub-category">

@@ -275,6 +275,14 @@
             color: #000 !important;
             background: #fff;
         }
+
+        .bg-deleted {
+            background: #ffaaaa;
+        }
+
+        .bg-added {
+            background: #aaffaa;
+        }
     </style>
 </body>
 

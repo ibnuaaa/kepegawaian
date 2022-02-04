@@ -16,6 +16,8 @@
 </div>
 <!-- PAGE-HEADER END -->
 
+
+
 <!-- ROW-1 -->
 <div class="row">
     <div class="col-12">
@@ -36,12 +38,12 @@
                     <div class="tab-menu-heading tab-menu-heading-boxed">
                         <div class="tabs-menu-boxed">
                             <ul class="nav panel-tabs">
-                                <li><a href="/profile/personal/{{$id}}" {{ $tab == 'personal' ? 'class=active' : '' }}>Personal</a></li>
-                                <li><a href="/profile/pendidikan/{{$id}}" {{ $tab == 'pendidikan' ? 'class=active' : '' }}>Pendidikan</a></li>
-                                <li><a href="/profile/pelatihan/{{$id}}" {{ $tab == 'pelatihan' ? 'class=active' : '' }}>Pelatihan</a></li>
-                                <li><a href="/profile/keluarga/{{$id}}" {{ $tab == 'keluarga' ? 'class=active' : '' }}>Keluarga</a></li>
-                                <li><a href="/profile/jabatan/{{$id}}" {{ $tab == 'jabatan' ? 'class=active' : '' }}>Riwayat Jabatan</a></li>
-                                <li><a href="/profile/golongan/{{$id}}" {{ $tab == 'golongan' ? 'class=active' : '' }}>Riwayat Golongan</a></li>
+                                <li><a href="{{ $page == 'profile' ? '/profile/personal/' . $id : '#tab-personal' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'personal' ? 'class=active' : '' }}>Personal</a></li>
+                                <li><a href="{{ $page == 'profile' ? '/profile/pendidikan/' . $id : '#tab-pendidikan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'pendidikan' ? 'class=active' : '' }}>Pendidikan</a></li>
+                                <li><a href="{{ $page == 'profile' ? '/profile/pelatihan/' . $id : '#tab-pelatihan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'pelatihan' ? 'class=active' : '' }}>Pelatihan</a></li>
+                                <li><a href="{{ $page == 'profile' ? '/profile/keluarga/' . $id : '#tab-keluarga' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'keluarga' ? 'class=active' : '' }}>Keluarga</a></li>
+                                <li><a href="{{ $page == 'profile' ? '/profile/jabatan/' . $id : '#tab-jabatan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'jabatan' ? 'class=active' : '' }}>Riwayat Jabatan</a></li>
+                                <li><a href="{{ $page == 'profile' ? '/profile/golongan/' . $id : '#tab-golongan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'golongan' ? 'class=active' : '' }}>Riwayat Golongan</a></li>
                             </ul>
                         </div>
                     </div>
@@ -57,7 +59,7 @@
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">Nama</label>
                                     <div class="col-md-9">
-                                        {{ MyAccount()->name }}
+                                        <a>{{ $data->user->name }}</a>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -69,7 +71,7 @@
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">NIP</label>
                                     <div class="col-md-9">
-                                        {{ MyAccount()->nip }}
+                                        {{ $data->user->nip }}
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -257,7 +259,9 @@
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">Foto KTP</label>
                                     <div class="col-md-9">
+                                        @if($page == 'profile')
                                         <input type="file" onchange="prepareUpload(this, 'foto_ktp{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}');" multiple>
+                                        @endif
                                         <div style="clear: both;"></div>
                                         <div class="img-preview mt-2" id="img-preview">
 
@@ -276,7 +280,9 @@
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">Foto NPWP</label>
                                     <div class="col-md-9">
+                                        @if($page == 'profile')
                                         <input type="file" onchange="prepareUpload(this, 'foto_npwp{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}');" multiple>
+                                        @endif
                                         <div style="clear: both;"></div>
                                         <div class="img-preview mt-2" id="img-preview">
                                             @if (!empty($data->foto_npwp))
@@ -294,7 +300,9 @@
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">Foto BPJS</label>
                                     <div class="col-md-9">
+                                        @if($page == 'profile')
                                         <input type="file" onchange="prepareUpload(this, 'foto_bpjs{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}');" multiple>
+                                        @endif
                                         <div style="clear: both;"></div>
                                         <div class="img-preview mt-2" id="img-preview">
                                             @if (!empty($data->foto_bpjs))
@@ -342,7 +350,8 @@
                                         </th>
                                     </tr>
                                     @foreach ($data->user_pendidikan as $key => $val)
-                                    <tr>
+                                    @if (!$val->deleted_at || $val->user_pendidikan_id)
+                                    <tr class="{{$val->deleted_at ? 'bg-deleted' : ''}} {{!$val->user_pendidikan_id ? 'bg-added' : ''}}">
                                         <td>
                                             {{ $key + 1 }}
                                         </td>
@@ -366,7 +375,9 @@
                                             <input name="tahun_lulus" value="{{$val->tahun_lulus ? $val->tahun_lulus : ''}}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control" type="text" required>
                                         </td>
                                         <td>
+                                            @if($page == 'profile')
                                             <input type="file" onchange="prepareUpload(this, 'foto_ijazah{{ !$id ? '_request' : '' }}', '{{ $val->id }}');" multiple>
+                                            @endif
                                             <div style="clear: both;"></div>
                                             <div class="img-preview mt-2" id="img-preview">
                                                 @if (!empty($val->foto_ijazah))
@@ -380,18 +391,31 @@
                                             </div>
                                         </td>
                                         <td>
+                                            @if($page == 'profile' && !$val->deleted_at)
                                             <a onClick="return remove('{{$val->id}}','{{!empty($val->pendidikan->name) ? $val->pendidikan->name : ''}}', 'pendidikan')" href="#" class="btn btn-danger">
                                                 <i class="fa fa-trash"></i>
                                             </a>
+                                            @endif
+
+                                            @if ($val->deleted_at)
+                                              Terhapus
+                                            @endif
+
+                                            @if (!$val->user_pendidikan_id)
+                                              Ditambahkan
+                                            @endif
                                         </td>
 
                                     </tr>
+                                    @endif
                                     @endforeach
+                                    @if($page == 'profile')
                                     <tr>
                                         <td colspan="6" class="text-left">
                                             <input type="button" class="btn btn-primary" value="Tambah Riwayat Pendidikan" onclick="saveNewUserPendidikan()" />
                                         </td>
                                     </tr>
+                                    @endif
                                 </table>
                             </div>
 
@@ -438,7 +462,9 @@
                                             <input name="tahun" value="{{ $val->tahun }}" data-id="{{ $val->id }}" onChange="savePelatihan(this)" class="form-control " type="text" required>
                                         </td>
                                         <td>
+                                            @if($page == 'profile')
                                             <input type="file" onchange="prepareUpload(this, 'foto_sertifikat{{ !$id ? '_request' : '' }}', '{{ $val->id }}');" multiple>
+                                            @endif
                                             <div style="clear: both;"></div>
                                             <div class="img-preview mt-2" id="img-preview">
                                                 @if (!empty($val->foto_sertifikat))
@@ -452,18 +478,22 @@
                                             </div>
                                         </td>
                                         <td>
+                                            @if($page == 'profile')
                                             <a onClick="return remove('{{$val->id}}','{{!empty($val->nama_sertifikat) ? $val->nama_sertifikat : ''}}', 'pelatihan')" href="#" class="btn btn-danger">
                                                 <i class="fa fa-trash"></i>
                                             </a>
+                                            @endif
                                         </td>
                                     </tr>
 
                                     @endforeach
+                                    @if($page == 'profile')
                                     <tr>
                                         <td colspan="5" class="text-left">
                                             <input type="button" class="btn btn-primary" value="Tambah Riwayat Pelatihan" onclick="saveNewUserPelatihan()" />
                                         </td>
                                     </tr>
+                                    @endif
                                 </table>
                             </div>
 
@@ -474,8 +504,10 @@
                             <div class="tab-pane  {{ $tab == 'keluarga' ? 'active' : '' }}" id="tab-keluarga">
                                 <h2>Keluarga</h2>
                                 <br />
+                                @if($page == 'profile')
                                 <h4>Upload Foto KK (PDF)</h4>
                                 <input type="file" onchange="prepareUpload(this, 'foto_kk{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}');" multiple>
+                                @endif
                                 <div style="clear: both;"></div>
                                 <div class="img-preview mt-2" id="img-preview">
                                     @if (!empty($data->foto_kk))
@@ -636,12 +668,15 @@
                                                     <input name="ibu" value="{{ $val->ibu }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>
+                                                    @if($page == 'profile')
                                                     <a onClick="return remove('{{$val->id}}','{{!empty($val->nama_lengkap) ? $val->nama_lengkap : ''}}', 'keluarga')" href="#" class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             @endforeach
+                                            @if($page == 'profile')
                                             <tr>
                                                 <td colspan="6" class="text-left">
                                                     <input type="button" class="btn btn-primary" value="Tambah Anggota Keluarga" onclick="saveNewUserKeluarga()" />
@@ -649,6 +684,7 @@
                                                 <td colspan="11" class="text-center">
                                                 </td>
                                             </tr>
+                                            @endif
                                         </table>
                                     </div>
                                 </div>
@@ -714,17 +750,21 @@
                                                     <input name="tmt" id="myDatepicker" value="{{ $val->tmt }}" data-id="{{ $val->id }}" onChange="saveJabatan(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>
+                                                    @if($page == 'profile')
                                                     <a onClick="return remove('{{$val->id}}','{{!empty($val->jabatan->name) ? $val->jabatan->name : ''}}', 'jabatan')" href="#" class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             @endforeach
+                                            @if($page == 'profile')
                                             <tr>
                                                 <td colspan="7" class="text-left">
                                                     <input type="button" class="btn btn-primary" value="Tambah Riwayat Jabatan" onclick="saveNewUserJabatan()" />
                                                 </td>
                                             </tr>
+                                            @endif
                                         </table>
                                     </div>
                                 </div>
@@ -774,17 +814,21 @@
                                                     <input name="sampai_tahun" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" onChange="saveJabatanFungsional(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>
+                                                    @if($page == 'profile')
                                                     <a onClick="return remove('{{$val->id}}','{{!empty($val->jabatan_fungsional->name) ? $val->jabatan_fungsional->name : ''}}', 'jabatan_fungsional')" href="#" class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             @endforeach
+                                            @if($page == 'profile')
                                             <tr>
                                                 <td colspan="7" class="text-left">
                                                     <input type="button" class="btn btn-primary" value="Tambah Riwayat Jabatan Fungsional" onclick="saveNewUserJabatanFungsional()" />
                                                 </td>
                                             </tr>
+                                            @endif
                                         </table>
                                     </div>
                                 </div>
@@ -846,17 +890,21 @@
                                                     <input name="tmt" value="{{ $val->tmt }}" data-id="{{ $val->id }}" id="myDatepicker" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>
+                                                    @if($page == 'profile')
                                                     <a onClick="return remove('{{$val->id}}','{{!empty($val->golongan->name) ? $val->golongan->name : ''}}', 'golongan')" href="#" class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             @endforeach
+                                            @if($page == 'profile')
                                             <tr>
                                                 <td colspan="6" class="text-left">
                                                     <input type="button" class="btn btn-primary" value="Tambah Riwayat Golongan" onclick="saveNewUserGolongan()" />
                                                 </td>
                                             </tr>
+                                            @endif
                                         </table>
                                     </div>
                                 </div>
@@ -867,10 +915,12 @@
                             <br>
                             <br>
                             <br>
-                            <div class="pull-right">
+                            <div class="text-center">
+                              @if($page == 'profile')
                               <a href="#" onClick="return request_approval()" class="btn btn-info"><i class="fa fa-check"></i> Minta Persetujuan</a>
+                              @else
                               <a href="#" onClick="return approve()" class="btn btn-info"><i class="fa fa-check"></i> Setujui <span class="d-none d-sm-inline">Perubahan Data</span></a>
-                              <a href="#" class="btn btn-danger"><i class="fa fa-times"></i> Tolak <span class="d-none d-sm-inline">Perubahan Data</span></a>
+                              @endif
                             </div>
                         </div>
                     </div>

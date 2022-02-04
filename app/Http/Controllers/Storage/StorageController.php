@@ -91,7 +91,8 @@ class StorageController extends Controller
         $Model = $request->Payload->all()['Model'];
         $Document = Document::where('storage_id', $Model->Storage->id)->first();
 
-        $Path = $Document->object . '_' . $Document->object_id . '/' . $Model->Storage->original_name;
+        // $Path = $Document->object . '_' . $Document->object_id . '/' . $Model->Storage->original_name;
+        $Path = $Model->Storage->original_name;
         $File = Storage::disk('local')->get($Path);
 
         $attachment = "";
@@ -111,7 +112,8 @@ class StorageController extends Controller
         $Model = $request->Payload->all()['Model'];
         $Document = Document::where('storage_id', $Model->Storage->id)->first();
 
-        $Path = $Document->object . '_' . $Document->object_id . '/' . $Model->Storage->original_name;
+        // $Path = $Document->object . '_' . $Document->object_id . '/' . $Model->Storage->original_name;
+        $Path = $Model->Storage->original_name;
         $File = Storage::disk('local')->get($Path);
 
         $attachment = "";
@@ -152,7 +154,7 @@ class StorageController extends Controller
     public function FetchThumb(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $Path = $Model->Storage->object . '_' . $Model->Storage->object_id . '/' . $Model->Storage->thumbName;
+        $Path = $Model->Storage->thumbName;
         $File = Storage::disk('local')->get($Path);
         return response($File, 200)
             ->header('Content-Type', $Model->Storage->metadata['mimetype'])
@@ -184,11 +186,12 @@ class StorageController extends Controller
         $Folder = $Object . '_' . $ObjectId;
         if ($ObjectId && $Object) {
             if (!Storage::disk('local')->has($Folder)) {
-                Storage::disk('local')->makeDirectory($Folder, $mode = 0777, true, true);
+                // Storage::disk('local')->makeDirectory($Folder, $mode = 0777, true, true);
             }
         }
         Storage::disk('local')->put(
-            $Folder . '/' . $FileName,
+          // $Folder . '/' . $FileName,
+            $FileName,
             Storage::disk('temporary')->get($FileName), 'public'
         );
         // if ($File->thumb) {
@@ -244,11 +247,12 @@ class StorageController extends Controller
         $Folder = $Object . '_' . $ObjectId;
         if ($ObjectId && $Object) {
             if (!Storage::disk('local')->has($Folder)) {
-                Storage::disk('local')->makeDirectory($Folder, $mode = 0777, true, true);
+                // Storage::disk('local')->makeDirectory($Folder, $mode = 0777, true, true);
             }
         }
         Storage::disk('local')->put(
-            $Folder . '/' . $FileName,
+            // $Folder . '/' . $FileName,
+            $FileName,
             Storage::disk('temporary')->get($FileName), 'public'
         );
 
