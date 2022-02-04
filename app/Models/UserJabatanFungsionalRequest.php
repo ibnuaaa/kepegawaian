@@ -18,6 +18,11 @@ class UserJabatanFungsionalRequest extends Model
         return $this->hasOne(JabatanFungsional::class, 'id', 'jabatan_fungsional_id');
     }
 
+    public function user_jabatan_fungsional()
+    {
+        return $this->hasOne(UserJabatanFungsional::class, 'id', 'user_jabatan_fungsional_id');
+    }
+
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');

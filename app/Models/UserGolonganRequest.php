@@ -18,4 +18,9 @@ class UserGolonganRequest extends Model
         return $this->hasOne(Golongan::class, 'id', 'golongan_id');
     }
 
+    public function user_golongan()
+    {
+        return $this->hasOne(UserGolongan::class, 'id', 'user_golongan_id');
+    }
+
 }

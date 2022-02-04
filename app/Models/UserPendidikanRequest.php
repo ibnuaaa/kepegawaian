@@ -23,6 +23,11 @@ class UserPendidikanRequest extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
+    public function user_pendidikan()
+    {
+        return $this->hasOne(UserPendidikan::class, 'id', 'user_pendidikan_id');
+    }
+
     public function foto_ijazah()
     {
         return $this->hasMany(Document::class, 'object_id', 'id')

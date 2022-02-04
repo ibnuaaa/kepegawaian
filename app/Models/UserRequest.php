@@ -42,17 +42,32 @@ class UserRequest extends Model
 
     public function user_pendidikan()
     {
-        return $this->hasMany(UserPendidikanRequest::class, 'user_request_id', 'user.id')->with('pendidikan')->withTrashed();
+        return $this->hasMany(UserPendidikanRequest::class, 'user_request_id', 'user.id')->with('pendidikan')->withTrashed()->with('user_pendidikan');
     }
 
     public function user_pelatihan()
     {
-        return $this->hasMany(UserPelatihanRequest::class, 'user_request_id', 'user.id');
+        return $this->hasMany(UserPelatihanRequest::class, 'user_request_id', 'user.id')->withTrashed()->with('user_pelatihan');
     }
 
     public function user_keluarga()
     {
-        return $this->hasMany(UserKeluargaRequest::class, 'user_request_id', 'user.id');
+        return $this->hasMany(UserKeluargaRequest::class, 'user_request_id', 'user.id')->withTrashed()->with('user_keluarga');
+    }
+
+    public function user_jabatan()
+    {
+        return $this->hasMany(UserJabatanRequest::class, 'user_request_id', 'user.id')->with('unit_kerja')->with('jabatan')->withTrashed()->with('user_jabatan');
+    }
+
+    public function user_jabatan_fungsional()
+    {
+        return $this->hasMany(UserJabatanFungsionalRequest::class, 'user_request_id', 'user.id')->with('jabatan_fungsional')->withTrashed()->with('user_jabatan_fungsional');
+    }
+
+    public function user_golongan()
+    {
+        return $this->hasMany(UserGolonganRequest::class, 'user_request_id', 'user.id')->with('golongan')->withTrashed()->with('user_golongan');
     }
 
     public function unit_kerja()
@@ -60,20 +75,6 @@ class UserRequest extends Model
         return $this->hasOne(UnitKerjaRequest::class, 'id', 'unit_kerja_id')->with('parents');
     }
 
-    public function user_jabatan()
-    {
-        return $this->hasMany(UserJabatanRequest::class, 'user_request_id', 'user.id')->with('unit_kerja')->with('jabatan');
-    }
-
-    public function user_jabatan_fungsional()
-    {
-        return $this->hasMany(UserJabatanFungsionalRequest::class, 'user_request_id', 'user.id')->with('jabatan_fungsional');
-    }
-
-    public function user_golongan()
-    {
-        return $this->hasMany(UserGolonganRequest::class, 'user_request_id', 'user.id')->with('golongan');
-    }
 
     public function foto_ktp()
     {

@@ -19,4 +19,9 @@ class UserPelatihanRequest extends Model
                     ->where('object', 'foto_sertifikat_request')
                     ->with('storage');
     }
+
+    public function user_pelatihan()
+    {
+        return $this->hasOne(UserPelatihan::class, 'id', 'user_pelatihan_id');
+    }
 }

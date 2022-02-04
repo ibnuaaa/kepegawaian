@@ -147,6 +147,7 @@ return [
 
     'AdminCompanyRequired' => 'Harus menggunakan akun company',
     'DuplicatePenilaianPrestasiKerjaItem' => 'Indikator Kinerja Sudah Ada.',
+    'NeedApprovalUser' => 'Request perubahan data user telah dikirimkan ke SDM. Silahkan Menunggu hingga data di proses dan disetujui oleh bagian SDM. Terimakasih.',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes

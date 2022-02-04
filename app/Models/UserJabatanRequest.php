@@ -18,6 +18,11 @@ class UserJabatanRequest extends Model
         return $this->hasOne(UnitKerja::class, 'id', 'unit_kerja_id');
     }
 
+    public function user_jabatan()
+    {
+        return $this->hasOne(UserJabatan::class, 'id', 'user_jabatan_id');
+    }
+
     public function jabatan()
     {
         return $this->hasOne(Jabatan::class, 'id', 'jabatan_id');

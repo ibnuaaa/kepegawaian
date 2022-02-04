@@ -32,7 +32,7 @@
 
                     <div class="alert alert-info" role="alert">
                         <span class="alert-inner--icon"><i class="fe fe-bell"></i></span>
-                        <span class="alert-inner--text"><strong>Informasi !</strong> Silahkan melakukan perubahan data anda. Data yang anda ketik langsung tersimpan pada server. Data akan diverifikasi oleh administrator. </span>
+                        <span class="alert-inner--text"><strong>Informasi !</strong> Silahkan melakukan perubahan data anda. Data yang anda ketik langsung tersimpan pada server. Data akan diverifikasi oleh Bagian SDM. </span>
                     </div>
 
                     <div class="tab-menu-heading tab-menu-heading-boxed">
@@ -355,7 +355,7 @@
                                         <td>
                                             {{ $key + 1 }}
                                         </td>
-                                        <td>
+                                        <td class="{{ $val->pendidikan_id != $val->user_pendidikan->pendidikan_id ? 'bg-changed' : '' }}">
                                             @component('components.form.awesomeSelect', [
                                             'name' => 'pendidikan_id',
                                             'items' => $pendidikan,
@@ -365,13 +365,13 @@
                                             ])
                                             @endcomponent
                                         </td>
-                                        <td>
+                                        <td class="{{ $val->pendidikan_detail != $val->user_pendidikan->pendidikan_detail ? 'bg-changed' : '' }}">
                                             <input name="pendidikan_detail" value="{{ $val->pendidikan_detail }}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control " type="text" required>
                                         </td>
-                                        <td>
+                                        <td class="{{ $val->no_ijazah != $val->user_pendidikan->no_ijazah ? 'bg-changed' : '' }}">
                                             <input name="no_ijazah" value="{{$val->no_ijazah ? $val->no_ijazah : ''}}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control" type="text" required>
                                         </td>
-                                        <td>
+                                        <td class="{{ $val->tahun_lulus != $val->user_pendidikan->tahun_lulus ? 'bg-changed' : '' }}">
                                             <input name="tahun_lulus" value="{{$val->tahun_lulus ? $val->tahun_lulus : ''}}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control" type="text" required>
                                         </td>
                                         <td>
@@ -448,17 +448,18 @@
                                         </th>
                                     </tr>
                                     @foreach ($data->user_pelatihan as $key => $val)
-                                    <tr>
+                                    @if (!$val->deleted_at || $val->user_pelatihan_id)
+                                    <tr  class="{{$val->deleted_at ? 'bg-deleted' : ''}} {{!$val->user_pelatihan_id ? 'bg-added' : ''}}">
                                         <td>
                                             {{ $key + 1 }}
                                         </td>
-                                        <td>
+                                        <td class="{{ $val->user_pelatihan_id && $val->nama_sertifikat != $val->user_pelatihan->nama_sertifikat ? 'bg-changed' : '' }}">
                                             <input name="nama_sertifikat" value="{{ $val->nama_sertifikat }}" data-id="{{ $val->id }}" onChange="savePelatihan(this)" class="form-control " type="text" required>
                                         </td>
-                                        <td>
+                                        <td class="{{ $val->user_pelatihan_id && $val->no_sertifikat != $val->user_pelatihan->no_sertifikat ? 'bg-changed' : '' }}">
                                             <input name="no_sertifikat" value="{{ $val->no_sertifikat }}" data-id="{{ $val->id }}" onChange="savePelatihan(this)" class="form-control " type="text" required>
                                         </td>
-                                        <td>
+                                        <td class="{{ $val->user_pelatihan_id && $val->tahun != $val->user_pelatihan->tahun ? 'bg-changed' : '' }}">
                                             <input name="tahun" value="{{ $val->tahun }}" data-id="{{ $val->id }}" onChange="savePelatihan(this)" class="form-control " type="text" required>
                                         </td>
                                         <td>
@@ -485,7 +486,7 @@
                                             @endif
                                         </td>
                                     </tr>
-
+                                    @endif
                                     @endforeach
                                     @if($page == 'profile')
                                     <tr>
@@ -588,17 +589,18 @@
 
 
                                             @foreach ($data->user_keluarga as $key => $val)
-                                            <tr>
+                                            @if (!$val->deleted_at || $val->user_keluarga_id)
+                                            <tr  class="{{$val->deleted_at ? 'bg-deleted' : ''}} {{!$val->user_keluarga_id ? 'bg-added' : ''}}">
                                                 <td>
                                                     {{ $key + 1 }}
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->nama_lengkap != $val->user_keluarga->nama_lengkap ? 'bg-changed' : '' }}">
                                                     <input name="nama_lengkap" value="{{ $val->nama_lengkap }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->nik != $val->user_keluarga->nik ? 'bg-changed' : '' }}">
                                                     <input name="nik" value="{{ $val->nik }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->jenis_kelamin != $val->user_keluarga->jenis_kelamin ? 'bg-changed' : '' }}">
                                                     @component('components.form.awesomeSelect', [
                                                     'name' => 'jenis_kelamin',
                                                     'items' => [
@@ -617,13 +619,13 @@
                                                     ])
                                                     @endcomponent
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->tempat_lahir != $val->user_keluarga->tempat_lahir ? 'bg-changed' : '' }}">
                                                     <input name="tempat_lahir" value="{{ $val->tempat_lahir }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control datepicker" type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->tanggal_lahir != $val->user_keluarga->tanggal_lahir ? 'bg-changed' : '' }}">
                                                     <input name="tanggal_lahir" id="myDatepicker" value="{{ $val->tanggal_lahir }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->agama_id != $val->user_keluarga->agama_id ? 'bg-changed' : '' }}">
                                                     @component('components.form.awesomeSelect', [
                                                     'name' => 'agama_id',
                                                     'items' => agama(),
@@ -633,7 +635,7 @@
                                                     ])
                                                     @endcomponent
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->pendidikan_id != $val->user_keluarga->pendidikan_id ? 'bg-changed' : '' }}">
                                                     @component('components.form.awesomeSelect', [
                                                     'name' => 'pendidikan_id',
                                                     'items' => $pendidikan,
@@ -643,28 +645,28 @@
                                                     ])
                                                     @endcomponent
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->jenis_pekerjaan != $val->user_keluarga->jenis_pekerjaan ? 'bg-changed' : '' }}">
                                                     <input name="jenis_pekerjaan" value="{{ $val->jenis_pekerjaan }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->status_perkawinan != $val->user_keluarga->status_perkawinan ? 'bg-changed' : '' }}">
                                                     <input name="status_perkawinan" value="{{ $val->status_perkawinan }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->hubungan_keluarga != $val->user_keluarga->hubungan_keluarga ? 'bg-changed' : '' }}">
                                                     <input name="hubungan_keluarga" value="{{ $val->hubungan_keluarga }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->kewarganegaraan != $val->user_keluarga->kewarganegaraan ? 'bg-changed' : '' }}">
                                                     <input name="kewarganegaraan" value="{{ $val->kewarganegaraan }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->no_paspor != $val->user_keluarga->no_paspor ? 'bg-changed' : '' }}">
                                                     <input name="no_paspor" value="{{ $val->no_paspor }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control" type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->no_kitas != $val->user_keluarga->no_kitas ? 'bg-changed' : '' }}">
                                                     <input name="no_kitas" value="{{ $val->no_kitas }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->ayah != $val->user_keluarga->ayah ? 'bg-changed' : '' }}">
                                                     <input name="ayah" value="{{ $val->ayah }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_keluarga_id && $val->ibu != $val->user_keluarga->ibu ? 'bg-changed' : '' }}">
                                                     <input name="ibu" value="{{ $val->ibu }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>
@@ -675,6 +677,7 @@
                                                     @endif
                                                 </td>
                                             </tr>
+                                            @endif
                                             @endforeach
                                             @if($page == 'profile')
                                             <tr>
@@ -724,29 +727,30 @@
                                                 </th>
                                             </tr>
                                             @foreach ($data->user_jabatan as $key => $val)
-                                            <tr>
+                                            @if (!$val->deleted_at || $val->user_jabatan_id)
+                                            <tr  class="{{$val->deleted_at ? 'bg-deleted' : ''}} {{!$val->user_jabatan_id ? 'bg-added' : ''}}">
                                                 <td>
                                                     {{ $key + 1 }}
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_jabatan_id && $val->jabatan_id != $val->user_jabatan->jabatan_id ? 'bg-changed' : '' }}">
                                                     <select class="form-control form-select" name="jabatan_id" onChange="saveJabatan(this)" data-id="{{ $val->id }}">
                                                         <option value="">-= Pilih Jabatan =-</option>
                                                         {!! !empty($jabatan) && count($jabatan) > 0 ? treeSelectJabatan($jabatan, '', $val->jabatan_id) : '' !!}
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_jabatan_id && $val->dari_tahun != $val->user_jabatan->dari_tahun ? 'bg-changed' : '' }}">
                                                     <input name="dari_tahun" value="{{ $val->dari_tahun }}" data-id="{{ $val->id }}" onChange="saveJabatan(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_jabatan_id && $val->sampai_tahun != $val->user_jabatan->sampai_tahun ? 'bg-changed' : '' }}">
                                                     <input name="sampai_tahun" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" onChange="saveJabatan(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
-                                                    <select class="form-control form-select" name="unit_kerja_id" onChange="saveJabatan(this)" data-id="{{ $val->id }}">
+                                                <td class="{{ $val->user_jabatan_id && $val->unit_kerja_id != $val->user_jabatan->unit_kerja_id ? 'bg-changed' : '' }}">
+                                                    <select name="unit_kerja_id" class="form-control form-select" onChange="saveJabatan(this)" data-id="{{ $val->id }}">
                                                         <option value="">-= Pilih Unit Kerja =-</option>
                                                         {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', $val->unit_kerja_id) : '' !!}
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_jabatan_id && $val->tmt != $val->user_jabatan->tmt ? 'bg-changed' : '' }}">
                                                     <input name="tmt" id="myDatepicker" value="{{ $val->tmt }}" data-id="{{ $val->id }}" onChange="saveJabatan(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>
@@ -757,6 +761,7 @@
                                                     @endif
                                                 </td>
                                             </tr>
+                                            @endif
                                             @endforeach
                                             @if($page == 'profile')
                                             <tr>
@@ -793,11 +798,12 @@
                                                 </th>
                                             </tr>
                                             @foreach ($data->user_jabatan_fungsional as $key => $val)
-                                            <tr>
+                                            @if (!$val->deleted_at || $val->user_jabatan_fungsional_id)
+                                            <tr  class="{{$val->deleted_at ? 'bg-deleted' : ''}} {{!$val->user_jabatan_fungsional_id ? 'bg-added' : ''}}">
                                                 <td>
                                                     {{ $key + 1 }}
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_jabatan_fungsional_id && $val->jabatan_fungsional_id != $val->user_jabatan_fungsional->jabatan_fungsional_id ? 'bg-changed' : '' }}">
                                                     @component('components.form.awesomeSelect', [
                                                     'name' => 'jabatan_fungsional_id',
                                                     'items' => $jabatan_fungsional,
@@ -807,10 +813,10 @@
                                                     ])
                                                     @endcomponent
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_jabatan_fungsional_id && $val->dari_tahun != $val->user_jabatan_fungsional->dari_tahun ? 'bg-changed' : '' }}">
                                                     <input name="dari_tahun" value="{{ $val->dari_tahun }}" data-id="{{ $val->id }}" onChange="saveJabatanFungsional(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_jabatan_fungsional_id && $val->sampai_tahun != $val->user_jabatan_fungsional->sampai_tahun ? 'bg-changed' : '' }}">
                                                     <input name="sampai_tahun" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" onChange="saveJabatanFungsional(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>
@@ -821,6 +827,7 @@
                                                     @endif
                                                 </td>
                                             </tr>
+                                            @endif
                                             @endforeach
                                             @if($page == 'profile')
                                             <tr>
@@ -866,11 +873,12 @@
                                                 </th>
                                             </tr>
                                             @foreach ($data->user_golongan as $key => $val)
-                                            <tr>
+                                            @if (!$val->deleted_at || $val->user_golongan_id)
+                                            <tr  class="{{$val->deleted_at ? 'bg-deleted' : ''}} {{!$val->user_golongan_id ? 'bg-added' : ''}}">
                                                 <td>
                                                     {{ $key + 1 }}
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_golongan_id && $val->golongan_id != $val->user_golongan->golongan_id ? 'bg-changed' : '' }}">
                                                     @component('components.form.awesomeSelect', [
                                                     'name' => 'golongan_id',
                                                     'items' => $golongan,
@@ -880,13 +888,13 @@
                                                     ])
                                                     @endcomponent
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_golongan_id && $val->dari_tahun != $val->user_golongan->dari_tahun ? 'bg-changed' : '' }}">
                                                     <input name="dari_tahun" value="{{ $val->dari_tahun }}" data-id="{{ $val->id }}" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_golongan_id && $val->sampai_tahun != $val->user_golongan->sampai_tahun ? 'bg-changed' : '' }}">
                                                     <input name="sampai_tahun" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td>
+                                                <td class="{{ $val->user_golongan_id && $val->tmt != $val->user_golongan->tmt ? 'bg-changed' : '' }}">
                                                     <input name="tmt" value="{{ $val->tmt }}" data-id="{{ $val->id }}" id="myDatepicker" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>
@@ -897,6 +905,7 @@
                                                     @endif
                                                 </td>
                                             </tr>
+                                            @endif
                                             @endforeach
                                             @if($page == 'profile')
                                             <tr>

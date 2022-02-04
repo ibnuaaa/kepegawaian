@@ -285,7 +285,7 @@
         }
 
         .bg-changed input{
-            background: #ffffaa;
+            background: #ffffaa !important;
         }
 
     </style>

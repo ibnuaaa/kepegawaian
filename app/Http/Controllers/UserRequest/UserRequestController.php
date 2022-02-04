@@ -295,6 +295,7 @@ class UserRequestController extends Controller
                 $UserPendidikanRequest->pendidikan_id = $value->pendidikan_id;
                 $UserPendidikanRequest->pendidikan_detail = $value->pendidikan_detail;
                 $UserPendidikanRequest->tahun_lulus = $value->tahun_lulus;
+                $UserPendidikanRequest->no_ijazah = $value->no_ijazah;
                 $UserPendidikanRequest->save();
 
                 $this->CopyDocumentToRequest('ijazah', $UserPendidikanRequest, $value);
