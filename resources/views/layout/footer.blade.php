@@ -283,6 +283,11 @@
         .bg-added {
             background: #aaffaa;
         }
+
+        .bg-changed input{
+            background: #ffffaa;
+        }
+
     </style>
 </body>
 

@@ -10,7 +10,6 @@ $(document).ready(function() {
     @else
     $(".bg-deleted :input").prop("disabled", true);
     $(".bg-deleted :select").prop("disabled", true);
-
     @endif
 })
 

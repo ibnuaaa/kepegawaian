@@ -62,7 +62,7 @@
                                         <a>{{ $data->user->name }}</a>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 {{ $data->username != $data->user->username ? 'bg-changed' : '' }}" >
                                     <label class="col-md-2 form-label">Username</label>
                                     <div class="col-md-9">
                                         <input name="username" value="{{ $data['username'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
@@ -74,61 +74,61 @@
                                         {{ $data->user->nip }}
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 {{ $data->no_ktp != $data->user->no_ktp ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">No KTP</label>
                                     <div class="col-md-9">
                                         <input name="no_ktp" value="{{ $data['no_ktp'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 {{ $data->tanggal_lahir != $data->user->tanggal_lahir ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Tanggal Lahir</label>
                                     <div class="col-md-9">
                                         <input name="tanggal_lahir" id="myDatepicker" value="{{ $data['tanggal_lahir'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 {{ $data->tempat_lahir != $data->user->tempat_lahir ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Tempat Lahir</label>
                                     <div class="col-md-9">
                                         <input name="tempat_lahir" value="{{ $data['tempat_lahir'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 {{ $data->alamat != $data->user->alamat ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Alamat</label>
                                     <div class="col-md-9">
                                         <input name="alamat" value="{{ $data['alamat'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 {{ $data->kode_pos != $data->user->kode_pos ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Kode Pos</label>
                                     <div class="col-md-9">
                                         <input name="kode_pos" value="{{ $data['kode_pos'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 {{ $data->telepon != $data->user->telepon ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Telepon</label>
                                     <div class="col-md-9">
                                         <input name="telepon" value="{{ $data['telepon'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 {{ $data->hp != $data->user->hp ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">HP</label>
                                     <div class="col-md-9">
                                         <input name="hp" value="{{ $data['hp'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 {{ $data->npwp != $data->user->npwp ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">NPWP</label>
                                     <div class="col-md-9">
                                         <input name="npwp" value="{{ $data['npwp'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 {{ $data->no_rekening != $data->user->no_rekening ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">No Rekening</label>
                                     <div class="col-md-9">
                                         <input name="no_rekening" value="{{ $data['no_rekening'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 {{ $data->golongan_darah != $data->user->golongan_darah ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Golongan Darah</label>
                                     <div class="col-md-9">
                                         @component('components.form.awesomeSelect', [
@@ -157,7 +157,7 @@
                                         @endcomponent
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 {{ $data->status_perkawinan_id != $data->user->status_perkawinan_id ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Status Perkawinan</label>
                                     <div class="col-md-9">
                                         @component('components.form.awesomeSelect', [
@@ -185,7 +185,7 @@
 
 
 
-                                <div class=" row mb-4">
+                                <div class=" row mb-4 {{ $data->jabatan_id != $data->user->jabatan_id ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Jabatan</label>
                                     <div class="col-md-9">
                                         <select class="form-control form-select" name="jabatan_id" onChange="savePersonal(this)">
@@ -194,7 +194,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class=" row mb-4">
+                                <div class=" row mb-4 {{ $data->unit_kerja_id != $data->user->unit_kerja_id ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Unit Kerja</label>
                                     <div class="col-md-9">
                                         <select class="form-control form-select" name="unit_kerja_id" onChange="savePersonal(this)">
@@ -203,7 +203,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class=" row mb-4">
+                                <div class=" row mb-4 {{ $data->golongan_id != $data->user->golongan_id ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Golongan</label>
                                     <div class="col-md-9">
                                         @component('components.form.awesomeSelect', [
@@ -215,7 +215,7 @@
                                         @endcomponent
                                     </div>
                                 </div>
-                                <div class=" row mb-4">
+                                <div class=" row mb-4 {{ $data->jabatan_fungsional_id != $data->user->jabatan_fungsional_id ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Jabatan Fungsional</label>
                                     <div class="col-md-9">
                                         @component('components.form.awesomeSelect', [
@@ -235,7 +235,7 @@
                                         {{ !empty($data->user_pendidikan[count($data->user_pendidikan) - 1]->pendidikan->name)  ? $data->user_pendidikan[count($data->user_pendidikan) - 1]->pendidikan->name : '<Kosong>' }}
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 {{ $data->gender != $data->user->gender ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Gender</label>
                                     <div class="col-md-9">
                                         @component('components.form.awesomeSelect', [
@@ -256,7 +256,7 @@
                                         @endcomponent
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row mb-4 ">
                                     <label class="col-md-2 form-label">Foto KTP</label>
                                     <div class="col-md-9">
                                         @if($page == 'profile')
