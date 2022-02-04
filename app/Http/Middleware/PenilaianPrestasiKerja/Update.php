@@ -16,8 +16,8 @@ class Update extends BaseMiddleware
     {
         $this->Model->PenilaianPrestasiKerja = PenilaianPrestasiKerja::where('id', $this->Id)->first();
         if ($this->Model->PenilaianPrestasiKerja) {
-            $this->Model->PenilaianPrestasiKerja->bulan = $this->_Request->input('bulan');
-            $this->Model->PenilaianPrestasiKerja->tahun = $this->_Request->input('tahun');
+            if(!empty($this->_Request->input('bulan'))) $this->Model->PenilaianPrestasiKerja->bulan = $this->_Request->input('bulan');
+            if (!empty($this->_Request->input('tahun'))) $this->Model->PenilaianPrestasiKerja->tahun = $this->_Request->input('tahun');
         }
     }
 
