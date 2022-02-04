@@ -104,4 +104,11 @@ class UserRequest extends Model
                     ->with('storage');
     }
 
+    public function foto_profile()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'user.id')
+                    ->where('object', 'foto_profile_request')
+                    ->with('storage');
+    }
+
 }

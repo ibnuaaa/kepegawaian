@@ -145,6 +145,7 @@ class UserRequestBrowseController extends Controller
        ->with('foto_npwp')
        ->with('foto_kk')
        ->with('foto_bpjs')
+       ->with('foto_profile')
        ->with('user')
        ;
 

@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
 use App\Models\IndikatorKinerja;
+use App\Models\UnitKerja;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -221,7 +222,31 @@ class PenilaianPrestasiKerjaController extends Controller
 
         $IndikatorKinerjaTree = IndikatorKinerja::tree();
 
-        if ($Jabatan['records']->is_staff) {
+        if ($Jabatan['records']->group_jabatan == 4) {
+
+          $UnitKerjaParent = UnitKerja::where('id', MyAccount()->unit_kerja_id)->first();
+
+          //
+          // die();
+
+          $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
+                              ->where('unit_kerja_id', $UnitKerjaParent->parent_id)
+                              ->where('take', 100000)
+                              ->where('tipe_indikator', 'program')
+                              ->get();
+
+          $indikator_kerja_ids = [];
+
+          foreach ($IndikatorKerja['records'] as $key2 => $value2) {
+              if(!empty($value2->id)) $indikator_kerja_ids[] = $value2->id;
+              $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
+          }
+          // cetak($IndikatorKerja['records']->toArray());
+          // die();
+          $tipe_indikator_ditampilkan = ['program'];
+
+
+        } else if ($Jabatan['records']->is_staff) {
 
             // list semua indikator kerja dari kegiatan yang ada di dalam 1 unit kerja
             $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)

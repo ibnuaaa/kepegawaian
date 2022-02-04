@@ -56,6 +56,30 @@
                             <!-- =========================================================== -->
                             <div class="tab-pane {{ $tab == 'personal' ? 'active' : '' }}" id="tab-personal">
                                 <h2>Personal</h2>
+
+
+
+                                <div class="row mb-4">
+                                    <label class="col-md-2 form-label">Foto Profil</label>
+                                    <div class="col-md-9">
+                                        @if($page == 'profile')
+                                        <input type="file" onchange="prepareUpload(this, 'foto_profile{{ !$id ? '_request' : '' }}', '{{ $data->id }}');" multiple>
+                                        @endif
+                                        <div style="clear: both;"></div>
+                                        <div class="img-preview mt-2" id="img-preview">
+                                            @if (!empty($data->foto_profile))
+                                            @foreach ($data->foto_profile as $key => $val2)
+                                            <img class="avatar avatar-xxl me-3" src="/api/preview/{{$val2->storage->key}}" alt="avatar-img" style="width: 200px;height: 200px;">
+                                            @endforeach
+                                            @endif
+                                            <div style="clear: both;"></div>
+                                        </div>
+
+                                        <div style="clear: both;"></div>
+
+                                    </div>
+                                </div>
+
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">Nama</label>
                                     <div class="col-md-9">

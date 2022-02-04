@@ -142,6 +142,7 @@ class JabatanBrowseController extends Controller
                 "$this->JabatanTable.name as user.name",
                 "$this->JabatanTable.parent_id as user.parent_id",
                 "$this->JabatanTable.is_staff as user.is_staff",
+                "$this->JabatanTable.group_jabatan as user.group_jabatan",
                 "$this->UserTable.name as user.pejabat",
                 "$this->UserTable.username as user.nip",
                 "$this->UserTable.id as user.user_id",
