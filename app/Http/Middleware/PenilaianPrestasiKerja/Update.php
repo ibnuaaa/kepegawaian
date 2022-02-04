@@ -16,14 +16,14 @@ class Update extends BaseMiddleware
     {
         $this->Model->PenilaianPrestasiKerja = PenilaianPrestasiKerja::where('id', $this->Id)->first();
         if ($this->Model->PenilaianPrestasiKerja) {
-            $this->Model->PenilaianPrestasiKerja->name = $this->_Request->input('name');
+            $this->Model->PenilaianPrestasiKerja->bulan = $this->_Request->input('bulan');
+            $this->Model->PenilaianPrestasiKerja->tahun = $this->_Request->input('tahun');
         }
     }
 
     private function Validation()
     {
         $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required'
         ]);
         if (!$this->Model->PenilaianPrestasiKerja) {
             $this->Json::set('exception.key', 'NotFoundPenilaianPrestasiKerja');

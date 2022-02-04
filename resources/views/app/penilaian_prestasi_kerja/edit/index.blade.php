@@ -33,7 +33,7 @@
                               <td style="width: 80px;" colspan="2">
                                     @component('components.form.awesomeSelect', [
                                       'name' => 'bulan',
-                                      'disabled' => 'disabled',
+                                      'onChange' => 'saveUpdate(this)',
                                       'items' => [[
                                           'label' => '-= Bulan =-',
                                           'value' => ''

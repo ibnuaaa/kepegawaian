@@ -158,5 +158,24 @@ function saveSKP(e) {
     })
 }
 
+function saveUpdate(e){
+
+    var data = {
+      bulan: $(e).val()
+    }
+
+    axios.put('/penilaian_prestasi_kerja/' + {{ $data->id }}, data).then((response) => {
+
+        swal({ title: 'Sukses', text: 'Data Penilaian Prestasi Kerja Sudah ter update.', type: 'success', confirmButtonText: 'Ok' })
+
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
+        }
+    })
+
+}
+
 
 </script>
