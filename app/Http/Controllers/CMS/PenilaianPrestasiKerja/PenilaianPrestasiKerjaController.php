@@ -226,9 +226,6 @@ class PenilaianPrestasiKerjaController extends Controller
 
           $UnitKerjaParent = UnitKerja::where('id', MyAccount()->unit_kerja_id)->first();
 
-          //
-          // die();
-
           $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
                               ->where('unit_kerja_id', $UnitKerjaParent->parent_id)
                               ->where('take', 100000)
@@ -241,10 +238,8 @@ class PenilaianPrestasiKerjaController extends Controller
               if(!empty($value2->id)) $indikator_kerja_ids[] = $value2->id;
               $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
           }
-          // cetak($IndikatorKerja['records']->toArray());
-          // die();
-          $tipe_indikator_ditampilkan = ['program'];
 
+          $tipe_indikator_ditampilkan = ['program'];
 
         } else if ($Jabatan['records']->is_staff) {
 

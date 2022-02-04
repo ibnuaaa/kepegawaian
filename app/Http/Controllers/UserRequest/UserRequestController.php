@@ -197,6 +197,7 @@ class UserRequestController extends Controller
             $this->CopyDocumentToRequest('ktp', $UserRequest, $User);
             $this->CopyDocumentToRequest('npwp', $UserRequest, $User);
             $this->CopyDocumentToRequest('bpjs', $UserRequest, $User);
+            $this->CopyDocumentToRequest('profile', $UserRequest, $User);
 
             $UserGolongan = UserGolongan::where('user_id', MyAccount()->id)->get();
             $UserJabatan = UserJabatan::where('user_id', MyAccount()->id)->get();
@@ -339,6 +340,7 @@ class UserRequestController extends Controller
         $this->updateDocumentAfterApprove('npwp', $User->id, $UserRequest);
         $this->updateDocumentAfterApprove('bpjs', $User->id, $UserRequest);
         $this->updateDocumentAfterApprove('kk', $User->id, $UserRequest);
+        $this->updateDocumentAfterApprove('profile', $User->id, $UserRequest);
 
         if ($UserRequest) {
           $UserGolonganRequest = UserGolonganRequest::where('user_request_id', $UserRequest->id)->withTrashed()->get();
