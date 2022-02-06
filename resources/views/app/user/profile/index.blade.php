@@ -59,7 +59,7 @@
                                     <div class="img-preview mt-2" id="img-preview">
                                         @if (!empty($data->foto_profile))
                                         @foreach ($data->foto_profile as $key => $val2)
-                                        <img class="avatar avatar-xxl me-3" src="/api/preview/{{$val2->storage->key}}" alt="avatar-img" style="width: 200px;height: 200px;">
+                                        <img src="/api/preview/{{$val2->storage->key}}" alt="avatar-img" style="max-width: 200px;max-height: 200px;">
                                         @endforeach
                                         @endif
                                         <div style="clear: both;"></div>
