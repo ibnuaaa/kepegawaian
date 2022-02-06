@@ -59,6 +59,8 @@
 
 
 
+
+
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">Foto Profil</label>
                                     <div class="col-md-9">
@@ -379,7 +381,7 @@
                                         <td>
                                             {{ $key + 1 }}
                                         </td>
-                                        <td class="{{ $val->user_pendidikan_id && $val->pendidikan_id != $val->user_pendidikan->pendidikan_id ? 'bg-changed' : '' }}">
+                                        <td class="{{ $val->user_pendidikan_id && $val->user_pendidikan && $val->pendidikan_id != $val->user_pendidikan->pendidikan_id ? 'bg-changed' : '' }}">
                                             @component('components.form.awesomeSelect', [
                                             'name' => 'pendidikan_id',
                                             'items' => $pendidikan,
@@ -389,13 +391,13 @@
                                             ])
                                             @endcomponent
                                         </td>
-                                        <td class="{{ $val->user_pendidikan_id && $val->pendidikan_detail != $val->user_pendidikan->pendidikan_detail ? 'bg-changed' : '' }}">
+                                        <td class="{{ $val->user_pendidikan_id && $val->user_pendidikan && $val->pendidikan_detail != $val->user_pendidikan->pendidikan_detail ? 'bg-changed' : '' }}">
                                             <input name="pendidikan_detail" value="{{ $val->pendidikan_detail }}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control " type="text" required>
                                         </td>
-                                        <td class="{{ $val->user_pendidikan_id && $val->no_ijazah != $val->user_pendidikan->no_ijazah ? 'bg-changed' : '' }}">
+                                        <td class="{{ $val->user_pendidikan_id && $val->user_pendidikan && $val->no_ijazah != $val->user_pendidikan->no_ijazah ? 'bg-changed' : '' }}">
                                             <input name="no_ijazah" value="{{$val->no_ijazah ? $val->no_ijazah : ''}}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control" type="text" required>
                                         </td>
-                                        <td class="{{ $val->user_pendidikan_id && $val->tahun_lulus != $val->user_pendidikan->tahun_lulus ? 'bg-changed' : '' }}">
+                                        <td class="{{ $val->user_pendidikan_id && $val->user_pendidikan && $val->tahun_lulus != $val->user_pendidikan->tahun_lulus ? 'bg-changed' : '' }}">
                                             <input name="tahun_lulus" value="{{$val->tahun_lulus ? $val->tahun_lulus : ''}}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control" type="text" required>
                                         </td>
                                         <td>
@@ -902,7 +904,7 @@
                                                 <td>
                                                     {{ $key + 1 }}
                                                 </td>
-                                                <td class="{{ $val->user_golongan_id && $val->golongan_id != $val->user_golongan->golongan_id ? 'bg-changed' : '' }}">
+                                                <td class="{{ $val->user_golongan_id && $val->user_golongan && $val->golongan_id != $val->user_golongan->golongan_id ? 'bg-changed' : '' }}">
                                                     @component('components.form.awesomeSelect', [
                                                     'name' => 'golongan_id',
                                                     'items' => $golongan,
@@ -912,13 +914,13 @@
                                                     ])
                                                     @endcomponent
                                                 </td>
-                                                <td class="{{ $val->user_golongan_id && $val->dari_tahun != $val->user_golongan->dari_tahun ? 'bg-changed' : '' }}">
+                                                <td class="{{ $val->user_golongan_id && $val->user_golongan && $val->dari_tahun != $val->user_golongan->dari_tahun ? 'bg-changed' : '' }}">
                                                     <input name="dari_tahun" value="{{ $val->dari_tahun }}" data-id="{{ $val->id }}" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td class="{{ $val->user_golongan_id && $val->sampai_tahun != $val->user_golongan->sampai_tahun ? 'bg-changed' : '' }}">
+                                                <td class="{{ $val->user_golongan_id && $val->user_golongan && $val->sampai_tahun != $val->user_golongan->sampai_tahun ? 'bg-changed' : '' }}">
                                                     <input name="sampai_tahun" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                 </td>
-                                                <td class="{{ $val->user_golongan_id && $val->tmt != $val->user_golongan->tmt ? 'bg-changed' : '' }}">
+                                                <td class="{{ $val->user_golongan_id && $val->user_golongan && $val->tmt != $val->user_golongan->tmt ? 'bg-changed' : '' }}">
                                                     <input name="tmt" value="{{ $val->tmt }}" data-id="{{ $val->id }}" id="myDatepicker" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>

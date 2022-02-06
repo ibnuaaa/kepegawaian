@@ -155,6 +155,7 @@ class UserRequestController extends Controller
 
         $UserRequest = UserRequest::where('user_id', MyAccount()->id)->whereIn('status', ['request_approval', 'new'])->first();
 
+
         if ($UserRequest && $UserRequest->status == 'request_approval') {
             Json::set('exception.code', 'NeedApprovalUser');
             Json::set('exception.message', trans('validation.'.Json::get('exception.code')));
@@ -162,7 +163,7 @@ class UserRequestController extends Controller
         }
 
         $User = User::where('id', MyAccount()->id)->first();
-
+        
         $isCreateNew = false;
         if (!$UserRequest) {
             $UserRequest = new UserRequest();
