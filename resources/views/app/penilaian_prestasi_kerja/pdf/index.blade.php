@@ -46,7 +46,7 @@
 
     <tr>
         <th class="text-center" colspan="8">
-            Identitas Pegawai
+            IDENTITAS PEGAWAI
         </th>
     </tr>
 
@@ -463,12 +463,9 @@
     </tr>
 
     <tr>
-        <td class="text-center" colspan="7">
+        <th class="text-center" colspan="8">
             TOTAL NILAI KINERJA INDIVIDU (PERILAKU + KINERJA UTAMA + KINERJA TAMBAHAN)
-        </td>
-        <td class="text-center">
-          {{$total_nilai_kinerja}}
-        </td>
+        </th>
     </tr>
     <tr>
         <td class="text-center" colspan="7">
@@ -480,6 +477,8 @@
 
     </tr>
 
+
+    @if (false)
     <tr>
         <td class="text-center" colspan="8">
             <br/>
@@ -494,11 +493,7 @@
     </tr>
 
     <tr>
-        <th class="text-center">
-
-        </th>
         <th class="text-center" colspan="3">
-            URAIAN KINERJA UTAMA
         </th>
         <th class="text-center">
             TARGET
@@ -506,7 +501,7 @@
         <th class="text-center">
             REALISASI
         </th>
-        <th class="text-center">
+        <th class="text-center" colspan="2">
             CAPAIAN UNIT
         </th>
         <th class="text-center">
@@ -515,18 +510,42 @@
     </tr>
 
     <tr>
+        <td colspan="3" class="text-center">
+          Capaian Kinerja Unit (IKU)
+        </td>
+        <td>
+          &nbsp;
+        </td>
+        <td>
+          &nbsp;
+        </td>
+        <td colspan="2">
+          &nbsp;
+        </td>
+        <td>
+          &nbsp;
+        </td>
+    </tr>
+
+    <tr>
         <td colspan="8">
             Catatatn Khusus (Incidental Record) dari Atasan :
             <br><br><br>
         </td>
     </tr>
+    @endif
+
+
+
+
+
 </table>
 <br/><br/>
 <table class="table" style="width: 100%;">
     <tr>
-      <td colspan="3" class="text-center">
+      <th colspan="3" class="text-center">
           PERSETUJUAN PENILAIAN
-      </td>
+      </th>
     </tr>
     <tr>
       <td class="text-center" style="width: 33%;">Pegawai Yang Dinilai</td>
