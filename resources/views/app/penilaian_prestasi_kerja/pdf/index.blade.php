@@ -1,12 +1,21 @@
 
-
-
-
-<div style="font-size:14px; text-align:center;">
-    KEMENTERIAN KESEHATAN RI<br>
-    DIREKTORAT JENDRAL PELAYANAN KESEHATAN<br>
-    RS PON PROF.DR.dr. MAHAR MARDJONO JAKARTA<br><br>
-</div>
+<table style="width: 100%;">
+    <tr>
+      <td style="width: 20%;text-align: left;">
+          <img src="assets/img/logo-kemenkes.png" height="50px">
+      </td>
+      <td style="width: 60%;">
+        <div style="font-size:14px; text-align:center;">
+            KEMENTERIAN KESEHATAN RI<br>
+            DIREKTORAT JENDRAL PELAYANAN KESEHATAN<br>
+            RS PON PROF.DR.dr. MAHAR MARDJONO JAKARTA<br><br>
+        </div>
+      </td>
+      <td style="width: 20%;text-align: right;">
+          <img src="assets/img/logo-rspon.png" height="50px">
+      </td>
+    </tr>
+</table>
 
 <div style="font-size:14px; text-align:center;">
     FORM PENILAIAN PRESTASI KERJA
@@ -16,17 +25,19 @@
 
 <table class="" style="width: 100%;margin-bottom: 10px;">
     <tr>
-        <td style="width:15%;text-align:center;">
-            Bulan
+        <td style="width:25%;text-align:right;">
+            Bulan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </td>
-        <td style="width:35%;text-align:left;">
-            : {{monthIndo($data->bulan)}}
+        <td style="width:25%;text-align:left;">
+            : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {{monthIndo($data->bulan)}}
         </td>
-        <td style="width:15%;text-align:center;">
-            Tahun
+        <td style="width:25%;text-align:right;">
+            Tahun &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </td>
-        <td style="width:35%;text-align:left;">
-            : {{$data->tahun}}
+        <td style="width:25%;text-align:left;">
+            : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {{$data->tahun}}
         </td>
     </tr>
 </table>
@@ -42,13 +53,13 @@
 
     <tr>
         <td colspan="2">
-            Nama
+            Nama :
         </td>
         <td colspan=3>
             {{ $data->user->name }}
         </td>
         <td>
-            Unit Kerja
+            Unit Kerja :
         </td>
         <td colspan=2>
             {{ !empty($data->unit_kerja->name) ? $data->unit_kerja->name : '' }}
@@ -56,13 +67,13 @@
     </tr>
     <tr>
         <td colspan="2">
-            Nip
+            Nip :
         </td>
         <td colspan=3>
             {{ $data->user->nip }}
         </td>
         <td>
-            Jabatan
+            Jabatan :
         </td>
         <td colspan=2>
             @if (!empty($data->jabatan->is_staff) && $data->jabatan->is_staff)
@@ -91,34 +102,34 @@
     </tr>
 
     <tr>
-        <th class="text-center" rowspan="2">
+        <th class="text-center" rowspan="2" style="width: 0.2cm;">
             NO
         </th>
-        <th class="text-center"  rowspan="2">
+        <th class="text-center"  rowspan="2" style="width: 4cm;">
             INDIKATOR
         </th>
         <th class="text-center" colspan="2">
             BOBOT
         </th>
-        <th class="text-center" rowspan="2">
+        <th class="text-center" rowspan="2" style="width: 1.5cm;">
             TARGET
         </th>
-        <th class="text-center" rowspan="2">
+        <th class="text-center" rowspan="2" style="width: 1.5cm;">
             REALISASI
         </th>
-        <th class="text-center" rowspan="2">
+        <th class="text-center" rowspan="2" style="width: 1.5cm;">
             CAPAIAN
         </th>
-        <th class="text-center" rowspan="2">
+        <th class="text-center" rowspan="2" style="width: 1.5cm;">
             NILAI KINERJA
         </th>
     </tr>
 
     <tr>
-        <th class="text-center">
+        <th class="text-center" style="width: 1.5cm;">
             PIMP
         </th>
-        <th class="text-center">
+        <th class="text-center" style="width: 1.5cm;">
             STAFF
         </th>
     </tr>
@@ -251,39 +262,19 @@
             {{!empty($val->indikator_kinerja->name) ? $val->indikator_kinerja->name : ''}}
         </td>
         <td align="center">
-            @if ($jabatan->is_staff == 1)
-              <input type="text" name="bobot" class="form-control" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="text-align:center;">
-            @else
-              {{$val->bobot}}
-            @endif
+            {{$val->bobot}}
         </td>
         <td align="center">
-            @if ($jabatan->is_staff == 1)
-              <input type="text" name="target" class="form-control" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="text-align:center;">
-            @else
-              {{$val->target}}
-            @endif
+            {{$val->target}}
         </td>
         <td align="center">
-            @if ($jabatan->is_staff == 1)
-              <input type="text" class="form-control" value="{{ $val->realisasi }}" data-id="{{ $val->id }}" style="text-align:center;" disabled>
-            @else
-              {{ $val->realisasi }}
-            @endif
+            {{ $val->realisasi }}
         </td>
         <td align="center">
-            @if ($jabatan->is_staff == 1)
-              <input type="text" name="capaian" id="capaian_{{$val->id}}" class="form-control" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="text-align:center;">
-            @else
-              {{ $val->capaian }}
-            @endif
+            {{ $val->capaian }}
         </td>
         <td align="center">
-            @if ($jabatan->is_staff == 1)
-              <input type="text" name="nilai_kinerja" id="nilai_kinerja_{{$val->id}}" class="form-control" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="text-align:center;">
-            @else
-              {{ $val->nilai_kinerja }}
-            @endif
+            {{ $val->nilai_kinerja }}
         </td>
 
     </tr>
@@ -442,39 +433,122 @@
             {{ $key+1 }}
         </td>
         <td align="center" colspan="2">
-            <input type="text" name="indikator_kinerja_text" class="form-control" value="{{ $val->indikator_kinerja_text }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}">
+            {{ $val->indikator_kinerja_text }}
         </td>
         <td align="center">
-            <input type="text" name="bobot" class="form-control text-center" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="">
+            {{ $val->bobot }}
         </td>
         <td align="center">
-            <input type="text" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="">
+            {{ $val->target }}
         </td>
         <td align="center">
-            <input type="text" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}"   data-id="{{ $val->id }}" style="">
+            {{ $val->realisasi }}
         </td>
         <td align="center">
-            <input type="text" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="">
+            {{ $val->capaian }}
         </td>
         <td align="center">
-            <input type="text" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="">
+            {{ $val->nilai_kinerja }}
         </td>
-
     </tr>
     @endforeach
 
     <tr>
         <td class="text-center" colspan="7">
-            Jumlah nilai kegiatan tambahan
+            Capaian Kinerja Tambahan
+        </td>
+        <td class="text-center">
+          {{$total_nilai_kinerja}}
+        </td>
+    </tr>
+
+    <tr>
+        <td class="text-center" colspan="7">
+            TOTAL NILAI KINERJA INDIVIDU (PERILAKU + KINERJA UTAMA + KINERJA TAMBAHAN)
+        </td>
+        <td class="text-center">
+          {{$total_nilai_kinerja}}
+        </td>
+    </tr>
+    <tr>
+        <td class="text-center" colspan="7">
+            INDEKS KINERJA INDIVIDU (IKI)
         </td>
         <td class="text-center">
           {{$total_nilai_kinerja}}
         </td>
 
     </tr>
+
+    <tr>
+        <td class="text-center" colspan="8">
+            <br/>
+        </td>
+    </tr>
+
+
+    <tr>
+        <td class="text-center" colspan="8">
+            INDEKS KINERJA UNIT (IKU)
+        </td>
+    </tr>
+
+    <tr>
+        <th class="text-center">
+
+        </th>
+        <th class="text-center" colspan="3">
+            URAIAN KINERJA UTAMA
+        </th>
+        <th class="text-center">
+            TARGET
+        </th>
+        <th class="text-center">
+            REALISASI
+        </th>
+        <th class="text-center">
+            CAPAIAN UNIT
+        </th>
+        <th class="text-center">
+            IKU
+        </th>
+    </tr>
+
+    <tr>
+        <td colspan="8">
+            Catatatn Khusus (Incidental Record) dari Atasan :
+            <br><br><br>
+        </td>
+    </tr>
 </table>
-
-
+<br/><br/>
+<table class="table" style="width: 100%;">
+    <tr>
+      <td colspan="3" class="text-center">
+          PERSETUJUAN PENILAIAN
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center" style="width: 33%;">Pegawai Yang Dinilai</td>
+      <td class="text-center" style="width: 33%;">Menyetujui Atasan Langsung</td>
+      <td class="text-center" style="width: 33%;">Mengetahui Atasan Pejabat Penilai</td>
+    </tr>
+    <tr>
+      <td>&nbsp;<br><br><br><br></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="text-center">{{ $data->user->name }}</td>
+      <td class="text-center">{{ !empty($user_penilai->name) ? $user_penilai->name : '' }}</td>
+      <td class="text-center">{{ !empty($user_atasan_penilai->name) ? $user_atasan_penilai->name : '' }}</td>
+    </tr>
+    <tr>
+      <td class="text-center">{{ $data->user->nip }}</td>
+      <td class="text-center">{{ !empty($user_penilai->nip) ? $user_penilai->nip : '' }}</td>
+      <td class="text-center">{{ !empty($user_atasan_penilai->nip) ? $user_atasan_penilai->nip : '' }}</td>
+    </tr>
+</table>
 
 
 

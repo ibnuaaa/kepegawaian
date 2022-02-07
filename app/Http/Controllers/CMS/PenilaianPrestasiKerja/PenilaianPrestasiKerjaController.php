@@ -7,7 +7,6 @@ use App\Http\Controllers\IndikatorKinerja\IndikatorKinerjaBrowseController;
 use App\Http\Controllers\PenilaianPrestasiKerjaItem\PenilaianPrestasiKerjaItemBrowseController;
 use App\Http\Controllers\PenilaianLogbook\PenilaianLogbookBrowseController;
 
-
 use App\Http\Controllers\Jabatan\JabatanBrowseController;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -24,6 +23,8 @@ use App\Http\Controllers\Controller;
 
 use App\Models\IndikatorKinerja;
 use App\Models\UnitKerja;
+use App\Models\Jabatan;
+use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -297,6 +298,8 @@ class PenilaianPrestasiKerjaController extends Controller
 
     public function Pdf(Request $request, $id)
     {
+
+
         $PenilaianPrestasiKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
             ->equal('id', $id)
             ->get('first');
@@ -371,13 +374,36 @@ class PenilaianPrestasiKerjaController extends Controller
             $tipe_indikator_ditampilkan = ['iku','program'];
         }
 
+        $jabatan_id = $PenilaianPrestasiKerja['records']->user->jabatan_id;
+        $is_staff = $PenilaianPrestasiKerja['records']->user->jabatan->is_staff;
+        $unit_kerja_id = $PenilaianPrestasiKerja['records']->user->unit_kerja_id;
+
+
+        if ($is_staff) {
+          // ATASAN STAFF
+          $user_penilai = User::where(function ($query) use($request) {
+              $query->whereHas("jabatan", function ($query) use($request) {
+                  $query->whereNull('is_staff');
+              });
+          })->where('unit_kerja_id', $unit_kerja_id)->with('jabatan')->first();
+        } else {
+            // ATASAN KEPALA
+            $jabatan_parent_id = $PenilaianPrestasiKerja['records']->user->jabatan->parent_id;
+            $user_penilai = User::where('jabatan_id', $jabatan_parent_id)->first();
+        }
+
+        $user_atasan_penilai = User::where('jabatan_id', $user_penilai->jabatan->parent_id)->first();
+
+
         $pdf = PDF::loadView('app.penilaian_prestasi_kerja.pdf.index', [
-          'select' => [],
-          'data' => $PenilaianPrestasiKerja['records'],
-          'indikator_kerja_ids' => $indikator_kerja_ids,
-          'jabatan' => $Jabatan['records'],
-          'indikator_kinerja' => $IndikatorKinerjaTree,
-          'tipe_indikator_ditampilkan' => $tipe_indikator_ditampilkan
+            'select' => [],
+            'data' => $PenilaianPrestasiKerja['records'],
+            'indikator_kerja_ids' => $indikator_kerja_ids,
+            'jabatan' => $Jabatan['records'],
+            'indikator_kinerja' => $IndikatorKinerjaTree,
+            'tipe_indikator_ditampilkan' => $tipe_indikator_ditampilkan,
+            'user_penilai' => $user_penilai,
+            'user_atasan_penilai' => $user_atasan_penilai
         ]);
         $pdf->setPaper('a4', 'portrait');
         return $pdf->stream();
