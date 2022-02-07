@@ -16,7 +16,7 @@
                     <!-- sidebar-toggle-->
                     <a class="logo-horizontal " href="/">
                         <img src="/assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
-                        <img src="/assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
+                        <img src="/assets/images/brand/logo-3.png?1" class="header-brand-img light-logo1" alt="logo">
                     </a>
                     <!-- LOGO -->
                     @if (false)

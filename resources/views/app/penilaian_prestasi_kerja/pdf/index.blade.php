@@ -45,7 +45,7 @@
 <table class="table table-bordered table-sm" style="width: 100%;">
 
     <tr>
-        <th class="text-center" colspan="8">
+        <th class="text-center" colspan="9">
             Identitas Pegawai
         </th>
     </tr>
@@ -145,10 +145,10 @@
             {{!empty($val->indikator_tetap->name) ? $val->indikator_tetap->name : ''}}
         </td>
         <td class="text-center">
-            00
+            {{ $val->indikator_tetap->bobot_pimpinan }}
         </td>
         <td class="text-center">
-            00
+            {{ !empty($val->indikator_tetap->bobot_staff) ? $val->indikator_tetap->bobot_staff : '0.00' }}
         </td>
         <td class="text-center">
             {{ $val->target }}

@@ -64,9 +64,18 @@ class PenilaianPrestasiKerjaController extends Controller
         $Model->PenilaianPrestasiKerja->save();
 
         $IndikatorTetapPerilakuKerja = IndikatorTetap::where('type', 'perilaku_kerja')->get();
+
+        $Jabatan = Jabatan::where('id', MyAccount()->jabatan_id)->first();
+        
         foreach ($IndikatorTetapPerilakuKerja as $key => $value) {
 
             $PenilaianPrestasiKerjaItem = new PenilaianPrestasiKerjaItem();
+
+            if ($Jabatan->is_staff) {
+              $PenilaianPrestasiKerjaItem->bobot = $value->bobot_staff;
+            } else  {
+              $PenilaianPrestasiKerjaItem->bobot = $value->bobot_pimpinan;
+            }
             $PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id = $Model->PenilaianPrestasiKerja->id;
             $PenilaianPrestasiKerjaItem->user_id = MyAccount()->id;
             $PenilaianPrestasiKerjaItem->indikator_tetap_id = $value->id;
@@ -75,7 +84,7 @@ class PenilaianPrestasiKerjaController extends Controller
 
         }
 
-        $Jabatan = Jabatan::where('id', MyAccount()->jabatan_id)->first();
+
 
         if ($Jabatan->is_staff) {
             $IndikatorTetapKualitas = IndikatorTetap::where('type', 'kualitas')->get();
