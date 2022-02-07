@@ -45,7 +45,7 @@
 <table class="table table-bordered table-sm" style="width: 100%;">
 
     <tr>
-        <th class="text-center" colspan="9">
+        <th class="text-center" colspan="8">
             Identitas Pegawai
         </th>
     </tr>
