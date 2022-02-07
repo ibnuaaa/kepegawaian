@@ -51,6 +51,7 @@
     </tr>
 
 
+
     <tr>
         <td colspan="2">
             Nama :
@@ -134,9 +135,9 @@
         </th>
     </tr>
 
-    <?php $total_nilai_kinerja = 0; ?>
+    <?php $total_nilai_perilaku = 0; ?>
     @foreach ($data->penilaian_perilaku_kerja as $key => $val)
-    <?php $total_nilai_kinerja += $val->nilai_kinerja; ?>
+    <?php $total_nilai_perilaku += $val->nilai_kinerja; ?>
     <tr>
         <td class="text-center">
             {{$key + 1}}
@@ -170,7 +171,7 @@
             Jumlah nilai indikator perilaku
         </td>
         <td class="text-center">
-          {{$total_nilai_kinerja}}
+          {{$total_nilai_perilaku}}
         </td>
     </tr>
 
@@ -228,6 +229,7 @@
             NILAI KINERJA
         </th>
     </tr>
+
     <tr>
         <th class="text-center fs-8">
             1
@@ -251,6 +253,9 @@
             7 = 6*3
         </th>
     </tr>
+
+
+
     <?php $total_nilai_kinerja = 0; ?>
     @foreach ($data->penilaian_prestasi_kerja_item as $key => $val)
     <?php $total_nilai_kinerja += $val->nilai_kinerja; ?>
@@ -291,8 +296,8 @@
     <?php $total_nilai_kinerja_utama =  $total_nilai_kinerja; ?>
 
 
-    @if ($jabatan->is_staff == 1)
 
+    @if ($jabatan->is_staff == 1)
     <tr>
         <th class="text-center" colspan="8">
             <br />
@@ -331,7 +336,9 @@
     </tr>
 
 
+    <?php $total_nilai_kualitas = 0; ?>
     @foreach ($data->penilaian_kualitas as $key => $val)
+    <?php $total_nilai_kualitas += $val->nilai_kinerja; ?>
     <tr>
         <td class="text-center">
             {{$key + 1}}
@@ -362,20 +369,23 @@
             Capaian kinerja utama Indikator Kualitas
         </td>
         <td class="text-center">
-          {{$total_nilai_kinerja}}
+          {{$total_nilai_kualitas}}
         </td>
     </tr>
-    <?php $total_nilai_kinerja_utama +=  $total_nilai_kinerja; ?>
+
+    <?php $total_nilai_kinerja_utama +=  $total_nilai_kualitas; ?>
 
 
     @endif
+
+
 
     <tr>
         <td class="text-center" colspan="7">
             JUMLAH CAPAIAN KINERJA UTAMA
         </td>
         <td class="text-center">
-          {{$total_nilai_kinerja_utama}}
+          {{ $total_nilai_kinerja_utama }}
         </td>
     </tr>
 
@@ -425,9 +435,11 @@
         </th>
     </tr>
 
-    <?php $total_nilai_kinerja = 0; ?>
+    <?php $total_nilai_tambahan = 0; ?>
+
+
     @foreach ($data->penilaian_tambahan as $key => $val)
-    <?php $total_nilai_kinerja += $val->nilai_kinerja; ?>
+    <?php $total_nilai_tambahan += $val->nilai_kinerja; ?>
     <tr>
         <td class="text-center">
             {{ $key+1 }}
@@ -453,12 +465,13 @@
     </tr>
     @endforeach
 
+
     <tr>
         <td class="text-center" colspan="7">
             Capaian Kinerja Tambahan
         </td>
         <td class="text-center">
-          {{$total_nilai_kinerja}}
+          {{$total_nilai_tambahan}}
         </td>
     </tr>
 
@@ -472,13 +485,13 @@
             INDEKS KINERJA INDIVIDU (IKI)
         </td>
         <td class="text-center">
-          {{$total_nilai_kinerja}}
+          {{ $total_nilai_kinerja_utama + $total_nilai_perilaku + $total_nilai_tambahan }}
         </td>
 
     </tr>
 
 
-    @if (false)
+    @if (true)
     <tr>
         <td class="text-center" colspan="8">
             <br/>

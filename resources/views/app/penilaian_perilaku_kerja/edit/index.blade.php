@@ -301,8 +301,9 @@
                               </th>
                           </tr>
 
-
+                          <?php $total_nilai_kualitas = 0; ?>
                           @foreach ($data->penilaian_kualitas as $key => $val)
+                          <?php $total_nilai_kualitas += $val->nilai_kinerja; ?>
                           <tr>
                               <td class="text-center">
                                   {{$key + 1}}
@@ -335,13 +336,13 @@
                                   Capaian kinerja utama Indikator Kualitas
                               </td>
                               <td class="text-center">
-                                {{$total_nilai_kinerja}}
+                                {{$total_nilai_kualitas}}
                               </td>
                               <td class="text-center">
 
                               </td>
                           </tr>
-                          <?php $total_nilai_kinerja_utama +=  $total_nilai_kinerja; ?>
+                          <?php $total_nilai_kinerja_utama +=  $total_nilai_kualitas; ?>
 
 
                           @endif

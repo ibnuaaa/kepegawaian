@@ -327,8 +327,9 @@
                               </th>
                           </tr>
 
-
+                          <?php $total_nilai_kualitas = 0; ?>
                           @foreach ($data->penilaian_kualitas as $key => $val)
+                          <?php $total_nilai_kualitas += $val->nilai_kinerja; ?>
                           <tr>
                               <td class="text-center">
                                   {{$key + 1}}
@@ -359,13 +360,13 @@
                                   Capaian kinerja utama Indikator Kualitas
                               </td>
                               <td class="text-center">
-                                {{$total_nilai_kinerja}}
+                                {{$total_nilai_kualitas}}
                               </td>
                               <td class="text-center">
 
                               </td>
                           </tr>
-                          <?php $total_nilai_kinerja_utama +=  $total_nilai_kinerja; ?>
+                          <?php $total_nilai_kinerja_utama +=  $total_nilai_kualitas; ?>
 
 
                           @endif
@@ -513,7 +514,7 @@
                                   <input type="text" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td align="center">
-                                  <input type="text" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}"   data-id="{{ $val->id }}" style="width: 80px;">
+                                  <input type="text" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td align="center">
                                   <input type="text" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
