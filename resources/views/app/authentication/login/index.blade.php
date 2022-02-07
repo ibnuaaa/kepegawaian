@@ -24,7 +24,7 @@
             <!-- CONTAINER OPEN -->
             <div class="col col-login mx-auto mt-7">
                 <div class="text-center">
-                    <img src="/assets/images/brand/logo-white.png" class="header-brand-img" alt="">
+                    <img src="/assets/img/logo-rspon-white.png" class="header-brand-img" alt="" style="width: 100px;">
                 </div>
             </div>
 

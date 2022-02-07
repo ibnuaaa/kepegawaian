@@ -19,10 +19,12 @@
                         <img src="/assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
                     </a>
                     <!-- LOGO -->
+                    @if (false)
                     <div class="main-header-center ms-3 d-none d-lg-block">
                         <input class="form-control" placeholder="Search for results..." type="search">
                         <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
                     </div>
+                    @endif
                     <div class="d-flex order-lg-2 ms-auto header-right-icons">
                         <div class="dropdown d-lg-none d-md-block d-none">
                             <a href="#" class="nav-link icon" data-bs-toggle="dropdown">
