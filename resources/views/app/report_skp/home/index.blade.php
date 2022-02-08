@@ -188,22 +188,19 @@
                                 </td>
                             </tr>
 
-                            <?php $parent_id = 0; ?>
+                            <?php $id_iku = 0; ?>
                             @foreach ($data as $key => $value)
                               <tr>
                                 <td class="text-center">
                                   {{ $key+1 }}
                                 </td>
                                 <td colspan="2">
-
-                                  @if (empty($parent_id) || (!empty($value->indikator_kinerja->parents->parents->id) && !empty($parent_id) && $parent_id != $value->indikator_kinerja->parents->parents->id))
-                                  {{ !empty($value->indikator_kinerja->parents->parents->name) ? $value->indikator_kinerja->parents->parents->name : '' }}
+                                  @if ($value->id_iku != $id_iku)
+                                  {{ !empty($value->nama_iku) ? $value->nama_iku : '' }}
                                   @endif
-                                  <?php if (!empty($value->indikator_kinerja->parents->parents->id)) $parent_id = $value->indikator_kinerja->parents->parents->id; ?>
-
                                 </td>
                                 <td>
-                                  {{ !empty($value->indikator_kinerja->name) ? $value->indikator_kinerja->name : '' }}
+                                  {{ !empty($value->nama_iki) ? $value->nama_iki : '' }}
                                 </td>
                                 <td colspan="2" class="text-center">
                                   {{ !empty($value->target) ? $value->target : '' }}
@@ -212,18 +209,39 @@
                                   {{ !empty($value->realisasi) ? $value->realisasi : '' }}
                                 </td>
                                 <td colspan="2" class="text-center">
-                                  {{ !empty($value->capaian) ? $value->capaian : '' }}
+                                  {{ !empty($value->capaian) ? $value->capaian * 100 : '' }}%
                                 </td>
                                 <td class="text-center">
-                                  KATEGORI CAPAIAN
+                                  <?php
+
+                                  $capaian = $value->capaian * 100;
+                                  if ($capaian < 60 ) $kategori_capaian = 'SANGAT KURANG';
+                                  else if ($capaian < 80 ) $kategori_capaian = 'KURANG';
+                                  else if ($capaian < 100 ) $kategori_capaian = 'CUKUP';
+                                  else if ($capaian == 100 ) $kategori_capaian = 'BAIK';
+                                  else if ($capaian > 100 ) $kategori_capaian = 'SANGAT BAIK';
+                                  ?>
+
+                                  {{$kategori_capaian}}
                                 </td>
                                 <td class="text-center">
-                                  NILAI CAPAIAN IKI
+                                  <?php
+
+                                    $capaian = $value->capaian * 100;
+                                    if ($capaian < 60 ) $nilai_capaian = 25;
+                                    else if ($capaian < 80 ) $nilai_capaian = 60;
+                                    else if ($capaian < 100 ) $nilai_capaian = 80;
+                                    else if ($capaian == 100 ) $nilai_capaian = 100;
+                                    else if ($capaian > 100 ) $nilai_capaian = 120;
+                                    ?>
+
+                                    {{$nilai_capaian}}
                                 </td>
                                 <td class="text-center">
-                                  NILAI TERTIMBANG
+
                                 </td>
                             </tr>
+                          <?php $id_iku = $value->id_iku; ?>
                           @endforeach
                       </table>
                   </div>

@@ -30,15 +30,33 @@ class ReportSkpBrowseController extends Controller
 
     public function get(Request $request)
     {
-        $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where(function ($query) use($request) {
-            if (isset($request->ArrQuery->type)) {
-                $query->where('type', $request->ArrQuery->type);
-            }
-        })
-        ->with('indikator_kinerja')
-        ->with('indikator_tetap')
-        ->orderBy('id', 'ASC')
-        ->get();
+        $PenilaianPrestasiKerjaItem = DB::table('penilaian_prestasi_kerja_item as a')
+            ->where(function ($query) use($request) {
+                if (isset($request->ArrQuery->type)) {
+                    $query->where('type', $request->ArrQuery->type);
+                }
+            })
+            ->select(
+              'a.id',
+              'a.type',
+              'a.bobot',
+              'a.target',
+              'a.realisasi',
+              'a.capaian',
+              'a.nilai_kinerja',
+              'b.name as nama_iki',
+              'b.id as id_iki',
+              'd.id as id_iku',
+              'd.name as nama_iku'
+            )
+            ->join('indikator_kinerja as b', 'b.id', 'a.indikator_kinerja_id')
+            ->join('indikator_kinerja as c', 'c.id', 'b.parent_id')
+            ->join('indikator_kinerja as d', 'd.id', 'c.parent_id')
+            ->join('penilaian_prestasi_kerja as e', 'e.id', 'a.penilaian_prestasi_kerja_id')
+            ->whereNull('e.deleted_at')
+            ->orderBy('d.id', 'asc')
+            ->get();
+
 
         Json::set('data', $PenilaianPrestasiKerjaItem);
         return response()->json(Json::get(), 200);
