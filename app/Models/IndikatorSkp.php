@@ -13,14 +13,14 @@ class IndikatorSkp extends Model
     use SoftDeletes;
     protected $table = 'indikator_kinerja';
 
-    public function indikator_skp_child()
-    {
-        return $this->hasMany(IndikatorSkp::class, 'parent_id', 'id')->with('kegiatan');
-    }
-
-    public function kegiatan()
-    {
-        return $this->hasMany(IndikatorSkp::class, 'parent_id', 'id');
-    }
+    // public function indikator_skp_child()
+    // {
+    //     return $this->hasMany(IndikatorSkp::class, 'parent_id', 'id')->with('kegiatan');
+    // }
+    //
+    // public function kegiatan()
+    // {
+    //     return $this->hasMany(IndikatorSkp::class, 'parent_id', 'id');
+    // }
 
 }

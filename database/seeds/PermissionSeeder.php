@@ -101,6 +101,12 @@ class PermissionSeeder extends Seeder
                 'name' => 'user_request',
                 'label' => 'user_request',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 16,
+                'name' => 'report_skp',
+                'label' => 'report_skp',
+                'created_at' => Carbon::now()
             ]
         ])->keyBy($this->key);
     }

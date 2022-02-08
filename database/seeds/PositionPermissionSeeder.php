@@ -101,6 +101,12 @@ class PositionPermissionSeeder extends Seeder
                 'position_id' => 1,
                 'permission_id' => 15,
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 16,
+                'position_id' => 1,
+                'permission_id' => 16,
+                'created_at' => Carbon::now()
             ]
 
 

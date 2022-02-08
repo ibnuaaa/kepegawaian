@@ -57,6 +57,16 @@ class IndikatorKinerja extends Model
         return $this->hasOne(UnitKerja::class, 'id', 'indikator_kinerja.unit_kerja_id')->with('parents');
     }
 
+    public function indikator_kinerja_child()
+    {
+        return $this->hasMany(IndikatorKinerja::class, 'parent_id', 'id')->with('kegiatan');
+    }
+
+    public function kegiatan()
+    {
+        return $this->hasMany(IndikatorSkp::class, 'parent_id', 'id');
+    }
+
     // public function users()
     // {
     //     return $this->hasMany(User::class, 'indikator_kinerja_id', 'id');

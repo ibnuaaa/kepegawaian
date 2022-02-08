@@ -81,7 +81,7 @@ class PenilaianPrestasiKerjaItemBrowseController extends Controller
             "$this->PenilaianPrestasiKerjaItemTable.created_at as penilaian_restasi_kerja_item.created_at"
         )->with('indikator_kinerja');
 
-
+        
 
        $Browse = $this->Browse($request, $PenilaianPrestasiKerjaItem, function ($data) use($request) {
             $data = $this->Manipulate($data);

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\IndikatorSkp;
 
-use App\Models\IndikatorSkp;
+use App\Models\IndikatorKinerja;
 
 use App\Traits\Browse;
 use App\Traits\IndikatorSkp\IndikatorSkpCollection;
@@ -43,7 +43,7 @@ class IndikatorSkpBrowseController extends Controller
             $request->ArrQuery->take = 5000;
         }
 
-        $IndikatorSkp = IndikatorSkp::where(function ($query) use($request) {
+        $IndikatorSkp = IndikatorKinerja::where(function ($query) use($request) {
             if (isset($request->ArrQuery->id)) {
                 $query->where("$this->IndikatorSkpTable.id", $request->ArrQuery->id);
             }
@@ -80,7 +80,7 @@ class IndikatorSkpBrowseController extends Controller
             "$this->IndikatorSkpTable.parent_id as indikator_skp.parent_id",
             "$this->IndikatorSkpTable.name as indikator_skp.name",
             "$this->IndikatorSkpTable.created_at as indikator_skp.created_at"
-        )->with('indikator_skp_child');
+        )->with('indikator_kinerja_child');
 
         if(!empty($request->get('sort'))) {
             if(!empty($request->get('sort_type'))) {

@@ -66,7 +66,7 @@
                           Aksi
                         </th>
                     </tr>
-                <?php  foreach($item->indikator_kinerja->indikator_skp_child as $key => $val) : ?>
+                <?php  foreach($item->indikator_kinerja->indikator_kinerja_child as $key => $val) : ?>
                     <tr>
                         <td>
                             {{$key + 1}}
