@@ -121,6 +121,10 @@ function saveSKP(e) {
     $(e).addClass('loadingField')
     axios.put('/penilaian_prestasi_kerja_item/' + id, data).then((response) => {
         // location.reload()
+
+        $('#capaian_' + id).val(response.data.data.capaian)
+        $('#nilai_kinerja_' + id).val(response.data.data.nilai_kinerja)
+
         $(e).removeClass('loadingField')
     }).catch((error) => {
         if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {

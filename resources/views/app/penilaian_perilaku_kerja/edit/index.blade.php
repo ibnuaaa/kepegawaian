@@ -151,7 +151,6 @@
                               </th>
                           </tr>
 
-                          @if ($jabatan->is_staff == 1)
                           <tr>
                               <th class="text-center" colspan="8">
                                   Kinerja Utama
@@ -163,7 +162,6 @@
                                   Indikator Kuantitas Kerja (40%)
                               </th>
                           </tr>
-                          @endif
 
                           <tr>
                               <th class="text-center">
@@ -262,7 +260,6 @@
                           <?php $total_nilai_kinerja_utama =  $total_nilai_kinerja; ?>
 
 
-                          @if ($jabatan->is_staff == 1)
 
                           <tr>
                               <th class="text-center" colspan="8">
@@ -312,19 +309,19 @@
                                   {{!empty($val->indikator_tetap->name) ? $val->indikator_tetap->name : ''}}
                               </td>
                               <td align="center">
-                                  <input type="text" name="bobot" class="form-control text-center" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  <input type="text" id="bobot_{{ $val->id }}" name="bobot" class="form-control text-center" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td align="center">
-                                  <input type="text" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  <input type="text" id="target_{{ $val->id }}" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td align="center">
-                                  <input type="text" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td align="center">
-                                  <input type="text" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  <input type="text" id="capaian_{{ $val->id }}" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;" disabled>
                               </td>
                               <td align="center">
-                                  <input type="text" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  <input type="text" id="nilai_kinerja_{{ $val->id }}" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
                               </td>
                               <td class="text-center">
                               </td>
@@ -343,9 +340,6 @@
                               </td>
                           </tr>
                           <?php $total_nilai_kinerja_utama +=  $total_nilai_kualitas; ?>
-
-
-                          @endif
 
                           <tr>
                               <td class="text-center" colspan="6">
@@ -406,19 +400,19 @@
                                   {{!empty($val->indikator_tetap->name) ? $val->indikator_tetap->name : ''}}
                               </td>
                               <td align="center">
-                                  <input type="text" name="bobot" class="form-control text-center" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  <input type="text" id="bobot_{{ $val->id }}" name="bobot" class="form-control text-center" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td align="center">
-                                  <input type="text" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  <input type="text" id="target_{{ $val->id }}" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td align="center">
-                                  <input type="text" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td align="center">
-                                  <input type="text" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  <input type="text" id="capaian_{{ $val->id }}" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
                               </td>
                               <td align="center">
-                                  <input type="text" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  <input type="text" id="nilai_kinerja_{{ $val->id }}" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
                               </td>
                               <td class="text-center">
                               </td>

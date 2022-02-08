@@ -191,7 +191,6 @@
         </th>
     </tr>
 
-    @if ($jabatan->is_staff == 1)
     <tr>
         <th class="text-center" colspan="8">
             KINERJA UTAMA
@@ -203,7 +202,6 @@
             INDIKATOR KUANTITAS KERJA (40%)
         </th>
     </tr>
-    @endif
 
     <tr>
         <th class="text-center">
@@ -297,7 +295,6 @@
 
 
 
-    @if ($jabatan->is_staff == 1)
     <tr>
         <th class="text-center" colspan="8">
             <br />
@@ -376,7 +373,6 @@
     <?php $total_nilai_kinerja_utama +=  $total_nilai_kualitas; ?>
 
 
-    @endif
 
 
 
@@ -491,7 +487,7 @@
     </tr>
 
 
-    @if (false)
+    @if ($show_iku)
     <tr>
         <td class="text-center" colspan="8">
             <br/>

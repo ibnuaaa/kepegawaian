@@ -66,7 +66,7 @@ class PenilaianPrestasiKerjaController extends Controller
         $IndikatorTetapPerilakuKerja = IndikatorTetap::where('type', 'perilaku_kerja')->get();
 
         $Jabatan = Jabatan::where('id', MyAccount()->jabatan_id)->first();
-        
+
         foreach ($IndikatorTetapPerilakuKerja as $key => $value) {
 
             $PenilaianPrestasiKerjaItem = new PenilaianPrestasiKerjaItem();
@@ -86,19 +86,26 @@ class PenilaianPrestasiKerjaController extends Controller
 
 
 
-        if ($Jabatan->is_staff) {
-            $IndikatorTetapKualitas = IndikatorTetap::where('type', 'kualitas')->get();
-            foreach ($IndikatorTetapKualitas as $key => $value) {
+        // if ($Jabatan->is_staff) {
+        $IndikatorTetapKualitas = IndikatorTetap::where('type', 'kualitas')->get();
+        foreach ($IndikatorTetapKualitas as $key => $value) {
 
-                $PenilaianPrestasiKerjaItem = new PenilaianPrestasiKerjaItem();
-                $PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id = $Model->PenilaianPrestasiKerja->id;
-                $PenilaianPrestasiKerjaItem->user_id = MyAccount()->id;
-                $PenilaianPrestasiKerjaItem->indikator_tetap_id = $value->id;
-                $PenilaianPrestasiKerjaItem->type = $value->type;
-                $PenilaianPrestasiKerjaItem->save();
+            $PenilaianPrestasiKerjaItem = new PenilaianPrestasiKerjaItem();
 
+            if ($Jabatan->is_staff) {
+              $PenilaianPrestasiKerjaItem->bobot = $value->bobot_staff;
+            } else  {
+              $PenilaianPrestasiKerjaItem->bobot = $value->bobot_pimpinan;
             }
+
+            $PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id = $Model->PenilaianPrestasiKerja->id;
+            $PenilaianPrestasiKerjaItem->user_id = MyAccount()->id;
+            $PenilaianPrestasiKerjaItem->indikator_tetap_id = $value->id;
+            $PenilaianPrestasiKerjaItem->type = $value->type;
+            $PenilaianPrestasiKerjaItem->save();
+
         }
+        // }
 
         Json::set('data', $this->SyncData($request, $Model->PenilaianPrestasiKerja->id));
         return response()->json(Json::get(), 201);

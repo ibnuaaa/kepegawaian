@@ -374,9 +374,9 @@ class PenilaianPrestasiKerjaController extends Controller
             $tipe_indikator_ditampilkan = ['iku','program'];
         }
 
-        $jabatan_id = $PenilaianPrestasiKerja['records']->user->jabatan_id;
-        $is_staff = $PenilaianPrestasiKerja['records']->user->jabatan->is_staff;
-        $unit_kerja_id = $PenilaianPrestasiKerja['records']->user->unit_kerja_id;
+        $jabatan_id = $PenilaianPrestasiKerja['records']->jabatan->id;
+        $is_staff = $PenilaianPrestasiKerja['records']->jabatan->is_staff;
+        $unit_kerja_id = $PenilaianPrestasiKerja['records']->unit_kerja_id;
 
 
         if ($is_staff) {
@@ -394,6 +394,12 @@ class PenilaianPrestasiKerjaController extends Controller
 
         $user_atasan_penilai = User::where('jabatan_id', $user_penilai->jabatan->parent_id)->first();
 
+        // get document group_jabatan
+        $show_iku = false;
+        if ($is_staff || in_array($Jabatan['records']->group_jabatan, [3,4])) {
+            // $show_iku = true;
+            // hide dulu aja
+        }
 
         $pdf = PDF::loadView('app.penilaian_prestasi_kerja.pdf.index', [
             'select' => [],
@@ -403,7 +409,8 @@ class PenilaianPrestasiKerjaController extends Controller
             'indikator_kinerja' => $IndikatorKinerjaTree,
             'tipe_indikator_ditampilkan' => $tipe_indikator_ditampilkan,
             'user_penilai' => $user_penilai,
-            'user_atasan_penilai' => $user_atasan_penilai
+            'user_atasan_penilai' => $user_atasan_penilai,
+            'show_iku' => $show_iku
         ]);
         $pdf->setPaper('a4', 'portrait');
         return $pdf->stream();
