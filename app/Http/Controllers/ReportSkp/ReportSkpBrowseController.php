@@ -35,6 +35,21 @@ class ReportSkpBrowseController extends Controller
                 if (isset($request->ArrQuery->type)) {
                     $query->where('type', $request->ArrQuery->type);
                 }
+
+                if (isset($request->ArrQuery->user_id)) {
+                    $query->where('e.user_id', $request->ArrQuery->user_id);
+                }
+
+                if (isset($request->ArrQuery->dari_bulan) &&isset($request->ArrQuery->tahun)) {
+                  $query->where('e.tahun', '>=', $request->ArrQuery->tahun);
+                  $query->where('e.bulan', '>=', $request->ArrQuery->dari_bulan);
+                }
+
+                if (isset($request->ArrQuery->sampai_bulan) &&isset($request->ArrQuery->tahun)) {
+                  $query->where('e.tahun', '<=' , $request->ArrQuery->tahun);
+                  $query->where('e.bulan', '<=' , $request->ArrQuery->sampai_bulan);
+                }
+
             })
             ->select(
               'a.id',

@@ -65,10 +65,12 @@ class UserBrowseController extends Controller
 
             if (!empty($request->get('q'))) {
                 $query->where(function ($query) use($request) {
-                    $query->where("$this->UserTable.player_username", 'like', '%'.$request->get('q').'%')
-                        ->orWhere("$this->UserTable.id", 'like', '%'.$request->get('q').'%')
-                        ->orWhere("$this->UserTable.name", 'like', '%'.$request->get('q').'%')
-                        ->orWhere("$this->PositionTable.name", 'like', '%'.$request->get('q').'%');
+                    $query->Where("$this->UserTable.id", 'like', '%'.$request->get('q').'%')
+                    ->orWhere("$this->UserTable.name", 'like', '%'.$request->get('q').'%')
+                    ->orWhere("$this->UserTable.nip", 'like', '%'.$request->get('q').'%')
+                    ->orWhere("$this->UserTable.email", 'like', '%'.$request->get('q').'%')
+                    ->orWhere("$this->UserTable.username", 'like', '%'.$request->get('q').'%')
+                    ;
                 });
             }
             if (isset($request->ArrQuery->status)) {
@@ -142,7 +144,7 @@ class UserBrowseController extends Controller
             "$this->UserTable.golongan_darah as user.golongan_darah",
             "$this->UserTable.status_perkawinan_id as user.status_perkawinan_id",
 
-            "$this->UserTable.golongan_id as user.golongan_id",
+            "$this->UserTable.golongan_id as golongan_id",
             "$this->UserTable.unit_kerja_id as user.unit_kerja_id",
             "$this->UserTable.pendidikan_id as user.pendidikan_id",
             "$this->UserTable.pendidikan_detail as user.pendidikan_detail",
@@ -151,7 +153,7 @@ class UserBrowseController extends Controller
             "$this->UserTable.gender as user.gender",
             "$this->UserTable.position_id as user.position_id",
             "$this->UserTable.jabatan_id as user.jabatan_id",
-            "$this->UserTable.jabatan_fungsional_id as user.jabatan_fungsional_id",
+            "$this->UserTable.jabatan_fungsional_id as jabatan_fungsional_id",
             "$this->UserTable.address as user.address",
             "$this->UserTable.remember_token as user.remember_token",
             "$this->UserTable.updated_at as user.updated_at",

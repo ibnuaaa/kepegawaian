@@ -1,80 +1,65 @@
 <script>
+function cari() {
 
-$('#modalDelete').on('show.bs.modal', function(e) {
-    const { recordId, recordName } = $(e.relatedTarget).data()
-    $('#deleteAction').click(function() {
+  console.log('asdasdasdasdasd')
 
-    })
-})
+  var dari_bulan = $('select[name=dari_bulan]').val()
+  var sampai_bulan = $('select[name=sampai_bulan]').val()
+  var tahun = $('select[name=tahun]').val()
+  var user_id = $('select[name=user_id]').val()
+  //
+  const query = {}
 
-// filter
-$('#filterAction').click(function() {
-    const filter_search = $('input[name="filter_search"]').val()
-    const query = {}
-    if (filter_search) {
-        query.filter_search = filter_search
-    }
-    const href = '{{ url('/report_skp') }}'
-    const queryString = Qs.stringify(query)
-    if (queryString) {
-        window.location = href + '?' + queryString
-    } else {
-        window.location = href
-    }
-    console.log(queryString);
-})
-
-function sortBy(column, current_sort_type) {
-    const filter_search = $('input[name="filter_search"]').val()
-    const query = {}
-    if (filter_search) {
-        query.filter_search = filter_search
-    }
-
-    query.sort = column
-
-    if(current_sort_type == '') query.sort_type = 'asc'
-    else if(current_sort_type == 'asc') query.sort_type = 'desc'
-    else if(current_sort_type == 'desc') query.sort_type = ''
-
-    if (column != '{{ !empty($_GET['sort']) ? $_GET['sort'] : '' }}') query.sort_type = 'asc'
-
-    const href = '{{ url('/report_skp') }}'
-    const queryString = Qs.stringify(query)
-    if (queryString) {
-        window.location = href + '?' + queryString
-    } else {
-        window.location = href
-    }
-}
-
-function remove(id, name) {
-
-  swal({
-      title: "Konfirmasi",
-      text: "Ingin menghapus data " + name + " ?",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonText: 'Ya, Hapus',
-      cancelButtonText: 'Batal'
-  }, function(isConfirmed) {
-    console.log(isConfirmed)
-
-    if (isConfirmed) {
-      showLoading()
-      axios.delete('/report_skp/'+id).then((response) => {
-          const { data } = response.data
-          window.location.reload()
-      }).catch((error) => {
-          if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
-              swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
-          }
-      })
-    }
-  });
-
+  query.dari_bulan = dari_bulan
+  query.sampai_bulan = sampai_bulan
+  query.tahun = tahun
+  query.user_id = user_id
+  //
+  const href = '{{ url('/report_skp') }}'
+  const queryString = Qs.stringify(query)
+  if (queryString) {
+      window.location = href + '?' + queryString
+  } else {
+      window.location = href
+  }
+  //
   return false;
 }
 
+
+$(document).ready(function() {
+    var user_id = $('select[name=user_id]').select2({
+        ajax: {
+            url: window.apiUrl + '/user',
+            headers: {
+                'Authorization': window.axios.defaults.headers['Authorization']
+            },
+            dataType: 'json',
+            delay: 50,
+            cache: true,
+            data: function (params) {
+                return {
+                    q: params.term,
+                    page: params.page
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: $.map(data.data.records, function (item) {
+                        return {
+                            text: item.name,
+                            id: item.id
+                        }
+                    })
+                };
+            }
+        },
+        minimumInputLength: 1,
+    });
+
+    material.on('select2:select', function (e) {
+        // saveMaterial(e.params.data.id)
+    });
+});
 
 </script>

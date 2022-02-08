@@ -24,6 +24,70 @@
           <div class="card-body">
               <div class="table-responsive">
                  <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+
+                      <table class="table table-bordered table-condensed-custom">
+                          <tr>
+                              <td style="width: 25%;">
+                                  Cari Pegawai
+                              </td>
+                              <td style="width: 25%;">
+                                  <select name="user_id" class="form-control form-select" >
+                                      @if (!empty($user->id))
+                                      <option value="{{ $user->id }}">{{ $user->name }}<option>
+                                      @else
+                                      <option value="">-= Pilih Pegawai =-<option>
+                                      @endif
+                                  </select>
+                              </td>
+                              <td style="width: 25%;">
+                                  Dari Bulan
+                              </td>
+                              <td style="width: 25%;">
+                                <select name="dari_bulan" class="form-control">
+                                    <option value="">-= Pilih Bulan =-</option>
+                                    @foreach (listMonth() as $key => $value)
+                                        <option {{ !empty($dari_bulan) && $dari_bulan == $key ? 'selected="selected"' : '' }} value="{{$key}}">{{$value}}</option>
+                                    @endforeach
+                                </select>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                Tahun
+                              </td>
+                              <td>
+                                <select name="tahun" class="form-control form-select">
+                                    <option value="2022">2022</option>
+                                </select>
+                              </td>
+                              <td style="width: 25%;">
+                                  Sampai Bulan
+                              </td>
+                              <td style="width: 25%;">
+                                  <select name="sampai_bulan" class="form-control">
+                                      <option value="">-= Pilih Bulan =-</option>
+                                      @foreach (listMonth() as $key => $value)
+                                          <option {{ !empty($sampai_bulan) && $sampai_bulan == $key ? 'selected="selected"' : '' }} value="{{$key}}">{{$value}}</option>
+                                      @endforeach
+                                  </select>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                              </td>
+                              <td>
+                                  <a href="#" class="btn btn-primary btn-sm" onclick="return cari()">
+                                      <i class="fa fa-search"></i>
+                                      Cari
+                                  </a>
+                              </td>
+                              <td>
+                              </td>
+                              <td>
+                              </td>
+                          </tr>
+                      </table>
+
                       <table class="table table-bordered table-condensed-custom" style="width: 1500px;">
                           <tr>
                               <td colspan="13" class="text-center">
@@ -63,13 +127,13 @@
                               NAMA
                             </td>
                             <td colspan="3">
-
+                              {{ !empty($user->name) ? $user->name : '' }}
                             </td>
                             <td colspan="3">
                               NAMA
                             </td>
                             <td colspan="4">
-
+                              {{ !empty($user_penilai->name) ? $user_penilai->name :'' }}
                             </td>
                           </tr>
                           <tr>
@@ -77,13 +141,13 @@
                               NIP
                             </td>
                             <td colspan="3">
-
+                              {{ !empty($user->nip) ? $user->nip : '' }}
                             </td>
                             <td colspan="3">
                               NIP
                             </td>
                             <td colspan="4">
-
+                              {{ !empty($user_penilai->nip) ? $user_penilai->nip : '' }}
                             </td>
                           </tr>
                           <tr>
@@ -91,13 +155,19 @@
                               PANGKAT/GOL RUANG
                             </td>
                             <td colspan="3">
-
+                              @if (!empty($user->golongan))
+                              {{ !empty($user->golongan->pangkat) ? $user->golongan->pangkat : '' }}
+                              /
+                              {{ !empty($user->golongan->golongan) ? $user->golongan->golongan : '' }}
+                              @endif
                             </td>
                             <td colspan="3">
                               PANGKAT/GOL RUANG
                             </td>
                             <td colspan="4">
-
+                              @if (!empty($user_penilai->golongan))
+                              {{ !empty($user_penilai->golongan->pangkat) ? $user_penilai->golongan->pangkat : '' }}/{{ !empty($user_penilai->golongan->golongan) ? $user_penilai->golongan->golongan : '' }}
+                              @endif
                             </td>
                           </tr>
                           <tr>
@@ -105,13 +175,18 @@
                               JABATAN
                             </td>
                             <td colspan="3">
+                              @if (!empty($user->jabatan->is_staff) && $user->jabatan->is_staff)
+                              {{ !empty($user->jabatan_fungsional->name) ? $user->jabatan_fungsional->name : '' }}
+                              @else
+                              {{ !empty($user->jabatan->name) ? $user->jabatan->name : '' }}
+                              @endif
 
                             </td>
                             <td colspan="3">
                               JABATAN
                             </td>
                             <td colspan="4">
-
+                              {{ !empty($user_penilai->jabatan->name) ? $user_penilai->jabatan->name : '' }}
                             </td>
                           </tr>
                           <tr>
@@ -119,15 +194,16 @@
                               UNIT KERJA
                             </td>
                             <td colspan="3">
-
+                              {{ !empty($user->unit_kerja->name) ? $user->unit_kerja->name : '' }}
                             </td>
                             <td colspan="3">
                               UNIT KERJA
                             </td>
                             <td colspan="4">
-
+                              {{ !empty($user_penilai->unit_kerja->name) ? $user_penilai->unit_kerja->name : ''  }}
                             </td>
                           </tr>
+
                           <tr>
                                 <td class="text-center">
                                   NO
@@ -209,7 +285,7 @@
                                   {{ !empty($value->realisasi) ? $value->realisasi : '' }}
                                 </td>
                                 <td colspan="2" class="text-center">
-                                  {{ !empty($value->capaian) ? $value->capaian * 100 : '' }}%
+                                  {{ !empty($value->capaian) ? ($value->capaian * 100) . '%' : '' }}
                                 </td>
                                 <td class="text-center">
                                   <?php
