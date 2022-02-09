@@ -224,39 +224,19 @@
                                   {{!empty($val->indikator_kinerja->name) ? $val->indikator_kinerja->name : ''}}
                               </td>
                               <td align="center">
-                                  @if ($jabatan->is_staff == 1)
                                     <input type="text" name="bobot" class="form-control" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;text-align:center;">
-                                  @else
-                                    {{$val->bobot}}
-                                  @endif
                               </td>
                               <td align="center">
-                                  @if ($jabatan->is_staff == 1)
                                     <input type="text" name="target" class="form-control" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;text-align:center;">
-                                  @else
-                                    {{$val->target}}
-                                  @endif
                               </td>
                               <td align="center">
-                                  @if ($jabatan->is_staff == 1)
                                     <input type="text" class="form-control" value="{{ $val->realisasi }}" data-id="{{ $val->id }}" style="width: 80px;text-align:center;" disabled>
-                                  @else
-                                    {{ $val->realisasi }}
-                                  @endif
                               </td>
                               <td align="center">
-                                  @if ($jabatan->is_staff == 1)
                                     <input type="text" name="capaian" id="capaian_{{$val->id}}" class="form-control" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;text-align:center;" disabled>
-                                  @else
-                                    {{ $val->capaian }}
-                                  @endif
                               </td>
                               <td align="center">
-                                  @if ($jabatan->is_staff == 1)
                                     <input type="text" name="nilai_kinerja" id="nilai_kinerja_{{$val->id}}" class="form-control" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;text-align:center;" disabled>
-                                  @else
-                                    {{ $val->nilai_kinerja }}
-                                  @endif
                               </td>
                               <td class="text-center">
                                   <a class="btn btn-danger btn-sm" href="#" onclick="return remove('{{ $val->id }}','{{!empty($val->indikator_kinerja->name) ? $val->indikator_kinerja->name : ''}}')"><i class="fa fa-trash"></i></a>

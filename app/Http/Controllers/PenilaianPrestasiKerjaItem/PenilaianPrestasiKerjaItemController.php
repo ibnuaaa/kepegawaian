@@ -82,18 +82,34 @@ class PenilaianPrestasiKerjaItemController extends Controller
         $Model = $request->Payload->all()['Model'];
         $Model->PenilaianPrestasiKerjaItem->save();
 
+        $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where('id', $Model->PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id)->first();
+
         $IndikatorKinerjaProgram = IndikatorKinerja::where('id', $Model->PenilaianPrestasiKerjaItem->indikator_kinerja_id)->with('parents')->first();
 
         if (!empty($IndikatorKinerjaProgram->tipe_indikator) && $IndikatorKinerjaProgram->tipe_indikator == 'kegiatan') {
             //  buat direksi & kabag / atasannya kepala ruang &  kasubag
-            $this->CalculateParents($IndikatorKinerjaProgram, 0);
+            $this->CalculateParents($IndikatorKinerjaProgram, 0, $PenilaianPrestasiKerja);
+        } else {
+
+          $IndikatorKinerjaAtasan = IndikatorKinerja::where('id' , $IndikatorKinerjaProgram->id)->first();
+          if (!empty($IndikatorKinerjaAtasan)) {
+              $IndikatorKinerjaAtasan->bobot = $Model->PenilaianPrestasiKerjaItem->bobot;
+              $IndikatorKinerjaAtasan->target = $Model->PenilaianPrestasiKerjaItem->target;
+              $IndikatorKinerjaAtasan->realisasi = $Model->PenilaianPrestasiKerjaItem->realisasi;
+              $IndikatorKinerjaAtasan->capaian = $Model->PenilaianPrestasiKerjaItem->capaian;
+              $IndikatorKinerjaAtasan->nilai_kinerja = $Model->PenilaianPrestasiKerjaItem->nilai_kinerja;
+              $IndikatorKinerjaAtasan->save();
+          }
+
+            //  buat direksi & kabag / atasannya kepala ruang &  kasubag
+            $this->CalculateParentsFromEselon3($IndikatorKinerjaProgram);
         }
 
         Json::set('data', $this->SyncData($request, $Model->PenilaianPrestasiKerjaItem->id));
         return response()->json(Json::get(), 202);
     }
 
-    public function CalculateParents($IndikatorKinerjaProgram, $is_atasan) {
+    public function CalculateParents($IndikatorKinerjaProgram, $is_atasan, $PenilaianPrestasiKerja) {
 
         $IndikatorKinerjaIku = IndikatorKinerja::where('id', $IndikatorKinerjaProgram->parent_id)->first();
 
@@ -124,7 +140,6 @@ class PenilaianPrestasiKerjaItemController extends Controller
                 $dataTotal = $this->GetPenilaianItemAtasan($value2->id, $dataTotal);
               }
             }
-
         }
 
         // indikator atasan buat diupdate
@@ -138,6 +153,7 @@ class PenilaianPrestasiKerjaItemController extends Controller
                                             ->whereNull('penilaian_prestasi_kerja_item.deleted_at')
                                             ->whereNull('penilaian_prestasi_kerja.deleted_at')
                                             ->first();
+
 
 
         if (!empty($PenilaianPrestasiKerjaItemAtasan)) {
@@ -160,7 +176,74 @@ class PenilaianPrestasiKerjaItemController extends Controller
             $IndikatorKinerjaAtasan->save();
         }
 
-        if (!empty($IndikatorKinerjaProgram->parents)) $this->CalculateParents($IndikatorKinerjaProgram->parents, 1);
+        if (!empty($IndikatorKinerjaProgram->parents)) $this->CalculateParents($IndikatorKinerjaProgram->parents, 1, $PenilaianPrestasiKerja);
+    }
+
+
+
+    public function CalculateParentsFromEselon3($IndikatorKinerjaProgram) {
+        $IndikatorKinerjaSeLevel = IndikatorKinerja::where('parent_id', $IndikatorKinerjaProgram->parent_id)->get();
+
+        $dataTotal['bobot'] = 0;
+        $dataTotal['target'] = 0;
+        $dataTotal['realisasi'] = 0;
+        $dataTotal['capaian'] = 0;
+        $dataTotal['nilai_kinerja'] = 0;
+
+        foreach ($IndikatorKinerjaSeLevel as $key => $value) {
+
+
+            $dataTotal['bobot'] += $value->bobot;
+            $dataTotal['target'] += $value->target;
+            $dataTotal['realisasi'] += $value->realisasi;
+            $dataTotal['capaian'] += $value->capaian;
+            $dataTotal['nilai_kinerja'] += $value->nilai_kinerja;
+        }
+
+        if ($IndikatorKinerjaProgram->id == 77) {
+          // cetak($IndikatorKinerjaSeLevel->toArray());
+          // cetak($dataTotal);
+          // die();
+        }
+
+
+        // indikator atasan buat diupdate
+        $PenilaianPrestasiKerjaItemAtasan = PenilaianPrestasiKerjaItem::select(
+                                                'penilaian_prestasi_kerja_item.id as id'
+                                            )
+                                            ->leftJoin('indikator_kinerja', 'indikator_kinerja.id', '=', 'penilaian_prestasi_kerja_item.indikator_kinerja_id')
+                                            ->leftJoin('penilaian_prestasi_kerja', 'penilaian_prestasi_kerja.id', '=', 'penilaian_prestasi_kerja_item.penilaian_prestasi_kerja_id')
+                                            ->where('indikator_kinerja_id' , $IndikatorKinerjaProgram->parent_id)
+                                            ->whereNull('indikator_kinerja.deleted_at')
+                                            ->whereNull('penilaian_prestasi_kerja_item.deleted_at')
+                                            ->whereNull('penilaian_prestasi_kerja.deleted_at')
+                                            ->first();
+
+
+
+        if (!empty($PenilaianPrestasiKerjaItemAtasan)) {
+            $PenilaianPrestasiKerjaItemAtasanUpdate = PenilaianPrestasiKerjaItem::where('id' , $PenilaianPrestasiKerjaItemAtasan->id)->first();
+            $PenilaianPrestasiKerjaItemAtasanUpdate->bobot = $dataTotal['bobot'];
+            $PenilaianPrestasiKerjaItemAtasanUpdate->target = $dataTotal['target'];
+            $PenilaianPrestasiKerjaItemAtasanUpdate->realisasi = $dataTotal['realisasi'];
+            if(!empty($dataTotal['target'])) $PenilaianPrestasiKerjaItemAtasanUpdate->capaian = $dataTotal['realisasi']/$dataTotal['target'];
+            $PenilaianPrestasiKerjaItemAtasanUpdate->nilai_kinerja = $PenilaianPrestasiKerjaItemAtasanUpdate->capaian * $dataTotal['bobot'];
+            $PenilaianPrestasiKerjaItemAtasanUpdate->save();
+        }
+
+        $IndikatorKinerjaAtasan = IndikatorKinerja::where('id' , $IndikatorKinerjaProgram->parent_id)->first();
+        if (!empty($IndikatorKinerjaAtasan)) {
+            $IndikatorKinerjaAtasan->bobot = $dataTotal['bobot'];
+            $IndikatorKinerjaAtasan->target = $dataTotal['target'];
+            $IndikatorKinerjaAtasan->realisasi = $dataTotal['realisasi'];
+            if(!empty($dataTotal['target']))  $IndikatorKinerjaAtasan->capaian = $dataTotal['realisasi']/$dataTotal['target'];
+            $IndikatorKinerjaAtasan->nilai_kinerja = $IndikatorKinerjaAtasan->capaian * $dataTotal['bobot'];
+            $IndikatorKinerjaAtasan->save();
+        }
+
+
+
+        if (!empty($IndikatorKinerjaProgram->parents)) $this->CalculateParentsFromEselon3($IndikatorKinerjaProgram->parents);
     }
 
     public function GetPenilaianItemAtasan($id, $dataTotal) {
