@@ -25,7 +25,13 @@
                             <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/penilaian_perilaku_kerja'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Penilaian Perilaku</span></a>
                             @endif
                             @if (getPermissions('user_request')['checked'])
-                            <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/user_request'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Approval SDM</span></a>
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Approval SDM</span><i class="angle fe fe-chevron-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a href="{!! url('/user_request/status/new'); !!}" class="slide-item"> Request Baru</a></li>
+                                <li><a href="{!! url('/user_request/status/request_approval'); !!}" class="slide-item"> Permintaan Approval</a></li>
+                                <li><a href="{!! url('/user_request/status/approved'); !!}" class="slide-item"> Disetujui</a></li>
+                            </ul>
+
                             @endif
                             @if (getPermissions('report_skp')['checked'])
                             <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/report_skp'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Rekap SKP</span></a>

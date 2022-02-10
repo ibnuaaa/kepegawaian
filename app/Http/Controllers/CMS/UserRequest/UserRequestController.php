@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserRequestController extends Controller
 {
-    public function Home(Request $request)
+    public function Home(Request $request, $status)
     {
         $TableKey = 'user_request-table';
 
@@ -48,7 +48,7 @@ class UserRequestController extends Controller
 
         $options = array(5,10,15,20);
         $UserRequest = UserRequestBrowseController::FetchBrowse($request)
-            ->where('status_in',  ['request_approval','approved'])
+            ->where('status_in',  [$status])
             ->where('take',  $selected)
             ->where('with.total', 'true');
 
@@ -94,12 +94,6 @@ class UserRequestController extends Controller
         return view('app.user_request.home.index', $ParseData);
     }
 
-    public function New(Request $request)
-    {
-        return view('app.user_request.new.index', [
-            'select' => [],
-        ]);
-    }
 
     public function Detail(Request $request, $id)
     {
@@ -203,20 +197,4 @@ class UserRequestController extends Controller
             'page' => 'user_request'
         ]);
     }
-
-    public function Edit(Request $request, $id)
-    {
-        $UserRequest = UserRequestBrowseController::FetchBrowse($request)
-            ->equal('id', $id)->get('first');
-
-
-        if (!isset($UserRequest['records']->id)) {
-            throw new ModelNotFoundException('Not Found Batch');
-        }
-        return view('app.user_request.edit.index', [
-            'select' => [],
-            'data' => $UserRequest['records']
-        ]);
-    }
-
 }
