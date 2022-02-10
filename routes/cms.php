@@ -39,8 +39,8 @@ $router->get('/indikator_kinerja', 'CMS\IndikatorKinerja\IndikatorKinerjaControl
 $router->get('/indikator_kinerja/new/{indikator_kinerja_id}', 'CMS\IndikatorKinerja\IndikatorKinerjaController@New');
 $router->get('/indikator_kinerja/{id}', 'CMS\IndikatorKinerja\IndikatorKinerjaController@IndikatorKinerjaEdit');
 
-$router->get('/user_request/status/{status}', 'CMS\UserRequest\UserRequestController@Home');
-$router->get('/user_request/{id}', 'CMS\UserRequest\UserRequestController@Detail');
+$router->get('/user_request/status/{status}/{menu}', 'CMS\UserRequest\UserRequestController@Home');
+$router->get('/user_request/{menu}/{id}', 'CMS\UserRequest\UserRequestController@Detail');
 
 $router->get('/report_skp', 'CMS\ReportSkp\ReportSkpController@Home');
 

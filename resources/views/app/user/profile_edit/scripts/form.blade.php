@@ -296,18 +296,32 @@ function saveNewUserGolongan() {
 // ================================================================
 
 
-function approve() {
+function approve(menu) {
       showLoading()
 
-      var data = {
-        id: '{{ $data->id }}'
+
+
+      if (menu == 'sdm') {
+          var data = {
+            id: '{{ $data->id }}',
+            status_sdm_approved: 'y'
+          }
       }
+
+      if (menu == 'diklat') {
+          var data = {
+            id: '{{ $data->id }}',
+            status_diklat_approved: 'y'
+          }
+      }
+
+
 
       axios.post('/user_request/approve', data).then((response) => {
           @if($page == 'profile')
           location.href= '/profile'
           @else
-          location.href= '/user_request/status/request_approval'
+          location.href= '/user_request/status/request_approval/' + menu
           @endif
           // console.log(response.data)
       }).catch((error) => {

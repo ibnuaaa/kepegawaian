@@ -3,6 +3,43 @@
 @section('title', 'User')
 @section('bodyClass', 'fixed-header menu-pin menu-behind')
 
+<?php
+
+if (!empty($menu)) {
+if ($menu == 'sdm') {
+  $menuClass= 'Sdm';
+
+  if ($data->status_sdm == 'new') {
+    $menuClassChild= 'New';
+  } else if ($data->status_sdm == 'request_approval') {
+    $menuClassChild= 'RequestApproval';
+  } else if ($data->status_sdm == 'approved') {
+    $menuClassChild= 'Approved';
+  }
+} else if ($menu == 'diklat') {
+  $menuClass= 'Diklat';
+
+  if ($data->status_diklat == 'new') {
+    $menuClassChild= 'New';
+  } else if ($data->status_diklat == 'request_approval') {
+    $menuClassChild= 'RequestApproval';
+  } else if ($data->status_diklat == 'approved') {
+    $menuClassChild= 'Approved';
+  }
+}
+
+
+
+
+
+}
+?>
+
+
+@section('userRequest'.$menuClass.'MenuClass', 'is-expanded')
+@section('userRequest'.$menuClassChild.$menuClass.'MenuClass', 'active')
+
+
 @section('content')
 <div class="page-header">
     <h1 class="page-title">Ubah Data User</h1>
@@ -958,12 +995,14 @@
         <div class="card card-default">
             <div class="card-body">
                 <div class="text-center">
-                  @if($page == 'profile' && $data->status == 'new')
-                  <a href="#" onClick="return request_approval()" class="btn btn-info"><i class="fa fa-check"></i> Minta Persetujuan</a>
-                  @elseif($page != 'profile' && $data->status == 'new')
-                  <a href="#" onClick="return warning()" class="btn btn-default"><i class="fa fa-check text-black"></i> Setujui Perubahan</a>
-                  @elseif($page != 'profile' && $data->status == 'request_approval')
-                  <a href="#" onClick="return approve()" class="btn btn-info"><i class="fa fa-check"></i> Setujui Perubahan Data</a>
+                  @if($page == 'profile' && $data->status_sdm == 'new')
+                      <a href="#" onClick="return request_approval()" class="btn btn-info"><i class="fa fa-check"></i> Minta Persetujuan</a>
+                  @elseif($page != 'profile' && $data->status_sdm == 'new')
+                      <a href="#" onClick="return warning()" class="btn btn-default"><i class="fa fa-check text-black"></i> Setujui Perubahan</a>
+                  @elseif($page != 'profile' && $menu == 'sdm' && $data->status_sdm == 'request_approval')
+                      <a href="#" onClick="return approve('sdm')" class="btn btn-info"><i class="fa fa-check"></i> Setujui Perubahan Data SDM</a>
+                  @elseif($page != 'profile' && $menu == 'diklat' && $data->status_diklat == 'request_approval')
+                      <a href="#" onClick="return approve('diklat')" class="btn btn-info"><i class="fa fa-check"></i> Setujui Perubahan Data Diklat</a>
                   @endif
                 </div>
             </div>

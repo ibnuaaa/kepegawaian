@@ -20,19 +20,36 @@
                         </li>
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/'); !!}"><i class="side-menu__icon fe fe-home"></i><span class="side-menu__label">Dashboard</span></a>
+                        </li>
+                        <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/penilaian_prestasi_kerja'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Penilaian Prestasi</span></a>
+                        </li>
+                        <li class="slide">
                             @if (getPermissions('penilaian_perilaku_kerja')['checked'])
                             <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/penilaian_perilaku_kerja'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Penilaian Perilaku</span></a>
                             @endif
-                            @if (getPermissions('user_request')['checked'])
+                        </li>
+                        <li class="slide active  @yield('userRequestSdmMenuClass')">
+                            @if (getPermissions('user_request_sdm')['checked'])
                             <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Approval SDM</span><i class="angle fe fe-chevron-right"></i></a>
                             <ul class="slide-menu">
-                                <li><a href="{!! url('/user_request/status/new'); !!}" class="slide-item"> Request Baru</a></li>
-                                <li><a href="{!! url('/user_request/status/request_approval'); !!}" class="slide-item"> Permintaan Approval</a></li>
-                                <li><a href="{!! url('/user_request/status/approved'); !!}" class="slide-item"> Disetujui</a></li>
+                                <li><a href="{!! url('/user_request/status/new/sdm'); !!}" class="slide-item @yield('userRequestNewSdmMenuClass')"> Request Baru</a></li>
+                                <li><a href="{!! url('/user_request/status/request_approval/sdm'); !!}" class="slide-item @yield('userRequestRequestApprovalSdmMenuClass')"> Permintaan Approval</a></li>
+                                <li><a href="{!! url('/user_request/status/approved/sdm'); !!}" class="slide-item @yield('userRequestApprovedSdmMenuClass')"> Disetujui</a></li>
                             </ul>
-
                             @endif
+                        </li>
+                        <li class="slide @yield('userRequestDiklatMenuClass')">
+                            @if (getPermissions('user_request_diklat')['checked'])
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Approval Diklat</span><i class="angle fe fe-chevron-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a href="{!! url('/user_request/status/new/diklat'); !!}" class="slide-item  @yield('userRequestNewDiklatMenuClass')"> Request Baru</a></li>
+                                <li><a href="{!! url('/user_request/status/request_approval/diklat'); !!}" class="slide-item @yield('userRequestRequestApprovalDiklatMenuClass')"> Permintaan Approval</a></li>
+                                <li><a href="{!! url('/user_request/status/approved/diklat'); !!}" class="slide-item @yield('userRequestApprovedDiklatMenuClass')"> Disetujui</a></li>
+                            </ul>
+                            @endif
+                      </li>
+                      <li class="slide">
                             @if (getPermissions('report_skp')['checked'])
                             <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/report_skp'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Rekap SKP</span></a>
                             @endif

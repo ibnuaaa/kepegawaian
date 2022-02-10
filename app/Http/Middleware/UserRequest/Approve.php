@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware\UserRequest;
 
 use App\Models\UserRequest;
@@ -17,9 +16,9 @@ class Approve extends BaseMiddleware
     private function Initiate($request)
     {
         $this->Model->UserRequest = UserRequest::where('id', $this->_Request->input('id'))->first();
-
         if ($this->Model->UserRequest) {
-            $this->Model->UserRequest->status = 'approved';
+            if($this->_Request->input('status_sdm_approved')) $this->Model->UserRequest->status_sdm = 'approved';
+            if($this->_Request->input('status_diklat_approved')) $this->Model->UserRequest->status_diklat = 'approved';
         }
     }
 

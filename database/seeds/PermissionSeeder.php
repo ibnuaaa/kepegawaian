@@ -98,14 +98,20 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'id' => 15,
-                'name' => 'user_request',
-                'label' => 'user_request',
+                'name' => 'user_request_sdm',
+                'label' => 'user_request_sdm',
                 'created_at' => Carbon::now()
             ],
             [
                 'id' => 16,
                 'name' => 'report_skp',
                 'label' => 'report_skp',
+                'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 17,
+                'name' => 'user_request_diklat',
+                'label' => 'user_request_diklat',
                 'created_at' => Carbon::now()
             ]
         ])->keyBy($this->key);

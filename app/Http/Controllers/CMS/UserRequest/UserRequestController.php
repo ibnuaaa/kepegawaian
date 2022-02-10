@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserRequestController extends Controller
 {
-    public function Home(Request $request, $status)
+    public function Home(Request $request, $status, $menu)
     {
         $TableKey = 'user_request-table';
 
@@ -47,9 +47,12 @@ class UserRequestController extends Controller
         }
 
         $options = array(5,10,15,20);
-        $UserRequest = UserRequestBrowseController::FetchBrowse($request)
-            ->where('status_in',  [$status])
-            ->where('take',  $selected)
+        $UserRequest = UserRequestBrowseController::FetchBrowse($request);
+
+        if ($menu == 'sdm') $UserRequest = $UserRequest->where('status_sdm',  $status);
+        if ($menu == 'diklat') $UserRequest = $UserRequest->where('status_diklat',  $status);
+
+        $UserRequest = $UserRequest->where('take',  $selected)
             ->where('with.total', 'true');
 
         if (isset($filter_search)) {
@@ -90,13 +93,14 @@ class UserRequestController extends Controller
         $ParseData = [
             'data' => $DataTable,
             'status' => $status,
-            'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0
+            'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0,
+            'menu' => $menu
         ];
         return view('app.user_request.home.index', $ParseData);
     }
 
 
-    public function Detail(Request $request, $id)
+    public function Detail(Request $request, $menu, $id)
     {
 
         $tab = 'personal';
@@ -195,7 +199,8 @@ class UserRequestController extends Controller
             'tab' => $tab,
             'data' => $User['records'],
             'id' => $profilePageMy ? '' : $id,
-            'page' => 'user_request'
+            'page' => 'user_request',
+            'menu' => $menu
         ]);
     }
 }
