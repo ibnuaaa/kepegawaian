@@ -21,7 +21,7 @@ class Update extends BaseMiddleware
            $this->Id = MyAccount()->id;
         }
 
-        $this->Model->UserRequest = UserRequest::where('user_id', $this->Id)->where('status', 'new')->orderBy('id', 'desc')->first();
+        $this->Model->UserRequest = UserRequest::where('user_id', $this->Id)->where('status_sdm', 'new')->orderBy('id', 'desc')->first();
         $password = $this->_Request->input('password');
         if (Hash::needsRehash($this->_Request->input('password'))) {
             $password = app('hash')->make($password);

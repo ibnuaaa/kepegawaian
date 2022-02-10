@@ -320,6 +320,8 @@ class UserRequestController extends Controller
         $Model = $request->Payload->all()['Model'];
         $UserRequest = UserRequest::where('id', $Model->UserRequest->id)->first();
 
+
+
         $User = User::where('id', $UserRequest->user_id)->first();
         $User->username  = $UserRequest->username;
         $User->jabatan_id  = $UserRequest->jabatan_id;
@@ -356,7 +358,9 @@ class UserRequestController extends Controller
           $UserPelatihanRequest = UserPelatihanRequest::where('user_request_id', $UserRequest->id)->withTrashed()->get();
           $UserPendidikanRequest = UserPendidikanRequest::where('user_request_id', $UserRequest->id)->withTrashed()->get();
 
-          if (!empty($Model->UserRequest->status_sdm) && $Model->UserRequest->status_sdm == 'approved') {
+
+
+          if (!empty($request->input('status_sdm_approved')) && $request->input('status_sdm_approved') == 'y') {
               foreach ($UserGolonganRequest as $key => $value) {
 
                   if ($value->deleted_at) {
@@ -454,7 +458,9 @@ class UserRequestController extends Controller
 
               }
 
-          } else if (!empty($Model->UserRequest->status_diklat) && $Model->UserRequest->status_diklat == 'approved') {
+
+          } else if (!empty($request->input('status_diklat_approved')) && $request->input('status_diklat_approved') == 'y') {
+
               foreach ($UserPelatihanRequest as $key => $value) {
 
                   if ($value->deleted_at) {
@@ -475,7 +481,11 @@ class UserRequestController extends Controller
                   $this->updateDocumentAfterApprove('sertifikat', $UserPelatihan->id, $value);
               }
 
+
+
               foreach ($UserPendidikanRequest as $key => $value) {
+
+
 
                   if ($value->deleted_at) {
                       $UserPendidikan = UserPendidikan::where('id', $value->user_pendidikan_id)->delete();

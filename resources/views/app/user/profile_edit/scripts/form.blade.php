@@ -331,7 +331,7 @@ function approve(menu) {
           }
       })
 
-
+      return false;
 }
 
 function request_approval() {
@@ -350,6 +350,8 @@ function request_approval() {
               hideLoading()
           }
       })
+
+      return false;
 }
 
 function warning() {
