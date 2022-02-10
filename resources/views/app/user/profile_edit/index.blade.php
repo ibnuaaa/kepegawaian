@@ -5,6 +5,10 @@
 
 <?php
 
+$menuClass= '';
+$menuClassChild= '';
+
+
 if (!empty($menu)) {
 if ($menu == 'sdm') {
   $menuClass= 'Sdm';
