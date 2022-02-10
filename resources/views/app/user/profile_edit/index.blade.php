@@ -945,20 +945,6 @@
                                 </div>
 
                             </div>
-
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <div class="text-center">
-                              @if($page == 'profile' && $data->status == 'new')
-                              <a href="#" onClick="return request_approval()" class="btn btn-info"><i class="fa fa-check"></i> Minta Persetujuan</a>
-                              @elseif($page != 'profile' && $data->status == 'new')
-                              <a href="#" onClick="return warning()" class="btn btn-default"><i class="fa fa-check text-black"></i> Setujui Perubahan</a>
-                              @elseif($page != 'profile' && $data->status == 'request_approval')
-                              <a href="#" onClick="return approve()" class="btn btn-info"><i class="fa fa-check"></i> Setujui Perubahan Data</a>
-                              @endif
-                            </div>
                         </div>
                     </div>
 
@@ -966,6 +952,23 @@
                 </div>
             </div>
         </div>
+
+
+
+        <div class="card card-default">
+            <div class="card-body">
+                <div class="text-center">
+                  @if($page == 'profile' && $data->status == 'new')
+                  <a href="#" onClick="return request_approval()" class="btn btn-info"><i class="fa fa-check"></i> Minta Persetujuan</a>
+                  @elseif($page != 'profile' && $data->status == 'new')
+                  <a href="#" onClick="return warning()" class="btn btn-default"><i class="fa fa-check text-black"></i> Setujui Perubahan</a>
+                  @elseif($page != 'profile' && $data->status == 'request_approval')
+                  <a href="#" onClick="return approve()" class="btn btn-info"><i class="fa fa-check"></i> Setujui Perubahan Data</a>
+                  @endif
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection

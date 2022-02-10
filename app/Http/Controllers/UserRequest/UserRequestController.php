@@ -207,7 +207,7 @@ class UserRequestController extends Controller
             $UserPelatihan = UserPelatihan::where('user_id', MyAccount()->id)->get();
             $UserPendidikan = UserPendidikan::where('user_id', MyAccount()->id)->get();
 
-            $UserGolonganRequest = UserGolonganRequest::where('user_id', MyAccount()->id)->delete();
+            // $UserGolonganRequest = UserGolonganRequest::where('user_id', MyAccount()->id)->delete();
             foreach ($UserGolongan as $key => $value) {
                 $UserGolonganRequest = new UserGolonganRequest();
                 $UserGolonganRequest->user_request_id = $UserRequest->id;
@@ -220,7 +220,7 @@ class UserRequestController extends Controller
                 $UserGolonganRequest->save();
             }
 
-            $UserJabatanRequest = UserJabatanRequest::where('user_id', MyAccount()->id)->delete();
+            // $UserJabatanRequest = UserJabatanRequest::where('user_id', MyAccount()->id)->delete();
             foreach ($UserJabatan as $key => $value) {
                 $UserJabatanRequest = new UserJabatanRequest();
                 $UserJabatanRequest->user_request_id = $UserRequest->id;
@@ -235,7 +235,7 @@ class UserRequestController extends Controller
                 $UserJabatanRequest->save();
             }
 
-            $UserJabatanFungsionalRequest = UserJabatanFungsionalRequest::where('user_id', MyAccount()->id)->delete();
+            // $UserJabatanFungsionalRequest = UserJabatanFungsionalRequest::where('user_id', MyAccount()->id)->delete();
             foreach ($UserJabatanFungsional as $key => $value) {
                 $UserJabatanFungsionalRequest = new UserJabatanFungsionalRequest();
                 $UserJabatanFungsionalRequest->user_request_id = $UserRequest->id;
@@ -248,7 +248,7 @@ class UserRequestController extends Controller
             }
 
 
-            $UserKeluargaRequest = UserKeluargaRequest::where('user_id', MyAccount()->id)->delete();
+            // $UserKeluargaRequest = UserKeluargaRequest::where('user_id', MyAccount()->id)->delete();
             foreach ($UserKeluarga as $key => $value) {
                 $UserKeluargaRequest = new UserKeluargaRequest();
                 $UserKeluargaRequest->user_request_id = $UserRequest->id;
@@ -274,7 +274,7 @@ class UserRequestController extends Controller
             }
 
 
-            $UserPelatihanRequest = UserPelatihanRequest::where('user_id', MyAccount()->id)->delete();
+            // $UserPelatihanRequest = UserPelatihanRequest::where('user_id', MyAccount()->id)->delete();
             foreach ($UserPelatihan as $key => $value) {
                 $UserPelatihanRequest = new UserPelatihanRequest();
                 $UserPelatihanRequest->user_request_id = $UserRequest->id;
@@ -288,7 +288,7 @@ class UserRequestController extends Controller
                 $this->CopyDocumentToRequest('sertifikat', $UserPelatihanRequest, $value);
             }
 
-            $UserPendidikanRequest = UserPendidikanRequest::where('user_id', MyAccount()->id)->delete();
+            // $UserPendidikanRequest = UserPendidikanRequest::where('user_id', MyAccount()->id)->delete();
             foreach ($UserPendidikan as $key => $value) {
                 $UserPendidikanRequest = new UserPendidikanRequest();
                 $UserPendidikanRequest->user_request_id = $UserRequest->id;
@@ -503,12 +503,14 @@ class UserRequestController extends Controller
     {
         $Model = $request->Payload->all()['Model'];
 
-        $user_golongan_request = UserGolonganRequest::where('user_id', MyAccount()->id)->first();
-        $user_jabatan_request = UserJabatanRequest::where('user_id', MyAccount()->id)->first();
-        $user_jabatan_fungsional_request = UserJabatanFungsionalRequest::where('user_id', MyAccount()->id)->first();
-        $user_keluarga_request = UserKeluargaRequest::where('user_id', MyAccount()->id)->first();
-        $user_pelatihan_request = UserPelatihanRequest::where('user_id', MyAccount()->id)->first();
-        $user_pendidikan_request = UserPendidikanRequest::where('user_id', MyAccount()->id)->first();
+        $user_request = UserRequest::where('user_id', MyAccount()->id)->where('status', 'new')->orderBy('id', 'DESC')->first();
+
+        $user_golongan_request = UserGolonganRequest::where('user_request_id', $user_request->id)->first();
+        $user_jabatan_request = UserJabatanRequest::where('user_request_id', $user_request->id)->first();
+        $user_jabatan_fungsional_request = UserJabatanFungsionalRequest::where('user_request_id', $user_request->id)->first();
+        $user_keluarga_request = UserKeluargaRequest::where('user_request_id', $user_request->id)->first();
+        $user_pelatihan_request = UserPelatihanRequest::where('user_request_id', $user_request->id)->first();
+        $user_pendidikan_request = UserPendidikanRequest::where('user_request_id', $user_request->id)->first();
 
 
         $message  = [];
@@ -538,7 +540,8 @@ class UserRequestController extends Controller
         }
 
         if (count($message) > 0) {
-            Json::set('exception.message', implode(',',$message));
+            Json::set('exception.message', implode('
+            ',$message));
             return response()->json(Json::get(), 400);
         }
         $Model->UserRequest->save();
