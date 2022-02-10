@@ -276,17 +276,7 @@
             background: #fff;
         }
 
-        .bg-deleted {
-            background: #ffaaaa;
-        }
 
-        .bg-added {
-            background: #aaffaa;
-        }
-
-        .bg-changed input{
-            background: #ffffaa !important;
-        }
 
     </style>
 </body>

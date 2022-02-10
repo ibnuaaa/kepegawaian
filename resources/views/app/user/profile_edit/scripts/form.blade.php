@@ -336,6 +336,10 @@ function request_approval() {
       })
 }
 
+function warning() {
+    swal({ title: 'Opps!', text: "Mohon maaf, Anda belum dapat menyetujui karena user belum melakukan permintaan persetujuan. Terimakasih", type: 'error', confirmButtonText: 'Ok' })
 
+    return false;
+}
 
 </script>
