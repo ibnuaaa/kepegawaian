@@ -55,6 +55,10 @@ class UserRequestBrowseController extends Controller
                 $query->where("$this->UserRequestTable.position_id", $request->ArrQuery->position_id);
             }
 
+            if (isset($request->ArrQuery->user_id)) {
+                $query->where("$this->UserRequestTable.user_id", $request->ArrQuery->user_id);
+            }
+
 
             if (isset($request->ArrQuery->status_in)) {
                 $query->whereIn("$this->UserRequestTable.status", $request->ArrQuery->status_in);
