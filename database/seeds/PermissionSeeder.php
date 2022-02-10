@@ -113,6 +113,12 @@ class PermissionSeeder extends Seeder
                 'name' => 'user_request_diklat',
                 'label' => 'user_request_diklat',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 18,
+                'name' => 'penilaian_prestasi_kerja',
+                'label' => 'penilaian_prestasi_kerja',
+                'created_at' => Carbon::now()
             ]
         ])->keyBy($this->key);
     }
