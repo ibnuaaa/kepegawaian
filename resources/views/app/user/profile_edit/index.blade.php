@@ -696,7 +696,11 @@
                                                     <input name="ibu" value="{{ $val->ibu }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>
-
+                                                    @if($page == 'profile')
+                                                    <a onClick="return remove('{{$val->id}}','{{!empty($val->nama_lengkap) ? $val->nama_lengkap : ''}}', 'keluarga')" href="#" class="btn btn-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             @endif
@@ -950,7 +954,7 @@
                               @if($page == 'profile' && $data->status == 'new')
                               <a href="#" onClick="return request_approval()" class="btn btn-info"><i class="fa fa-check"></i> Minta Persetujuan</a>
                               @elseif($page != 'profile' && $data->status == 'new')
-                              <a href="#" onClick="return warning()" class="btn btn-default"><i class="fa fa-check text-black"></i> Minta Persetujuan</a>
+                              <a href="#" onClick="return warning()" class="btn btn-default"><i class="fa fa-check text-black"></i> Setujui Perubahan</a>
                               @elseif($page != 'profile' && $data->status == 'request_approval')
                               <a href="#" onClick="return approve()" class="btn btn-info"><i class="fa fa-check"></i> Setujui Perubahan Data</a>
                               @endif

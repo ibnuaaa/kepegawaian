@@ -89,6 +89,7 @@ class UserRequestController extends Controller
 
         $ParseData = [
             'data' => $DataTable,
+            'status' => $status,
             'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0
         ];
         return view('app.user_request.home.index', $ParseData);

@@ -307,7 +307,7 @@ function approve() {
           @if($page == 'profile')
           location.href= '/profile'
           @else
-          location.href= '/user_request'
+          location.href= '/user_request/status/request_approval'
           @endif
           // console.log(response.data)
       }).catch((error) => {
@@ -316,6 +316,8 @@ function approve() {
               hideLoading()
           }
       })
+
+
 }
 
 function request_approval() {

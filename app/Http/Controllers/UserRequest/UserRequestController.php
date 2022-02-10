@@ -163,7 +163,7 @@ class UserRequestController extends Controller
         }
 
         $User = User::where('id', MyAccount()->id)->first();
-        
+
         $isCreateNew = false;
         if (!$UserRequest) {
             $UserRequest = new UserRequest();
@@ -502,6 +502,45 @@ class UserRequestController extends Controller
     public function RequestApproval(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
+
+        $user_golongan_request = UserGolonganRequest::where('user_id', MyAccount()->id)->first();
+        $user_jabatan_request = UserJabatanRequest::where('user_id', MyAccount()->id)->first();
+        $user_jabatan_fungsional_request = UserJabatanFungsionalRequest::where('user_id', MyAccount()->id)->first();
+        $user_keluarga_request = UserKeluargaRequest::where('user_id', MyAccount()->id)->first();
+        $user_pelatihan_request = UserPelatihanRequest::where('user_id', MyAccount()->id)->first();
+        $user_pendidikan_request = UserPendidikanRequest::where('user_id', MyAccount()->id)->first();
+
+
+        $message  = [];
+
+        if (empty($user_golongan_request)) {
+          $message[] = "Riwayat Golongan Harus Diisi";
+        }
+
+        if (empty($user_jabatan_request)) {
+          $message[] = "Riwayat Jabatan Harus Diisi";
+        }
+
+        if (empty($user_jabatan_fungsional_request)) {
+          $message[] = "Riwayat Jabatan Fungsional Harus Diisi";
+        }
+
+        if (empty($user_keluarga_request)) {
+          $message[] = "Data Keluarga Harus Diisi";
+        }
+
+        if (empty($user_pelatihan_request)) {
+          $message[] = "Riwayat Pelatihan Harus Diisi";
+        }
+
+        if (empty($user_pendidikan_request)) {
+          $message[] = "Riwayat Pendidikan Harus Diisi";
+        }
+
+        if (count($message) > 0) {
+            Json::set('exception.message', implode(',',$message));
+            return response()->json(Json::get(), 400);
+        }
         $Model->UserRequest->save();
 
         Json::set('data', 'oke');

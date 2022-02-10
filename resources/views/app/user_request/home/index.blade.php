@@ -6,12 +6,12 @@
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">UserRequest
+    <h1 class="page-title">User Request
     </h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">UserRequest</li>
+            <li class="breadcrumb-item active" aria-current="page">User Request</li>
         </ol>
     </div>
 </div>
@@ -20,6 +20,14 @@
 <!-- ROW-1 -->
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+
+        @if ($status == 'new')
+        <div class="alert alert-info" role="alert">
+            <span class="alert-inner--icon"><i class="fe fe-info"></i></span>
+            <span class="alert-inner--text"><strong>Perhatian !</strong> Di bawah ini adalah daftar user yang belum menge-klik tombol "Minta Persetujuan" pada profil user. Terimakasih </span>
+        </div>
+        @endif
+
         @component('components.table', ['data' => $data, 'props' => []])
         @scopedslot('head', ($item))
         @if($item->name === 'No')
