@@ -56,8 +56,12 @@ class UserRequestBrowseController extends Controller
             }
 
 
-            if (isset($request->ArrQuery->status_in)) {
-                $query->whereIn("$this->UserRequestTable.status", $request->ArrQuery->status_in);
+            if (isset($request->ArrQuery->status_sdm)) {
+                $query->where("$this->UserRequestTable.status_sdm", $request->ArrQuery->status_sdm);
+            }
+
+            if (isset($request->ArrQuery->status_diklat)) {
+                $query->where("$this->UserRequestTable.status_diklat", $request->ArrQuery->status_diklat);
             }
 
             if (isset($request->ArrQuery->user_ids)) {
@@ -129,7 +133,8 @@ class UserRequestBrowseController extends Controller
             "$this->UserRequestTable.updated_at as user.updated_at",
             "$this->UserRequestTable.created_at as user.created_at",
             "$this->UserRequestTable.deleted_at as user.deleted_at",
-            "$this->UserRequestTable.status as user.status",
+            "$this->UserRequestTable.status_sdm as user.status_sdm",
+            "$this->UserRequestTable.status_diklat as user.status_diklat",
 
             "$this->UserRequestTable.deleted_at as user.deleted_at"
        )

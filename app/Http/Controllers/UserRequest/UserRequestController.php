@@ -153,10 +153,15 @@ class UserRequestController extends Controller
     public function CheckExist(Request $request)
     {
 
-        $UserRequest = UserRequest::where('user_id', MyAccount()->id)->whereIn('status', ['request_approval', 'new'])->first();
+        $UserRequest = UserRequest::where('user_id', MyAccount()->id)
+        ->where('status_sdm', ['request_approval'])
+        ->whereOr('status_sdm', ['new'])
+        ->whereOr('status_diklat', ['request_approval'])
+        ->whereOr('status_diklat', ['new'])
+        ->first();
 
 
-        if ($UserRequest && $UserRequest->status == 'request_approval') {
+        if ($UserRequest && ($UserRequest->status_sdm == 'request_approval' && $UserRequest->status_diklat == 'request_approval')) {
             Json::set('exception.code', 'NeedApprovalUser');
             Json::set('exception.message', trans('validation.'.Json::get('exception.code')));
             return response()->json(Json::get(), 400);
@@ -191,7 +196,7 @@ class UserRequestController extends Controller
             $UserRequest->unit_kerja_id  = $User->unit_kerja_id;
             $UserRequest->pendidikan_id  = $User->pendidikan_id;
             $UserRequest->pendidikan_detail  = $User->pendidikan_detail;
-            $UserRequest->status  = 'new';
+            $UserRequest->status_sdm  = 'new';
             $UserRequest->save()  ;
 
             $this->CopyDocumentToRequest('kk', $UserRequest, $User);
@@ -351,145 +356,147 @@ class UserRequestController extends Controller
           $UserPelatihanRequest = UserPelatihanRequest::where('user_request_id', $UserRequest->id)->withTrashed()->get();
           $UserPendidikanRequest = UserPendidikanRequest::where('user_request_id', $UserRequest->id)->withTrashed()->get();
 
-          foreach ($UserGolonganRequest as $key => $value) {
+          if (!empty($Model->UserRequest->status_sdm) && $Model->UserRequest->status_sdm == 'approved') {
+              foreach ($UserGolonganRequest as $key => $value) {
 
-              if ($value->deleted_at) {
-                  $UserGolongan = UserGolongan::where('id', $value->user_golongan_id)->delete();
-                  continue;
+                  if ($value->deleted_at) {
+                      $UserGolongan = UserGolongan::where('id', $value->user_golongan_id)->delete();
+                      continue;
+                  }
+
+                  $UserGolongan = UserGolongan::where('id', $value->user_golongan_id)->first();
+                  if (!$UserGolongan) {
+                    $UserGolongan = new UserGolongan();
+                  }
+                  $UserGolongan->user_id = $value->user_id;
+                  $UserGolongan->golongan_id = $value->golongan_id;
+                  $UserGolongan->dari_tahun = $value->dari_tahun;
+                  $UserGolongan->sampai_tahun = $value->sampai_tahun;
+                  $UserGolongan->tmt = $value->tmt;
+                  $UserGolongan->save();
+
+
               }
 
-              $UserGolongan = UserGolongan::where('id', $value->user_golongan_id)->first();
-              if (!$UserGolongan) {
-                $UserGolongan = new UserGolongan();
+              foreach ($UserJabatanRequest as $key => $value) {
+
+                  if ($value->deleted_at) {
+                      $UserJabatan = UserJabatan::where('id', $value->user_jabatan_id)->delete();
+                      continue;
+                  }
+                  $UserJabatan = UserJabatan::where('id', $value->user_jabatan_id)->first();
+
+                  if (!$UserJabatan) {
+                    $UserJabatan = new UserJabatan();
+                  }
+                  $UserJabatan->user_id = $value->user_id;
+                  $UserJabatan->jabatan_id = $value->jabatan_id;
+                  $UserJabatan->detail_jabatan = $value->detail_jabatan;
+                  $UserJabatan->dari_tahun = $value->dari_tahun;
+                  $UserJabatan->sampai_tahun = $value->sampai_tahun;
+                  $UserJabatan->unit_kerja_id = $value->unit_kerja_id;
+                  $UserJabatan->tmt = $value->tmt;
+                  $UserJabatan->save();
+
+
               }
-              $UserGolongan->user_id = $value->user_id;
-              $UserGolongan->golongan_id = $value->golongan_id;
-              $UserGolongan->dari_tahun = $value->dari_tahun;
-              $UserGolongan->sampai_tahun = $value->sampai_tahun;
-              $UserGolongan->tmt = $value->tmt;
-              $UserGolongan->save();
+
+              foreach ($UserJabatanFungsionalRequest as $key => $value) {
+
+                  if ($value->deleted_at) {
+                      $UserJabatanFungsional = UserJabatanFungsional::where('id', $value->user_jabatan_fungsional_id)->delete();
+                      continue;
+                  }
+                  $UserJabatanFungsional = UserJabatanFungsional::where('id', $value->user_jabatan_fungsional_id)->first();
+
+                  if (!$UserJabatanFungsional) {
+                    $UserJabatanFungsional = new UserJabatanFungsional();
+                  }
+                  $UserJabatanFungsional->user_id = $value->user_id;
+                  $UserJabatanFungsional->jabatan_fungsional_id = $value->jabatan_fungsional_id;
+                  $UserJabatanFungsional->dari_tahun = $value->dari_tahun;
+                  $UserJabatanFungsional->sampai_tahun = $value->sampai_tahun;
+                  $UserJabatanFungsional->save();
 
 
-          }
-
-          foreach ($UserJabatanRequest as $key => $value) {
-
-              if ($value->deleted_at) {
-                  $UserJabatan = UserJabatan::where('id', $value->user_jabatan_id)->delete();
-                  continue;
               }
-              $UserJabatan = UserJabatan::where('id', $value->user_jabatan_id)->first();
 
-              if (!$UserJabatan) {
-                $UserJabatan = new UserJabatan();
+
+              foreach ($UserKeluargaRequest as $key => $value) {
+
+                  if ($value->deleted_at) {
+                      $UserKeluarga = UserKeluarga::where('id', $value->user_keluarga_id)->delete();
+                      continue;
+                  }
+                  $UserKeluarga = UserKeluarga::where('id', $value->user_keluarga_id)->first();
+
+                  if (!$UserKeluarga) {
+                    $UserKeluarga = new UserKeluarga();
+                  }
+                  $UserKeluarga->user_id = $value->user_id;
+
+                  $UserKeluarga->nama_lengkap =  $value->nama_lengkap;
+                  $UserKeluarga->nik =  $value->nik;
+                  $UserKeluarga->jenis_kelamin =  $value->jenis_kelamin;
+                  $UserKeluarga->tempat_lahir =  $value->tempat_lahir;
+                  $UserKeluarga->tanggal_lahir =  $value->tanggal_lahir;
+                  $UserKeluarga->agama_id =  $value->agama_id;
+                  $UserKeluarga->pendidikan_id =  $value->pendidikan_id;
+                  $UserKeluarga->jenis_pekerjaan =  $value->jenis_pekerjaan;
+                  $UserKeluarga->status_perkawinan =  $value->status_perkawinan;
+                  $UserKeluarga->hubungan_keluarga =  $value->hubungan_keluarga;
+                  $UserKeluarga->kewarganegaraan =  $value->kewarganegaraan;
+                  $UserKeluarga->no_paspor =  $value->no_paspor;
+                  $UserKeluarga->no_kitas =  $value->no_kitas;
+                  $UserKeluarga->ayah =  $value->ayah;
+                  $UserKeluarga->ibu =  $value->ibu;
+                  $UserKeluarga->save();
+
               }
-              $UserJabatan->user_id = $value->user_id;
-              $UserJabatan->jabatan_id = $value->jabatan_id;
-              $UserJabatan->detail_jabatan = $value->detail_jabatan;
-              $UserJabatan->dari_tahun = $value->dari_tahun;
-              $UserJabatan->sampai_tahun = $value->sampai_tahun;
-              $UserJabatan->unit_kerja_id = $value->unit_kerja_id;
-              $UserJabatan->tmt = $value->tmt;
-              $UserJabatan->save();
 
+          } else if (!empty($Model->UserRequest->status_diklat) && $Model->UserRequest->status_diklat == 'approved') {
+              foreach ($UserPelatihanRequest as $key => $value) {
 
-          }
+                  if ($value->deleted_at) {
+                      $UserPelatihan = UserPelatihan::where('id', $value->user_pelatihan_id)->delete();
+                      continue;
+                  }
+                  $UserPelatihan = UserPelatihan::where('id', $value->user_pelatihan_id)->first();
 
-          foreach ($UserJabatanFungsionalRequest as $key => $value) {
+                  if (!$UserPelatihan) {
+                    $UserPelatihan = new UserPelatihan();
+                  }
+                  $UserPelatihan->user_id = $value->user_id;
+                  $UserPelatihan->nama_sertifikat = $value->nama_sertifikat;
+                  $UserPelatihan->no_sertifikat = $value->no_sertifikat;
+                  $UserPelatihan->tahun = $value->tahun;
+                  $UserPelatihan->save();
 
-              if ($value->deleted_at) {
-                  $UserJabatanFungsional = UserJabatanFungsional::where('id', $value->user_jabatan_fungsional_id)->delete();
-                  continue;
+                  $this->updateDocumentAfterApprove('sertifikat', $UserPelatihan->id, $value);
               }
-              $UserJabatanFungsional = UserJabatanFungsional::where('id', $value->user_jabatan_fungsional_id)->first();
 
-              if (!$UserJabatanFungsional) {
-                $UserJabatanFungsional = new UserJabatanFungsional();
+              foreach ($UserPendidikanRequest as $key => $value) {
+
+                  if ($value->deleted_at) {
+                      $UserPendidikan = UserPendidikan::where('id', $value->user_pendidikan_id)->delete();
+                      continue;
+                  }
+                  $UserPendidikan = UserPendidikan::where('id', $value->user_pendidikan_id)->first();
+
+                  if (!$UserPendidikan) {
+                    $UserPendidikan = new UserPendidikan();
+                  }
+                  $UserPendidikan->user_id = $value->user_id;
+                  $UserPendidikan->pendidikan_id = $value->pendidikan_id;
+                  $UserPendidikan->pendidikan_detail = $value->pendidikan_detail;
+                  $UserPendidikan->no_ijazah = $value->no_ijazah;
+                  $UserPendidikan->tahun_lulus = $value->tahun_lulus;
+                  $UserPendidikan->save();
+
+
+                  $this->updateDocumentAfterApprove('ijazah', $UserPendidikan->id, $value);
+
               }
-              $UserJabatanFungsional->user_id = $value->user_id;
-              $UserJabatanFungsional->jabatan_fungsional_id = $value->jabatan_fungsional_id;
-              $UserJabatanFungsional->dari_tahun = $value->dari_tahun;
-              $UserJabatanFungsional->sampai_tahun = $value->sampai_tahun;
-              $UserJabatanFungsional->save();
-
-
-          }
-
-
-          foreach ($UserKeluargaRequest as $key => $value) {
-
-              if ($value->deleted_at) {
-                  $UserKeluarga = UserKeluarga::where('id', $value->user_keluarga_id)->delete();
-                  continue;
-              }
-              $UserKeluarga = UserKeluarga::where('id', $value->user_keluarga_id)->first();
-
-              if (!$UserKeluarga) {
-                $UserKeluarga = new UserKeluarga();
-              }
-              $UserKeluarga->user_id = $value->user_id;
-
-              $UserKeluarga->nama_lengkap =  $value->nama_lengkap;
-              $UserKeluarga->nik =  $value->nik;
-              $UserKeluarga->jenis_kelamin =  $value->jenis_kelamin;
-              $UserKeluarga->tempat_lahir =  $value->tempat_lahir;
-              $UserKeluarga->tanggal_lahir =  $value->tanggal_lahir;
-              $UserKeluarga->agama_id =  $value->agama_id;
-              $UserKeluarga->pendidikan_id =  $value->pendidikan_id;
-              $UserKeluarga->jenis_pekerjaan =  $value->jenis_pekerjaan;
-              $UserKeluarga->status_perkawinan =  $value->status_perkawinan;
-              $UserKeluarga->hubungan_keluarga =  $value->hubungan_keluarga;
-              $UserKeluarga->kewarganegaraan =  $value->kewarganegaraan;
-              $UserKeluarga->no_paspor =  $value->no_paspor;
-              $UserKeluarga->no_kitas =  $value->no_kitas;
-              $UserKeluarga->ayah =  $value->ayah;
-              $UserKeluarga->ibu =  $value->ibu;
-              $UserKeluarga->save();
-
-          }
-
-
-          foreach ($UserPelatihanRequest as $key => $value) {
-
-              if ($value->deleted_at) {
-                  $UserPelatihan = UserPelatihan::where('id', $value->user_pelatihan_id)->delete();
-                  continue;
-              }
-              $UserPelatihan = UserPelatihan::where('id', $value->user_pelatihan_id)->first();
-
-              if (!$UserPelatihan) {
-                $UserPelatihan = new UserPelatihan();
-              }
-              $UserPelatihan->user_id = $value->user_id;
-              $UserPelatihan->nama_sertifikat = $value->nama_sertifikat;
-              $UserPelatihan->no_sertifikat = $value->no_sertifikat;
-              $UserPelatihan->tahun = $value->tahun;
-              $UserPelatihan->save();
-
-              $this->updateDocumentAfterApprove('sertifikat', $UserPelatihan->id, $value);
-          }
-
-          foreach ($UserPendidikanRequest as $key => $value) {
-
-              if ($value->deleted_at) {
-                  $UserPendidikan = UserPendidikan::where('id', $value->user_pendidikan_id)->delete();
-                  continue;
-              }
-              $UserPendidikan = UserPendidikan::where('id', $value->user_pendidikan_id)->first();
-
-              if (!$UserPendidikan) {
-                $UserPendidikan = new UserPendidikan();
-              }
-              $UserPendidikan->user_id = $value->user_id;
-              $UserPendidikan->pendidikan_id = $value->pendidikan_id;
-              $UserPendidikan->pendidikan_detail = $value->pendidikan_detail;
-              $UserPendidikan->no_ijazah = $value->no_ijazah;
-              $UserPendidikan->tahun_lulus = $value->tahun_lulus;
-              $UserPendidikan->save();
-
-
-              $this->updateDocumentAfterApprove('ijazah', $UserPendidikan->id, $value);
-
           }
         }
 
@@ -503,7 +510,7 @@ class UserRequestController extends Controller
     {
         $Model = $request->Payload->all()['Model'];
 
-        $user_request = UserRequest::where('user_id', MyAccount()->id)->where('status', 'new')->orderBy('id', 'DESC')->first();
+        $user_request = UserRequest::where('user_id', MyAccount()->id)->where('status_sdm', 'new')->orderBy('id', 'DESC')->first();
 
         $user_golongan_request = UserGolonganRequest::where('user_request_id', $user_request->id)->first();
         $user_jabatan_request = UserJabatanRequest::where('user_request_id', $user_request->id)->first();

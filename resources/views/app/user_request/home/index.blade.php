@@ -28,7 +28,7 @@
         </div>
         @endif
 
-        @component('components.table', ['data' => $data, 'props' => []])
+        @component('components.table', ['data' => $data, 'props' => ['menu' => $menu]])
         @scopedslot('head', ($item))
         @if($item->name === 'No')
         <th style="width: 3%">{{ $item->label }}</th>
@@ -49,14 +49,29 @@
                 <p>{{ !empty($item->user->name) ? $item->user->name : '' }}</p>
             </td>
             <td class="v-align-middle ">
-                <p>{{ !empty($item->status) ? $item->status : '' }}</p>
+                @if ($item->status_sdm == 'new')
+                    <label></label>
+                @else
+                    @if ($item->status_sdm == 'request_approval')
+                        <span class="badge bg-warning badge-sm  me-1 mb-1 mt-1">Pending SDM</span>
+                    @endif
+                    @if ($item->status_sdm == 'approved')
+                        <span class="badge bg-success badge-sm  me-1 mb-1 mt-1">Approved SDM</span>
+                    @endif
+                    @if ($item->status_diklat == 'request_approval')
+                        <span class="badge bg-warning badge-sm  me-1 mb-1 mt-1">Pending Diklat</span>
+                    @endif
+                    @if ($item->status_diklat == 'approved')
+                        <span class="badge bg-success badge-sm  me-1 mb-1 mt-1">Approved Diklat</span>
+                    @endif
+                @endif
             </td>
             <td class="v-align-middle">
                 <p>{{ $item->created_at }}</p>
             </td>
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
-                    <a href="{{ url('/user_request/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                    <a href="{{ url('/user_request/'.$props['menu'].'/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
                 </div>
             </td>
         </tr>
