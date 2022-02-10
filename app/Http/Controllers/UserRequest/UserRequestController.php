@@ -161,7 +161,7 @@ class UserRequestController extends Controller
         ->first();
 
 
-        if ($UserRequest && ($UserRequest->status_sdm == 'request_approval' && $UserRequest->status_diklat == 'request_approval')) {
+        if ($UserRequest && ($UserRequest->status_sdm == 'request_approval' || $UserRequest->status_diklat == 'request_approval')) {
             Json::set('exception.code', 'NeedApprovalUser');
             Json::set('exception.message', trans('validation.'.Json::get('exception.code')));
             return response()->json(Json::get(), 400);
