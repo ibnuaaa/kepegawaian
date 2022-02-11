@@ -125,6 +125,12 @@ class PermissionSeeder extends Seeder
                 'name' => 'config',
                 'label' => 'config',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 20,
+                'name' => 'e_kinerja',
+                'label' => 'e_kinerja',
+                'created_at' => Carbon::now()
             ]
         ])->keyBy($this->key);
     }

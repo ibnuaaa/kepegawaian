@@ -21,14 +21,21 @@
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/'); !!}"><i class="side-menu__icon fe fe-home"></i><span class="side-menu__label">Dashboard</span></a>
                         </li>
-                        @if (getPermissions('penilaian_prestasi_kerja')['checked'])
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/penilaian_prestasi_kerja'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Penilaian Prestasi</span></a>
-                        </li>
-                        @endif
-                        @if (getPermissions('penilaian_perilaku_kerja')['checked'])
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/penilaian_perilaku_kerja'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Penilaian Perilaku</span></a>
+
+                        @if (getPermissions('e_kinerja')['checked'])
+                        <li class="slide active  @yield('userRequestSdmMenuClass')">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">E-Kinerja</span><i class="angle fe fe-chevron-right"></i></a>
+                            <ul class="slide-menu">
+                              @if (getPermissions('penilaian_prestasi_kerja')['checked'])
+                              <li><a href="{!! url('/penilaian_prestasi_kerja'); !!}" class="slide-item"> Penilaian Prestasi Kerja</a></li>
+                              @endif
+                              @if (getPermissions('penilaian_perilaku_kerja')['checked'])
+                              <li><a href="{!! url('/penilaian_perilaku_kerja'); !!}" class="slide-item"> Penilaian Perilaku Kerja</a></li>
+                              @endif
+                              @if (getPermissions('report_skp')['checked'])
+                              <li><a href="{!! url('/report_skp'); !!}" class="slide-item"> Rekap SKP</a></li>
+                              @endif
+                            </ul>
                         </li>
                         @endif
                         @if (getPermissions('user_request_sdm')['checked'])
@@ -51,11 +58,18 @@
                             </ul>
                         </li>
                         @endif
-                        @if (getPermissions('report_skp')['checked'])
-                        <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/report_skp'); !!}"><i class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Rekap SKP</span></a>
+
+                        @if (getPermissions('dokumen')['checked'])
+                        <li class="slide @yield('userRequestDiklatMenuClass')">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Approval Diklat</span><i class="angle fe fe-chevron-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a href="{!! url('/user_request/status/new/diklat'); !!}" class="slide-item  @yield('userRequestNewDiklatMenuClass')"> Request Baru</a></li>
+                                <li><a href="{!! url('/user_request/status/request_approval/diklat'); !!}" class="slide-item @yield('userRequestRequestApprovalDiklatMenuClass')"> Permintaan Approval</a></li>
+                                <li><a href="{!! url('/user_request/status/approved/diklat'); !!}" class="slide-item @yield('userRequestApprovedDiklatMenuClass')"> Disetujui</a></li>
+                            </ul>
                         </li>
                         @endif
+
                         @if (getPermissions('modul_pengguna')['checked'])
                         <li class="sub-category">
                             <h3>Modul Pengguna</h3>

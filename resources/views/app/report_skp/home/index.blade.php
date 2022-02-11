@@ -96,22 +96,24 @@
                           </tr>
                           <tr>
                             <td colspan="6" class="text-center">
-                              Nama Instansi
+                              UNIT KERJA : {{ !empty($user->unit_kerja->name) ? $user->unit_kerja->name : '' }}
                             </td>
                             <td colspan="7" class="text-center">
-                              PERIODE PENILAIAN : JULI s.d DESEMBER
+                              PERIODE PENILAIAN :
+                              @if ($dari_bulan != $sampai_bulan)
+                                Bulan {{ monthIndo($dari_bulan) }} s.d Bulan {{ monthIndo($sampai_bulan) }}
+                              @else
+                                Bulan {{ monthIndo($dari_bulan) }}
+                              @endif
                             </td>
                           </tr>
                           <tr>
                             <td colspan="6" class="text-center">
-                              TAHUN
+                              TAHUN {{ $tahun }}
                             </td>
                             <td colspan="7" class="text-center">
-
                             </td>
                           </tr>
-
-
 
                           <tr>
                             <td colspan="6" class="text-center">

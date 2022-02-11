@@ -61,7 +61,7 @@ class ReportSkpController extends Controller
 
           } else {
               // ATASAN KEPALA
-              $jabatan_parent_id = $PenilaianPrestasiKerja['records']->user->jabatan->parent_id;
+              $jabatan_parent_id = $user->jabatan->parent_id;
               $user_penilai = User::where('jabatan_id', $jabatan_parent_id)
                                 ->with('jabatan')
                                 ->with('golongan')
