@@ -173,6 +173,14 @@ $router->post($prefix.'/pendidikan', ['uses' => 'Pendidikan\PendidikanController
 $router->put($prefix.'/pendidikan/{id}', ['uses' => 'Pendidikan\PendidikanController@Update', 'middleware' => ['LogActivity:Pendidikan.Update','Pendidikan.Update']]);
 $router->delete($prefix.'/pendidikan/{id}', ['uses' => 'Pendidikan\PendidikanController@Delete', 'middleware' => ['LogActivity:Pendidikan.Delete','Pendidikan.Delete']]);
 
+// document_unit
+$router->get($prefix.'/document_unit', ['uses' => 'DocumentUnit\DocumentUnitBrowseController@get', 'middleware' => ['LogActivity:DocumentUnit.View','ArrQuery']]);
+$router->get($prefix.'/document_unit/{query:.+}', ['uses' => 'DocumentUnit\DocumentUnitBrowseController@get', 'middleware' => ['DocumentUnit:DocumentUnit.View','ArrQuery']]);
+$router->post($prefix.'/document_unit', ['uses' => 'DocumentUnit\DocumentUnitController@Insert', 'middleware' => ['LogActivity:DocumentUnit.Insert','DocumentUnit.Insert']]);
+$router->put($prefix.'/document_unit/{id}', ['uses' => 'DocumentUnit\DocumentUnitController@Update', 'middleware' => ['LogActivity:DocumentUnit.Update','DocumentUnit.Update']]);
+$router->delete($prefix.'/document_unit/{id}', ['uses' => 'DocumentUnit\DocumentUnitController@Delete', 'middleware' => ['LogActivity:DocumentUnit.Delete','DocumentUnit.Delete']]);
+
+
 // jabatan_fungsional
 $router->get($prefix.'/jabatan_fungsional', ['uses' => 'JabatanFungsional\JabatanFungsionalBrowseController@get', 'middleware' => ['LogActivity:JabatanFungsional.View','ArrQuery']]);
 $router->get($prefix.'/jabatan_fungsional/{query:.+}', ['uses' => 'JabatanFungsional\JabatanFungsionalBrowseController@get', 'middleware' => ['JabatanFungsional:JabatanFungsional.View','ArrQuery']]);

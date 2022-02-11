@@ -55,6 +55,12 @@ $router->get('/pendidikan/new', 'CMS\Pendidikan\PendidikanController@New');
 $router->get('/pendidikan/edit/{id}', 'CMS\Pendidikan\PendidikanController@Edit');
 $router->get('/pendidikan/{id}', 'CMS\Pendidikan\PendidikanController@Detail');
 
+$router->get('/document_unit', 'CMS\DocumentUnit\DocumentUnitController@Home');
+$router->get('/document_unit/new', 'CMS\DocumentUnit\DocumentUnitController@New');
+$router->get('/document_unit/edit/{id}', 'CMS\DocumentUnit\DocumentUnitController@Edit');
+$router->get('/document_unit/{id}', 'CMS\DocumentUnit\DocumentUnitController@Detail');
+
+
 $router->get('/jabatan_fungsional', 'CMS\JabatanFungsional\JabatanFungsionalController@Home');
 $router->get('/jabatan_fungsional/new', 'CMS\JabatanFungsional\JabatanFungsionalController@New');
 $router->get('/jabatan_fungsional/edit/{id}', 'CMS\JabatanFungsional\JabatanFungsionalController@Edit');

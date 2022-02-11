@@ -59,6 +59,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'Pendidikan.Update' => \App\Http\Middleware\Pendidikan\Update::class,
         'Pendidikan.Delete' => \App\Http\Middleware\Pendidikan\Delete::class,
 
+        'DocumentUnit.Insert' => \App\Http\Middleware\DocumentUnit\Insert::class,
+        'DocumentUnit.Update' => \App\Http\Middleware\DocumentUnit\Update::class,
+        'DocumentUnit.Delete' => \App\Http\Middleware\DocumentUnit\Delete::class,
+
         'JabatanFungsional.Insert' => \App\Http\Middleware\JabatanFungsional\Insert::class,
         'JabatanFungsional.Update' => \App\Http\Middleware\JabatanFungsional\Update::class,
         'JabatanFungsional.Delete' => \App\Http\Middleware\JabatanFungsional\Delete::class,
