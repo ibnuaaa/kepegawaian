@@ -1,16 +1,16 @@
 <script>
 $(document).ready(function() {
 
-    const form = document.getElementById('newUserForm')
-    const newUserForm = $('#newUserForm').formValidation({
+    const form = document.getElementById('newConfigForm')
+    const newConfigForm = $('#newConfigForm').formValidation({
         fields: {
-            title: {
-                validators: {
-                    notEmpty: {
-                        message: 'The title is required'
-                    }
-                }
-            }
+            // name: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'Nama Config Harus diisi'
+            //         }
+            //     }
+            // },
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -22,14 +22,14 @@ $(document).ready(function() {
 
     $('.saveAction').click(function() {
         const { urlNext, isRecreate } = $(this).data()
-        newUserForm.validate().then(function(status) {
+        newConfigForm.validate().then(function(status) {
             if (status === 'Valid') {
-                const key = $('input[name="key"]')
-                const value = $('input[name="value"]')
+              const key = $('input[name="key"]')
+              const value = $('input[name="value"]')
 
                 axios.post('/config', {
-                    key: key.val(),
-                    value: value.val(),
+                  key: key.val(),
+                  value: value.val(),
                 }).then((response) => {
                     const { data } = response.data
                     if (!isRecreate) {
@@ -47,6 +47,4 @@ $(document).ready(function() {
     })
 
 })
-
-
 </script>

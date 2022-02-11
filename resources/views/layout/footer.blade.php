@@ -1,7 +1,6 @@
 
 
 
-
 <!-- JQUERY JS -->
 <script src="/assets/js/jquery.min.js"></script>
 
@@ -72,6 +71,42 @@
 <script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
 
 <script>
+
+        $(document).ready(function() {
+
+            if (getCookie('TokenType') != "" && getCookie('AccessToken')) {
+              timerSession()
+            }
+
+            $('body input').on('keyup', function() {
+                g_timeout = parseInt({{getConfig('session_timeout')}});
+            })
+
+        })
+
+        function addSessionTimeout() {
+          $('#modalSession').modal('hide');
+          g_timeout = parseInt({{getConfig('session_timeout')}})
+          return false;
+        }
+
+        var g_timeout = {{getConfig('session_timeout')}}
+        function timerSession() {
+            g_timeout = g_timeout - 1;
+            $('#time_session').html(g_timeout)
+
+            if (g_timeout == 0) {
+              location.href = '/logout'
+            } else {
+
+              if (g_timeout < parseInt({{getConfig('session_timeout_popup')}})) {
+                $('#modalSession').modal('show');
+              }
+
+              setTimeout(timerSession, 1000);
+            }
+        }
+
         // Dropzone.autoDiscover = false;
         window.getCookie = function(cname) {
             var name = cname + '='

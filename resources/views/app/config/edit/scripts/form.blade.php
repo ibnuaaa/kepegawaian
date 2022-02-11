@@ -1,15 +1,16 @@
 <script>
 $(document).ready(function() {
-    const form = document.getElementById('editMailClassificationForm')
-    const editMailClassificationForm = $('#editMailClassificationForm').formValidation({
+
+    const form = document.getElementById('editConfigForm')
+    const editConfigForm = $('#editConfigForm').formValidation({
         fields: {
-            code: {
-                validators: {
-                    notEmpty: {
-                        message: 'The Title is required'
-                    }
-                }
-            },
+            // name: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'The configname is required'
+            //         }
+            //     }
+            // }
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
@@ -19,7 +20,7 @@ $(document).ready(function() {
     }).data('formValidation')
 
     $('#saveAction').click(function() {
-        editMailClassificationForm.validate().then(function(status) {
+        editConfigForm.validate().then(function(status) {
             if (status === 'Valid') {
                 const key = $('input[name="key"]')
                 const value = $('input[name="value"]')
@@ -42,4 +43,20 @@ $(document).ready(function() {
 
 })
 
+
+$('#deleteOpenModal').click(function() {
+    const modalElem = $('#modalDelete')
+    $('#modalDelete').modal('show')
+})
+$('#deleteAction').click(function() {
+    axios.delete('/config/{{$data['id']}}').then((response) => {
+        const { data } = response.data
+        window.location = '{{ UrlPrevious(url('/config')) }}'
+        $('#modalDelete').modal('hide')
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+        }
+    })
+})
 </script>

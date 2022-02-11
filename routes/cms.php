@@ -44,6 +44,11 @@ $router->get('/user_request/{menu}/{id}', 'CMS\UserRequest\UserRequestController
 
 $router->get('/report_skp', 'CMS\ReportSkp\ReportSkpController@Home');
 
+$router->get('/config', 'CMS\Config\ConfigController@Home');
+$router->get('/config/new', 'CMS\Config\ConfigController@New');
+$router->get('/config/edit/{id}', 'CMS\Config\ConfigController@Edit');
+$router->get('/config/{id}', 'CMS\Config\ConfigController@Detail');
+
 
 $router->get('/pendidikan', 'CMS\Pendidikan\PendidikanController@Home');
 $router->get('/pendidikan/new', 'CMS\Pendidikan\PendidikanController@New');

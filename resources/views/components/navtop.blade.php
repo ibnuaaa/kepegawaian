@@ -119,6 +119,29 @@
     </div>
 
 
+    <div class="modal effect-sign" id="modalSession" role="dialog">
+        <div class="modal-dialog modal-lg " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Pemberitahuan</h2>
+                </div>
+                <div class="modal-body" id="body-modal-sasaran-kinerja">
+                    <h4>Sesi akan habis dalam waktu <span style="font-size: 20px;" id="time_session">10</span> detik lagi. Halaman akan ter-logout otomatis. <br /><br />Apakah anda masih ingin melanjutkan sesi anda ?</h4>
+                </div>
+                <div class="modal-footer">
+
+                  <a href="#" class="btn btn-primary" onclick="return addSessionTimeout()">
+                        <i class="fa fa-checked"></i>
+                        Ya, saya ingin melanjutkan sesi
+                    </a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">

@@ -109,6 +109,14 @@
                             </ul>
                         </li>
                         @endif
+                        @if (getPermissions('config')['checked'])
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="/config">
+                              <i class="side-menu__icon fe fe-settings"></i>
+                              <span class="side-menu__label">Konfigurasi</span>
+                            </a>
+                        </li>
+                        @endif
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="/logout">
                               <i class="side-menu__icon fe fe-log-out"></i>
