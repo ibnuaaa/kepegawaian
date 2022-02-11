@@ -89,7 +89,7 @@ class PenilaianPrestasiKerjaItemController extends Controller
         if (!empty($IndikatorKinerjaProgram->tipe_indikator) && $IndikatorKinerjaProgram->tipe_indikator == 'kegiatan') {
             //  buat direksi & kabag / atasannya kepala ruang &  kasubag
             $this->CalculateParents($IndikatorKinerjaProgram, 0, $PenilaianPrestasiKerja);
-        } else {
+        } else if (!empty($IndikatorKinerjaProgram->tipe_indikator) && $IndikatorKinerjaProgram->tipe_indikator == 'iku') {
 
           $IndikatorKinerjaAtasan = IndikatorKinerja::where('id' , $IndikatorKinerjaProgram->id)->first();
           if (!empty($IndikatorKinerjaAtasan)) {
@@ -99,7 +99,7 @@ class PenilaianPrestasiKerjaItemController extends Controller
               $IndikatorKinerjaAtasan->capaian = $Model->PenilaianPrestasiKerjaItem->capaian;
               $IndikatorKinerjaAtasan->nilai_kinerja = $Model->PenilaianPrestasiKerjaItem->nilai_kinerja;
               $IndikatorKinerjaAtasan->save();
-          }
+           }
 
             //  buat direksi & kabag / atasannya kepala ruang &  kasubag
             $this->CalculateParentsFromEselon3($IndikatorKinerjaProgram);
