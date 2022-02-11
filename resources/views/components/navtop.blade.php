@@ -12,7 +12,7 @@
         <div class="app-header header sticky">
             <div class="container-fluid main-container">
                 <div class="d-flex">
-                    <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="#"></a>
+                    <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="#" id="timer_review"></a>
                     <!-- sidebar-toggle-->
                     <a class="logo-horizontal " href="/">
                         <img src="/assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">

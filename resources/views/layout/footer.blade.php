@@ -82,6 +82,9 @@
                 g_timeout = parseInt({{getConfig('session_timeout')}});
             })
 
+            document.onmousemove = function(event) {
+              g_timeout = parseInt({{getConfig('session_timeout')}});
+            }
         })
 
         function addSessionTimeout() {
@@ -94,6 +97,8 @@
         function timerSession() {
             g_timeout = g_timeout - 1;
             $('#time_session').html(g_timeout)
+            // $('#timer_review').html(g_timeout)
+
 
             if (g_timeout == 0) {
               location.href = '/logout'
