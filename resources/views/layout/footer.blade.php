@@ -55,6 +55,12 @@
 <!-- CUSTOM JS -->
 <script src="/assets/js/custom.js"></script>
 
+<!-- Perfect SCROLLBAR JS-->
+<script src="/assets/plugins/p-scroll/perfect-scrollbar.js"></script>
+<script src="/assets/plugins/p-scroll/pscroll.js"></script>
+<script src="/assets/plugins/p-scroll/pscroll-1.js"></script>
+
+
 <!-- QS JS -->
 <script src="/assets/js/qs.min.js"></script>
 
