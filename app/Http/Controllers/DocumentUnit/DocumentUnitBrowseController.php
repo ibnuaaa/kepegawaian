@@ -74,6 +74,7 @@ class DocumentUnitBrowseController extends Controller
             "$this->DocumentUnitTable.unit_kerja_id as document_unit.unit_kerja_id",
             "$this->DocumentUnitTable.tanggal_terbit_dokumen as document_unit.tanggal_terbit_dokumen",
             "$this->DocumentUnitTable.no_dokumen as document_unit.no_dokumen",
+            "$this->DocumentUnitTable.jenis_dokumen_id as document_unit.jenis_dokumen_id",
             "$this->DocumentUnitTable.perspektif_id as document_unit.perspektif_id",
             "$this->DocumentUnitTable.created_at as document_unit.created_at"
         )->with('document_unit');

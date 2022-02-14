@@ -23,9 +23,21 @@ $(document).ready(function() {
         editDocumentUnitForm.validate().then(function(status) {
             if (status === 'Valid') {
                 const name = $('input[name="name"]')
+                const description = $('textarea[name="description"]')
+                const unit_kerja_id = $('select[name="unit_kerja_id"]')
+                const tanggal_terbit_dokumen = $('input[name="tanggal_terbit_dokumen"]')
+                const no_dokumen = $('input[name="no_dokumen"]')
+                const perspektif_id = $('select[name="perspektif_id"]')
+                const jenis_dokumen_id = $('select[name="jenis_dokumen_id"]')
 
                 const data = {
-                    name: name.val(),
+                  name: name.val(),
+                  description: description.val(),
+                  unit_kerja_id: unit_kerja_id.val(),
+                  tanggal_terbit_dokumen: tanggal_terbit_dokumen.val(),
+                  no_dokumen: no_dokumen.val(),
+                  perspektif_id: perspektif_id.val(),
+                  jenis_dokumen_id: jenis_dokumen_id.val()
                 }
 
                 axios.put('/document_unit/{{$data['id']}}', data).then((response) => {

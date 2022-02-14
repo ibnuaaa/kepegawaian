@@ -1076,6 +1076,47 @@ if ( ! function_exists('perspektif'))
     }
 }
 
+if ( ! function_exists('jenis_dokumen'))
+{
+    function jenis_dokumen($id = null)
+    {
+
+        $list = [
+          [
+            'value' => '',
+            'label' => '-= Pilih Jenis Dokumen =-',
+          ],
+          [
+            'value' => '1',
+            'label' => 'SOP',
+          ],
+          [
+            'value' => '2',
+            'label' => 'Pedoman',
+          ],
+          [
+            'value' => '3',
+            'label' => 'SK',
+          ]
+        ];
+
+        if ($id) {
+          $ret = "";
+          foreach ($list as $key => $value) {
+
+
+            if ($value['value'] == $id) {
+              $ret = $value['label'];
+            }
+          }
+
+          return $ret;
+        }
+
+        return $list;
+    }
+}
+
 if ( ! function_exists('status_perkawinan'))
 {
     function status_perkawinan($id = null)

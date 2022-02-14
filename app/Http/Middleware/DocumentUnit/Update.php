@@ -17,11 +17,12 @@ class Update extends BaseMiddleware
         $this->Model->DocumentUnit = DocumentUnit::where('id', $this->Id)->first();
         if ($this->Model->DocumentUnit) {
             if(!empty($this->_Request->input('name'))) $this->Model->DocumentUnit->name = $this->_Request->input('name');
-            if(!empty($this->_Request->input('name'))) $this->Model->DocumentUnit->description = $this->_Request->input('description');
-            if(!empty($this->_Request->input('name'))) $this->Model->DocumentUnit->unit_kerja_id = $this->_Request->input('unit_kerja_id');
-            if(!empty($this->_Request->input('name'))) $this->Model->DocumentUnit->tanggal_terbit_dokumen = $this->_Request->input('tanggal_terbit_dokumen');
-            if(!empty($this->_Request->input('name'))) $this->Model->DocumentUnit->no_dokumen = $this->_Request->input('no_dokumen');
-            if(!empty($this->_Request->input('name'))) $this->Model->DocumentUnit->perspektif_id = $this->_Request->input('perspektif_id')
+            if(!empty($this->_Request->input('description'))) $this->Model->DocumentUnit->description = $this->_Request->input('description');
+            if(!empty($this->_Request->input('unit_kerja_id'))) $this->Model->DocumentUnit->unit_kerja_id = $this->_Request->input('unit_kerja_id');
+            if(!empty($this->_Request->input('tanggal_terbit_dokumen'))) $this->Model->DocumentUnit->tanggal_terbit_dokumen = $this->_Request->input('tanggal_terbit_dokumen');
+            if(!empty($this->_Request->input('no_dokumen'))) $this->Model->DocumentUnit->no_dokumen = $this->_Request->input('no_dokumen');
+            if(!empty($this->_Request->input('perspektif_id'))) $this->Model->DocumentUnit->perspektif_id = $this->_Request->input('perspektif_id');
+            if(!empty($this->_Request->input('jenis_dokumen_id'))) $this->Model->DocumentUnit->jenis_dokumen_id = $this->_Request->input('jenis_dokumen_id');
         }
     }
 

@@ -34,6 +34,7 @@ $(document).ready(function() {
                 const tanggal_terbit_dokumen = $('input[name="tanggal_terbit_dokumen"]')
                 const no_dokumen = $('input[name="no_dokumen"]')
                 const perspektif_id = $('select[name="perspektif_id"]')
+                const jenis_dokumen_id = $('select[name="jenis_dokumen_id"]')
 
                 axios.post('/document_unit', {
                   name: name.val(),
@@ -42,6 +43,7 @@ $(document).ready(function() {
                   tanggal_terbit_dokumen: tanggal_terbit_dokumen.val(),
                   no_dokumen: no_dokumen.val(),
                   perspektif_id: perspektif_id.val(),
+                  jenis_dokumen_id: jenis_dokumen_id.val()
                 }).then((response) => {
 
                     console.log('bbbb')

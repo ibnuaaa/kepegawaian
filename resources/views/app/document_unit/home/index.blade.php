@@ -58,6 +58,9 @@
                 <p>{{ $item->name }}</p>
             </td>
             <td class="v-align-middle ">
+                <p>{{ $item->jenis_dokumen_id ? jenis_dokumen($item->jenis_dokumen_id) : '' }}</p>
+            </td>
+            <td class="v-align-middle ">
               <?php if (!empty($item->document_unit)): ?>
                   <?php foreach ($item->document_unit as $key => $val2): ?>
                       <a href="/api/preview/{{$val2->storage->key}}" onclick="return openModalPreview('{{ getConfig('protocol') . '://'. getConfig('basepath')  }}/api/preview/{{$val2->storage->key}}')">

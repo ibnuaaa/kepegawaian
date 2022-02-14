@@ -21,6 +21,7 @@ class Insert extends BaseMiddleware
         $this->Model->DocumentUnit->tanggal_terbit_dokumen = $this->_Request->input('tanggal_terbit_dokumen');
         $this->Model->DocumentUnit->no_dokumen = $this->_Request->input('no_dokumen');
         $this->Model->DocumentUnit->perspektif_id = $this->_Request->input('perspektif_id');
+        $this->Model->DocumentUnit->jenis_dokumen_id = $this->_Request->input('jenis_dokumen_id');
     }
 
     private function Validation()

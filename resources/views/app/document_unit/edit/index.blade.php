@@ -69,6 +69,17 @@
                         </div>
                     </div>
                     <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Jenis Dokumen</label>
+                        <div class="col-md-9 pt-2">
+                            @component('components.form.awesomeSelect', [
+                                'name' => 'jenis_dokumen_id',
+                                'items' => jenis_dokumen(),
+                                'selected' => $data->jenis_dokumen_id
+                            ])
+                            @endcomponent
+                        </div>
+                    </div>
+                    <div class=" row mb-4">
                         <label class="col-md-3 form-label">File</label>
                         <div class="col-md-9 pt-2">
                           <input type="file" onchange="prepareUpload(this, 'document_unit', '{{ $data->id }}');" multiple>
