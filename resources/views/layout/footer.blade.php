@@ -231,11 +231,33 @@
 
 
 
-        function prepareUpload(el, object_type, id, is_for_new) {
+        function prepareUpload(el, object_type, id, is_for_new, allowed_ext) {
             var files = $(el)[0].files;
             var preview = $(el).siblings("#img-preview");
+
+            var is_allowed = true
+            // check file type
             for (i = 0; i < files.length; i++) {
-              uploadFile(files[i], preview, object_type, id, is_for_new);
+                var file = files[i]
+
+                var filename_split = file.name.split('.')
+                var ext = filename_split[filename_split.length-1]
+                ext = ext.toLowerCase()
+
+                if (allowed_ext) {
+                  if (allowed_ext.indexOf(ext) == -1) {
+                    is_allowed = false
+                  }
+                }
+
+            }
+
+            if (is_allowed) {
+              for (i = 0; i < files.length; i++) {
+                uploadFile(files[i], preview, object_type, id, is_for_new);
+              }
+            } else {
+              swal({ title: 'Opps!', text: 'Mohon maaf, hanya mengizinkan file berikut : ' + allowed_ext.join(','), type: 'error', confirmButtonText: 'Ok' })
             }
         }
 

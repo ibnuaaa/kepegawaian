@@ -82,7 +82,7 @@
                     <div class=" row mb-4">
                         <label class="col-md-3 form-label">File</label>
                         <div class="col-md-9 pt-2">
-                          <input type="file" onchange="prepareUpload(this, 'document_unit', null, true);" multiple>
+                          <input type="file" onchange="prepareUpload(this, 'document_unit', null, true, ['pdf']);" multiple>
                           <div style="clear: both;"></div>
                           <div class="img-preview mt-2" id="img-preview">
                               <div style="clear: both;"></div>

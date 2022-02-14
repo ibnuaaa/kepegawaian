@@ -106,7 +106,7 @@ if ($menu == 'sdm') {
                                     <label class="col-md-2 form-label">Foto Profil</label>
                                     <div class="col-md-9">
                                         @if($page == 'profile')
-                                        <input type="file" onchange="prepareUpload(this, 'foto_profile{{ !$id ? '_request' : '' }}', '{{ $data->id }}');" multiple>
+                                        <input type="file" onchange="prepareUpload(this, 'foto_profile{{ !$id ? '_request' : '' }}', '{{ $data->id }}', false, ['png','jpg','jpeg','bmp']);" multiple>
                                         @endif
                                         <div style="clear: both;"></div>
                                         <div class="img-preview mt-2" id="img-preview">
@@ -327,7 +327,7 @@ if ($menu == 'sdm') {
                                     <label class="col-md-2 form-label">Foto KTP</label>
                                     <div class="col-md-9">
                                         @if($page == 'profile')
-                                        <input type="file" onchange="prepareUpload(this, 'foto_ktp{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}');" multiple>
+                                        <input type="file" onchange="prepareUpload(this, 'foto_ktp{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}', false, ['pdf']);" multiple>
                                         @endif
                                         <div style="clear: both;"></div>
                                         <div class="img-preview mt-2" id="img-preview">
@@ -348,7 +348,7 @@ if ($menu == 'sdm') {
                                     <label class="col-md-2 form-label">Foto NPWP</label>
                                     <div class="col-md-9">
                                         @if($page == 'profile')
-                                        <input type="file" onchange="prepareUpload(this, 'foto_npwp{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}');" multiple>
+                                        <input type="file" onchange="prepareUpload(this, 'foto_npwp{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}', false, ['pdf']);" multiple>
                                         @endif
                                         <div style="clear: both;"></div>
                                         <div class="img-preview mt-2" id="img-preview">
@@ -368,7 +368,7 @@ if ($menu == 'sdm') {
                                     <label class="col-md-2 form-label">Foto BPJS</label>
                                     <div class="col-md-9">
                                         @if($page == 'profile')
-                                        <input type="file" onchange="prepareUpload(this, 'foto_bpjs{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}');" multiple>
+                                        <input type="file" onchange="prepareUpload(this, 'foto_bpjs{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}', false, ['pdf']);" multiple>
                                         @endif
                                         <div style="clear: both;"></div>
                                         <div class="img-preview mt-2" id="img-preview">
@@ -443,7 +443,7 @@ if ($menu == 'sdm') {
                                         </td>
                                         <td>
                                             @if($page == 'profile')
-                                            <input type="file" onchange="prepareUpload(this, 'foto_ijazah{{ !$id ? '_request' : '' }}', '{{ $val->id }}');" multiple>
+                                            <input type="file" onchange="prepareUpload(this, 'foto_ijazah{{ !$id ? '_request' : '' }}', '{{ $val->id }}', false, ['pdf']);" multiple>
                                             @endif
                                             <div style="clear: both;"></div>
                                             <div class="img-preview mt-2" id="img-preview">
@@ -531,7 +531,7 @@ if ($menu == 'sdm') {
                                         </td>
                                         <td>
                                             @if($page == 'profile')
-                                            <input type="file" onchange="prepareUpload(this, 'foto_sertifikat{{ !$id ? '_request' : '' }}', '{{ $val->id }}');" multiple>
+                                            <input type="file" onchange="prepareUpload(this, 'foto_sertifikat{{ !$id ? '_request' : '' }}', '{{ $val->id }}', false, ['pdf']);" multiple>
                                             @endif
                                             <div style="clear: both;"></div>
                                             <div class="img-preview mt-2" id="img-preview">
@@ -574,7 +574,7 @@ if ($menu == 'sdm') {
                                 <br />
                                 @if($page == 'profile')
                                 <h4>Upload Foto KK (PDF)</h4>
-                                <input type="file" onchange="prepareUpload(this, 'foto_kk{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}');" multiple>
+                                <input type="file" onchange="prepareUpload(this, 'foto_kk{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}', false, ['pdf']);" multiple>
                                 @endif
                                 <div style="clear: both;"></div>
                                 <div class="img-preview mt-2" id="img-preview">
