@@ -6,6 +6,8 @@ use App\Http\Controllers\DocumentUnit\DocumentUnitBrowseController;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+use App\Models\UnitKerja;
+
 use DB;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
@@ -59,7 +61,8 @@ class DocumentUnitController extends Controller
             'options' => $options,
             'heads' => [
                 (object)['name' => 'No', 'label' => 'No'],
-                (object)['name' => 'name', 'label' => 'Nama DocumentUnit'],
+                (object)['name' => 'name', 'label' => 'Nama Dokumen'],
+                (object)['name' => 'link file', 'label' => 'link file'],
                 (object)['name' => 'created_at', 'label' => 'Terbuat Pada'],
                 (object)['name' => 'action', 'label' => 'Aksi']
             ],
@@ -81,8 +84,12 @@ class DocumentUnitController extends Controller
 
     public function New(Request $request)
     {
+
+        $UnitKerjaTree = UnitKerja::tree();
+
         return view('app.document_unit.new.index', [
             'select' => [],
+            'unit_kerja' => $UnitKerjaTree
         ]);
     }
 
@@ -107,9 +114,13 @@ class DocumentUnitController extends Controller
         if (!isset($DocumentUnit['records']->id)) {
             throw new ModelNotFoundException('Not Found Batch');
         }
+
+        $UnitKerjaTree = UnitKerja::tree();
+
         return view('app.document_unit.edit.index', [
             'select' => [],
-            'data' => $DocumentUnit['records']
+            'data' => $DocumentUnit['records'],
+            'unit_kerja' => $UnitKerjaTree
         ]);
     }
 

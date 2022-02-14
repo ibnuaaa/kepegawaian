@@ -16,6 +16,11 @@ class Insert extends BaseMiddleware
         $this->Model->DocumentUnit = new DocumentUnit();
 
         $this->Model->DocumentUnit->name = $this->_Request->input('name');
+        $this->Model->DocumentUnit->description = $this->_Request->input('description');
+        $this->Model->DocumentUnit->unit_kerja_id = $this->_Request->input('unit_kerja_id');
+        $this->Model->DocumentUnit->tanggal_terbit_dokumen = $this->_Request->input('tanggal_terbit_dokumen');
+        $this->Model->DocumentUnit->no_dokumen = $this->_Request->input('no_dokumen');
+        $this->Model->DocumentUnit->perspektif_id = $this->_Request->input('perspektif_id');
     }
 
     private function Validation()

@@ -6,16 +6,16 @@
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">DocumentUnit
+    <h1 class="page-title">Dokumen
         <a href="/document_unit/new" class="btn btn-primary btn-sm">
             <i class="fa fa-plus"></i>
-            Buat DocumentUnit
+            Buat Dokumen
         </a>
     </h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">DocumentUnit</li>
+            <li class="breadcrumb-item active" aria-current="page">Dokumen</li>
         </ol>
     </div>
 </div>
@@ -56,6 +56,15 @@
             </td>
             <td class="v-align-middle ">
                 <p>{{ $item->name }}</p>
+            </td>
+            <td class="v-align-middle ">
+              <?php if (!empty($item->document_unit)): ?>
+                  <?php foreach ($item->document_unit as $key => $val2): ?>
+                      <a href="/api/preview/{{$val2->storage->key}}" onclick="return openModalPreview('{{ getConfig('protocol') . '://'. getConfig('basepath')  }}/api/preview/{{$val2->storage->key}}')">
+                          <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
+                      </a>
+                  <?php endforeach; ?>
+              <?php endif; ?>
             </td>
             <td class="v-align-middle">
                 <p>{{ $item->created_at }}</p>

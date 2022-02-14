@@ -4,13 +4,13 @@ $(document).ready(function() {
     const form = document.getElementById('editDocumentUnitForm')
     const editDocumentUnitForm = $('#editDocumentUnitForm').formValidation({
         fields: {
-            name: {
-                validators: {
-                    notEmpty: {
-                        message: 'The document_unitname is required'
-                    }
-                }
-            }
+            // name: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'The document_unitname is required'
+            //         }
+            //     }
+            // }
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),

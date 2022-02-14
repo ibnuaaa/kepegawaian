@@ -70,8 +70,13 @@ class DocumentUnitBrowseController extends Controller
             // DocumentUnit
             "$this->DocumentUnitTable.id as document_unit.id",
             "$this->DocumentUnitTable.name as document_unit.name",
+            "$this->DocumentUnitTable.description as document_unit.description",
+            "$this->DocumentUnitTable.unit_kerja_id as document_unit.unit_kerja_id",
+            "$this->DocumentUnitTable.tanggal_terbit_dokumen as document_unit.tanggal_terbit_dokumen",
+            "$this->DocumentUnitTable.no_dokumen as document_unit.no_dokumen",
+            "$this->DocumentUnitTable.perspektif_id as document_unit.perspektif_id",
             "$this->DocumentUnitTable.created_at as document_unit.created_at"
-        );
+        )->with('document_unit');
 
         if(!empty($request->get('sort'))) {
             if(!empty($request->get('sort_type'))) {

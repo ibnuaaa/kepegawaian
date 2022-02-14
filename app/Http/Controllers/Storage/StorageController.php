@@ -206,7 +206,8 @@ class StorageController extends Controller
         // INI BUAT FOTO YANG SINGLE, harus dimasukkan ke array di bawah ini
         if (in_array($Object, [
           'foto_profile', 'foto_ktp', 'foto_npwp', 'foto_ijazah', 'foto_sertifikat','foto_kk','foto_bpjs',
-          'foto_profile_request', 'foto_ktp_request', 'foto_npwp_request', 'foto_ijazah_request', 'foto_sertifikat_request','foto_kk_request','foto_bpjs_request'
+          'foto_profile_request', 'foto_ktp_request', 'foto_npwp_request', 'foto_ijazah_request', 'foto_sertifikat_request','foto_kk_request','foto_bpjs_request',
+          'document_unit'
           ])) {
             Document::where('object', $Object)->where('object_id', $ObjectId)->delete();
         }

@@ -91,6 +91,17 @@
             document.onmousemove = function(event) {
               g_timeout = parseInt({{getConfig('session_timeout')}});
             }
+
+            // $('#modalPreview').on('shown', function(){
+            //     $('#iframe-preview').attr('src', g_url)
+            // });
+
+            $("#modalPreview").on('show.bs.modal', function () {
+              setTimeout(() => {
+                 $('#iframe-preview').attr('src', g_url)
+              }, 200)
+              // alert('The modal will be displayed now!');
+            });
         })
 
         function addSessionTimeout() {
@@ -220,16 +231,16 @@
 
 
 
-        function prepareUpload(el, object_type, id) {
+        function prepareUpload(el, object_type, id, is_for_new) {
             var files = $(el)[0].files;
             var preview = $(el).siblings("#img-preview");
             for (i = 0; i < files.length; i++) {
-              uploadFile(files[i], preview, object_type, id);
+              uploadFile(files[i], preview, object_type, id, is_for_new);
             }
         }
 
-        var files = [];
-        function uploadFile(file, preview, object, id) {
+        var g_data_storage = [];
+        function uploadFile(file, preview, object, id, is_for_new) {
           showLoading()
           var formData = new FormData();
           formData.append('file', file);
@@ -245,25 +256,22 @@
                 processData: false,
                 success: function(response) {
 
-                    console.log(response)
-
-                    // START SAVE LAMPIRAN
                     const data_storage = {
                         object: object,
                         object_id: id,
                         file: JSON.stringify(response.data)
                     };
 
-                    axios.post('/storage/save', data_storage).then((response) => {
-                        hideLoading()
-                    }).catch((error) => {
-                        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
-                            Swal.fire({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
-                            hideLoading()
-                        }
-                    })
+                    hideLoading()
+
+                    g_data_storage.push(data_storage)
+                    // START SAVE LAMPIRAN
+                    if (is_for_new) {} else {
+                        saveDocument(id)
+                    }
 
                     appendImage(preview, response.data)
+
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                   hideLoading()
@@ -274,6 +282,42 @@
                   }
                 }
             });
+        }
+
+        function saveDocument(id) {
+
+          console.log('saveDocument')
+          console.log(g_data_storage)
+
+            showLoading()
+            console.log('saveDocument 2222')
+            console.log(g_data_storage.length)
+            for (var i = 0; i < g_data_storage.length; i++) {
+              console.log('rrrr')
+                var data_storage_tmp = g_data_storage[i]
+
+                console.log('vvv')
+
+                const data_storage = {
+                    object: data_storage_tmp.object,
+                    object_id: id,
+                    file: data_storage_tmp.file
+                };
+
+                console.log('zzz')
+
+                axios.post('/storage/save', data_storage).then((response) => {
+                    hideLoading()
+                }).catch((error) => {
+                    if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+                        Swal.fire({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+                        hideLoading()
+                    }
+                })
+
+
+
+            }
         }
 
         function appendImage(preview, data) {
@@ -289,6 +333,17 @@
                 // + "<i class='fa fa-trash'></i></button>"
                 + img
                 + "</div>");
+        }
+
+        var g_url = ''
+        function openModalPreview(url) {
+          $('#modalPreview').modal('show');
+
+          g_url = '{{pdfViewerUrl()}}' + url
+
+
+
+          return false;
         }
 
     </script>

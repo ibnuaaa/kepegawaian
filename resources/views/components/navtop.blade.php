@@ -142,6 +142,28 @@
     </div>
 
 
+
+
+    <div class="modal effect-sign" id="modalPreview" role="dialog">
+        <div class="modal-dialog modal-xl " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Preview</h2>
+                </div>
+                <div class="modal-body" id="body-modal-sasaran-kinerja">
+                    <iframe src="" id="iframe-preview" width="100%" height="600px"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fa fa-checked"></i>
+                        Download
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
