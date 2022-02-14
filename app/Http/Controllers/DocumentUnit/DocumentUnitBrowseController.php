@@ -48,6 +48,14 @@ class DocumentUnitBrowseController extends Controller
                 $query->where("$this->DocumentUnitTable.id", $request->ArrQuery->id);
             }
 
+            if (isset($request->ArrQuery->jenis_dokumen_id)) {
+                $query->where("$this->DocumentUnitTable.jenis_dokumen_id", $request->ArrQuery->jenis_dokumen_id);
+            }
+
+            if (isset($request->ArrQuery->unit_kerja_id)) {
+                $query->where("$this->DocumentUnitTable.unit_kerja_id", $request->ArrQuery->unit_kerja_id);
+            }
+
             if (!empty($request->get('q'))) {
                 $query->where(function ($query) use($request) {
                     $query->where("$this->DocumentUnitTable.name", 'like', '%'.$request->get('name').'%');

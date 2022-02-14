@@ -21,6 +21,27 @@
 </div>
 <!-- PAGE-HEADER END -->
 
+@section('headerTableSection')
+
+<label class="pull-right row" style="margin-top: 2px;">
+  <div class="input-group col-6">
+      @component('components.form.awesomeSelect', [
+          'name' => 'jenis_dokumen_id',
+          'items' => jenis_dokumen(),
+          'onChange' => 'selectJenisDokumen(this)',
+          'selected' => $selected_jenis_dokumen_id
+      ])
+      @endcomponent
+  </div>
+  <div class="input-group col-6">
+      <select class="form-control form-select" name="unit_kerja_id" onChange='selectUnitKerja(this)'>
+          <option value="">-= Pilih Unit Kerja =-</option>
+          {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', $selected_unit_kerja_id) : '' !!}
+      </select>
+  </div>
+</label>
+@endsection
+
 <!-- ROW-1 -->
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">

@@ -19,20 +19,20 @@
                            </label>
                         </div>
                      </div>
-                     <div class="col-sm-12 col-md-6">
+                     <div class="col-sm-12 col-md-7">
                        @yield('headerTableSection')
                      </div>
-                     <div class="col-sm-12 col-md-4">
-                        <div id="responsive-datatable_filter" class="dataTables_filter"><label>
+                     <div class="col-sm-12 col-md-3">
+                        <div id="responsive-datatable_filter" class="dataTables_filter"><label style="width: 100%;">
                           <?php
                           if (!isset($data['unshow_filter'])) {
                               ?>
-                                  <form action="{{ fullUri() }}">
-                                      <div class="input-group">
+                                  <form action="{{ fullUri() }}" onsubmit="return filterName()">
+                                      <div class="input-group"  style="width: 100%;">
                                       <input  name="filter_search"
                                           placeholder="Search... {{ !empty($data['placeholder_search']) ? '('.$data['placeholder_search'].')' : '' }}"
                                           value="{{ isset($data['filter_search']) ? $data['filter_search'] : '' }}"
-                                          class="form-control"
+                                          class="form-control full-width"
                                           type="text">
                                       </div>
                                   </from>

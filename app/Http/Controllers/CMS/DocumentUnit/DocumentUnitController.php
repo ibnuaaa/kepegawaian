@@ -27,11 +27,12 @@ class DocumentUnitController extends Controller
         $TableKey = 'document_unit-table';
 
         $filter_search = $request->input('filter_search');
+        $selected_unit_kerja_id = $request->input('unit_kerja_id');
+        $selected_jenis_dokumen_id = $request->input('jenis_dokumen_id');
 
         if (isset($request['document_unit-table-show'])) {
             $selected = $request['document_unit-table-show'];
-        }
-        else {
+        } else {
             $selected = 10;
         }
 
@@ -42,6 +43,14 @@ class DocumentUnitController extends Controller
 
         if (isset($filter_search)) {
             $DocumentUnit = $DocumentUnit->where('search', $filter_search);
+        }
+
+        if (!empty($selected_unit_kerja_id)) {
+            $DocumentUnit = $DocumentUnit->where('unit_kerja_id', $selected_unit_kerja_id);
+        }
+
+        if (!empty($selected_jenis_dokumen_id)) {
+            $DocumentUnit = $DocumentUnit->where('jenis_dokumen_id', $selected_jenis_dokumen_id);
         }
 
         $DocumentUnit = $DocumentUnit->middleware(function($fetch) use($request, $TableKey) {
@@ -76,9 +85,15 @@ class DocumentUnitController extends Controller
             $DataTable['show'] = $DocumentUnit['show'];
         }
 
+        $UnitKerjaTree = UnitKerja::tree();
+
         $ParseData = [
             'data' => $DataTable,
-            'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0
+            'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0,
+            'unit_kerja' => $UnitKerjaTree,
+            'selected_unit_kerja_id' => $selected_unit_kerja_id,
+            'selected_jenis_dokumen_id'  => $selected_jenis_dokumen_id
+
         ];
         return view('app.document_unit.home.index', $ParseData);
     }

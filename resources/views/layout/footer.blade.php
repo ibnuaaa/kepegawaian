@@ -373,6 +373,62 @@
           return false;
         }
 
+
+
+
+        // filter
+        function filterName() {
+
+          const filter_search = $('input[name="filter_search"]').val()
+          const query = getQuery()
+
+          if (filter_search) {
+              query.filter_search = filter_search
+          }
+
+          gotoPage(query)
+
+          return false;
+        }
+
+        function sortBy(column, current_sort_type) {
+            const query = getQuery()
+
+            query.sort = column
+            if(current_sort_type == '') query.sort_type = 'asc'
+            else if(current_sort_type == 'asc') query.sort_type = 'desc'
+            else if(current_sort_type == 'desc') query.sort_type = ''
+
+            if (column != '{{ !empty($_GET['sort']) ? $_GET['sort'] : '' }}') query.sort_type = 'asc'
+
+            gotoPage(query)
+        }
+
+        function gotoPage(query) {
+
+          const queryString = Qs.stringify(query)
+          if (queryString) {
+              window.location = g_href + '?' + queryString
+          } else {
+              window.location = g_href
+          }
+        }
+
+        function getQuery() {
+          var url = window.location.href
+          if (url.indexOf('?') > 0) {
+            var split_url = url.split('?')
+            var query_split = split_url[split_url.length-1].split('&')
+            var query = []
+            for (var i = 0; i < query_split.length; i++) {
+              var query_split_val = query_split[i].split('=')
+              query[query_split_val[0]] = query_split_val[1]
+            }
+          }
+
+          return query
+        }
+
     </script>
     @yield('script')
     @yield('formValidationScript')
