@@ -37,6 +37,12 @@
                         </div>
                     </div>
                     <div class=" row mb-4">
+                        <label class="col-md-3 form-label">Revisi Ke</label>
+                        <div class="col-md-9">
+                            <input name="revisi_ke" value="" class="form-control" type="text" required>
+                        </div>
+                    </div>
+                    <div class=" row mb-4">
                         <label class="col-md-3 form-label">Unit Kerja</label>
                         <div class="col-md-9 pt-2">
                           <select class="form-control form-select" name="unit_kerja_id">

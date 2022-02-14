@@ -154,10 +154,6 @@
                     <iframe src="" id="iframe-preview" width="100%" height="600px"></iframe>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn btn-primary">
-                        <i class="fa fa-checked"></i>
-                        Download
-                    </a>
                 </div>
             </div>
         </div>

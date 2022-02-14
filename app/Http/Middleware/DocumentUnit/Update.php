@@ -23,6 +23,7 @@ class Update extends BaseMiddleware
             if(!empty($this->_Request->input('no_dokumen'))) $this->Model->DocumentUnit->no_dokumen = $this->_Request->input('no_dokumen');
             if(!empty($this->_Request->input('perspektif_id'))) $this->Model->DocumentUnit->perspektif_id = $this->_Request->input('perspektif_id');
             if(!empty($this->_Request->input('jenis_dokumen_id'))) $this->Model->DocumentUnit->jenis_dokumen_id = $this->_Request->input('jenis_dokumen_id');
+            if(!empty($this->_Request->input('revisi_ke'))) $this->Model->DocumentUnit->revisi_ke = $this->_Request->input('revisi_ke');
         }
     }
 
