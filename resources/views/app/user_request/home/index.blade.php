@@ -50,7 +50,7 @@
             </td>
             <td class="v-align-middle ">
                 @if ($item->status_sdm == 'new')
-                    <label></label>
+                    <span class="badge bg-default badge-sm  me-1 mb-1 mt-1">Draft</span>
                 @else
                     @if ($item->status_sdm == 'request_approval')
                         <span class="badge bg-warning badge-sm  me-1 mb-1 mt-1">Pending SDM</span>

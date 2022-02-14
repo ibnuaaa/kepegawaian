@@ -95,11 +95,9 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
             if (!empty($request->ArrQuery->search)) {
                 $searched = explode(' ',$request->ArrQuery->search);
                 foreach ($searched as $key => $value) {
-                    $query->where(function ($query) use($request, $value) {
+                    $query->whereHas('user', function ($query) use($request, $value) {
                         $search = '%' . $value . '%';
-                        foreach ($this->search as $keySearch => $valueSearch) {
-                            $query->orWhere($valueSearch, 'like', $search);
-                        }
+                        $query->where('name', 'like', $search);
                     });
                 }
             }
@@ -115,7 +113,7 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
             "$this->PenilaianPrestasiKerjaTable.bulan as bulan",
             "$this->PenilaianPrestasiKerjaTable.tahun as tahun",
             "$this->PenilaianPrestasiKerjaTable.created_at as penilaian_prestasi_kerja.created_at"
-        );
+        )->with('user');
 
         if(!empty($request->get('sort'))) {
             if(!empty($request->get('sort_type'))) {

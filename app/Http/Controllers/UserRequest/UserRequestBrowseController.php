@@ -23,8 +23,8 @@ class UserRequestBrowseController extends Controller
     }
 
     protected $search = [
-        'username',
-        'email'
+      'username',
+      'nip'
     ];
 
     public function __construct(Request $request)
@@ -79,13 +79,12 @@ class UserRequestBrowseController extends Controller
 
             if (isset($request->ArrQuery->search)) {
                $search = '%' . $request->ArrQuery->search . '%';
-               $query->where(function ($query) use($search) {
-                    foreach ($this->search as $key => $value) {
-                        if($value == 'name') $query->orWhere($this->UserRequestTable.".".$value, 'like', $search);
-                        else $query->orWhere($value, 'like', $search);
 
-                    }
+
+               $query->whereHas('user', function ($query)  use($request, $search) {
+                  $query->where("name", 'like', $search);
                });
+
             }
        })
 
@@ -110,37 +109,37 @@ class UserRequestBrowseController extends Controller
 
        ->select(
             // UserRequest
-            "$this->UserRequestTable.id as user.id",
-            "$this->UserRequestTable.username as user.username",
-            "$this->UserRequestTable.user_id as user.user_id",
-            "$this->UserRequestTable.nip as user.nip",
+            "$this->UserRequestTable.id as user_request.id",
+            "$this->UserRequestTable.username as user_request.username",
+            "$this->UserRequestTable.user_id as user_request.user_id",
+            "$this->UserRequestTable.nip as user_request.nip",
 
-            "$this->UserRequestTable.no_ktp as user.no_ktp",
-            "$this->UserRequestTable.tanggal_lahir as user.tanggal_lahir",
-            "$this->UserRequestTable.tempat_lahir as user.tempat_lahir",
-            "$this->UserRequestTable.alamat as user.alamat",
-            "$this->UserRequestTable.kode_pos as user.kode_pos",
-            "$this->UserRequestTable.telepon as user.telepon",
-            "$this->UserRequestTable.hp as user.hp",
-            "$this->UserRequestTable.npwp as user.npwp",
-            "$this->UserRequestTable.no_rekening as user.no_rekening",
-            "$this->UserRequestTable.golongan_darah as user.golongan_darah",
-            "$this->UserRequestTable.status_perkawinan_id as user.status_perkawinan_id",
+            "$this->UserRequestTable.no_ktp as user_request.no_ktp",
+            "$this->UserRequestTable.tanggal_lahir as user_request.tanggal_lahir",
+            "$this->UserRequestTable.tempat_lahir as user_request.tempat_lahir",
+            "$this->UserRequestTable.alamat as user_request.alamat",
+            "$this->UserRequestTable.kode_pos as user_request.kode_pos",
+            "$this->UserRequestTable.telepon as user_request.telepon",
+            "$this->UserRequestTable.hp as user_request.hp",
+            "$this->UserRequestTable.npwp as user_request.npwp",
+            "$this->UserRequestTable.no_rekening as user_request.no_rekening",
+            "$this->UserRequestTable.golongan_darah as user_request.golongan_darah",
+            "$this->UserRequestTable.status_perkawinan_id as user_request.status_perkawinan_id",
 
-            "$this->UserRequestTable.golongan_id as user.golongan_id",
-            "$this->UserRequestTable.unit_kerja_id as user.unit_kerja_id",
-            "$this->UserRequestTable.pendidikan_id as user.pendidikan_id",
-            "$this->UserRequestTable.pendidikan_detail as user.pendidikan_detail",
+            "$this->UserRequestTable.golongan_id as user_request.golongan_id",
+            "$this->UserRequestTable.unit_kerja_id as user_request.unit_kerja_id",
+            "$this->UserRequestTable.pendidikan_id as user_request.pendidikan_id",
+            "$this->UserRequestTable.pendidikan_detail as user_request.pendidikan_detail",
 
-            "$this->UserRequestTable.jabatan_id as user.jabatan_id",
-            "$this->UserRequestTable.jabatan_fungsional_id as user.jabatan_fungsional_id",
-            "$this->UserRequestTable.updated_at as user.updated_at",
-            "$this->UserRequestTable.created_at as user.created_at",
-            "$this->UserRequestTable.deleted_at as user.deleted_at",
-            "$this->UserRequestTable.status_sdm as user.status_sdm",
-            "$this->UserRequestTable.status_diklat as user.status_diklat",
+            "$this->UserRequestTable.jabatan_id as user_request.jabatan_id",
+            "$this->UserRequestTable.jabatan_fungsional_id as user_request.jabatan_fungsional_id",
+            "$this->UserRequestTable.updated_at as user_request.updated_at",
+            "$this->UserRequestTable.created_at as user_request.created_at",
+            "$this->UserRequestTable.deleted_at as user_request.deleted_at",
+            "$this->UserRequestTable.status_sdm as user_request.status_sdm",
+            "$this->UserRequestTable.status_diklat as user_request.status_diklat",
 
-            "$this->UserRequestTable.deleted_at as user.deleted_at"
+            "$this->UserRequestTable.deleted_at as user_request.deleted_at"
        )
        ->with('jabatan_fungsional')
        ->with('golongan')
@@ -194,7 +193,7 @@ class UserRequestBrowseController extends Controller
         $position = [];
         return $records->map(function ($item) {
             foreach ($item->getAttributes() as $key => $value) {
-                $this->Group($item, $key, 'user.', $item);
+                $this->Group($item, $key, 'user_request.', $item);
                 $this->Group($position, $key, 'position.', $item);
             }
             $item->position = $position;

@@ -35,7 +35,7 @@ class PositionController extends Controller
     {
         $TableKey = 'position';
 
-        $filter_search = $request->input($TableKey . '-filter_search');
+        $filter_search = $request->input('filter_search');
 
         if (isset($request['position-show'])) {
             $selected = $request['position-show'];

@@ -25,7 +25,9 @@ class GolonganBrowseController extends Controller
     }
 
     protected $search = [
-        'name'
+      'name',
+      'pangkat',
+      'golongan'
     ];
 
     public function __construct(Request $request)

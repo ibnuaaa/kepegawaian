@@ -24,7 +24,7 @@ class ConfigController extends Controller
     {
         $TableKey = 'config-table';
 
-        $filter_search = $request->input($TableKey . '-filter_search');
+        $filter_search = $request->input('filter_search');
 
         if (isset($request['config-table-show'])) {
             $selected = $request['config-table-show'];
@@ -34,6 +34,7 @@ class ConfigController extends Controller
         }
         $options = array(5,10,15,20);
         $Config = ConfigBrowseController::FetchBrowse($request)
+            ->where('take', $selected)
             ->where('orderBy.blast_configs.created_at', 'desc')
             ->where('with.total', 'true');
 

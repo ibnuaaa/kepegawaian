@@ -382,9 +382,7 @@
           const filter_search = $('input[name="filter_search"]').val()
           const query = getQuery()
 
-          if (filter_search) {
-              query.filter_search = filter_search
-          }
+          query.filter_search = filter_search
 
           gotoPage(query)
 
