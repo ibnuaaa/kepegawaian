@@ -9,6 +9,8 @@ use Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Middleware\BaseMiddleware;
 
+use Illuminate\Support\Facades\Auth;
+
 class Insert extends BaseMiddleware
 {
     private function Initiate()
@@ -23,6 +25,8 @@ class Insert extends BaseMiddleware
         $this->Model->DocumentUnit->perspektif_id = $this->_Request->input('perspektif_id');
         $this->Model->DocumentUnit->jenis_dokumen_id = $this->_Request->input('jenis_dokumen_id');
         $this->Model->DocumentUnit->revisi_ke = $this->_Request->input('revisi_ke');
+        $this->Model->DocumentUnit->created_user_id = Auth::user()->id;
+        $this->Model->DocumentUnit->status = 'pending';
     }
 
     private function Validation()

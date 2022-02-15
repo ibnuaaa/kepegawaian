@@ -84,7 +84,9 @@ class DocumentUnitBrowseController extends Controller
             "$this->DocumentUnitTable.no_dokumen as document_unit.no_dokumen",
             "$this->DocumentUnitTable.jenis_dokumen_id as document_unit.jenis_dokumen_id",
             "$this->DocumentUnitTable.perspektif_id as document_unit.perspektif_id",
+            "$this->DocumentUnitTable.status as document_unit.status",
             "$this->DocumentUnitTable.revisi_ke as document_unit.revisi_ke",
+            "$this->DocumentUnitTable.created_user_id as document_unit.created_user_id",
             "$this->DocumentUnitTable.created_at as document_unit.created_at"
         )->with('document_unit');
 

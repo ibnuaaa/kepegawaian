@@ -184,6 +184,7 @@ $router->delete($prefix.'/status_pegawai/{id}', ['uses' => 'StatusPegawai\Status
 $router->get($prefix.'/document_unit', ['uses' => 'DocumentUnit\DocumentUnitBrowseController@get', 'middleware' => ['LogActivity:DocumentUnit.View','ArrQuery']]);
 $router->get($prefix.'/document_unit/{query:.+}', ['uses' => 'DocumentUnit\DocumentUnitBrowseController@get', 'middleware' => ['DocumentUnit:DocumentUnit.View','ArrQuery']]);
 $router->post($prefix.'/document_unit', ['uses' => 'DocumentUnit\DocumentUnitController@Insert', 'middleware' => ['LogActivity:DocumentUnit.Insert','DocumentUnit.Insert']]);
+$router->post($prefix.'/document_unit/approve', ['uses' => 'DocumentUnit\DocumentUnitController@Approve', 'middleware' => ['LogActivity:DocumentUnit.Approve','DocumentUnit.Approve']]);
 $router->put($prefix.'/document_unit/{id}', ['uses' => 'DocumentUnit\DocumentUnitController@Update', 'middleware' => ['LogActivity:DocumentUnit.Update','DocumentUnit.Update']]);
 $router->delete($prefix.'/document_unit/{id}', ['uses' => 'DocumentUnit\DocumentUnitController@Delete', 'middleware' => ['LogActivity:DocumentUnit.Delete','DocumentUnit.Delete']]);
 

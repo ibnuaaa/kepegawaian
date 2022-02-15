@@ -54,5 +54,40 @@ function remove(id, name) {
   return false;
 }
 
+function approve(id, name) {
+
+  swal({
+      title: "Konfirmasi",
+      text: "Ingin menyetujui data " + name + " ?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonText: 'Ya, Setujui',
+      cancelButtonText: 'Batal'
+  }, function(isConfirmed) {
+    console.log(isConfirmed)
+    if (isConfirmed) {
+
+      showLoading()
+
+      var data = {
+        document_unit_id: id
+      }
+
+      axios.post('/document_unit/approve', data).then((response) => {
+          const { data } = response.data
+          window.location.reload()
+      }).catch((error) => {
+          if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+              swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+          }
+      })
+    }
+  });
+
+  return false;
+}
+
+
+
 
 </script>

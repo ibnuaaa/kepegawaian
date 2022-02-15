@@ -72,6 +72,15 @@ class DocumentUnitController extends Controller
         return response()->json(Json::get(), 202);
     }
 
+    public function Approve(Request $request)
+    {
+        $Model = $request->Payload->all()['Model'];
+        $Model->DocumentUnit->save();
+
+        Json::set('data', $this->SyncData($request, $Model->DocumentUnit->id));
+        return response()->json(Json::get(), 202);
+    }
+
     public function Delete(Request $request)
     {
         $Model = $request->Payload->all()['Model'];

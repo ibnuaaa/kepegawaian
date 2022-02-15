@@ -137,7 +137,15 @@ class PermissionSeeder extends Seeder
                 'name' => 'status_pegawai',
                 'label' => 'status_pegawai',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 22,
+                'name' => 'approval_document_unit',
+                'label' => 'approval_document_unit',
+                'created_at' => Carbon::now()
             ]
+
+
         ])->keyBy($this->key);
     }
 

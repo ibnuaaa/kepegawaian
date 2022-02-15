@@ -90,16 +90,36 @@
                   <?php endforeach; ?>
               <?php endif; ?>
             </td>
+            <td class="v-align-middle text-center">
+                @if (!empty($item->status) && $item->status == 'approved')
+                  <span class="badge bg-success badge-sm  me-1 mb-1 mt-1">Terverifikasi</span>
+                @else
+                  <span class="badge bg-warning badge-sm  me-1 mb-1 mt-1">Pending</span>
+                @endif
+            </td>
             <td class="v-align-middle">
                 <p>{{ $item->created_at }}</p>
             </td>
             <td class="v-align-middle">
-                <div class="btn-group btn-group-sm">
-                    <a href="{{ url('/document_unit/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                    <a href="{{ url('/document_unit/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                    <a onClick="return remove('{{$item->id}}','{{ $item->name }}')" href="#" class="btn btn-danger">
-                        <i class="fa fa-trash"></i>
-                    </a>
+                <div class="btn-group-sm">
+                  <a href="{{ url('/document_unit/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+
+                  @if (getPermissions('approval_document_unit')['checked'])
+                  @if (!empty($item->status) && $item->status != 'approved')
+                  <a href="#" onClick="return approve({{$item->id}},'{{ $item->name }}')" class="btn btn-primary"><i class="fa fa-check"></i></a>
+                  @endif
+                  @endif
+
+                  @if ($item->created_user_id == MyAccount()->id || MyAccount()->position_id == 1)
+                  <a href="{{ url('/document_unit/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                  @endif
+
+                  @if ($item->created_user_id == MyAccount()->id || MyAccount()->position_id == 1)
+                  <a onClick="return remove('{{$item->id}}','{{ $item->name }}')" href="#" class="btn btn-danger">
+                      <i class="fa fa-trash"></i>
+                  </a>
+                  @endif
+
                 </div>
             </td>
         </tr>

@@ -73,6 +73,7 @@ class DocumentUnitController extends Controller
                 (object)['name' => 'name', 'label' => 'Nama Dokumen'],
                 (object)['name' => 'jenis dokumen', 'label' => 'jenis dokumen'],
                 (object)['name' => 'link file', 'label' => 'link file'],
+                (object)['name' => 'status', 'label' => 'status'],
                 (object)['name' => 'created_at', 'label' => 'Terbuat Pada'],
                 (object)['name' => 'action', 'label' => 'Aksi']
             ],
