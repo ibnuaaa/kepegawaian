@@ -149,6 +149,8 @@ class UserBrowseController extends Controller
             "$this->UserTable.status_pegawai_id as status_pegawai_id",
             "$this->UserTable.pendidikan_id as user.pendidikan_id",
             "$this->UserTable.pendidikan_detail as user.pendidikan_detail",
+            "$this->UserTable.no_str as user.no_str",
+            "$this->UserTable.masa_berlaku_str as user.masa_berlaku_str",
 
             "$this->UserTable.email as user.email",
             "$this->UserTable.gender as user.gender",

@@ -188,6 +188,8 @@ class UserRequestController extends Controller
             $UserRequest->kode_pos  = $User->kode_pos;
             $UserRequest->telepon  = $User->telepon;
             $UserRequest->hp  = $User->hp;
+            $UserRequest->no_str  = $User->no_str;
+            $UserRequest->masa_berlaku_str  = $User->masa_berlaku_str;
             $UserRequest->npwp  = $User->npwp;
             $UserRequest->no_rekening  = $User->no_rekening;
             $UserRequest->golongan_darah  = $User->golongan_darah;
@@ -341,6 +343,8 @@ class UserRequestController extends Controller
         $User->status_perkawinan_id  = $UserRequest->status_perkawinan_id;
         $User->golongan_id  = $UserRequest->golongan_id;
         $User->status_pegawai_id  = $UserRequest->status_pegawai_id;
+        $User->no_str  = $UserRequest->no_str;
+        $User->masa_berlaku_str  = $UserRequest->masa_berlaku_str;
         $User->unit_kerja_id  = $UserRequest->unit_kerja_id;
         $User->pendidikan_id  = $UserRequest->pendidikan_id;
         $User->pendidikan_detail  = $UserRequest->pendidikan_detail;

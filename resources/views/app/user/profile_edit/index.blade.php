@@ -224,6 +224,21 @@ if ($menu == 'sdm') {
                                         @endcomponent
                                     </div>
                                 </div>
+
+                                <div class="row mb-4 {{ $data->no_str != $data->user->no_str ? 'bg-changed' : '' }}">
+                                    <label class="col-md-2 form-label">Nomor STR</label>
+                                    <div class="col-md-9">
+                                        <input name="no_str" value="{{ $data['no_str'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4 {{ $data->masa_berlaku_str != $data->user->masa_berlaku_str ? 'bg-changed' : '' }}">
+                                    <label class="col-md-2 form-label">Masa Berlaku STR Sampai</label>
+                                    <div class="col-md-9">
+                                        <input name="masa_berlaku_str" id="myDatepicker" value="{{ $data['masa_berlaku_str'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
+                                    </div>
+                                </div>
+
                                 <div class="row mb-4 {{ $data->status_perkawinan_id != $data->user->status_perkawinan_id ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Status Perkawinan</label>
                                     <div class="col-md-9">

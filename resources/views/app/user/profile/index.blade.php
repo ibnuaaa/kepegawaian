@@ -180,6 +180,18 @@
                                 </div>
                             </div>
                             <div class=" row mb-4">
+                                <label class="col-md-2 form-label">No STR</label>
+                                <div class="col-md-9">
+                                    {{!empty($data->no_str) ? ($data->no_str) : ''}}
+                                </div>
+                            </div>
+                            <div class=" row mb-4">
+                                <label class="col-md-2 form-label">Masa Berlaku STR Sampai</label>
+                                <div class="col-md-9">
+                                    {{!empty($data->masa_berlaku_str) ? ($data->masa_berlaku_str) : ''}}
+                                </div>
+                            </div>
+                            <div class=" row mb-4">
                                 <label class="col-md-2 form-label">Jabatan Fungsional</label>
                                 <div class="col-md-9">
                                     {{!empty($data->jabatan_fungsional->name) ? $data->jabatan_fungsional->name : ''}}

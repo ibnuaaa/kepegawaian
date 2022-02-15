@@ -52,6 +52,8 @@ class Update extends BaseMiddleware
             !$this->_Request->input('pendidikan_id') || $this->Model->UserRequest->pendidikan_id = $this->_Request->input('pendidikan_id');
             !$this->_Request->input('pendidikan_detail') || $this->Model->UserRequest->pendidikan_detail = $this->_Request->input('pendidikan_detail');
             !$this->_Request->input('gender') || $this->Model->UserRequest->gender = $this->_Request->input('gender');
+            !$this->_Request->input('no_str') || $this->Model->UserRequest->no_str = $this->_Request->input('no_str');
+            !$this->_Request->input('masa_berlaku_str') || $this->Model->UserRequest->masa_berlaku_str = $this->_Request->input('masa_berlaku_str');
 
             if ($this->_Request->input('password')) {
                 $this->Model->UserRequest->password = $password;
