@@ -12,6 +12,7 @@ use App\Http\Controllers\Golongan\GolonganBrowseController;
 use App\Http\Controllers\Pendidikan\PendidikanBrowseController;
 use App\Http\Controllers\JabatanFungsional\JabatanFungsionalBrowseController;
 use App\Http\Controllers\UnitKerja\UnitKerjaBrowseController;
+use App\Http\Controllers\StatusPegawai\StatusPegawaiBrowseController;
 
 use App\Models\Jabatan;
 use App\Models\UnitKerja;
@@ -169,6 +170,23 @@ class UserRequestController extends Controller
             ];
         }
 
+        // StatusPegawai
+        $StatusPegawai = StatusPegawaiBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $StatusPegawaiList[] = [
+            'value' => '',
+            'label' => '-= Pilih Status Pegawai =-'
+        ];
+
+        foreach ($StatusPegawai['records'] as $key => $value) {
+            $StatusPegawaiList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
 
         // Golongan
         $Golongan = GolonganBrowseController::FetchBrowse($request)
@@ -200,6 +218,7 @@ class UserRequestController extends Controller
             'data' => $User['records'],
             'id' => $profilePageMy ? '' : $id,
             'page' => 'user_request',
+            'status_pegawai' => $StatusPegawaiList,
             'menu' => $menu
         ]);
     }

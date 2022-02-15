@@ -414,6 +414,7 @@
 
         function getQuery() {
           var url = window.location.href
+          query = {}
           if (url.indexOf('?') > 0) {
             var split_url = url.split('?')
             var query_split = split_url[split_url.length-1].split('&')

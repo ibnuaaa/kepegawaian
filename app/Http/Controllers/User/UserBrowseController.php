@@ -146,6 +146,7 @@ class UserBrowseController extends Controller
 
             "$this->UserTable.golongan_id as golongan_id",
             "$this->UserTable.unit_kerja_id as user.unit_kerja_id",
+            "$this->UserTable.status_pegawai_id as status_pegawai_id",
             "$this->UserTable.pendidikan_id as user.pendidikan_id",
             "$this->UserTable.pendidikan_detail as user.pendidikan_detail",
 
@@ -164,6 +165,7 @@ class UserBrowseController extends Controller
        )
        ->with('jabatan_fungsional')
        ->with('golongan')
+       ->with('status_pegawai')
        ->with('user_pendidikan')
        ->with('user_pelatihan')
        ->with('user_keluarga')
@@ -175,7 +177,7 @@ class UserBrowseController extends Controller
        ->with('foto_kk')
        ->with('foto_bpjs')
        ->with('foto_profile')
-
+       ->with('status_pegawai')
        ;
 
 

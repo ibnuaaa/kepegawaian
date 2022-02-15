@@ -80,8 +80,8 @@ if ($menu == 'sdm') {
                         <div class="tabs-menu-boxed">
                             <ul class="nav panel-tabs">
                                 <li><a href="{{ $page == 'profile' ? '/profile/personal/' . $id : '#tab-personal' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'personal' ? 'class=active' : '' }}>Personal</a></li>
-                                <li><a href="{{ $page == 'profile' ? '/profile/pendidikan/' . $id : '#tab-pendidikan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'pendidikan' ? 'class=active' : '' }}>Pendidikan</a></li>
-                                <li><a href="{{ $page == 'profile' ? '/profile/pelatihan/' . $id : '#tab-pelatihan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'pelatihan' ? 'class=active' : '' }}>Pelatihan</a></li>
+                                <li><a href="{{ $page == 'profile' ? '/profile/pendidikan/' . $id : '#tab-pendidikan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'pendidikan' ? 'class=active' : '' }}>Riwayat Pendidikan</a></li>
+                                <li><a href="{{ $page == 'profile' ? '/profile/pelatihan/' . $id : '#tab-pelatihan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'pelatihan' ? 'class=active' : '' }}>Riwayat Pelatihan</a></li>
                                 <li><a href="{{ $page == 'profile' ? '/profile/keluarga/' . $id : '#tab-keluarga' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'keluarga' ? 'class=active' : '' }}>Keluarga</a></li>
                                 <li><a href="{{ $page == 'profile' ? '/profile/jabatan/' . $id : '#tab-jabatan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'jabatan' ? 'class=active' : '' }}>Riwayat Jabatan</a></li>
                                 <li><a href="{{ $page == 'profile' ? '/profile/golongan/' . $id : '#tab-golongan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'golongan' ? 'class=active' : '' }}>Riwayat Golongan</a></li>
@@ -268,6 +268,18 @@ if ($menu == 'sdm') {
                                             <option value="">-= Pilih Unit Kerja =-</option>
                                             {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', $data->unit_kerja_id) : '' !!}
                                         </select>
+                                    </div>
+                                </div>
+                                <div class=" row mb-4 {{ $data->status_pegawai_id != $data->user->status_pegawai_id ? 'bg-changed' : '' }}">
+                                    <label class="col-md-2 form-label">Status Pegawai</label>
+                                    <div class="col-md-9">
+                                        @component('components.form.awesomeSelect', [
+                                        'name' => 'status_pegawai_id',
+                                        'onChange' => 'savePersonal(this)',
+                                        'items' => $status_pegawai,
+                                        'selected' => $data->status_pegawai_id
+                                        ])
+                                        @endcomponent
                                     </div>
                                 </div>
                                 <div class=" row mb-4 {{ $data->golongan_id != $data->user->golongan_id ? 'bg-changed' : '' }}">

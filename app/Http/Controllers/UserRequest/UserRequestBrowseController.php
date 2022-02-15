@@ -128,6 +128,7 @@ class UserRequestBrowseController extends Controller
 
             "$this->UserRequestTable.golongan_id as user_request.golongan_id",
             "$this->UserRequestTable.unit_kerja_id as user_request.unit_kerja_id",
+            "$this->UserRequestTable.status_pegawai_id as user_request.status_pegawai_id",
             "$this->UserRequestTable.pendidikan_id as user_request.pendidikan_id",
             "$this->UserRequestTable.pendidikan_detail as user_request.pendidikan_detail",
 

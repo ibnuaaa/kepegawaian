@@ -55,6 +55,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasOne(Golongan::class, 'id', 'golongan_id');
     }
 
+    public function status_pegawai()
+    {
+        return $this->hasOne(StatusPegawai::class, 'id', 'status_pegawai_id');
+    }
+
     public function user_pendidikan()
     {
         return $this->hasMany(UserPendidikan::class, 'user_id', 'user.id')->with('pendidikan');

@@ -48,6 +48,7 @@ class Update extends BaseMiddleware
             !$this->_Request->input('status_perkawinan_id') || $this->Model->UserRequest->status_perkawinan_id = $this->_Request->input('status_perkawinan_id');
             !$this->_Request->input('golongan_id') || $this->Model->UserRequest->golongan_id = $this->_Request->input('golongan_id');
             !$this->_Request->input('unit_kerja_id') || $this->Model->UserRequest->unit_kerja_id = $this->_Request->input('unit_kerja_id');
+            !$this->_Request->input('status_pegawai_id') || $this->Model->UserRequest->status_pegawai_id = $this->_Request->input('status_pegawai_id');
             !$this->_Request->input('pendidikan_id') || $this->Model->UserRequest->pendidikan_id = $this->_Request->input('pendidikan_id');
             !$this->_Request->input('pendidikan_detail') || $this->Model->UserRequest->pendidikan_detail = $this->_Request->input('pendidikan_detail');
             !$this->_Request->input('gender') || $this->Model->UserRequest->gender = $this->_Request->input('gender');

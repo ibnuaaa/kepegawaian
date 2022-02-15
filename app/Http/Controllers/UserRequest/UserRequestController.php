@@ -193,6 +193,7 @@ class UserRequestController extends Controller
             $UserRequest->golongan_darah  = $User->golongan_darah;
             $UserRequest->status_perkawinan_id  = $User->status_perkawinan_id;
             $UserRequest->golongan_id  = $User->golongan_id;
+            $UserRequest->status_pegawai_id  = $User->status_pegawai_id;
             $UserRequest->unit_kerja_id  = $User->unit_kerja_id;
             $UserRequest->pendidikan_id  = $User->pendidikan_id;
             $UserRequest->pendidikan_detail  = $User->pendidikan_detail;
@@ -339,6 +340,7 @@ class UserRequestController extends Controller
         $User->golongan_darah  = $UserRequest->golongan_darah;
         $User->status_perkawinan_id  = $UserRequest->status_perkawinan_id;
         $User->golongan_id  = $UserRequest->golongan_id;
+        $User->status_pegawai_id  = $UserRequest->status_pegawai_id;
         $User->unit_kerja_id  = $UserRequest->unit_kerja_id;
         $User->pendidikan_id  = $UserRequest->pendidikan_id;
         $User->pendidikan_detail  = $UserRequest->pendidikan_detail;

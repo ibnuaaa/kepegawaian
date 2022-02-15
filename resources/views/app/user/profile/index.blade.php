@@ -168,6 +168,12 @@
                                 </div>
                             </div>
                             <div class=" row mb-4">
+                                <label class="col-md-2 form-label">Status Pegawai</label>
+                                <div class="col-md-9">
+                                    {{!empty($data->status_pegawai->name) ? $data->status_pegawai->name : ''}}
+                                </div>
+                            </div>
+                            <div class=" row mb-4">
                                 <label class="col-md-2 form-label">Golongan</label>
                                 <div class="col-md-9">
                                     {{!empty($data->golongan->pangkat) ? ($data->golongan->pangkat .'/'. $data->golongan->golongan) : ''}}

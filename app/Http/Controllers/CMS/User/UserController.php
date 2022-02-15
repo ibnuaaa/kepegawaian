@@ -11,6 +11,7 @@ use App\Http\Controllers\Golongan\GolonganBrowseController;
 use App\Http\Controllers\Pendidikan\PendidikanBrowseController;
 use App\Http\Controllers\JabatanFungsional\JabatanFungsionalBrowseController;
 use App\Http\Controllers\UnitKerja\UnitKerjaBrowseController;
+use App\Http\Controllers\StatusPegawai\StatusPegawaiBrowseController;
 
 use App\Models\Jabatan;
 use App\Models\UnitKerja;
@@ -326,6 +327,23 @@ class UserController extends Controller
             ];
         }
 
+        // StatusPegawai
+        $StatusPegawai = StatusPegawaiBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $StatusPegawaiList[] = [
+            'value' => '',
+            'label' => '-= Pilih Status Pegawai =-'
+        ];
+
+        foreach ($StatusPegawai['records'] as $key => $value) {
+            $StatusPegawaiList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
         // Jabatan Fungsional
         $JabatanFungsional = JabatanFungsionalBrowseController::FetchBrowse($request)
             ->where('take','all')
@@ -348,6 +366,7 @@ class UserController extends Controller
           'jabatan' => $JabatanTree,
           'jabatan_fungsional' => $JabatanFungsionalList,
           'golongan' => $GolonganList,
+          'status_pegawai' => $StatusPegawaiList,
           'unit_kerja' => $UnitKerjaTree,
           'data' => $User['records']
         ]);
@@ -443,6 +462,40 @@ class UserController extends Controller
             ];
         }
 
+        // Golongan
+        $Golongan = GolonganBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $GolonganList[] = [
+            'value' => '',
+            'label' => '-= Pilih Golongan =-'
+        ];
+
+        foreach ($Golongan['records'] as $key => $value) {
+            $GolonganList[] = [
+                'value' => $value->id,
+                'label' => $value->pangkat . '/' . $value->golongan
+            ];
+        }
+
+        // StatusPegawai
+        $StatusPegawai = StatusPegawaiBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $StatusPegawaiList[] = [
+            'value' => '',
+            'label' => '-= Pilih Status Pegawai =-'
+        ];
+
+        foreach ($StatusPegawai['records'] as $key => $value) {
+            $StatusPegawaiList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
 
         return view('app.user.profile_edit.index', [
             'positions' => $PositionList,
@@ -451,6 +504,7 @@ class UserController extends Controller
             'jabatan_fungsional' => $JabatanFungsionalList,
             'unit_kerja' => $UnitKerjaTree,
             'golongan' => $GolonganList,
+            'status_pegawai' => $StatusPegawaiList,
             'tab' => $tab,
             'data' => $User['records'],
             'id' => $profilePageMy ? '' : $id,

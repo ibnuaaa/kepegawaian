@@ -29,13 +29,13 @@
           'name' => 'jenis_dokumen_id',
           'items' => jenis_dokumen(),
           'onChange' => 'selectJenisDokumen(this)',
-          'selected' => $selected_jenis_dokumen_id
+          'selected' => $selected_jenis_dokumen_id,
       ])
       @endcomponent
   </div>
   <div class="input-group col-6">
       <select class="form-control form-select" name="unit_kerja_id" onChange='selectUnitKerja(this)'>
-          <option value="">-= Pilih Unit Kerja =-</option>
+          <option value="">-= Semua Unit Kerja =-</option>
           {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', $selected_unit_kerja_id) : '' !!}
       </select>
   </div>
