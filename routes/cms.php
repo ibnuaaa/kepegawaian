@@ -55,6 +55,11 @@ $router->get('/pendidikan/new', 'CMS\Pendidikan\PendidikanController@New');
 $router->get('/pendidikan/edit/{id}', 'CMS\Pendidikan\PendidikanController@Edit');
 $router->get('/pendidikan/{id}', 'CMS\Pendidikan\PendidikanController@Detail');
 
+$router->get('/status_pegawai', 'CMS\StatusPegawai\StatusPegawaiController@Home');
+$router->get('/status_pegawai/new', 'CMS\StatusPegawai\StatusPegawaiController@New');
+$router->get('/status_pegawai/edit/{id}', 'CMS\StatusPegawai\StatusPegawaiController@Edit');
+$router->get('/status_pegawai/{id}', 'CMS\StatusPegawai\StatusPegawaiController@Detail');
+
 $router->get('/document_unit', 'CMS\DocumentUnit\DocumentUnitController@Home');
 $router->get('/document_unit/new', 'CMS\DocumentUnit\DocumentUnitController@New');
 $router->get('/document_unit/edit/{id}', 'CMS\DocumentUnit\DocumentUnitController@Edit');

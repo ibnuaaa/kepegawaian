@@ -173,6 +173,13 @@ $router->post($prefix.'/pendidikan', ['uses' => 'Pendidikan\PendidikanController
 $router->put($prefix.'/pendidikan/{id}', ['uses' => 'Pendidikan\PendidikanController@Update', 'middleware' => ['LogActivity:Pendidikan.Update','Pendidikan.Update']]);
 $router->delete($prefix.'/pendidikan/{id}', ['uses' => 'Pendidikan\PendidikanController@Delete', 'middleware' => ['LogActivity:Pendidikan.Delete','Pendidikan.Delete']]);
 
+// status_pegawai
+$router->get($prefix.'/status_pegawai', ['uses' => 'StatusPegawai\StatusPegawaiBrowseController@get', 'middleware' => ['LogActivity:StatusPegawai.View','ArrQuery']]);
+$router->get($prefix.'/status_pegawai/{query:.+}', ['uses' => 'StatusPegawai\StatusPegawaiBrowseController@get', 'middleware' => ['StatusPegawai:StatusPegawai.View','ArrQuery']]);
+$router->post($prefix.'/status_pegawai', ['uses' => 'StatusPegawai\StatusPegawaiController@Insert', 'middleware' => ['LogActivity:StatusPegawai.Insert','StatusPegawai.Insert']]);
+$router->put($prefix.'/status_pegawai/{id}', ['uses' => 'StatusPegawai\StatusPegawaiController@Update', 'middleware' => ['LogActivity:StatusPegawai.Update','StatusPegawai.Update']]);
+$router->delete($prefix.'/status_pegawai/{id}', ['uses' => 'StatusPegawai\StatusPegawaiController@Delete', 'middleware' => ['LogActivity:StatusPegawai.Delete','StatusPegawai.Delete']]);
+
 // document_unit
 $router->get($prefix.'/document_unit', ['uses' => 'DocumentUnit\DocumentUnitBrowseController@get', 'middleware' => ['LogActivity:DocumentUnit.View','ArrQuery']]);
 $router->get($prefix.'/document_unit/{query:.+}', ['uses' => 'DocumentUnit\DocumentUnitBrowseController@get', 'middleware' => ['DocumentUnit:DocumentUnit.View','ArrQuery']]);

@@ -59,6 +59,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'Pendidikan.Update' => \App\Http\Middleware\Pendidikan\Update::class,
         'Pendidikan.Delete' => \App\Http\Middleware\Pendidikan\Delete::class,
 
+        'StatusPegawai.Insert' => \App\Http\Middleware\StatusPegawai\Insert::class,
+        'StatusPegawai.Update' => \App\Http\Middleware\StatusPegawai\Update::class,
+        'StatusPegawai.Delete' => \App\Http\Middleware\StatusPegawai\Delete::class,
+
         'DocumentUnit.Insert' => \App\Http\Middleware\DocumentUnit\Insert::class,
         'DocumentUnit.Update' => \App\Http\Middleware\DocumentUnit\Update::class,
         'DocumentUnit.Delete' => \App\Http\Middleware\DocumentUnit\Delete::class,
