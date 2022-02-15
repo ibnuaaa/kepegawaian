@@ -104,11 +104,11 @@
                 <div class="btn-group-sm">
                   <a href="{{ url('/document_unit/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
 
+                  @if (!empty($item->status) && $item->status != 'approved' || MyAccount()->position_id == 1)
                   @if (getPermissions('approval_document_unit')['checked'])
-                  @if (!empty($item->status) && $item->status != 'approved')
                   <a href="#" onClick="return approve({{$item->id}},'{{ $item->name }}')" class="btn btn-primary"><i class="fa fa-check"></i></a>
                   @endif
-                  @endif
+
 
                   @if ($item->created_user_id == MyAccount()->id || MyAccount()->position_id == 1)
                   <a href="{{ url('/document_unit/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
@@ -119,7 +119,7 @@
                       <i class="fa fa-trash"></i>
                   </a>
                   @endif
-
+                  @endif
                 </div>
             </td>
         </tr>
