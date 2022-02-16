@@ -17,7 +17,6 @@ $router->get('/logout', 'CMS\Authentication\AuthenticationController@Logout');
 $router->get('/', 'CMS\Home\HomeController@Home');
 $router->get('/coupon/new', 'CMS\Home\HomeController@NewCoupon');
 
-// $router->get('/position/paging', 'CMS\Position\PositionController@HomeWithPaging');
 $router->get('/position', 'CMS\Position\PositionController@HomeWithPaging');
 $router->get('/position/new/{position_id}', 'CMS\Position\PositionController@New');
 $router->get('/position/{id}', 'CMS\Position\PositionController@PositionEdit');
@@ -49,11 +48,15 @@ $router->get('/config/new', 'CMS\Config\ConfigController@New');
 $router->get('/config/edit/{id}', 'CMS\Config\ConfigController@Edit');
 $router->get('/config/{id}', 'CMS\Config\ConfigController@Detail');
 
-
 $router->get('/pendidikan', 'CMS\Pendidikan\PendidikanController@Home');
 $router->get('/pendidikan/new', 'CMS\Pendidikan\PendidikanController@New');
 $router->get('/pendidikan/edit/{id}', 'CMS\Pendidikan\PendidikanController@Edit');
 $router->get('/pendidikan/{id}', 'CMS\Pendidikan\PendidikanController@Detail');
+
+$router->get('/pelatihan', 'CMS\Pelatihan\PelatihanController@Home');
+$router->get('/pelatihan/new', 'CMS\Pelatihan\PelatihanController@New');
+$router->get('/pelatihan/edit/{id}', 'CMS\Pelatihan\PelatihanController@Edit');
+$router->get('/pelatihan/{id}', 'CMS\Pelatihan\PelatihanController@Detail');
 
 $router->get('/status_pegawai', 'CMS\StatusPegawai\StatusPegawaiController@Home');
 $router->get('/status_pegawai/new', 'CMS\StatusPegawai\StatusPegawaiController@New');
@@ -65,12 +68,10 @@ $router->get('/document_unit/new', 'CMS\DocumentUnit\DocumentUnitController@New'
 $router->get('/document_unit/edit/{id}', 'CMS\DocumentUnit\DocumentUnitController@Edit');
 $router->get('/document_unit/{id}', 'CMS\DocumentUnit\DocumentUnitController@Detail');
 
-
 $router->get('/jabatan_fungsional', 'CMS\JabatanFungsional\JabatanFungsionalController@Home');
 $router->get('/jabatan_fungsional/new', 'CMS\JabatanFungsional\JabatanFungsionalController@New');
 $router->get('/jabatan_fungsional/edit/{id}', 'CMS\JabatanFungsional\JabatanFungsionalController@Edit');
 $router->get('/jabatan_fungsional/{id}', 'CMS\JabatanFungsional\JabatanFungsionalController@Detail');
-
 
 // $router->get('/indikator_skp', 'CMS\IndikatorSkp\IndikatorSkpController@Home');
 $router->get('/indikator_skp/new/{tipe_indikator}/{indikator_kinerja_id}/{penilaian_prestasi_kerja_id}', 'CMS\IndikatorSkp\IndikatorSkpController@New');

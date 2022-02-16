@@ -143,6 +143,12 @@ class PermissionSeeder extends Seeder
                 'name' => 'approval_document_unit',
                 'label' => 'approval_document_unit',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 23,
+                'name' => 'pelatihan',
+                'label' => 'pelatihan',
+                'created_at' => Carbon::now()
             ]
 
 
