@@ -51,12 +51,19 @@
                         : {{ $data->tanggal_mulai_pelatihan }} s/d {{ $data->tanggal_selesai_pelatihan }}
                     </div>
                 </div>
-                <div class="row mb-4">
+                <div class="row mb-8">
                     <div class="col-6 col-md-2">
                         Deskripsi
                     </div>
                     <div class="col-6 col-md-10">
                         : {{ $data->description }}
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12 col-md-12 text-center">
+                        <a href="#" class="btn btn-primary">
+                            Ikuti Pelatihan
+                        </a>
                     </div>
                 </div>
             </div>
