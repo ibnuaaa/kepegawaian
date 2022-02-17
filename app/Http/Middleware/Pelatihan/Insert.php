@@ -21,6 +21,7 @@ class Insert extends BaseMiddleware
         $this->Model->Pelatihan->tanggal_selesai_pendaftaran = $this->_Request->input('tanggal_selesai_pendaftaran');
         $this->Model->Pelatihan->tanggal_mulai_pelatihan = $this->_Request->input('tanggal_mulai_pelatihan');
         $this->Model->Pelatihan->tanggal_selesai_pelatihan = $this->_Request->input('tanggal_selesai_pelatihan');
+        $this->Model->Pelatihan->biaya = $this->_Request->input('biaya');
     }
 
     private function Validation()

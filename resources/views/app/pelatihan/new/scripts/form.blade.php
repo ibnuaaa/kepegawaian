@@ -34,6 +34,7 @@ $(document).ready(function() {
                 const tanggal_selesai_pendaftaran = $('input[name="tanggal_selesai_pendaftaran"]')
                 const tanggal_mulai_pelatihan = $('input[name="tanggal_mulai_pelatihan"]')
                 const tanggal_selesai_pelatihan = $('input[name="tanggal_selesai_pelatihan"]')
+                const biaya = $('input[name="biaya"]')
 
                 axios.post('/pelatihan', {
                     name: name.val(),
@@ -41,7 +42,8 @@ $(document).ready(function() {
                     tanggal_mulai_pendaftaran: tanggal_mulai_pendaftaran.val(),
                     tanggal_selesai_pendaftaran: tanggal_selesai_pendaftaran.val(),
                     tanggal_mulai_pelatihan: tanggal_mulai_pelatihan.val(),
-                    tanggal_selesai_pelatihan: tanggal_selesai_pelatihan.val()
+                    tanggal_selesai_pelatihan: tanggal_selesai_pelatihan.val(),
+                    biaya: biaya.val()
                 }).then((response) => {
                     const { data } = response.data
                     if (!isRecreate) {

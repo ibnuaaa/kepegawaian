@@ -60,6 +60,12 @@
                             <input id="myDatepicker" value="{{ $data->tanggal_selesai_pelatihan }}" name="tanggal_selesai_pelatihan" value="" class="form-control" type="text" required>
                         </div>
                     </div>
+                    <div class=" row mb-4">
+                        <label class="col-md-4 form-label">Biaya Pelatihan</label>
+                        <div class="col-md-8">
+                            <input value="{{ $data->biaya }}" name="biaya" value="" class="form-control" type="text" required>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

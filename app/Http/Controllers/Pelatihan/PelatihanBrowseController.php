@@ -75,6 +75,7 @@ class PelatihanBrowseController extends Controller
             "$this->PelatihanTable.tanggal_selesai_pendaftaran as pelatihan.tanggal_selesai_pendaftaran",
             "$this->PelatihanTable.tanggal_mulai_pelatihan as pelatihan.tanggal_mulai_pelatihan",
             "$this->PelatihanTable.tanggal_selesai_pelatihan as pelatihan.tanggal_selesai_pelatihan",
+            "$this->PelatihanTable.biaya as pelatihan.biaya",
             "$this->PelatihanTable.created_at as pelatihan.created_at"
         );
 
