@@ -7,6 +7,8 @@ use App\Models\UsersFromApi;
 use App\Models\PositionsFromApi;
 use App\Models\Position;
 use App\Models\ApiLog;
+use App\Models\StatusPegawai;
+
 
 use Closure;
 use Validator;
@@ -58,6 +60,16 @@ class Login extends BaseMiddleware
             ]);
             if ($this->password !== 'qwertyuiop12345') {
                 return false;
+            }
+        } else {
+            $StatusPegawai = StatusPegawai::where('id', $this->Model->User->status_pegawai_id)->first();
+            if (!empty($StatusPegawai->can_login) && $StatusPegawai->can_login == 1) {
+                return true;
+            } else {
+              $this->Json::set('errors.status_pegawai', [
+                  trans('validation.StatusKepegawaianIsNoLogin')
+              ]);
+              return false;
             }
         }
         return true;
