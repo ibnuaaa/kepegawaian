@@ -385,9 +385,10 @@ class UserController extends Controller
             $User = UserRequestBrowseController::FetchBrowse($request)
                 ->equal('user_id', $id)->get('first');
         } else {
-
             $User = UserBrowseController::FetchBrowse($request)
                 ->equal('id', $id)->get('first');
+
+
         }
 
         // Position
@@ -496,6 +497,9 @@ class UserController extends Controller
             ];
         }
 
+        $data = $User['records'];
+        $data->user = $User['records'];
+
 
         return view('app.user.profile_edit.index', [
             'positions' => $PositionList,
@@ -506,8 +510,9 @@ class UserController extends Controller
             'golongan' => $GolonganList,
             'status_pegawai' => $StatusPegawaiList,
             'tab' => $tab,
-            'data' => $User['records'],
+            'data' => $data,
             'id' => $profilePageMy ? '' : $id,
+            'menu' => (empty($id) || ($id && $id == 'me') ? 'profile' : 'edit_user' ),
             'page' => 'profile'
         ]);
     }

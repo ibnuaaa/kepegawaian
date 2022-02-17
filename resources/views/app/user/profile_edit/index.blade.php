@@ -1044,18 +1044,20 @@ if ($menu == 'sdm') {
 @endsection
 
 <style>
-    @if ($data->status != 'approved')
-    .bg-deleted {
-        background: #ffaaaa;
-    }
+    @if ($menu != 'edit_user')
+        @if ($data->status != 'approved')
+        .bg-deleted {
+            background: #ffaaaa;
+        }
 
-    .bg-added {
-        background: #aaffaa;
-    }
+        .bg-added {
+            background: #aaffaa;
+        }
 
-    .bg-changed input{
-        background: #ffffaa !important;
-    }
+        .bg-changed input{
+            background: #ffffaa !important;
+        }
+        @endif
     @endif
 </style>
 

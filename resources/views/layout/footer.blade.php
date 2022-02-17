@@ -92,20 +92,13 @@
               g_timeout = parseInt({{getConfig('session_timeout')}});
             }
 
-            // $('#modalPreview').on('shown', function(){
-            //     $('#iframe-preview').attr('src', g_url)
-            // });
-
-            $("#modalPreview").on('show.bs.modal', function () {
-              setTimeout(() => {
-                 $('#iframe-preview').attr('src', g_url)
-
-                 setTimeout(function() {
-                     $('#iframe-preview').contents().find('#download').remove();
-                  }, 100);
-
-              }, 200)
-              // alert('The modal will be displayed now!');
+            $("#modalPreview").on('shown.bs.modal', function () {
+                 setTimeout(() => {
+                    $('#iframe-preview').attr('src', g_url)
+                    setTimeout(function() {
+                        $('#iframe-preview').contents().find('#download').remove();
+                     }, 100);
+                 }, 1000)
             });
         })
 
@@ -368,7 +361,11 @@
 
           g_url = '{{pdfViewerUrl()}}' + url
 
+          $('#iframe-preview').attr('src', '');
 
+
+          // document.getElementById('iframe-preview').contentWindow.location.href = g_url
+          // document.getElementById('iframe-preview').contentWindow.location.reload()
 
           return false;
         }

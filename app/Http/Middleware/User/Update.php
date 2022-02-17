@@ -36,6 +36,8 @@ class Update extends BaseMiddleware
             !$this->_Request->input('nip') || $this->Model->User->nip = $this->_Request->input('nip');
 
             !$this->_Request->input('no_ktp') || $this->Model->User->no_ktp = $this->_Request->input('no_ktp');
+            !$this->_Request->input('no_str') || $this->Model->User->no_ktp = $this->_Request->input('no_ktp');
+            !$this->_Request->input('no_ktp') || $this->Model->User->no_ktp = $this->_Request->input('no_ktp');
             !$this->_Request->input('tanggal_lahir') || $this->Model->User->tanggal_lahir = $this->_Request->input('tanggal_lahir');
             !$this->_Request->input('tempat_lahir') || $this->Model->User->tempat_lahir = $this->_Request->input('tempat_lahir');
             !$this->_Request->input('alamat') || $this->Model->User->alamat = $this->_Request->input('alamat');
@@ -51,6 +53,9 @@ class Update extends BaseMiddleware
             !$this->_Request->input('pendidikan_id') || $this->Model->User->pendidikan_id = $this->_Request->input('pendidikan_id');
             !$this->_Request->input('pendidikan_detail') || $this->Model->User->pendidikan_detail = $this->_Request->input('pendidikan_detail');
             !$this->_Request->input('gender') || $this->Model->User->gender = $this->_Request->input('gender');
+            !$this->_Request->input('no_str') || $this->Model->User->no_str = $this->_Request->input('no_str');
+            !$this->_Request->input('masa_berlaku_str') || $this->Model->User->masa_berlaku_str = $this->_Request->input('masa_berlaku_str');
+            !$this->_Request->input('status_pegawai_id') || $this->Model->User->status_pegawai_id = $this->_Request->input('status_pegawai_id');
 
             if ($this->_Request->input('password')) {
                 $this->Model->User->password = $password;
