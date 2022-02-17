@@ -79,8 +79,12 @@ class LogActivity extends BaseMiddleware
         $Log->data = json_encode($datas);
         $Log->uri = $request_uri;
         $Log->primary_id = $id;
-        $Log->response = $response;
 
+        if ($Log->modul == 'Storage' && $Log->activity=='Fetch') {
+
+        } else {
+          $Log->response = $response;
+        }
         $Log->save();
 
 
