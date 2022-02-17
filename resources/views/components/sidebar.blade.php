@@ -139,6 +139,14 @@
                             </a>
                         </li>
                         @endif
+                        @if (getPermissions('audit_trail')['checked'])
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="/audit_trail">
+                              <i class="side-menu__icon fe fe-book"></i>
+                              <span class="side-menu__label">Audit Trail</span>
+                            </a>
+                        </li>
+                        @endif
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="/logout">
                               <i class="side-menu__icon fe fe-log-out"></i>

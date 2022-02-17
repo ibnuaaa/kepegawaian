@@ -68,6 +68,9 @@ class LogActivityBrowseController extends Controller
             "$this->LogActivityTable.ip_client as log_activity.ip_client",
             "$this->LogActivityTable.browser as log_activity.browser",
             "$this->LogActivityTable.data as log_activity.data",
+            "$this->LogActivityTable.primary_id as log_activity.primary_id",
+            "$this->LogActivityTable.uri as log_activity.uri",
+            "$this->LogActivityTable.response as log_activity.response",
             "$this->LogActivityTable.updated_at as log_activity.updated_at",
             "$this->LogActivityTable.created_at as log_activity.created_at"
             // "a.username as log_activity.username"

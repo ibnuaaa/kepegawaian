@@ -149,6 +149,12 @@ class PermissionSeeder extends Seeder
                 'name' => 'pelatihan',
                 'label' => 'pelatihan',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 24,
+                'name' => 'audit_trail',
+                'label' => 'audit_trail',
+                'created_at' => Carbon::now()
             ]
 
 

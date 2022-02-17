@@ -64,7 +64,6 @@ class AuditTrailController extends Controller
                 (object)['name' => 'Modul', 'label' => 'Modul'],
                 (object)['name' => 'Aktifitas', 'label' => 'Aktifitas'],
                 (object)['name' => 'IP', 'label' => 'Alamat IP'],
-                (object)['name' => 'Browser', 'label' => 'Browser'],
             ],
             'records' => []
         ];
