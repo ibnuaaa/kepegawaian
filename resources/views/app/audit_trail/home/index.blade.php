@@ -67,14 +67,14 @@
             <td class="v-align-middle" colspan="5" style="white-space: normal !important;">
                   <div style="width: 1000px;">
                   API:<br/>
-                  {{ $item->uri }}
+                  [{{$item->method}}] {{ $item->uri }}
 
                   <br/><br/>
-                  Request:<br/>
+                  <span class="text-bold">Request:</span><br/>
                   {{ $item->data }}
 
                   <br/><br/>
-                  Response :<br/>
+                  <span class="text-bold">Response :</span><br/>
                   {{ $item->response }}
                 </div>
             </td>

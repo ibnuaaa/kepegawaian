@@ -63,6 +63,7 @@ class LogActivityBrowseController extends Controller
             // LogActivity
             "$this->LogActivityTable.id as log_activity.id",
             "$this->LogActivityTable.user_id as log_activity.user_id",
+            "$this->LogActivityTable.method as log_activity.method",
             "$this->LogActivityTable.modul as log_activity.modul",
             "$this->LogActivityTable.activity as log_activity.activity",
             "$this->LogActivityTable.ip_client as log_activity.ip_client",

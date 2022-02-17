@@ -44,8 +44,6 @@ class LogActivity extends BaseMiddleware
         try {
             $response = $access->getContent();
         } catch (\Exception $e) {
-          echo "aaa";
-          die();
         }
 
 
@@ -60,8 +58,6 @@ class LogActivity extends BaseMiddleware
                 }
             }
         } catch (\Exception $e) {
-          echo "bb";
-          die();
         }
 
         $request_uri = '';
@@ -78,6 +74,7 @@ class LogActivity extends BaseMiddleware
         $Log->browser = !empty($request->header('User-Agent')) ? $request->header('User-Agent') : '';
         $Log->data = json_encode($datas);
         $Log->uri = $request_uri;
+        $Log->method = $_SERVER['REQUEST_METHOD'];
         $Log->primary_id = $id;
 
         if ($Log->modul == 'Storage' && $Log->activity=='Fetch') {
