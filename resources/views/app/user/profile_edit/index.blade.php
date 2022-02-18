@@ -79,7 +79,7 @@ if ($menu == 'sdm') {
                     <div class="tab-menu-heading tab-menu-heading-boxed">
                         <div class="tabs-menu-boxed">
                             <ul class="nav panel-tabs">
-                                <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/personal/' . $id : '#tab-personal' }}" {!! ($page == 'profile' && $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'personal' ? 'class=active' : '' }}>Personal</a></li>
+                                <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/personal/' . $id : '#tab-personal' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'personal' ? 'class=active' : '' }}>Personal</a></li>
                                 <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/pendidikan/' . $id : '#tab-pendidikan' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'pendidikan' ? 'class=active' : '' }}>Riwayat Pendidikan</a></li>
                                 <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/pelatihan/' . $id : '#tab-pelatihan' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'pelatihan' ? 'class=active' : '' }}>Riwayat Pelatihan</a></li>
                                 <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/keluarga/' . $id : '#tab-keluarga' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'keluarga' ? 'class=active' : '' }}>Keluarga</a></li>
@@ -500,7 +500,7 @@ if ($menu == 'sdm') {
                                     </tr>
                                     @endif
                                     @endforeach
-                                    @if(($page == 'profile' || $page == 'admin_update_profile')))
+                                    @if(($page == 'profile' || $page == 'admin_update_profile'))
                                     <tr>
                                         <td colspan="6" class="text-left">
                                             <input type="button" class="btn btn-primary" value="Tambah Riwayat Pendidikan" onclick="saveNewUserPendidikan()" />
@@ -579,7 +579,7 @@ if ($menu == 'sdm') {
                                     </tr>
                                     @endif
                                     @endforeach
-                                    @if(($page == 'profile'  || $page == 'admin_update_profile')))
+                                    @if(($page == 'profile'  || $page == 'admin_update_profile'))
                                     <tr>
                                         <td colspan="5" class="text-left">
                                             <input type="button" class="btn btn-primary" value="Tambah Riwayat Pelatihan" onclick="saveNewUserPelatihan()" />
@@ -596,7 +596,7 @@ if ($menu == 'sdm') {
                             <div class="tab-pane  {{ $tab == 'keluarga' ? 'active' : '' }}" id="tab-keluarga">
                                 <h2>Keluarga</h2>
                                 <br />
-                                @if(($page == 'profile' || $page == 'admin_update_profile')))
+                                @if(($page == 'profile' || $page == 'admin_update_profile'))
                                 <h4>Upload Foto KK (PDF)</h4>
                                 <input type="file" onchange="prepareUpload(this, 'foto_kk{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}', false, ['pdf']);" multiple>
                                 @endif
@@ -854,7 +854,7 @@ if ($menu == 'sdm') {
                                             </tr>
                                             @endif
                                             @endforeach
-                                            @if(($page == 'profile'  || $page == 'admin_update_profile')))
+                                            @if(($page == 'profile'  || $page == 'admin_update_profile'))
                                             <tr>
                                                 <td colspan="7" class="text-left">
                                                     <input type="button" class="btn btn-primary" value="Tambah Riwayat Jabatan" onclick="saveNewUserJabatan()" />
@@ -998,7 +998,7 @@ if ($menu == 'sdm') {
                                             </tr>
                                             @endif
                                             @endforeach
-                                            @if(($page == 'profile' || $page == 'admin_update_profile')))
+                                            @if(($page == 'profile' || $page == 'admin_update_profile'))
                                             <tr>
                                                 <td colspan="6" class="text-left">
                                                     <input type="button" class="btn btn-primary" value="Tambah Riwayat Golongan" onclick="saveNewUserGolongan()" />
