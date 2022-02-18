@@ -79,12 +79,12 @@ if ($menu == 'sdm') {
                     <div class="tab-menu-heading tab-menu-heading-boxed">
                         <div class="tabs-menu-boxed">
                             <ul class="nav panel-tabs">
-                                <li><a href="{{ $page == 'profile' ? '/profile/personal/' . $id : '#tab-personal' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'personal' ? 'class=active' : '' }}>Personal</a></li>
-                                <li><a href="{{ $page == 'profile' ? '/profile/pendidikan/' . $id : '#tab-pendidikan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'pendidikan' ? 'class=active' : '' }}>Riwayat Pendidikan</a></li>
-                                <li><a href="{{ $page == 'profile' ? '/profile/pelatihan/' . $id : '#tab-pelatihan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'pelatihan' ? 'class=active' : '' }}>Riwayat Pelatihan</a></li>
-                                <li><a href="{{ $page == 'profile' ? '/profile/keluarga/' . $id : '#tab-keluarga' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'keluarga' ? 'class=active' : '' }}>Keluarga</a></li>
-                                <li><a href="{{ $page == 'profile' ? '/profile/jabatan/' . $id : '#tab-jabatan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'jabatan' ? 'class=active' : '' }}>Riwayat Jabatan</a></li>
-                                <li><a href="{{ $page == 'profile' ? '/profile/golongan/' . $id : '#tab-golongan' }}" {!! $page == 'profile' ? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'golongan' ? 'class=active' : '' }}>Riwayat Golongan</a></li>
+                                <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/personal/' . $id : '#tab-personal' }}" {!! ($page == 'profile' && $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'personal' ? 'class=active' : '' }}>Personal</a></li>
+                                <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/pendidikan/' . $id : '#tab-pendidikan' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'pendidikan' ? 'class=active' : '' }}>Riwayat Pendidikan</a></li>
+                                <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/pelatihan/' . $id : '#tab-pelatihan' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'pelatihan' ? 'class=active' : '' }}>Riwayat Pelatihan</a></li>
+                                <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/keluarga/' . $id : '#tab-keluarga' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'keluarga' ? 'class=active' : '' }}>Keluarga</a></li>
+                                <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/jabatan/' . $id : '#tab-jabatan' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'jabatan' ? 'class=active' : '' }}>Riwayat Jabatan</a></li>
+                                <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/golongan/' . $id : '#tab-golongan' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'golongan' ? 'class=active' : '' }}>Riwayat Golongan</a></li>
                             </ul>
                         </div>
                     </div>
@@ -105,7 +105,7 @@ if ($menu == 'sdm') {
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">Foto Profil</label>
                                     <div class="col-md-9">
-                                        @if($page == 'profile')
+                                        @if(($page == 'profile' || $page == 'admin_update_profile'))
                                         <input type="file" onchange="prepareUpload(this, 'foto_profile{{ !$id ? '_request' : '' }}', '{{ $data->id }}', false, ['png','jpg','jpeg','bmp']);" multiple>
                                         @endif
                                         <div style="clear: both;"></div>
@@ -353,7 +353,7 @@ if ($menu == 'sdm') {
                                 <div class="row mb-4 ">
                                     <label class="col-md-2 form-label">Foto KTP</label>
                                     <div class="col-md-9">
-                                        @if($page == 'profile')
+                                        @if(($page == 'profile'  || $page == 'admin_update_profile'))
                                         <input type="file" onchange="prepareUpload(this, 'foto_ktp{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}', false, ['pdf']);" multiple>
                                         @endif
                                         <div style="clear: both;"></div>
@@ -374,7 +374,7 @@ if ($menu == 'sdm') {
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">Foto NPWP</label>
                                     <div class="col-md-9">
-                                        @if($page == 'profile')
+                                        @if(($page == 'profile'  || $page == 'admin_update_profile'))
                                         <input type="file" onchange="prepareUpload(this, 'foto_npwp{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}', false, ['pdf']);" multiple>
                                         @endif
                                         <div style="clear: both;"></div>
@@ -394,7 +394,7 @@ if ($menu == 'sdm') {
                                 <div class="row mb-4">
                                     <label class="col-md-2 form-label">Foto BPJS</label>
                                     <div class="col-md-9">
-                                        @if($page == 'profile')
+                                        @if(($page == 'profile'  || $page == 'admin_update_profile'))
                                         <input type="file" onchange="prepareUpload(this, 'foto_bpjs{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}', false, ['pdf']);" multiple>
                                         @endif
                                         <div style="clear: both;"></div>
@@ -469,7 +469,7 @@ if ($menu == 'sdm') {
                                             <input name="tahun_lulus" value="{{$val->tahun_lulus ? $val->tahun_lulus : ''}}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control" type="text" required>
                                         </td>
                                         <td>
-                                            @if($page == 'profile')
+                                            @if(($page == 'profile'  || $page == 'admin_update_profile'))
                                             <input type="file" onchange="prepareUpload(this, 'foto_ijazah{{ !$id ? '_request' : '' }}', '{{ $val->id }}', false, ['pdf']);" multiple>
                                             @endif
                                             <div style="clear: both;"></div>
@@ -485,7 +485,7 @@ if ($menu == 'sdm') {
                                             </div>
                                         </td>
                                         <td>
-                                            @if($page == 'profile' && !$val->deleted_at)
+                                            @if(($page == 'profile'  || $page == 'admin_update_profile') && !$val->deleted_at)
                                             <a onClick="return remove('{{$val->id}}','{{!empty($val->pendidikan->name) ? $val->pendidikan->name : ''}}', 'pendidikan')" href="#" class="btn btn-danger">
                                                 <i class="fa fa-trash"></i>
                                             </a>
@@ -495,15 +495,12 @@ if ($menu == 'sdm') {
                                               Terhapus
                                             @endif
 
-                                            @if (!$val->user_pendidikan_id)
-                                              Ditambahkan
-                                            @endif
                                         </td>
 
                                     </tr>
                                     @endif
                                     @endforeach
-                                    @if($page == 'profile')
+                                    @if(($page == 'profile' || $page == 'admin_update_profile')))
                                     <tr>
                                         <td colspan="6" class="text-left">
                                             <input type="button" class="btn btn-primary" value="Tambah Riwayat Pendidikan" onclick="saveNewUserPendidikan()" />
@@ -557,7 +554,7 @@ if ($menu == 'sdm') {
                                             <input name="tahun" value="{{ $val->tahun }}" data-id="{{ $val->id }}" onChange="savePelatihan(this)" class="form-control " type="text" required>
                                         </td>
                                         <td>
-                                            @if($page == 'profile')
+                                            @if(($page == 'profile'  || $page == 'admin_update_profile'))
                                             <input type="file" onchange="prepareUpload(this, 'foto_sertifikat{{ !$id ? '_request' : '' }}', '{{ $val->id }}', false, ['pdf']);" multiple>
                                             @endif
                                             <div style="clear: both;"></div>
@@ -573,7 +570,7 @@ if ($menu == 'sdm') {
                                             </div>
                                         </td>
                                         <td>
-                                            @if($page == 'profile')
+                                            @if(($page == 'profile'  || $page == 'admin_update_profile'))
                                             <a onClick="return remove('{{$val->id}}','{{!empty($val->nama_sertifikat) ? $val->nama_sertifikat : ''}}', 'pelatihan')" href="#" class="btn btn-danger">
                                                 <i class="fa fa-trash"></i>
                                             </a>
@@ -582,7 +579,7 @@ if ($menu == 'sdm') {
                                     </tr>
                                     @endif
                                     @endforeach
-                                    @if($page == 'profile')
+                                    @if(($page == 'profile'  || $page == 'admin_update_profile')))
                                     <tr>
                                         <td colspan="5" class="text-left">
                                             <input type="button" class="btn btn-primary" value="Tambah Riwayat Pelatihan" onclick="saveNewUserPelatihan()" />
@@ -599,7 +596,7 @@ if ($menu == 'sdm') {
                             <div class="tab-pane  {{ $tab == 'keluarga' ? 'active' : '' }}" id="tab-keluarga">
                                 <h2>Keluarga</h2>
                                 <br />
-                                @if($page == 'profile')
+                                @if(($page == 'profile' || $page == 'admin_update_profile')))
                                 <h4>Upload Foto KK (PDF)</h4>
                                 <input type="file" onchange="prepareUpload(this, 'foto_kk{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}', false, ['pdf']);" multiple>
                                 @endif
@@ -764,7 +761,7 @@ if ($menu == 'sdm') {
                                                     <input name="ibu" value="{{ $val->ibu }}" data-id="{{ $val->id }}" onChange="saveKeluarga(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>
-                                                    @if($page == 'profile')
+                                                    @if(($page == 'profile' || $page == 'admin_update_profile'))
                                                     <a onClick="return remove('{{$val->id}}','{{!empty($val->nama_lengkap) ? $val->nama_lengkap : ''}}', 'keluarga')" href="#" class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
@@ -773,7 +770,7 @@ if ($menu == 'sdm') {
                                             </tr>
                                             @endif
                                             @endforeach
-                                            @if($page == 'profile')
+                                            @if(($page == 'profile' || $page == 'admin_update_profile'))
                                             <tr>
                                                 <td colspan="6" class="text-left">
                                                     <input type="button" class="btn btn-primary" value="Tambah Anggota Keluarga" onclick="saveNewUserKeluarga()" />
@@ -848,7 +845,7 @@ if ($menu == 'sdm') {
                                                     <input name="tmt" id="myDatepicker" value="{{ $val->tmt }}" data-id="{{ $val->id }}" onChange="saveJabatan(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>
-                                                    @if($page == 'profile')
+                                                    @if(($page == 'profile'  || $page == 'admin_update_profile'))
                                                     <a onClick="return remove('{{$val->id}}','{{!empty($val->jabatan->name) ? $val->jabatan->name : ''}}', 'jabatan')" href="#" class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
@@ -857,7 +854,7 @@ if ($menu == 'sdm') {
                                             </tr>
                                             @endif
                                             @endforeach
-                                            @if($page == 'profile')
+                                            @if(($page == 'profile'  || $page == 'admin_update_profile')))
                                             <tr>
                                                 <td colspan="7" class="text-left">
                                                     <input type="button" class="btn btn-primary" value="Tambah Riwayat Jabatan" onclick="saveNewUserJabatan()" />
@@ -914,7 +911,7 @@ if ($menu == 'sdm') {
                                                     <input name="sampai_tahun" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" onChange="saveJabatanFungsional(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>
-                                                    @if($page == 'profile')
+                                                    @if(($page == 'profile'  || $page == 'admin_update_profile')))
                                                     <a onClick="return remove('{{$val->id}}','{{!empty($val->jabatan_fungsional->name) ? $val->jabatan_fungsional->name : ''}}', 'jabatan_fungsional')" href="#" class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
@@ -923,7 +920,7 @@ if ($menu == 'sdm') {
                                             </tr>
                                             @endif
                                             @endforeach
-                                            @if($page == 'profile')
+                                            @if(($page == 'profile'  || $page == 'admin_update_profile'))
                                             <tr>
                                                 <td colspan="7" class="text-left">
                                                     <input type="button" class="btn btn-primary" value="Tambah Riwayat Jabatan Fungsional" onclick="saveNewUserJabatanFungsional()" />
@@ -992,7 +989,7 @@ if ($menu == 'sdm') {
                                                     <input name="tmt" value="{{ $val->tmt }}" data-id="{{ $val->id }}" id="myDatepicker" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td>
-                                                    @if($page == 'profile')
+                                                    @if(($page == 'profile'  || $page == 'admin_update_profile'))
                                                     <a onClick="return remove('{{$val->id}}','{{!empty($val->golongan->name) ? $val->golongan->name : ''}}', 'golongan')" href="#" class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
@@ -1001,7 +998,7 @@ if ($menu == 'sdm') {
                                             </tr>
                                             @endif
                                             @endforeach
-                                            @if($page == 'profile')
+                                            @if(($page == 'profile' || $page == 'admin_update_profile')))
                                             <tr>
                                                 <td colspan="6" class="text-left">
                                                     <input type="button" class="btn btn-primary" value="Tambah Riwayat Golongan" onclick="saveNewUserGolongan()" />
@@ -1030,9 +1027,9 @@ if ($menu == 'sdm') {
                       <a href="#" onClick="return request_approval()" class="btn btn-info"><i class="fa fa-check"></i> Minta Persetujuan</a>
                   @elseif($page != 'profile' && $data->status_sdm == 'new')
                       <a href="#" onClick="return warning()" class="btn btn-default"><i class="fa fa-check text-black"></i> Setujui Perubahan</a>
-                  @elseif($page != 'profile' && $menu == 'sdm' && $data->status_sdm == 'request_approval')
+                  @elseif($page == 'sdm' && $data->status_sdm == 'request_approval')
                       <a href="#" onClick="return approve('sdm')" class="btn btn-info"><i class="fa fa-check"></i> Setujui Perubahan Data SDM</a>
-                  @elseif($page != 'profile' && $menu == 'diklat' && $data->status_diklat == 'request_approval')
+                  @elseif($page == 'diklat'  && $data->status_diklat == 'request_approval')
                       <a href="#" onClick="return approve('diklat')" class="btn btn-info"><i class="fa fa-check"></i> Setujui Perubahan Data Diklat</a>
                   @endif
                 </div>
@@ -1044,7 +1041,7 @@ if ($menu == 'sdm') {
 @endsection
 
 <style>
-    @if ($menu != 'edit_user')
+    @if ($page == 'profile' || $page == 'sdm' || $page == 'diklat')
         @if ($data->status != 'approved')
         .bg-deleted {
             background: #ffaaaa;

@@ -217,9 +217,8 @@ class UserRequestController extends Controller
             'tab' => $tab,
             'data' => $User['records'],
             'id' => $profilePageMy ? '' : $id,
-            'page' => 'user_request',
             'status_pegawai' => $StatusPegawaiList,
-            'menu' => $menu
+            'page' => $menu
         ]);
     }
 }

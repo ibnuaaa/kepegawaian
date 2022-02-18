@@ -4,10 +4,10 @@ $(document).ready(function() {
       format: 'yyyy-mm-dd',
     });
 
-    @if($page == 'user_request')
+    @if($page == 'sdm' || $page == 'diklat' )
     $(".panel-body :input").prop("disabled", true);
     $(".panel-body :select").prop("disabled", true);
-    @else
+    @else if($page == 'profile' )
     $(".bg-deleted :input").prop("disabled", true);
     $(".bg-deleted :select").prop("disabled", true);
     @endif
@@ -335,11 +335,14 @@ function approve(menu) {
 }
 
 function request_approval() {
-      showLoading()
+      // showLoading()
 
       var data = {
         id: '{{ $data->id }}'
       }
+
+      console.log('request_approval')
+
 
       axios.post('/user_request/request_approval', data).then((response) => {
           location.href= '/profile'

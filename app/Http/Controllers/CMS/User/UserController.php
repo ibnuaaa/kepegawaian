@@ -375,6 +375,19 @@ class UserController extends Controller
     public function ProfileEdit(Request $request, $tab, $id = 'me')
     {
 
+        $page = '';
+        if ($id == 'me') {
+          // user mau request
+          $page = 'profile';
+        } else if ($id != 'me') {
+          // admin
+          $page = 'admin_update_profile';
+        }
+
+
+
+        // admin
+
         $profilePageMy = false;
         if ($id == 'me') {
             $profilePageMy = true;
@@ -498,8 +511,10 @@ class UserController extends Controller
         }
 
         $data = $User['records'];
-        $data->user = $User['records'];
 
+        if ($page == 'admin_update_profile') {
+            $data->user = $User['records'];
+        }
 
         return view('app.user.profile_edit.index', [
             'positions' => $PositionList,
@@ -512,8 +527,7 @@ class UserController extends Controller
             'tab' => $tab,
             'data' => $data,
             'id' => $profilePageMy ? '' : $id,
-            'menu' => (empty($id) || ($id && $id == 'me') ? 'profile' : 'edit_user' ),
-            'page' => 'profile'
+            'page' => $page,
         ]);
     }
 
