@@ -30,7 +30,11 @@ function remove(id, name, table_name) {
       showLoading()
       axios.delete('/user_' + table_name + '{{ !$id ? '_request' : '' }}/'+id).then((response) => {
           const { data } = response.data
+          @if ($page == 'profile')
           location.href = '/profile/{{ $tab }}'
+          @else
+          location.href = '/profile/{{ $tab }}/{{ $id }}'
+          @endif
       }).catch((error) => {
           if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
               swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
