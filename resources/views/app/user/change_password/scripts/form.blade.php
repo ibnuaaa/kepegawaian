@@ -3,27 +3,27 @@ $(document).ready(function() {
     const form = document.getElementById('changePasswordForm')
     const changePasswordForm = $('#changePasswordForm').formValidation({
         fields: {
-            password: {
-                validators: {
-                    notEmpty: {
-                        message: 'Password harus diisi'
-                    }
-                }
-            },
-            new_password: {
-                validators: {
-                    notEmpty: {
-                        message: 'Password Baru Harus Diisi'
-                    }
-                }
-            },
-            new_password_confirmation: {
-                validators: {
-                    notEmpty: {
-                        message: 'Konfirmasi Password Harus Diisi'
-                    }
-                }
-            }
+            // password: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'Password harus diisi'
+            //         }
+            //     }
+            // },
+            // new_password: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'Password Baru Harus Diisi'
+            //         }
+            //     }
+            // },
+            // new_password_confirmation: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'Konfirmasi Password Harus Diisi'
+            //         }
+            //     }
+            // }
         },
         plugins: {
             trigger: new FormValidation.plugins.Trigger(),
