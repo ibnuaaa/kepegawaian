@@ -153,12 +153,17 @@ class UserRequestController extends Controller
     public function CheckExist(Request $request)
     {
 
+
+
         $UserRequest = UserRequest::where('user_id', MyAccount()->id)
-        ->where('status_sdm', ['request_approval'])
-        ->whereOr('status_sdm', ['new'])
-        ->whereOr('status_diklat', ['request_approval'])
-        ->whereOr('status_diklat', ['new'])
+        ->where('status_sdm', 'request_approval')
+        ->orWhere('status_sdm', 'new')
+        ->orWhere('status_diklat', 'request_approval')
+        ->orWhere('status_diklat', 'new')
         ->first();
+
+        // cetak($UserRequest);
+        // die();
 
 
         if ($UserRequest && ($UserRequest->status_sdm == 'request_approval' || $UserRequest->status_diklat == 'request_approval')) {
@@ -175,6 +180,8 @@ class UserRequestController extends Controller
             $UserRequest->user_id = MyAccount()->id;
             $isCreateNew = true;
         }
+
+
 
         if ($isCreateNew) {
             $UserRequest->username  = $User->username;
