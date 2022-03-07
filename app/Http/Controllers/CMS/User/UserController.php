@@ -280,7 +280,8 @@ class UserController extends Controller
             'golongan' => $GolonganList,
             'tab' => 'personal',
             'data' => $User['records'],
-            'reject_request' => $UserRequestReject['records']
+            'reject_request' => $UserRequestReject['records'],
+            'user_request' => $UserRequest['records']
         ]);
     }
 

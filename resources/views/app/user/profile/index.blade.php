@@ -27,6 +27,37 @@
         <div class="card overflow-hidden">
             <div class="card-body">
 
+
+
+
+              @if ($user_request->status_sdm == 'request_approval')
+              <div class="alert alert-info" role="alert">
+                  <span class="alert-inner--icon"><i class="fe fe-bell"></i></span>
+                  <span class="alert-inner--text"><strong>Informasi !</strong> Permintaan ubah data profil menunggu approval dari SDM </span>
+              </div>
+              @endif
+              @if ($user_request->status_diklat == 'request_approval')
+              <div class="alert alert-info" role="alert">
+                  <span class="alert-inner--icon"><i class="fe fe-bell"></i></span>
+                  <span class="alert-inner--text"><strong>Informasi !</strong> Permintaan ubah data profil menunggu approval dari Diklat </span>
+              </div>
+              @endif
+
+              @if ($user_request->status_sdm == 'approved')
+              <div class="alert alert-success" role="alert">
+                  <span class="alert-inner--icon"><i class="fe fe-bell"></i></span>
+                  <span class="alert-inner--text"><strong>Informasi !</strong> Permintaan ubah data profil telah disetujui SDM </span>
+              </div>
+              @endif
+
+              @if ($user_request->status_diklat == 'approved')
+              <div class="alert alert-success" role="alert">
+                  <span class="alert-inner--icon"><i class="fe fe-bell"></i></span>
+                  <span class="alert-inner--text"><strong>Informasi !</strong> Permintaan ubah data profil telah disetujui Diklat </span>
+              </div>
+              @endif
+
+
               @if (!empty($reject_request)   && count($reject_request) > 0)
               <div class="alert alert-danger" role="alert">
                   <span class="alert-inner--icon"><i class="fe fe-bell"></i></span>
