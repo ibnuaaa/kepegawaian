@@ -14,7 +14,6 @@ class AddStatusToUserRequestRejectTable extends Migration
     public function up()
     {
         Schema::table('user_request_reject', function (Blueprint $table) {
-          $table->string('method')->nullable()->default(null)->after('primary_id');  //
             $table->string('status')->nullable()->default(null)->after('description');
         });
     }
