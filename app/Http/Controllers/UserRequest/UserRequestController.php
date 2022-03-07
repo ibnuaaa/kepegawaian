@@ -157,15 +157,17 @@ class UserRequestController extends Controller
 
 
         $UserRequest = UserRequest::where('user_id', MyAccount()->id)
-        ->where('status_sdm', 'request_approval')
-        ->orWhere('status_sdm', 'new')
-        ->orWhere('status_sdm', 'rejected')
-        ->orWhere('status_diklat', 'request_approval')
-        ->orWhere('status_diklat', 'new')
-        ->orWhere('status_diklat', 'rejected')
+        ->where(function ($query) use($request) {
+            $query->where('status_sdm', 'request_approval');
+            $query->orWhere('status_sdm', 'new');
+            $query->orWhere('status_sdm', 'rejected');
+            $query->orWhere('status_diklat', 'request_approval');
+            $query->orWhere('status_diklat', 'new');
+            $query->orWhere('status_diklat', 'rejected');
+        })
         ->first();
 
-        // cetak($UserRequest);
+        // cetak(MyAccount()->id);
         // die();
 
 
