@@ -29,11 +29,6 @@
 
 
 
-
-
-
-
-
                 <div class="tab-menu-heading tab-menu-heading-boxed">
                     <div class="tabs-menu-boxed">
                         <ul class="nav panel-tabs">

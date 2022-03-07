@@ -58,11 +58,20 @@
                     @if ($item->status_sdm == 'approved')
                         <span class="badge bg-success badge-sm  me-1 mb-1 mt-1">Approved SDM</span>
                     @endif
+                    @if ($item->status_sdm == 'rejected')
+                        <span class="badge bg-danger badge-sm  me-1 mb-1 mt-1">Ditolak SDM</span>
+                    @endif
+
+
+
                     @if ($item->status_diklat == 'request_approval')
                         <span class="badge bg-warning badge-sm  me-1 mb-1 mt-1">Pending Diklat</span>
                     @endif
                     @if ($item->status_diklat == 'approved')
                         <span class="badge bg-success badge-sm  me-1 mb-1 mt-1">Approved Diklat</span>
+                    @endif
+                    @if ($item->status_diklat == 'rejected')
+                        <span class="badge bg-danger badge-sm  me-1 mb-1 mt-1">Ditolak Diklat</span>
                     @endif
                 @endif
             </td>

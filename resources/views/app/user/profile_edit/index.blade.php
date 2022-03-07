@@ -1023,14 +1023,19 @@ if ($menu == 'sdm') {
         <div class="card card-default">
             <div class="card-body">
                 <div class="text-center">
+
                   @if($page == 'profile' && $data->status_sdm == 'new')
                       <a href="#" onClick="return request_approval()" class="btn btn-info"><i class="fa fa-check"></i> Minta Persetujuan</a>
+                  @elseif($page == 'profile' && ($data->status_sdm == 'rejected' || $data->status_diklat == 'rejected'))
+                      <a href="#" onClick="return request_approval()" class="btn btn-info"><i class="fa fa-check"></i> Minta Persetujuan Ulang</a>
                   @elseif($page != 'profile' && $data->status_sdm == 'new')
                       <a href="#" onClick="return warning()" class="btn btn-default"><i class="fa fa-check text-black"></i> Setujui Perubahan</a>
                   @elseif($page == 'sdm' && $data->status_sdm == 'request_approval')
                       <a href="#" onClick="return approve('sdm')" class="btn btn-info"><i class="fa fa-check"></i> Setujui Perubahan Data SDM</a>
+                      <a href="#" onClick="return openModalReject('sdm')" class="btn btn-danger"><i class="fa fa-check"></i> Tolak Perubahan Data SDM</a>
                   @elseif($page == 'diklat'  && $data->status_diklat == 'request_approval')
                       <a href="#" onClick="return approve('diklat')" class="btn btn-info"><i class="fa fa-check"></i> Setujui Perubahan Data Diklat</a>
+                      <a href="#" onClick="return openModalReject('diklat')" class="btn btn-danger"><i class="fa fa-check"></i> Tolak Perubahan Data Diklat</a>
                   @endif
                 </div>
             </div>
@@ -1038,6 +1043,25 @@ if ($menu == 'sdm') {
 
     </div>
 </div>
+
+<div class="modal effect-sign" id="modalReject" role="dialog">
+    <div class="modal-dialog modal-md " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Alasan Penolakan Data SDM</h2>
+            </div>
+            <div class="modal-body" id="body-modal-sasaran-kinerja">
+                <textarea class="form-control" name="reject_description" placeholder="Masukkan keterangan / deskripsi penolakan data...."></textarea>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary btn-xs" onClick="saveReject()">
+                    <i class="fa fa-save"></i> Simpan
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 <style>

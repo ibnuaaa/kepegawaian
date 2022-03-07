@@ -45,6 +45,7 @@ class MiddlewareServiceProvider extends ServiceProvider
         'UserRequest.Update' => \App\Http\Middleware\UserRequest\Update::class,
         'UserRequest.RequestApproval' => \App\Http\Middleware\UserRequest\RequestApproval::class,
         'UserRequest.Approve' => \App\Http\Middleware\UserRequest\Approve::class,
+        'UserRequest.Reject' => \App\Http\Middleware\UserRequest\Reject::class,
 
 
         'Config.Insert' => \App\Http\Middleware\Config\Insert::class,

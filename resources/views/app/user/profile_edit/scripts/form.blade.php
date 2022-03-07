@@ -367,4 +367,57 @@ function warning() {
     return false;
 }
 
+var g_menu = ''
+function openModalReject(menu) {
+  g_menu = menu
+
+  $('#modalReject').modal('show');
+
+  return false;
+}
+
+function saveReject() {
+  var reject_description = $('textarea[name=reject_description]').val();
+
+  showLoading()
+
+
+
+  if (g_menu == 'sdm') {
+      var data = {
+        id: '{{ $data->id }}',
+        status_sdm_rejected: 'y',
+        description: reject_description
+      }
+  }
+
+  if (g_menu == 'diklat') {
+      var data = {
+        id: '{{ $data->id }}',
+        status_diklat_rejected: 'y',
+        description: reject_description
+      }
+  }
+
+
+
+  axios.post('/user_request/reject', data).then((response) => {
+      @if($page == 'profile')
+      location.href= '/profile'
+      @else
+      location.href= '/user_request/status/request_approval/' + g_menu
+      @endif
+      // console.log(response.data)
+  }).catch((error) => {
+      if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+          swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+          hideLoading()
+      }
+  })
+
+  return false;
+
+}
+
+
 </script>

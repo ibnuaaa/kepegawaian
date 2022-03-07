@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateUserRequestRejectTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('user_request_reject', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_request_id')->nullable()->default(NULL);
+            $table->text('description')->nullable()->default(NULL);
+            $table->integer('reject_user_id')->nullable()->default(NULL);
+            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('deleted_at')->nullable()->default(NULL);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('user_request_reject');
+    }
+}

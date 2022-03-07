@@ -45,6 +45,7 @@
                                 <li><a href="{!! url('/user_request/status/new/sdm'); !!}" class="slide-item @yield('userRequestNewSdmMenuClass')"> Request Baru</a></li>
                                 <li><a href="{!! url('/user_request/status/request_approval/sdm'); !!}" class="slide-item @yield('userRequestRequestApprovalSdmMenuClass')"> Permintaan Approval</a></li>
                                 <li><a href="{!! url('/user_request/status/approved/sdm'); !!}" class="slide-item @yield('userRequestApprovedSdmMenuClass')"> Disetujui</a></li>
+                                <li><a href="{!! url('/user_request/status/rejected/sdm'); !!}" class="slide-item @yield('userRequestRejectedSdmMenuClass')"> Ditolak</a></li>
                             </ul>
                         </li>
                         @endif
@@ -55,6 +56,7 @@
                                 <li><a href="{!! url('/user_request/status/new/diklat'); !!}" class="slide-item  @yield('userRequestNewDiklatMenuClass')"> Request Baru</a></li>
                                 <li><a href="{!! url('/user_request/status/request_approval/diklat'); !!}" class="slide-item @yield('userRequestRequestApprovalDiklatMenuClass')"> Permintaan Approval</a></li>
                                 <li><a href="{!! url('/user_request/status/approved/diklat'); !!}" class="slide-item @yield('userRequestApprovedDiklatMenuClass')"> Disetujui</a></li>
+                                <li><a href="{!! url('/user_request/status/rejected/diklat'); !!}" class="slide-item @yield('userRequestRejectedDiklatMenuClass')"> Ditolak</a></li>
                             </ul>
                         </li>
                         @endif
