@@ -19,8 +19,8 @@ class RequestApproval extends BaseMiddleware
         $this->Model->UserRequest = UserRequest::where('id', $this->_Request->input('id'))->first();
 
         if ($this->Model->UserRequest) {
-          $this->Model->UserRequest->status_sdm = 'request_approval';
-          $this->Model->UserRequest->status_diklat = 'request_approval';
+          if (in_array($this->Model->UserRequest->status_sdm, ['rejected', 'new', ''])) $this->Model->UserRequest->status_sdm = 'request_approval';
+          if (in_array($this->Model->UserRequest->status_diklat, ['rejected', 'new', ''])) $this->Model->UserRequest->status_diklat = 'request_approval';
         }
     }
 
