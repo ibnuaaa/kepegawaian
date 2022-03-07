@@ -20,6 +20,7 @@ use App\Models\UserJabatanFungsionalRequest;
 use App\Models\UserGolonganRequest;
 
 use App\Models\Document;
+use App\Models\UserRequestReject;
 
 
 use App\Models\Position;
@@ -158,8 +159,10 @@ class UserRequestController extends Controller
         $UserRequest = UserRequest::where('user_id', MyAccount()->id)
         ->where('status_sdm', 'request_approval')
         ->orWhere('status_sdm', 'new')
+        ->orWhere('status_sdm', 'rejected')
         ->orWhere('status_diklat', 'request_approval')
         ->orWhere('status_diklat', 'new')
+        ->orWhere('status_diklat', 'rejected')
         ->first();
 
         // cetak($UserRequest);
@@ -529,11 +532,32 @@ class UserRequestController extends Controller
         return response()->json(Json::get(), 202);
     }
 
+    public function Reject(Request $request)
+    {
+        $Model = $request->Payload->all()['Model'];
+        $Model->UserRequest->save();
+
+        $UserRequestReject = new UserRequestReject();
+        $UserRequestReject->user_request_id = $Model->UserRequest->id;
+        $UserRequestReject->description = $request->input('description');
+        $UserRequestReject->reject_user_id = MyAccount()->id;
+        $UserRequestReject->save();
+
+        Json::set('data', 'oke');
+        return response()->json(Json::get(), 202);
+    }
+
     public function RequestApproval(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
 
-        $user_request = UserRequest::where('user_id', MyAccount()->id)->where('status_sdm', 'new')->orderBy('id', 'DESC')->first();
+        $user_request = UserRequest::where('user_id', MyAccount()->id)
+          ->where(function ($query) use($request) {
+              $query->where('status_sdm', 'new');
+              $query->orWhere('status_sdm', 'rejected');
+              $query->orWhere('status_diklat', 'rejected');
+          })
+          ->orderBy('id', 'DESC')->first();
 
         $user_golongan_request = UserGolonganRequest::where('user_request_id', $user_request->id)->first();
         $user_jabatan_request = UserJabatanRequest::where('user_request_id', $user_request->id)->first();
