@@ -27,6 +27,30 @@
         <div class="card overflow-hidden">
             <div class="card-body">
 
+              @if (!empty($reject_request)   && count($reject_request) > 0)
+              <div class="alert alert-danger" role="alert">
+                  <span class="alert-inner--icon"><i class="fe fe-bell"></i></span>
+                  <span class="alert-inner--text"><strong>Informasi !</strong> Permintaan ubah data profil anda ditolak dengan alasan : </span>
+                  <br />
+                  <ol>
+                  @foreach ($reject_request as $key => $val)
+                    <li>{{$val->description}}</li>
+                  @endforeach
+                </ol>
+
+                <br>
+
+                Silahkan klik
+
+                <a href="#" onClick="ubahProfil()" class="btn btn-primary btn-sm">
+                    <i class="fa fa-pencil"></i>
+                    Ubah Profil
+                </a>
+
+                untuk memperbaiki. Terimakasih.
+
+              </div>
+              @endif
 
 
                 <div class="tab-menu-heading tab-menu-heading-boxed">

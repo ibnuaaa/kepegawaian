@@ -6,6 +6,7 @@ use App\Http\Controllers\User\UserBrowseController;
 use App\Http\Controllers\UserRequest\UserRequestBrowseController;
 use App\Http\Controllers\Position\PositionBrowseController;
 use App\Http\Controllers\Jabatan\JabatanBrowseController;
+use App\Http\Controllers\UserRequestReject\UserRequestRejectBrowseController;
 
 use App\Http\Controllers\Golongan\GolonganBrowseController;
 use App\Http\Controllers\Pendidikan\PendidikanBrowseController;
@@ -262,6 +263,15 @@ class UserController extends Controller
             ];
         }
 
+        // Last request
+        $UserRequest = UserRequestBrowseController::FetchBrowse($request)
+            ->where('user_id', MyAccount()->id)
+            ->get('first');
+        $last_request_id = $UserRequest['records']->id;
+        $UserRequestReject = UserRequestRejectBrowseController::FetchBrowse($request)
+            ->where('user_request_id', $last_request_id)
+            ->where('status', 'rejected')
+            ->get('fetch');
 
         return view('app.user.profile.index', [
             'positions' => $PositionList,
@@ -269,7 +279,8 @@ class UserController extends Controller
             'unit_kerja' => $UnitKerjaList,
             'golongan' => $GolonganList,
             'tab' => 'personal',
-            'data' => $User['records']
+            'data' => $User['records'],
+            'reject_request' => $UserRequestReject['records']
         ]);
     }
 
@@ -400,8 +411,6 @@ class UserController extends Controller
         } else {
             $User = UserBrowseController::FetchBrowse($request)
                 ->equal('id', $id)->get('first');
-
-
         }
 
         // Position

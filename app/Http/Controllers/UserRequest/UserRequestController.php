@@ -543,6 +543,7 @@ class UserRequestController extends Controller
         $UserRequestReject->user_request_id = $Model->UserRequest->id;
         $UserRequestReject->description = $request->input('description');
         $UserRequestReject->reject_user_id = MyAccount()->id;
+        $UserRequestReject->status = 'rejected';
         $UserRequestReject->save();
 
         Json::set('data', 'oke');
@@ -568,6 +569,10 @@ class UserRequestController extends Controller
         $user_pelatihan_request = UserPelatihanRequest::where('user_request_id', $user_request->id)->first();
         $user_pendidikan_request = UserPendidikanRequest::where('user_request_id', $user_request->id)->first();
 
+
+        UserRequestReject::where('user_request_id', $user_request->id)->update([
+            'status' => 'requested'
+        ]);
 
         $message  = [];
 

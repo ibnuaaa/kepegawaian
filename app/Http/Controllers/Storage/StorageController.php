@@ -30,7 +30,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
-
+use Ajaxray\PHPWatermark\Watermark;
 
 
 class StorageController extends Controller
@@ -194,6 +194,33 @@ class StorageController extends Controller
             $FileName,
             Storage::disk('temporary')->get($FileName), 'public'
         );
+
+
+        $this->PlaceWatermark($FileName, "PDF INI HANYA SAMPLE", 0, 0, 100,TRUE);
+
+
+
+
+        // cetak('D:/Web/XAMPP73/htdocs/kepegawaian-rspon/storage/app/'.$FileName);
+        // die();
+
+
+        // $watermark = new Watermark('D:/Web/XAMPP73/htdocs/kepegawaian-rspon/storage/app/0O3Er7059t5M7tu4gqnBY4RtEcj1uFxXAixQW3pgCLD5fpaDhooFegdSomZaHgHo.pdf');
+
+        // cetak($watermark);
+        // die();
+
+        // $watermark = $watermark->withText('ajaxray.com');
+
+        // $watermark->write('D:/Web/XAMPP73/htdocs/kepegawaian-rspon/storage/app/bbb.pdf');
+
+        // $watermark->withText('ajaxray.com')->setFontSize(48)->setRotate(30)
+        //      ->setOpacity(.4)
+        //      ->write('D:/Web/XAMPP73/htdocs/kepegawaian-rspon/storage/app/bbb.pdf');
+        //
+        //
+        // cetak($watermark);
+        // die();
         // if ($File->thumb) {
         //     Storage::disk('local')->put(
         //         $Folder . '/' . $File->thumb,
@@ -221,6 +248,91 @@ class StorageController extends Controller
         Json::set('data', $this->SyncData($request, $Storage->id));
         return response()->json(Json::get(), 201);
     }
+
+
+
+    public function PlaceWatermark($file, $text, $xxx, $yyy, $op, $outdir) {
+        // require_once('fpdf.php');
+        // require_once('fpdi.php');
+        $name = uniqid();
+        $font_size = 25;
+        $ts=explode("\n",$text);
+        $width=0;
+        foreach ($ts as $k=>$string) {
+            $width=max($width,strlen($string));
+        }
+        $width  = imagefontwidth($font_size)*$width;
+        $height = imagefontheight($font_size)*count($ts);
+        $el=imagefontheight($font_size);
+        $em=imagefontwidth($font_size);
+        $img = imagecreatetruecolor($width,$height);
+        // Background color
+        $bg = imagecolorallocate($img, 255, 255, 255);
+        imagefilledrectangle($img, 0, 0,$width ,$height , $bg);
+        // Font color
+        $color = imagecolorallocate($img, 0, 0, 0);
+        foreach ($ts as $k=>$string) {
+            $len = strlen($string);
+            $ypos = 0;
+            for($i=0;$i<$len;$i++){
+                $xpos = $i * $em;
+                $ypos = $k * $el;
+                imagechar($img, $font_size, $xpos, $ypos, $string, $color);
+                $string = substr($string, 1);
+            }
+        }
+
+        // echo "aa";
+        // die();
+
+        imagecolortransparent($img, $bg);
+        $blank = imagecreatetruecolor($width, $height);
+        $tbg = imagecolorallocate($blank, 255, 255, 255);
+        imagefilledrectangle($blank, 0, 0,$width ,$height , $tbg);
+        imagecolortransparent($blank, $tbg);
+        if ( ($op < 0) OR ($op >100) ){
+            $op = 100;
+        }
+        imagecopymerge($blank, $img, 0, 0, 0, 0, $width, $height, $op);
+        imagepng($blank,$name.".png");
+        // Created Watermark Image
+        $pdf = new \setasign\Fpdi\Fpdi();
+        // if (file_exists("./".$file)){
+
+            // cetak(file_exists($file));
+            // die();
+
+            $pagecount = $pdf->setSourceFile('D:/Web/XAMPP73/htdocs/kepegawaian-rspon/storage/app/'.$file);
+
+            // cetak($pagecount);
+            // die();
+
+        // } else {
+        //     return FALSE;
+        // }
+        for ($i=0; $i < $pagecount; $i++) {
+            $tpl = $pdf->importPage($i+1);
+            $size = $pdf->getTemplateSize($tpl);
+            $pdf->addPage();
+            $pdf->useTemplate($tpl, null, null, $size['width'], $size['height'], TRUE);
+            $pdf->Image($name.'.png', $xxx, $yyy, 0, 0, 'png');
+        }
+
+        // //Put the watermark
+        // die();
+
+
+        // if ($outdir === TRUE){
+
+            unlink("D:/Web/XAMPP73/htdocs/kepegawaian-rspon/storage/app/".$file);
+
+            return $pdf->Output("D:/Web/XAMPP73/htdocs/kepegawaian-rspon/storage/app/".$file, "F");
+        // } else {
+            // return $pdf;
+        // }
+    }
+
+
 
     public function SaveExcel(Request $request)
     {

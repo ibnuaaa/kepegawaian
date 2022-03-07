@@ -161,7 +161,6 @@ class UserRequestBrowseController extends Controller
        ->with('user')
        ;
 
-
         if(!empty($request->get('sort'))) {
             if(!empty($request->get('sort_type'))) {
                 if ($request->get('sort') == 'id') $UserRequest->orderBy("$this->UserRequestTable.id", $request->get('sort_type'));

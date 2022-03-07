@@ -48,6 +48,15 @@ class UserRequestRejectBrowseController extends Controller
                 $query->where("$this->UserRequestRejectTable.id", $request->ArrQuery->id);
             }
 
+            if (isset($request->ArrQuery->user_request_id)) {
+                $query->where("$this->UserRequestRejectTable.user_request_id", $request->ArrQuery->user_request_id);
+            }
+
+            if (isset($request->ArrQuery->status)) {
+                $query->where("$this->UserRequestRejectTable.status", $request->ArrQuery->status);
+            }
+
+
             if (!empty($request->get('q'))) {
                 $query->where(function ($query) use($request) {
                     $query->where("$this->UserRequestRejectTable.description", 'like', '%'.$request->get('name').'%');
