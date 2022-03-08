@@ -106,7 +106,7 @@ class UserRequest extends Model
 
     public function foto_profile()
     {
-        return $this->hasMany(Document::class, 'object_id', 'user.id')
+        return $this->hasMany(Document::class, 'object_id', 'user_request.id')
                     ->where('object', 'foto_profile_request')
                     ->with('storage');
     }
