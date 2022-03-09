@@ -73,8 +73,10 @@
                         </td>
                         <td>
                           <b class="text-blue">
-                            {{$val->name}}
+                            {{$val->name}} ({{$val->tipe_indikator}})
                           </b>
+
+                            @if ($val->tipe_indikator == 'program')
                             <table class="table table-bordered table-sm bg-white">
                                 <tr>
                                     <th>
@@ -108,6 +110,7 @@
                                     </td>
                                 </tr>
                             </table>
+                            @endif
 
                         </td>
                         <td>
@@ -125,6 +128,10 @@
 
                 <tr>
                     <td colspan="3" class="text-left">
+                        <a href="{{ url('/indikator_skp/new/kegiatan/'.$item->indikator_kinerja->id.'/'.$props['penilaian_prestasi_kerja_id']) }}" class="btn btn-success btn-sm">
+                            <i class="fa fa-plus"></i>
+                            Tambah Kegiatan
+                        </a>
                         <a href="{{ url('/indikator_skp/new/program/'.$item->indikator_kinerja->id.'/'.$props['penilaian_prestasi_kerja_id']) }}" class="btn btn-primary btn-sm">
                             <i class="fa fa-plus"></i>
                             Tambah Program
