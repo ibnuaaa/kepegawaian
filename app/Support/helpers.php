@@ -1431,18 +1431,35 @@ if ( ! function_exists('treeChildIndikatorKinerja'))
 
 if ( ! function_exists('treeChildIndikatorKinerjaModal'))
 {
-    function treeChildIndikatorKinerjaModal($data, $dataParent, $prefix, $incr, $indikator_kerja_ids, $tipe_indikator_ditampilkan) {
+    function treeChildIndikatorKinerjaModal($data, $dataParent, $prefix, $incr, $indikator_kerja_ids, $tipe_indikator_ditampilkan, $dataPrestasiKinerja) {
 
         $html = "";
-
-          // cetak($indikator_kerja_ids);
-          // die();
-
           if (!empty($data)) {
               foreach ($data as $key => $item) {
 
                   $num = $key + 1;
                   if (in_array( $item->id ,$indikator_kerja_ids)) {
+
+                  $button_pilih = '';
+
+                  if (in_array( $item->id ,$indikator_kerja_ids) && in_array($item->tipe_indikator, $tipe_indikator_ditampilkan)) {
+
+                    $isSelected = false;
+                    $selectedItem = [];
+                    foreach ($dataPrestasiKinerja->penilaian_prestasi_kerja_item as $key2 => $value2) {
+                        if ($value2->indikator_kinerja_id == $item->id) {
+                            $isSelected = true;
+                            $selectedItem = $value2;
+                        }
+                    }
+
+                    if ($isSelected) {
+                      $button_pilih = '<a href="#" onclick=\'return removeFromPopup(this, "' . $selectedItem->id  . '", "'.$item->id.'")\'  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>';
+                    } else {
+                      $button_pilih = '<a href="#" onclick=\'return selectIndikatorKinerja(this, "' . $item->id  . '")\'  class="btn btn-success btn-sm"><i class="fa fa-check"></i> Pilih</a>';
+                    }
+                  }
+
                   $html .= '
                     <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" >
                         <td style="height: 10px !important;white-space: nowrap;">
@@ -1454,11 +1471,9 @@ if ( ! function_exists('treeChildIndikatorKinerjaModal'))
                         <td>
                             '. (!empty($item->unit_kerja->name) ? $item->unit_kerja->name : '') .'
                         </td>
-                        <td>' .
-                            (in_array( $item->id ,$indikator_kerja_ids) && in_array($item->tipe_indikator, $tipe_indikator_ditampilkan) ? '<a href="#" onclick=\'return selectIndikatorKinerja(this, "' . $item->id  . '")\'  class="btn btn-success btn-sm"><i class="fa fa-check"></i> Pilih</a>' : '')
-                        .'</td>
+                        <td id="td_button_container_'.$item->id.'">' . $button_pilih . '</td>
                     </tr>
-                  ' . (count($item->children) > 0 ? treeChildIndikatorKinerjaModal($item->children, $item,  (($prefix ? ($prefix .'.') : ''). $num), $num, $indikator_kerja_ids, $tipe_indikator_ditampilkan) : '') ;
+                  ' . (count($item->children) > 0 ? treeChildIndikatorKinerjaModal($item->children, $item,  (($prefix ? ($prefix .'.') : ''). $num), $num, $indikator_kerja_ids, $tipe_indikator_ditampilkan, $dataPrestasiKinerja) : '') ;
               }
           }
         }

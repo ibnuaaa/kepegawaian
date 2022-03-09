@@ -62,11 +62,27 @@ function selectIndikatorKinerja(e, id) {
         type: 'skp'
     }
 
+    //td_button_container_'.$item->id.'
+    // if ($isSelected) {
+    //   $button_pilih = ;
+    // } else {
+    //   $button_pilih = '';
+    // }
+
+
+
     $(e).removeClass('btn-success');
     $(e).addClass('btn-warning');
     axios.post('/penilaian_prestasi_kerja_item', data).then((response) => {
-        $(e).removeClass('btn-warning');
-        $(e).addClass('btn-default');
+
+        var button_pilih = ''
+        if (response.data.data.id) {
+            var prestasi_kinerja_item_id = response.data.data.id
+            var button_pilih = '<a href="#" onclick=\'return removeFromPopup(this, "' + prestasi_kinerja_item_id  + '", "' +id + '")\'  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>';
+        }
+
+        $('#td_button_container_' + id).html(button_pilih);
+
         $.growl.notice({
             message: "Indikator telah berhasil ditambahkan"
         });
@@ -80,6 +96,47 @@ function selectIndikatorKinerja(e, id) {
     return false;
 }
 
+function removeFromPopup(e, id, indikator_kinerja_id, name) {
+
+  swal({
+      title: "Konfirmasi",
+      text: "Ingin menghapus data " + name + " ?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonText: 'Ya, Hapus',
+      cancelButtonText: 'Batal'
+  }, function(isConfirmed) {
+    console.log(isConfirmed)
+
+    if (isConfirmed) {
+
+      $(e).removeClass('btn-success');
+      $(e).addClass('btn-warning');
+
+      axios.delete('/penilaian_prestasi_kerja_item/'+id).then((response) => {
+          // const { data } = response.data
+          //
+          // $(e).removeClass('btn-warning');
+          // $(e).addClass('btn-default');
+
+          var button_pilih = '<a href="#" onclick=\'return selectIndikatorKinerja(this, "' + indikator_kinerja_id  + '")\'  class="btn btn-success btn-sm"><i class="fa fa-check"></i> Pilih</a>';
+
+          $('#td_button_container_' + indikator_kinerja_id).html(button_pilih);
+
+          $.growl.notice({
+              message: "Indikator telah berhasil ditambahkan"
+          });
+
+      }).catch((error) => {
+          if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+              swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+          }
+      })
+    }
+  });
+
+  return false;
+}
 
 function saveNewIndikatorTambahan(e, id) {
 
@@ -129,7 +186,6 @@ function remove(id, name) {
 
   return false;
 }
-
 
 function saveSKP(e) {
 

@@ -284,9 +284,8 @@ class PenilaianPrestasiKerjaController extends Controller
         }
 
 
-
         return view('app.penilaian_prestasi_kerja.edit.index', [
-            'select' => [],
+            'selected' => [],
             'data' => $PenilaianPrestasiKerja['records'],
             'indikator_kerja_ids' => $indikator_kerja_ids,
             'jabatan' => $Jabatan['records'],
