@@ -80,6 +80,20 @@
 
         $(document).ready(function() {
 
+            @if (MyAccount()->is_change_password != 1)
+                @if (empty($change_password))
+                    swal({
+                        title: "Ubah Password",
+                        text: "Anda belum mengubah password. Untuk keamanan, silahkan ubah password anda sebelum menggunakan aplikasi Simpeg. Terimakasih 🙏",
+                        type: "warning",
+                        showCancelButton: false,
+                        confirmButtonText: 'Oke, Ke Halaman Ubah Password Sekarang',
+                    }, function(isConfirmed) {
+                        location.href = '/change_password'
+                    })
+                @endif
+            @endif
+
             if (getCookie('TokenType') != "" && getCookie('AccessToken')) {
               timerSession()
             }

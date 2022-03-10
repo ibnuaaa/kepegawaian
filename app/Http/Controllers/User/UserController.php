@@ -116,6 +116,7 @@ class UserController extends Controller
     {
         $Model = $request->Payload->all()['Model'];
         $Model->User->password = app('hash')->make($request->input('new_password'));
+        $Model->User->is_change_password = 1;
         $Model->User->save();
 
         Json::set('data', $this->SyncData($request, $Model->User->id));

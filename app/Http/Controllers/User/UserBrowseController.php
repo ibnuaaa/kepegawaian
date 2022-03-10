@@ -131,6 +131,7 @@ class UserBrowseController extends Controller
             "$this->UserTable.name as user.name",
             "$this->UserTable.username as user.username",
             "$this->UserTable.nip as user.nip",
+            "$this->UserTable.is_change_password as user.is_change_password",
 
             "$this->UserTable.no_ktp as user.no_ktp",
             "$this->UserTable.tanggal_lahir as user.tanggal_lahir",
