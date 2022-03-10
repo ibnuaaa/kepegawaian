@@ -29,8 +29,8 @@
         @scopedslot('head', ($item))
         @if($item->name === 'ID')
         <th style="width: 3%">{{ $item->name }}</th>
-        @elseif ($item->name === 'ACTION')
-        <th style="width: 112px" class="hide">{{ $item->name }}</th>
+        @elseif ($item->name === 'Action')
+        <th style="width: 212px" class="hide">{{ $item->name }}</th>
         @else
         <th style="position: relative;cursor: pointer" onClick="sortBy('{{ $item->name }}', '{{ !empty($_GET['sort_type']) ? $_GET['sort_type'] : '' }}' )">
             {{ $item->name }}
@@ -66,55 +66,17 @@
                 <p>{{ !empty($item->jabatan['name']) ? $item->jabatan['name'] : '' }}</p>
             </td>
             <td class="v-align-middle">
-                <p>{{ $item->created_at }}</p>
-            </td>
-            <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
-                    <a href="{{ url('/user/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                    <a href="{{ url('/user/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                    <a href="{{ url('/profile/personal/'.$item->id) }}" class="btn btn-primary"><i class="fa fa-user"></i></a>
+                    <a href="{{ url('/user/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i> Detail</a>
+                    <a href="{{ url('/user/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-lock"></i> Ubah Password</a>
+                    <a href="{{ url('/profile/personal/'.$item->id) }}" class="btn btn-primary"><i class="fa fa-user"></i> Profil User</a>
                     <a onClick="return remove('{{$item->id}}','{{ $item->name }}')" href="#" class="btn btn-danger">
-                        <i class="fa fa-trash"></i>
+                        <i class="fa fa-trash"></i> Hapus
                     </a>
                 </div>
             </td>
         </tr>
         @endscopedslot
-
-        {{-- @scopedslot('head', ($item))
-                @if($item->name === 'id')
-                    <th style="width: 3%">{{ $item->name }}</th>
-        @elseif ($item->name === 'action')
-        <th style="width: 10%">{{ $item->name }}</th>
-        @else
-        <th>{{ $item->name }}</th>
-        @endif
-        @endscopedslot
-        @scopedslot('record', ($item, $props))
-        <tr>
-            <td class="v-align-middle ">
-                <p>{{ $item->id }}</p>
-            </td>
-            <td class="v-align-middle ">
-                <p>{{ $item->username }}</p>
-            </td>
-            <td class="v-align-middle">
-                <p>{{ $item->updated_at }}</p>
-            </td>
-            <td class="v-align-middle">
-                <p>{{ $item->created_at }}</p>asdasd
-            </td>
-            <td class="v-align-middle">
-                <div class="btn-group-xs">asdasd
-                    <a href="{{ url('/user/'.$item->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                    <a href="{{ url('/user/edit/'.$item->id) }}" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
-                    <a href="#modalDelete" data-toggle="modal" data-record-id="{{$item->id}}" data-record-name="{{$item->name}}" class="btn btn-danger">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                </div>
-            </td>
-        </tr>
-        @endscopedslot--}}
         @endcomponent
     </div>
 </div>

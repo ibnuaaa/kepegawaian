@@ -30,27 +30,27 @@
 
 
 
-              @if ($user_request->status_sdm == 'request_approval')
+              @if (!empty($user_request->status_sdm) && $user_request->status_sdm == 'request_approval')
               <div class="alert alert-info" role="alert">
                   <span class="alert-inner--icon"><i class="fe fe-bell"></i></span>
                   <span class="alert-inner--text"><strong>Informasi !</strong> Permintaan ubah data profil menunggu approval dari SDM </span>
               </div>
               @endif
-              @if ($user_request->status_diklat == 'request_approval')
+              @if (!empty($user_request->status_diklat) && $user_request->status_diklat == 'request_approval')
               <div class="alert alert-info" role="alert">
                   <span class="alert-inner--icon"><i class="fe fe-bell"></i></span>
                   <span class="alert-inner--text"><strong>Informasi !</strong> Permintaan ubah data profil menunggu approval dari Diklat </span>
               </div>
               @endif
 
-              @if ($user_request->status_sdm == 'approved')
+              @if (!empty($user_request->status_sdm) && $user_request->status_sdm == 'approved')
               <div class="alert alert-success" role="alert">
                   <span class="alert-inner--icon"><i class="fe fe-bell"></i></span>
                   <span class="alert-inner--text"><strong>Informasi !</strong> Permintaan ubah data profil telah disetujui SDM </span>
               </div>
               @endif
 
-              @if ($user_request->status_diklat == 'approved')
+              @if (!empty($user_request->status_diklat) && $user_request->status_diklat == 'approved')
               <div class="alert alert-success" role="alert">
                   <span class="alert-inner--icon"><i class="fe fe-bell"></i></span>
                   <span class="alert-inner--text"><strong>Informasi !</strong> Permintaan ubah data profil telah disetujui Diklat </span>
@@ -64,7 +64,7 @@
                   <span class="alert-inner--text"><strong>Informasi !</strong> Permintaan ubah data profil anda ditolak dengan alasan : </span>
                   <br />
                   <ol>
-                  @foreach ($reject_request as $key => $val)
+                  @foreach (!empty($reject_request) && $reject_request as $key => $val)
                     <li>{{$val->description}}</li>
                   @endforeach
                 </ol>

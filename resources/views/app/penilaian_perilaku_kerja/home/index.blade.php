@@ -61,7 +61,7 @@
             </td>
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
-                    <a href="{{ url('/penilaian_perilaku_kerja/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-user"></i></a>
+                    <a href="{{ url('/penilaian_perilaku_kerja/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-user"></i> Beri Penilaian Perilaku</a>
                 </div>
             </td>
         </tr>

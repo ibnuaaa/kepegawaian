@@ -80,7 +80,7 @@
             </td>
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
-                    <a href="{{ url('/user_request/'.$props['menu'].'/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                    <a href="{{ url('/user_request/'.$props['menu'].'/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i> Detail</a>
                 </div>
             </td>
         </tr>

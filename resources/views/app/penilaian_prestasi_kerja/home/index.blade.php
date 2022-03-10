@@ -62,16 +62,16 @@
             </td>
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
-                    <a href="{{ url('/penilaian_prestasi_kerja/pdf/'.$item->id) }}" class="btn btn-info"><i class="fa fa-file-pdf-o"></i></a>
-                    <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                    <a onClick="return remove('{{$item->id}}','{{ $item->name }}')" href="#" class="btn btn-danger">
-                        <i class="fa fa-trash"></i>
+                    <a href="{{ url('/penilaian_prestasi_kerja/pdf/'.$item->id) }}" class="btn btn-info btn-xs"><i class="fa fa-file-pdf-o"></i> Download PDF</a>
+                    <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->id) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"> Edit</i></a>
+                    <a onClick="return remove('{{$item->id}}','{{ $item->name }}')" href="#" class="btn btn-danger btn-xs">
+                        <i class="fa fa-trash"></i> Hapus
                     </a>
                     @if (!empty($props['jabatan']->is_staff) && $props['jabatan']->is_staff)
-                    <a href="{{ url('/penilaian_prestasi_kerja/logbook/'.$item->id) }}" class="btn btn-primary"><i class="fa fa-list-alt"></i></a>
+                    <a href="{{ url('/penilaian_prestasi_kerja/logbook/'.$item->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-list-alt"></i> Logbook</a>
                     @endif
                     @if (!$props['jabatan']->is_staff)
-                    <a href="{{ url('/penilaian_prestasi_kerja/id/'.$item->id) }}" class="btn btn-success"><i class="fa fa-file"></i></a>
+                    <a href="{{ url('/penilaian_prestasi_kerja/id/'.$item->id) }}" class="btn btn-success btn-xs"><i class="fa fa-file"></i> Buat Program / Kegiatan </a>
                     @endif
                 </div>
             </td>
