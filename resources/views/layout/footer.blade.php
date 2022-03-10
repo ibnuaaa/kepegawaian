@@ -77,7 +77,7 @@
 <script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
 
 <script>
-
+        var g_is_show_popup = '0'
         $(document).ready(function() {
 
 
@@ -100,11 +100,13 @@
             }
 
             $('body input').on('keyup', function() {
-                g_timeout = parseInt({{getConfig('session_timeout')}});
+                  g_timeout = parseInt({{getConfig('session_timeout')}});
             })
 
             document.onmousemove = function(event) {
-              g_timeout = parseInt({{getConfig('session_timeout')}});
+              if (g_is_show_popup == '0') {
+                g_timeout = parseInt({{getConfig('session_timeout')}});
+              }
             }
 
             $("#modalPreview").on('shown.bs.modal', function () {
@@ -119,6 +121,7 @@
 
         function addSessionTimeout() {
           $('#modalSession').modal('hide');
+          g_is_show_popup = '0'
           g_timeout = parseInt({{getConfig('session_timeout')}})
           return false;
         }
@@ -134,7 +137,10 @@
               location.href = '/logout'
             } else {
 
+
+
               if (g_timeout < parseInt({{getConfig('session_timeout_popup')}})) {
+                g_is_show_popup = '1'
                 $('#modalSession').modal('show');
               }
 
