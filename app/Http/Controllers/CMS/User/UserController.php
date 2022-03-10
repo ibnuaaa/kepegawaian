@@ -77,7 +77,6 @@ class UserController extends Controller
                 (object)['name' => 'name', 'label' => 'Name'],
                 (object)['name' => 'username', 'label' => 'username'],
                 (object)['name' => 'jabatan', 'label' => 'Jabatan'],
-                (object)['name' => 'terbuat_pada', 'label' => 'Terbuat Pada'],
                 (object)['name' => 'action', 'label' => 'ACTION']
             ],
             'records' => []
@@ -267,7 +266,12 @@ class UserController extends Controller
         $UserRequest = UserRequestBrowseController::FetchBrowse($request)
             ->where('user_id', MyAccount()->id)
             ->get('first');
-        $last_request_id = $UserRequest['records']->id;
+
+        $last_request_id = 0;
+        if (!empty($UserRequest['records']->id)) {
+            $last_request_id = $UserRequest['records']->id;
+        }
+
         $UserRequestReject = UserRequestRejectBrowseController::FetchBrowse($request)
             ->where('user_request_id', $last_request_id)
             ->where('status', 'rejected')
@@ -287,7 +291,10 @@ class UserController extends Controller
 
     public function ChangePassword(Request $request)
     {
-        return view('app.user.change_password.index');
+
+        return view('app.user.change_password.index', [
+          'change_password' => '1'
+        ]);
     }
 
     public function Edit(Request $request, $id)
