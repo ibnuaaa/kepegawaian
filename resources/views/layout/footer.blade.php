@@ -80,7 +80,8 @@
 
         $(document).ready(function() {
 
-            @if (MyAccount()->is_change_password != 1)
+
+            @if (!empty(MyAccount()) && MyAccount()->is_change_password != 1)
                 @if (empty($change_password))
                     swal({
                         title: "Ubah Password",
