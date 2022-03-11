@@ -1075,7 +1075,7 @@ if ($menu == 'sdm') {
             background: #aaffaa;
         }
 
-        .bg-changed input{
+        .bg-changed input, .bg-changed select{
             background: #ffffaa !important;
         }
         @endif
