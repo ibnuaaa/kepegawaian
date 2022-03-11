@@ -62,19 +62,10 @@
                         @endif
 
                         @if (getPermissions('dokumen')['checked'])
-                        <li class="slide @yield('userRequestDiklatMenuClass')">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">Approval Diklat</span><i class="angle fe fe-chevron-right"></i></a>
-                            <ul class="slide-menu">
-                                <li><a href="{!! url('/user_request/status/new/diklat'); !!}" class="slide-item  @yield('userRequestNewDiklatMenuClass')"> Request Baru</a></li>
-                                <li><a href="{!! url('/user_request/status/request_approval/diklat'); !!}" class="slide-item @yield('userRequestRequestApprovalDiklatMenuClass')"> Permintaan Approval</a></li>
-                                <li><a href="{!! url('/user_request/status/approved/diklat'); !!}" class="slide-item @yield('userRequestApprovedDiklatMenuClass')"> Disetujui</a></li>
-                            </ul>
-                        </li>
-                        @endif
-
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/document_unit'); !!}"><i class="side-menu__icon fe fe-folder"></i><span class="side-menu__label">Dokumen</span></a>
                         </li>
+                        @endif
 
                         @if (getPermissions('modul_pengguna')['checked'])
                         <li class="sub-category">

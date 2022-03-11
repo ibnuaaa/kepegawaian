@@ -155,7 +155,14 @@ class PermissionSeeder extends Seeder
                 'name' => 'audit_trail',
                 'label' => 'audit_trail',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 25,
+                'name' => 'dokumen',
+                'label' => 'dokumen',
+                'created_at' => Carbon::now()
             ]
+
 
 
         ])->keyBy($this->key);
