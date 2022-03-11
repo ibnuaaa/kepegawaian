@@ -150,7 +150,13 @@
                         </li>
                         @endif
                         <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="/logout">
+                            <a class="side-menu__item" data-bs-toggle="slide" target="_blank" href="/Juknis.Simpeg.Ver.0.1.pdf">
+                              <i class="side-menu__icon fe fe-book  "></i>
+                              <span class="side-menu__label">Buku Petunjuk</span>
+                            </a>
+                        </li>
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="/">
                               <i class="side-menu__icon fe fe-log-out"></i>
                               <span class="side-menu__label">Logout</span>
                             </a>

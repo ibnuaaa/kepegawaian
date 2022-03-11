@@ -64,7 +64,7 @@
                   <span class="alert-inner--text"><strong>Informasi !</strong> Permintaan ubah data profil anda ditolak dengan alasan : </span>
                   <br />
                   <ol>
-                  @foreach (!empty($reject_request) && $reject_request as $key => $val)
+                  @foreach ($reject_request as $key => $val)
                     <li>{{$val->description}}</li>
                   @endforeach
                 </ol>
