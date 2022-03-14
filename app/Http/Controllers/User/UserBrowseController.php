@@ -152,6 +152,7 @@ class UserBrowseController extends Controller
             "$this->UserTable.pendidikan_detail as user.pendidikan_detail",
             "$this->UserTable.no_str as user.no_str",
             "$this->UserTable.masa_berlaku_str as user.masa_berlaku_str",
+            "$this->UserTable.no_sip as user.no_sip",
 
             "$this->UserTable.email as user.email",
             "$this->UserTable.gender as user.gender",
@@ -180,6 +181,7 @@ class UserBrowseController extends Controller
        ->with('foto_kk')
        ->with('foto_bpjs')
        ->with('foto_profile')
+       ->with('foto_sip')
        ->with('status_pegawai')
        ;
 

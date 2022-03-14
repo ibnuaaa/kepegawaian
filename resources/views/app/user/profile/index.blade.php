@@ -242,6 +242,28 @@
                                 </div>
                             </div>
                             <div class=" row mb-4">
+                                <label class="col-md-2 form-label">No SIP</label>
+                                <div class="col-md-9">
+                                    {{!empty($data->no_sip) ? ($data->no_sip) : ''}}
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <label class="col-md-2 form-label">Upload File SIP (PDF)</label>
+                                <div class="col-md-9">
+                                    <div class="img-preview mt-2" id="img-preview">
+                                        @if (!empty($data->foto_sip))
+                                        @foreach ($data->foto_sip as $key => $val)
+                                        <a href="/api/preview/{{$val->storage->key}}">
+                                            <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
+                                        </a>
+                                        @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class=" row mb-4">
                                 <label class="col-md-2 form-label">Jabatan Fungsional</label>
                                 <div class="col-md-9">
                                     {{!empty($data->jabatan_fungsional->name) ? $data->jabatan_fungsional->name : ''}}

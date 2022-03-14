@@ -239,6 +239,33 @@ if ($menu == 'sdm') {
                                     </div>
                                 </div>
 
+                                <div class="row mb-4 {{ $data->no_sip != $data->user->no_sip ? 'bg-changed' : '' }}">
+                                    <label class="col-md-2 form-label">Nomor SIP <br/><span style="font-size: 11px;">(Jika Tenaga Kesehatan)</span></label>
+                                    <div class="col-md-9">
+                                      <input name="no_sip" value="{{ $data['no_sip'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <label class="col-md-2 form-label">Upload File SIP (PDF)</label>
+                                    <div class="col-md-9">
+                                        @if(($page == 'profile'  || $page == 'admin_update_profile'))
+                                        <input type="file" onchange="prepareUpload(this, 'foto_sip{{ !$id ? '_request' : '' }}', '{{ $data['id'] }}', false, ['pdf']);" multiple>
+                                        @endif
+                                        <div style="clear: both;"></div>
+                                        <div class="img-preview mt-2" id="img-preview">
+                                            @if (!empty($data->foto_sip))
+                                            @foreach ($data->foto_sip as $key => $val2)
+                                            <a href="/api/preview/{{$val2->storage->key}}">
+                                                <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
+                                            </a>
+                                            @endforeach
+                                            @endif
+                                            <div style="clear: both;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row mb-4 {{ $data->status_perkawinan_id != $data->user->status_perkawinan_id ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Status Perkawinan</label>
                                     <div class="col-md-9">

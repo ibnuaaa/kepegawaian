@@ -54,6 +54,7 @@ class Update extends BaseMiddleware
             !$this->_Request->input('pendidikan_detail') || $this->Model->User->pendidikan_detail = $this->_Request->input('pendidikan_detail');
             !$this->_Request->input('gender') || $this->Model->User->gender = $this->_Request->input('gender');
             !$this->_Request->input('no_str') || $this->Model->User->no_str = $this->_Request->input('no_str');
+            !$this->_Request->input('no_sip') || $this->Model->User->no_sip = $this->_Request->input('no_sip');
             !$this->_Request->input('masa_berlaku_str') || $this->Model->User->masa_berlaku_str = $this->_Request->input('masa_berlaku_str');
             !$this->_Request->input('status_pegawai_id') || $this->Model->User->status_pegawai_id = $this->_Request->input('status_pegawai_id');
 

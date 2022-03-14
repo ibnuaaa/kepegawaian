@@ -131,6 +131,7 @@ class UserRequestBrowseController extends Controller
             "$this->UserRequestTable.status_pegawai_id as user_request.status_pegawai_id",
             "$this->UserRequestTable.no_str as user_request.no_str",
             "$this->UserRequestTable.masa_berlaku_str as user_request.masa_berlaku_str",
+            "$this->UserRequestTable.no_sip as user_request.no_sip",
 
             "$this->UserRequestTable.pendidikan_id as user_request.pendidikan_id",
             "$this->UserRequestTable.pendidikan_detail as user_request.pendidikan_detail",
@@ -158,6 +159,7 @@ class UserRequestBrowseController extends Controller
        ->with('foto_kk')
        ->with('foto_bpjs')
        ->with('foto_profile')
+       ->with('foto_sip')
        ->with('user')
        ;
 

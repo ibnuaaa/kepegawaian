@@ -130,4 +130,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
                     ->with('storage');
     }
 
+    public function foto_sip()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'user.id')
+                    ->where('object', 'foto_sip')
+                    ->with('storage');
+    }
+
 }

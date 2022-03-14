@@ -111,4 +111,11 @@ class UserRequest extends Model
                     ->with('storage');
     }
 
+    public function foto_sip()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'user_request.id')
+                    ->where('object', 'foto_sip_request')
+                    ->with('storage');
+    }
+
 }

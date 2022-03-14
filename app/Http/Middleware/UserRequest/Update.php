@@ -33,6 +33,7 @@ class Update extends BaseMiddleware
             $password = app('hash')->make($password);
         }
         if ($this->Model->UserRequest) {
+
             !$this->_Request->input('username') || $this->Model->UserRequest->username = $this->_Request->input('username');
             !$this->_Request->input('name') || $this->Model->UserRequest->name = $this->_Request->input('name');
             !$this->_Request->input('address') || $this->Model->UserRequest->address = $this->_Request->input('address');
@@ -60,6 +61,7 @@ class Update extends BaseMiddleware
             !$this->_Request->input('gender') || $this->Model->UserRequest->gender = $this->_Request->input('gender');
             !$this->_Request->input('no_str') || $this->Model->UserRequest->no_str = $this->_Request->input('no_str');
             !$this->_Request->input('masa_berlaku_str') || $this->Model->UserRequest->masa_berlaku_str = $this->_Request->input('masa_berlaku_str');
+            !$this->_Request->input('no_sip') || $this->Model->UserRequest->no_sip = $this->_Request->input('no_sip');
 
             if ($this->_Request->input('password')) {
                 $this->Model->UserRequest->password = $password;

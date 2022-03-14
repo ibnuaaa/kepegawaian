@@ -201,6 +201,7 @@ class UserRequestController extends Controller
             $UserRequest->telepon  = $User->telepon;
             $UserRequest->hp  = $User->hp;
             $UserRequest->no_str  = $User->no_str;
+            $UserRequest->no_sip  = $User->no_sip;
             $UserRequest->masa_berlaku_str  = $User->masa_berlaku_str;
             $UserRequest->npwp  = $User->npwp;
             $UserRequest->no_rekening  = $User->no_rekening;
@@ -218,6 +219,7 @@ class UserRequestController extends Controller
             $this->CopyDocumentToRequest('ktp', $UserRequest, $User);
             $this->CopyDocumentToRequest('npwp', $UserRequest, $User);
             $this->CopyDocumentToRequest('bpjs', $UserRequest, $User);
+            $this->CopyDocumentToRequest('sip', $UserRequest, $User);
             $this->CopyDocumentToRequest('profile', $UserRequest, $User);
 
             $UserGolongan = UserGolongan::where('user_id', MyAccount()->id)->get();
@@ -356,6 +358,7 @@ class UserRequestController extends Controller
         $User->golongan_id  = $UserRequest->golongan_id;
         $User->status_pegawai_id  = $UserRequest->status_pegawai_id;
         $User->no_str  = $UserRequest->no_str;
+        $User->no_sip  = $UserRequest->no_sip;
         $User->masa_berlaku_str  = $UserRequest->masa_berlaku_str;
         $User->unit_kerja_id  = $UserRequest->unit_kerja_id;
         $User->pendidikan_id  = $UserRequest->pendidikan_id;
@@ -365,6 +368,7 @@ class UserRequestController extends Controller
         $this->updateDocumentAfterApprove('ktp', $User->id, $UserRequest);
         $this->updateDocumentAfterApprove('npwp', $User->id, $UserRequest);
         $this->updateDocumentAfterApprove('bpjs', $User->id, $UserRequest);
+        $this->updateDocumentAfterApprove('sip', $User->id, $UserRequest);
         $this->updateDocumentAfterApprove('kk', $User->id, $UserRequest);
         $this->updateDocumentAfterApprove('profile', $User->id, $UserRequest);
 
