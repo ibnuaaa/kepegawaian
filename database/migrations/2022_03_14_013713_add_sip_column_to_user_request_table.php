@@ -15,7 +15,7 @@ class AddSipColumnToUserRequestTable extends Migration
     {
         Schema::table('user_request', function (Blueprint $table) {
             //
-            $table->string('no_sip')->nullable()->default(null)->after('masa_ber_str');
+            $table->string('no_sip')->nullable()->default(null)->after('masa_berlaku_str');
         });
     }
 
