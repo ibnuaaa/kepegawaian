@@ -183,6 +183,26 @@ if ($menu == 'sdm') {
                                         <input name="hp" value="{{ $data['hp'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
+
+                                <div class="row mb-4 {{ $data->hp != $data->user->nama_kontak_darurat ? 'bg-changed' : '' }}">
+                                    <label class="col-md-2 form-label">Nama Kontak Darurat</label>
+                                    <div class="col-md-9">
+                                        <input name="hp" value="{{ $data['nama_kontak_darurat'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-4 {{ $data->hp != $data->user->hubungan_kontak_darurat ? 'bg-changed' : '' }}">
+                                    <label class="col-md-2 form-label">Hubungan Kontak Darurat</label>
+                                    <div class="col-md-9">
+                                        <input name="hp" value="{{ $data['hubungan_kontak_darurat'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-4 {{ $data->hp != $data->user->no_handphone_kontak_darurat ? 'bg-changed' : '' }}">
+                                    <label class="col-md-2 form-label">No HP Kontak Darurat</label>
+                                    <div class="col-md-9">
+                                        <input name="hp" value="{{ $data['no_handphone_kontak_darurat'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
+                                    </div>
+                                </div>
+
                                 <div class="row mb-4 {{ $data->npwp != $data->user->npwp ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">NPWP</label>
                                     <div class="col-md-9">

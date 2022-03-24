@@ -200,6 +200,9 @@ class UserRequestController extends Controller
             $UserRequest->kode_pos  = $User->kode_pos;
             $UserRequest->telepon  = $User->telepon;
             $UserRequest->hp  = $User->hp;
+            $UserRequest->nama_kontak_darurat  = $User->nama_kontak_darurat;
+            $UserRequest->hubungan_kontak_darurat  = $User->hubungan_kontak_darurat;
+            $UserRequest->no_handphone_kontak_darurat  = $User->no_handphone_kontak_darurat;
             $UserRequest->no_str  = $User->no_str;
             $UserRequest->no_sip  = $User->no_sip;
             $UserRequest->masa_berlaku_str  = $User->masa_berlaku_str;
@@ -351,6 +354,9 @@ class UserRequestController extends Controller
         $User->kode_pos  = $UserRequest->kode_pos;
         $User->telepon  = $UserRequest->telepon;
         $User->hp  = $UserRequest->hp;
+        $User->nama_kontak_darurat  = $UserRequest->nama_kontak_darurat;
+        $User->hubungan_kontak_darurat  = $UserRequest->hubungan_kontak_darurat;
+        $User->no_handphone_kontak_darurat  = $UserRequest->no_handphone_kontak_darurat;
         $User->npwp  = $UserRequest->npwp;
         $User->no_rekening  = $UserRequest->no_rekening;
         $User->golongan_darah  = $UserRequest->golongan_darah;
@@ -581,27 +587,27 @@ class UserRequestController extends Controller
         $message  = [];
 
         if (empty($user_golongan_request)) {
-          $message[] = "Riwayat Golongan Harus Diisi";
+          // $message[] = "Riwayat Golongan Harus Diisi";
         }
 
         if (empty($user_jabatan_request)) {
-          $message[] = "Riwayat Jabatan Harus Diisi";
+          // $message[] = "Riwayat Jabatan Harus Diisi";
         }
 
         if (empty($user_jabatan_fungsional_request)) {
-          $message[] = "Riwayat Jabatan Fungsional Harus Diisi";
+          // $message[] = "Riwayat Jabatan Fungsional Harus Diisi";
         }
 
         if (empty($user_keluarga_request)) {
-          $message[] = "Data Keluarga Harus Diisi";
+          // $message[] = "Data Keluarga Harus Diisi";
         }
 
         if (empty($user_pelatihan_request)) {
-          $message[] = "Riwayat Pelatihan Harus Diisi";
+          // $message[] = "Riwayat Pelatihan Harus Diisi";
         }
 
         if (empty($user_pendidikan_request)) {
-          $message[] = "Riwayat Pendidikan Harus Diisi";
+          // $message[] = "Riwayat Pendidikan Harus Diisi";
         }
 
         if (count($message) > 0) {
