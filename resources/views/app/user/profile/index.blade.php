@@ -28,8 +28,6 @@
             <div class="card-body">
 
 
-
-
               @if (!empty($user_request->status_sdm) && $user_request->status_sdm == 'request_approval')
               <div class="alert alert-info" role="alert">
                   <span class="alert-inner--icon"><i class="fe fe-bell"></i></span>
@@ -214,7 +212,7 @@
                             <div class=" row mb-4">
                                 <label class="col-md-2 form-label">Unit Kerja</label>
                                 <div class="col-md-9">
-                                    {{$data->unit_kerja->name}}
+                                    {{!empty($data->unit_kerja->name) ? $data->unit_kerja->name : ''}}
                                 </div>
                             </div>
                             <div class=" row mb-4">
