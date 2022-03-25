@@ -322,11 +322,20 @@ function approve(menu) {
 
 
       axios.post('/user_request/approve', data).then((response) => {
-          @if($page == 'profile')
-          location.href= '/profile'
-          @else
-          location.href= '/user_request/status/request_approval/' + menu
-          @endif
+
+          if (menu == 'sdm') {
+
+            approve('diklat');
+
+          } else {
+            @if($page == 'profile')
+            location.href= '/profile'
+            @else
+            location.href= '/user_request/status/request_approval/' + menu
+            @endif
+          }
+
+
           // console.log(response.data)
       }).catch((error) => {
           if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
