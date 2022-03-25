@@ -35,6 +35,7 @@ class Update extends BaseMiddleware
         if ($this->Model->UserRequest) {
 
             !$this->_Request->input('username') || $this->Model->UserRequest->username = $this->_Request->input('username');
+            !$this->_Request->input('email') || $this->Model->UserRequest->email = $this->_Request->input('email');
             !$this->_Request->input('name') || $this->Model->UserRequest->name = $this->_Request->input('name');
             !$this->_Request->input('address') || $this->Model->UserRequest->address = $this->_Request->input('address');
             !$this->_Request->input('position_id') || $this->Model->UserRequest->position_id = $this->_Request->input('position_id');

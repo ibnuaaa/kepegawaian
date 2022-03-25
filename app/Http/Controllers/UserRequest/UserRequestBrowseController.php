@@ -113,6 +113,7 @@ class UserRequestBrowseController extends Controller
             "$this->UserRequestTable.username as user_request.username",
             "$this->UserRequestTable.user_id as user_request.user_id",
             "$this->UserRequestTable.nip as user_request.nip",
+            "$this->UserRequestTable.email as user_request.email",
 
             "$this->UserRequestTable.no_ktp as user_request.no_ktp",
             "$this->UserRequestTable.tanggal_lahir as user_request.tanggal_lahir",

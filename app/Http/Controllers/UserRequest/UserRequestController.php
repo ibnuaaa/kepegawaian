@@ -190,6 +190,7 @@ class UserRequestController extends Controller
 
         if ($isCreateNew) {
             $UserRequest->username  = $User->username;
+            $UserRequest->email  = $User->email;
             $UserRequest->jabatan_id  = $User->jabatan_id;
             $UserRequest->jabatan_fungsional_id  = $User->jabatan_fungsional_id;
             $UserRequest->nip  = $User->nip;
@@ -344,6 +345,7 @@ class UserRequestController extends Controller
 
         $User = User::where('id', $UserRequest->user_id)->first();
         $User->username  = $UserRequest->username;
+        $User->email  = $UserRequest->email;
         $User->jabatan_id  = $UserRequest->jabatan_id;
         $User->jabatan_fungsional_id  = $UserRequest->jabatan_fungsional_id;
         $User->nip  = $UserRequest->nip;

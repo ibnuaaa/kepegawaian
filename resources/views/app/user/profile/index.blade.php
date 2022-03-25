@@ -131,6 +131,12 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
+                                <label class="col-md-2 form-label">Email</label>
+                                <div class="col-md-9">
+                                    {{ $data['email'] }}
+                                </div>
+                            </div>
+                            <div class="row mb-4">
                                 <label class="col-md-2 form-label">NIP</label>
                                 <div class="col-md-9">
                                     {{ $data['nip'] }}
