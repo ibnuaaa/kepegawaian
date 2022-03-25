@@ -217,7 +217,7 @@ if ($menu == 'sdm') {
                                     </div>
                                 </div>
                                 <div class="row mb-4 {{ $data->no_rekening != $data->user->no_rekening ? 'bg-changed' : '' }}">
-                                    <label class="col-md-2 form-label">No Rekening</label>
+                                    <label class="col-md-2 form-label">No Rekening  (Mandiri)</label>
                                     <div class="col-md-9">
                                         <input name="no_rekening" value="{{ $data['no_rekening'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>

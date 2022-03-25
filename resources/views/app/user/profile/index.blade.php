@@ -191,7 +191,7 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label class="col-md-2 form-label">No Rekening</label>
+                                <label class="col-md-2 form-label">No Rekening (Mandiri)</label>
                                 <div class="col-md-9">
                                     {{ $data['no_rekening'] }}
                                 </div>
