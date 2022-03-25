@@ -48,6 +48,8 @@ class Update extends BaseMiddleware
             !$this->_Request->input('tempat_lahir') || $this->Model->UserRequest->tempat_lahir = $this->_Request->input('tempat_lahir');
             !$this->_Request->input('alamat') || $this->Model->UserRequest->alamat = $this->_Request->input('alamat');
             !$this->_Request->input('kode_pos') || $this->Model->UserRequest->kode_pos = $this->_Request->input('kode_pos');
+            !$this->_Request->input('alamat_domisili') || $this->Model->UserRequest->alamat_domisili = $this->_Request->input('alamat_domisili');
+            !$this->_Request->input('kode_pos_domisili') || $this->Model->UserRequest->kode_pos_domisili = $this->_Request->input('kode_pos_domisili');
             !$this->_Request->input('telepon') || $this->Model->UserRequest->telepon = $this->_Request->input('telepon');
             !$this->_Request->input('hp') || $this->Model->UserRequest->hp = $this->_Request->input('hp');
             !$this->_Request->input('npwp') || $this->Model->UserRequest->npwp = $this->_Request->input('npwp');

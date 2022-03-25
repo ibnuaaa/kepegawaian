@@ -172,6 +172,20 @@
                                     {{ $data['kode_pos'] }}
                                 </div>
                             </div>
+
+                            <div class="row mb-4">
+                                <label class="col-md-2 form-label">Alamat (Domisili)</label>
+                                <div class="col-md-9">
+                                    {{ $data['alamat_domisili'] }}
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label class="col-md-2 form-label">Kode Pos (Domisili)</label>
+                                <div class="col-md-9">
+                                    {{ $data['kode_pos_domisili'] }}
+                                </div>
+                            </div>
+
                             <div class="row mb-4">
                                 <label class="col-md-2 form-label">Telepon</label>
                                 <div class="col-md-9">

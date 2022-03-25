@@ -138,6 +138,8 @@ class UserBrowseController extends Controller
             "$this->UserTable.tempat_lahir as user.tempat_lahir",
             "$this->UserTable.alamat as user.alamat",
             "$this->UserTable.kode_pos as user.kode_pos",
+            "$this->UserTable.alamat_domisili as user.alamat_domisili",
+            "$this->UserTable.kode_pos_domisili as user.kode_pos_domisili",
             "$this->UserTable.telepon as user.telepon",
             "$this->UserTable.hp as user.hp",
             "$this->UserTable.npwp as user.npwp",

@@ -120,6 +120,8 @@ class UserRequestBrowseController extends Controller
             "$this->UserRequestTable.tempat_lahir as user_request.tempat_lahir",
             "$this->UserRequestTable.alamat as user_request.alamat",
             "$this->UserRequestTable.kode_pos as user_request.kode_pos",
+            "$this->UserRequestTable.alamat_domisili as user_request.alamat_domisili",
+            "$this->UserRequestTable.kode_pos_domisili as user_request.kode_pos_domisili",
             "$this->UserRequestTable.telepon as user_request.telepon",
             "$this->UserRequestTable.hp as user_request.hp",
             "$this->UserRequestTable.npwp as user_request.npwp",

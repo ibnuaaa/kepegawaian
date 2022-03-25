@@ -199,6 +199,8 @@ class UserRequestController extends Controller
             $UserRequest->tempat_lahir  = $User->tempat_lahir;
             $UserRequest->alamat  = $User->alamat;
             $UserRequest->kode_pos  = $User->kode_pos;
+            $UserRequest->alamat_domisili  = $User->alamat_domisili;
+            $UserRequest->kode_pos_domisili  = $User->kode_pos_domisili;
             $UserRequest->telepon  = $User->telepon;
             $UserRequest->hp  = $User->hp;
             $UserRequest->nama_kontak_darurat  = $User->nama_kontak_darurat;
@@ -354,6 +356,8 @@ class UserRequestController extends Controller
         $User->tempat_lahir  = $UserRequest->tempat_lahir;
         $User->alamat  = $UserRequest->alamat;
         $User->kode_pos  = $UserRequest->kode_pos;
+        $User->alamat_domisili  = $UserRequest->alamat_domisili;
+        $User->kode_pos_domisili  = $UserRequest->kode_pos_domisili;
         $User->telepon  = $UserRequest->telepon;
         $User->hp  = $UserRequest->hp;
         $User->nama_kontak_darurat  = $UserRequest->nama_kontak_darurat;

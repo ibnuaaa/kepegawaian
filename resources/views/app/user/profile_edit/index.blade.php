@@ -167,15 +167,28 @@ if ($menu == 'sdm') {
                                     </div>
                                 </div>
                                 <div class="row mb-4 {{ $data->alamat != $data->user->alamat ? 'bg-changed' : '' }}">
-                                    <label class="col-md-2 form-label">Alamat</label>
+                                    <label class="col-md-2 form-label">Alamat (KTP)</label>
                                     <div class="col-md-9">
                                         <input name="alamat" value="{{ $data['alamat'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
                                 <div class="row mb-4 {{ $data->kode_pos != $data->user->kode_pos ? 'bg-changed' : '' }}">
-                                    <label class="col-md-2 form-label">Kode Pos</label>
+                                    <label class="col-md-2 form-label">Kode Pos (KTP)</label>
                                     <div class="col-md-9">
                                         <input name="kode_pos" value="{{ $data['kode_pos'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4 {{ $data->alamat != $data->user->alamat_domisili ? 'bg-changed' : '' }}">
+                                    <label class="col-md-2 form-label">Alamat (Domisili)</label>
+                                    <div class="col-md-9">
+                                        <input name="alamat_domisili" value="{{ $data['alamat_domisili'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-4 {{ $data->kode_pos != $data->user->kode_pos_domisili ? 'bg-changed' : '' }}">
+                                    <label class="col-md-2 form-label">Kode Pos (Domisili)</label>
+                                    <div class="col-md-9">
+                                        <input name="kode_pos_domisili" value="{{ $data['kode_pos_domisili'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
                                 <div class="row mb-4 {{ $data->telepon != $data->user->telepon ? 'bg-changed' : '' }}">
