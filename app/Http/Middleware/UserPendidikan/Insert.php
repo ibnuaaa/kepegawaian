@@ -17,6 +17,8 @@ class Insert extends BaseMiddleware
         $this->Model->UserPendidikan->user_id = $this->_Request->input('user_id');
         $this->Model->UserPendidikan->pendidikan_id = $this->_Request->input('pendidikan_id');
         $this->Model->UserPendidikan->pendidikan_detail = $this->_Request->input('pendidikan_detail');
+        $this->Model->UserPendidikan->fakultas = $this->_Request->input('fakultas');
+        $this->Model->UserPendidikan->nim = $this->_Request->input('nim');
         $this->Model->UserPendidikan->no_ijazah = $this->_Request->input('no_ijazah');
         $this->Model->UserPendidikan->tahun_lulus = $this->_Request->input('tahun_lulus');
     }

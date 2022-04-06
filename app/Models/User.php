@@ -62,7 +62,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function user_pendidikan()
     {
-        return $this->hasMany(UserPendidikan::class, 'user_id', 'user.id')->with('pendidikan');
+        return $this->hasMany(UserPendidikan::class, 'user_id', 'user.id')
+          ->with('pendidikan')
+          ->with('foto_ijazah')
+          ->with('foto_transkrip_nilai');
     }
 
     public function user_pelatihan()
@@ -113,6 +116,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasMany(Document::class, 'object_id', 'user.id')
                     ->where('object', 'foto_kk')
+                    ->with('storage');
+    }
+
+    public function foto_akta_nikah()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'user.id')
+                    ->where('object', 'foto_akta_nikah')
                     ->with('storage');
     }
 

@@ -97,6 +97,13 @@ class UserRequest extends Model
                     ->with('storage');
     }
 
+    public function foto_akta_nikah()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'user_request.id')
+                    ->where('object', 'foto_akta_nikah_request')
+                    ->with('storage');
+    }
+
     public function foto_bpjs()
     {
         return $this->hasMany(Document::class, 'object_id', 'user_request.id')

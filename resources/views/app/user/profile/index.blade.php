@@ -34,12 +34,6 @@
                   <span class="alert-inner--text"><strong>Informasi !</strong> Permintaan ubah data profil menunggu approval dari SDM </span>
               </div>
               @endif
-              @if (!empty($user_request->status_diklat) && $user_request->status_diklat == 'request_approval')
-              <div class="alert alert-info" role="alert">
-                  <span class="alert-inner--icon"><i class="fe fe-bell"></i></span>
-                  <span class="alert-inner--text"><strong>Informasi !</strong> Permintaan ubah data profil menunggu approval dari Diklat </span>
-              </div>
-              @endif
 
               @if (!empty($user_request->status_sdm) && $user_request->status_sdm == 'approved')
               <div class="alert alert-success" role="alert">
@@ -355,10 +349,16 @@
                                         No
                                     </th>
                                     <th>
-                                        Nama Pendidikan
+                                        Jenjang Pendidikan
                                     </th>
                                     <th>
-                                        Detail Pendidikan
+                                        Nama Sekolah / Kampus
+                                    </th>
+                                    <th>
+                                        Fakultas
+                                    </th>
+                                    <th>
+                                        NIM
                                     </th>
                                     <th>
                                         No Ijazah
@@ -379,6 +379,12 @@
                                         {{ $val->pendidikan_detail }}
                                     </td>
                                     <td>
+                                        {{ $val->fakultas }}
+                                    </td>
+                                    <td>
+                                        {{ $val->nim   }}
+                                    </td>
+                                    <td>
                                         {{$val->no_ijazah ? $val->no_ijazah : ''}}
                                     </td>
                                     <td>
@@ -386,15 +392,32 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5">
-                                        <div class="img-preview mt-2" id="img-preview">
-                                            @if (!empty($val->foto_ijazah))
-                                            @foreach ($val->foto_ijazah as $key => $val)
-                                            <a href="/api/preview/{{$val->storage->key}}">
-                                                <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
-                                            </a>
-                                            @endforeach
-                                            @endif
+                                    <td colspan="9">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <h4>File Ijazah</h4>
+                                                <div class="img-preview mt-2" id="img-preview">
+                                                    @if (!empty($val->foto_ijazah))
+                                                    @foreach ($val->foto_ijazah as $key2 => $val2)
+                                                    <a href="/api/preview/{{$val2->storage->key}}">
+                                                        <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
+                                                    </a>
+                                                    @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <h4>File Transkrip Nilai</h4>
+                                                <div class="img-preview mt-2" id="img-preview">
+                                                    @if (!empty($val->foto_transkrip_nilai))
+                                                    @foreach ($val->foto_transkrip_nilai as $key2 => $val2)
+                                                    <a href="/api/preview/{{$val2->storage->key}}">
+                                                        <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
+                                                    </a>
+                                                    @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -465,114 +488,370 @@
                                 @endif
 
                             </div>
+
+
+                            <br />
+                            <h4>Foto Akta Nikah</h4>
+                            <div class="img-preview mt-2 mb-5" id="img-preview">
+                                @if (!empty($data->foto_akta_nikah))
+                                @foreach ($data->foto_akta_nikah as $key => $val)
+                                <a href="/api/preview/{{$val->storage->key}}">
+                                    <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
+                                </a>
+                                @endforeach
+                                @endif
+
+                            </div>
+
+
                             <div class="table-responsive">
                                 <div id="responsive-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                                    <table class="table table-bordered">
-                                        <tr>
-                                            <th style="min-width: 80px;" rowspan="2">
-                                                No
-                                            </th>
-                                            <th style="min-width: 200px;" rowspan="2">
-                                                Nama Lengkap
-                                            </th>
-                                            <th style="min-width: 200px;" rowspan="2">
-                                                NIK
-                                            </th>
-                                            <th style="min-width: 200px;" rowspan="2">
-                                                Jenis Kelamin
-                                            </th>
-                                            <th style="min-width: 200px;" rowspan="2">
-                                                Tempat Lahir
-                                            </th>
-                                            <th style="min-width: 200px;" rowspan="2">
-                                                Tanggal Lahir
-                                            </th>
-                                            <th style="min-width: 200px;" rowspan="2">
-                                                Agama
-                                            </th>
-                                            <th style="min-width: 200px;" rowspan="2">
-                                                Pendidikan
-                                            </th>
-                                            <th style="min-width: 200px;" rowspan="2">
-                                                Jenis Pekerjaan
-                                            </th>
-                                            <th style="min-width: 200px;" rowspan="2">
-                                                Status Perkawinan
-                                            </th>
-                                            <th style="min-width: 200px;" rowspan="2">
-                                                Status Hub Dalam Keluarga
-                                            </th>
-                                            <th style="min-width: 200px;" rowspan="2">
-                                                Kewarganegaraan
-                                            </th>
-                                            <th colspan="2">
-                                                Dok Imigrasi
-                                            </th>
-                                            <th colspan="2">
-                                                Nama Orangtua
-                                            </th>
-                                        </tr>
 
-                                        <tr>
-                                            <th style="min-width: 200px;">No Paspor</th>
-                                            <th style="min-width: 200px;">No Kitas / Kitap</th>
-                                            <th style="min-width: 200px;">Ayah</th>
-                                            <th style="min-width: 200px;">Ibu</th>
-                                        </tr>
+                                      @foreach ($data->user_keluarga as $key => $val)
+                                      <div style="border-bottom: solid thin #ccc;padding-top: 30px;" class="disable-form">
+                                          <div class="row">
+                                              <div class="col-md-6">
+                                                  <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Hub Keluarga</label>
+                                                        <div class="col-md-8">
+                                                            <select class="form-control form-select" name="hub_keluarga_id" data-id="{{ $val->id }}">
+                                                                <option>-= Pilih =-</option>
+                                                                <option value="1" @if ($val->hub_keluarga_id == '1') selected='selected'  @endif>Pasangan Saya (suami / istri)</option>
+                                                                <option value="2" @if ($val->hub_keluarga_id == '2') selected='selected'  @endif>Anak Saya</option>
+                                                                <option value="3" @if ($val->hub_keluarga_id == '3') selected='selected'  @endif>Lain2 (Ayah saya / Ibu saya / Kakek saya / Nenek Saya / Adik Saya / Kakak Saya)</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        @if ($val->hub_keluarga_id == 1)
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Nama Suami / Istri</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->nama_lengkap != $val->user_keluarga->nama_lengkap ? 'bg-changed' : '' }}">
+                                                            <input name="nama_lengkap" value="{{ $val->nama_lengkap }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">NIK Suami / Istri</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->nik != $val->user_keluarga->nik ? 'bg-changed' : '' }}">
+                                                            <input name="nik" value="{{ $val->nik }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">NIP Suami / Istri (Jika PNS)</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->nip != $val->user_keluarga->nip ? 'bg-changed' : '' }}">
+                                                            <input name="nip" value="{{ $val->nip }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Tempat lahir Suami / Istri</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->tempat_lahir != $val->user_keluarga->tempat_lahir ? 'bg-changed' : '' }}">
+                                                            <input name="tempat_lahir" value="{{ $val->tempat_lahir }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Tanggal lahir Suami / Istri</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->tanggal_lahir != $val->user_keluarga->tanggal_lahir ? 'bg-changed' : '' }}">
+                                                            <input id="myDatepicker" name="tanggal_lahir" value="{{ $val->tanggal_lahir }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">No Akta Nikah</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->no_akta_nikah != $val->user_keluarga->no_akta_nikah ? 'bg-changed' : '' }}">
+                                                            <input name="no_akta_nikah" value="{{ $val->no_akta_nikah }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Tanggal Pernikahan</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->tgl_pernikahan != $val->user_keluarga->tgl_pernikahan ? 'bg-changed' : '' }}">
+                                                            <input id="myDatepicker" name="tgl_pernikahan" value="{{ $val->tgl_pernikahan }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Pekerjaan</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->jenis_pekerjaan != $val->user_keluarga->jenis_pekerjaan ? 'bg-changed' : '' }}">
+                                                            <input name="jenis_pekerjaan" value="{{ $val->jenis_pekerjaan }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Alamat Suami / Istri</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->alamat != $val->user_keluarga->alamat ? 'bg-changed' : '' }}">
+                                                            <input name="alamat" value="{{ $val->alamat }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Telp / HP</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->hp != $val->user_keluarga->hp ? 'bg-changed' : '' }}">
+                                                            <input name="hp" value="{{ $val->hp }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Status</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->status_pasangan != $val->user_keluarga->status_pasangan ? 'bg-changed' : '' }}">
+                                                          <select class="form-control form-select" name="status_pasangan" data-id="{{ $val->id }}">
+                                                            <option>-= Pilih =-</option>
+                                                            <option value="meninggal" @if ($val->status_pasangan == 'meninggal') selected='selected'  @endif>Meninggal</option>
+                                                              <option value="cerai" @if ($val->status_pasangan == 'cerai') selected='selected'  @endif>Cerai</option>
+                                                          </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">No Akta Cerai / Kematian</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->no_akta_cerai_meninggal != $val->user_keluarga->no_akta_cerai_meninggal ? 'bg-changed' : '' }}">
+                                                            <input name="no_akta_cerai_meninggal" value="{{ $val->no_akta_cerai_meninggal }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Tanggal Akta Cerai / Kematian</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->tgl_akta_cerai_meninggal != $val->user_keluarga->tgl_akta_cerai_meninggal ? 'bg-changed' : '' }}">
+                                                            <input id="myDatepicker" name="tgl_akta_cerai_meninggal" value="{{ $val->tgl_akta_cerai_meninggal }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
 
-                                        @foreach ($data->user_keluarga as $key => $val)
-                                        <tr>
-                                            <td>
-                                                {{ $key + 1 }}
-                                            </td>
-                                            <td>
-                                                {{ $val->nama_lengkap }}
-                                            </td>
-                                            <td>
-                                                {{ $val->nik }}
-                                            </td>
-                                            <td>
-                                                {{ $val->jenis_kelamin ? gender($val->jenis_kelamin) : '' }}
-                                            </td>
-                                            <td>
-                                                {{ $val->tempat_lahir }}
-                                            </td>
-                                            <td>
-                                                {{ $val->tanggal_lahir }}
-                                            </td>
-                                            <td>
-                                                {{ $val->agama_id ? agama($val->agama_id) : '' }}
-                                            </td>
-                                            <td>
-                                                {{$val->pendidikan}}
-                                            </td>
-                                            <td>
-                                                {{ $val->jenis_pekerjaan }}
-                                            </td>
-                                            <td>
-                                                {{ $val->status_perkawinan }}
-                                            </td>
-                                            <td>
-                                                {{ $val->hubungan_keluarga }}
-                                            </td>
-                                            <td>
-                                                {{ $val->kewarganegaraan }}
-                                            </td>
-                                            <td>
-                                                {{ $val->no_paspor }}
-                                            </td>
-                                            <td>
-                                                {{ $val->no_kitas }}
-                                            </td>
-                                            <td>
-                                                {{ $val->ayah }}
-                                            </td>
-                                            <td>
-                                                {{ $val->ibu }}
-                                            </td>
-                                        </tr>
+
+
+
+
+                                        @elseif ($val->hub_keluarga_id == 2)
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row mb-4 mt-4">
+                                                        <label class="col-md-4 form-label">Nama Anak</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->nama_lengkap != $val->user_keluarga->nama_lengkap ? 'bg-changed' : '' }}">
+                                                            <input name="nama_lengkap" value="{{ $val->nama_lengkap }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">NIK</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->nik != $val->user_keluarga->nik ? 'bg-changed' : '' }}">
+                                                            <input name="nik" value="{{ $val->nik }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Jenis Kelamin</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->jenis_kelamin != $val->user_keluarga->jenis_kelamin ? 'bg-changed' : '' }}">
+                                                            <input name="jenis_kelamin" value="{{ $val->jenis_kelamin }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Tempat Lahir</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->tempat_lahir != $val->user_keluarga->tempat_lahir ? 'bg-changed' : '' }}">
+                                                            <input name="tempat_lahir" value="{{ $val->tempat_lahir }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Tanggal Lahir</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->tanggal_lahir != $val->user_keluarga->tanggal_lahir ? 'bg-changed' : '' }}">
+                                                            <input id="myDatepicker" name="tanggal_lahir" value="{{ $val->tanggal_lahir }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">No Akta Kelahiran</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->akta_kelahiran != $val->user_keluarga->akta_kelahiran ? 'bg-changed' : '' }}">
+                                                            <input name="akta_kelahiran" value="{{ $val->akta_kelahiran }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Alamat</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->alamat != $val->user_keluarga->alamat ? 'bg-changed' : '' }}">
+                                                            <input name="alamat" value="{{ $val->alamat }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">No Telp / Hp</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->hp != $val->user_keluarga->hp ? 'bg-changed' : '' }}">
+                                                            <input name="hp" value="{{ $val->hp }}" data-id="{{ $val->id }}" class="form-control" type="text" placeholder="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Status Perkawinan</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->status_perkawinan != $val->user_keluarga->status_perkawinan ? 'bg-changed' : '' }}">
+                                                          <select class="form-control form-select" name="status_perkawinan" data-id="{{ $val->id }}">
+                                                              <option value="">-= Pilih =-</option>
+                                                              <option value="belum_menikah" @if( $val->status_perkawinan == 'belum_menikah' ) selected='selected' @endif >Belum Menikah</option>
+                                                              <option value="sudah_menikah" @if( $val->status_perkawinan == 'sudah_menikah' ) selected='selected' @endif>Sudah Menikah</option>
+                                                              <option value="janda" @if( $val->status_perkawinan == 'janda' ) selected='selected' @endif>Janda</option>
+                                                              <option value="duda" @if( $val->status_perkawinan == 'duda' ) selected='selected' @endif>Duda</option>
+                                                          </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Status Pekerjaan</label>
+                                                        <div class="col-md-8 {{ $val->user_keluarga && $val->status_pekerjaan != $val->user_keluarga->status_pekerjaan ? 'bg-changed' : '' }}">
+                                                            <select class="form-control form-select" name="status_pekerjaan_id" data-id="{{ $val->id }}">
+                                                                <option value="">-= Pilih =-</option>W
+                                                                <option value="1" @if( $val->status_pekerjaan_id == '1' ) selected='selected' @endif>Sekolah / Kuliah</option>
+                                                                <option value="2" @if( $val->status_pekerjaan_id == '2' ) selected='selected' @endif>Bekerja</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <label class="col-md-4 form-label">Status Anak</label>
+                                                        <div class="col-md-8 {{ $val->user_pelatihan && $val->status_anak_id != $val->user_pelatihan->status_anak_id ? 'bg-changed' : '' }}">
+                                                          <select class="form-control form-select" name="status_anak_id" data-id="{{ $val->id }}">
+                                                              <option value="">-= Pilih =-</option>W
+                                                              <option value="1" @if( $val->status_pekerjaan_id == '1' ) selected='selected' @endif>Anak Kandung</option>
+                                                              <option value="2" @if( $val->status_pekerjaan_id == '2' ) selected='selected' @endif>Anak Angkat</option>
+                                                          </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            @else
+                                                <div class="row">
+                                                    <div class="col-md-6">
+
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">Nama</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->nama_lengkap != $val->user_keluarga->nama_lengkap ? 'bg-changed' : '' }}">
+                                                                <input name="nama_lengkap" value="{{ $val->nama_lengkap }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">NIK</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->nik != $val->user_keluarga->nik ? 'bg-changed' : '' }}">
+                                                                <input name="nik" value="{{ $val->nik }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">Jenis Kelamin</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->jenis_kelamin != $val->user_keluarga->jenis_kelamin ? 'bg-changed' : '' }}">
+                                                              @component('components.form.awesomeSelect', [
+                                                              'name' => 'jenis_kelamin',
+                                                              'items' => [
+                                                              [
+                                                              'label' => 'Laki-laki',
+                                                              'value' => 'm',
+                                                              ],
+                                                              [
+                                                              'label' => 'Perempuan',
+                                                              'value' => 'f',
+                                                              ]
+                                                              ],
+                                                              'selected' => $val->jenis_kelamin,
+                                                              'data_id' => $val->id
+                                                              ])
+                                                              @endcomponent
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">Tempat Lahir</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->tempat_lahir != $val->user_keluarga->tempat_lahir ? 'bg-changed' : '' }}">
+                                                            <input name="tempat_lahir" value="{{ $val->tempat_lahir }}" data-id="{{ $val->id }}" class="form-control datepicker" type="text" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">Tanggal Lahir</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->tanggal_lahir != $val->user_keluarga->tanggal_lahir ? 'bg-changed' : '' }}">
+                                                            <input name="tanggal_lahir" id="myDatepicker" value="{{ $val->tanggal_lahir }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">Agama</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->nik != $val->user_keluarga->nik ? 'bg-changed' : '' }}">
+                                                            @component('components.form.awesomeSelect', [
+                                                            'name' => 'agama_id',
+                                                            'items' => agama(),
+                                                            'selected' => $val->agama_id,
+                                                            'data_id' => $val->id
+                                                            ])
+                                                            @endcomponent
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">Pendidikan</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->pendidikan_id != $val->user_keluarga->pendidikan_id ? 'bg-changed' : '' }}">
+                                                              @component('components.form.awesomeSelect', [
+                                                              'name' => 'pendidikan_id',
+                                                              'items' => $pendidikan,
+                                                              'selected' => $val->pendidikan_id,
+                                                              'data_id' => $val->id
+                                                              ])
+                                                              @endcomponent
+                                                            </div>
+                                                        </div>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">Jenis Pekerjaan</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->jenis_pekerjaan != $val->user_keluarga->jenis_pekerjaan ? 'bg-changed' : '' }}">
+                                                                <input name="jenis_pekerjaan" value="{{ $val->jenis_pekerjaan }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">Status Perkawinan</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->status_perkawinan != $val->user_keluarga->status_perkawinan ? 'bg-changed' : '' }}">
+                                                                <input name="status_perkawinan" value="{{ $val->status_perkawinan }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">Hub Keluarga</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->hubungan_keluarga != $val->user_keluarga->hubungan_keluarga ? 'bg-changed' : '' }}">
+                                                                <input name="hubungan_keluarga" value="{{ $val->hubungan_keluarga }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                                <i style="font-size: 10px;">Sesuai Dengan Kartu Keluarga</i>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">Kewarganegaraan</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->kewarganegaraan != $val->user_keluarga->kewarganegaraan ? 'bg-changed' : '' }}">
+                                                                <input name="kewarganegaraan" value="{{ $val->kewarganegaraan }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">No Paspor</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->no_paspor != $val->user_keluarga->no_paspor ? 'bg-changed' : '' }}">
+                                                                <input name="no_paspor" value="{{ $val->no_paspor }}" data-id="{{ $val->id }}" class="form-control" type="text" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">No Kitas</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->no_kitas != $val->user_keluarga->no_kitas ? 'bg-changed' : '' }}">
+                                                                <input name="no_kitas" value="{{ $val->no_kitas }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">Nama Ayah</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->ayah != $val->user_keluarga->ayah ? 'bg-changed' : '' }}">
+                                                                <input name="ayah" value="{{ $val->ayah }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-4 mt-4">
+                                                            <label class="col-md-4 form-label">Nama Ibu</label>
+                                                            <div class="col-md-8 {{ $val->user_keluarga && $val->ibu != $val->user_keluarga->ibu ? 'bg-changed' : '' }}">
+                                                                <input name="ibu" value="{{ $val->ibu }}" data-id="{{ $val->id }}" class="form-control " type="text" required>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            @endif
+                                          </div>
+
+
+
+
+
+
+
+
+
                                         @endforeach
                                     </table>
                                 </div>
@@ -746,3 +1025,9 @@
 @section('formValidationScript')
 @include('app.user.profile.scripts.form')
 @endsection
+
+<style>
+.disable-form input, .disable-form select{
+  pointer-events:none;
+}
+</style>

@@ -29,4 +29,12 @@ class UserPendidikan extends Model
                     ->where('object', 'foto_ijazah')
                     ->with('storage');
     }
+
+    public function foto_transkrip_nilai()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'id')
+                    ->where('object', 'foto_transkrip_nilai')
+                    ->with('storage');
+    }
+
 }

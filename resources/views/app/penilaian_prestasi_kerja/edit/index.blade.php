@@ -538,7 +538,7 @@
 
                     </div>
                 </div>
-                @if ($jabatan->is_staff == 1)
+                @if (!empty($jabatan->is_staff) && $jabatan->is_staff == 1)
                 @else
                   <a href="/penilaian_prestasi_kerja/id/{{$data['id']}}" class="btn btn-primary btn-sm pull-right" >
                       Buat Progrem & Kegiatan

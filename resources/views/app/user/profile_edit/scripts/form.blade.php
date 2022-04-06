@@ -128,7 +128,7 @@ function savePelatihan(e) {
     })
 }
 
-function saveKeluarga(e) {
+function saveKeluarga(e, isRefresh) {
 
     var field = $(e).attr('name')
     var id = $(e).attr('data-id')
@@ -138,7 +138,11 @@ function saveKeluarga(e) {
 
     $(e).addClass('loadingField')
     axios.put('/user_keluarga{{ !$id ? '_request' : '' }}/' + id, data).then((response) => {
-        // location.reload()
+        if (isRefresh) {
+            location.reload()
+        }
+
+
         $(e).removeClass('loadingField')
     }).catch((error) => {
         if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {

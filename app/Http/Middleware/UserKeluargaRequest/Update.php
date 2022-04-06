@@ -31,6 +31,20 @@ class Update extends BaseMiddleware
           if ($this->_Request->input('no_kitas')) $this->Model->UserKeluargaRequest->no_kitas = $this->_Request->input('no_kitas');
           if ($this->_Request->input('ayah')) $this->Model->UserKeluargaRequest->ayah = $this->_Request->input('ayah');
           if ($this->_Request->input('ibu')) $this->Model->UserKeluargaRequest->ibu = $this->_Request->input('ibu');
+
+          if ($this->_Request->input('hub_keluarga_id')) $this->Model->UserKeluargaRequest->hub_keluarga_id = $this->_Request->input('hub_keluarga_id');
+          if ($this->_Request->input('nip')) $this->Model->UserKeluargaRequest->nip = $this->_Request->input('nip');
+          if ($this->_Request->input('no_akta_nikah')) $this->Model->UserKeluargaRequest->no_akta_nikah = $this->_Request->input('no_akta_nikah');
+          if ($this->_Request->input('tgl_pernikahan')) $this->Model->UserKeluargaRequest->tgl_pernikahan = $this->_Request->input('tgl_pernikahan');
+          if ($this->_Request->input('alamat')) $this->Model->UserKeluargaRequest->alamat = $this->_Request->input('alamat');
+          if ($this->_Request->input('hp')) $this->Model->UserKeluargaRequest->hp = $this->_Request->input('hp');
+          if ($this->_Request->input('status_pasangan')) $this->Model->UserKeluargaRequest->status_pasangan = $this->_Request->input('status_pasangan');
+          if ($this->_Request->input('no_akta_cerai_meninggal')) $this->Model->UserKeluargaRequest->no_akta_cerai_meninggal = $this->_Request->input('no_akta_cerai_meninggal');
+          if ($this->_Request->input('tgl_akta_cerai_meninggal')) $this->Model->UserKeluargaRequest->tgl_akta_cerai_meninggal = $this->_Request->input('tgl_akta_cerai_meninggal');
+          if ($this->_Request->input('akta_kelahiran')) $this->Model->UserKeluargaRequest->akta_kelahiran = $this->_Request->input('akta_kelahiran');
+          if ($this->_Request->input('status_pekerjaan_id')) $this->Model->UserKeluargaRequest->status_pekerjaan_id = $this->_Request->input('status_pekerjaan_id');
+          if ($this->_Request->input('status_anak_id')) $this->Model->UserKeluargaRequest->status_anak_id = $this->_Request->input('status_anak_id');
+
         }
     }
 

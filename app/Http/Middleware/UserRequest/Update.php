@@ -4,7 +4,7 @@ namespace App\Http\Middleware\UserRequest;
 
 use App\Models\UserRequest;
 use App\Models\Position;
-use App\Models\Blast\Category;
+use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
 use Closure;
@@ -28,6 +28,10 @@ class Update extends BaseMiddleware
               $query->orWhere('status_diklat', 'rejected');
           })
           ->orderBy('id', 'desc')->first();
+
+        $this->Model->User = User::where('email', $this->_Request->input('email'))->where('id', '!=', $this->Model->UserRequest->user_id)->first();
+
+
         $password = $this->_Request->input('password');
         if (Hash::needsRehash($this->_Request->input('password'))) {
             $password = app('hash')->make($password);
@@ -66,6 +70,8 @@ class Update extends BaseMiddleware
             !$this->_Request->input('masa_berlaku_str') || $this->Model->UserRequest->masa_berlaku_str = $this->_Request->input('masa_berlaku_str');
             !$this->_Request->input('no_sip') || $this->Model->UserRequest->no_sip = $this->_Request->input('no_sip');
 
+            
+
             if ($this->_Request->input('password')) {
                 $this->Model->UserRequest->password = $password;
             }
@@ -80,7 +86,7 @@ class Update extends BaseMiddleware
     {
         $validator = Validator::make($this->_Request->all(), [
             'username' => ['unique:users,username,'.$this->Id, 'max:255'],
-            'email' => ['unique:users,email,'.$this->Id, 'max:255'],
+            'email' => ['max:255'],
             'password' => 'min:6|max:255|regex:/^(?=.*[a-z])(?=.*\d).+$/',
             'position_id' => [],
             'gender' => ['in:male,female'],
@@ -99,6 +105,12 @@ class Update extends BaseMiddleware
             $this->Json::set('exception.message', trans('validation.'.$this->Json::get('exception.code')));
             return false;
         }
+        if ($this->Model->User) {
+            $this->Json::set('exception.code', 'UserDuplicate');
+            $this->Json::set('exception.message', trans('validation.'.$this->Json::get('exception.code')));
+            return false;
+        }
+
         return true;
     }
 

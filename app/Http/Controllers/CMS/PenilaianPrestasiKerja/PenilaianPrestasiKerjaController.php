@@ -225,7 +225,7 @@ class PenilaianPrestasiKerjaController extends Controller
 
         $IndikatorKinerjaTree = IndikatorKinerja::tree();
 
-        if ($Jabatan['records']->group_jabatan == 4) {
+        if (!empty($Jabatan['records']->group_jabatan) && $Jabatan['records']->group_jabatan == 4) {
 
           $UnitKerjaParent = UnitKerja::where('id', MyAccount()->unit_kerja_id)->first();
 
@@ -244,7 +244,7 @@ class PenilaianPrestasiKerjaController extends Controller
 
           $tipe_indikator_ditampilkan = ['program'];
 
-        } else if ($Jabatan['records']->is_staff) {
+        } else if (!empty($Jabatan['records']->is_staff) && $Jabatan['records']->is_staff) {
 
             // list semua indikator kerja dari kegiatan yang ada di dalam 1 unit kerja
             $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)

@@ -34,4 +34,11 @@ class UserPendidikanRequest extends Model
                     ->where('object', 'foto_ijazah_request')
                     ->with('storage');
     }
+
+    public function foto_transkrip_nilai()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'id')
+                    ->where('object', 'foto_transkrip_nilai_request')
+                    ->with('storage');
+    }
 }

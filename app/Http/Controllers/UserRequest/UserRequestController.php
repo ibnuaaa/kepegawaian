@@ -167,15 +167,11 @@ class UserRequestController extends Controller
         })
         ->first();
 
-        // cetak(MyAccount()->id);
-        // die();
-
-
-        if ($UserRequest && ($UserRequest->status_sdm == 'request_approval' || $UserRequest->status_diklat == 'request_approval')) {
-            Json::set('exception.code', 'NeedApprovalUser');
-            Json::set('exception.message', trans('validation.'.Json::get('exception.code')));
-            return response()->json(Json::get(), 400);
-        }
+        // if ($UserRequest && ($UserRequest->status_sdm == 'request_approval' || $UserRequest->status_diklat == 'request_approval')) {
+        //     Json::set('exception.code', 'NeedApprovalUser');
+        //     Json::set('exception.message', trans('validation.'.Json::get('exception.code')));
+        //     return response()->json(Json::get(), 400);
+        // }
 
         $User = User::where('id', MyAccount()->id)->first();
 
@@ -185,8 +181,6 @@ class UserRequestController extends Controller
             $UserRequest->user_id = MyAccount()->id;
             $isCreateNew = true;
         }
-
-
 
         if ($isCreateNew) {
             $UserRequest->username  = $User->username;
@@ -219,7 +213,7 @@ class UserRequestController extends Controller
             $UserRequest->pendidikan_id  = $User->pendidikan_id;
             $UserRequest->pendidikan_detail  = $User->pendidikan_detail;
             $UserRequest->status_sdm  = 'new';
-            $UserRequest->save()  ;
+            $UserRequest->save();
 
             $this->CopyDocumentToRequest('kk', $UserRequest, $User);
             $this->CopyDocumentToRequest('ktp', $UserRequest, $User);
@@ -227,6 +221,8 @@ class UserRequestController extends Controller
             $this->CopyDocumentToRequest('bpjs', $UserRequest, $User);
             $this->CopyDocumentToRequest('sip', $UserRequest, $User);
             $this->CopyDocumentToRequest('profile', $UserRequest, $User);
+            $this->CopyDocumentToRequest('akta_nikah', $UserRequest, $User);
+
 
             $UserGolongan = UserGolongan::where('user_id', MyAccount()->id)->get();
             $UserJabatan = UserJabatan::where('user_id', MyAccount()->id)->get();
@@ -298,6 +294,21 @@ class UserRequestController extends Controller
                 $UserKeluargaRequest->no_kitas =  $value->no_kitas;
                 $UserKeluargaRequest->ayah =  $value->ayah;
                 $UserKeluargaRequest->ibu =  $value->ibu;
+
+                $UserKeluargaRequest->hub_keluarga_id =  $value->hub_keluarga_id;
+                $UserKeluargaRequest->nip =  $value->nip;
+                $UserKeluargaRequest->no_akta_nikah =  $value->no_akta_nikah;
+                $UserKeluargaRequest->tgl_pernikahan =  $value->tgl_pernikahan;
+                $UserKeluargaRequest->alamat =  $value->alamat;
+                $UserKeluargaRequest->hp =  $value->hp;
+                $UserKeluargaRequest->status_pasangan =  $value->status_pasangan;
+                $UserKeluargaRequest->no_akta_cerai_meninggal =  $value->no_akta_cerai_meninggal;
+                $UserKeluargaRequest->tgl_akta_cerai_meninggal =  $value->tgl_akta_cerai_meninggal;
+                $UserKeluargaRequest->akta_kelahiran =  $value->akta_kelahiran;
+                $UserKeluargaRequest->status_pekerjaan_id =  $value->status_pekerjaan_id;
+                $UserKeluargaRequest->status_anak_id =  $value->status_anak_id;
+
+
                 $UserKeluargaRequest->save();
             }
 
@@ -324,11 +335,15 @@ class UserRequestController extends Controller
                 $UserPendidikanRequest->user_id = $value->user_id;
                 $UserPendidikanRequest->pendidikan_id = $value->pendidikan_id;
                 $UserPendidikanRequest->pendidikan_detail = $value->pendidikan_detail;
+                $UserPendidikanRequest->fakultas = $value->fakultas;
+                $UserPendidikanRequest->nim = $value->nim;
                 $UserPendidikanRequest->tahun_lulus = $value->tahun_lulus;
                 $UserPendidikanRequest->no_ijazah = $value->no_ijazah;
                 $UserPendidikanRequest->save();
 
                 $this->CopyDocumentToRequest('ijazah', $UserPendidikanRequest, $value);
+                $this->CopyDocumentToRequest('transkrip_nilai', $UserPendidikanRequest, $value);
+
 
             }
         }
@@ -382,6 +397,10 @@ class UserRequestController extends Controller
         $this->updateDocumentAfterApprove('bpjs', $User->id, $UserRequest);
         $this->updateDocumentAfterApprove('sip', $User->id, $UserRequest);
         $this->updateDocumentAfterApprove('kk', $User->id, $UserRequest);
+        // $this->updateDocumentAfterApprove('transkrip_nilai', $User->id, $UserRequest);
+        $this->updateDocumentAfterApprove('akta_nikah', $User->id, $UserRequest);
+
+
         $this->updateDocumentAfterApprove('profile', $User->id, $UserRequest);
 
         if ($UserRequest) {
@@ -488,6 +507,21 @@ class UserRequestController extends Controller
                   $UserKeluarga->no_kitas =  $value->no_kitas;
                   $UserKeluarga->ayah =  $value->ayah;
                   $UserKeluarga->ibu =  $value->ibu;
+
+                  $UserKeluarga->hub_keluarga_id =  $value->hub_keluarga_id;
+                  $UserKeluarga->nip =  $value->nip;
+                  $UserKeluarga->no_akta_nikah =  $value->no_akta_nikah;
+                  $UserKeluarga->tgl_pernikahan =  $value->tgl_pernikahan;
+                  $UserKeluarga->alamat =  $value->alamat;
+                  $UserKeluarga->hp =  $value->hp;
+                  $UserKeluarga->status_pasangan =  $value->status_pasangan;
+                  $UserKeluarga->no_akta_cerai_meninggal =  $value->no_akta_cerai_meninggal;
+                  $UserKeluarga->tgl_akta_cerai_meninggal =  $value->tgl_akta_cerai_meninggal;
+                  $UserKeluarga->akta_kelahiran =  $value->akta_kelahiran;
+                  $UserKeluarga->status_pekerjaan_id =  $value->status_pekerjaan_id;
+                  $UserKeluarga->status_anak_id =  $value->status_anak_id;
+
+
                   $UserKeluarga->save();
 
               }
@@ -533,12 +567,15 @@ class UserRequestController extends Controller
                   $UserPendidikan->user_id = $value->user_id;
                   $UserPendidikan->pendidikan_id = $value->pendidikan_id;
                   $UserPendidikan->pendidikan_detail = $value->pendidikan_detail;
+                  $UserPendidikan->fakultas = $value->fakultas;
+                  $UserPendidikan->nim = $value->nim;
                   $UserPendidikan->no_ijazah = $value->no_ijazah;
                   $UserPendidikan->tahun_lulus = $value->tahun_lulus;
                   $UserPendidikan->save();
 
 
                   $this->updateDocumentAfterApprove('ijazah', $UserPendidikan->id, $value);
+                  $this->updateDocumentAfterApprove('transkrip_nilai', $UserPendidikan->id, $value);
 
               }
           }
