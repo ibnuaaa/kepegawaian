@@ -73,13 +73,21 @@ class PenilaianPrestasiKerjaController extends Controller
 
             if ($Jabatan->is_staff) {
               $PenilaianPrestasiKerjaItem->bobot = $value->bobot_staff;
+            //   $PenilaianPrestasiKerjaItem->nilai_kinerja = $value->bobot_staff   ;
             } else  {
               $PenilaianPrestasiKerjaItem->bobot = $value->bobot_pimpinan;
+            //   $PenilaianPrestasiKerjaItem->nilai_kinerja = $value->bobot_pimpinan;
             }
             $PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id = $Model->PenilaianPrestasiKerja->id;
             $PenilaianPrestasiKerjaItem->user_id = MyAccount()->id;
             $PenilaianPrestasiKerjaItem->indikator_tetap_id = $value->id;
             $PenilaianPrestasiKerjaItem->type = $value->type;
+
+            // $PenilaianPrestasiKerjaItem->realisasi = 100;
+            $PenilaianPrestasiKerjaItem->target = 100;
+            // $PenilaianPrestasiKerjaItem->capaian = 1;
+            
+
             $PenilaianPrestasiKerjaItem->save();
 
         }
@@ -94,14 +102,21 @@ class PenilaianPrestasiKerjaController extends Controller
 
             if ($Jabatan->is_staff) {
               $PenilaianPrestasiKerjaItem->bobot = $value->bobot_staff;
+            //   $PenilaianPrestasiKerjaItem->nilai_kinerja = $value->bobot_staff   ;
             } else  {
               $PenilaianPrestasiKerjaItem->bobot = $value->bobot_pimpinan;
+            //   $PenilaianPrestasiKerjaItem->nilai_kinerja = $value->bobot_pimpinan;
             }
 
             $PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id = $Model->PenilaianPrestasiKerja->id;
             $PenilaianPrestasiKerjaItem->user_id = MyAccount()->id;
             $PenilaianPrestasiKerjaItem->indikator_tetap_id = $value->id;
             $PenilaianPrestasiKerjaItem->type = $value->type;
+
+            // $PenilaianPrestasiKerjaItem->realisasi = 100;
+            $PenilaianPrestasiKerjaItem->target = 100;
+            // $PenilaianPrestasiKerjaItem->capaian = 1;
+
             $PenilaianPrestasiKerjaItem->save();
 
         }

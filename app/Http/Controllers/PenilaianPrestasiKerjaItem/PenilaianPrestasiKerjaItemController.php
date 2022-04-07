@@ -91,6 +91,7 @@ class PenilaianPrestasiKerjaItemController extends Controller
         //     $this->CalculateParents($IndikatorKinerjaKegiatan, 0, $PenilaianPrestasiKerja);
         // } else if (!empty($IndikatorKinerjaKegiatan->tipe_indikator) && $IndikatorKinerjaKegiatan->tipe_indikator == 'iku') {
 
+        if (!empty($IndikatorKinerjaKegiatan->id)) {
           $IndikatorKinerjaAtasan = IndikatorKinerja::where('id' , $IndikatorKinerjaKegiatan->id)->first();
           if (!empty($IndikatorKinerjaAtasan)) {
               $IndikatorKinerjaAtasan->bobot = $Model->PenilaianPrestasiKerjaItem->bobot;
@@ -104,7 +105,7 @@ class PenilaianPrestasiKerjaItemController extends Controller
             //  buat direksi & kabag / atasannya kepala ruang &  kasubag
             $this->CalculateParentsFromEselon3($IndikatorKinerjaKegiatan);
         // }
-
+        }
         Json::set('data', $this->SyncData($request, $Model->PenilaianPrestasiKerjaItem->id));
         return response()->json(Json::get(), 202);
     }
