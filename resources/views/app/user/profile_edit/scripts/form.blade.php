@@ -335,7 +335,7 @@ function approve(menu) {
             @if($page == 'profile')
             location.href= '/profile'
             @else
-            location.href= '/user_request/status/request_approval/' + menu
+            location.href= '/user_request/status/request_approval/sdm'
             @endif
           }
 
