@@ -64,11 +64,13 @@ class PenilaianPrestasiKerjaItemController extends Controller
         $IndikatorKinerja = IndikatorKinerja::where('id', $Model->PenilaianPrestasiKerjaItem->indikator_kinerja_id)->first();
 
         if (!empty($IndikatorKinerja)) {
-          $Model->PenilaianPrestasiKerjaItem->bobot = $IndikatorKinerja->bobot;
-          $Model->PenilaianPrestasiKerjaItem->target = $IndikatorKinerja->target;
-          $Model->PenilaianPrestasiKerjaItem->realisasi = $IndikatorKinerja->realisasi;
-          $Model->PenilaianPrestasiKerjaItem->capaian = $IndikatorKinerja->capaian;
-          $Model->PenilaianPrestasiKerjaItem->nilai_kinerja = $IndikatorKinerja->nilai_kinerja;
+          if ($IndikatorKinerja->tipe_indikator != 'kegiatan') {
+            $Model->PenilaianPrestasiKerjaItem->bobot = $IndikatorKinerja->bobot;
+            $Model->PenilaianPrestasiKerjaItem->target = $IndikatorKinerja->target;
+            $Model->PenilaianPrestasiKerjaItem->realisasi = $IndikatorKinerja->realisasi;
+            $Model->PenilaianPrestasiKerjaItem->capaian = $IndikatorKinerja->capaian;
+            $Model->PenilaianPrestasiKerjaItem->nilai_kinerja = $IndikatorKinerja->nilai_kinerja;
+          }
         }
 
         $Model->PenilaianPrestasiKerjaItem->save();
@@ -236,6 +238,53 @@ class PenilaianPrestasiKerjaItemController extends Controller
 
 
     public function CalculateParentsFromEselon3($IndikatorKinerjaProgram) {
+
+        // cetak();
+        // die();
+
+        if ($IndikatorKinerjaProgram->tipe_indikator == 'kegiatan') {
+              $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::select(
+                                                  'penilaian_prestasi_kerja_item.id as id',
+                                                  'penilaian_prestasi_kerja_item.bobot as  bobot',
+                                                  'penilaian_prestasi_kerja_item.target as  target',
+                                                  'penilaian_prestasi_kerja_item.realisasi as  realisasi',
+                                                  'penilaian_prestasi_kerja_item.capaian as  capaian',
+                                                  'penilaian_prestasi_kerja_item.nilai_kinerja as  nilai_kinerja'
+                                              )
+                                              ->leftJoin('indikator_kinerja', 'indikator_kinerja.id', '=', 'penilaian_prestasi_kerja_item.indikator_kinerja_id')
+                                              ->leftJoin('penilaian_prestasi_kerja', 'penilaian_prestasi_kerja.id', '=', 'penilaian_prestasi_kerja_item.penilaian_prestasi_kerja_id')
+                                              ->where('indikator_kinerja_id' , $IndikatorKinerjaProgram->id)
+                                              ->whereNull('indikator_kinerja.deleted_at')
+                                              ->whereNull('penilaian_prestasi_kerja_item.deleted_at')
+                                              ->whereNull('penilaian_prestasi_kerja.deleted_at')
+                                              ->get();
+              if ($PenilaianPrestasiKerjaItem) {
+                  $bobot = 0;
+                  $target = 0;
+                  $realisasi = 0;
+                  $capaian = 0;
+                  $nilai_kinerja = 0;
+
+                  foreach ($PenilaianPrestasiKerjaItem as $key => $value) {
+                    $bobot += $value->bobot;
+                    $target += $value->target;
+                    $realisasi += $value->realisasi;
+                    $capaian += $value->capaian;
+                    $nilai_kinerja += $value->nilai_kinerja;
+                  }
+              }
+
+              $IndikatorKinerja = IndikatorKinerja::where('id', $IndikatorKinerjaProgram->id)->first();
+              if ($IndikatorKinerja) {
+                $IndikatorKinerja->bobot = $bobot;
+                $IndikatorKinerja->target = $target;
+                $IndikatorKinerja->realisasi = $realisasi;
+                $IndikatorKinerja->capaian = $capaian;
+                $IndikatorKinerja->nilai_kinerja = $nilai_kinerja;
+                $IndikatorKinerja->save();
+              }
+        }
+
         $IndikatorKinerjaSeLevel = IndikatorKinerja::where('parent_id', $IndikatorKinerjaProgram->parent_id)->get();
 
         $dataTotal['bobot'] = 0;
@@ -253,6 +302,8 @@ class PenilaianPrestasiKerjaItemController extends Controller
             $dataTotal['capaian'] += $value->capaian;
             $dataTotal['nilai_kinerja'] += $value->nilai_kinerja;
         }
+
+
 
         if ($IndikatorKinerjaProgram->id == 77) {
           // cetak($IndikatorKinerjaSeLevel->toArray());
