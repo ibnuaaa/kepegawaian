@@ -444,7 +444,7 @@
 
                           <tr>
                               <th class="text-center" colspan="8">
-                                  3. Kinerja Tambahan
+                                  3. Kinerja Tambahan (Maksimal 5%)
                               </th>
                           </tr>
 
