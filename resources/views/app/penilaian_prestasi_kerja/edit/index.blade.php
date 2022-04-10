@@ -546,6 +546,24 @@
                   </a>
                 @endif
             </div>
+
+
+            <div class="card-body">
+                <h4>Upload Penilaian Prestasi Kerja yang telah ditandatangani (PDF)</h4>
+                <input type="file" onchange="prepareUpload(this, 'foto_penilaian_prestasi_kerja', '{{ $data->id }}', false, ['pdf']);" multiple>
+                <div style="clear: both;"></div>
+                <div class="img-preview mt-2" id="img-preview">
+                    @if (!empty($data->foto_penilaian_prestasi_kerja))
+                    @foreach ($data->foto_penilaian_prestasi_kerja as $key => $val2)
+                    <a href="/api/preview/{{$val2->storage->key}}">
+                        <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
+                    </a>
+                    @endforeach
+                    @endif
+                    <div style="clear: both;"></div>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
         </div>
     </div>
 </div>
