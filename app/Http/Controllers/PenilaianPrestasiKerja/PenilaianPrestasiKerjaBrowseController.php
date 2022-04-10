@@ -113,7 +113,8 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
             "$this->PenilaianPrestasiKerjaTable.bulan as bulan",
             "$this->PenilaianPrestasiKerjaTable.tahun as tahun",
             "$this->PenilaianPrestasiKerjaTable.created_at as penilaian_prestasi_kerja.created_at"
-        )->with('user');
+        )->with('user')
+        ->with('foto_penilaian_prestasi_kerja');
 
         if(!empty($request->get('sort'))) {
             if(!empty($request->get('sort_type'))) {
