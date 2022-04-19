@@ -57,7 +57,11 @@
                 <p>{{ !empty($item->user->name) ? $item->user->name : '' }}</p>
             </td>
             <td class="v-align-middle">
-                <p>{{ $item->created_at }}</p>
+                <p>
+                    {{ $item->created_at }}
+
+                    {{ $item->parent_name }}
+                </p>
             </td>
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">

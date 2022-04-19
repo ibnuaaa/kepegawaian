@@ -15,7 +15,9 @@ class PenilaianPrestasiKerja extends Model
 
     public function penilaian_prestasi_kerja_item()
     {
-        return $this->hasMany(PenilaianPrestasiKerjaItem::class, 'penilaian_prestasi_kerja_id', 'id')->where('type', 'skp');
+        return $this->hasMany(PenilaianPrestasiKerjaItem::class, 'penilaian_prestasi_kerja_id', 'id')->where('type', 'skp')
+        ->with('indikator_kinerja')
+        ;
     }
 
     public function penilaian_perilaku_kerja()
