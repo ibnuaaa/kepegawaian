@@ -1348,8 +1348,7 @@ if ($menu == 'sdm') {
         <div class="card card-default">
             <div class="card-body">
                 <div class="text-center">
-
-                  @if($page == 'profile' && $data->status_sdm == 'new')
+                  @if($page == 'profile')
                       <a href="#" onClick="return request_approval()" class="btn btn-info"><i class="fa fa-check"></i> Minta Persetujuan</a>
                   @elseif($page == 'profile' && ($data->status_sdm == 'rejected' || $data->status_diklat == 'rejected'))
                       <a href="#" onClick="return request_approval()" class="btn btn-info"><i class="fa fa-check"></i> Minta Persetujuan Ulang</a>
