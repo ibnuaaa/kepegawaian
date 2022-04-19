@@ -61,17 +61,17 @@ class PenilaianPrestasiKerjaItemController extends Controller
         $Model = $request->Payload->all()['Model'];
 
 
-        $IndikatorKinerja = IndikatorKinerja::where('id', $Model->PenilaianPrestasiKerjaItem->indikator_kinerja_id)->first();
+        // $IndikatorKinerja = IndikatorKinerja::where('id', $Model->PenilaianPrestasiKerjaItem->indikator_kinerja_id)->first();
 
-        if (!empty($IndikatorKinerja)) {
-          if ($IndikatorKinerja->tipe_indikator != 'kegiatan') {
-            $Model->PenilaianPrestasiKerjaItem->bobot = $IndikatorKinerja->bobot;
-            $Model->PenilaianPrestasiKerjaItem->target = $IndikatorKinerja->target;
-            $Model->PenilaianPrestasiKerjaItem->realisasi = $IndikatorKinerja->realisasi;
-            $Model->PenilaianPrestasiKerjaItem->capaian = $IndikatorKinerja->capaian;
-            $Model->PenilaianPrestasiKerjaItem->nilai_kinerja = $IndikatorKinerja->nilai_kinerja;
-          }
-        }
+        // if (!empty($IndikatorKinerja)) {
+        //   if ($IndikatorKinerja->tipe_indikator != 'kegiatan') {
+        //     $Model->PenilaianPrestasiKerjaItem->bobot = $IndikatorKinerja->bobot;
+        //     $Model->PenilaianPrestasiKerjaItem->target = $IndikatorKinerja->target;
+        //     $Model->PenilaianPrestasiKerjaItem->realisasi = $IndikatorKinerja->realisasi;
+        //     $Model->PenilaianPrestasiKerjaItem->capaian = $IndikatorKinerja->capaian;
+        //     $Model->PenilaianPrestasiKerjaItem->nilai_kinerja = $IndikatorKinerja->nilai_kinerja;
+        //   }
+        // }
 
         $Model->PenilaianPrestasiKerjaItem->save();
 
@@ -84,30 +84,24 @@ class PenilaianPrestasiKerjaItemController extends Controller
         $Model = $request->Payload->all()['Model'];
         $Model->PenilaianPrestasiKerjaItem->save();
 
-        $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where('id', $Model->PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id)->first();
+        // $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where('id', $Model->PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id)->first();
 
-        $IndikatorKinerjaKegiatan = IndikatorKinerja::where('id', $Model->PenilaianPrestasiKerjaItem->indikator_kinerja_id)->with('parents')->first();
+        // $IndikatorKinerjaKegiatan = IndikatorKinerja::where('id', $Model->PenilaianPrestasiKerjaItem->indikator_kinerja_id)->with('parents')->first();
 
-        // if (!empty($IndikatorKinerjaKegiatan->tipe_indikator) && $IndikatorKinerjaKegiatan->tipe_indikator == 'kegiatan') {
+        // if (!empty($IndikatorKinerjaKegiatan->id)) {
+        //   $IndikatorKinerjaAtasan = IndikatorKinerja::where('id' , $IndikatorKinerjaKegiatan->id)->first();
+        //   if (!empty($IndikatorKinerjaAtasan)) {
+        //       $IndikatorKinerjaAtasan->bobot = $Model->PenilaianPrestasiKerjaItem->bobot;
+        //       $IndikatorKinerjaAtasan->target = $Model->PenilaianPrestasiKerjaItem->target;
+        //       $IndikatorKinerjaAtasan->realisasi = $Model->PenilaianPrestasiKerjaItem->realisasi;
+        //       $IndikatorKinerjaAtasan->capaian = $Model->PenilaianPrestasiKerjaItem->capaian;
+        //       $IndikatorKinerjaAtasan->nilai_kinerja = $Model->PenilaianPrestasiKerjaItem->nilai_kinerja;
+        //       $IndikatorKinerjaAtasan->save();
+        //    }
+
         //     //  buat direksi & kabag / atasannya kepala ruang &  kasubag
-        //     $this->CalculateParents($IndikatorKinerjaKegiatan, 0, $PenilaianPrestasiKerja);
-        // } else if (!empty($IndikatorKinerjaKegiatan->tipe_indikator) && $IndikatorKinerjaKegiatan->tipe_indikator == 'iku') {
-
-        if (!empty($IndikatorKinerjaKegiatan->id)) {
-          $IndikatorKinerjaAtasan = IndikatorKinerja::where('id' , $IndikatorKinerjaKegiatan->id)->first();
-          if (!empty($IndikatorKinerjaAtasan)) {
-              $IndikatorKinerjaAtasan->bobot = $Model->PenilaianPrestasiKerjaItem->bobot;
-              $IndikatorKinerjaAtasan->target = $Model->PenilaianPrestasiKerjaItem->target;
-              $IndikatorKinerjaAtasan->realisasi = $Model->PenilaianPrestasiKerjaItem->realisasi;
-              $IndikatorKinerjaAtasan->capaian = $Model->PenilaianPrestasiKerjaItem->capaian;
-              $IndikatorKinerjaAtasan->nilai_kinerja = $Model->PenilaianPrestasiKerjaItem->nilai_kinerja;
-              $IndikatorKinerjaAtasan->save();
-           }
-
-            //  buat direksi & kabag / atasannya kepala ruang &  kasubag
-            $this->CalculateParentsFromEselon3($IndikatorKinerjaKegiatan);
+        //     $this->CalculateParentsFromEselon3($IndikatorKinerjaKegiatan);
         // }
-        }
         Json::set('data', $this->SyncData($request, $Model->PenilaianPrestasiKerjaItem->id));
         return response()->json(Json::get(), 202);
     }

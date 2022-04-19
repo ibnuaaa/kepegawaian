@@ -44,6 +44,8 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
             $request->ArrQuery->take = 5000;
         }
 
+        
+
         $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where(function ($query) use($request) {
             if (isset($request->ArrQuery->id)) {
                 $query->where("$this->PenilaianPrestasiKerjaTable.id", $request->ArrQuery->id);
@@ -104,7 +106,7 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
         })
         ->select(
             // PenilaianPrestasiKerja
-            "$this->PenilaianPrestasiKerjaTable.id as penilaian_prestasi_kerja.id",
+            "$this->PenilaianPrestasiKerjaTable.id as id",
             "$this->PenilaianPrestasiKerjaTable.name as penilaian_prestasi_kerja.name",
             "$this->PenilaianPrestasiKerjaTable.user_id as user_id",
             "$this->PenilaianPrestasiKerjaTable.unit_kerja_id as unit_kerja_id",
@@ -114,6 +116,7 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
             "$this->PenilaianPrestasiKerjaTable.tahun as tahun",
             "$this->PenilaianPrestasiKerjaTable.created_at as penilaian_prestasi_kerja.created_at"
         )->with('user')
+        ->with('penilaian_prestasi_kerja_item')
         ->with('foto_penilaian_prestasi_kerja');
 
         if(!empty($request->get('sort'))) {

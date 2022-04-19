@@ -226,13 +226,13 @@ class PenilaianPrestasiKerjaController extends Controller
         $IndikatorKinerjaTree = IndikatorKinerja::tree();
 
         if (!empty($Jabatan['records']->group_jabatan) && $Jabatan['records']->group_jabatan == 4) {
-
+            
           $UnitKerjaParent = UnitKerja::where('id', MyAccount()->unit_kerja_id)->first();
 
           $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
-                              ->where('unit_kerja_id', $UnitKerjaParent->parent_id)
+                            //   ->where('unit_kerja_id', $UnitKerjaParent->parent_id)
                               ->where('take', 100000)
-                              ->where('tipe_indikator', 'program')
+                              ->whereIn('tipe_indikator', 'program')
                               ->get();
 
           $indikator_kerja_ids = [];
@@ -246,16 +246,29 @@ class PenilaianPrestasiKerjaController extends Controller
 
         } else if (!empty($Jabatan['records']->is_staff) && $Jabatan['records']->is_staff) {
 
+            $indikator_kerja_ids = [];
+
             // list semua indikator kerja dari kegiatan yang ada di dalam 1 unit kerja
             $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
                                 ->where('unit_kerja_id', MyAccount()->unit_kerja_id)
                                 ->where('take', 100000)
                                 ->where('tipe_indikator', 'kegiatan')
                                 ->get();
-            // cetak($IndikatorKerja['records']->toArray());
-            // die();
-            $indikator_kerja_ids = [];
+            foreach ($IndikatorKerja['records'] as $key2 => $value2) {
+                if(!empty($value2->id)) $indikator_kerja_ids[] = $value2->id;
+                $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
+            }
 
+
+            // unit_kerja_atasan
+            $UnitKerjaParent = UnitKerja::where('id', MyAccount()->unit_kerja_id)->first();
+
+            // list semua indikator kerja dari kegiatan yang ada di dalam 1 unit kerja
+            $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
+                                ->where('unit_kerja_id', $UnitKerjaParent->parent_id)
+                                ->where('take', 100000)
+                                ->where('tipe_indikator', 'kegiatan')
+                                ->get();
             foreach ($IndikatorKerja['records'] as $key2 => $value2) {
                 if(!empty($value2->id)) $indikator_kerja_ids[] = $value2->id;
                 $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
@@ -280,7 +293,7 @@ class PenilaianPrestasiKerjaController extends Controller
                 $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
             }
 
-            $tipe_indikator_ditampilkan = ['iku','program'];
+            $tipe_indikator_ditampilkan = ['iku','program', 'kegiatan'];
         }
 
 
@@ -387,11 +400,21 @@ class PenilaianPrestasiKerjaController extends Controller
           })->where('unit_kerja_id', $unit_kerja_id)->with('jabatan')->first();
         } else {
             // ATASAN KEPALA
+            // echo 
             $jabatan_parent_id = $PenilaianPrestasiKerja['records']->user->jabatan->parent_id;
+            // cetak($PenilaianPrestasiKerja['records']->user->jabatan->toArray());
+            // die();
             $user_penilai = User::where('jabatan_id', $jabatan_parent_id)->first();
+
+            // cetak($user_penilai);
+            // die();
         }
 
-        $user_atasan_penilai = User::where('jabatan_id', $user_penilai->jabatan->parent_id)->first();
+        $user_atasan_penilai = null;
+        if (!empty($user_penilai->jabatan->parent_id)) {
+            $user_atasan_penilai = User::where('jabatan_id', $user_penilai->jabatan->parent_id)->first();
+        }
+        
 
         // get document group_jabatan
         $show_iku = false;
@@ -401,6 +424,139 @@ class PenilaianPrestasiKerjaController extends Controller
         }
 
         $pdf = PDF::loadView('app.penilaian_prestasi_kerja.pdf.index', [
+            'select' => [],
+            'data' => $PenilaianPrestasiKerja['records'],
+            'indikator_kerja_ids' => $indikator_kerja_ids,
+            'jabatan' => $Jabatan['records'],
+            'indikator_kinerja' => $IndikatorKinerjaTree,
+            'tipe_indikator_ditampilkan' => $tipe_indikator_ditampilkan,
+            'user_penilai' => $user_penilai,
+            'user_atasan_penilai' => $user_atasan_penilai,
+            'show_iku' => $show_iku
+        ]);
+        $pdf->setPaper('a4', 'portrait');
+        return $pdf->stream();
+
+
+    }
+
+
+    public function PdfIku(Request $request, $id)
+    {
+
+
+        $PenilaianPrestasiKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
+            ->equal('id', $id)
+            ->get('first');
+
+
+
+        if (!isset($PenilaianPrestasiKerja['records']->id)) {
+            throw new ModelNotFoundException('Not Found Batch');
+        }
+
+        // Get detail jabatan apakah dia staff atau bukan
+        $Jabatan = JabatanBrowseController::FetchBrowse($request)
+                    ->equal('id', $PenilaianPrestasiKerja['records']->jabatan_id)->get('first');
+
+        $IndikatorKinerjaTree = IndikatorKinerja::tree();
+
+        if ($Jabatan['records']->group_jabatan == 4) {
+
+          $UnitKerjaParent = UnitKerja::where('id', MyAccount()->unit_kerja_id)->first();
+
+          $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
+                              ->where('unit_kerja_id', $UnitKerjaParent->parent_id)
+                              ->where('take', 100000)
+                              ->where('tipe_indikator', 'program')
+                              ->get();
+
+          $indikator_kerja_ids = [];
+
+          foreach ($IndikatorKerja['records'] as $key2 => $value2) {
+              if(!empty($value2->id)) $indikator_kerja_ids[] = $value2->id;
+              $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
+          }
+
+          $tipe_indikator_ditampilkan = ['program'];
+
+        } else if ($Jabatan['records']->is_staff) {
+
+            // list semua indikator kerja dari kegiatan yang ada di dalam 1 unit kerja
+            $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
+                                ->where('unit_kerja_id', MyAccount()->unit_kerja_id)
+                                ->where('take', 100000)
+                                ->where('tipe_indikator', 'kegiatan')
+                                ->get();
+            // cetak($IndikatorKerja['records']->toArray());
+            // die();
+            $indikator_kerja_ids = [];
+
+            foreach ($IndikatorKerja['records'] as $key2 => $value2) {
+                if(!empty($value2->id)) $indikator_kerja_ids[] = $value2->id;
+                $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
+            }
+
+
+            $tipe_indikator_ditampilkan = ['kegiatan'];
+
+        } else {
+
+            // list semua indikator kerja buat kepala bagian, kepala sub bagian, kepala instalasi
+            $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
+                                // ->where('unit_kerja_id', MyAccount()->unit_kerja_id)
+                                // ->where('tipe_indikator', 'iku')
+                                ->where('take', 100000)
+                                ->get();
+
+            $indikator_kerja_ids = [];
+
+            foreach ($IndikatorKerja['records'] as $key2 => $value2) {
+                if(!empty($value2->id)) $indikator_kerja_ids[] = $value2->id;
+                $indikator_kerja_ids = array_merge($indikator_kerja_ids,$this->tree($value2->parents, []));
+            }
+
+            $tipe_indikator_ditampilkan = ['iku','program'];
+        }
+
+        $jabatan_id = $PenilaianPrestasiKerja['records']->jabatan->id;
+        $is_staff = $PenilaianPrestasiKerja['records']->jabatan->is_staff;
+        $unit_kerja_id = $PenilaianPrestasiKerja['records']->unit_kerja_id;
+
+
+        if ($is_staff) {
+          // ATASAN STAFF
+          $user_penilai = User::where(function ($query) use($request) {
+              $query->whereHas("jabatan", function ($query) use($request) {
+                  $query->whereNull('is_staff');
+              });
+          })->where('unit_kerja_id', $unit_kerja_id)->with('jabatan')->first();
+        } else {
+            // ATASAN KEPALA
+            // echo 
+            $jabatan_parent_id = $PenilaianPrestasiKerja['records']->user->jabatan->parent_id;
+            // cetak($PenilaianPrestasiKerja['records']->user->jabatan->toArray());
+            // die();
+            $user_penilai = User::where('jabatan_id', $jabatan_parent_id)->first();
+
+            // cetak($user_penilai);
+            // die();
+        }
+
+        $user_atasan_penilai = null;
+        if (!empty($user_penilai->jabatan->parent_id)) {
+            $user_atasan_penilai = User::where('jabatan_id', $user_penilai->jabatan->parent_id)->first();
+        }
+        
+
+        // get document group_jabatan
+        $show_iku = false;
+        if ($is_staff || in_array($Jabatan['records']->group_jabatan, [3,4])) {
+            // $show_iku = true;
+            // hide dulu aja
+        }
+
+        $pdf = PDF::loadView('app.penilaian_prestasi_kerja.pdf_iku.index', [
             'select' => [],
             'data' => $PenilaianPrestasiKerja['records'],
             'indikator_kerja_ids' => $indikator_kerja_ids,
