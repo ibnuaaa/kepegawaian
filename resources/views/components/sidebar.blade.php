@@ -141,7 +141,7 @@
                         </li>
                         @endif
                         <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" target="_blank" href="/Juknis.Simpeg.Ver.0.1.pdf">
+                            <a class="side-menu__item" data-bs-toggle="slide" target="_blank" href="/Juknis.Simpeg.Ver.0.2.pdf">
                               <i class="side-menu__icon fe fe-book  "></i>
                               <span class="side-menu__label">Buku Petunjuk</span>
                             </a>
