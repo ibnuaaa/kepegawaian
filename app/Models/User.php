@@ -45,12 +45,27 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasOne(Jabatan::class, 'id', 'jabatan_id')->with('parents');
     }
 
+    public function detail_jabatan()
+    {
+        return $this->hasOne(Jabatan::class, 'id', 'jabatan_id');
+    }
+
     public function jabatan_fungsional()
     {
         return $this->hasOne(JabatanFungsional::class, 'id', 'jabatan_fungsional_id');
     }
 
+    public function detail_jabatan_fungsional()
+    {
+        return $this->hasOne(JabatanFungsional::class, 'id', 'jabatan_fungsional_id');
+    }
+
     public function golongan()
+    {
+        return $this->hasOne(Golongan::class, 'id', 'golongan_id');
+    }
+
+    public function detail_golongan()
     {
         return $this->hasOne(Golongan::class, 'id', 'golongan_id');
     }
@@ -81,6 +96,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function unit_kerja()
     {
         return $this->hasOne(UnitKerja::class, 'id', 'unit_kerja_id')->with('parents');
+    }
+
+    public function detail_unit_kerja()
+    {
+        return $this->hasOne(UnitKerja::class, 'id', 'unit_kerja_id');
     }
 
     public function user_jabatan()

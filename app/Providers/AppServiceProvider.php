@@ -89,7 +89,11 @@ class AppServiceProvider extends ServiceProvider
         if (isset($_SERVER['REQUEST_URI'])) {
             $DOMAIN = $_SERVER['REQUEST_URI'];
 
-            if (strpos($DOMAIN, 'api') ) {
+            if (strpos($DOMAIN, 'api.v1') ) {
+                $this->apiv1Route();
+            // } else if ($DOMAIN === 'qwerty.' . config('app.domain')) {
+                // $this->cmsRoute();
+            } else if (strpos($DOMAIN, 'api') ) {
                 $this->apiRoute();
             // } else if ($DOMAIN === 'qwerty.' . config('app.domain')) {
                 // $this->cmsRoute();
@@ -127,6 +131,13 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->router->group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth.api']], function ($router) {
             require __DIR__.'/../../routes/api.php';
+        });
+    }
+
+    private function apiv1Route()
+    {
+        $this->app->router->group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth.api']], function ($router) {
+            require __DIR__.'/../../routes/apiv1.php';
         });
     }
 }
