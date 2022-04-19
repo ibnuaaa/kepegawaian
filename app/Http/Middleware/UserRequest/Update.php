@@ -23,7 +23,8 @@ class Update extends BaseMiddleware
 
         $this->Model->UserRequest = UserRequest::where('user_id', $this->Id)
           ->where(function ($query) use($request) {
-              $query->where('status_sdm', 'new');
+              $query->whereIn('status_sdm', ['new','request_approval']);
+            //   $query->where('status_sdm', 'new');
               $query->orWhere('status_sdm', 'rejected');
               $query->orWhere('status_diklat', 'rejected');
           })

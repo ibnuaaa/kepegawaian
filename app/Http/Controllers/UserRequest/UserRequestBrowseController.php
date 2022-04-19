@@ -176,7 +176,7 @@ class UserRequestBrowseController extends Controller
                 else if($request->get('sort') == 'terbuat_pada') $UserRequest->orderBy("$this->UserRequestTable.created_at", $request->get('sort_type'));
             }
         } else {
-            $UserRequest->orderBy("$this->UserRequestTable.created_at", 'desc');
+            $UserRequest->orderBy("$this->UserRequestTable.created_at", 'asc');
         }
 
         // echo $UserRequest->toSql();

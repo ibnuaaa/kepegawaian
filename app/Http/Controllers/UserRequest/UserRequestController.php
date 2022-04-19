@@ -390,6 +390,7 @@ class UserRequestController extends Controller
         $User->unit_kerja_id  = $UserRequest->unit_kerja_id;
         $User->pendidikan_id  = $UserRequest->pendidikan_id;
         $User->pendidikan_detail  = $UserRequest->pendidikan_detail;
+        $User->gender  = $UserRequest->gender;
         $User->save();
 
         $this->updateDocumentAfterApprove('ktp', $User->id, $UserRequest);
