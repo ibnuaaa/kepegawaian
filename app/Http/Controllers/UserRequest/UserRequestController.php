@@ -179,6 +179,7 @@ class UserRequestController extends Controller
         }
 
         if ($isCreateNew) {
+
             $UserRequest->username  = $User->username;
             $UserRequest->email  = $User->email;
             $UserRequest->jabatan_id  = $User->jabatan_id;
@@ -208,6 +209,7 @@ class UserRequestController extends Controller
             $UserRequest->unit_kerja_id  = $User->unit_kerja_id;
             $UserRequest->pendidikan_id  = $User->pendidikan_id;
             $UserRequest->pendidikan_detail  = $User->pendidikan_detail;
+            $UserRequest->gender  = $User->gender;
             $UserRequest->status_sdm  = 'new';
             $UserRequest->save();
 

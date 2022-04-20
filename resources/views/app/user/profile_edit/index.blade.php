@@ -179,13 +179,13 @@ if ($menu == 'sdm') {
                                     </div>
                                 </div>
 
-                                <div class="row mb-4 {{ $data->alamat != $data->user->alamat_domisili ? 'bg-changed' : '' }}">
+                                <div class="row mb-4 {{ $data->alamat_domisili != $data->user->alamat_domisili ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Alamat (Domisili)</label>
                                     <div class="col-md-9">
                                         <input name="alamat_domisili" value="{{ $data['alamat_domisili'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
-                                <div class="row mb-4 {{ $data->kode_pos != $data->user->kode_pos_domisili ? 'bg-changed' : '' }}">
+                                <div class="row mb-4 {{ $data->kode_pos_domisili != $data->user->kode_pos_domisili ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Kode Pos (Domisili)</label>
                                     <div class="col-md-9">
                                         <input name="kode_pos_domisili" value="{{ $data['kode_pos_domisili'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
@@ -204,19 +204,19 @@ if ($menu == 'sdm') {
                                     </div>
                                 </div>
 
-                                <div class="row mb-4 {{ $data->hp != $data->user->nama_kontak_darurat ? 'bg-changed' : '' }}">
+                                <div class="row mb-4 {{ $data->nama_kontak_darurat != $data->user->nama_kontak_darurat ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Nama Kontak Darurat</label>
                                     <div class="col-md-9">
                                         <input name="hp" value="{{ $data['nama_kontak_darurat'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
-                                <div class="row mb-4 {{ $data->hp != $data->user->hubungan_kontak_darurat ? 'bg-changed' : '' }}">
+                                <div class="row mb-4 {{ $data->hubungan_kontak_darurat != $data->user->hubungan_kontak_darurat ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Hubungan Kontak Darurat</label>
                                     <div class="col-md-9">
                                         <input name="hp" value="{{ $data['hubungan_kontak_darurat'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
-                                <div class="row mb-4 {{ $data->hp != $data->user->no_handphone_kontak_darurat ? 'bg-changed' : '' }}">
+                                <div class="row mb-4 {{ $data->no_handphone_kontak_darurat != $data->user->no_handphone_kontak_darurat ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">No HP Kontak Darurat</label>
                                     <div class="col-md-9">
                                         <input name="hp" value="{{ $data['no_handphone_kontak_darurat'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
@@ -399,6 +399,7 @@ if ($menu == 'sdm') {
                                 <div class="row mb-4 {{ $data->gender != $data->user->gender ? 'bg-changed' : '' }}">
                                     <label class="col-md-2 form-label">Gender</label>
                                     <div class="col-md-9">
+
                                         @component('components.form.awesomeSelect', [
                                         'name' => 'gender',
                                         'items' => [
