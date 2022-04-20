@@ -404,7 +404,6 @@ class UserController extends Controller
         }
 
 
-
         // admin
 
         $profilePageMy = false;
@@ -415,11 +414,17 @@ class UserController extends Controller
 
         if ($profilePageMy) {
             $User = UserRequestBrowseController::FetchBrowse($request)
-                ->equal('user_id', $id)->get('first');
+                ->where('orderByIdDesc', 'true')
+                ->equal('user_id', $id)
+                ->get('first');
+
+            // cetak($User['records']->toArray());
+            // die();
         } else {
             $User = UserBrowseController::FetchBrowse($request)
                 ->equal('id', $id)->get('first');
         }
+
 
         // Position
         $Position = PositionBrowseController::FetchBrowse($request)

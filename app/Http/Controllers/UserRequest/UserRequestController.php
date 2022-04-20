@@ -157,15 +157,11 @@ class UserRequestController extends Controller
 
 
         $UserRequest = UserRequest::where('user_id', MyAccount()->id)
-        ->where(function ($query) use($request) {
-            $query->where('status_sdm', 'request_approval');
-            $query->orWhere('status_sdm', 'new');
-            $query->orWhere('status_sdm', 'rejected');
-            $query->orWhere('status_diklat', 'request_approval');
-            $query->orWhere('status_diklat', 'new');
-            $query->orWhere('status_diklat', 'rejected');
-        })
+        ->orderBy('id','desc')
         ->first();
+
+        // cetak($UserRequest);
+        // die();
 
         // if ($UserRequest && ($UserRequest->status_sdm == 'request_approval' || $UserRequest->status_diklat == 'request_approval')) {
         //     Json::set('exception.code', 'NeedApprovalUser');
@@ -176,7 +172,7 @@ class UserRequestController extends Controller
         $User = User::where('id', MyAccount()->id)->first();
 
         $isCreateNew = false;
-        if (!$UserRequest) {
+        if (!$UserRequest || (!empty($UserRequest) && $UserRequest->status_sdm == 'approved' )) {
             $UserRequest = new UserRequest();
             $UserRequest->user_id = MyAccount()->id;
             $isCreateNew = true;

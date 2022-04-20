@@ -128,6 +128,7 @@ class UserRequestBrowseController extends Controller
             "$this->UserRequestTable.no_rekening as user_request.no_rekening",
             "$this->UserRequestTable.golongan_darah as user_request.golongan_darah",
             "$this->UserRequestTable.status_perkawinan_id as user_request.status_perkawinan_id",
+            "$this->UserRequestTable.gender as user_request.gender",
 
             "$this->UserRequestTable.golongan_id as user_request.golongan_id",
             "$this->UserRequestTable.unit_kerja_id as user_request.unit_kerja_id",
@@ -176,8 +177,17 @@ class UserRequestBrowseController extends Controller
                 else if($request->get('sort') == 'terbuat_pada') $UserRequest->orderBy("$this->UserRequestTable.created_at", $request->get('sort_type'));
             }
         } else {
+          if (isset($request->ArrQuery->orderByIdDesc)) {
+              // die();
+              $UserRequest->orderBy("id", 'DESC');
+          } else {
             $UserRequest->orderBy("$this->UserRequestTable.created_at", 'asc');
+          }
+
         }
+
+
+
 
         // echo $UserRequest->toSql();
         // die();
