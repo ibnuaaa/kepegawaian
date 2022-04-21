@@ -63,6 +63,10 @@ class UserBrowseController extends Controller
                 $query->where("$this->UserTable.position_id", $request->ArrQuery->position_id);
             }
 
+            if (MyAccount()->id == 1338) {
+              $query->whereNotIn("$this->UserTable.id", [1341,1338,1345,1,1342]);
+            }
+
             if (!empty($request->get('q'))) {
                 $query->where(function ($query) use($request) {
                     $query->Where("$this->UserTable.id", 'like', '%'.$request->get('q').'%')
