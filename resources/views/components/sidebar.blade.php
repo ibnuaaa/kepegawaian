@@ -121,6 +121,7 @@
                               @if (getPermissions('pelatihan')['checked'])
                               <li><a href="{!! url('/pelatihan'); !!}" class="slide-item"> Pelatihan</a></li>
                               @endif
+                              <li><a href="{!! url('/kampus'); !!}" class="slide-item"> Kampus</a></li>
                             </ul>
                         </li>
                         @endif

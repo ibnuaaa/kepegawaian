@@ -53,6 +53,11 @@ $router->get('/pendidikan/new', 'CMS\Pendidikan\PendidikanController@New');
 $router->get('/pendidikan/edit/{id}', 'CMS\Pendidikan\PendidikanController@Edit');
 $router->get('/pendidikan/{id}', 'CMS\Pendidikan\PendidikanController@Detail');
 
+$router->get('/kampus', 'CMS\Kampus\KampusController@Home');
+$router->get('/kampus/new', 'CMS\Kampus\KampusController@New');
+$router->get('/kampus/edit/{id}', 'CMS\Kampus\KampusController@Edit');
+$router->get('/kampus/{id}', 'CMS\Kampus\KampusController@Detail');
+
 $router->get('/pelatihan', 'CMS\Pelatihan\PelatihanController@Home');
 $router->get('/pelatihan/new', 'CMS\Pelatihan\PelatihanController@New');
 $router->get('/pelatihan/edit/{id}', 'CMS\Pelatihan\PelatihanController@Edit');
