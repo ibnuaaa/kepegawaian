@@ -6,6 +6,7 @@ use App\Http\Controllers\User\UserBrowseController;
 use App\Http\Controllers\UserRequest\UserRequestBrowseController;
 use App\Http\Controllers\Position\PositionBrowseController;
 use App\Http\Controllers\Jabatan\JabatanBrowseController;
+use App\Http\Controllers\Kampus\KampusBrowseController;
 use App\Http\Controllers\UserRequestReject\UserRequestRejectBrowseController;
 
 use App\Http\Controllers\Golongan\GolonganBrowseController;
@@ -426,6 +427,24 @@ class UserController extends Controller
         }
 
 
+        // Kampus
+        $Kampus = KampusBrowseController::FetchBrowse($request)
+            ->where('take','all')
+            ->get('fetch');
+
+        $KampusList[] = [
+            'value' => '',
+            'label' => '-= Pilih Kampus =-'
+        ];
+
+
+        foreach ($Kampus['records'] as $key => $value) {
+            $KampusList[] = [
+                'value' => $value->id,
+                'label' => $value->name
+            ];
+        }
+
         // Position
         $Position = PositionBrowseController::FetchBrowse($request)
             ->where('take','all')
@@ -542,6 +561,7 @@ class UserController extends Controller
             'positions' => $PositionList,
             'jabatan' => $JabatanTree,
             'pendidikan' => $PendidikanList,
+            'kampus' => $KampusList,
             'jabatan_fungsional' => $JabatanFungsionalList,
             'unit_kerja' => $UnitKerjaTree,
             'golongan' => $GolonganList,

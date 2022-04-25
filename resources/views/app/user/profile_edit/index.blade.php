@@ -531,7 +531,18 @@ if ($menu == 'sdm') {
                                             @endcomponent
                                         </td>
                                         <td class="{{ $val->user_pendidikan_id && $val->user_pendidikan && $val->pendidikan_detail != $val->user_pendidikan->pendidikan_detail ? 'bg-changed' : '' }}">
+
+                                            @component('components.form.awesomeSelect', [
+                                              'name' => 'kampus_id',
+                                              'items' => $kampus,
+                                              'onChange' => 'savePendidikan(this)',
+                                              'selected' => $val->kampus_id,
+                                              'data_id' => $val->id
+                                            ])
+                                            @endcomponent
+                                            <br><br>
                                             <input name="pendidikan_detail" value="{{ $val->pendidikan_detail }}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control " type="text" required>
+
                                         </td>
                                         <td class="{{ $val->user_pendidikan_id && $val->user_pendidikan && $val->fakultas != $val->user_pendidikan->fakultas ? 'bg-changed' : '' }}">
                                             <input name="fakultas" value="{{ $val->fakultas }}" data-id="{{ $val->id }}" onChange="savePendidikan(this)" class="form-control " type="text" required>
@@ -564,7 +575,7 @@ if ($menu == 'sdm') {
                                                 <div style="clear: both;"></div>
                                             </div>
                                         </td>
-                                        <td  colspan="5">
+                                        <td  colspan="3">
                                             <h4>Foto Transkrip Nilai (PDF)<h4><br>
                                             @if(($page == 'profile'  || $page == 'admin_update_profile'))
                                             <input type="file" onchange="prepareUpload(this, 'foto_transkrip_nilai{{ !$id ? '_request' : '' }}', '{{ $val->id }}', false, ['pdf']);" multiple>

@@ -57,7 +57,7 @@
                 <p>{{ $item->modul }}</p>
             </td>
             <td class="v-align-middle ">
-                <p>{{ $item->activity }}</p>
+                <p>[{{ $item->activity }}]</p>
             </td>
             <td class="v-align-middle ">
                 <p>{{ $item->ip_client }}</p>
@@ -76,6 +76,13 @@
                   <br/><br/>
                   <span class="text-bold">Response :</span><br/>
                   {{ $item->response }}
+
+                  <br/><br/>
+                  Dieksekusi oleh :
+                  <span style="color:green;font-weight:bold;">
+                    {{ !empty($item->user->name) ? $item->user->name : '' }}
+                  </span>
+
                 </div>
             </td>
         </tr>

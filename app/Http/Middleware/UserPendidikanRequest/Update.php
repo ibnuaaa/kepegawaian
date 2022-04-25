@@ -18,6 +18,7 @@ class Update extends BaseMiddleware
         if ($this->Model->UserPendidikanRequest) {
           if ($this->_Request->input('pendidikan_id')) $this->Model->UserPendidikanRequest->pendidikan_id = $this->_Request->input('pendidikan_id');
           if ($this->_Request->input('pendidikan_detail')) $this->Model->UserPendidikanRequest->pendidikan_detail = $this->_Request->input('pendidikan_detail');
+          if ($this->_Request->input('kampus_id')) $this->Model->UserPendidikanRequest->kampus_id = $this->_Request->input('kampus_id');
           if ($this->_Request->input('fakultas')) $this->Model->UserPendidikanRequest->fakultas = $this->_Request->input('fakultas');
           if ($this->_Request->input('nim')) $this->Model->UserPendidikanRequest->nim = $this->_Request->input('nim');
           if ($this->_Request->input('no_ijazah')) $this->Model->UserPendidikanRequest->no_ijazah = $this->_Request->input('no_ijazah');
