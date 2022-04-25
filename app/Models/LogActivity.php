@@ -12,4 +12,9 @@ class LogActivity extends Model
 {
     use SoftDeletes;
     protected $table = 'log_activity';
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'log_activity.user_id');
+    }
 }
