@@ -534,7 +534,7 @@ if ($menu == 'sdm') {
 
                                             @component('components.form.awesomeSelect', [
                                               'name' => 'kampus_id',
-                                              'items' => $kampus,
+                                              'items' => !empty($kampus) ? $kampus : [],
                                               'onChange' => 'savePendidikan(this)',
                                               'selected' => $val->kampus_id,
                                               'data_id' => $val->id

@@ -161,6 +161,18 @@ class PermissionSeeder extends Seeder
                 'name' => 'dokumen',
                 'label' => 'dokumen',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 26,
+                'name' => 'kampus',
+                'label' => 'kampus',
+                'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 27,
+                'name' => 'approval_penilaian_sdm',
+                'label' => 'approval_penilaian_sdm',
+                'created_at' => Carbon::now()
             ]
 
 

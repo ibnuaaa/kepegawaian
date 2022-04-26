@@ -61,6 +61,17 @@
                         </li>
                         @endif
 
+                        @if (getPermissions('approval_penilaian_sdm')['checked'])
+                        <li class="slide @yield('userRequestDiklatMenuClass')">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-briefcase"></i><span class="side-menu__label">Approval Diklat</span><i class="angle fe fe-chevron-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a href="{!! url('/approval_penilaian_sdm/request_approval'); !!}" class="slide-item @yield('userRequestRequestApprovalDiklatMenuClass')"> Permintaan Approval</a></li>
+                                <li><a href="{!! url('/approval_penilaian_sdm/approved/diklat'); !!}" class="slide-item @yield('userRequestApprovedDiklatMenuClass')"> Disetujui</a></li>
+                                <li><a href="{!! url('/approval_penilaian_sdm/rejected/diklat'); !!}" class="slide-item @yield('userRequestRejectedDiklatMenuClass')"> Ditolak</a></li>
+                            </ul>
+                        </li>
+                        @endif
+
                         @if (getPermissions('dokumen')['checked'])
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/document_unit'); !!}"><i class="side-menu__icon fe fe-folder"></i><span class="side-menu__label">Dokumen</span></a>
@@ -121,7 +132,9 @@
                               @if (getPermissions('pelatihan')['checked'])
                               <li><a href="{!! url('/pelatihan'); !!}" class="slide-item"> Pelatihan</a></li>
                               @endif
+                              @if (getPermissions('kampus')['checked'])
                               <li><a href="{!! url('/kampus'); !!}" class="slide-item"> Kampus</a></li>
+                              @endif
                             </ul>
                         </li>
                         @endif
