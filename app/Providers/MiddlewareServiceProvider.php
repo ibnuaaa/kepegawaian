@@ -60,6 +60,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'Pendidikan.Update' => \App\Http\Middleware\Pendidikan\Update::class,
         'Pendidikan.Delete' => \App\Http\Middleware\Pendidikan\Delete::class,
 
+        'Kampus.Insert' => \App\Http\Middleware\Kampus\Insert::class,
+        'Kampus.Update' => \App\Http\Middleware\Kampus\Update::class,
+        'Kampus.Delete' => \App\Http\Middleware\Kampus\Delete::class,
+
         'Pelatihan.Insert' => \App\Http\Middleware\Pelatihan\Insert::class,
         'Pelatihan.Update' => \App\Http\Middleware\Pelatihan\Update::class,
         'Pelatihan.Delete' => \App\Http\Middleware\Pelatihan\Delete::class,

@@ -1,17 +1,21 @@
 @extends('layout.app')
 
-@section('title', 'AuditTrail')
+@section('title', 'Kampus')
 @section('bodyClass', 'fixed-header menu-pin menu-behind')
 
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">AuditTrail
+    <h1 class="page-title">Kampus
+        <a href="/kampus/new" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus"></i>
+            Buat Kampus
+        </a>
     </h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">AuditTrail</li>
+            <li class="breadcrumb-item active" aria-current="page">Kampus</li>
         </ol>
     </div>
 </div>
@@ -47,42 +51,22 @@
         @endscopedslot
         @scopedslot('record', ($item, $props, $number))
         <tr>
+            <td class="v-align-middle ">
+                <p>{{ $number }}</p>
+            </td>
+            <td class="v-align-middle ">
+                <p>{{ $item->name }}</p>
+            </td>
             <td class="v-align-middle">
                 <p>{{ $item->created_at }}</p>
             </td>
-            <td class="v-align-middle ">
-                <p>{{ $item->primary_id }}</p>
-            </td>
-            <td class="v-align-middle ">
-                <p>{{ $item->modul }}</p>
-            </td>
-            <td class="v-align-middle ">
-                <p>[{{ $item->activity }}]</p>
-            </td>
-            <td class="v-align-middle ">
-                <p>{{ $item->ip_client }}</p>
-            </td>
-        </tr>
-        <tr>
-            <td class="v-align-middle" colspan="5" style="white-space: normal !important;">
-                  <div style="width: 1000px;">
-                  API:<br/>
-                  [{{$item->method}}] {{ $item->uri }}
-
-                  <br/><br/>
-                  <span class="text-bold">Request:</span><br/>
-                  {{ $item->data }}
-
-                  <br/><br/>
-                  <span class="text-bold">Response :</span><br/>
-                  {{ $item->response }}
-
-                  <br/><br/>
-                  Dieksekusi oleh :
-                  <span style="color:green;font-weight:bold;">
-                    {{ !empty($item->user->name) ? $item->user->name : '' }}
-                  </span>
-
+            <td class="v-align-middle">
+                <div class="btn-group btn-group-sm">
+                    <a href="{{ url('/kampus/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                    <a href="{{ url('/kampus/edit/'.$item->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                    <a onClick="return remove('{{$item->id}}','{{ $item->name }}')" href="#" class="btn btn-danger">
+                        <i class="fa fa-trash"></i>
+                    </a>
                 </div>
             </td>
         </tr>
@@ -95,5 +79,5 @@
 @endsection
 
 @section('script')
-@include('app.audit_trail.home.scripts.index')
+@include('app.kampus.home.scripts.index')
 @endsection

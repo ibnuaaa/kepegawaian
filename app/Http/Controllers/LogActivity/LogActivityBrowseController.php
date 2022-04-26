@@ -75,7 +75,7 @@ class LogActivityBrowseController extends Controller
             "$this->LogActivityTable.updated_at as log_activity.updated_at",
             "$this->LogActivityTable.created_at as log_activity.created_at"
             // "a.username as log_activity.username"
-        );
+        )->with('user');
         // ->leftJoin($this->UserTable . ' as a', "a.id", "$this->LogActivityTable.user_id");
 
         $LogActivity->orderBy("$this->LogActivityTable.id", 'DESC');

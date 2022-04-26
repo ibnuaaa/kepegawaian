@@ -71,7 +71,7 @@ class Update extends BaseMiddleware
             !$this->_Request->input('masa_berlaku_str') || $this->Model->UserRequest->masa_berlaku_str = $this->_Request->input('masa_berlaku_str');
             !$this->_Request->input('no_sip') || $this->Model->UserRequest->no_sip = $this->_Request->input('no_sip');
 
-            
+
 
             if ($this->_Request->input('password')) {
                 $this->Model->UserRequest->password = $password;
