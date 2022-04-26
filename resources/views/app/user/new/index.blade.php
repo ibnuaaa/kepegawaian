@@ -23,39 +23,39 @@
             <div class="card-body">
                 <form autocomplete="off" id="newUserForm">
                     <div class=" row mb-4">
-                        <label class="col-md-3 form-label">Nama</label>
+                        <label class="col-md-3 form-label">Nama *)</label>
                         <div class="col-md-9">
                             <input name="name" value="" class="form-control" type="text" required>
                         </div>
                     </div>
                     <div class=" row mb-4">
-                        <label class="col-md-3 form-label">Username</label>
+                        <label class="col-md-3 form-label">Username (NIP) *)</label>
                         <div class="col-md-9">
                             <input name="username" class="form-control" type="text" required>
                         </div>
                     </div>
                     <div class=" row mb-4">
-                        <label class="col-md-3 form-label">NIP</label>
+                        <label class="col-md-3 form-label">NIP *)</label>
                         <div class="col-md-9">
                             <input name="nip" class="form-control" type="text" required>
                         </div>
                     </div>
                     <div class=" row mb-4">
-                        <label class="col-md-3 form-label">Password</label>
+                        <label class="col-md-3 form-label">Password *)</label>
                         <div class="col-md-9">
-                            <input autocomplete="new-password" name="password" class="form-control" type="password" required>
+                            <input autocomplete="new-password" value="abcABC123!@#" name="password" class="form-control" type="password" required>
                         </div>
                     </div>
                     <div class=" row mb-4">
-                        <label class="col-md-3 form-label">Konfirmasi Password</label>
+                        <label class="col-md-3 form-label">Konfirmasi Password *)</label>
                         <div class="col-md-9">
-                            <input name="confirmPassword" class="form-control" type="password" required>
+                            <input name="confirmPassword" value="abcABC123!@#" class="form-control" type="password" required>
                         </div>
                     </div>
                     <div class=" row mb-4">
                         <label class="col-md-3 form-label">Email</label>
                         <div class="col-md-9">
-                            <input name="email" class="form-control" type="text" required>
+                            <input name="email" value="mail.{{time()}}@mail.com" class="form-control" type="text" required>
                         </div>
                     </div>
                     <div class=" row mb-4">

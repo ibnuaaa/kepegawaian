@@ -147,7 +147,7 @@
                             </a>
                         </li>
                         <li class="slide">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="/">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="/logout">
                               <i class="side-menu__icon fe fe-log-out"></i>
                               <span class="side-menu__label">Logout</span>
                             </a>

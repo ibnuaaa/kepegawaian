@@ -607,11 +607,6 @@ class UserRequestController extends Controller
         $Model = $request->Payload->all()['Model'];
 
         $user_request = UserRequest::where('user_id', MyAccount()->id)
-          ->where(function ($query) use($request) {
-              $query->where('status_sdm', 'new');
-              $query->orWhere('status_sdm', 'rejected');
-              $query->orWhere('status_diklat', 'rejected');
-          })
           ->orderBy('id', 'DESC')->first();
 
         $user_golongan_request = UserGolonganRequest::where('user_request_id', $user_request->id)->first();

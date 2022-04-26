@@ -132,7 +132,7 @@ if ($menu == 'sdm') {
                                 <div class="row mb-4 {{ $data->username != $data->user->username ? 'bg-changed' : '' }}" >
                                     <label class="col-md-2 form-label">Username</label>
                                     <div class="col-md-9">
-                                        <input name="username" value="{{ $data['username'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
+                                        <input disabled name="username" value="{{ $data['username'] }}" onChange="savePersonal(this)" class="form-control" type="text" required>
                                     </div>
                                 </div>
                                 <div class="row mb-4 {{ $data->email != $data->user->email ? 'bg-changed' : '' }}">
