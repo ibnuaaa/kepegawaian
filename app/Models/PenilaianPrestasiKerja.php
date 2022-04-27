@@ -57,7 +57,7 @@ class PenilaianPrestasiKerja extends Model
 
     public function foto_penilaian_prestasi_kerja()
     {
-        return $this->hasMany(Document::class, 'object_id', 'penilaian_prestasi_kerja.id')
+        return $this->hasMany(Document::class, 'object_id', 'id')
                     ->where('object', 'foto_penilaian_prestasi_kerja')
                     ->with('storage');
     }

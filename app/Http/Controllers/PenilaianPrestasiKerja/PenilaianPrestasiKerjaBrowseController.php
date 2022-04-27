@@ -44,7 +44,7 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
             $request->ArrQuery->take = 5000;
         }
 
-        
+
 
         $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where(function ($query) use($request) {
             if (isset($request->ArrQuery->id)) {
@@ -53,6 +53,12 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
 
             if (isset($request->ArrQuery->user_id)) {
                 $query->where("$this->PenilaianPrestasiKerjaTable.user_id", $request->ArrQuery->user_id);
+            }
+
+
+
+            if (isset($request->ArrQuery->status_approval_sdm)) {
+                $query->where("$this->PenilaianPrestasiKerjaTable.status_approval_sdm", $request->ArrQuery->status_approval_sdm);
             }
 
             if (isset($request->ArrQuery->for)) {
@@ -85,6 +91,8 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
                             });
                         });
                     });
+                } else if ($request->ArrQuery->for == 'approval_penilaian') {
+                    $query->has("foto_penilaian_prestasi_kerja");
                 }
             }
 
@@ -110,6 +118,7 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
             "$this->PenilaianPrestasiKerjaTable.name as penilaian_prestasi_kerja.name",
             "$this->PenilaianPrestasiKerjaTable.user_id as user_id",
             "$this->PenilaianPrestasiKerjaTable.unit_kerja_id as unit_kerja_id",
+            "$this->PenilaianPrestasiKerjaTable.status_approval_sdm as status_approval_sdm",
             "$this->PenilaianPrestasiKerjaTable.jabatan_id as jabatan_id",
             "$this->PenilaianPrestasiKerjaTable.jabatan_fungsional_id as jabatan_fungsional_id",
             "$this->PenilaianPrestasiKerjaTable.bulan as bulan",
@@ -118,6 +127,9 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
         )->with('user')
         ->with('penilaian_prestasi_kerja_item')
         ->with('foto_penilaian_prestasi_kerja');
+
+
+
 
         if(!empty($request->get('sort'))) {
             if(!empty($request->get('sort_type'))) {

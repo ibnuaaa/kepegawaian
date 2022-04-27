@@ -18,6 +18,7 @@ class Update extends BaseMiddleware
         if ($this->Model->PenilaianPrestasiKerja) {
             if(!empty($this->_Request->input('bulan'))) $this->Model->PenilaianPrestasiKerja->bulan = $this->_Request->input('bulan');
             if (!empty($this->_Request->input('tahun'))) $this->Model->PenilaianPrestasiKerja->tahun = $this->_Request->input('tahun');
+            if (!empty($this->_Request->input('status_approval_sdm'))) $this->Model->PenilaianPrestasiKerja->status_approval_sdm = $this->_Request->input('status_approval_sdm');
         }
     }
 
