@@ -98,6 +98,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasOne(UnitKerja::class, 'id', 'unit_kerja_id')->with('parents');
     }
 
+    public function plt()
+    {
+        return $this->hasMany(Plt::class, 'user_id', 'user.id')->with('jabatan');
+    }
+
     public function detail_unit_kerja()
     {
         return $this->hasOne(UnitKerja::class, 'id', 'unit_kerja_id');

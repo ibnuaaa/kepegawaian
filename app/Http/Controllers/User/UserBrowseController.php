@@ -190,6 +190,7 @@ class UserBrowseController extends Controller
        ->with('foto_profile')
        ->with('foto_sip')
        ->with('status_pegawai')
+       ->with('plt')
        ;
 
 
