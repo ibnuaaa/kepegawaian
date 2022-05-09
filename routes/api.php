@@ -174,6 +174,14 @@ $router->post($prefix.'/pendidikan', ['uses' => 'Pendidikan\PendidikanController
 $router->put($prefix.'/pendidikan/{id}', ['uses' => 'Pendidikan\PendidikanController@Update', 'middleware' => ['LogActivity:Pendidikan.Update','Pendidikan.Update']]);
 $router->delete($prefix.'/pendidikan/{id}', ['uses' => 'Pendidikan\PendidikanController@Delete', 'middleware' => ['LogActivity:Pendidikan.Delete','Pendidikan.Delete']]);
 
+// plt
+$router->get($prefix.'/plt', ['uses' => 'Plt\PltBrowseController@get', 'middleware' => ['LogActivity:Plt.View','ArrQuery']]);
+$router->get($prefix.'/plt/{query:.+}', ['uses' => 'Plt\PltBrowseController@get', 'middleware' => ['Plt:Plt.View','ArrQuery']]);
+$router->post($prefix.'/plt', ['uses' => 'Plt\PltController@Insert', 'middleware' => ['LogActivity:Plt.Insert','Plt.Insert']]);
+$router->put($prefix.'/plt/{id}', ['uses' => 'Plt\PltController@Update', 'middleware' => ['LogActivity:Plt.Update','Plt.Update']]);
+$router->delete($prefix.'/plt/{id}', ['uses' => 'Plt\PltController@Delete', 'middleware' => ['LogActivity:Plt.Delete','Plt.Delete']]);
+
+
 // kampus
 $router->get($prefix.'/kampus', ['uses' => 'Kampus\KampusBrowseController@get', 'middleware' => ['LogActivity:Kampus.View','ArrQuery']]);
 $router->get($prefix.'/kampus/{query:.+}', ['uses' => 'Kampus\KampusBrowseController@get', 'middleware' => ['Kampus:Kampus.View','ArrQuery']]);

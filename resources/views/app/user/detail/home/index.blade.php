@@ -18,7 +18,7 @@
 
 <!-- ROW-1 -->
 <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xl-6">
         <div class="card card-default m-t-20">
             <div class="card-body">
                 <div class="row">
@@ -92,6 +92,98 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+    <div class="col-md-6">
+          <div class="row m-t-20">
+              <div class="col-md-12">
+
+
+                  <div class="card card-default">
+                      <div class="card-header  ">
+                          <div class="card-title">
+                              Multi Jabatan
+                          </div>
+                      </div>
+                      <div class="card-body">
+
+
+                          <table class="table table-bordered table-condensed">
+                              <tr>
+                                  <th style="width: 10%;">
+                                      No
+                                  </th>
+                                  <th style="width: 40%;">
+                                      Jabatan
+                                  </th>
+                                  <th style="width: 20%;">
+                                      Tipe
+                                  </th>
+                                  <th style="width: 30%;">
+                                      Action
+                                  </th>
+                              </tr>
+
+                              <tr class="hide" id="inputFormContainer">
+                                  <td colspan="4">
+                                      <select name="position_id" class="form-control" style="width: 100%">
+                                      </select>
+
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <input class="btn btn-danger btn-block" type="button" value= "Batal" onClick="cancelSavePLT()" style="margin-top: 10px;">
+                                          </div>
+                                          <div class="col-md-6">
+                                              <input class="btn btn-primary btn-block" type="button" value= "Simpan" onClick="savePLT()" style="margin-top: 10px;">
+                                          </div>
+                                      </div>
+
+                                  </td>
+                              </tr>
+
+                              <tr id="buttonAddContainer">
+                                  <td colspan="4">
+                                      <a href="#" class="btn btn-primary btn-block" onClick="return openInputForm()" style="margin-top: 10px;">
+                                          <i class="fa fa-plus text-white"></i> Add
+                                      </a>
+                                  </td>
+                              </tr>
+
+                              @if (!empty($data->plt))
+                                  @foreach ($data->plt as $key => $value)
+                                  <tr>
+                                      <td>
+                                          {{ $key+1 }}
+                                      </td>
+                                      <td colspan="2">
+                                          {{ $value->jabatan ? $value->jabatan->name : '' }}
+                                      </td>
+                                      <td>
+                                          <div class="row">
+                                              <div class="col-md-12">
+                                                  <a href="#" class="btn btn-danger btn-block btn-xs m-r-10" onClick="return deletePLT('{{$value->id}}')" style="margin-top: 10px;">
+                                                      <i class="fa fa-trash text-white"></i>
+                                                  </a>
+                                              </div>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  @endforeach
+                              @endif
+
+                          </table>
+                      </div>
+                  </div>
+
+              </div>
+          </div
+      </div>
+  </div>
+
 </div>
 
 @endsection
