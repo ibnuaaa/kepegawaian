@@ -174,6 +174,20 @@ $router->post($prefix.'/pendidikan', ['uses' => 'Pendidikan\PendidikanController
 $router->put($prefix.'/pendidikan/{id}', ['uses' => 'Pendidikan\PendidikanController@Update', 'middleware' => ['LogActivity:Pendidikan.Update','Pendidikan.Update']]);
 $router->delete($prefix.'/pendidikan/{id}', ['uses' => 'Pendidikan\PendidikanController@Delete', 'middleware' => ['LogActivity:Pendidikan.Delete','Pendidikan.Delete']]);
 
+// complaint
+$router->get($prefix.'/complaint', ['uses' => 'Complaint\ComplaintBrowseController@get', 'middleware' => ['LogActivity:Complaint.View','ArrQuery']]);
+$router->get($prefix.'/complaint/{query:.+}', ['uses' => 'Complaint\ComplaintBrowseController@get', 'middleware' => ['Complaint:Complaint.View','ArrQuery']]);
+$router->post($prefix.'/complaint', ['uses' => 'Complaint\ComplaintController@Insert', 'middleware' => ['LogActivity:Complaint.Insert','Complaint.Insert']]);
+$router->put($prefix.'/complaint/{id}', ['uses' => 'Complaint\ComplaintController@Update', 'middleware' => ['LogActivity:Complaint.Update','Complaint.Update']]);
+$router->delete($prefix.'/complaint/{id}', ['uses' => 'Complaint\ComplaintController@Delete', 'middleware' => ['LogActivity:Complaint.Delete','Complaint.Delete']]);
+
+// complaint_to
+$router->get($prefix.'/complaint_to', ['uses' => 'ComplaintTo\ComplaintToBrowseController@get', 'middleware' => ['LogActivity:ComplaintTo.View','ArrQuery']]);
+$router->get($prefix.'/complaint_to/{query:.+}', ['uses' => 'ComplaintTo\ComplaintToBrowseController@get', 'middleware' => ['ComplaintTo:ComplaintTo.View','ArrQuery']]);
+$router->post($prefix.'/complaint_to', ['uses' => 'ComplaintTo\ComplaintToController@Insert', 'middleware' => ['LogActivity:ComplaintTo.Insert','ComplaintTo.Insert']]);
+$router->put($prefix.'/complaint_to/{id}', ['uses' => 'ComplaintTo\ComplaintToController@Update', 'middleware' => ['LogActivity:ComplaintTo.Update','ComplaintTo.Update']]);
+$router->delete($prefix.'/complaint_to/{id}', ['uses' => 'ComplaintTo\ComplaintToController@Delete', 'middleware' => ['LogActivity:ComplaintTo.Delete','ComplaintTo.Delete']]);
+
 // plt
 $router->get($prefix.'/plt', ['uses' => 'Plt\PltBrowseController@get', 'middleware' => ['LogActivity:Plt.View','ArrQuery']]);
 $router->get($prefix.'/plt/{query:.+}', ['uses' => 'Plt\PltBrowseController@get', 'middleware' => ['Plt:Plt.View','ArrQuery']]);

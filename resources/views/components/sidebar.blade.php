@@ -77,6 +77,12 @@
                         </li>
                         @endif
 
+                        @if (getPermissions('complaint')['checked'])
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/complaint'); !!}"><i class="side-menu__icon fe fe-folder"></i><span class="side-menu__label">E-Complaint</span></a>
+                        </li>
+                        @endif
+
                         @if (getPermissions('modul_pengguna')['checked'])
                         <li class="sub-category">
                             <h3>Modul Pengguna</h3>

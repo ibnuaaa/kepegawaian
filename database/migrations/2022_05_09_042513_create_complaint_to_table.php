@@ -16,7 +16,11 @@ class CreateComplaintToTable extends Migration
         Schema::create('complaint_to', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('complaint_id')->nullable()->default(NULL);
-            $table->integer('unit_kerja_id')->nullable()->default(NULL);
+            $table->integer('destination_unit_kerja_id')->nullable()->default(NULL);
+            $table->integer('delegate_by_user_id')->nullable()->default(NULL);
+            $table->text('delegate_notes')->nullable()->default(NULL);
+            $table->integer('delegate_unit_kerja_id')->nullable()->default(NULL);
+            $table->timestamp('delegate_at')->nullable()->default(NULL);
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('created_at')->nullable();
             $table->timestamp('deleted_at')->nullable()->default(NULL);

@@ -173,6 +173,12 @@ class PermissionSeeder extends Seeder
                 'name' => 'approval_penilaian_sdm',
                 'label' => 'approval_penilaian_sdm',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 28,
+                'name' => 'complaint',
+                'label' => 'complaint',
+                'created_at' => Carbon::now()
             ]
 
 
