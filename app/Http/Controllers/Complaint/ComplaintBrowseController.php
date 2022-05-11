@@ -52,7 +52,8 @@ class ComplaintBrowseController extends Controller
             if (isset($request->ArrQuery->for)) {
 
                 if ($request->ArrQuery->for == 'inbox') {
-
+                  $query->where("$this->ComplaintTable.status", 2);
+                  $query->where("b.destination_unit_kerja_id", MyAccount()->unit_kerja_id);
                 }
 
                 if ($request->ArrQuery->for == 'drafts') {
@@ -112,6 +113,10 @@ class ComplaintBrowseController extends Controller
         ->with('foto_complaint')
         ->with('complaint_to')
         ;
+
+        if ($request->ArrQuery->for == 'inbox') {
+            $Complaint->leftJoin('complaint_to as b', "b.complaint_id", "$this->ComplaintTable.id");
+        }
 
         if(!empty($request->get('sort'))) {
             if(!empty($request->get('sort_type'))) {
