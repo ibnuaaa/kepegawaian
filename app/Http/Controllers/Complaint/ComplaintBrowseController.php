@@ -49,7 +49,7 @@ class ComplaintBrowseController extends Controller
             }
 
 
-            if (isset($request->ArrQuery->for)) {
+            if (!empty($request->ArrQuery->for)) {
 
                 if ($request->ArrQuery->for == 'inbox') {
                   $query->where("$this->ComplaintTable.status", 2);
@@ -114,7 +114,7 @@ class ComplaintBrowseController extends Controller
         ->with('complaint_to')
         ;
 
-        if ($request->ArrQuery->for == 'inbox') {
+        if (!empty($request->ArrQuery->for) && $request->ArrQuery->for == 'inbox') {
             $Complaint->leftJoin('complaint_to as b', "b.complaint_id", "$this->ComplaintTable.id");
         }
 

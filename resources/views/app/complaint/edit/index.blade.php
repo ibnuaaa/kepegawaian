@@ -91,6 +91,28 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="form-group">
+                        <div class="row ">
+                            <label class="col-xl-2 form-label">Image</label>
+                            <div class="col-xl-10">
+                                <input type="file" onchange="prepareUpload(this, 'foto_complaint', '{{ $data->id }}', false, ['jpg','jpeg', 'bmp', 'png'], true);" multiple>
+                                <div style="clear: both;"></div>
+                                <div class="img-preview mt-2" id="img-preview">
+                                    @if (!empty($data->foto_complaint))
+                                    @foreach ($data->foto_complaint as $key => $val2)
+                                    <img src="/api/preview/{{$val2->storage->key}}" alt="avatar-img" style="max-width: 200px;max-height: 200px;">
+                                    @endforeach
+                                    @endif
+                                    <div style="clear: both;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
                 </form>
             </div>
             <div class="card-footer d-sm-flex">

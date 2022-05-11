@@ -250,7 +250,7 @@
 
 
 
-        function prepareUpload(el, object_type, id, is_for_new, allowed_ext) {
+        function prepareUpload(el, object_type, id, is_for_new, allowed_ext, is_append) {
             var files = $(el)[0].files;
             var preview = $(el).siblings("#img-preview");
 
@@ -273,7 +273,7 @@
 
             if (is_allowed) {
               for (i = 0; i < files.length; i++) {
-                uploadFile(files[i], preview, object_type, id, is_for_new);
+                uploadFile(files[i], preview, object_type, id, is_for_new, is_append);
               }
             } else {
               swal({ title: 'Opps!', text: 'Mohon maaf, hanya mengizinkan file berikut : ' + allowed_ext.join(','), type: 'error', confirmButtonText: 'Ok' })
@@ -281,7 +281,7 @@
         }
 
         var g_data_storage = [];
-        function uploadFile(file, preview, object, id, is_for_new) {
+        function uploadFile(file, preview, object, id, is_for_new, is_append) {
           showLoading()
           var formData = new FormData();
           formData.append('file', file);
@@ -311,7 +311,11 @@
                         saveDocument(id)
                     }
 
-                    appendImage(preview, response.data)
+                    if (is_append) {
+                      appendImage(preview, response.data)
+                    } else {
+                      replaceImage(preview, response.data)
+                    }
 
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -361,7 +365,7 @@
             }
         }
 
-        function appendImage(preview, data) {
+        function replaceImage(preview, data) {
 
             img = "";
             if(data.extension.toLowerCase() == 'jpg' || data.extension.toLowerCase() == 'png' || data.extension.toLowerCase() == 'bmp')
@@ -372,6 +376,21 @@
             preview.html("<div style='float:left;position:relative;'>"
                 // + "<button class='btn btn-danger btn-xs' onClick='removeNode(this)' style='position:absolute;left:3px;border:solid 1px;' data-key='"+data.key+"'>"
                 // + "<i class='fa fa-trash'></i></button>"
+                + img
+                + "</div>");
+        }
+
+        function appendImage(preview, data) {
+
+            img = "";
+            if(data.extension.toLowerCase() == 'jpg' || data.extension.toLowerCase() == 'png' || data.extension.toLowerCase() == 'bmp')
+            img = "<img src='"+window.apiUrl+"/tmp/"+data.key+"."+data.extension+"' style='max-width: 200px;max-height: 200px;'/>";
+            else
+            img = "<i class='fa fa-file-pdf-o' style='font-size: 50px'></i>";
+
+            preview.append("<div style='float:left;position:relative;'>"
+                + "<button class='btn btn-danger btn-xs' onClick='removeNode(\""+data.key+"\")' style='position:absolute;left:3px;border:solid 1px;'>"
+                + "<i class='fa fa-trash'></i></button>"
                 + img
                 + "</div>");
         }
