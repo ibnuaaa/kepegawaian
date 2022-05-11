@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Complaint;
 
 use App\Models\Complaint;
-use App\Models\ComplaintTo;
+use App\Models\ComplaintUserResolve;
 
 use App\Traits\Browse;
 
@@ -72,6 +72,21 @@ class ComplaintController extends Controller
     {
         $Model = $request->Payload->all()['Model'];
         $Model->Complaint->save();
+
+        if ($Model->Complaint->status && $Model->Complaint->status == 3) {
+
+          // check
+
+          $ComplaintUserResolve = ComplaintUserResolve::where('complaint_id', $Model->Complaint->id)
+            ->where('user_id', MyAccount()->id)->first();
+
+          if (!$ComplaintUserResolve) {
+              $ComplaintUserResolve = new ComplaintUserResolve();
+              $ComplaintUserResolve->complaint_id = $Model->Complaint->id;
+              $ComplaintUserResolve->user_id = MyAccount()->id;
+              $ComplaintUserResolve->save();
+          }
+        }
 
         Json::set('data', $this->SyncData($request, $Model->Complaint->id));
         return response()->json(Json::get(), 202);

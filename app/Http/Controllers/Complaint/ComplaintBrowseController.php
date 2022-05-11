@@ -52,7 +52,7 @@ class ComplaintBrowseController extends Controller
             if (!empty($request->ArrQuery->for)) {
 
                 if ($request->ArrQuery->for == 'inbox') {
-                  $query->where("$this->ComplaintTable.status", 2);
+                  $query->whereIn("$this->ComplaintTable.status", [2,3,4,5,6,7]);
                   $query->where("b.destination_unit_kerja_id", MyAccount()->unit_kerja_id);
                 }
 

@@ -124,8 +124,7 @@
                     <a href="#" onClick="return trash()" class="btn btn-icon btn-white btn-svg" data-bs-toggle="tooltip" title="" data-bs-original-title="Delete"><span class="ri-delete-bin-line"></span></a>
                 </div>
                 <div class="btn-list ms-auto my-auto">
-                    <button class="btn btn-danger btn-space mb-0">Cancel</button>
-                    <button class="btn btn-primary btn-space mb-0">Send message</button>
+                    <button class="btn btn-primary btn-space mb-0" onclick="send()">Send message</button>
                 </div>
             </div>
         </div>
