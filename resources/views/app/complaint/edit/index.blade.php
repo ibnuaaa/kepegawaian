@@ -44,9 +44,8 @@
                                   $destination_unit_kerja_name = '';
 
                                   if ($data->complaint_to && count($data->complaint_to) > 0) {
-                                      if (!empty($data->complaint_to[0])) {
+                                      if (!empty($data->complaint_to[0]->destination_unit_kerja->id)) {
                                           $complaint_to = $data->complaint_to[0];
-
 
                                           $destination_unit_kerja_id = $complaint_to->destination_unit_kerja->id;
                                           $destination_unit_kerja_name = $complaint_to->destination_unit_kerja->name;
@@ -96,10 +95,7 @@
             </div>
             <div class="card-footer d-sm-flex">
                 <div class="mt-2 mb-2">
-                    <a href="javascript:void(0)" class="btn btn-icon btn-white btn-svg" data-bs-toggle="tooltip" title="" data-bs-original-title="Attach"><span class="ri-attachment-2"></span></a>
-                    <a href="javascript:void(0)" class="btn btn-icon btn-white btn-svg" data-bs-toggle="tooltip" title="" data-bs-original-title="Link"><span class="ri-link"></span></a>
-                    <a href="javascript:void(0)" class="btn btn-icon btn-white btn-svg" data-bs-toggle="tooltip" title="" data-bs-original-title="Photos"><span class="ri-image-line"></span></a>
-                    <a href="javascript:void(0)" class="btn btn-icon btn-white btn-svg" data-bs-toggle="tooltip" title="" data-bs-original-title="Delete"><span class="ri-delete-bin-line"></span></a>
+                    <a href="#" onClick="return trash()" class="btn btn-icon btn-white btn-svg" data-bs-toggle="tooltip" title="" data-bs-original-title="Delete"><span class="ri-delete-bin-line"></span></a>
                 </div>
                 <div class="btn-list ms-auto my-auto">
                     <button class="btn btn-danger btn-space mb-0">Cancel</button>

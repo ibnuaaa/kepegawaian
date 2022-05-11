@@ -1,4 +1,5 @@
 <script>
+
 $(document).ready(function() {
 
     $('select[name=destination_unit_kerja_id]').select2({
@@ -33,21 +34,23 @@ $(document).ready(function() {
 })
 
 
-$('#deleteOpenModal').click(function() {
-    const modalElem = $('#modalDelete')
-    $('#modalDelete').modal('show')
-})
-$('#deleteAction').click(function() {
-    axios.delete('/complaint/{{$data['id']}}').then((response) => {
-        const { data } = response.data
-        window.location = '{{ UrlPrevious(url('/complaint')) }}'
-        $('#modalDelete').modal('hide')
+function trash() {
+
+    var data = new Object;
+    data['status'] = '99';
+
+    showLoading()
+    axios.put('/complaint/{{ $data->id }}', data).then((response) => {
+        location.href = '/complaint/drafts'
     }).catch((error) => {
         if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
             swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
         }
     })
-})
+
+    return false;
+}
 
 function saveEdit(e) {
 

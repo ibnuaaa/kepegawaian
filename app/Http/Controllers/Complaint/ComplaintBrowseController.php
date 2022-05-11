@@ -48,6 +48,34 @@ class ComplaintBrowseController extends Controller
                 $query->where("$this->ComplaintTable.id", $request->ArrQuery->id);
             }
 
+
+            if (isset($request->ArrQuery->for)) {
+
+                if ($request->ArrQuery->for == 'inbox') {
+
+                }
+
+                if ($request->ArrQuery->for == 'drafts') {
+                  $query->where("$this->ComplaintTable.status", 1);
+                  $query->where("$this->ComplaintTable.from_user_id", MyAccount()->id);
+                }
+
+                if ($request->ArrQuery->for == 'starred') {
+                  $query->where("$this->ComplaintTable.status", 88);
+                }
+
+                if ($request->ArrQuery->for == 'sent') {
+                  $query->where("$this->ComplaintTable.status", 2);
+                  $query->where("$this->ComplaintTable.from_user_id", MyAccount()->id);
+                }
+
+                if ($request->ArrQuery->for == 'trash') {
+                  $query->where("$this->ComplaintTable.status", 99);
+                  $query->where("$this->ComplaintTable.from_user_id", MyAccount()->id);
+                }
+
+            }
+
             if (!empty($request->get('q'))) {
                 $query->where(function ($query) use($request) {
                     $query->where("$this->ComplaintTable.title", 'like', '%'.$request->get('title').'%');

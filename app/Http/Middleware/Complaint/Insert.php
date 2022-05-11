@@ -17,6 +17,7 @@ class Insert extends BaseMiddleware
     {
         $this->Model->Complaint = new Complaint();
 
+        $this->Model->Complaint->status = 1;
         $this->Model->Complaint->from_user_id = Auth::user()['id'];
         $this->Model->Complaint->from_unit_kerja_id = Auth::user()['unit_kerja_id'];
     }

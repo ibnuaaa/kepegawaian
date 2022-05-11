@@ -19,6 +19,7 @@ class Update extends BaseMiddleware
             if(!empty($this->_Request->input('title'))) $this->Model->Complaint->title = $this->_Request->input('title');
             if(!empty($this->_Request->input('description'))) $this->Model->Complaint->description = $this->_Request->input('description');
             if(!empty($this->_Request->input('urgency_type'))) $this->Model->Complaint->urgency_type = $this->_Request->input('urgency_type');
+            if(!empty($this->_Request->input('status'))) $this->Model->Complaint->status = $this->_Request->input('status');
         }
     }
 

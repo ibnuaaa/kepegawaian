@@ -36,6 +36,7 @@ class ComplaintController extends Controller
 
         $options = array(5,10,15,20);
         $Complaint = ComplaintBrowseController::FetchBrowse($request)
+            ->where('for', $menu)
             ->where('take',  $selected)
             ->where('with.total', 'true');
 
