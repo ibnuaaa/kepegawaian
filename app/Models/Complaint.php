@@ -23,9 +23,14 @@ class Complaint extends Model
         return $this->hasOne(UnitKerja::class, 'id', 'complaint.from_unit_kerja_id');
     }
 
-    public function complaint_to()
+    public function complaint_reply()
     {
         return $this->hasMany(ComplaintTo::class, 'complaint_id', 'complaint.id')->with('destination_unit_kerja');
+    }
+
+    public function complaint_reply()
+    {
+        return $this->hasMany(ComplaintReply::class, 'complaint_id', 'complaint.id')->with('user');
     }
 
     public function foto_complaint()

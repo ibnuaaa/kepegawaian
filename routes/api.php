@@ -189,6 +189,13 @@ $router->post($prefix.'/complaint_to', ['uses' => 'ComplaintTo\ComplaintToContro
 $router->put($prefix.'/complaint_to/{id}', ['uses' => 'ComplaintTo\ComplaintToController@Update', 'middleware' => ['LogActivity:ComplaintTo.Update','ComplaintTo.Update']]);
 $router->delete($prefix.'/complaint_to/{id}', ['uses' => 'ComplaintTo\ComplaintToController@Delete', 'middleware' => ['LogActivity:ComplaintTo.Delete','ComplaintTo.Delete']]);
 
+// complaint_reply
+$router->get($prefix.'/complaint_reply', ['uses' => 'ComplaintReply\ComplaintReplyBrowseController@get', 'middleware' => ['LogActivity:ComplaintReply.View','ArrQuery']]);
+$router->get($prefix.'/complaint_reply/{query:.+}', ['uses' => 'ComplaintReply\ComplaintReplyBrowseController@get', 'middleware' => ['LogActivity:ComplaintReply.View','ArrQuery']]);
+$router->post($prefix.'/complaint_reply', ['uses' => 'ComplaintReply\ComplaintReplyController@Insert', 'middleware' => ['LogActivity:ComplaintReply.Insert','ComplaintReply.Insert']]);
+$router->put($prefix.'/complaint_reply/{id}', ['uses' => 'ComplaintReply\ComplaintReplyController@Update', 'middleware' => ['LogActivity:ComplaintReply.Update','ComplaintReply.Update']]);
+$router->delete($prefix.'/complaint_reply/{id}', ['uses' => 'ComplaintReply\ComplaintReplyController@Delete', 'middleware' => ['LogActivity:ComplaintReply.Delete','ComplaintReply.Delete']]);
+
 // plt
 $router->get($prefix.'/plt', ['uses' => 'Plt\PltBrowseController@get', 'middleware' => ['LogActivity:Plt.View','ArrQuery']]);
 $router->get($prefix.'/plt/{query:.+}', ['uses' => 'Plt\PltBrowseController@get', 'middleware' => ['Plt:Plt.View','ArrQuery']]);

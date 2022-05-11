@@ -68,6 +68,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'ComplaintTo.Update' => \App\Http\Middleware\ComplaintTo\Update::class,
         'ComplaintTo.Delete' => \App\Http\Middleware\ComplaintTo\Delete::class,
 
+        'ComplaintReply.Insert' => \App\Http\Middleware\ComplaintReply\Insert::class,
+        'ComplaintReply.Update' => \App\Http\Middleware\ComplaintReply\Update::class,
+        'ComplaintReply.Delete' => \App\Http\Middleware\ComplaintReply\Delete::class,
+
         'Plt.Insert' => \App\Http\Middleware\Plt\Insert::class,
         'Plt.Update' => \App\Http\Middleware\Plt\Update::class,
         'Plt.Delete' => \App\Http\Middleware\Plt\Delete::class,
