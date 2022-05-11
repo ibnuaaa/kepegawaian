@@ -29,7 +29,7 @@
     <div class="col-xl-9">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Compose new message</h3>
+                <h3 class="card-title">Compose message</h3>
             </div>
             <div class="card-body">
                 <form>
@@ -38,11 +38,28 @@
                             <label class="col-xl-2 form-label">To</label>
                             <div class="col-xl-10">
 
+                                <?php
+
+                                  $destination_unit_kerja_id = '';
+                                  $destination_unit_kerja_name = '';
+
+                                  if ($data->complaint_to && count($data->complaint_to) > 0) {
+                                      if (!empty($data->complaint_to[0])) {
+                                          $complaint_to = $data->complaint_to[0];
 
 
-                                <select class="form-control" onChange="saveEditDestination(this)" name="to_unit_kerja_id"></select>
+                                          $destination_unit_kerja_id = $complaint_to->destination_unit_kerja->id;
+                                          $destination_unit_kerja_name = $complaint_to->destination_unit_kerja->name;
+                                      }
+                                  }
 
+                                ?>
 
+                                <select class="form-control" onChange="saveEditDestination(this)" name="destination_unit_kerja_id">
+                                    @if ($destination_unit_kerja_id)
+                                    <option value="{{$destination_unit_kerja_id}}">{{$destination_unit_kerja_name}}</option>
+                                    @endif
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -52,9 +69,9 @@
                             <div class="col-xl-10">
                                 <select class="form-control" onChange="saveEdit(this)" name="urgency_type">
                                   <option>-= Pilih =-</option>
-                                  <option value="1">Sangat Segera</option>
-                                  <option value="2">Segera</option>
-                                  <option value="3">Biasa</option>
+                                  <option value="1" {{ $data->urgency_type == 1 ? 'selected' : '' }}>Sangat Segera</option>
+                                  <option value="2" {{ $data->urgency_type == 2 ? 'selected' : '' }}>Segera</option>
+                                  <option value="3" {{ $data->urgency_type == 3 ? 'selected' : '' }}>Biasa</option>
                                 </select>
                             </div>
                         </div>
@@ -63,7 +80,7 @@
                         <div class="row align-items-center">
                             <label class="col-xl-2 form-label">Subject</label>
                             <div class="col-xl-10">
-                                <input type="text" onChange="saveEdit(this)" name="title" class="form-control">
+                                <input type="text" onChange="saveEdit(this)" name="title" value="{{ $data->title }}" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -71,7 +88,7 @@
                         <div class="row ">
                             <label class="col-xl-2 form-label">Message</label>
                             <div class="col-xl-10">
-                                <textarea rows="10" onChange="saveEdit(this)" name="description" class="form-control"></textarea>
+                                <textarea rows="10" onChange="saveEdit(this)" name="description" class="form-control">{{ $data->description }}</textarea>
                             </div>
                         </div>
                     </div>

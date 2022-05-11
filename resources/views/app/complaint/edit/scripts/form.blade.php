@@ -1,7 +1,7 @@
 <script>
 $(document).ready(function() {
 
-    $('select[name=to_unit_kerja_id]').select2({
+    $('select[name=destination_unit_kerja_id]').select2({
         ajax: {
             url: window.apiUrl + '/unit_kerja',
             headers: {
@@ -81,7 +81,9 @@ function saveEditDestination(e) {
 
 
     axios.get('/complaint_to/complaint_id/{{ $data->id }}/set/first').then((response) => {
-      var id = response.data.records.id
+      var id = response.data.data.records.id
+
+      // console.log(response.data)
 
       axios.put('/complaint_to/' + id, data).then((response) => {
           // location.reload()

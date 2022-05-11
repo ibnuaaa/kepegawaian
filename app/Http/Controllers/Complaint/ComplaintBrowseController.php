@@ -78,7 +78,12 @@ class ComplaintBrowseController extends Controller
             "$this->ComplaintTable.process_at as complaint.process_at",
             "$this->ComplaintTable.finish_at as complaint.finish_at",
             "$this->ComplaintTable.created_at as complaint.created_at"
-        );
+        )
+        ->with('from_user')
+        ->with('from_unit_kerja')
+        ->with('foto_complaint')
+        ->with('complaint_to')
+        ;
 
         if(!empty($request->get('sort'))) {
             if(!empty($request->get('sort_type'))) {

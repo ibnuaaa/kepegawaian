@@ -12,4 +12,27 @@ class Complaint extends Model
 {
     use SoftDeletes;
     protected $table = 'complaint';
+
+    public function from_user()
+    {
+        return $this->hasOne(User::class, 'id', 'complaint.from_user_id');
+    }
+
+    public function from_unit_kerja()
+    {
+        return $this->hasOne(UnitKerja::class, 'id', 'complaint.from_unit_kerja_id');
+    }
+
+    public function complaint_to()
+    {
+        return $this->hasMany(ComplaintTo::class, 'complaint_id', 'complaint.id')->with('destination_unit_kerja');
+    }
+
+    public function foto_complaint()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'complaint.id')
+                    ->where('object', 'foto_complaint')
+                    ->with('storage');
+    }
+
 }

@@ -18,24 +18,12 @@ class Update extends BaseMiddleware
         if ($this->Model->ComplaintTo) {
           $this->Model->ComplaintTo->delegate_by_user_id = MyAccount()->id;
           $this->Model->ComplaintTo->delegate_unit_kerja_id = MyAccount()->unit_kerja_id;
-          $this->Model->ComplaintTo->destination_unit_kerja_id = $this->_Request->input('destination_unit_kerja_id  ');
+          $this->Model->ComplaintTo->destination_unit_kerja_id = $this->_Request->input('destination_unit_kerja_id');
         }
     }
 
     private function Validation()
     {
-        $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required'
-        ]);
-        if (!$this->Model->ComplaintTo) {
-            $this->Json::set('exception.key', 'NotFoundComplaintTo');
-            $this->Json::set('exception.message', trans('validation.'.$this->Json::get('exception.key')));
-            return false;
-        }
-        if ($validator->fails()) {
-            $this->Json::set('errors', $validator->errors());
-            return false;
-        }
         return true;
     }
 
