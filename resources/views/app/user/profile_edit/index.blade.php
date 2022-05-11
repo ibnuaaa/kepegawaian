@@ -115,6 +115,7 @@ if ($menu == 'sdm') {
                                             <img src="/api/preview/{{$val2->storage->key}}" alt="avatar-img" style="max-width: 200px;max-height: 200px;">
                                             @endforeach
                                             @endif
+                                            <div style="clear: both;"></div>
                                         </div>
 
                                         <div style="clear: both;"></div>

@@ -151,6 +151,12 @@ class StorageController extends Controller
         return response()->json(Json::get(), 202);
     }
 
+    public function DeleteByKey(Request $request)
+    {
+        Json::set('data', 'Success Delete');
+        return response()->json(Json::get(), 202);
+    }
+
     public function FetchThumb(Request $request)
     {
         $Model = $request->Payload->all()['Model'];

@@ -91,6 +91,5 @@
 
 
 @section('formValidationScript')
-@include('app.complaint.detail.scripts.form')
 @include('app.complaint.home.scripts.index')
 @endsection

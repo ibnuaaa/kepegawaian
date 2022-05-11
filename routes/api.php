@@ -54,6 +54,7 @@ $router->post($prefix.'/upload', ['uses' => 'File\FileController@Upload', 'middl
 
 $router->post($prefix.'/storage/save', ['uses' => 'Storage\StorageController@Save', 'middleware' => ['LogActivity:Storage.Save','Storage.Save']]);
 $router->post($prefix.'/storage/save_excel', ['uses' => 'Storage\StorageController@SaveExcel', 'middleware' => ['LogActivity:Storage.SaveExcel','Storage.SaveExcel']]);
+$router->delete($prefix.'/storage/delete_by_key/{uuid}', ['uses' => 'Storage\StorageController@DeleteByKey', 'middleware' => ['LogActivity:Storage.DeleteByKey','Storage.DeleteByKey']]);
 
 // mail
 $router->get($prefix.'/log_activity', ['uses' => 'LogActivity\LogActivityBrowseController@get', 'middleware' => ['LogActivity:LogActivity.View', 'ArrQuery']]);

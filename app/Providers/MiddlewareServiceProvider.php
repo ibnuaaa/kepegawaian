@@ -190,6 +190,7 @@ class MiddlewareServiceProvider extends ServiceProvider
         'Storage.Fetch' => \App\Http\Middleware\Storage\Fetch::class,
         'Storage.FetchTmp' => \App\Http\Middleware\Storage\FetchTmp::class,
         'Storage.Delete' => \App\Http\Middleware\Storage\Delete::class,
+        'Storage.DeleteByKey' => \App\Http\Middleware\Storage\DeleteByKey::class,
         'Storage.FetchThumb' => \App\Http\Middleware\Storage\FetchThumb::class,
 
         'PushNotification.Insert' => \App\Http\Middleware\PushNotification\Insert::class,

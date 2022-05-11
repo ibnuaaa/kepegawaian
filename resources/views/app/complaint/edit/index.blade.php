@@ -102,7 +102,11 @@
                                 <div class="img-preview mt-2" id="img-preview">
                                     @if (!empty($data->foto_complaint))
                                     @foreach ($data->foto_complaint as $key => $val2)
-                                    <img src="/api/preview/{{$val2->storage->key}}" alt="avatar-img" style="max-width: 200px;max-height: 200px;">
+                                        <div style='float:left;position:relative;'>
+                                        <button class='btn btn-danger btn-xs' onClick="return removeNode('{{ $val2->storage->key }}')" style='position:absolute;left:3px;border:solid 1px;'>
+                                        <i class='fa fa-trash'></i></button>
+                                        <img src="/api/preview/{{$val2->storage->key}}" alt="avatar-img" style="max-width: 200px;max-height: 200px;">
+                                        </div>
                                     @endforeach
                                     @endif
                                     <div style="clear: both;"></div>
