@@ -78,14 +78,28 @@ function saveEditDestination(e) {
     data['id'] = '{{ $data->id }}';
 
     $(e).addClass('loadingField')
-    axios.put('/complaint_to/{{ $data->id }}', data).then((response) => {
-        // location.reload()
-        $(e).removeClass('loadingField')
+
+
+    axios.get('/complaint_to/complaint_id/{{ $data->id }}/set/first').then((response) => {
+      var id = response.data.records.id
+
+      axios.put('/complaint_to/' + id, data).then((response) => {
+          // location.reload()
+          $(e).removeClass('loadingField')
+      }).catch((error) => {
+          if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+              swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+              hideLoading()
+          }
+      })
+
     }).catch((error) => {
         if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
             swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
             hideLoading()
         }
     })
+
+
 }
 </script>

@@ -20,8 +20,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ComplaintController extends Controller
 {
-    public function Home(Request $request)
+    public function Home(Request $request, $menu = 'inbox')
     {
+
         $TableKey = 'complaint-table';
 
         $filter_search = $request->input('filter_search');
@@ -74,6 +75,7 @@ class ComplaintController extends Controller
 
         $ParseData = [
             'data' => $DataTable,
+            'menu' => $menu,
             'result_total' => isset($DataTable['total']) ? $DataTable['total'] : 0
         ];
         return view('app.complaint.home.index', $ParseData);
@@ -88,7 +90,10 @@ class ComplaintController extends Controller
         $ComplaintBrowseController = new ComplaintBrowseController($QueryRoute);
         $data = $ComplaintBrowseController->get($QueryRoute);
 
-        return view('app.complaint.detail.index', [ 'data' => $data->original['data']['records'] ]);
+        return view('app.complaint.detail.index', [
+          'data' => $data->original['data']['records'],
+          'menu' => '',
+        ]);
     }
 
     public function Edit(Request $request, $id)
@@ -102,6 +107,7 @@ class ComplaintController extends Controller
         }
         return view('app.complaint.edit.index', [
             'select' => [],
+            'menu' => '',
             'data' => $Complaint['records']
         ]);
     }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Complaint;
+namespace App\Http\Controllers\ComplaintTo;
 
-use App\Models\Complaint;
+use App\Models\ComplaintTo;
 
 use App\Traits\Browse;
-use App\Traits\Complaint\ComplaintCollection;
+use App\Traits\ComplaintTo\ComplaintToCollection;
 
 use Carbon\Carbon;
 use Illuminate\Http\Response;
@@ -18,14 +18,14 @@ use Illuminate\Support\Facades\Auth;
 
 use DB;
 
-class ComplaintBrowseController extends Controller
+class ComplaintToBrowseController extends Controller
 {
-    use Browse, ComplaintCollection {
-        ComplaintCollection::__construct as private __ComplaintCollectionConstruct;
+    use Browse, ComplaintToCollection {
+        ComplaintToCollection::__construct as private __ComplaintToCollectionConstruct;
     }
 
     protected $search = [
-        'title'
+        'name'
     ];
 
     public function __construct(Request $request)
@@ -33,7 +33,7 @@ class ComplaintBrowseController extends Controller
         if ($request) {
             $this->_Request = $request;
         }
-        $this->__ComplaintCollectionConstruct();
+        $this->__ComplaintToCollectionConstruct();
     }
 
     public function get(Request $request)
@@ -43,14 +43,14 @@ class ComplaintBrowseController extends Controller
             $request->ArrQuery->take = 5000;
         }
 
-        $Complaint = Complaint::where(function ($query) use($request) {
+        $ComplaintTo = ComplaintTo::where(function ($query) use($request) {
             if (isset($request->ArrQuery->id)) {
-                $query->where("$this->ComplaintTable.id", $request->ArrQuery->id);
+                $query->where("$this->ComplaintToTable.id", $request->ArrQuery->id);
             }
 
             if (!empty($request->get('q'))) {
                 $query->where(function ($query) use($request) {
-                    $query->where("$this->ComplaintTable.title", 'like', '%'.$request->get('title').'%');
+                    $query->where("$this->ComplaintToTable.name", 'like', '%'.$request->get('name').'%');
                 });
             }
 
@@ -67,32 +67,30 @@ class ComplaintBrowseController extends Controller
             }
         })
         ->select(
-            // Complaint
-            "$this->ComplaintTable.id as complaint.id",
-            "$this->ComplaintTable.from_user_id as complaint.from_user_id",
-            "$this->ComplaintTable.from_unit_kerja_id as complaint.from_unit_kerja_id",
-            "$this->ComplaintTable.title as complaint.title",
-            "$this->ComplaintTable.description as complaint.description",
-            "$this->ComplaintTable.urgency_type as complaint.urgency_type",
-            "$this->ComplaintTable.status as complaint.status",
-            "$this->ComplaintTable.process_at as complaint.process_at",
-            "$this->ComplaintTable.finish_at as complaint.finish_at",
-            "$this->ComplaintTable.created_at as complaint.created_at"
+            // ComplaintTo
+            "$this->ComplaintToTable.id as complaint_to.id",
+            "$this->ComplaintToTable.complaint_id as complaint_to.complaint_id",
+            "$this->ComplaintToTable.delegate_by_user_id as complaint_to.delegate_by_user_id",
+            "$this->ComplaintToTable.destination_unit_kerja_id as complaint_to.destination_unit_kerja_id",
+            "$this->ComplaintToTable.delegate_notes as complaint_to.delegate_notes",
+            "$this->ComplaintToTable.delegate_unit_kerja_id as complaint_to.delegate_unit_kerja_id",
+            "$this->ComplaintToTable.delegate_at as complaint_to.delegate_at",
+            "$this->ComplaintToTable.created_at as complaint_to.created_at"
         );
 
         if(!empty($request->get('sort'))) {
             if(!empty($request->get('sort_type'))) {
-              if ($request->get('sort') == 'title') $Complaint->orderBy("$this->ComplaintTable.title", $request->get('sort_type'));
-              if ($request->get('sort') == 'created_at') $Complaint->orderBy("$this->ComplaintTable.created_at", $request->get('sort_type'));
+              if ($request->get('sort') == 'name') $ComplaintTo->orderBy("$this->ComplaintToTable.name", $request->get('sort_type'));
+              if ($request->get('sort') == 'created_at') $ComplaintTo->orderBy("$this->ComplaintToTable.created_at", $request->get('sort_type'));
             } else {
-              $Complaint->orderBy("$this->ComplaintTable.created_at", 'desc');
+              $ComplaintTo->orderBy("$this->ComplaintToTable.created_at", 'desc');
             }
         } else {
-            $Complaint->orderBy("$this->ComplaintTable.created_at", 'desc');
+            $ComplaintTo->orderBy("$this->ComplaintToTable.created_at", 'desc');
         }
 
 
-       $Browse = $this->Browse($request, $Complaint, function ($data) use($request) {
+       $Browse = $this->Browse($request, $ComplaintTo, function ($data) use($request) {
             $data = $this->Manipulate($data);
             return $data;
        });
@@ -104,7 +102,7 @@ class ComplaintBrowseController extends Controller
     {
         return $records->map(function ($item) {
             foreach ($item->getAttributes() as $key => $value) {
-                $this->Group($item, $key, 'complaint.', $item);
+                $this->Group($item, $key, 'complaint_to.', $item);
             }
             return $item;
         });

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Complaint;
+namespace App\Http\Controllers\ComplaintTo;
 
-use App\Models\Complaint;
 use App\Models\ComplaintTo;
 
 use App\Traits\Browse;
@@ -15,7 +14,7 @@ use App\Support\Generate\Hash as KeyGenerator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
-class ComplaintController extends Controller
+class ComplaintToController extends Controller
 {
     use Browse;
 
@@ -26,7 +25,7 @@ class ComplaintController extends Controller
     ];
     public function get(Request $request)
     {
-        $Complaint = Complaint::where(function ($query) use($request) {
+        $ComplaintTo = ComplaintTo::where(function ($query) use($request) {
             if (isset($request->ArrQuery->id)) {
                 if ($request->ArrQuery->id === 'my') {
                     $query->where('id', $request->information()->id);
@@ -48,7 +47,7 @@ class ComplaintController extends Controller
                }
            }
         });
-        $Browse = $this->Browse($request, $Complaint, function ($data) use($request) {
+        $Browse = $this->Browse($request, $ComplaintTo, function ($data) use($request) {
             return $data;
         });
         Json::set('data', $Browse);
@@ -58,29 +57,25 @@ class ComplaintController extends Controller
     public function Insert(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $Model->Complaint->save();
+        $Model->ComplaintTo->save();
 
-        $ComplaintTo = new ComplaintTo();
-        $ComplaintTo->complaint_id = $Model->Complaint->id;
-        $ComplaintTo->save();
-
-        Json::set('data', $this->SyncData($request, $Model->Complaint->id));
+        Json::set('data', $this->SyncData($request, $Model->ComplaintTo->id));
         return response()->json(Json::get(), 201);
     }
 
     public function Update(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $Model->Complaint->save();
+        $Model->ComplaintTo->save();
 
-        Json::set('data', $this->SyncData($request, $Model->Complaint->id));
+        Json::set('data', $this->SyncData($request, $Model->ComplaintTo->id));
         return response()->json(Json::get(), 202);
     }
 
     public function Delete(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $Model->Complaint->delete();
+        $Model->ComplaintTo->delete();
         return response()->json(Json::get(), 202);
     }
 

@@ -37,7 +37,12 @@
                         <div class="row align-items-center">
                             <label class="col-xl-2 form-label">To</label>
                             <div class="col-xl-10">
+
+
+
                                 <select class="form-control" onChange="saveEditDestination(this)" name="to_unit_kerja_id"></select>
+
+
                             </div>
                         </div>
                     </div>
@@ -92,5 +97,6 @@
 @endsection
 
 @section('formValidationScript')
+@include('app.complaint.home.scripts.index')
 @include('app.complaint.edit.scripts.form')
 @endsection
