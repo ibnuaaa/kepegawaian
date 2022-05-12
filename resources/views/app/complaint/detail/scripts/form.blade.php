@@ -7,7 +7,25 @@ function process() {
 
     showLoading()
     axios.put('/complaint/{{ $data->id }}', data).then((response) => {
-        location.href = '/complaint/inbox'
+        location.reload()
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
+        }
+    })
+
+    return false;
+}
+
+function finish() {
+
+    var data = new Object;
+    data['status'] = '4';
+
+    showLoading()
+    axios.put('/complaint/{{ $data->id }}', data).then((response) => {
+        location.reload()
     }).catch((error) => {
         if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
             swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })

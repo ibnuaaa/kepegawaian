@@ -103,9 +103,23 @@
                 </div>
             </div>
             <div class="card-footer">
+
+                <?php
+
+                $is_processed = 0;
+                foreach($data->complaint_user_resolve as $key => $val){
+                  if ($val->user_id == MyAccount()->id) $is_processed = 1;
+                }
+                ?>
+
+
                 @if ($menu == 'inbox')
-                <a class="btn btn-primary mt-1 mb-1" href="#" onClick="return process()"><i class="fa fa-reply"></i> Saya Proses</a>
-                <a class="btn btn-primary mt-1 mb-1" href="#" onClick="return finish()"><i class="fa fa-reply"></i> Selesai Pengerjaan</a>
+                @if (!$is_processed) <a class="btn btn-primary mt-1 mb-1" href="#" onClick="return process()"><i class="fa fa-reply"></i> Saya Proses</a> @endif
+                @if ($is_processed)
+                  @if ($data->status == '3')
+                    <a class="btn btn-primary mt-1 mb-1" href="#" onClick="return finish()"><i class="fa fa-reply"></i> Selesai Pengerjaan</a>
+                  @endif
+                @endif
                 @endif
                 <a class="btn btn-secondary mt-1 mb-1" href="#"  onClick="return forward()"><i class="fa fa-share"></i> Forward</a>
             </div>
