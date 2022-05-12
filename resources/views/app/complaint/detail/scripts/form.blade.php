@@ -91,6 +91,42 @@ function finish() {
     return false;
 }
 
+function revisi() {
+
+    var data = new Object;
+    data['status'] = '5';
+
+    showLoading()
+    axios.put('/complaint/{{ $data->id }}', data).then((response) => {
+        location.reload()
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
+        }
+    })
+
+    return false;
+}
+
+function solved() {
+
+    var data = new Object;
+    data['status'] = '7';
+
+    showLoading()
+    axios.put('/complaint/{{ $data->id }}', data).then((response) => {
+        location.reload()
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
+        }
+    })
+
+    return false;
+}
+
 function saveReply() {
 
     var data = new Object;

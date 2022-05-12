@@ -66,7 +66,7 @@ class ComplaintBrowseController extends Controller
                 }
 
                 if ($request->ArrQuery->for == 'sent') {
-                  $query->where("$this->ComplaintTable.status", 2);
+                  $query->whereIn("$this->ComplaintTable.status", [2,3,4,5,6,7]);
                   $query->where("$this->ComplaintTable.from_user_id", MyAccount()->id);
                 }
 

@@ -922,7 +922,6 @@ if ( ! function_exists('complaintStatus'))
             'Diproses', //3
             'Selesai',  //4
             'Revisi',   //5
-            'Perbaikan Revisi', //6
             'Selesai Revisi',   //7
             'Solved',   //8
         );

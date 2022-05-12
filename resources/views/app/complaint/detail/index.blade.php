@@ -43,7 +43,27 @@
                                 <small class="me-3 mt-3 text-muted">{{ dateIndo($data->created_at) }} {{ jamIndo($data->created_at) }}</small>
                             </div>
                             <div class="media-title text-dark font-weight-semibold mt-1">{{$data->from_user->name}}</div>
-                            <small class="mb-0">ke Unit Kerja Saya</small>
+                            <small class="mb-0">ke
+
+                              <?php
+
+                                $destination_unit_kerja_id = '';
+                                $destination_unit_kerja_name = '';
+
+                                if ($data->complaint_to && count($data->complaint_to) > 0) {
+                                    if (!empty($data->complaint_to[0]->destination_unit_kerja->id)) {
+                                        $complaint_to = $data->complaint_to[0];
+
+                                        $destination_unit_kerja_id = $complaint_to->destination_unit_kerja->id;
+                                        $destination_unit_kerja_name = $complaint_to->destination_unit_kerja->name;
+                                    }
+                                }
+
+                              ?>
+
+                              {{ $destination_unit_kerja_name }}
+
+                            </small>
                             <small class="me-2 d-md-none">{{ dateIndo($data->created_at) }} {{ jamIndo($data->created_at) }}</small>
                         </div>
                     </div>
@@ -121,6 +141,14 @@
                   @endif
                 @endif
                 @endif
+
+                @if ($menu == 'sent')
+                @if ($data->status == '4')
+                  <a class="btn btn-primary mt-1 mb-1" href="#" onClick="return revisi()"><i class="fa fa-reply"></i> Revisi</a>
+                @endif
+                <a class="btn btn-success mt-1 mb-1" href="#" onClick="return solved()"><i class="fa fa-reply"></i> Terselesaikan</a>
+                @endif
+
                 <a class="btn btn-secondary mt-1 mb-1" href="#"  onClick="return forward()"><i class="fa fa-share"></i> Forward</a>
             </div>
         </div>
