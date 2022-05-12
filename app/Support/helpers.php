@@ -927,9 +927,9 @@ if ( ! function_exists('complaintStatus'))
             'Solved',   //8
         );
 
-        $status = '';
+        $status = '-';
 
-        if (!empty($nums[$num])) $status = '-';
+        if (!empty($nums[$num])) $status = $nums[$num];
 
         return  $status;
     }

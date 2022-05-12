@@ -43,7 +43,7 @@
                                 <small class="me-3 mt-3 text-muted">{{ dateIndo($data->created_at) }} {{ jamIndo($data->created_at) }}</small>
                             </div>
                             <div class="media-title text-dark font-weight-semibold mt-1">{{$data->from_user->name}}</div>
-                            <small class="mb-0">to ... </small>
+                            <small class="mb-0">ke Unit Kerja Saya</small>
                             <small class="me-2 d-md-none">{{ dateIndo($data->created_at) }} {{ jamIndo($data->created_at) }}</small>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
 
 
 
-                    @if ($data->complaint_user_resolve)
+                    @if ($data->complaint_user_resolve && count($data->complaint_user_resolve) > 0)
                     Diproses Oleh<br>
                     <ul class="list-group">
                     @foreach($data->complaint_user_resolve as $key => $val)
@@ -138,7 +138,7 @@
                             <div class="float-end d-none d-md-flex fs-15">
                                 <small class="me-3 mt-3 text-muted">{{ dateIndo($val->created_at) }} {{ jamIndo($val->created_at) }}</small>
                             </div>
-                            <div class="media-title text-dark font-weight-semibold mt-3">{{$data->from_user->name}}</div>
+                            <div class="media-title text-dark font-weight-semibold mt-3">{{$val->user->name}}</div>
                             <small class="me-2 d-md-none">{{ dateIndo($val->created_at) }} {{ jamIndo($val->created_at) }}</small>
                         </div>
                     </div>
@@ -177,6 +177,23 @@
     </div>
 </div>
 <!--End  Row -->
+
+<div class="modal effect-sign" id="modalForward" role="dialog">
+    <div class="modal-dialog modal-md " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Preview</h2>
+            </div>
+            <div class="modal-body" id="body-modal-sasaran-kinerja">
+                <select class="form-control full-width" name="destination_unit_kerja_id" style="width: 100%;">
+                </select>
+            </div>
+            <div class="modal-footer">
+              <a class="btn btn-secondary mt-1 mb-1 pull-right" href="#" onClick="return saveForward()"><i class="fa fa-telegram"></i> Kirim</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 

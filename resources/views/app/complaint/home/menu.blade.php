@@ -1,12 +1,12 @@
 <div class="list-group list-group-transparent mb-0 mail-inbox pb-3">
     <div class="mt-4 mx-4 mb-4 text-center">
-        <a onClick="saveNew()" class="btn btn-primary btn-lg d-grid">Compose</a>
+        <a onClick="saveNew()" class="btn btn-primary btn-lg d-grid">Buat Komplain</a>
     </div>
     <a href="/complaint/inbox" class="list-group-item d-flex align-items-center {{ ($menu == 'inbox') ? 'active' : '' }} mx-4">
         <span class="icons"><i class="ri-mail-line"></i></span> Inbox
 
         <span class="ms-auto badge bg-secondary bradius hide">14</span>
-        
+
     </a>
     <a href="/complaint/drafts" class="list-group-item d-flex align-items-center {{ ($menu == 'drafts') ? 'active' : '' }} mx-4">
         <span class="icons"><i class="ri-mail-open-line"></i></span> Drafts

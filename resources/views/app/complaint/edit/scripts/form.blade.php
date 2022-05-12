@@ -109,6 +109,9 @@ function saveEditDestination(e) {
 }
 
 
+
+
+
 function removeNode(key) {
   showLoading()
   axios.delete('/storage/delete_by_key/' + key).then((response) => {

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\ComplaintTo;
 
 use App\Models\ComplaintTo;
+use App\Models\ComplaintReply;
+use App\Models\UnitKerja;
 
 use App\Traits\Browse;
 
@@ -58,6 +60,19 @@ class ComplaintToController extends Controller
     {
         $Model = $request->Payload->all()['Model'];
         $Model->ComplaintTo->save();
+
+        $sender_user_name = MyAccount()->name;
+        $unit_kerja_name = '';
+
+        $UnitKerja = UnitKerja::where('id', $Model->ComplaintTo->destination_unit_kerja_id)->first();
+
+        if ($UnitKerja && $UnitKerja->name) $unit_kerja_name = $UnitKerja->name;
+
+        $ComplaintReply = new ComplaintReply();
+        $ComplaintReply->complaint_id = $Model->ComplaintTo->complaint_id;
+        $ComplaintReply->user_id = 1;
+        $ComplaintReply->message = $sender_user_name . ' mendelegasikan kepada ' . $unit_kerja_name;
+        $ComplaintReply->save();
 
         Json::set('data', $this->SyncData($request, $Model->ComplaintTo->id));
         return response()->json(Json::get(), 201);

@@ -15,18 +15,17 @@ class Insert extends BaseMiddleware
     {
         $this->Model->ComplaintTo = new ComplaintTo();
 
-        $this->Model->ComplaintTo->name = $this->_Request->input('name');
+        $this->Model->ComplaintTo->complaint_id = $this->_Request->input('complaint_id');
+        $this->Model->ComplaintTo->delegate_by_user_id = MyAccount()->id;
+        $this->Model->ComplaintTo->delegate_unit_kerja_id = MyAccount()->unit_kerja_id;
+        $this->Model->ComplaintTo->destination_unit_kerja_id = $this->_Request->input('destination_unit_kerja_id');
+
+
+
     }
 
     private function Validation()
     {
-        $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required'
-        ]);
-        if ($validator->fails()) {
-            $this->Json::set('errors', $validator->errors());
-            return false;
-        }
         return true;
     }
 

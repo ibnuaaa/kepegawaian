@@ -35,7 +35,7 @@
                 <form>
                     <div class="form-group">
                         <div class="row align-items-center">
-                            <label class="col-xl-2 form-label">To</label>
+                            <label class="col-xl-2 form-label">Kepada Unit</label>
                             <div class="col-xl-10">
 
                                 <?php

@@ -496,7 +496,9 @@
             background: #fff;
         }
 
-
+        .select2-container--open {
+            z-index: 9999999
+        }
 
     </style>
 </body>
