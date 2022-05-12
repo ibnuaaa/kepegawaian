@@ -21,6 +21,8 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
+date_default_timezone_set("Asia/Jakarta");
+
 $app->withFacades();
 
 /*
