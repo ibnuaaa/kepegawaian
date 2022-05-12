@@ -62,7 +62,7 @@ class ComplaintBrowseController extends Controller
                 }
 
                 if ($request->ArrQuery->for == 'starred') {
-                  $query->where("$this->ComplaintTable.status", 88);
+                  $query->where("b.user_id", MyAccount()->id);
                 }
 
                 if ($request->ArrQuery->for == 'sent') {
@@ -118,6 +118,10 @@ class ComplaintBrowseController extends Controller
 
         if (!empty($request->ArrQuery->for) && $request->ArrQuery->for == 'inbox') {
             $Complaint->leftJoin('complaint_to as b', "b.complaint_id", "$this->ComplaintTable.id");
+        }
+
+        if (!empty($request->ArrQuery->for) && $request->ArrQuery->for == 'starred') {
+            $Complaint->leftJoin('complaint_user_resolve as b', "b.complaint_id", "$this->ComplaintTable.id");
         }
 
         if(!empty($request->get('sort'))) {

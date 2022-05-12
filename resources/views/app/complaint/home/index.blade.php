@@ -92,6 +92,19 @@
                                   }
 
 
+                                  $status_class = '';
+                                  if ($val->status == 1) {
+                                  } else if ($val->status == 2) {
+                                    $status_class = 'text-danger';
+                                  } else if ($val->status == 3) {
+                                    $status_class = 'text-warning';
+                                  } else if ($val->status == 4) {
+                                    $status_class = 'text-info';
+                                  } else if ($val->status == 7) {
+                                    $status_class = 'text-success';
+                                  }
+
+
                                 ?>
                                 <tr>
                                     <td class="inbox-small-cells"  style="display: none;">
@@ -100,7 +113,7 @@
                                             <span class="custom-control-label"></span>
                                         </label>
                                     </td>
-                                    <td class="inbox-small-cells"><i class="fa fa-star"  style="display: none;"></i></td>
+                                    <td class="inbox-small-cells"><i class="fa fa-star {{ $status_class}}"></i></td>
                                     <td class="inbox-small-cells"><i class="fa fa-bookmark {{ $urgency_class }}"></i></td>
                                     <td class="view-message dont-show fw-semibold clickable-row" data-href='{{$data_href}}'>{{ !empty($val->from_unit_kerja->name) ? $val->from_unit_kerja->name : '-' }}</td>
                                     <td class="view-message clickable-row" data-href='{{$data_href}}'>{{ !empty($val->title) ? $val->title : '<< Kosong >>' }}</td>
