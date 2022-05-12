@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Complaint;
 use App\Models\Complaint;
 use App\Models\ComplaintUserResolve;
 use App\Models\ComplaintTo;
+use App\Models\ComplaintReply;
 
 
 use App\Traits\Browse;
@@ -73,22 +74,79 @@ class ComplaintController extends Controller
     public function Update(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
-        $Model->Complaint->save();
 
-        if ($Model->Complaint->status && $Model->Complaint->status == 3) {
 
-          // check
+        if ($request->input('status')) {
 
-          $ComplaintUserResolve = ComplaintUserResolve::where('complaint_id', $Model->Complaint->id)
-            ->where('user_id', MyAccount()->id)->first();
+            $ComplaintReply = new ComplaintReply();
 
-          if (!$ComplaintUserResolve) {
-              $ComplaintUserResolve = new ComplaintUserResolve();
-              $ComplaintUserResolve->complaint_id = $Model->Complaint->id;
-              $ComplaintUserResolve->user_id = MyAccount()->id;
-              $ComplaintUserResolve->save();
-          }
+
+            if ($Model->Complaint->status && $Model->Complaint->status == 2) {
+
+              $Model->Complaint->sent_at = date('Y-m-d H:i:s');
+              $Model->Complaint->sent_user_id = MyAccount()->id;
+
+              $ComplaintReply->message = MyAccount()->name . ' telah mengirim komplain';
+
+            }
+
+            if ($Model->Complaint->status && $Model->Complaint->status == 3) {
+
+              // check
+
+              $Model->Complaint->process_at = date('Y-m-d H:i:s');
+
+              $ComplaintUserResolve = ComplaintUserResolve::where('complaint_id', $Model->Complaint->id)
+                ->where('user_id', MyAccount()->id)->first();
+
+              if (!$ComplaintUserResolve) {
+                  $ComplaintUserResolve = new ComplaintUserResolve();
+                  $ComplaintUserResolve->complaint_id = $Model->Complaint->id;
+                  $ComplaintUserResolve->user_id = MyAccount()->id;
+                  $ComplaintUserResolve->save();
+              }
+
+
+              $ComplaintReply->message = MyAccount()->name . ' sedang memproses komplain';
+
+            }
+
+
+            if ($Model->Complaint->status && $Model->Complaint->status == 4) {
+
+              $Model->Complaint->finish_at = date('Y-m-d H:i:s');
+              $Model->Complaint->finish_user_id = MyAccount()->id;
+
+              $ComplaintReply->message = MyAccount()->name . ' menyatakan selesai / finish pada komplain ini';
+
+            }
+
+            if ($Model->Complaint->status && $Model->Complaint->status == 5) {
+
+
+
+              $ComplaintReply->message = MyAccount()->name . ' menyatakan revisi pada komplain ini';
+            }
+
+            if ($Model->Complaint->status && $Model->Complaint->status == 7) {
+
+              $Model->Complaint->solved_at = date('Y-m-d H:i:s');
+              $Model->Complaint->solved_user_id = MyAccount()->id;
+
+              $ComplaintReply->message = MyAccount()->name . ' menyatakan solved pada komplain ini';
+            }
+
+            $ComplaintReply->flag = 1;
+
+
+            $ComplaintReply->complaint_id = $Model->Complaint->id;
+            $ComplaintReply->user_id = MyAccount()->id;
+            $ComplaintReply->save();
+
         }
+
+
+        $Model->Complaint->save();
 
         Json::set('data', $this->SyncData($request, $Model->Complaint->id));
         return response()->json(Json::get(), 202);

@@ -115,7 +115,34 @@
                                     </td>
                                     <td class="inbox-small-cells"><i class="fa fa-star {{ $status_class}}"></i></td>
                                     <td class="inbox-small-cells"><i class="fa fa-bookmark {{ $urgency_class }}"></i></td>
-                                    <td class="view-message dont-show fw-semibold clickable-row" data-href='{{$data_href}}'>{{ !empty($val->from_unit_kerja->name) ? $val->from_unit_kerja->name : '-' }}</td>
+                                    <td class="view-message dont-show clickable-row" data-href='{{$data_href}}'>
+
+                                      <?php
+
+                                        $destination_unit_kerja_name = '<< kosong >>';
+
+                                        if ($val->complaint_to && count($val->complaint_to) > 0) {
+                                            if (!empty($val->complaint_to[0]->destination_unit_kerja->id)) {
+                                                $complaint_to = $val->complaint_to[0];
+
+                                                $destination_unit_kerja_name = $complaint_to->destination_unit_kerja->name;
+                                            }
+                                        }
+
+                                        $from_unit_kerja_name = '';
+                                        if (!empty($val->from_unit_kerja->name)) {
+                                          $from_unit_kerja_name = $val->from_unit_kerja->name;
+                                        }
+
+                                      ?>
+
+                                      @if (in_array($menu, ['drafts', 'sent', 'trash']))
+                                      ke : <span class="fw-semibold">{{ $destination_unit_kerja_name }}</span>
+                                      @else
+                                      dari : <span class="fw-semibold">{{ $from_unit_kerja_name }}</span>
+                                      @endif
+
+                                    </td>
                                     <td class="view-message clickable-row" data-href='{{$data_href}}'>{{ !empty($val->title) ? $val->title : '<< Kosong >>' }}</td>
                                     <td class="view-message text-end fw-semibold clickable-row" data-href='{{$data_href}}'>{{ !empty($val->created_at) ? time_elapsed_string($val->created_at) : '<< Kosong >>' }}</td>
                                 </tr>

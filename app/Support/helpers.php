@@ -934,6 +934,25 @@ if ( ! function_exists('complaintStatus'))
     }
 }
 
+if ( ! function_exists('userSystem'))
+{
+    function userSystem($num){
+
+        $num = (int) $num;
+
+        $nums = array(
+            '',
+            'System',    //1
+        );
+
+        $status = '-';
+
+        if (!empty($nums[$num])) $status = $nums[$num];
+
+        return  $status;
+    }
+}
+
 if ( ! function_exists('timeIndo'))
 {
     function timeIndo($datetime){

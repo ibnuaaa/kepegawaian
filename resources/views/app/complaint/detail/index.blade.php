@@ -134,19 +134,24 @@
 
 
                 @if ($menu == 'inbox')
-                @if (!$is_processed) <a class="btn btn-primary mt-1 mb-1" href="#" onClick="return process()"><i class="fa fa-reply"></i> Saya Proses</a> @endif
-                @if ($is_processed)
-                  @if ($data->status == '3')
-                    <a class="btn btn-primary mt-1 mb-1" href="#" onClick="return finish()"><i class="fa fa-reply"></i> Selesai Pengerjaan</a>
+                  @if (!$is_processed)
+                    <a class="btn btn-primary mt-1 mb-1" href="#" onClick="return process()"><i class="fa fa-reply"></i> Saya Proses</a>
                   @endif
-                @endif
+                  @if ($is_processed)
+                    @if ($data->status == '3')
+                      <a class="btn btn-primary mt-1 mb-1" href="#" onClick="return finish()"><i class="fa fa-reply"></i> Selesai Pengerjaan</a>
+                    @endif
+                  @endif
                 @endif
 
                 @if ($menu == 'sent')
-                @if ($data->status == '4')
-                  <a class="btn btn-primary mt-1 mb-1" href="#" onClick="return revisi()"><i class="fa fa-reply"></i> Revisi</a>
+                  @if ($data->status == '4')
+                    <a class="btn btn-primary mt-1 mb-1" href="#" onClick="return revisi()"><i class="fa fa-reply"></i> Revisi</a>
+                  @endif
+
+                @if ($data->status != '7')
+                <a class="btn btn-success mt-1 mb-1" href="#" onClick="return solved()"><i class="fa fa-reply"></i> Solved</a>
                 @endif
-                <a class="btn btn-success mt-1 mb-1" href="#" onClick="return solved()"><i class="fa fa-reply"></i> Terselesaikan</a>
                 @endif
 
                 <a class="btn btn-secondary mt-1 mb-1" href="#"  onClick="return forward()"><i class="fa fa-share"></i> Forward</a>
@@ -154,9 +159,31 @@
         </div>
 
         @foreach ($data->complaint_reply as $key => $val)
+
+        @if ($val->flag)
+        <div class="card bg-green">
+            <div class="card-body">
+
+                <div class="eamil-body">
+
+                    <?php
+                      $userSystem = userSystem($val->flag);
+                    ?>
+
+                    {{ $userSystem }} :
+                    {{ $val->message }}
+
+
+
+                    <br>
+                    Pada : <small>{{ dateIndo($val->created_at) }} {{ jamIndo($val->created_at) }}</small>
+                </div>
+            </div>
+        </div>
+        @else
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Balasan</h3>
+                <h3 class="card-title">Balasan User</h3>
             </div>
             <div class="card-body">
                 <div class="email-media">
@@ -166,7 +193,14 @@
                             <div class="float-end d-none d-md-flex fs-15">
                                 <small class="me-3 mt-3 text-muted">{{ dateIndo($val->created_at) }} {{ jamIndo($val->created_at) }}</small>
                             </div>
-                            <div class="media-title text-dark font-weight-semibold mt-3">{{$val->user->name}}</div>
+                            <div class="media-title text-dark font-weight-semibold mt-3">
+
+                              <?php
+                                $userSystem = $val->user->name;
+                              ?>
+
+                              {{ $userSystem }}
+                            </div>
                             <small class="me-2 d-md-none">{{ dateIndo($val->created_at) }} {{ jamIndo($val->created_at) }}</small>
                         </div>
                     </div>
@@ -180,6 +214,8 @@
             <div class="card-footer">
             </div>
         </div>
+        @endif
+
         @endforeach
 
 
@@ -188,7 +224,7 @@
         @if (!in_array($data->status, [1,99]))
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Balasan</h3>
+                <h3 class="card-title">Tulis Balasan</h3>
             </div>
             <div class="card-body">
                 <div class="eamil-body">
@@ -210,7 +246,7 @@
     <div class="modal-dialog modal-md " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Preview</h2>
+                <h2 class="modal-title">Teruskan Komplain</h2>
             </div>
             <div class="modal-body" id="body-modal-sasaran-kinerja">
                 <select class="form-control full-width" name="destination_unit_kerja_id" style="width: 100%;">
