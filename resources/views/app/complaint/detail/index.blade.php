@@ -37,7 +37,7 @@
 
                 <div class="email-media">
                     <div class="mt-0 d-sm-flex">
-                        <img class="me-2 rounded-circle avatar avatar-lg" src="../assets/images/users/6.jpg" alt="avatar">
+                        <img class="me-2 rounded-circle avatar avatar-lg" src="/api/storage/{{ !empty($data->from_user->foto_profile_single->storage->key) ? $data->from_user->foto_profile_single->storage->key : '' }}" alt="avatar">
                         <div class="media-body pt-0">
                             <div class="float-end d-none d-md-flex fs-15">
                                 <small class="me-3 mt-3 text-muted">{{ dateIndo($data->created_at) }} {{ jamIndo($data->created_at) }}</small>

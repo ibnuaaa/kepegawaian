@@ -24,7 +24,7 @@
 
                         @if (getPermissions('e_kinerja')['checked'])
                         <li class="slide active  @yield('userRequestSdmMenuClass')">
-                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">E-Kinerja</span><i class="angle fe fe-chevron-right"></i></a>
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">E-Remun</span><i class="angle fe fe-chevron-right"></i></a>
                             <ul class="slide-menu">
                               @if (getPermissions('penilaian_prestasi_kerja')['checked'])
                               <li><a href="{!! url('/penilaian_prestasi_kerja'); !!}" class="slide-item"> Penilaian Prestasi Kerja</a></li>

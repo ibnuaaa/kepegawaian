@@ -15,7 +15,7 @@ class Complaint extends Model
 
     public function from_user()
     {
-        return $this->hasOne(User::class, 'id', 'complaint.from_user_id');
+        return $this->hasOne(User::class, 'id', 'complaint.from_user_id')->with('foto_profile_single');
     }
 
     public function from_unit_kerja()
