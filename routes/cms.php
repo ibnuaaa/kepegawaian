@@ -33,7 +33,7 @@ $router->get('/golongan/{id}', 'CMS\Golongan\GolonganController@Detail');
 $router->get('/complaint', 'CMS\Complaint\ComplaintController@Home');
 $router->get('/complaint/{menu}', 'CMS\Complaint\ComplaintController@Home');
 $router->get('/complaint/edit/{id}', 'CMS\Complaint\ComplaintController@Edit');
-$router->get('/complaint/detail/{id}', 'CMS\Complaint\ComplaintController@Detail');
+$router->get('/complaint/detail/{id}/{menu}', 'CMS\Complaint\ComplaintController@Detail');
 
 $router->get('/unit_kerja', 'CMS\UnitKerja\UnitKerjaController@Home');
 $router->get('/unit_kerja/new/{unit_kerja_id}', 'CMS\UnitKerja\UnitKerjaController@New');

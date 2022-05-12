@@ -23,7 +23,7 @@ class Complaint extends Model
         return $this->hasOne(UnitKerja::class, 'id', 'complaint.from_unit_kerja_id');
     }
 
-    public function complaint_reply()
+    public function complaint_to()
     {
         return $this->hasMany(ComplaintTo::class, 'complaint_id', 'complaint.id')->with('destination_unit_kerja');
     }
@@ -31,6 +31,11 @@ class Complaint extends Model
     public function complaint_reply()
     {
         return $this->hasMany(ComplaintReply::class, 'complaint_id', 'complaint.id')->with('user');
+    }
+
+    public function complaint_user_resolve()
+    {
+        return $this->hasMany(ComplaintUserResolve::class, 'complaint_id', 'complaint.id')->with('user');
     }
 
     public function foto_complaint()

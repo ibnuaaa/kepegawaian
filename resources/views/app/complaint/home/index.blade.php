@@ -74,7 +74,7 @@
 
                                 @foreach ($data['records'] as $key => $val)
                                 <?php
-                                  $data_href = '/complaint/detail/' . $val->id;
+                                  $data_href = '/complaint/detail/' . $val->id . '/' . $menu;
 
                                   if ($menu == 'drafts') {
                                     $data_href = '/complaint/edit/' . $val->id;
@@ -102,7 +102,7 @@
                                     </td>
                                     <td class="inbox-small-cells"><i class="fa fa-star"  style="display: none;"></i></td>
                                     <td class="inbox-small-cells"><i class="fa fa-bookmark {{ $urgency_class }}"></i></td>
-                                    <td class="view-message dont-show fw-semibold clickable-row" data-href='{{$data_href}}'>{{ !empty($val->from_user->name) ? $val->from_user->name : '-' }}</td>
+                                    <td class="view-message dont-show fw-semibold clickable-row" data-href='{{$data_href}}'>{{ !empty($val->from_unit_kerja->name) ? $val->from_unit_kerja->name : '-' }}</td>
                                     <td class="view-message clickable-row" data-href='{{$data_href}}'>{{ !empty($val->title) ? $val->title : '<< Kosong >>' }}</td>
                                     <td class="view-message text-end fw-semibold clickable-row" data-href='{{$data_href}}'>{{ !empty($val->created_at) ? time_elapsed_string($val->created_at) : '<< Kosong >>' }}</td>
                                 </tr>

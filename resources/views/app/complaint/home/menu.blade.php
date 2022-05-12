@@ -4,12 +4,14 @@
     </div>
     <a href="/complaint/inbox" class="list-group-item d-flex align-items-center {{ ($menu == 'inbox') ? 'active' : '' }} mx-4">
         <span class="icons"><i class="ri-mail-line"></i></span> Inbox
+
         <span class="ms-auto badge bg-secondary bradius hide">14</span>
+        
     </a>
     <a href="/complaint/drafts" class="list-group-item d-flex align-items-center {{ ($menu == 'drafts') ? 'active' : '' }} mx-4">
         <span class="icons"><i class="ri-mail-open-line"></i></span> Drafts
     </a>
-    <a href="/complaint/starred" class="list-group-item d-flex align-items-center {{ ($menu == 'starred') ? 'active' : '' }} mx-4">
+    <a href="#" class="list-group-item d-flex align-items-center {{ ($menu == 'starred') ? 'active' : '' }} mx-4 disable">
         <span class="icons"><i class="ri-star-line"></i></span> Starred
     </a>
     <a href="/complaint/sent" class="list-group-item d-flex align-items-center {{ ($menu == 'sent') ? 'active' : '' }} mx-4">

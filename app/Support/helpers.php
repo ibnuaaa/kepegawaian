@@ -909,6 +909,32 @@ if ( ! function_exists('dayIndo'))
     }
 }
 
+if ( ! function_exists('complaintStatus'))
+{
+    function complaintStatus($num){
+
+        $num = (int) $num;
+
+        $nums = array(
+            '',
+            'Draft',    //1
+            'Pending',  //2
+            'Diproses', //3
+            'Selesai',  //4
+            'Revisi',   //5
+            'Perbaikan Revisi', //6
+            'Selesai Revisi',   //7
+            'Solved',   //8
+        );
+
+        $status = '';
+
+        if (!empty($nums[$num])) $status = '-';
+
+        return  $status;
+    }
+}
+
 if ( ! function_exists('timeIndo'))
 {
     function timeIndo($datetime){

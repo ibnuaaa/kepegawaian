@@ -82,7 +82,7 @@ class ComplaintController extends Controller
         return view('app.complaint.home.index', $ParseData);
     }
 
-    public function Detail(Request $request, $id)
+    public function Detail(Request $request, $menu, $id)
     {
         $QueryRoute = QueryRoute($request);
         $QueryRoute->ArrQuery->id = $id;
@@ -93,7 +93,7 @@ class ComplaintController extends Controller
 
         return view('app.complaint.detail.index', [
           'data' => $data->original['data']['records'],
-          'menu' => '',
+          'menu' => $menu,
         ]);
     }
 

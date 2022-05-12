@@ -112,6 +112,8 @@ class ComplaintBrowseController extends Controller
         ->with('from_unit_kerja')
         ->with('foto_complaint')
         ->with('complaint_to')
+        ->with('complaint_reply')
+        ->with('complaint_user_resolve')
         ;
 
         if (!empty($request->ArrQuery->for) && $request->ArrQuery->for == 'inbox') {

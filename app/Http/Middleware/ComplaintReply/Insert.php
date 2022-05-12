@@ -15,18 +15,19 @@ class Insert extends BaseMiddleware
     {
         $this->Model->ComplaintReply = new ComplaintReply();
 
-        $this->Model->ComplaintReply->name = $this->_Request->input('name');
+
+        // echo date_default_timezone_get();
+        // echo date('Y-m-d H:i:s');
+        // die();
+
+        $this->Model->ComplaintReply->complaint_id = $this->_Request->input('complaint_id');
+        $this->Model->ComplaintReply->user_id = MyAccount()->id;
+        $this->Model->ComplaintReply->message = $this->_Request->input('message');
+
     }
 
     private function Validation()
     {
-        $validator = Validator::make($this->_Request->all(), [
-            'name' => 'required'
-        ]);
-        if ($validator->fails()) {
-            $this->Json::set('errors', $validator->errors());
-            return false;
-        }
         return true;
     }
 
