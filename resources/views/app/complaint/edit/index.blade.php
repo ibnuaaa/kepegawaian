@@ -29,7 +29,7 @@
     <div class="col-xl-9">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Compose message</h3>
+                <h3 class="card-title">Buat Komplain</h3>
             </div>
             <div class="card-body">
                 <form>
@@ -77,7 +77,7 @@
                     </div>
                     <div class="form-group">
                         <div class="row align-items-center">
-                            <label class="col-xl-2 form-label">Subject</label>
+                            <label class="col-xl-2 form-label">Judul Masalah</label>
                             <div class="col-xl-10">
                                 <input type="text" onChange="saveEdit(this)" name="title" value="{{ $data->title }}" class="form-control">
                             </div>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="form-group">
                         <div class="row ">
-                            <label class="col-xl-2 form-label">Message</label>
+                            <label class="col-xl-2 form-label">Deskripsi Masalah</label>
                             <div class="col-xl-10">
                                 <textarea rows="10" onChange="saveEdit(this)" name="description" class="form-control">{{ $data->description }}</textarea>
                             </div>
