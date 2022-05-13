@@ -94,6 +94,7 @@ class ComplaintController extends Controller
         return view('app.complaint.detail.index', [
           'data' => $data->original['data']['records'],
           'menu' => $menu,
+          'is_detail' => 'y'
         ]);
     }
 

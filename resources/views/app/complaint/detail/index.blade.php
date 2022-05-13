@@ -31,17 +31,26 @@
                 <h3 class="card-title">{{ $data->title }}</h3>
             </div>
             <div class="card-body">
-
-
-
-
                 <div class="email-media">
                     <div class="mt-0 d-sm-flex">
                         <img class="me-2 rounded-circle avatar avatar-lg" src="/api/storage/{{ !empty($data->from_user->foto_profile_single->storage->key) ? $data->from_user->foto_profile_single->storage->key : '' }}" alt="avatar">
                         <div class="media-body pt-0">
                             <div class="float-end d-none d-md-flex fs-15">
-                                <small class="me-3 mt-3 text-muted">{{ dateIndo($data->created_at) }} {{ jamIndo($data->created_at) }}</small>
+                                <small class="me-3 mt-3 text-muted">
+                                  <?php
+                                      $status_class = '';
+                                      if ($data->status == 2) $status_class = 'bg-danger';
+                                      else if ($data->status == 3) $status_class = 'bg-warning';
+                                      else if ($data->status == 4) $status_class = 'bg-info';
+                                      else if ($data->status == 6) $status_class = 'bg-info';
+                                      else if ($data->status == 7) $status_class = 'bg-success';
+                                  ?>
+                                  <label class="badge {{ $status_class }} badge-lg  me-1 mb-1 mt-1" style="font-size: 16px;">{{ complaintStatus($data->status) }}</label>
+                                  <br>
+                                  {{ dateIndo($data->created_at) }} {{ jamIndo($data->created_at) }}
+                                </small>
                             </div>
+
                             <div class="media-title text-dark font-weight-semibold mt-1">{{$data->from_user->name}}</div>
                             <small class="mb-0">ke
 
@@ -65,6 +74,9 @@
 
                             </small>
                             <small class="me-2 d-md-none">{{ dateIndo($data->created_at) }} {{ jamIndo($data->created_at) }}</small>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -73,7 +85,7 @@
 
 
 
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         {{ $data->description }}
 
                         <hr>
@@ -99,24 +111,6 @@
                         <br><br>
                     </div>
 
-                    <div class="col-md-3">
-                    Status : <label class="badge bg-warning badge-sm  me-1 mb-1 mt-1">{{ complaintStatus($data->status) }}</label>
-                    <br /><br />
-
-
-
-                    @if ($data->complaint_user_resolve && count($data->complaint_user_resolve) > 0)
-                    Diproses Oleh<br>
-                    <ul class="list-group">
-                    @foreach($data->complaint_user_resolve as $key => $val)
-
-                    <li class="listunorder">{{ $val->user->name }} <br><i>({{ $val->created_at }})</i></li>
-
-                    @endforeach
-                    </ul>
-                    @endif
-
-                    </div>
 
 
 

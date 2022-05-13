@@ -920,7 +920,7 @@ if ( ! function_exists('complaintStatus'))
             'Draft',    //1
             'Pending',  //2
             'Diproses', //3
-            'Selesai',  //4
+            'Selesai Pengerjaan',  //4
             'Revisi',   //5
             'Selesai Revisi',   //7
             'Solved',   //8
