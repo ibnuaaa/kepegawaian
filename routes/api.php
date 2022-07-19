@@ -6,6 +6,9 @@ $prefix = '/api';
 // getters
 $router->get($prefix.'/user', ['uses' => 'User\UserBrowseController@get', 'middleware' => ['LogActivity:User.View','ArrQuery']]);
 $router->get($prefix.'/user/{query:.+}', ['uses' => 'User\UserBrowseController@get', 'middleware' => ['LogActivity:User.View','ArrQuery']]);
+
+$router->get($prefix.'/user_complete/{query:.+}', ['uses' => 'User\UserCompleteBrowseController@get', 'middleware' => ['LogActivity:User.View','ArrQuery']]);
+
 // actions
 $router->post($prefix.'/user', ['uses' => 'User\UserController@Insert', 'middleware' => ['LogActivity:User.Insert','User.Insert']]);
 $router->put($prefix.'/user/change_password', ['uses' => 'User\UserController@ChangePassword', 'middleware' => ['LogActivity:User.ChangePassword','User.ChangePassword']]);
@@ -296,3 +299,10 @@ $router->delete($prefix.'/indikator_skp/{id}', ['uses' => 'IndikatorSkp\Indikato
 $router->post($prefix.'/user', ['uses' => 'User\UserController@Insert', 'middleware' => ['LogActivity:User.Insert','User.Insert']]);
 $router->put($prefix.'/user/change_password', ['uses' => 'User\UserController@ChangePassword', 'middleware' => ['LogActivity:User.ChangePassword','User.ChangePassword']]);
 $router->put($prefix.'/user/{id}', ['uses' => 'User\UserController@Update', 'middleware' => ['LogActivity:User.Update','User.Update']]);
+
+// e_kinerja_iki
+$router->get($prefix.'/e_kinerja_iki', ['uses' => 'EKinerjaIki\EKinerjaIkiBrowseController@get', 'middleware' => ['LogActivity:EKinerjaIki.View','ArrQuery']]);
+$router->get($prefix.'/e_kinerja_iki/{query:.+}', ['uses' => 'EKinerjaIki\EKinerjaIkiBrowseController@get', 'middleware' => ['EKinerjaIki:EKinerjaIki.View','ArrQuery']]);
+$router->post($prefix.'/e_kinerja_iki', ['uses' => 'EKinerjaIki\EKinerjaIkiController@Insert', 'middleware' => ['LogActivity:EKinerjaIki.Insert','EKinerjaIki.Insert']]);
+$router->put($prefix.'/e_kinerja_iki/{id}', ['uses' => 'EKinerjaIki\EKinerjaIkiController@Update', 'middleware' => ['LogActivity:EKinerjaIki.Update','EKinerjaIki.Update']]);
+$router->delete($prefix.'/e_kinerja_iki/{id}', ['uses' => 'EKinerjaIki\EKinerjaIkiController@Delete', 'middleware' => ['LogActivity:EKinerjaIki.Delete','EKinerjaIki.Delete']]);

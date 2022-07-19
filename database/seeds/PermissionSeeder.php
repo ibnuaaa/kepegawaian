@@ -179,7 +179,26 @@ class PermissionSeeder extends Seeder
                 'name' => 'complaint',
                 'label' => 'complaint',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 29,
+                'name' => 'e_kinerja_kemenkes',
+                'label' => 'e_kinerja_kemenkes',
+                'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 30,
+                'name' => 'e_kinerja_iki',
+                'label' => 'e_kinerja_iki',
+                'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 31,
+                'name' => 'e_kinerja_ikt',
+                'label' => 'e_kinerja_ikt',
+                'created_at' => Carbon::now()
             ]
+
 
 
 

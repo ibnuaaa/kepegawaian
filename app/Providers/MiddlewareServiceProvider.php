@@ -167,6 +167,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'UserJabatanFungsionalRequest.Update' => \App\Http\Middleware\UserJabatanFungsionalRequest\Update::class,
         'UserJabatanFungsionalRequest.Delete' => \App\Http\Middleware\UserJabatanFungsionalRequest\Delete::class,
 
+        'EKinerjaIki.Insert' => \App\Http\Middleware\EKinerjaIki\Insert::class,
+        'EKinerjaIki.Update' => \App\Http\Middleware\EKinerjaIki\Update::class,
+        'EKinerjaIki.Delete' => \App\Http\Middleware\EKinerjaIki\Delete::class,
+
         'UserPelatihanRequest.Insert' => \App\Http\Middleware\UserPelatihanRequest\Insert::class,
         'UserPelatihanRequest.Update' => \App\Http\Middleware\UserPelatihanRequest\Update::class,
         'UserPelatihanRequest.Delete' => \App\Http\Middleware\UserPelatihanRequest\Delete::class,

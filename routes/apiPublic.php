@@ -26,6 +26,7 @@ $router->get($prefix.'/roulette_wheel_data/{query:.+}', ['uses' => 'RouletteWhee
 $router->get($prefix.'/thumb/{key}', ['uses' => 'Storage\StorageController@FetchThumb', 'middleware' => ['LogActivity:Storage.FetchThumb','ArrQuery']]);
 
 $router->post($prefix.'/login', ['uses' => 'Authentication\AuthenticationController@Login', 'middleware' => ['Authentication.Login']]);
+$router->post($prefix.'/login/bmn', ['uses' => 'Authentication\AuthenticationController@Login', 'middleware' => ['Authentication.Login']]);
 
 $router->get($prefix.'/qrcode/{key}', ['uses' => 'QrCode\QrCodeController@Create', 'middleware' => ['LogActivity:Mail.View', 'ArrQuery']]);
 

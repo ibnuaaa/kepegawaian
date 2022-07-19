@@ -122,3 +122,13 @@ $router->get('/notifikasi', 'CMS\Notifikasi\NotifikasiController@Home');
 
 $router->get('/audit_trail', 'CMS\AuditTrail\AuditTrailController@Home');
 $router->get('/audit_trail/log_data/{id}', 'CMS\AuditTrail\AuditTrailController@LogData');
+
+$router->get('/e_kinerja_iki', 'CMS\EKinerjaIki\EKinerjaIkiController@Home');
+$router->get('/e_kinerja_iki/new', 'CMS\EKinerjaIki\EKinerjaIkiController@New');
+$router->get('/e_kinerja_iki/edit/{id}', 'CMS\EKinerjaIki\EKinerjaIkiController@Edit');
+$router->get('/e_kinerja_iki/{id}', 'CMS\EKinerjaIki\EKinerjaIkiController@Detail');
+
+$router->get('/e_kinerja_ikt', 'CMS\EKinerjaIkt\EKinerjaIktController@Home');
+$router->get('/e_kinerja_ikt/new', 'CMS\EKinerjaIkt\EKinerjaIktController@New');
+$router->get('/e_kinerja_ikt/edit/{id}', 'CMS\EKinerjaIkt\EKinerjaIktController@Edit');
+$router->get('/e_kinerja_ikt/{id}', 'CMS\EKinerjaIkt\EKinerjaIktController@Detail');

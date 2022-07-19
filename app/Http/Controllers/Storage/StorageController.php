@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Storage;
 
 use App\Models\Storage as StorageDB;
 use App\Models\User;
-use App\Models\KontrakPayungItem;
-use App\Models\Material;
+use App\Models\EKinerjaIkiDetail;
+use App\Models\EKinerjaIki;
 
 use App\Traits\Browse;
 
@@ -263,31 +263,32 @@ class StorageController extends Controller
             Storage::disk('temporary')->get($FileName), 'public'
         );
 
-        $spreadsheet = $reader->load('../storage/app/' . $Folder . '/' . $FileName);
+        $spreadsheet = $reader->load('../storage/app/' . $FileName);
         $sheetData = $spreadsheet->getActiveSheet()->toArray();
 
-        KontrakPayungItem::where('kontrak_payung_id', $ObjectId)->delete();
+        $e_kinerja_iki_id = $ObjectId;
 
-        for($i = 1;$i < count($sheetData);$i++)
-        {
+        $category = '';
+        foreach ($sheetData as $key => $val) {
+            if ($key > 0) {
+                
+                if (!empty($val[0])) $category = $val[0];
 
-            $Material = Material::where('code',$sheetData[$i][0])->first();
-            if ($Material) $material_id = $Material->id;
-
-            $KontrakPayungItem = new KontrakPayungItem();
-            $KontrakPayungItem->kontrak_payung_id = $ObjectId;
-            $KontrakPayungItem->material_id = $material_id;
-            $KontrakPayungItem->obj_id = $sheetData[$i][0];
-            $KontrakPayungItem->nama_obat = $sheetData[$i][1];
-            $KontrakPayungItem->kuantitas = $sheetData[$i][2];
-            $KontrakPayungItem->satuan = $sheetData[$i][3];
-            $KontrakPayungItem->hna = $sheetData[$i][4];
-            $KontrakPayungItem->diskon = $sheetData[$i][5];
-            $KontrakPayungItem->hna_diskon = $sheetData[$i][6];
-            $KontrakPayungItem->hna_diskon_ppn = $sheetData[$i][7];
-            $KontrakPayungItem->save();
+                $EKinerjaIkiDetail = new EKinerjaIkiDetail();    
+                $EKinerjaIkiDetail->e_kinerja_iki_id = $e_kinerja_iki_id;
+                $EKinerjaIkiDetail->category = $category;
+                $EKinerjaIkiDetail->no = $val[1];
+                $EKinerjaIkiDetail->judul_indikator = $val[2];
+                $EKinerjaIkiDetail->bobot = $val[3];
+                $EKinerjaIkiDetail->standart = $val[4];
+                $EKinerjaIkiDetail->haper = $val[5];
+                $EKinerjaIkiDetail->skor = $val[6];
+                $EKinerjaIkiDetail->total = $val[7];
+                $EKinerjaIkiDetail->save();
+            }
         }
-
+        
+        
         Json::set('data', 'success');
         return response()->json(Json::get(), 201);
     }
