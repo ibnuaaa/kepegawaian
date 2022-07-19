@@ -57,6 +57,7 @@ $router->post($prefix.'/upload', ['uses' => 'File\FileController@Upload', 'middl
 
 $router->post($prefix.'/storage/save', ['uses' => 'Storage\StorageController@Save', 'middleware' => ['LogActivity:Storage.Save','Storage.Save']]);
 $router->post($prefix.'/storage/save_excel', ['uses' => 'Storage\StorageController@SaveExcel', 'middleware' => ['LogActivity:Storage.SaveExcel','Storage.SaveExcel']]);
+$router->post($prefix.'/storage/save_excel_ikt', ['uses' => 'Storage\StorageController@SaveExcelIkt', 'middleware' => ['LogActivity:Storage.SaveExcelIkt','Storage.SaveExcelIkt']]);
 $router->delete($prefix.'/storage/delete_by_key/{uuid}', ['uses' => 'Storage\StorageController@DeleteByKey', 'middleware' => ['LogActivity:Storage.DeleteByKey','Storage.DeleteByKey']]);
 
 // mail
@@ -306,3 +307,10 @@ $router->get($prefix.'/e_kinerja_iki/{query:.+}', ['uses' => 'EKinerjaIki\EKiner
 $router->post($prefix.'/e_kinerja_iki', ['uses' => 'EKinerjaIki\EKinerjaIkiController@Insert', 'middleware' => ['LogActivity:EKinerjaIki.Insert','EKinerjaIki.Insert']]);
 $router->put($prefix.'/e_kinerja_iki/{id}', ['uses' => 'EKinerjaIki\EKinerjaIkiController@Update', 'middleware' => ['LogActivity:EKinerjaIki.Update','EKinerjaIki.Update']]);
 $router->delete($prefix.'/e_kinerja_iki/{id}', ['uses' => 'EKinerjaIki\EKinerjaIkiController@Delete', 'middleware' => ['LogActivity:EKinerjaIki.Delete','EKinerjaIki.Delete']]);
+
+// e_kinerja_ikt
+$router->get($prefix.'/e_kinerja_ikt', ['uses' => 'EKinerjaIkt\EKinerjaIktBrowseController@get', 'middleware' => ['LogActivity:EKinerjaIkt.View','ArrQuery']]);
+$router->get($prefix.'/e_kinerja_ikt/{query:.+}', ['uses' => 'EKinerjaIkt\EKinerjaIktBrowseController@get', 'middleware' => ['EKinerjaIkt:EKinerjaIkt.View','ArrQuery']]);
+$router->post($prefix.'/e_kinerja_ikt', ['uses' => 'EKinerjaIkt\EKinerjaIktController@Insert', 'middleware' => ['LogActivity:EKinerjaIkt.Insert','EKinerjaIkt.Insert']]);
+$router->put($prefix.'/e_kinerja_ikt/{id}', ['uses' => 'EKinerjaIkt\EKinerjaIktController@Update', 'middleware' => ['LogActivity:EKinerjaIkt.Update','EKinerjaIkt.Update']]);
+$router->delete($prefix.'/e_kinerja_ikt/{id}', ['uses' => 'EKinerjaIkt\EKinerjaIktController@Delete', 'middleware' => ['LogActivity:EKinerjaIkt.Delete','EKinerjaIkt.Delete']]);

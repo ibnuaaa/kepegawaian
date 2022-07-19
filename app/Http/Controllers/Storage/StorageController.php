@@ -6,6 +6,9 @@ use App\Models\Storage as StorageDB;
 use App\Models\User;
 use App\Models\EKinerjaIkiDetail;
 use App\Models\EKinerjaIki;
+use App\Models\EKinerjaIktDetail;
+use App\Models\EKinerjaIkt;
+
 
 use App\Traits\Browse;
 
@@ -284,6 +287,68 @@ class StorageController extends Controller
                 $EKinerjaIkiDetail->haper = $val[5];
                 $EKinerjaIkiDetail->skor = $val[6];
                 $EKinerjaIkiDetail->total = $val[7];
+                $EKinerjaIkiDetail->save();
+            }
+        }
+        
+        
+        Json::set('data', 'success');
+        return response()->json(Json::get(), 201);
+    }
+
+    public function SaveExcelIkt(Request $request)
+    {
+        $File = $request->Payload->all()['File'];
+        $Object = $request->Payload->all()['Object'];
+        $ObjectId = $request->Payload->all()['ObjectId'];
+
+        $FileName = $File->key . '.' . $File->extension;
+        $SizeFile = Storage::disk('temporary')->size($FileName);
+        $MimeType = Storage::disk('temporary')->mimeType($FileName);
+
+        // $Storage = new StorageDB();
+        // $Storage->type = 'file';
+        // $Storage->name = $File->name;
+        // $Storage->original_name = $FileName;
+        // $Storage->key = $File->key;
+        // $Storage->user_id = $request->user()->id;
+
+        // $Storage->extension = $File->extension;
+        // $Storage->size = $SizeFile;
+        // $Storage->mimetype = $MimeType;
+
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+
+        $Folder = $Object . '_' . $ObjectId;
+        if ($ObjectId && $Object) {
+            if (!Storage::disk('local')->has($Folder)) {
+                // Storage::disk('local')->makeDirectory($Folder, $mode = 0777, true, true);
+            }
+        }
+        Storage::disk('local')->put(
+            // $Folder . '/' . $FileName,
+            $FileName,
+            Storage::disk('temporary')->get($FileName), 'public'
+        );
+
+        $spreadsheet = $reader->load('../storage/app/' . $FileName);
+        $sheetData = $spreadsheet->getActiveSheet()->toArray();
+
+        $e_kinerja_ikt_id = $ObjectId;
+
+        $category = '';
+        foreach ($sheetData as $key => $val) {
+            if ($key > 0) {
+                
+                // if (!empty($val[0])) $category = $val[0];
+
+                $EKinerjaIkiDetail = new EKinerjaIktDetail();    
+                $EKinerjaIkiDetail->e_kinerja_ikt_id = $e_kinerja_ikt_id;
+                $EKinerjaIkiDetail->no = $val[0];
+                $EKinerjaIkiDetail->judul_indikator = $val[1];
+                $EKinerjaIkiDetail->standart = $val[2];
+                $EKinerjaIkiDetail->target = $val[3];
+                $EKinerjaIkiDetail->realisasi = $val[4];
                 $EKinerjaIkiDetail->save();
             }
         }

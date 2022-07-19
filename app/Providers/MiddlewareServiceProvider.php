@@ -171,6 +171,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'EKinerjaIki.Update' => \App\Http\Middleware\EKinerjaIki\Update::class,
         'EKinerjaIki.Delete' => \App\Http\Middleware\EKinerjaIki\Delete::class,
 
+        'EKinerjaIkt.Insert' => \App\Http\Middleware\EKinerjaIkt\Insert::class,
+        'EKinerjaIkt.Update' => \App\Http\Middleware\EKinerjaIkt\Update::class,
+        'EKinerjaIkt.Delete' => \App\Http\Middleware\EKinerjaIkt\Delete::class,
+
         'UserPelatihanRequest.Insert' => \App\Http\Middleware\UserPelatihanRequest\Insert::class,
         'UserPelatihanRequest.Update' => \App\Http\Middleware\UserPelatihanRequest\Update::class,
         'UserPelatihanRequest.Delete' => \App\Http\Middleware\UserPelatihanRequest\Delete::class,
@@ -195,6 +199,7 @@ class MiddlewareServiceProvider extends ServiceProvider
 
         'Storage.Save' => \App\Http\Middleware\Storage\Save::class,
         'Storage.SaveExcel' => \App\Http\Middleware\Storage\SaveExcel::class,
+        'Storage.SaveExcelIkt' => \App\Http\Middleware\Storage\SaveExcelIkt::class,
         'Storage.Fetch' => \App\Http\Middleware\Storage\Fetch::class,
         'Storage.FetchTmp' => \App\Http\Middleware\Storage\FetchTmp::class,
         'Storage.Delete' => \App\Http\Middleware\Storage\Delete::class,
