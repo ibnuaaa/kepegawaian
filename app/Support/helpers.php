@@ -1554,4 +1554,58 @@ if ( ! function_exists('treeChildIndikatorKinerjaModal'))
       if (!$full) $string = array_slice($string, 0, 1);
       return $string ? implode(', ', $string) . ' ago' : 'just now';
   }
+
+  if ( ! function_exists('treeChildMataAnggaran'))
+  {
+      function treeChildMataAnggaran($data, $dataParent, $prefix, $incr){
+
+          $html = "";
+          if (!empty($data)) {
+              foreach ($data as $key => $item) {
+
+                  $num = $key + 1;
+
+                  $html .= '
+                    <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" class="td-' . $item->status . '">
+                        <td style="height: 10px !important;white-space: nowrap;">
+                          '.(($prefix ? ($prefix .'.') : ''). $num).'
+                        </td>
+                        <td style="height: 10px !important;">
+                            '.
+
+                            ( !empty($item->perspektif_id) ?
+                            '
+                            <a href="#" class="tag tag-blue text-white">
+                              '.($item->perspektif_id ? perspektif($item->perspektif_id) : '' ).'
+                            </a>
+                            <br />
+                            ' : ''
+                            )
+                            .'
+
+                            ' . $item->name . '
+                        </td>
+                        <td>
+                            '. (!empty($item->unit_kerja->name) ? $item->unit_kerja->name : '') .'
+                        </td>
+                        <td>
+                            <a href="'. url('/mata_anggaran/'.$item->id) .'" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
+                            <a href="'. url('/mata_anggaran/new/'.$item->id) .'" class="btn btn-primary btn-sm">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                            <a onClick=\'return remove('.$item->id.', "'.$item->name.'")\' href="#" class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+                  ' . (count($item->children) > 0 ? treeChildMataAnggaran($item->children, $item,  (($prefix ? ($prefix .'.') : ''). $num), $num) : '') ;
+              }
+          }
+
+          return $html;
+
+      }
+  }
+
 }

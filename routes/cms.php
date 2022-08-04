@@ -43,6 +43,10 @@ $router->get('/indikator_kinerja', 'CMS\IndikatorKinerja\IndikatorKinerjaControl
 $router->get('/indikator_kinerja/new/{indikator_kinerja_id}', 'CMS\IndikatorKinerja\IndikatorKinerjaController@New');
 $router->get('/indikator_kinerja/{id}', 'CMS\IndikatorKinerja\IndikatorKinerjaController@IndikatorKinerjaEdit');
 
+$router->get('/mata_anggaran', 'CMS\MataAnggaran\MataAnggaranController@Home');
+$router->get('/mata_anggaran/new/{mata_anggaran_id}', 'CMS\MataAnggaran\MataAnggaranController@New');
+$router->get('/mata_anggaran/{id}', 'CMS\MataAnggaran\MataAnggaranController@MataAnggaranEdit');
+
 $router->get('/user_request/status/{status}/{menu}', 'CMS\UserRequest\UserRequestController@Home');
 $router->get('/user_request/{menu}/{id}', 'CMS\UserRequest\UserRequestController@Detail');
 

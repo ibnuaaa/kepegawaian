@@ -121,6 +121,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'IndikatorKinerja.Update' => \App\Http\Middleware\IndikatorKinerja\Update::class,
         'IndikatorKinerja.Delete' => \App\Http\Middleware\IndikatorKinerja\Delete::class,
 
+        'MataAnggaran.Insert' => \App\Http\Middleware\MataAnggaran\Insert::class,
+        'MataAnggaran.Update' => \App\Http\Middleware\MataAnggaran\Update::class,
+        'MataAnggaran.Delete' => \App\Http\Middleware\MataAnggaran\Delete::class,
+
         'IndikatorSkp.Insert' => \App\Http\Middleware\IndikatorSkp\Insert::class,
         'IndikatorSkp.Update' => \App\Http\Middleware\IndikatorSkp\Update::class,
         'IndikatorSkp.Delete' => \App\Http\Middleware\IndikatorSkp\Delete::class,

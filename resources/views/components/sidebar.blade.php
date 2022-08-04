@@ -152,6 +152,9 @@
                               @if (getPermissions('kampus')['checked'])
                               <li><a href="{!! url('/kampus'); !!}" class="slide-item"> Kampus</a></li>
                               @endif
+                              @if (getPermissions('mata_anggaran')['checked'])
+                              <li><a href="{!! url('/mata_anggaran'); !!}" class="slide-item"> Mata Anggaran</a></li>
+                              @endif
                             </ul>
                         </li>
                         @endif

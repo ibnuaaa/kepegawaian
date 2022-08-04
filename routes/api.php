@@ -289,6 +289,13 @@ $router->post($prefix.'/indikator_kinerja', ['uses' => 'IndikatorKinerja\Indikat
 $router->put($prefix.'/indikator_kinerja/{id}', ['uses' => 'IndikatorKinerja\IndikatorKinerjaController@Update', 'middleware' => ['LogActivity:IndikatorKinerja.Update','IndikatorKinerja.Update']]);
 $router->delete($prefix.'/indikator_kinerja/{id}', ['uses' => 'IndikatorKinerja\IndikatorKinerjaController@Delete', 'middleware' => ['LogActivity:IndikatorKinerja.Delete','IndikatorKinerja.Delete']]);
 
+// mata_anggaran
+$router->get($prefix.'/mata_anggaran', ['uses' => 'MataAnggaran\MataAnggaranBrowseController@get', 'middleware' => ['LogActivity:MataAnggaran.View','ArrQuery']]);
+$router->get($prefix.'/mata_anggaran/{query:.+}', ['uses' => 'MataAnggaran\MataAnggaranBrowseController@get', 'middleware' => ['MataAnggaran:MataAnggaran.View','ArrQuery']]);
+$router->post($prefix.'/mata_anggaran', ['uses' => 'MataAnggaran\MataAnggaranController@Insert', 'middleware' => ['LogActivity:MataAnggaran.Insert','MataAnggaran.Insert']]);
+$router->put($prefix.'/mata_anggaran/{id}', ['uses' => 'MataAnggaran\MataAnggaranController@Update', 'middleware' => ['LogActivity:MataAnggaran.Update','MataAnggaran.Update']]);
+$router->delete($prefix.'/mata_anggaran/{id}', ['uses' => 'MataAnggaran\MataAnggaranController@Delete', 'middleware' => ['LogActivity:MataAnggaran.Delete','MataAnggaran.Delete']]);
+
 // indikator_skp
 $router->get($prefix.'/indikator_skp', ['uses' => 'IndikatorSkp\IndikatorSkpBrowseController@get', 'middleware' => ['LogActivity:IndikatorSkp.View','ArrQuery']]);
 $router->get($prefix.'/indikator_skp/{query:.+}', ['uses' => 'IndikatorSkp\IndikatorSkpBrowseController@get', 'middleware' => ['IndikatorSkp:IndikatorSkp.View','ArrQuery']]);

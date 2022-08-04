@@ -197,11 +197,13 @@ class PermissionSeeder extends Seeder
                 'name' => 'e_kinerja_ikt',
                 'label' => 'e_kinerja_ikt',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 32,
+                'name' => 'mata_anggaran',
+                'label' => 'mata_anggaran',
+                'created_at' => Carbon::now()
             ]
-
-
-
-
         ])->keyBy($this->key);
     }
 
