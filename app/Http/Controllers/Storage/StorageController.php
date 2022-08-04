@@ -271,6 +271,8 @@ class StorageController extends Controller
 
         $e_kinerja_iki_id = $ObjectId;
 
+        $EKinerjaIkiDetail = EKinerjaIkiDetail::where('e_kinerja_iki_id',$e_kinerja_iki_id)->delete();
+
         $category = '';
         foreach ($sheetData as $key => $val) {
             if ($key > 0) {
@@ -335,6 +337,8 @@ class StorageController extends Controller
         $sheetData = $spreadsheet->getActiveSheet()->toArray();
 
         $e_kinerja_ikt_id = $ObjectId;
+        
+        $EKinerjaIktDetail = EKinerjaIktDetail::where('e_kinerja_ikt_id',$e_kinerja_ikt_id)->delete();
 
         $category = '';
         foreach ($sheetData as $key => $val) {

@@ -31,7 +31,8 @@ function saveExcel(id) {
 
         axios.post('/storage/save_excel', data_storage).then((response) => {
             hideLoading()
-            location.reload()
+            // location.reload()
+            location.href = '/e_kinerja_iki/' + id
         }).catch((error) => {
             if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
                 Swal.fire({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })

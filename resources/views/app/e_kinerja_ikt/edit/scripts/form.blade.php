@@ -16,7 +16,7 @@ function saveExcel(id) {
     console.log('saveExcel 2222')
     console.log(g_data_storage.length)
     for (var i = 0; i < g_data_storage.length; i++) {
-    console.log('rrrr')
+        console.log('rrrr')
         var data_storage_tmp = g_data_storage[i]
 
         console.log('vvv')
@@ -31,7 +31,7 @@ function saveExcel(id) {
 
         axios.post('/storage/save_excel_ikt', data_storage).then((response) => {
             hideLoading()
-            location.reload()
+            location.href = '/e_kinerja_ikt/' + id
         }).catch((error) => {
             if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
                 Swal.fire({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
