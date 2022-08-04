@@ -219,7 +219,7 @@
         @if (!in_array($data->status, [1,99]))
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Tulis Balasan</h3>
+                <h3 class="card- title">Tulis Balasan</h3>
             </div>
             <div class="card-body">
                 <div class="eamil-body">
