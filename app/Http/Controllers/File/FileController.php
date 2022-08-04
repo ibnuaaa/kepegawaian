@@ -25,6 +25,7 @@ class FileController extends Controller
     public function Upload(Request $request)
     {
         $File = $request->Payload->all()['File'];
+        
         $NameFile = $File->getClientOriginalName();
         $ExtensionFile = $File->getClientOriginalExtension();
 

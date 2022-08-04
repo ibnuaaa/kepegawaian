@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Storage;
 
 use App\Models\Storage as StorageDB;
 use App\Models\User;
-use App\Models\KontrakPayungItem;
-use App\Models\Material;
+use App\Models\EKinerjaIkiDetail;
+use App\Models\EKinerjaIki;
+use App\Models\EKinerjaIktDetail;
+use App\Models\EKinerjaIkt;
+
 
 use App\Traits\Browse;
 
@@ -263,31 +266,98 @@ class StorageController extends Controller
             Storage::disk('temporary')->get($FileName), 'public'
         );
 
-        $spreadsheet = $reader->load('../storage/app/' . $Folder . '/' . $FileName);
+        $spreadsheet = $reader->load('../storage/app/' . $FileName);
         $sheetData = $spreadsheet->getActiveSheet()->toArray();
 
-        KontrakPayungItem::where('kontrak_payung_id', $ObjectId)->delete();
+        $e_kinerja_iki_id = $ObjectId;
 
-        for($i = 1;$i < count($sheetData);$i++)
-        {
+        $EKinerjaIkiDetail = EKinerjaIkiDetail::where('e_kinerja_iki_id',$e_kinerja_iki_id)->delete();
 
-            $Material = Material::where('code',$sheetData[$i][0])->first();
-            if ($Material) $material_id = $Material->id;
+        $category = '';
+        foreach ($sheetData as $key => $val) {
+            if ($key > 0) {
+                
+                if (!empty($val[0])) $category = $val[0];
 
-            $KontrakPayungItem = new KontrakPayungItem();
-            $KontrakPayungItem->kontrak_payung_id = $ObjectId;
-            $KontrakPayungItem->material_id = $material_id;
-            $KontrakPayungItem->obj_id = $sheetData[$i][0];
-            $KontrakPayungItem->nama_obat = $sheetData[$i][1];
-            $KontrakPayungItem->kuantitas = $sheetData[$i][2];
-            $KontrakPayungItem->satuan = $sheetData[$i][3];
-            $KontrakPayungItem->hna = $sheetData[$i][4];
-            $KontrakPayungItem->diskon = $sheetData[$i][5];
-            $KontrakPayungItem->hna_diskon = $sheetData[$i][6];
-            $KontrakPayungItem->hna_diskon_ppn = $sheetData[$i][7];
-            $KontrakPayungItem->save();
+                $EKinerjaIkiDetail = new EKinerjaIkiDetail();    
+                $EKinerjaIkiDetail->e_kinerja_iki_id = $e_kinerja_iki_id;
+                $EKinerjaIkiDetail->category = $category;
+                $EKinerjaIkiDetail->no = $val[1];
+                $EKinerjaIkiDetail->judul_indikator = $val[2];
+                $EKinerjaIkiDetail->bobot = $val[3];
+                $EKinerjaIkiDetail->standart = $val[4];
+                $EKinerjaIkiDetail->haper = $val[5];
+                $EKinerjaIkiDetail->skor = $val[6];
+                $EKinerjaIkiDetail->total = $val[7];
+                $EKinerjaIkiDetail->save();
+            }
         }
+        
+        
+        Json::set('data', 'success');
+        return response()->json(Json::get(), 201);
+    }
 
+    public function SaveExcelIkt(Request $request)
+    {
+        $File = $request->Payload->all()['File'];
+        $Object = $request->Payload->all()['Object'];
+        $ObjectId = $request->Payload->all()['ObjectId'];
+
+        $FileName = $File->key . '.' . $File->extension;
+        $SizeFile = Storage::disk('temporary')->size($FileName);
+        $MimeType = Storage::disk('temporary')->mimeType($FileName);
+
+        // $Storage = new StorageDB();
+        // $Storage->type = 'file';
+        // $Storage->name = $File->name;
+        // $Storage->original_name = $FileName;
+        // $Storage->key = $File->key;
+        // $Storage->user_id = $request->user()->id;
+
+        // $Storage->extension = $File->extension;
+        // $Storage->size = $SizeFile;
+        // $Storage->mimetype = $MimeType;
+
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+
+        $Folder = $Object . '_' . $ObjectId;
+        if ($ObjectId && $Object) {
+            if (!Storage::disk('local')->has($Folder)) {
+                // Storage::disk('local')->makeDirectory($Folder, $mode = 0777, true, true);
+            }
+        }
+        Storage::disk('local')->put(
+            // $Folder . '/' . $FileName,
+            $FileName,
+            Storage::disk('temporary')->get($FileName), 'public'
+        );
+
+        $spreadsheet = $reader->load('../storage/app/' . $FileName);
+        $sheetData = $spreadsheet->getActiveSheet()->toArray();
+
+        $e_kinerja_ikt_id = $ObjectId;
+        
+        $EKinerjaIktDetail = EKinerjaIktDetail::where('e_kinerja_ikt_id',$e_kinerja_ikt_id)->delete();
+
+        $category = '';
+        foreach ($sheetData as $key => $val) {
+            if ($key > 0) {
+                
+                // if (!empty($val[0])) $category = $val[0];
+
+                $EKinerjaIkiDetail = new EKinerjaIktDetail();    
+                $EKinerjaIkiDetail->e_kinerja_ikt_id = $e_kinerja_ikt_id;
+                $EKinerjaIkiDetail->no = $val[0];
+                $EKinerjaIkiDetail->judul_indikator = $val[1];
+                $EKinerjaIkiDetail->standart = $val[2];
+                $EKinerjaIkiDetail->target = $val[3];
+                $EKinerjaIkiDetail->realisasi = $val[4];
+                $EKinerjaIkiDetail->save();
+            }
+        }
+        
+        
         Json::set('data', 'success');
         return response()->json(Json::get(), 201);
     }

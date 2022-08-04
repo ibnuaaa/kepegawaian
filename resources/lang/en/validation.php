@@ -148,6 +148,7 @@ return [
     'AdminCompanyRequired' => 'Harus menggunakan akun company',
     'DuplicatePenilaianPrestasiKerjaItem' => 'Indikator Kinerja Sudah Ada.',
     'NeedApprovalUser' => 'Request perubahan data user telah dikirimkan ke SDM. Silahkan Menunggu hingga data di proses dan disetujui oleh bagian SDM. Terimakasih.',
+    'MonthYearExist' => 'Tanggal dan Bulan sudah ada, silahkan pilih bulan atau tahun lain',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes

@@ -5,7 +5,7 @@
             <div class="app-sidebar">
                 <div class="side-header">
                     <a class="header-brand1" href="/">
-                        <img src="/assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
+                        <img src="/assets/images/brand/logo-3.png" class="header-brand-img desktop-logo" alt="logo">
                         <img src="/assets/images/brand/logo-1.png" class="header-brand-img toggle-logo" alt="logo">
                         <img src="/assets/images/brand/logo-2.png" class="header-brand-img light-logo" alt="logo">
                         <img src="/assets/images/brand/logo-3.png?1" class="header-brand-img light-logo1" alt="logo">
@@ -21,7 +21,19 @@
                         <li class="slide">
                             <a class="side-menu__item" data-bs-toggle="slide" href="{!! url('/'); !!}"><i class="side-menu__icon fe fe-home"></i><span class="side-menu__label">Dashboard</span></a>
                         </li>
-
+                        @if (getPermissions('e_kinerja_kemenkes')['checked'])
+                        <li class="slide active  @yield('ekinerjaMenuClass')">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">E-Kinerja</span><i class="angle fe fe-chevron-right"></i></a>
+                            <ul class="slide-menu">
+                              @if (getPermissions('e_kinerja_iki')['checked'])
+                              <li><a href="{!! url('/e_kinerja_iki'); !!}" class="slide-item"> IKI</a></li>
+                              @endif
+                              @if (getPermissions('e_kinerja_ikt')['checked'])
+                              <li><a href="{!! url('/e_kinerja_ikt'); !!}" class="slide-item"> IKT</a></li>
+                              @endif
+                            </ul>
+                        </li>
+                        @endif
                         @if (getPermissions('e_kinerja')['checked'])
                         <li class="slide active  @yield('userRequestSdmMenuClass')">
                             <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-slack"></i><span class="side-menu__label">E-Remun</span><i class="angle fe fe-chevron-right"></i></a>
