@@ -11,7 +11,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item"><a href="/pendidikan">E-Kinerja Ikt</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Detail E-Kinerja Ikt</li>
+            <li class="breadcrumb-item active" aria-current="page">Detail E-Kinerja IKT</li>
         </ol>
     </div>
 </div>
@@ -24,15 +24,15 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="font-montserrat all-caps hint-text">Detail E-Kinerja Ikt</h2>
+                        <h2 class="font-montserrat all-caps hint-text">Detail E-Kinerja IKT</h2>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6 col-md-2">
-                        Bulan
+                        Triwulan Ke
                     </div>
                     <div class="col-6 col-md-10">
-                        : {{ monthIndo($data['month']) }}
+                        : {{ $data['month'] }}
                     </div>
                 </div>
                 <div class="row">
@@ -53,7 +53,7 @@
                                 </td>
                                 <td>
                                     Judul Indikator
-                                </td> 
+                                </td>
                                 <td>
                                     Standart
                                 </td>
@@ -63,10 +63,10 @@
                                 <td>
                                     Realisasi
                                 </td>
-                                
-                                
-                            </tr> 
-                            
+
+
+                            </tr>
+
                             @foreach ($data->e_kinerja_ikt_detail as $key => $val)
                             <tr>
                                 <td>
@@ -74,7 +74,7 @@
                                 </td>
                                 <td>
                                     {{ $val->judul_indikator }}
-                                </td> 
+                                </td>
                                 <td>
                                 {{ $val->standart }}
                                 </td>
@@ -84,9 +84,9 @@
                                 <td>
                                 {{ $val->realisasi }}
                                 </td>
-                                
-                                
-                            </tr> 
+
+
+                            </tr>
                             @endforeach
 
 

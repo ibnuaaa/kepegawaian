@@ -7,7 +7,7 @@
 
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Buat Iki</h1>
+    <h1 class="page-title">Buat IKT</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -25,15 +25,11 @@
             <div class="card-body">
                 <form autocomplete="off" id="newEKinerjaIkiForm">
                     <div class="form-group form-group-default required ">
-                        <label class="form-label">Bulan</label>
+                        <label class="form-label">Triwulan</label>
                         <select class="form-control" name="month">
-                            <option>-= Pilih =-<option>
-                            @foreach(listMonth() as $key => $val)
-                                @if((int)$key == (int)date('m'))
-                                <option selected value="{{(int)$key}}">{{$val}}</option>
-                                @else
-                                <option value="{{(int)$key}}">{{$val}}</option>
-                                @endif
+                            <option>-= Pilih =-</option>
+                            @foreach([1,2,3,4] as $key => $val)
+                                @if($val)<option value="{{(int)$key}}">{{$val}}</option>@endif
                             @endforeach
                         </select>
                     </div>

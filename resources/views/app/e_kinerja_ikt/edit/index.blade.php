@@ -7,7 +7,7 @@
 
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Edit E-Kinerja Ikt</h1>
+    <h1 class="page-title">Edit E-Kinerja IKT</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -29,12 +29,11 @@
                         <input name="year" value="{{ $data['year'] }}" class="form-control" type="text" disabled>
                     </div>
                     <div class="form-group form-group-default required ">
-                        <label class="form-label">Bulan</label>
+                        <label class="form-label">Triwulan</label>
                         <select class="form-control" name="month" disabled>
-                            <option>-= Pilih =-<option>
                             @foreach(listMonth() as $key => $val)
                                 @if ($val)
-                                    <option @if($key == $data['month']) selected  @endif >{{$val}}</option>
+                                    <option>{{$data['month']}}</option>
                                 @endif
                             @endforeach
                         </select>
