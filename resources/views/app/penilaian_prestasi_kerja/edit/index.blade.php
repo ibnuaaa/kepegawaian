@@ -319,19 +319,19 @@
                                   {{!empty($val->indikator_tetap->name) ? $val->indikator_tetap->name : ''}}
                               </td>
                               <td class="text-center">
-                                  {{ $val->bobot }}
+                                  <input type="text" id="bobot_{{ $val->id }}" name="bobot" class="form-control text-center" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td class="text-center">
-                                  {{ $val->target }}
+                                  <input type="text" id="target_{{ $val->id }}" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td class="text-center">
-                                  {{ $val->realisasi }}
+                                  <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td class="text-center">
-                                  {{ $val->capaian }}
+                                  <input type="text" id="capaian_{{ $val->id }}" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
                               </td>
                               <td class="text-center">
-                                  {{ $val->nilai_kinerja }}
+                                  <input type="text" id="nilai_kinerja_{{ $val->id }}" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
                               </td>
                           </tr>
                           @endforeach
