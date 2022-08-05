@@ -32,7 +32,7 @@
                         Triwulan Ke
                     </div>
                     <div class="col-6 col-md-10">
-                        : {{ $data['month'] }}
+                        : {{ numberToRomanRepresentation($data->month) }}
                     </div>
                 </div>
                 <div class="row">

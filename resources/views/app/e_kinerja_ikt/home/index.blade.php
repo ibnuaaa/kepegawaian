@@ -55,7 +55,7 @@
                 <p>{{ $number }}</p>
             </td>
             <td class="v-align-middle ">
-                <p>{{ $item->month }}</p>
+                <p>{{ numberToRomanRepresentation($item->month) }}</p>
             </td>
             <td class="v-align-middle ">
                 <p>{{ $item->year }}</p>

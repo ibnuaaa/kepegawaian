@@ -33,7 +33,7 @@
                         <select class="form-control" name="month" disabled>
                             @foreach(listMonth() as $key => $val)
                                 @if ($val)
-                                    <option>{{$data['month']}}</option>
+                                    <option>{{numberToRomanRepresentation($data->month)}}</option>
                                 @endif
                             @endforeach
                         </select>

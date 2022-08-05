@@ -29,7 +29,7 @@
                         <select class="form-control" name="month">
                             <option>-= Pilih =-</option>
                             @foreach([1,2,3,4] as $key => $val)
-                                @if($val)<option value="{{(int)$key}}">{{$val}}</option>@endif
+                                @if($val)<option value="{{(int)$key}}">{{ numberToRomanRepresentation($val)}}</option>@endif
                             @endforeach
                         </select>
                     </div>
