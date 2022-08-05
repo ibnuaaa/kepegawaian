@@ -59,7 +59,7 @@ class EKinerjaIktController extends Controller
             'options' => $options,
             'heads' => [
                 (object)['name' => 'No', 'label' => 'No'],
-                (object)['name' => 'month', 'label' => 'Bulan'],
+                (object)['name' => 'month', 'label' => 'Triwulan Ke'],
                 (object)['name' => 'year', 'label' => 'Tahun'],
                 (object)['name' => 'created_at', 'label' => 'Terbuat Pada'],
                 (object)['name' => 'action', 'label' => 'Aksi']

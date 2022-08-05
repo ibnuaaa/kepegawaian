@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'IKI')
+@section('title', 'IKT')
 @section('bodyClass', 'fixed-header menu-pin menu-behind')
 
 @section('content')
@@ -11,8 +11,8 @@
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="/e_kinerja_ikt">Iki</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Buat Iki</li>
+            <li class="breadcrumb-item"><a href="/e_kinerja_ikt">IKT</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Buat IKT</li>
         </ol>
     </div>
 </div>
