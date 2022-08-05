@@ -56,6 +56,7 @@ $(document).ready(function() {
     $('#saveAction').click(function() {
         editUserForm.validate().then(function(status) {
             if (status === 'Valid') {
+                const code = $('input[name="code"]')
                 const name = $('input[name="name"]')
                 const parent_id = $('select[name="parent_id"]')
                 const perspektif_id = $('select[name="perspektif_id"]')
@@ -64,7 +65,6 @@ $(document).ready(function() {
                     name: name.val(),
                     parent_id: parent_id.val(),
                     unit_kerja_id: g_unit_kerja_id,
-                    perspektif_id: perspektif_id.val(),
                     code: code.val(),
                 }
 

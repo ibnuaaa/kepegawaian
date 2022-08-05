@@ -1563,7 +1563,7 @@ if ( ! function_exists('treeChildIndikatorKinerjaModal'))
           if (!empty($data)) {
               foreach ($data as $key => $item) {
 
-                  $num = $key + 1;
+                  $num = $item->code;
 
                   $html .= '
                     <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" class="td-' . $item->status . '">
