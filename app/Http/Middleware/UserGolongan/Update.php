@@ -19,6 +19,8 @@ class Update extends BaseMiddleware
           if ($this->_Request->input('golongan_id')) $this->Model->UserGolongan->golongan_id = $this->_Request->input('golongan_id');
           if ($this->_Request->input('dari_tahun')) $this->Model->UserGolongan->dari_tahun = $this->_Request->input('dari_tahun');
           if ($this->_Request->input('sampai_tahun')) $this->Model->UserGolongan->sampai_tahun = $this->_Request->input('sampai_tahun');
+          if ($this->_Request->input('dari_bulan')) $this->Model->UserGolongan->dari_bulan = $this->_Request->input('dari_bulan');
+          if ($this->_Request->input('sampai_bulan')) $this->Model->UserGolongan->sampai_bulan = $this->_Request->input('sampai_bulan');
           if ($this->_Request->input('tmt')) $this->Model->UserGolongan->tmt = $this->_Request->input('tmt');
         }
     }

@@ -1340,16 +1340,29 @@ if ( ! function_exists('treeChildUnitKerja'))
 
                 if (!empty($item->users)) {
                   foreach ($item->users as $key => $user) {
-                      $html_user = $html_user  .($key > 0 ? '<br/>' : ''). ($user ? $user->name : '');
+
+                      $nama_jabatan = '';
+                      $color = '';
+                      if (!empty($user->jabatan->name)) {
+                        $nama_jabatan = '<br>('.$user->jabatan->name.')';
+                        if ($user->jabatan->name == 'Staff') {
+                            $color = '#00f';
+                        } else {
+                            $color = '#f00';
+                        }
+
+                      }
+
+                      $html_user = $html_user  .($key > 0 ? '<br/>' : ''). ($user ? $user->name  . "<a style='color:$color;'>" . $nama_jabatan."</a>" : '');
                   }
                 }
 
                 $html .= '
                   <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '">
                       <td style="height: 10px !important;">
-                          ' . $item->name . '
+                        ' . $item->name . '
                       </td>
-                      <td>
+                      <td class="notree">
                         ' . $html_user . '
                       </td>
                       <td>

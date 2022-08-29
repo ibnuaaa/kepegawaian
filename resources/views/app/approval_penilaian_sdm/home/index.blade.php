@@ -51,7 +51,7 @@
             </td>
             <td class="v-align-middle ">
               <p>{{ $item->user->name }}<br>
-              <i style="font-size: 10px;">{{ $item->user->jabatan->name }}</i>
+              <i style="font-size: 10px;">{{ !empty($item->user->jabatan->name) ? $item->user->jabatan->name : '' }}</i>
               </p>
             </td>
             <td class="v-align-middle ">

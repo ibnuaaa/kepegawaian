@@ -232,7 +232,7 @@ class PenilaianPrestasiKerjaController extends Controller
           $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
                             //   ->where('unit_kerja_id', $UnitKerjaParent->parent_id)
                               ->where('take', 100000)
-                              ->whereIn('tipe_indikator', 'program')
+                            //   ->whereIn('tipe_indikator', 'program')
                               ->get();
 
           $indikator_kerja_ids = [];

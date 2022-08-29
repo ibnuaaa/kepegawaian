@@ -240,6 +240,8 @@ class UserRequestController extends Controller
                 $UserGolonganRequest->sampai_tahun = $value->sampai_tahun;
                 $UserGolonganRequest->tmt = $value->tmt;
                 $UserGolonganRequest->save();
+
+                $this->CopyDocumentToRequest('perjanjian_kerja', $UserGolonganRequest, $value);
             }
 
             // $UserJabatanRequest = UserJabatanRequest::where('user_id', MyAccount()->id)->delete();
@@ -428,8 +430,12 @@ class UserRequestController extends Controller
                   $UserGolongan->golongan_id = $value->golongan_id;
                   $UserGolongan->dari_tahun = $value->dari_tahun;
                   $UserGolongan->sampai_tahun = $value->sampai_tahun;
+                  $UserGolongan->dari_bulan = $value->dari_bulan;
+                  $UserGolongan->sampai_bulan = $value->sampai_bulan;
                   $UserGolongan->tmt = $value->tmt;
                   $UserGolongan->save();
+
+                  $this->updateDocumentAfterApprove('perjanjian_kerja', $UserGolongan->id, $value);
 
 
               }

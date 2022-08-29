@@ -23,4 +23,11 @@ class UserGolonganRequest extends Model
         return $this->hasOne(UserGolongan::class, 'id', 'user_golongan_id');
     }
 
+    public function foto_perjanjian_kerja()
+    {
+        return $this->hasMany(Document::class, 'object_id', 'id')
+                    ->where('object', 'foto_perjanjian_kerja_request')
+                    ->with('storage');
+    }
+
 }

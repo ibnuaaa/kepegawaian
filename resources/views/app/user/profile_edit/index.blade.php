@@ -84,7 +84,7 @@ if ($menu == 'sdm') {
                                 <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/pelatihan/' . $id : '#tab-pelatihan' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'pelatihan' ? 'class=active' : '' }}>Riwayat Pelatihan</a></li>
                                 <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/keluarga/' . $id : '#tab-keluarga' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'keluarga' ? 'class=active' : '' }}>Keluarga</a></li>
                                 <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/jabatan/' . $id : '#tab-jabatan' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'jabatan' ? 'class=active' : '' }}>Riwayat Jabatan</a></li>
-                                <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/golongan/' . $id : '#tab-golongan' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'golongan' ? 'class=active' : '' }}>Riwayat Golongan</a></li>
+                                <li><a href="{{ ($page == 'profile' || $page == 'admin_update_profile' )? '/profile/golongan/' . $id : '#tab-golongan' }}" {!! ($page == 'profile' || $page == 'admin_update_profile' )? '' : 'data-bs-toggle="tab"' !!}  {{ $tab == 'golongan' ? 'class=active' : '' }}>Riwayat Golongan  / Perjanjian Kerja</a></li>
                             </ul>
                         </div>
                     </div>
@@ -1287,14 +1287,19 @@ if ($menu == 'sdm') {
                                                 <th style="min-width: 200px;">
                                                     Nama
                                                 </th>
-                                                <th style="min-width: 200px;">
-                                                    Dari Tahun
+                                                <th style="min-width: 300px;" colspan="2">
+                                                    Dari Bulan - Tahun
                                                 </th>
-                                                <th style="min-width: 200px;">
-                                                    Sampai Tahun
+                                                <th style="min-width: 300px;" colspan="2">
+                                                    Sampai Bulan - Tahun
                                                 </th>
-                                                <th style="min-width: 200px;">
+                                                 <th style="min-width: 200px;">
                                                     TMT
+                                                </th>
+                                                <th style="min-width: 200px;text-align:center;">
+                                                    Upload Surat Perjanjian Kerja
+                                                    <br>
+                                                    (PDF)
                                                 </th>
                                                 <th style="min-width: 200px;">
                                                     Aksi
@@ -1316,14 +1321,52 @@ if ($menu == 'sdm') {
                                                     ])
                                                     @endcomponent
                                                 </td>
+                                                <td class="{{ $val->user_golongan_id && $val->user_golongan && $val->dari_bulan != $val->user_golongan->dari_bulan ? 'bg-changed' : '' }}">
+                                                    <select class="form-control form-select" name="dari_bulan" onChange="saveGolongan(this)" data-id="{{ $val->id }}">
+                                                        <option>-= Bulan =-</option>
+                                                        @foreach(listMonth() as $key2 => $val2)
+                                                            @if ($val2)
+                                                                <option value="{{$key2}}" {{$val->dari_bulan == $key2 ? 'selected' : '' }}>{{$val2}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </td>
                                                 <td class="{{ $val->user_golongan_id && $val->user_golongan && $val->dari_tahun != $val->user_golongan->dari_tahun ? 'bg-changed' : '' }}">
                                                     <input name="dari_tahun" value="{{ $val->dari_tahun }}" data-id="{{ $val->id }}" onChange="saveGolongan(this)" class="form-control " type="text" required>
+                                                </td>
+                                                <td class="{{ $val->user_golongan_id && $val->user_golongan && $val->sampai_bulan != $val->user_golongan->sampai_bulan ? 'bg-changed' : '' }}">
+                                                    <select class="form-control form-select" name="sampai_bulan" onChange="saveGolongan(this)" data-id="{{ $val->id }}">
+                                                        <option>-= Bulan =-</option>
+                                                        @foreach(listMonth() as $key2 => $val2)
+                                                            @if ($val2)
+                                                                <option value="{{$key2}}" {{$val->sampai_bulan == $key2 ? 'selected' : '' }}>{{$val2}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td class="{{ $val->user_golongan_id && $val->user_golongan && $val->sampai_tahun != $val->user_golongan->sampai_tahun ? 'bg-changed' : '' }}">
                                                     <input name="sampai_tahun" value="{{ $val->sampai_tahun }}" data-id="{{ $val->id }}" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                 </td>
                                                 <td class="{{ $val->user_golongan_id && $val->user_golongan && $val->tmt != $val->user_golongan->tmt ? 'bg-changed' : '' }}">
                                                     <input name="tmt" value="{{ $val->tmt }}" data-id="{{ $val->id }}" id="myDatepicker" onChange="saveGolongan(this)" class="form-control " type="text" required>
+                                                </td>
+                                                
+                                                <td>                                                
+                                                    @if(($page == 'profile'  || $page == 'admin_update_profile'))
+                                                    <input type="file" onchange="prepareUpload(this, 'foto_perjanjian_kerja{{ !$id ? '_request' : '' }}', '{{ $val->id }}', false, ['pdf']);" multiple>
+                                                    @endif
+                                                    <div style="clear: both;"></div>
+                                                    <div class="img-preview mt-2" id="img-preview">
+
+                                                        @if (!empty($val->foto_perjanjian_kerja))
+                                                        @foreach ($val->foto_perjanjian_kerja as $key => $val2)
+                                                        <a href="/api/preview/{{$val2->storage->key}}">
+                                                            <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
+                                                        </a>
+                                                        @endforeach
+                                                        @endif
+                                                        <div style="clear: both;"></div>
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     @if(($page == 'profile'  || $page == 'admin_update_profile'))

@@ -84,16 +84,14 @@
                             <li><a href="#tab-pelatihan" data-bs-toggle="tab">Pelatihan</a></li>
                             <li><a href="#tab-keluarga" data-bs-toggle="tab">Keluarga</a></li>
                             <li><a href="#tab-jabatan" data-bs-toggle="tab">Riwayat Jabatan</a></li>
-                            <li><a href="#tab-golongan" data-bs-toggle="tab">Riwayat Golongan</a></li>
+                            <li><a href="#tab-golongan" data-bs-toggle="tab">Riwayat Golongan / Perjanjian Kerja</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="panel-body tabs-menu-body">
                     <div class="tab-content">
                         <div class="tab-pane {{ $tab == 'personal' ? 'active' : '' }}" id="tab-personal">
-
                             <h2>Personal</h2>
-
                             <div class="row mb-4">
                                 <label class="col-md-2 form-label">Foto Profil</label>
                                 <div class="col-md-9">
@@ -968,13 +966,16 @@
                                                 Nama
                                             </th>
                                             <th style="min-width: 200px;">
-                                                Dari Tahun
+                                                Dari Bulan-Tahun
                                             </th>
                                             <th style="min-width: 200px;">
-                                                Sampai Tahun
+                                                Sampai Bulan-Tahun
                                             </th>
                                             <th style="min-width: 200px;">
                                                 TMT
+                                            </th>
+                                            <th style="min-width: 200px;">
+                                                Surat Perjanjian Kerja
                                             </th>
                                         </tr>
                                         @foreach ($data->user_golongan as $key => $val)
@@ -988,13 +989,22 @@
                                                 {{!empty($val->golongan->golongan) ? $val->golongan->golongan : ''}}
                                             </td>
                                             <td>
-                                                {{ $val->dari_tahun }}
+                                                {{ monthIndo($val->dari_bulan) }} {{ $val->dari_tahun }}
                                             </td>
                                             <td>
-                                                {{ $val->sampai_tahun }}
+                                                {{ monthIndo($val->sampai_bulan) }} {{ $val->sampai_tahun }}
                                             </td>
                                             <td>
                                                 {{ $val->tmt }}
+                                            </td>
+                                            <td>
+                                                @if (!empty($val->foto_perjanjian_kerja))
+                                                @foreach ($val->foto_perjanjian_kerja as $key => $val2)
+                                                <a href="/api/preview/{{$val2->storage->key}}">
+                                                    <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
+                                                </a>
+                                                @endforeach
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach

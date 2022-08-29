@@ -479,6 +479,10 @@
             display: none;
         }
 
+        #basic .notree span {
+            display: none;
+        }
+
         .table-condensed-custom td {
             padding-top: 3px !important;
             padding-bottom: 3px !important;

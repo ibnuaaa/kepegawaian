@@ -104,7 +104,7 @@ class UserComplete extends Model
 
     public function user_golongan()
     {
-        return $this->hasMany(UserGolongan::class, 'user_id', 'user.id')->with('golongan');
+        return $this->hasMany(UserGolongan::class, 'user_id', 'user.id')->with('golongan')->with('foto_perjanjian_kerja');
     }
 
     public function foto_ktp()

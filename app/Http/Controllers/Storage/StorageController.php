@@ -216,7 +216,7 @@ class StorageController extends Controller
         if (in_array($Object, [
           'foto_profile', 'foto_ktp', 'foto_npwp', 'foto_ijazah', 'foto_sertifikat','foto_kk','foto_akta_nikah','foto_bpjs',
           'foto_profile_request', 'foto_ktp_request', 'foto_npwp_request', 'foto_ijazah_request', 'foto_sertifikat_request','foto_kk_request','foto_akta_nikah_request','foto_bpjs_request',
-          'document_unit', 'foto_sip', 'foto_sip_request','foto_transkrip_nilai','foto_transkrip_nilai_request','foto_penilaian_prestasi_kerja'
+          'document_unit', 'foto_sip', 'foto_sip_request','foto_transkrip_nilai','foto_transkrip_nilai_request','foto_penilaian_prestasi_kerja', 'foto_perjanjian_kerja', 'foto_perjanjian_kerja_request'
           ])) {
             Document::where('object', $Object)->where('object_id', $ObjectId)->delete();
         }
