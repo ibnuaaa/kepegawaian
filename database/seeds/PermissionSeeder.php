@@ -203,6 +203,12 @@ class PermissionSeeder extends Seeder
                 'name' => 'mata_anggaran',
                 'label' => 'mata_anggaran',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 33,
+                'name' => 'e_monev',
+                'label' => 'e_monev',
+                'created_at' => Carbon::now()
             ]
         ])->keyBy($this->key);
     }

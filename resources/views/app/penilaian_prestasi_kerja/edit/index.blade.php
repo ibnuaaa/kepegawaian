@@ -408,20 +408,22 @@
                               <td>
                                   {{!empty($val->indikator_tetap->name) ? $val->indikator_tetap->name : ''}}
                               </td>
-                              <td class="text-center">
-                                  {{ $val->bobot }}
+                              <td align="center">
+                                  <input type="text" id="bobot_{{ $val->id }}" name="bobot" class="form-control text-center" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              </td>
+                              <td align="center">
+                                  <input type="text" id="target_{{ $val->id }}" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              </td>
+                              <td align="center">
+                                  <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                              </td>
+                              <td align="center">
+                                  <input type="text" id="capaian_{{ $val->id }}" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
+                              </td>
+                              <td align="center">
+                                  <input type="text" id="nilai_kinerja_{{ $val->id }}" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
                               </td>
                               <td class="text-center">
-                                  {{ $val->target }}
-                              </td>
-                              <td class="text-center">
-                                  {{ $val->realisasi }}
-                              </td>
-                              <td class="text-center">
-                                  {{ $val->capaian }}
-                              </td>
-                              <td class="text-center">
-                                  {{ $val->nilai_kinerja }}
                               </td>
                           </tr>
                           @endforeach
@@ -552,6 +554,7 @@
             </div>
 
 
+
             <div class="card-body">
                 <h4>Upload Penilaian Prestasi Kerja yang telah ditandatangani (PDF)</h4>
                 <input type="file" onchange="prepareUpload(this, 'foto_penilaian_prestasi_kerja', '{{ $data->id }}', false, ['pdf']);" multiple>
@@ -567,6 +570,18 @@
                     <div style="clear: both;"></div>
                 </div>
                 <div style="clear: both;"></div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card overflow-scrolln">
+            <div class="card-body text-center">
+                <a class="btn btn-primary btn-lg"><i class="fa fa-telegram"></i> Kirim</a>
             </div>
         </div>
     </div>
