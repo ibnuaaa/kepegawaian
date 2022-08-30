@@ -21,7 +21,7 @@ class PenilaianPrestasiKerjaItem extends Model
 
     public function indikator_tetap()
     {
-        return $this->hasOne(IndikatorTetap::class, 'id', 'indikator_tetap_id');
+        return $this->hasOne(IndikatorTetap::class, 'id', 'indikator_tetap_id')->with('indikator_tetap_dasar_nilai');
     }
 
 }

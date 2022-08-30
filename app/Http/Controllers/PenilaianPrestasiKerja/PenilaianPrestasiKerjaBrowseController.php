@@ -126,7 +126,8 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
             "$this->PenilaianPrestasiKerjaTable.created_at as penilaian_prestasi_kerja.created_at"
         )->with('user')
         ->with('penilaian_prestasi_kerja_item')
-        ->with('foto_penilaian_prestasi_kerja');
+        ->with('foto_penilaian_prestasi_kerja')
+        ->with('penilaian_kualitas');
 
 
 

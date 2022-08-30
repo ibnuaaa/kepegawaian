@@ -209,6 +209,7 @@ class PenilaianPrestasiKerjaController extends Controller
 
     public function Edit(Request $request, $id)
     {
+
         $PenilaianPrestasiKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
             ->equal('id', $id)
             ->get('first');
@@ -226,7 +227,7 @@ class PenilaianPrestasiKerjaController extends Controller
         $IndikatorKinerjaTree = IndikatorKinerja::tree();
 
         if (!empty($Jabatan['records']->group_jabatan) && $Jabatan['records']->group_jabatan == 4) {
-            
+
           $UnitKerjaParent = UnitKerja::where('id', MyAccount()->unit_kerja_id)->first();
 
           $IndikatorKerja = IndikatorKinerjaBrowseController::FetchBrowse($request)
@@ -296,6 +297,8 @@ class PenilaianPrestasiKerjaController extends Controller
             $tipe_indikator_ditampilkan = ['iku','program', 'kegiatan'];
         }
 
+        // cetak($PenilaianPrestasiKerja['records']->toArray());
+        // die();
 
         return view('app.penilaian_prestasi_kerja.edit.index', [
             'selected' => [],
@@ -400,7 +403,7 @@ class PenilaianPrestasiKerjaController extends Controller
           })->where('unit_kerja_id', $unit_kerja_id)->with('jabatan')->first();
         } else {
             // ATASAN KEPALA
-            // echo 
+            // echo
             $jabatan_parent_id = $PenilaianPrestasiKerja['records']->user->jabatan->parent_id;
             // cetak($PenilaianPrestasiKerja['records']->user->jabatan->toArray());
             // die();
@@ -414,7 +417,7 @@ class PenilaianPrestasiKerjaController extends Controller
         if (!empty($user_penilai->jabatan->parent_id)) {
             $user_atasan_penilai = User::where('jabatan_id', $user_penilai->jabatan->parent_id)->first();
         }
-        
+
 
         // get document group_jabatan
         $show_iku = false;
@@ -533,7 +536,7 @@ class PenilaianPrestasiKerjaController extends Controller
           })->where('unit_kerja_id', $unit_kerja_id)->with('jabatan')->first();
         } else {
             // ATASAN KEPALA
-            // echo 
+            // echo
             $jabatan_parent_id = $PenilaianPrestasiKerja['records']->user->jabatan->parent_id;
             // cetak($PenilaianPrestasiKerja['records']->user->jabatan->toArray());
             // die();
@@ -547,7 +550,7 @@ class PenilaianPrestasiKerjaController extends Controller
         if (!empty($user_penilai->jabatan->parent_id)) {
             $user_atasan_penilai = User::where('jabatan_id', $user_penilai->jabatan->parent_id)->first();
         }
-        
+
 
         // get document group_jabatan
         $show_iku = false;
