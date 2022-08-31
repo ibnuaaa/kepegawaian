@@ -52,7 +52,9 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
             }
 
             if (isset($request->ArrQuery->user_id)) {
-                $query->where("$this->PenilaianPrestasiKerjaTable.user_id", $request->ArrQuery->user_id);
+                if ($request->ArrQuery->user_id == 'my') {
+                  $query->where("$this->PenilaianPrestasiKerjaTable.user_id", Auth::user()->id);
+                } else $query->where("$this->PenilaianPrestasiKerjaTable.user_id", $request->ArrQuery->user_id);
             }
 
             if (isset($request->ArrQuery->bulan)) {
