@@ -138,6 +138,9 @@
     <?php $total_nilai_perilaku = 0; ?>
     @foreach ($data->penilaian_perilaku_kerja as $key => $val)
     <?php $total_nilai_perilaku += $val->nilai_kinerja; ?>
+    @if ($data->jabatan->is_staff && !empty($val->indikator_tetap->name) && $val->indikator_tetap->name == 'Kepemimpinan')
+
+    @else
     <tr>
         <td class="text-center">
             {{$key + 1}}
@@ -164,6 +167,7 @@
             {{ $val->nilai_kinerja }}
         </td>
     </tr>
+    @endif
     @endforeach
 
     <tr>
