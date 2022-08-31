@@ -55,7 +55,13 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
                 $query->where("$this->PenilaianPrestasiKerjaTable.user_id", $request->ArrQuery->user_id);
             }
 
+            if (isset($request->ArrQuery->bulan)) {
+                $query->where("$this->PenilaianPrestasiKerjaTable.bulan", $request->ArrQuery->bulan);
+            }
 
+            if (isset($request->ArrQuery->tahun)) {
+                $query->where("$this->PenilaianPrestasiKerjaTable.tahun", $request->ArrQuery->tahun);
+            }
 
             if (isset($request->ArrQuery->status_approval_sdm)) {
                 $query->where("$this->PenilaianPrestasiKerjaTable.status_approval_sdm", $request->ArrQuery->status_approval_sdm);

@@ -73,6 +73,9 @@ class LogActivity extends BaseMiddleware
         $Log->ip_client = $request->ip();
         $Log->browser = !empty($request->header('User-Agent')) ? $request->header('User-Agent') : '';
         $Log->data = json_encode($datas);
+        if ($activity[1] == 'View') {
+          $Log->data = '';
+        }
         $Log->uri = $request_uri;
         $Log->method = $_SERVER['REQUEST_METHOD'];
         $Log->primary_id = $id;
@@ -80,7 +83,11 @@ class LogActivity extends BaseMiddleware
         if ($Log->modul == 'Storage' && $Log->activity=='Fetch') {
 
         } else {
-          $Log->response = $response;
+          if ($activity[1] == 'View') {
+            $Log->response = '';
+          } else {
+            $Log->response = $response;
+          }
         }
         $Log->save();
 
