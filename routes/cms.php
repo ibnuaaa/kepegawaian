@@ -103,6 +103,9 @@ $router->get('/penilaian_prestasi_kerja/pdf_iku/{id}', 'CMS\PenilaianPrestasiKer
 $router->get('/penilaian_prestasi_kerja/{id}', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Detail');
 $router->get('/penilaian_prestasi_kerja/logbook/{id}', 'CMS\PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Logbook');
 
+$router->get('/penilaian_prestasi_kerja_approval', 'CMS\PenilaianPrestasiKerjaApproval\PenilaianPrestasiKerjaApprovalController@Home');
+$router->get('/penilaian_prestasi_kerja_approval/{id}', 'CMS\PenilaianPrestasiKerjaApproval\PenilaianPrestasiKerjaApprovalController@Detail');
+
 $router->get('/penilaian_perilaku_kerja', 'CMS\PenilaianPerilakuKerja\PenilaianPerilakuKerjaController@Home');
 $router->get('/penilaian_perilaku_kerja/edit/{id}', 'CMS\PenilaianPerilakuKerja\PenilaianPerilakuKerjaController@Edit');
 $router->get('/penilaian_perilaku_kerja/{id}', 'CMS\PenilaianPerilakuKerja\PenilaianPerilakuKerjaController@Detail');

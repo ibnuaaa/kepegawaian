@@ -44,6 +44,9 @@
                               @if (getPermissions('penilaian_perilaku_kerja')['checked'])
                               <li><a href="{!! url('/penilaian_perilaku_kerja'); !!}" class="slide-item"> Penilaian Perilaku Kerja</a></li>
                               @endif
+                              @if (getPermissions('penilaian_prestasi_kerja_approval')['checked'])
+                              <li><a href="{!! url('/penilaian_prestasi_kerja_approval'); !!}" class="slide-item"> Approval Presatsi Kerja</a></li>
+                              @endif
                               @if (getPermissions('report_skp')['checked'])
                               <li><a href="{!! url('/report_skp'); !!}" class="slide-item"> Rekap SKP</a></li>
                               @endif

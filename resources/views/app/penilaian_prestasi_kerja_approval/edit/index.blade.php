@@ -11,7 +11,7 @@
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/penilaian_prestasi_kerja">Penilaian</a></li>
+            <li class="breadcrumb-item"><a href="/penilaian_prestasi_kerja_approval">Penilaian</a></li>
             <li class="breadcrumb-item active" aria-current="page">Edit </li>
         </ol>
     </div>
@@ -215,7 +215,7 @@
                           </tr>
                           <?php $total_nilai_kinerja = 0;
                           ?>
-                          @foreach ($data->penilaian_prestasi_kerja_item as $key => $val)
+                          @foreach ($data->penilaian_prestasi_kerja_approval_item as $key => $val)
                           <?php $total_nilai_kinerja += $val->nilai_kinerja; ?>
                           <tr>
                               <td class="text-center">
@@ -589,7 +589,7 @@
                 </div>
                 @if (!empty($jabatan->is_staff) && $jabatan->is_staff == 1)
                 @else
-                  <a href="/penilaian_prestasi_kerja/id/{{$data['id']}}" class="btn btn-primary btn-sm pull-right" >
+                  <a href="/penilaian_prestasi_kerja_approval/id/{{$data['id']}}" class="btn btn-primary btn-sm pull-right" >
                       Buat Progrem & Kegiatan
                       <i class="fa fa-angle-right"></i>
                   </a>
@@ -599,12 +599,12 @@
 
 
             <div class="card-body">
-                <h4>Upload Penilaian Prestasi Kerja yang telah ditandatangani (PDF)</h4>
-                <input type="file" onchange="prepareUpload(this, 'foto_penilaian_prestasi_kerja', '{{ $data->id }}', false, ['pdf']);" multiple>
+                <h4>Upload Approval Penilaian Prestasi Kerja yang telah ditandatangani (PDF)</h4>
+                <input type="file" onchange="prepareUpload(this, 'foto_penilaian_prestasi_kerja_approval', '{{ $data->id }}', false, ['pdf']);" multiple>
                 <div style="clear: both;"></div>
                 <div class="img-preview mt-2" id="img-preview">
-                    @if (!empty($data->foto_penilaian_prestasi_kerja))
-                    @foreach ($data->foto_penilaian_prestasi_kerja as $key => $val2)
+                    @if (!empty($data->foto_penilaian_prestasi_kerja_approval))
+                    @foreach ($data->foto_penilaian_prestasi_kerja_approval as $key => $val2)
                     <a href="/api/preview/{{$val2->storage->key}}">
                         <i class="fa fa-file-pdf-o" style="font-size: 50px;"></i>
                     </a>
@@ -624,7 +624,7 @@
     <div class="col-12">
         <div class="card overflow-scrolln">
             <div class="card-body text-center">
-                @if (empty($data->penilaian_prestasi_kerja_my_approval))
+                @if (empty($data->penilaian_prestasi_kerja_approval_my_approval))
                   <a class="btn btn-primary btn-lg" onClick="approve()"><i class="fa fa-telegram"></i> Kirim</a>
                 @endif
             </div>
@@ -673,5 +673,5 @@
 @endsection
 
 @section('formValidationScript')
-@include('app.penilaian_prestasi_kerja.edit.scripts.form')
+@include('app.penilaian_prestasi_kerja_approval.edit.scripts.form')
 @endsection

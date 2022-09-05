@@ -266,6 +266,13 @@ $router->post($prefix.'/penilaian_prestasi_kerja', ['uses' => 'PenilaianPrestasi
 $router->put($prefix.'/penilaian_prestasi_kerja/{id}', ['uses' => 'PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Update', 'middleware' => ['LogActivity:PenilaianPrestasiKerja.Update','PenilaianPrestasiKerja.Update']]);
 $router->delete($prefix.'/penilaian_prestasi_kerja/{id}', ['uses' => 'PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Delete', 'middleware' => ['LogActivity:PenilaianPrestasiKerja.Delete','PenilaianPrestasiKerja.Delete']]);
 
+// penilaian_prestasi_kerja_approval
+$router->get($prefix.'/penilaian_prestasi_kerja_approval', ['uses' => 'PenilaianPrestasiKerjaApproval\PenilaianPrestasiKerjaApprovalBrowseController@get', 'middleware' => ['ArrQuery']]);
+$router->get($prefix.'/penilaian_prestasi_kerja_approval/{query:.+}', ['uses' => 'PenilaianPrestasiKerjaApproval\PenilaianPrestasiKerjaApprovalBrowseController@get', 'middleware' => ['ArrQuery']]);
+$router->post($prefix.'/penilaian_prestasi_kerja_approval/approve', ['uses' => 'PenilaianPrestasiKerjaApproval\PenilaianPrestasiKerjaApprovalController@Approve', 'middleware' => ['LogActivity:PenilaianPrestasiKerjaApproval.Approve','PenilaianPrestasiKerjaApproval.Approve']]);
+$router->delete($prefix.'/penilaian_prestasi_kerja_approval/{id}', ['uses' => 'PenilaianPrestasiKerjaApproval\PenilaianPrestasiKerjaApprovalController@Delete', 'middleware' => ['LogActivity:PenilaianPrestasiKerjaApproval.Delete','PenilaianPrestasiKerjaApproval.Delete']]);
+
+
 // penilaian_perilaku_kerja
 $router->get($prefix.'/penilaian_perilaku_kerja', ['uses' => 'PenilaianPerilakuKerja\PenilaianPerilakuKerjaBrowseController@get', 'middleware' => ['LogActivity:PenilaianPerilakuKerja.View','ArrQuery']]);
 $router->get($prefix.'/penilaian_perilaku_kerja/{query:.+}', ['uses' => 'PenilaianPerilakuKerja\PenilaianPerilakuKerjaBrowseController@get', 'middleware' => ['PenilaianPerilakuKerja:PenilaianPerilakuKerja.View','ArrQuery']]);

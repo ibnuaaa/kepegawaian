@@ -45,7 +45,6 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
         }
 
 
-
         $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where(function ($query) use($request) {
             if (isset($request->ArrQuery->id)) {
                 $query->where("$this->PenilaianPrestasiKerjaTable.id", $request->ArrQuery->id);
@@ -104,6 +103,7 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
                 }
             }
 
+
             if (!empty($request->get('q'))) {
                 $query->where(function ($query) use($request) {
                     $query->where("$this->PenilaianPrestasiKerjaTable.name", 'like', '%'.$request->get('name').'%');
@@ -134,6 +134,8 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
             "$this->PenilaianPrestasiKerjaTable.created_at as penilaian_prestasi_kerja.created_at"
         )->with('user')
         ->with('penilaian_prestasi_kerja_item')
+        ->with('penilaian_prestasi_kerja_approval')
+        ->with('penilaian_prestasi_kerja_my_approval')
         ->with('foto_penilaian_prestasi_kerja')
         ->with('penilaian_kualitas');
 

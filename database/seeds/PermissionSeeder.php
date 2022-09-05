@@ -209,6 +209,12 @@ class PermissionSeeder extends Seeder
                 'name' => 'e_monev',
                 'label' => 'e_monev',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 34,
+                'name' => 'penilaian_prestasi_kerja_approval',
+                'label' => 'penilaian_prestasi_kerja_approval',
+                'created_at' => Carbon::now()
             ]
         ])->keyBy($this->key);
     }

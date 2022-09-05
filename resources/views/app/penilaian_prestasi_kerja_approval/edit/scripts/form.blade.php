@@ -11,7 +11,7 @@ $(document).ready(function() {
             name: {
                 validators: {
                     notEmpty: {
-                        message: 'The penilaian_prestasi_kerjaname is required'
+                        message: 'The penilaian_prestasi_kerja_approvalname is required'
                     }
                 }
             }
@@ -32,8 +32,8 @@ $(document).ready(function() {
                     name: name.val(),
                 }
 
-                axios.put('/penilaian_prestasi_kerja/{{$data['id']}}', data).then((response) => {
-                    window.location = '{{ url('/penilaian_prestasi_kerja') }}';
+                axios.put('/penilaian_prestasi_kerja_approval/{{$data['id']}}', data).then((response) => {
+                    window.location = '{{ url('/penilaian_prestasi_kerja_approval') }}';
                 }).catch((error) => {
                     if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
                         swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
@@ -57,7 +57,7 @@ function openModalIndikatorKinerja() {
 function selectIndikatorKinerja(e, id) {
 
     var data = {
-        penilaian_prestasi_kerja_id: '{{ $data->id }}',
+        penilaian_prestasi_kerja_approval_id: '{{ $data->id }}',
         indikator_kinerja_id: id,
         type: 'skp'
     }
@@ -73,7 +73,7 @@ function selectIndikatorKinerja(e, id) {
 
     $(e).removeClass('btn-success');
     $(e).addClass('btn-warning');
-    axios.post('/penilaian_prestasi_kerja_item', data).then((response) => {
+    axios.post('/penilaian_prestasi_kerja_approval_item', data).then((response) => {
 
         var button_pilih = ''
         if (response.data.data.id) {
@@ -113,7 +113,7 @@ function removeFromPopup(e, id, indikator_kinerja_id, name) {
       $(e).removeClass('btn-success');
       $(e).addClass('btn-warning');
 
-      axios.delete('/penilaian_prestasi_kerja_item/'+id).then((response) => {
+      axios.delete('/penilaian_prestasi_kerja_approval_item/'+id).then((response) => {
           // const { data } = response.data
           //
           // $(e).removeClass('btn-warning');
@@ -141,13 +141,13 @@ function removeFromPopup(e, id, indikator_kinerja_id, name) {
 function saveNewIndikatorTambahan(e, id) {
 
     var data = {
-        penilaian_prestasi_kerja_id: '{{ $data->id }}',
+        penilaian_prestasi_kerja_approval_id: '{{ $data->id }}',
         indikator_kinerja_id: id,
         type: 'tambahan'
     }
 
     showLoading()
-    axios.post('/penilaian_prestasi_kerja_item', data).then((response) => {
+    axios.post('/penilaian_prestasi_kerja_approval_item', data).then((response) => {
           location.reload()
     }).catch((error) => {
         if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
@@ -173,7 +173,7 @@ function remove(id, name) {
 
     if (isConfirmed) {
       showLoading()
-      axios.delete('/penilaian_prestasi_kerja_item/'+id).then((response) => {
+      axios.delete('/penilaian_prestasi_kerja_approval_item/'+id).then((response) => {
           const { data } = response.data
           window.location.reload()
       }).catch((error) => {
@@ -196,7 +196,7 @@ function saveSKP(e) {
     data[field] = $(e).val();
 
     $(e).addClass('loadingField')
-    axios.put('/penilaian_prestasi_kerja_item/' + id, data).then((response) => {
+    axios.put('/penilaian_prestasi_kerja_approval_item/' + id, data).then((response) => {
         // location.reload()
 
         console.log(response.data.data.capaian)
@@ -222,7 +222,7 @@ function saveSKPIndikatorTetap(id, nilai) {
   $('#realisasi_' + id).html(nilai)
 
 
-  axios.put('/penilaian_prestasi_kerja_item/' + id, data).then((response) => {
+  axios.put('/penilaian_prestasi_kerja_approval_item/' + id, data).then((response) => {
 
       $('#capaian_' + id).val(response.data.data.capaian)
       $('#nilai_kinerja_' + id).val(response.data.data.nilai_kinerja)
@@ -245,9 +245,9 @@ function saveUpdate(e){
       bulan: $(e).val()
     }
 
-    axios.put('/penilaian_prestasi_kerja/' + {{ $data->id }}, data).then((response) => {
+    axios.put('/penilaian_prestasi_kerja_approval/' + {{ $data->id }}, data).then((response) => {
 
-        swal({ title: 'Sukses', text: 'Data Penilaian Prestasi Kerja Sudah ter update.', type: 'success', confirmButtonText: 'Ok' })
+        swal({ title: 'Sukses', text: 'Data Approval Penilaian Prestasi Kerja Sudah ter update.', type: 'success', confirmButtonText: 'Ok' })
 
     }).catch((error) => {
         if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
@@ -261,11 +261,11 @@ function saveUpdate(e){
 function approve(){
 
     var data = {
-      penilaian_prestasi_kerja_id: '{{ $data->id }}'
+      penilaian_prestasi_kerja_approval_id: '{{ $data->id }}'
     }
 
     showLoading()
-    axios.post('/penilaian_prestasi_kerja_approval/approve', data).then((response) => {
+    axios.post('/penilaian_prestasi_kerja_approval_approval/approve', data).then((response) => {
         location.reload()
     }).catch((error) => {
         if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
@@ -273,8 +273,6 @@ function approve(){
             hideLoading()
         }
     })
-
-    return false;
 
 }
 
