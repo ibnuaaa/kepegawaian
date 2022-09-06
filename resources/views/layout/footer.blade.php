@@ -96,7 +96,7 @@
             @endif
 
             if (getCookie('TokenType') != "" && getCookie('AccessToken')) {
-              timerSession()
+            //   timerSession()
             }
 
             $('body input').on('keyup', function() {
@@ -144,7 +144,7 @@
                 $('#modalSession').modal('show');
               }
 
-              setTimeout(timerSession, 1000);
+            //   setTimeout(timerSession, 1000);
             }
         }
 

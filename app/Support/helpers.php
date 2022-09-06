@@ -1353,7 +1353,7 @@ if ( ! function_exists('treeChildUnitKerja'))
 
                       }
 
-                      $html_user = $html_user  .($key > 0 ? '<br/>' : ''). ($user ? $user->name  . "<a style='color:$color;'>" . $nama_jabatan."</a>" : '');
+                      $html_user = $html_user  .'<a href="/profile/personal/'.$user->id.'">'.($key > 0 ? '<br/>' : ''). ($user ? $user->name  . "</a><a style='color:$color;'>" . $nama_jabatan."</a>" : '');
                   }
                 }
 
