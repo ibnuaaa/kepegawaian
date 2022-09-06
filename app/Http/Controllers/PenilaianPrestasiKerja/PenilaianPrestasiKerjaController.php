@@ -84,9 +84,9 @@ class PenilaianPrestasiKerjaController extends Controller
             $PenilaianPrestasiKerjaItem->type = $value->type;
 
             // $PenilaianPrestasiKerjaItem->realisasi = 100;
-            $PenilaianPrestasiKerjaItem->target = 100;
+            $PenilaianPrestasiKerjaItem->target = $value->target;
             // $PenilaianPrestasiKerjaItem->capaian = 1;
-            
+
 
             $PenilaianPrestasiKerjaItem->save();
 
@@ -114,7 +114,7 @@ class PenilaianPrestasiKerjaController extends Controller
             $PenilaianPrestasiKerjaItem->type = $value->type;
 
             // $PenilaianPrestasiKerjaItem->realisasi = 100;
-            $PenilaianPrestasiKerjaItem->target = 100;
+            $PenilaianPrestasiKerjaItem->target = $value->target;
             // $PenilaianPrestasiKerjaItem->capaian = 1;
 
             $PenilaianPrestasiKerjaItem->save();
