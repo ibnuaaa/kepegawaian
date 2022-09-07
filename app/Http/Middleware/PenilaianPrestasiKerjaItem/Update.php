@@ -20,13 +20,17 @@ class Update extends BaseMiddleware
             if(!empty($this->_Request->input('indikator_kinerja_text'))) $this->Model->PenilaianPrestasiKerjaItem->indikator_kinerja_text = $this->_Request->input('indikator_kinerja_text');
             if(!empty($this->_Request->input('bobot'))) $this->Model->PenilaianPrestasiKerjaItem->bobot = $this->_Request->input('bobot');
             if(!empty($this->_Request->input('target'))) $this->Model->PenilaianPrestasiKerjaItem->target = $this->_Request->input('target');
-            if(!empty($this->_Request->input('realisasi'))) $this->Model->PenilaianPrestasiKerjaItem->realisasi = $this->_Request->input('realisasi');
+              if(!empty($this->_Request->input('realisasi'))) {
+              $this->Model->PenilaianPrestasiKerjaItem->realisasi = $this->_Request->input('realisasi');
+              $this->Model->PenilaianPrestasiKerjaItem->realisasi_approved = $this->_Request->input('realisasi');
+            }
+            if(!empty($this->_Request->input('realisasi_approved'))) $this->Model->PenilaianPrestasiKerjaItem->realisasi_approved = $this->_Request->input('realisasi_approved');
 
-            if ($this->Model->PenilaianPrestasiKerjaItem->bobot && $target = $this->Model->PenilaianPrestasiKerjaItem->target && $realisasi = $this->Model->PenilaianPrestasiKerjaItem->realisasi) {
+            if ($this->Model->PenilaianPrestasiKerjaItem->bobot && $target = $this->Model->PenilaianPrestasiKerjaItem->target && ($this->Model->PenilaianPrestasiKerjaItem->realisasi || $this->Model->PenilaianPrestasiKerjaItem->realisasi_approved) ) {
 
                 $bobot = $this->Model->PenilaianPrestasiKerjaItem->bobot;
                 $target = $this->Model->PenilaianPrestasiKerjaItem->target;
-                $realisasi = $this->Model->PenilaianPrestasiKerjaItem->realisasi;
+                $realisasi = $this->Model->PenilaianPrestasiKerjaItem->realisasi_approved;
 
                 $capaian = $realisasi / $target;
                 $nilai_kinerja = $capaian * $bobot;

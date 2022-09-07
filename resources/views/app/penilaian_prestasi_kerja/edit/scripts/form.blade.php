@@ -237,6 +237,29 @@ function saveSKPIndikatorTetap(id, nilai) {
   return false;
 }
 
+function saveSKPIndikatorTetapApproved(id, nilai) {
+
+  var data = new Object;
+  data['realisasi_approved'] = nilai;
+
+  $('#realisasi_approved_' + id).html(nilai)
+
+
+  axios.put('/penilaian_prestasi_kerja_item/' + id, data).then((response) => {
+
+      $('#capaian_' + id).val(response.data.data.capaian)
+      $('#nilai_kinerja_' + id).val(response.data.data.nilai_kinerja)
+
+  }).catch((error) => {
+      if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+          swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+          hideLoading()
+      }
+  })
+
+  return false;
+}
+
 
 
 function saveUpdate(e){

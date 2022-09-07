@@ -337,21 +337,38 @@
                                   <input type="text" id="target_{{ $val->id }}" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                               </td>
                               <td align="center">
-
-                                  @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
-                                    <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  @if ($data->user_id == MyAccount()->id)
+                                      @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
+                                        <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                      @else
+                                        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                            <span id="realisasi_{{ $val->id }}">{{ $val->realisasi ? $val->realisasi : 'Nilai' }}</span> <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li class="dropdown-plus-title">
+                                                Pilih salah satu
+                                            </li>
+                                            @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
+                                            <li><a href="#" onclick="return saveSKPIndikatorTetap('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                      @endif
                                   @else
-                                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                        <span id="realisasi_{{ $val->id }}">{{ $val->realisasi ? $val->realisasi : 'Nilai' }}</span> <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li class="dropdown-plus-title">
-                                            Pilih salah satu
-                                        </li>
-                                        @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
-                                        <li><a href="#" onclick="return saveSKPIndikatorTetap('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
-                                        @endforeach
-                                    </ul>
+                                      @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
+                                        <input type="text" id="realisasi_approved_{{ $val->id }}" name="realisasi_approved" class="form-control text-center" value="{{ $val->realisasi_approved }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                      @else
+                                        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                            <span id="realisasi_approved_{{ $val->id }}">{{ $val->realisasi_approved ? $val->realisasi_approved : 'Nilai' }}</span> <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li class="dropdown-plus-title">
+                                                Pilih salah satu
+                                            </li>
+                                            @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
+                                            <li><a href="#" onclick="return saveSKPIndikatorTetapApproved('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                      @endif
                                   @endif
                               </td>
                               <td class="text-center">
@@ -443,20 +460,38 @@
                               </td>
                               <td align="center">
 
-                                @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
-                                  <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                @if ($data->user_id == MyAccount()->id)
+                                    @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
+                                      <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                    @else
+                                      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                          <span id="realisasi_{{ $val->id }}">{{ $val->realisasi ? $val->realisasi : 'Nilai' }}</span> <span class="caret"></span>
+                                      </button>
+                                      <ul class="dropdown-menu" role="menu">
+                                          <li class="dropdown-plus-title">
+                                              Pilih salah satu
+                                          </li>
+                                          @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
+                                          <li><a href="#" onclick="return saveSKPIndikatorTetap('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
+                                          @endforeach
+                                      </ul>
+                                    @endif
                                 @else
-                                  <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                      <span id="realisasi_{{ $val->id }}">{{ $val->realisasi ? $val->realisasi : 'Nilai' }}</span> <span class="caret"></span>
-                                  </button>
-                                  <ul class="dropdown-menu" role="menu">
-                                      <li class="dropdown-plus-title">
-                                          Pilih salah satu
-                                      </li>
-                                      @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
-                                      <li><a href="#" onclick="return saveSKPIndikatorTetap('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
-                                      @endforeach
-                                  </ul>
+                                    @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
+                                      <input type="text" id="realisasi_approved_{{ $val->id }}" name="realisasi_approved" class="form-control text-center" value="{{ $val->realisasi_approved }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                    @else
+                                      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                          <span id="realisasi_approved_{{ $val->id }}">{{ $val->realisasi_approved ? $val->realisasi_approved : 'Nilai' }}</span> <span class="caret"></span>
+                                      </button>
+                                      <ul class="dropdown-menu" role="menu">
+                                          <li class="dropdown-plus-title">
+                                              Pilih salah satu
+                                          </li>
+                                          @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
+                                          <li><a href="#" onclick="return saveSKPIndikatorTetapApproved('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
+                                          @endforeach
+                                      </ul>
+                                    @endif
                                 @endif
 
                               </td>
@@ -632,7 +667,7 @@
     </div>
 </div>
 
-<br><br><br><br><br><br><br>
+
 
 
 <div class="modal effect-sign" id="modalIndikatorKinerja" role="dialog">
