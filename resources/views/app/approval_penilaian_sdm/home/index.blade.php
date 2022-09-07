@@ -78,7 +78,7 @@
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
                     <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->id) }}" class="btn btn-info"><i class="fa fa-eye"></i> Detail</a>
-                    @if ($item->status_approval_sdm == 'pending')
+                    @if ($item->status_approval_sdm == 'need_approval')
                     <a href="#" class="btn btn-warning" onclick="return approveSdm({{$item->id}});"><i class="fa fa-check"></i> Approve</a>
                     @endif
                 </div>

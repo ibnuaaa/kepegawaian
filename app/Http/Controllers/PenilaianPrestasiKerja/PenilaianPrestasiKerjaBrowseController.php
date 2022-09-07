@@ -99,7 +99,7 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
                         });
                     });
                 } else if ($request->ArrQuery->for == 'approval_penilaian') {
-                    $query->has("foto_penilaian_prestasi_kerja");
+                    // $query->where("$this->PenilaianPrestasiKerjaTable.status_approval_sdm", 'need_approval');
                 }
             }
 

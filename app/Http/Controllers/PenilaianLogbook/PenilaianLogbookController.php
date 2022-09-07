@@ -95,6 +95,7 @@ class PenilaianLogbookController extends Controller
             ->where('penilaian_prestasi_kerja_id', $Model->PenilaianLogbook->penilaian_prestasi_kerja_id)
             ->first();
         $PenilaianPrestasiKerjaItem->realisasi = $total;
+        $PenilaianPrestasiKerjaItem->realisasi_approved = $total;
 
 
 
@@ -102,7 +103,7 @@ class PenilaianLogbookController extends Controller
 
             $bobot = $PenilaianPrestasiKerjaItem->bobot;
             $target = $PenilaianPrestasiKerjaItem->target;
-            $realisasi = $PenilaianPrestasiKerjaItem->realisasi;
+            $realisasi = $PenilaianPrestasiKerjaItem->realisasi_approved;
 
             $capaian = $realisasi / $target;
             $nilai_kinerja = $capaian * $bobot;
