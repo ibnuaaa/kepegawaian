@@ -62,7 +62,7 @@
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
                     <a href="{{ url('/penilaian_prestasi_kerja/pdf/'.$item->penilaian_prestasi_kerja->id) }}" class="btn btn-info btn-xs"><i class="fa fa-file-pdf-o"></i> Download IKI</a>
-                    <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->penilaian_prestasi_kerja->id) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"> Edit</i></a>
+                    <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->penilaian_prestasi_kerja->id) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"> Koreksi</i></a>
                 </div>
             </td>
         </tr>

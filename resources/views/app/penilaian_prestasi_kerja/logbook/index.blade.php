@@ -158,6 +158,8 @@
                                 <tr>
                                     <td>
                                         {{ $value->indikator_kinerja->name }}
+                                        <br>
+                                        <b>Target: {{$value->target}}</b>
                                     </td>
                                     @for ($i= 0; $i < $num_days; $i++)
                                     <td>

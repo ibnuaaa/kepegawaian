@@ -335,7 +335,8 @@ function approve(menu) {
             @if($page == 'profile')
             location.href= '/profile'
             @else
-            location.href= '/user_request/status/request_approval/sdm'
+            // location.href= '/user_request/status/request_approval/sdm'
+            location.href= '/profile'
             @endif
           }
 
@@ -352,7 +353,7 @@ function approve(menu) {
 }
 
 function request_approval() {
-      // showLoading()
+      showLoading()
 
       var data = {
         id: '{{ $data->id }}'
@@ -362,7 +363,10 @@ function request_approval() {
 
 
       axios.post('/user_request/request_approval', data).then((response) => {
-          location.href= '/profile'
+        //   location.href= '/profile'
+
+            approve('sdm')
+
           // console.log(response.data)
       }).catch((error) => {
           if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
