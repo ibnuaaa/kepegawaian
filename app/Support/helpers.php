@@ -1638,7 +1638,25 @@ if ( ! function_exists('treeChildIndikatorKinerjaModal'))
 
 
   function barcode_ttd($approval) {
-      $qrcode = 'data:image/png' . ';base64,' . base64_encode(QrCode::size(250)->format('png')->generate(getConfig('basepath').'/sign/11/' . $approval->uuid));
+
+
+    $result = Endroid\QrCode\Builder\Builder::create()
+        ->writer(new Endroid\QrCode\Writer\PngWriter())
+        ->writerOptions([])
+        ->data(getConfig('basepath').'/sign/11/' . $approval->uuid)
+        ->encoding(new Endroid\QrCode\Encoding\Encoding('UTF-8'))
+        ->errorCorrectionLevel(new Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh())
+        ->size(600)
+        ->margin(0)
+        ->roundBlockSizeMode(new Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin())
+        // ->logoPath('D:/Web/XAMPP73/htdocs/kepegawaian-rspon/public/assets/img/logo-rspon-xs.png')
+        ->labelText('')
+        ->labelFont(new Endroid\QrCode\Label\Font\NotoSans(20))
+        ->labelAlignment(new Endroid\QrCode\Label\Alignment\LabelAlignmentCenter())
+        ->build();
+
+
+      $qrcode = 'data:image/png' . ';base64,' . base64_encode($result->getString());
 
       return '
         <table class="noborder" cellspacing="0px" cellpadding="0px">
