@@ -54,15 +54,33 @@
                 <p>{{ !empty($item->penilaian_prestasi_kerja->user->name) ? $item->penilaian_prestasi_kerja->user->name : '' }}</p>
             </td>
             <td class="v-align-middle ">
-                <p>{{ !empty($item->penilaian_prestasi_kerja->bulan) ? monthIndo($item->penilaian_prestasi_kerja->bulan) : '' }} {{ $item->penilaian_prestasi_kerja->tahun }}</p>
+                <p>{{ !empty($item->penilaian_prestasi_kerja->bulan) ? monthIndo($item->penilaian_prestasi_kerja->bulan) : '' }} {{ !empty($item->penilaian_prestasi_kerja->tahun) ? $item->penilaian_prestasi_kerja->tahun : '' }}</p>
             </td>
             <td class="v-align-middle">
+
+
+
                 <p>{{ $item->created_at }}</p>
             </td>
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
                     <a href="{{ url('/penilaian_prestasi_kerja/pdf/'.$item->penilaian_prestasi_kerja->id) }}" class="btn btn-info btn-xs"><i class="fa fa-file-pdf-o"></i> Download IKI</a>
-                    <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->penilaian_prestasi_kerja->id) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"> Edit</i></a>
+
+                    @if ($item->penilaian_prestasi_kerja->user->jabatan->is_staff)
+                      @if ($item->penilaian_prestasi_kerja->user->unit_kerja->id == MyAccount()->unit_kerja_id)
+                        <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->penilaian_prestasi_kerja->id) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Koreksi</a>
+                      @else
+                        <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->penilaian_prestasi_kerja->id) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Setujui</a>
+                      @endif
+                    @else
+                      @if ($item->penilaian_prestasi_kerja->user->unit_kerja->parents->id == MyAccount()->unit_kerja_id)
+                        <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->penilaian_prestasi_kerja->id) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Koreksi</a>
+                      @else
+                        <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->penilaian_prestasi_kerja->id) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Setujui</a>
+                      @endif
+                    @endif
+
+
                 </div>
             </td>
         </tr>

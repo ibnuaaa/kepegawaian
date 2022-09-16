@@ -586,7 +586,6 @@
                   $approval_3 = $val;
               }
             }
-
           ?>
           @if ($approval_1)
             {!! barcode_ttd($approval_1) !!}
@@ -603,16 +602,7 @@
           @endif
       </td>
     </tr>
-    <tr>
-      <td class="text-center">{{ $data->user->name }}</td>
-      <td class="text-center">{{ !empty($user_penilai->name) ? $user_penilai->name : '' }}</td>
-      <td class="text-center">{{ !empty($user_atasan_penilai->name) ? $user_atasan_penilai->name : '' }}</td>
-    </tr>
-    <tr>
-      <td class="text-center">{{ $data->user->nip }}</td>
-      <td class="text-center">{{ !empty($user_penilai->nip) ? $user_penilai->nip : '' }}</td>
-      <td class="text-center">{{ !empty($user_atasan_penilai->nip) ? $user_atasan_penilai->nip : '' }}</td>
-    </tr>
+
 </table>
 
 <?php date_default_timezone_set("Asia/Jakarta"); ?>
