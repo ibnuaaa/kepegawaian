@@ -1636,4 +1636,25 @@ if ( ! function_exists('treeChildIndikatorKinerjaModal'))
       return $returnValue;
   }
 
+
+  function barcode_ttd($approval) {
+      $qrcode = 'data:image/png' . ';base64,' . base64_encode(QrCode::size(250)->format('png')->generate(getConfig('basepath').'/sign/11/' . $approval->uuid));
+
+      return '
+        <table class="noborder" cellspacing="0px" cellpadding="0px">
+          <tr>
+            <td rowspan="4" style="width:62px;">
+              <img src="'.$qrcode .'" width="60px">
+            </td>
+            <td style="font-size:8px;" >
+              Telah ditandatangani secara elektronik oleh:<br>
+              '.$approval->user->name.'<br>
+              '.$approval->user->nip.'<br>
+              '.$approval->user->jabatan->name.'
+            </td>
+          </tr>
+        </table>
+      ';
+
+  }
 }

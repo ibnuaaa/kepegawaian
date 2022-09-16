@@ -16,6 +16,7 @@ use App\Support\Generate\Hash as KeyGenerator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Webpatser\Uuid\Uuid;
 
 class PenilaianPrestasiKerjaApprovalController extends Controller
 {
@@ -60,6 +61,10 @@ class PenilaianPrestasiKerjaApprovalController extends Controller
     public function Approve(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
+
+        $uuid = Uuid::generate()->string;
+
+        $Model->PenilaianPrestasiKerjaApproval->uuid = $uuid;
         $Model->PenilaianPrestasiKerjaApproval->save();
 
 
@@ -95,7 +100,7 @@ class PenilaianPrestasiKerjaApprovalController extends Controller
             $user_atasan_penilai = User::where('jabatan_id', $user_penilai->jabatan->parent_id)->first();
         }
 
-
+        // jika di approve oleh atasan nya atasan
         if ($user_atasan_penilai->id == Auth::user()->id) {
           $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where('id', $Model->PenilaianPrestasiKerjaApproval->penilaian_prestasi_kerja_id)
             ->first();

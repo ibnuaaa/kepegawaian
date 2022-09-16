@@ -48,6 +48,14 @@ class PenilaianPrestasiKerjaApprovalBrowseController extends Controller
                 $query->where("$this->PenilaianPrestasiKerjaApprovalTable.id", $request->ArrQuery->id);
             }
 
+            if (isset($request->ArrQuery->user_id)) {
+                $query->where("$this->PenilaianPrestasiKerjaApprovalTable.user_id", $request->ArrQuery->user_id);
+            }
+
+            if (isset($request->ArrQuery->penilaian_prestasi_kerja_id)) {
+                $query->where("$this->PenilaianPrestasiKerjaApprovalTable.penilaian_prestasi_kerja_id", $request->ArrQuery->penilaian_prestasi_kerja_id);
+            }
+
             if (isset($request->ArrQuery->for)) {
                 if ($request->ArrQuery->for == 'approval') {
                   $query->where(function ($query) use($request) {
@@ -78,6 +86,7 @@ class PenilaianPrestasiKerjaApprovalBrowseController extends Controller
                             });
                         });
                     });
+                    $query->where('user_id', '!=', Auth::user()->id);
                 } else if ($request->ArrQuery->for == 'approval_penilaian') {
                     $query->has("foto_penilaian_prestasi_kerja");
                 }
@@ -89,7 +98,7 @@ class PenilaianPrestasiKerjaApprovalBrowseController extends Controller
                 });
             }
 
-            $query->where('user_id', '!=', Auth::user()->id);
+
 
             if (!empty($request->ArrQuery->search)) {
                 $searched = explode(' ',$request->ArrQuery->search);
