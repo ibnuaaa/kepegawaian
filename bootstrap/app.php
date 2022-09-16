@@ -49,8 +49,10 @@ $app->singleton(
 $app->register(App\Providers\AppServiceProvider::class);
 
 $app->register(\Barryvdh\DomPDF\ServiceProvider::class);
+$app->register(\SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class);
 
 class_alias(\Barryvdh\DomPDF\Facade::class, 'PDF');
+class_alias(\SimpleSoftwareIO\QrCode\Facades\QrCode::class, 'QrCode');
 
 // $app->register(Laravel\Dusk\DuskServiceProvider::class);
 

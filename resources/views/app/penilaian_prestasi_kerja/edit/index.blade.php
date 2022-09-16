@@ -18,6 +18,15 @@
 </div>
 <!-- PAGE-HEADER END -->
 
+<?php
+
+$can_edit = false;
+if (empty($data->penilaian_prestasi_kerja_my_approval)) {
+  $can_edit = true;
+}
+
+?>
+
 <!-- ROW-1 -->
 <div class="row">
     <div class="col-12">
@@ -31,66 +40,73 @@
 
                           <tr>
                               <td style="width: 80px;" colspan="2">
-                                    @component('components.form.awesomeSelect', [
-                                      'name' => 'bulan',
-                                      'onChange' => 'saveUpdate(this)',
-                                      'items' => [[
-                                          'label' => '-= Bulan =-',
-                                          'value' => ''
-                                      ],[
-                                          'label' => 'Januari',
-                                          'value' => '1'
-                                      ],[
-                                          'label' => 'Februari',
-                                          'value' => '2'
-                                      ],[
-                                          'label' => 'Maret',
-                                          'value' => '3'
-                                      ],[
-                                          'label' => 'April',
-                                          'value' => '4'
-                                      ],[
-                                          'label' => 'Mei',
-                                          'value' => '5'
-                                      ],[
-                                          'label' => 'Juni',
-                                          'value' => '6'
-                                      ],[
-                                          'label' => 'Juli',
-                                          'value' => '7'
-                                      ],[
-                                          'label' => 'Agustus',
-                                          'value' => '8'
-                                      ],[
-                                          'label' => 'September',
-                                          'value' => '9'
-                                      ],[
-                                          'label' => 'Oktober',
-                                          'value' => '10'
-                                      ],[
-                                          'label' => 'November',
-                                          'value' => '11'
-                                      ],[
-                                          'label' => 'Desember',
-                                          'value' => '12'
-                                      ]],
-                                      'selected' => $data->bulan
-                                  ])
-                                  @endcomponent
-
+                                    @if ($can_edit)
+                                        @component('components.form.awesomeSelect', [
+                                          'name' => 'bulan',
+                                          'onChange' => 'saveUpdate(this)',
+                                          'items' => [[
+                                              'label' => '-= Bulan =-',
+                                              'value' => ''
+                                          ],[
+                                              'label' => 'Januari',
+                                              'value' => '1'
+                                          ],[
+                                              'label' => 'Februari',
+                                              'value' => '2'
+                                          ],[
+                                              'label' => 'Maret',
+                                              'value' => '3'
+                                          ],[
+                                              'label' => 'April',
+                                              'value' => '4'
+                                          ],[
+                                              'label' => 'Mei',
+                                              'value' => '5'
+                                          ],[
+                                              'label' => 'Juni',
+                                              'value' => '6'
+                                          ],[
+                                              'label' => 'Juli',
+                                              'value' => '7'
+                                          ],[
+                                              'label' => 'Agustus',
+                                              'value' => '8'
+                                          ],[
+                                              'label' => 'September',
+                                              'value' => '9'
+                                          ],[
+                                              'label' => 'Oktober',
+                                              'value' => '10'
+                                          ],[
+                                              'label' => 'November',
+                                              'value' => '11'
+                                          ],[
+                                              'label' => 'Desember',
+                                              'value' => '12'
+                                          ]],
+                                          'selected' => $data->bulan
+                                      ])
+                                      @endcomponent
+                                  @else
+                                      Bulan : {{ monthIndo($data->bulan) }}
+                                  @endif
                               </td>
                           </tr>
 
                           <tr>
                               <td style="width: 80px;" colspan="2">
-                                    <select class="form-control form-select" disabled="disabled">
-                                        <option>-= Pilih Tahun =-</option>
-                                        @for ($i= date('Y'); $i >= 2022; $i--)
-                                        <option value="{{$i}}" {{ $i == $data->tahun ? 'selected=selected' : '' }}>
-                                            {{$i}}
-                                        </option>
-                                        @endfor
-                                    </select>
+                                    @if ($can_edit)
+                                        <select class="form-control form-select" disabled="disabled">
+                                            <option>-= Pilih Tahun =-</option>
+                                            @for ($i= date('Y'); $i >= 2022; $i--)
+                                            <option value="{{$i}}" {{ $i == $data->tahun ? 'selected=selected' : '' }}>
+                                                {{$i}}
+                                            </option>
+                                            @endfor
+                                        </select>
+                                    @else
+                                        Tahun : {{ $data->tahun }}
+                                    @endif
                               </td>
                           </tr>
 
@@ -225,29 +241,54 @@
                                   {{!empty($val->indikator_kinerja->name) ? $val->indikator_kinerja->name : ''}}
                               </td>
                               <td align="center">
+                                    @if ($can_edit)
                                     <input type="text" name="bobot" class="form-control" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;text-align:center;">
+                                    @else
+                                    {{ $val->bobot }}
+                                    @endif
                               </td>
                               <td align="center">
-                                    <input type="text" name="target" class="form-control" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;text-align:center;">
+                                    @if ($can_edit)
+                                        <input type="text" name="target" class="form-control" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;text-align:center;">
+                                    @else
+                                        {{ $val->target }}
+                                    @endif
                               </td>
                               <td align="center">
-                              @if (!empty($jabatan->is_staff) && $jabatan->is_staff == 1)
-                              <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" disabled="disabled" data-id="{{ $val->id }}" style="width: 80px;text-align:center;">
-                              @else
-                              <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" onChange="saveSKP(this)" data-id="{{ $val->id }}" style="width: 80px;text-align:center;">
-                              @endif
+                                    @if ($can_edit)
+                                        @if (!empty($jabatan->is_staff) && $jabatan->is_staff == 1)
+                                        <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" disabled="disabled" data-id="{{ $val->id }}" style="width: 80px;text-align:center;">
+                                        @else
+                                        <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" onChange="saveSKP(this)" data-id="{{ $val->id }}" style="width: 80px;text-align:center;">
+                                        @endif
+                                    @else
+                                        {{ $val->realisasi_approved }}
+                                    @endif
                               </td>
                               <td align="center">
-                                    <input type="text" name="capaian" id="capaian_{{$val->id}}" class="form-control" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;text-align:center;" disabled>
+                                    @if ($can_edit)
+                                        <input type="text" name="capaian" id="capaian_{{$val->id}}" class="form-control" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;text-align:center;" disabled>
+                                    @else
+                                        {{ $val->capaian }}
+                                    @endif
                               </td>
                               <td align="center">
-                                    <input type="text" name="nilai_kinerja" id="nilai_kinerja_{{$val->id}}" class="form-control" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;text-align:center;" disabled>
+                                    @if ($can_edit)
+                                        <input type="text" name="nilai_kinerja" id="nilai_kinerja_{{$val->id}}" class="form-control" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;text-align:center;" disabled>
+                                    @else
+                                        {{ $val->nilai_kinerja }}
+                                    @endif
                               </td>
                               <td class="text-center">
-                                  <a class="btn btn-danger btn-sm" href="#" onclick="return remove('{{ $val->id }}','{{!empty($val->indikator_kinerja->name) ? $val->indikator_kinerja->name : ''}}')"><i class="fa fa-trash"></i></a>
+                                    @if ($can_edit)
+                                        <a class="btn btn-danger btn-sm" href="#" onclick="return remove('{{ $val->id }}','{{!empty($val->indikator_kinerja->name) ? $val->indikator_kinerja->name : ''}}')"><i class="fa fa-trash"></i></a>
+                                    @else
+
+                                    @endif
                               </td>
                           </tr>
                           @endforeach
+                          @if ($can_edit)
                           <tr>
                               <td class="text-left" colspan="8">
                                   <a class="btn btn-primary btn-sm" href="#" onclick="return openModalIndikatorKinerja();">
@@ -256,7 +297,7 @@
                                   </a>
                               </td>
                           </tr>
-
+                          @endif
                           <tr>
                               <td class="text-center" colspan="6">
                                   Capaian kinerja utama Indikator Kuantitas
@@ -331,51 +372,71 @@
                                   {{!empty($val->indikator_tetap->name) ? $val->indikator_tetap->name : ''}}
                               </td>
                               <td class="text-center">
+                                  @if ($can_edit)
                                   <input type="text" id="bobot_{{ $val->id }}" name="bobot" class="form-control text-center" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                              </td>
-                              <td class="text-center">
-                                  <input type="text" id="target_{{ $val->id }}" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                              </td>
-                              <td align="center">
-                                  @if ($data->user_id == MyAccount()->id)
-                                      @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
-                                        <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                                      @else
-                                        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                            <span id="realisasi_{{ $val->id }}">{{ $val->realisasi ? $val->realisasi : 'Nilai' }}</span> <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li class="dropdown-plus-title">
-                                                Pilih salah satu
-                                            </li>
-                                            @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
-                                            <li><a href="#" onclick="return saveSKPIndikatorTetap('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                      @endif
                                   @else
-                                      @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
-                                        <input type="text" id="realisasi_approved_{{ $val->id }}" name="realisasi_approved" class="form-control text-center" value="{{ $val->realisasi_approved }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                                      @else
-                                        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                            <span id="realisasi_approved_{{ $val->id }}">{{ $val->realisasi_approved ? $val->realisasi_approved : 'Nilai' }}</span> <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li class="dropdown-plus-title">
-                                                Pilih salah satu
-                                            </li>
-                                            @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
-                                            <li><a href="#" onclick="return saveSKPIndikatorTetapApproved('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                      @endif
+                                  {{ $val->bobot }}
                                   @endif
                               </td>
                               <td class="text-center">
-                                  <input type="text" id="capaian_{{ $val->id }}" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
+                                  @if ($can_edit)
+                                  <input type="text" id="target_{{ $val->id }}" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  @else
+                                  {{ $val->target }}
+                                  @endif
+                              </td>
+                              <td align="center">
+                                  @if ($can_edit)
+                                      @if ($data->user_id == MyAccount()->id)
+                                          @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
+                                            <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                          @else
+                                            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                                <span id="realisasi_{{ $val->id }}">{{ $val->realisasi ? $val->realisasi : 'Nilai' }}</span> <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li class="dropdown-plus-title">
+                                                    Pilih salah satu
+                                                </li>
+                                                @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
+                                                <li><a href="#" onclick="return saveSKPIndikatorTetap('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
+                                                @endforeach
+                                            </ul>
+                                          @endif
+                                      @else
+                                          @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
+                                            <input type="text" id="realisasi_approved_{{ $val->id }}" name="realisasi_approved" class="form-control text-center" value="{{ $val->realisasi_approved }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                          @else
+                                            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                                <span id="realisasi_approved_{{ $val->id }}">{{ $val->realisasi_approved ? $val->realisasi_approved : 'Nilai' }}</span> <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li class="dropdown-plus-title">
+                                                    Pilih salah satu
+                                                </li>
+                                                @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
+                                                <li><a href="#" onclick="return saveSKPIndikatorTetapApproved('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
+                                                @endforeach
+                                            </ul>
+                                          @endif
+                                      @endif
+                                  @else
+                                      {{$val->realisasi_approved}}
+                                  @endif
                               </td>
                               <td class="text-center">
-                                  <input type="text" id="nilai_kinerja_{{ $val->id }}" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
+                                  @if ($can_edit)
+                                      <input type="text" id="capaian_{{ $val->id }}" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
+                                  @else
+                                      {{ $val->capaian }}
+                                  @endif
+                              </td>
+                              <td class="text-center">
+                                  @if ($can_edit)
+                                      <input type="text" id="nilai_kinerja_{{ $val->id }}" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
+                                  @else
+                                      {{ $val->nilai_kinerja }}
+                                  @endif
                               </td>
                           </tr>
                           @endforeach
@@ -453,53 +514,71 @@
                                   {{!empty($val->indikator_tetap->name) ? $val->indikator_tetap->name : ''}}
                               </td>
                               <td align="center">
-                                  <input type="text" id="bobot_{{ $val->id }}" name="bobot" class="form-control text-center" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  @if ($can_edit)
+                                      <input type="text" id="bobot_{{ $val->id }}" name="bobot" class="form-control text-center" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  @else
+                                      {{ $val->bobot }}
+                                  @endif
                               </td>
                               <td align="center">
-                                  <input type="text" id="target_{{ $val->id }}" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  @if ($can_edit)
+                                      <input type="text" id="target_{{ $val->id }}" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  @else
+                                      {{ $val->target }}
+                                  @endif
                               </td>
                               <td align="center">
-
-                                @if ($data->user_id == MyAccount()->id)
-                                    @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
-                                      <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                                    @else
-                                      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                          <span id="realisasi_{{ $val->id }}">{{ $val->realisasi ? $val->realisasi : 'Nilai' }}</span> <span class="caret"></span>
-                                      </button>
-                                      <ul class="dropdown-menu" role="menu">
-                                          <li class="dropdown-plus-title">
-                                              Pilih salah satu
-                                          </li>
-                                          @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
-                                          <li><a href="#" onclick="return saveSKPIndikatorTetap('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
-                                          @endforeach
-                                      </ul>
-                                    @endif
-                                @else
-                                    @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
-                                      <input type="text" id="realisasi_approved_{{ $val->id }}" name="realisasi_approved" class="form-control text-center" value="{{ $val->realisasi_approved }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                                    @else
-                                      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                          <span id="realisasi_approved_{{ $val->id }}">{{ $val->realisasi_approved ? $val->realisasi_approved : 'Nilai' }}</span> <span class="caret"></span>
-                                      </button>
-                                      <ul class="dropdown-menu" role="menu">
-                                          <li class="dropdown-plus-title">
-                                              Pilih salah satu
-                                          </li>
-                                          @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
-                                          <li><a href="#" onclick="return saveSKPIndikatorTetapApproved('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
-                                          @endforeach
-                                      </ul>
-                                    @endif
-                                @endif
-
+                                  @if ($can_edit)
+                                      @if ($data->user_id == MyAccount()->id)
+                                          @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
+                                            <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                          @else
+                                            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                                <span id="realisasi_{{ $val->id }}">{{ $val->realisasi ? $val->realisasi : 'Nilai' }}</span> <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li class="dropdown-plus-title">
+                                                    Pilih salah satu
+                                                </li>
+                                                @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
+                                                <li><a href="#" onclick="return saveSKPIndikatorTetap('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
+                                                @endforeach
+                                            </ul>
+                                          @endif
+                                      @else
+                                          @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
+                                            <input type="text" id="realisasi_approved_{{ $val->id }}" name="realisasi_approved" class="form-control text-center" value="{{ $val->realisasi_approved }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                          @else
+                                            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                                <span id="realisasi_approved_{{ $val->id }}">{{ $val->realisasi_approved ? $val->realisasi_approved : 'Nilai' }}</span> <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li class="dropdown-plus-title">
+                                                    Pilih salah satu
+                                                </li>
+                                                @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
+                                                <li><a href="#" onclick="return saveSKPIndikatorTetapApproved('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
+                                                @endforeach
+                                            </ul>
+                                          @endif
+                                      @endif
+                                  @else
+                                      {{ $val->realisasi_approved }}
+                                  @endif
                               </td>
                               <td align="center">
-                                  <input type="text" id="capaian_{{ $val->id }}" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
+                                  @if ($can_edit)
+                                      <input type="text" id="capaian_{{ $val->id }}" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
+                                  @else
+                                      {{ $val->capaian }}
+                                  @endif
                               </td>
                               <td align="center">
-                                  <input type="text" id="nilai_kinerja_{{ $val->id }}" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
+                                  @if ($can_edit)
+                                      <input type="text" id="nilai_kinerja_{{ $val->id }}" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
+                                  @else
+                                      {{ $val->nilai_kinerja }}
+                                  @endif
                               </td>
                               <td class="text-center">
                               </td>
@@ -564,28 +643,56 @@
                                   {{ $key+1 }}
                               </td>
                               <td align="center">
+                                  @if ($can_edit)
                                   <input type="text" id="indikator_kinerja_text_{{ $val->id }}" name="indikator_kinerja_text" class="form-control" value="{{ $val->indikator_kinerja_text }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}">
+                                  @else
+                                  {{ $val->indikator_kinerja_text }}
+                                  @endif
                               </td>
                               <td align="center">
+                                  @if ($can_edit)
                                   <input type="text" id="bobot_{{ $val->id }}" name="bobot" class="form-control text-center" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  @else
+                                  {{ $val->bobot }}
+                                  @endif
                               </td>
                               <td align="center">
+                                  @if ($can_edit)
                                   <input type="text" id="target_{{ $val->id }}" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  @else
+                                  {{ $val->target }}
+                                  @endif
                               </td>
                               <td align="center">
+                                  @if ($can_edit)
                                   <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                  @else
+                                  {{ $val->realisasi }}
+                                  @endif
                               </td>
                               <td align="center">
+                                  @if ($can_edit)
                                   <input type="text" id="capaian_{{ $val->id }}" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;" disabled>
+                                  @else
+                                  {{ $val->capaian }}
+                                  @endif
                               </td>
                               <td align="center">
+                                  @if ($can_edit)
                                   <input type="text" id="nilai_kinerja_{{ $val->id }}" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;" disabled>
+                                  @else
+                                  {{ $val->nilai_kinerja }}
+                                  @endif
                               </td>
                               <td class="text-center">
+                                  @if ($can_edit)
                                   <a class="btn btn-danger btn-sm" href="#" onclick="return remove('{{ $val->id }}','{{!empty($val->indikator_kinerja->name) ? $val->indikator_kinerja->name : ''}}')"><i class="fa fa-trash"></i></a>
+                                  @else
+                                  @endif
                               </td>
                           </tr>
                           @endforeach
+                          @if ($can_edit)
                           <tr>
                               <td class="text-left" colspan="7">
                                   <a class="btn btn-primary btn-sm" href="#" onclick="return saveNewIndikatorTambahan();">
@@ -594,6 +701,7 @@
                                   </a>
                               </td>
                           </tr>
+                          @endif
 
                           <tr>
                               <td class="text-center" colspan="6">
@@ -632,7 +740,7 @@
             </div>
 
 
-
+            @if (false)
             <div class="card-body">
                 <h4>Upload Penilaian Prestasi Kerja yang telah ditandatangani (PDF)</h4>
                 <input type="file" onchange="prepareUpload(this, 'foto_penilaian_prestasi_kerja', '{{ $data->id }}', false, ['pdf']);" multiple>
@@ -649,6 +757,7 @@
                 </div>
                 <div style="clear: both;"></div>
             </div>
+            @endif
         </div>
 
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\CMS\PenilaianPrestasiKerja;
 use App\Http\Controllers\PenilaianPrestasiKerja\PenilaianPrestasiKerjaBrowseController;
 use App\Http\Controllers\IndikatorKinerja\IndikatorKinerjaBrowseController;
 use App\Http\Controllers\PenilaianPrestasiKerjaItem\PenilaianPrestasiKerjaItemBrowseController;
+use App\Http\Controllers\PenilaianPrestasiKerjaApproval\PenilaianPrestasiKerjaApprovalBrowseController;
+
 use App\Http\Controllers\PenilaianLogbook\PenilaianLogbookBrowseController;
 
 use App\Http\Controllers\Jabatan\JabatanBrowseController;
@@ -319,6 +321,10 @@ class PenilaianPrestasiKerjaController extends Controller
             ->equal('id', $id)
             ->get('first');
 
+        $PenilaianPrestasiKerjaApproval = PenilaianPrestasiKerjaApprovalBrowseController::FetchBrowse($request)
+            ->equal('penilaian_prestasi_kerja_id', $id)
+            ->get()
+            ;
 
 
         if (!isset($PenilaianPrestasiKerja['records']->id)) {
@@ -435,7 +441,8 @@ class PenilaianPrestasiKerjaController extends Controller
             'tipe_indikator_ditampilkan' => $tipe_indikator_ditampilkan,
             'user_penilai' => $user_penilai,
             'user_atasan_penilai' => $user_atasan_penilai,
-            'show_iku' => $show_iku
+            'show_iku' => $show_iku,
+            'penilaian_approval' => $PenilaianPrestasiKerjaApproval['records']
         ]);
         $pdf->setPaper('a4', 'portrait');
         return $pdf->stream();

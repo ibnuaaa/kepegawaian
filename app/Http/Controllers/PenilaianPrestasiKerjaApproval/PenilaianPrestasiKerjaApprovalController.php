@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\PenilaianPrestasiKerjaApproval;
 
 use App\Models\PenilaianPrestasiKerjaApproval;
+use App\Models\PenilaianPrestasiKerja;
+use App\Models\User;
 
 use App\Traits\Browse;
 
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Support\Generate\Hash as KeyGenerator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Webpatser\Uuid\Uuid;
 
 class PenilaianPrestasiKerjaApprovalController extends Controller
 {
@@ -57,7 +61,52 @@ class PenilaianPrestasiKerjaApprovalController extends Controller
     public function Approve(Request $request)
     {
         $Model = $request->Payload->all()['Model'];
+
+        $uuid = Uuid::generate()->string;
+
+        $Model->PenilaianPrestasiKerjaApproval->uuid = $uuid;
         $Model->PenilaianPrestasiKerjaApproval->save();
+
+
+        $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where('id', $Model->PenilaianPrestasiKerjaApproval->penilaian_prestasi_kerja_id)
+        ->with('jabatan')
+        ->first();
+
+        $jabatan_id = $PenilaianPrestasiKerja->jabatan->id;
+        $is_staff = $PenilaianPrestasiKerja->jabatan->is_staff;
+        $unit_kerja_id = $PenilaianPrestasiKerja->unit_kerja_id;
+
+        if ($is_staff) {
+          // ATASAN STAFF
+          $user_penilai = User::where(function ($query) use($request) {
+              $query->whereHas("jabatan", function ($query) use($request) {
+                  $query->whereNull('is_staff');
+              });
+          })->where('unit_kerja_id', $unit_kerja_id)->with('jabatan')->first();
+        } else {
+            // ATASAN KEPALA
+            // echo
+            $jabatan_parent_id = $PenilaianPrestasiKerja['records']->user->jabatan->parent_id;
+            // cetak($PenilaianPrestasiKerja['records']->user->jabatan->toArray());
+            // die();
+            $user_penilai = User::where('jabatan_id', $jabatan_parent_id)->first();
+
+            // cetak($user_penilai);
+            // die();
+        }
+
+        $user_atasan_penilai = null;
+        if (!empty($user_penilai->jabatan->parent_id)) {
+            $user_atasan_penilai = User::where('jabatan_id', $user_penilai->jabatan->parent_id)->first();
+        }
+
+        // jika di approve oleh atasan nya atasan
+        if ($user_atasan_penilai->id == Auth::user()->id) {
+          $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where('id', $Model->PenilaianPrestasiKerjaApproval->penilaian_prestasi_kerja_id)
+            ->first();
+          $PenilaianPrestasiKerja->status_approval_sdm = 'need_approval';
+          $PenilaianPrestasiKerja->save();
+        }
 
         Json::set('data', $this->SyncData($request, $Model->PenilaianPrestasiKerjaApproval->id));
         return response()->json(Json::get(), 201);

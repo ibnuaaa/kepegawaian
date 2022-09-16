@@ -565,10 +565,43 @@
       <td class="text-center" style="width: 33%;">Menyetujui Atasan Langsung</td>
       <td class="text-center" style="width: 33%;">Mengetahui Atasan Pejabat Penilai</td>
     </tr>
+
+
+
+
     <tr>
-      <td>&nbsp;<br><br><br><br></td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <td>
+          <?php
+            $approval_1 = false;
+            $approval_2 = false;
+            $approval_3 = false;
+            foreach ($penilaian_approval as $key => $val) {
+              if (!empty($data->user->id) && $data->user->id == $val->user_id) {
+                $approval_1 = $val;
+              }
+              if (!empty($user_penilai->id) && $user_penilai->id == $val->user_id) {
+                  $approval_2 = $val;
+              }
+              if (!empty($user_atasan_penilai->id) && $user_atasan_penilai->id == $val->user_id) {
+                  $approval_3 = $val;
+              }
+            }
+
+          ?>
+          @if ($approval_1)
+            {!! barcode_ttd($approval_1) !!}
+          @endif
+      </td>
+      <td>
+          @if ($approval_2)
+            {!! barcode_ttd($approval_2) !!}
+          @endif
+      </td>
+      <td>
+          @if ($approval_3)
+            {!! barcode_ttd($approval_3) !!}
+          @endif
+      </td>
     </tr>
     <tr>
       <td class="text-center">{{ $data->user->name }}</td>
@@ -619,6 +652,10 @@
 
    .daftar-obat td, .daftar-obat th {
     font-size: 8pt !important;
+   }
+
+   .noborder td {
+      border: none;
    }
 
 ol.huruf_tipe1 {

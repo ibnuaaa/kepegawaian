@@ -20,6 +20,7 @@
         "phpoffice/phpspreadsheet": "^1.17",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi": "^2.3",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "webpatser/laravel-uuid": "^3.0",
         "wisembly/elephant.io": "^3.3",
         "workerman/phpsocket.io": "^1.1"
