@@ -554,7 +554,7 @@
 
 </table>
 <br/><br/>
-<table class="table" style="width: 100%;">
+<table class="table" style="width: 100%; page-break-inside: avoid;">
     <tr>
       <th colspan="3" class="text-center">
           PERSETUJUAN PENILAIAN
