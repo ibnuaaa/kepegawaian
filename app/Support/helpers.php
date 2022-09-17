@@ -163,7 +163,7 @@ if ( ! function_exists('pdfViewerUrl'))
 {
     function pdfViewerUrl($url = null)
     {
-      return getConfig('protocol') . "://" . getConfig('basepath') . "/assets/plugins/viewer-js/#" . $url;
+      return getConfig('protocol') . "://" . getConfig('basepath') . "/assets/plugins/viewer-js/?zoom=page-width#" . $url;
     }
 }
 

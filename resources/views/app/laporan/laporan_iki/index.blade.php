@@ -114,7 +114,9 @@
                 <p>{{ !empty($item->user->name) ? $item->user->name : '' }}</p>
             </td>
             <td class="v-align-middle">
-                <a href="/penilaian_prestasi_kerja/pdf/{{ $item->id }}" target="_blank">{{ !empty($item->bulan) ? monthIndo($item->bulan) : '' }} {{ $item->tahun }}</a>
+                <a href="/penilaian_prestasi_kerja/pdf/{{ $item->id }}" onclick="return openModalPreview('/penilaian_prestasi_kerja/pdf/{{ $item->id }}')">
+                    {{ !empty($item->bulan) ? monthIndo($item->bulan) : '' }} {{ $item->tahun }}
+                </a>
             </td>
             <td class="v-align-middle ">
 

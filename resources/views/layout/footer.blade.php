@@ -113,7 +113,7 @@
                  setTimeout(() => {
                     $('#iframe-preview').attr('src', g_url)
                     setTimeout(function() {
-                        $('#iframe-preview').contents().find('#download').remove();
+                        // $('#iframe-preview').contents().find('#download').remove();
                      }, 100);
                  }, 1000)
             });
