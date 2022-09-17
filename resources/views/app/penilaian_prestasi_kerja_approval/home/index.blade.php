@@ -57,18 +57,11 @@
                 <p>{{ !empty($item->penilaian_prestasi_kerja->bulan) ? monthIndo($item->penilaian_prestasi_kerja->bulan) : '' }} {{ !empty($item->penilaian_prestasi_kerja->tahun) ? $item->penilaian_prestasi_kerja->tahun : '' }}</p>
             </td>
             <td class="v-align-middle">
-
-
-
                 <p>{{ $item->created_at }}</p>
             </td>
             <td class="v-align-middle">
                 <div class="btn-group btn-group-sm">
                     <a href="{{ url('/penilaian_prestasi_kerja/pdf/'.$item->penilaian_prestasi_kerja->id) }}" class="btn btn-info btn-xs"><i class="fa fa-file-pdf-o"></i> Download IKI</a>
-<<<<<<< HEAD
-                    <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->penilaian_prestasi_kerja->id) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"> Koreksi</i></a>
-=======
-
                     @if ($item->penilaian_prestasi_kerja->user->jabatan->is_staff)
                       @if ($item->penilaian_prestasi_kerja->user->unit_kerja->id == MyAccount()->unit_kerja_id)
                         <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->penilaian_prestasi_kerja->id) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Koreksi</a>
@@ -82,9 +75,6 @@
                         <a href="{{ url('/penilaian_prestasi_kerja/edit/'.$item->penilaian_prestasi_kerja->id) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> Setujui</a>
                       @endif
                     @endif
-
-
->>>>>>> b062a17c0df8be831cf18722ae4e18ec91f14e22
                 </div>
             </td>
         </tr>
