@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\PenilaianPrestasiKerjaApproval;
 
 use App\Models\PenilaianPrestasiKerjaApproval;
+use App\Models\PenilaianPrestasiKerjaReject;
 use App\Models\PenilaianPrestasiKerja;
 use App\Models\User;
 
@@ -63,8 +64,9 @@ class PenilaianPrestasiKerjaApprovalController extends Controller
         $Model = $request->Payload->all()['Model'];
 
         $uuid = Uuid::generate()->string;
-
-        $Model->PenilaianPrestasiKerjaApproval->uuid = $uuid;
+        if (empty($Model->PenilaianPrestasiKerjaApproval->uuid)) {
+            $Model->PenilaianPrestasiKerjaApproval->uuid = $uuid;
+        }
         $Model->PenilaianPrestasiKerjaApproval->save();
 
 
@@ -111,6 +113,17 @@ class PenilaianPrestasiKerjaApprovalController extends Controller
           $PenilaianPrestasiKerja->status_approval_sdm = 'need_approval';
           $PenilaianPrestasiKerja->save();
         }
+
+        Json::set('data', $this->SyncData($request, $Model->PenilaianPrestasiKerjaApproval->id));
+        return response()->json(Json::get(), 201);
+    }
+
+    public function Reject(Request $request)
+    {
+        $Model = $request->Payload->all()['Model'];
+        $Model->PenilaianPrestasiKerjaApproval->save();
+
+        $Model->PenilaianPrestasiKerjaReject->save();
 
         Json::set('data', $this->SyncData($request, $Model->PenilaianPrestasiKerjaApproval->id));
         return response()->json(Json::get(), 201);

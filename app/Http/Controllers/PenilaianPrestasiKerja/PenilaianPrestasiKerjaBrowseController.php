@@ -125,6 +125,7 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
             "$this->PenilaianPrestasiKerjaTable.id as id",
             "$this->PenilaianPrestasiKerjaTable.name as penilaian_prestasi_kerja.name",
             "$this->PenilaianPrestasiKerjaTable.user_id as user_id",
+            "$this->PenilaianPrestasiKerjaTable.catatan as catatan",
             "$this->PenilaianPrestasiKerjaTable.unit_kerja_id as unit_kerja_id",
             "$this->PenilaianPrestasiKerjaTable.status_approval_sdm as status_approval_sdm",
             "$this->PenilaianPrestasiKerjaTable.jabatan_id as jabatan_id",
@@ -135,6 +136,7 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
         )->with('user')
         ->with('penilaian_prestasi_kerja_item')
         ->with('penilaian_prestasi_kerja_approval')
+        ->with('penilaian_prestasi_kerja_reject')
         ->with('penilaian_prestasi_kerja_my_approval')
         ->with('foto_penilaian_prestasi_kerja')
         ->with('penilaian_kualitas');

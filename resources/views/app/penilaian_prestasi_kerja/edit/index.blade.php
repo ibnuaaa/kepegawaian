@@ -29,6 +29,12 @@ if (empty($data->penilaian_prestasi_kerja_my_approval)) {
 }
 
 
+if (!empty($data->penilaian_prestasi_kerja_my_approval)) {
+  if ($data->penilaian_prestasi_kerja_my_approval->status == '4') {
+      $can_edit = true;
+  }
+}
+
 if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id) {
   $can_edit = false;
 }
@@ -724,22 +730,30 @@ if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id)
                                 {{$total_nilai_kinerja}}
                               </td>
                               <td class="text-center">
-
                               </td>
                           </tr>
+                          <tr>
+                              <th class="text-center" colspan="8">
+                                <br>
+                              </th>
+                          </tr>
 
+                          <tr>
+                              <th class="text-center" colspan="8">
+                                  Catatan
+                              </th>
+                          </tr>
 
-
-
-
+                          <tr>
+                              <td colspan="8">
+                                  @if ($can_edit)
+                                  <textarea class="form-control" name="catatan" placeholder="Inputkan catatan di sini..." onchange="saveUpdate(this)">{{ $data->catatan }}</textarea>
+                                  @else
+                                  {{ $data->catatan }}
+                                  @endif
+                              </td>
+                          </tr>
                       </table>
-
-
-
-
-
-
-
 
                     </div>
                 </div>
@@ -772,8 +786,6 @@ if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id)
             </div>
             @endif
         </div>
-
-
     </div>
 </div>
 
@@ -781,14 +793,31 @@ if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id)
     <div class="col-12">
         <div class="card overflow-scrolln">
             <div class="card-body text-center">
-                @if (empty($data->penilaian_prestasi_kerja_my_approval))
-                  <a class="btn btn-primary btn-lg" onClick="approve()"><i class="fa fa-telegram"></i>
-                    @if (MyAccount()->id == $data->user_id)
-                      Kirim
-                    @else
-                      Approve
-                    @endif
+                @if (empty($data->penilaian_prestasi_kerja_my_approval) || (!empty($data->penilaian_prestasi_kerja_my_approval) && in_array($data->penilaian_prestasi_kerja_my_approval->status, ['4','5'])) )
+                  @if (MyAccount()->id != $data->user_id)
+                  <a class="btn btn-danger btn-lg text-white" onClick="tolak()"><i class="fa fa-times"></i>
+                    Tolak
                   </a>
+                  @endif
+
+                  @if (MyAccount()->id == $data->user_id)
+
+                      @if (!empty($data->penilaian_prestasi_kerja_my_approval) && in_array($data->penilaian_prestasi_kerja_my_approval->status, ['4']))
+                      <a class="btn btn-primary btn-lg" onClick="approve()"><i class="fa fa-telegram"></i>
+                        Kirim Perbaikan
+                      </a>
+                      @else
+                      <a class="btn btn-primary btn-lg" onClick="approve()"><i class="fa fa-telegram"></i>
+                        Kirim
+                      </a>
+                      @endif
+
+
+                  @else
+                  <a class="btn btn-primary btn-lg" onClick="approve()"><i class="fa fa-telegram"></i>
+                      Setujui
+                  </a>
+                  @endif
                 @endif
             </div>
         </div>
@@ -796,7 +825,52 @@ if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id)
 </div>
 
 
+<div class="row">
+    <div class="col-12">
+        <div class="card overflow-scrolln">
+            <div class="card-body text-center">
+                <h4>Riwayat Penolakan</h4>
 
+
+
+                <table class="table table-bordered table-sm">
+                    <tr>
+                        <th style="width: 15%;">
+                          Nama
+                        </th>
+                        <th style="width: 15%;">
+                          Unit Kerja
+                        </th>
+                        <th style="width: 15%;">
+                          Jabatan
+                        </th>
+                        <th style="width: 55%;">
+                          Notes Reject
+                        </th>
+                    </tr>
+
+                    @foreach($data->penilaian_prestasi_kerja_reject as $key => $value)
+                    <tr>
+                        <td>
+                          {{ $value->user->name }}
+                        </td>
+                        <td>
+                          {{ $value->user->unit_kerja->name }}
+                        </td>
+                        <td>
+                          {{ $value->user->jabatan->name }}
+                        </td>
+                        <td>
+                          {{ $value->notes }}
+                        </td>
+                    </tr>
+                    @endforeach
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal effect-sign" id="modalIndikatorKinerja" role="dialog">
     <div class="modal-dialog modal-xl " role="document">
@@ -828,6 +902,28 @@ if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id)
                 </div>
             </div>
             <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal effect-sign" id="modalTolak" role="dialog">
+    <div class="modal-dialog modal-md " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alasan Ditolak</h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="body-modal-sasaran-kinerja">
+                <textarea class="form-control" name="catatan_penolakan" placeholder="Tulis alasan penolakan..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-danger btn-sm text-white" onClick="saveTolak()"><i class="fa fa-times"></i>
+                  Tolak
+                </a>
             </div>
         </div>
     </div>

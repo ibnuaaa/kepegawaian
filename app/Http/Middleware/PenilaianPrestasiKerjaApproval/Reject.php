@@ -3,6 +3,8 @@
 namespace App\Http\Middleware\PenilaianPrestasiKerjaApproval;
 
 use App\Models\PenilaianPrestasiKerjaApproval;
+use App\Models\PenilaianPrestasiKerjaReject;
+
 
 use Closure;
 use Validator;
@@ -11,15 +13,17 @@ use App\Http\Middleware\BaseMiddleware;
 
 use Illuminate\Support\Facades\Auth;
 
-class Approve extends BaseMiddleware
+class Reject extends BaseMiddleware
 {
     private function Initiate()
     {
 
+
+        // UPDATE DULU SEMUA JADI RECEIVE REJECT
         PenilaianPrestasiKerjaApproval::where(
           'penilaian_prestasi_kerja_id', $this->_Request->input('penilaian_prestasi_kerja_id')
-        )->whereIn('status', ['3','4'])->update([
-          'status' => '5'
+        )->where('status', '2')->update([
+          'status' => '4'
         ]);
 
         $this->Model->PenilaianPrestasiKerjaApproval = PenilaianPrestasiKerjaApproval::where('user_id', Auth::user()->id)
@@ -31,8 +35,14 @@ class Approve extends BaseMiddleware
             $this->Model->PenilaianPrestasiKerjaApproval->user_id = Auth::user()->id;
             $this->Model->PenilaianPrestasiKerjaApproval->penilaian_prestasi_kerja_id = $this->_Request->input('penilaian_prestasi_kerja_id');
         }
-        $this->Model->PenilaianPrestasiKerjaApproval->approved_at = date('Y-m-d H:i:s');
-        $this->Model->PenilaianPrestasiKerjaApproval->status = '2';
+
+        $this->Model->PenilaianPrestasiKerjaReject = new PenilaianPrestasiKerjaReject();
+        $this->Model->PenilaianPrestasiKerjaReject->notes = $this->_Request->input('notes');
+        $this->Model->PenilaianPrestasiKerjaReject->user_id = Auth::user()->id;
+        $this->Model->PenilaianPrestasiKerjaReject->penilaian_prestasi_kerja_id = $this->_Request->input('penilaian_prestasi_kerja_id');
+
+        // 3. reject, 4. receive_reject, 5. approve_reject
+        $this->Model->PenilaianPrestasiKerjaApproval->status = '3';
     }
 
     private function Validation()

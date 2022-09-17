@@ -66,6 +66,13 @@ class PenilaianPrestasiKerja extends Model
           ->where('user_id', !empty(Auth::user()->id) ? Auth::user()->id : '00');
     }
 
+    public function penilaian_prestasi_kerja_reject()
+    {
+        return $this->hasMany(PenilaianPrestasiKerjaReject::class, 'penilaian_prestasi_kerja_id', 'id')
+          ->with('user')
+          ->with('penilaian_prestasi_kerja');
+    }
+
     public function foto_penilaian_prestasi_kerja()
     {
         return $this->hasMany(Document::class, 'object_id', 'id')

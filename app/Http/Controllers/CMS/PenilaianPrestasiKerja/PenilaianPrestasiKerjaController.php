@@ -146,6 +146,7 @@ class PenilaianPrestasiKerjaController extends Controller
                 (object)['name' => 'No', 'label' => 'No'],
                 (object)['name' => 'bulan', 'label' => 'Bulan - Tahun'],
                 (object)['name' => 'created_at', 'label' => 'Terbuat Pada'],
+                (object)['name' => 'catatan', 'label' => 'Catatan'],
                 (object)['name' => 'action', 'label' => 'Aksi']
             ],
             'records' => []
