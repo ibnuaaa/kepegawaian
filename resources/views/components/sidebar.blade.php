@@ -107,6 +107,15 @@
                         </li>
                         @endif
 
+                        @if (getPermissions('laporan')['checked'])
+                        <li class="slide @yield('LaporanMenuClass')">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="#"><i class="side-menu__icon fe fe-clipboard"></i><span class="side-menu__label">Laporan</span><i class="angle fe fe-chevron-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a href="{!! url('/laporan_iki'); !!}" class="slide-item @yield('LaporanIkiMenuClass')"> Laporan IKI</a></li>
+                            </ul>
+                        </li>
+                        @endif
+
                         @if (getPermissions('modul_pengguna')['checked'])
                         <li class="sub-category">
                             <h3>Modul Pengguna</h3>

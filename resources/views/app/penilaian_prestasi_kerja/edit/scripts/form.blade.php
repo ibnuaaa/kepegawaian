@@ -96,6 +96,29 @@ function selectIndikatorKinerja(e, id) {
     return false;
 }
 
+function tolak() {
+  $('#modalTolak').modal('show');
+}
+
+function saveTolak() {
+    var data = {
+      penilaian_prestasi_kerja_id: '{{ $data->id }}',
+      notes: $('textarea[name=catatan_penolakan]').val()
+    }
+
+    showLoading()
+    axios.post('/penilaian_prestasi_kerja_approval/reject', data).then((response) => {
+        location.reload()
+    }).catch((error) => {
+        if (Boolean(error) && Boolean(error.response) && Boolean(error.response.data) && Boolean(error.response.data.exception) && Boolean(error.response.data.exception.message)) {
+            swal({ title: 'Opps!', text: error.response.data.exception.message, type: 'error', confirmButtonText: 'Ok' })
+            hideLoading()
+        }
+    })
+
+    return false;
+}
+
 function removeFromPopup(e, id, indikator_kinerja_id, name) {
 
   swal({
@@ -264,9 +287,10 @@ function saveSKPIndikatorTetapApproved(id, nilai) {
 
 function saveUpdate(e){
 
-    var data = {
-      bulan: $(e).val()
-    }
+    var field = $(e).attr('name')
+
+    var data = new Object;
+    data[field] = $(e).val();
 
     axios.put('/penilaian_prestasi_kerja/' + {{ $data->id }}, data).then((response) => {
 

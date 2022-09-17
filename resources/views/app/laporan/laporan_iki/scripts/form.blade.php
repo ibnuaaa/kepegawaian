@@ -7,14 +7,14 @@ function cari() {
   var tahun = $('select[name=tahun]').val()
   var user_id = $('select[name=user_id]').val()
   //
-  const query = {}
+  const query = getQuery()
 
   query.dari_bulan = dari_bulan
   query.sampai_bulan = sampai_bulan
   query.tahun = tahun
   query.user_id = user_id
   //
-  const href = '{{ url('/report_skp') }}'
+  const href = '{{ url('/laporan_iki') }}'
   const queryString = Qs.stringify(query)
   if (queryString) {
       window.location = href + '?' + queryString

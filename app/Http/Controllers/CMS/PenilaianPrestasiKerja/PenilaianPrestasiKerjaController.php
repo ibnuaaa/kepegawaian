@@ -146,6 +146,7 @@ class PenilaianPrestasiKerjaController extends Controller
                 (object)['name' => 'No', 'label' => 'No'],
                 (object)['name' => 'bulan', 'label' => 'Bulan - Tahun'],
                 (object)['name' => 'created_at', 'label' => 'Terbuat Pada'],
+                (object)['name' => 'catatan', 'label' => 'Catatan'],
                 (object)['name' => 'action', 'label' => 'Aksi']
             ],
             'records' => []
@@ -302,13 +303,51 @@ class PenilaianPrestasiKerjaController extends Controller
         // cetak($PenilaianPrestasiKerja['records']->toArray());
         // die();
 
+
+
+
+
+
+
+
+        $jabatan_id = $PenilaianPrestasiKerja['records']->jabatan->id;
+        $is_staff = $PenilaianPrestasiKerja['records']->jabatan->is_staff;
+        $unit_kerja_id = $PenilaianPrestasiKerja['records']->unit_kerja_id;
+
+
+        if ($is_staff) {
+          // ATASAN STAFF
+          $user_penilai = User::where(function ($query) use($request) {
+              $query->whereHas("jabatan", function ($query) use($request) {
+                  $query->whereNull('is_staff');
+              });
+          })->where('unit_kerja_id', $unit_kerja_id)->with('jabatan')->first();
+        } else {
+            // ATASAN KEPALA
+            // echo
+            $jabatan_parent_id = $PenilaianPrestasiKerja['records']->user->jabatan->parent_id;
+            // cetak($PenilaianPrestasiKerja['records']->user->jabatan->toArray());
+            // die();
+            $user_penilai = User::where('jabatan_id', $jabatan_parent_id)->first();
+
+            // cetak($user_penilai);
+            // die();
+        }
+
+        $user_atasan_penilai = null;
+        if (!empty($user_penilai->jabatan->parent_id)) {
+            $user_atasan_penilai = User::where('jabatan_id', $user_penilai->jabatan->parent_id)->first();
+        }
+
+
         return view('app.penilaian_prestasi_kerja.edit.index', [
             'selected' => [],
             'data' => $PenilaianPrestasiKerja['records'],
             'indikator_kerja_ids' => $indikator_kerja_ids,
             'jabatan' => $Jabatan['records'],
             'indikator_kinerja' => $IndikatorKinerjaTree,
-            'tipe_indikator_ditampilkan' => $tipe_indikator_ditampilkan
+            'tipe_indikator_ditampilkan' => $tipe_indikator_ditampilkan,
+            'user_atasan_penilai' => $user_atasan_penilai
         ]);
     }
 

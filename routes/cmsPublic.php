@@ -26,3 +26,5 @@ $router->get('/qrpdf/{id}', 'CMS\SuratMasuk\SuratMasukController@DownloadPdfFrom
 $router->get('/pdf/{encoded_url}', 'GetPdf\GetPdfController@GetPdf');
 $router->get('/disposisi/pdf/{id}', 'CMS\Disposisi\DisposisiController@DownloadPdf');
 $router->get('/landing', 'CMS\Landing\LandingController@Home');
+
+$router->get('/sign/{code}/{qrcode}', 'CMS\Home\HomeController@Sign');

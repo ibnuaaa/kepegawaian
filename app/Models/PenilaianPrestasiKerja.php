@@ -63,7 +63,14 @@ class PenilaianPrestasiKerja extends Model
     public function penilaian_prestasi_kerja_my_approval()
     {
         return $this->hasOne(PenilaianPrestasiKerjaApproval::class, 'penilaian_prestasi_kerja_id', 'id')
-          ->where('user_id', Auth::user()->id);
+          ->where('user_id', !empty(Auth::user()->id) ? Auth::user()->id : '00');
+    }
+
+    public function penilaian_prestasi_kerja_reject()
+    {
+        return $this->hasMany(PenilaianPrestasiKerjaReject::class, 'penilaian_prestasi_kerja_id', 'id')
+          ->with('user')
+          ->with('penilaian_prestasi_kerja');
     }
 
     public function foto_penilaian_prestasi_kerja()

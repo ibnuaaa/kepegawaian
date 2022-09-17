@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\PenilaianPrestasiKerjaApproval;
 
 use App\Models\PenilaianPrestasiKerjaApproval;
+use App\Models\PenilaianPrestasiKerjaReject;
 use App\Models\PenilaianPrestasiKerja;
 use App\Models\User;
 
@@ -63,8 +64,9 @@ class PenilaianPrestasiKerjaApprovalController extends Controller
         $Model = $request->Payload->all()['Model'];
 
         $uuid = Uuid::generate()->string;
-
-        $Model->PenilaianPrestasiKerjaApproval->uuid = $uuid;
+        if (empty($Model->PenilaianPrestasiKerjaApproval->uuid)) {
+            $Model->PenilaianPrestasiKerjaApproval->uuid = $uuid;
+        }
         $Model->PenilaianPrestasiKerjaApproval->save();
 
 
@@ -86,7 +88,11 @@ class PenilaianPrestasiKerjaApprovalController extends Controller
         } else {
             // ATASAN KEPALA
             // echo
-            $jabatan_parent_id = $PenilaianPrestasiKerja['records']->user->jabatan->parent_id;
+            $jabatan_parent_id =  '';
+            if (!empty($PenilaianPrestasiKerja['records']->user->jabatan->parent_id)) {
+                $jabatan_parent_id = $PenilaianPrestasiKerja['records']->user->jabatan->parent_id;
+            }
+
             // cetak($PenilaianPrestasiKerja['records']->user->jabatan->toArray());
             // die();
             $user_penilai = User::where('jabatan_id', $jabatan_parent_id)->first();
@@ -101,12 +107,23 @@ class PenilaianPrestasiKerjaApprovalController extends Controller
         }
 
         // jika di approve oleh atasan nya atasan
-        if ($user_atasan_penilai->id == Auth::user()->id) {
+        if (!empty($user_atasan_penilai->id) && $user_atasan_penilai->id == Auth::user()->id) {
           $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where('id', $Model->PenilaianPrestasiKerjaApproval->penilaian_prestasi_kerja_id)
             ->first();
           $PenilaianPrestasiKerja->status_approval_sdm = 'need_approval';
           $PenilaianPrestasiKerja->save();
         }
+
+        Json::set('data', $this->SyncData($request, $Model->PenilaianPrestasiKerjaApproval->id));
+        return response()->json(Json::get(), 201);
+    }
+
+    public function Reject(Request $request)
+    {
+        $Model = $request->Payload->all()['Model'];
+        $Model->PenilaianPrestasiKerjaApproval->save();
+
+        $Model->PenilaianPrestasiKerjaReject->save();
 
         Json::set('data', $this->SyncData($request, $Model->PenilaianPrestasiKerjaApproval->id));
         return response()->json(Json::get(), 201);

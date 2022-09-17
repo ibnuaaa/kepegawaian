@@ -1661,7 +1661,7 @@ if ( ! function_exists('treeChildIndikatorKinerjaModal'))
       return '
         <table class="noborder" cellspacing="0px" cellpadding="0px">
           <tr>
-            <td rowspan="4" style="width:62px;">
+            <td style="width:62px;">
               <img src="'.$qrcode .'" width="60px">
             </td>
             <td style="font-size:8px;" >

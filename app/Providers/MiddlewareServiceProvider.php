@@ -110,6 +110,7 @@ class MiddlewareServiceProvider extends ServiceProvider
         'PenilaianPrestasiKerja.Delete' => \App\Http\Middleware\PenilaianPrestasiKerja\Delete::class,
 
         'PenilaianPrestasiKerjaApproval.Approve' => \App\Http\Middleware\PenilaianPrestasiKerjaApproval\Approve::class,
+        'PenilaianPrestasiKerjaApproval.Reject' => \App\Http\Middleware\PenilaianPrestasiKerjaApproval\Reject::class,
         'PenilaianPrestasiKerjaApproval.Delete' => \App\Http\Middleware\PenilaianPrestasiKerjaApproval\Delete::class,
 
         'PenilaianPrestasiKerjaItem.Insert' => \App\Http\Middleware\PenilaianPrestasiKerjaItem\Insert::class,

@@ -20,10 +20,25 @@
 
 <?php
 
+
+
 $can_edit = false;
+// jika yang login belum mengapprove
 if (empty($data->penilaian_prestasi_kerja_my_approval)) {
   $can_edit = true;
 }
+
+
+if (!empty($data->penilaian_prestasi_kerja_my_approval)) {
+  if ($data->penilaian_prestasi_kerja_my_approval->status == '4') {
+      $can_edit = true;
+  }
+}
+
+if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id) {
+  $can_edit = false;
+}
+
 
 ?>
 
@@ -506,83 +521,87 @@ if (empty($data->penilaian_prestasi_kerja_my_approval)) {
                           <?php $total_nilai_kinerja = 0; ?>
                           @foreach ($data->penilaian_perilaku_kerja as $key => $val)
                           <?php $total_nilai_kinerja += $val->nilai_kinerja; ?>
-                          <tr>
-                              <td class="text-center">
-                                  {{$key + 1}}
-                              </td>
-                              <td>
-                                  {{!empty($val->indikator_tetap->name) ? $val->indikator_tetap->name : ''}}
-                              </td>
-                              <td align="center">
-                                  @if ($can_edit)
-                                      <input type="text" id="bobot_{{ $val->id }}" name="bobot" class="form-control text-center" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                                  @else
-                                      {{ $val->bobot }}
-                                  @endif
-                              </td>
-                              <td align="center">
-                                  @if ($can_edit)
-                                      <input type="text" id="target_{{ $val->id }}" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                                  @else
-                                      {{ $val->target }}
-                                  @endif
-                              </td>
-                              <td align="center">
-                                  @if ($can_edit)
-                                      @if ($data->user_id == MyAccount()->id)
-                                          @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
-                                            <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                          @if (!empty($data->jabatan->is_staff) && $data->jabatan->is_staff == 1 && $val->indikator_tetap->name == 'Kepemimpinan')
+
+                          @else
+                              <tr>
+                                  <td class="text-center">
+                                      {{$key + 1}}
+                                  </td>
+                                  <td>
+                                      {{!empty($val->indikator_tetap->name) ? $val->indikator_tetap->name : ''}}
+                                  </td>
+                                  <td align="center">
+                                      @if ($can_edit)
+                                          <input type="text" id="bobot_{{ $val->id }}" name="bobot" class="form-control text-center" value="{{ $val->bobot }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                      @else
+                                          {{ $val->bobot }}
+                                      @endif
+                                  </td>
+                                  <td align="center">
+                                      @if ($can_edit)
+                                          <input type="text" id="target_{{ $val->id }}" name="target" class="form-control text-center" value="{{ $val->target }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                      @else
+                                          {{ $val->target }}
+                                      @endif
+                                  </td>
+                                  <td align="center">
+                                      @if ($can_edit)
+                                          @if ($data->user_id == MyAccount()->id)
+                                              @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
+                                                <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                              @else
+                                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                                    <span id="realisasi_{{ $val->id }}">{{ $val->realisasi ? $val->realisasi : 'Nilai' }}</span> <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li class="dropdown-plus-title">
+                                                        Pilih salah satu
+                                                    </li>
+                                                    @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
+                                                    <li><a href="#" onclick="return saveSKPIndikatorTetap('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                              @endif
                                           @else
-                                            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                                <span id="realisasi_{{ $val->id }}">{{ $val->realisasi ? $val->realisasi : 'Nilai' }}</span> <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li class="dropdown-plus-title">
-                                                    Pilih salah satu
-                                                </li>
-                                                @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
-                                                <li><a href="#" onclick="return saveSKPIndikatorTetap('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
-                                                @endforeach
-                                            </ul>
+                                              @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
+                                                <input type="text" id="realisasi_approved_{{ $val->id }}" name="realisasi_approved" class="form-control text-center" value="{{ $val->realisasi_approved }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                              @else
+                                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                                    <span id="realisasi_approved_{{ $val->id }}">{{ $val->realisasi_approved ? $val->realisasi_approved : 'Nilai' }}</span> <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li class="dropdown-plus-title">
+                                                        Pilih salah satu
+                                                    </li>
+                                                    @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
+                                                    <li><a href="#" onclick="return saveSKPIndikatorTetapApproved('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                              @endif
                                           @endif
                                       @else
-                                          @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
-                                            <input type="text" id="realisasi_approved_{{ $val->id }}" name="realisasi_approved" class="form-control text-center" value="{{ $val->realisasi_approved }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
-                                          @else
-                                            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                                <span id="realisasi_approved_{{ $val->id }}">{{ $val->realisasi_approved ? $val->realisasi_approved : 'Nilai' }}</span> <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li class="dropdown-plus-title">
-                                                    Pilih salah satu
-                                                </li>
-                                                @foreach ($val->indikator_tetap->indikator_tetap_dasar_nilai as $key2 => $val2)
-                                                <li><a href="#" onclick="return saveSKPIndikatorTetapApproved('{{$val->id}}','{{$val2->nilai}}')" style="width:500px;white-space: normal !important;">Nilai <b style="color:black;">{{$val2->nilai}}</b>) {{ $val2->name }}</a></li>
-                                                @endforeach
-                                            </ul>
-                                          @endif
+                                          {{ $val->realisasi_approved }}
                                       @endif
-                                  @else
-                                      {{ $val->realisasi_approved }}
-                                  @endif
-                              </td>
-                              <td align="center">
-                                  @if ($can_edit)
-                                      <input type="text" id="capaian_{{ $val->id }}" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
-                                  @else
-                                      {{ $val->capaian }}
-                                  @endif
-                              </td>
-                              <td align="center">
-                                  @if ($can_edit)
-                                      <input type="text" id="nilai_kinerja_{{ $val->id }}" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
-                                  @else
-                                      {{ $val->nilai_kinerja }}
-                                  @endif
-                              </td>
-                              <td class="text-center">
-                              </td>
-                          </tr>
+                                  </td>
+                                  <td align="center">
+                                      @if ($can_edit)
+                                          <input type="text" id="capaian_{{ $val->id }}" name="capaian" class="form-control text-center" value="{{ $val->capaian }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
+                                      @else
+                                          {{ $val->capaian }}
+                                      @endif
+                                  </td>
+                                  <td align="center">
+                                      @if ($can_edit)
+                                          <input type="text" id="nilai_kinerja_{{ $val->id }}" name="nilai_kinerja" class="form-control text-center" value="{{ $val->nilai_kinerja }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;"  disabled>
+                                      @else
+                                          {{ $val->nilai_kinerja }}
+                                      @endif
+                                  </td>
+                                  <td class="text-center">
+                                  </td>
+                              </tr>
+                          @endif
                           @endforeach
 
                           <tr>
@@ -711,22 +730,30 @@ if (empty($data->penilaian_prestasi_kerja_my_approval)) {
                                 {{$total_nilai_kinerja}}
                               </td>
                               <td class="text-center">
-
                               </td>
                           </tr>
+                          <tr>
+                              <th class="text-center" colspan="8">
+                                <br>
+                              </th>
+                          </tr>
 
+                          <tr>
+                              <th class="text-center" colspan="8">
+                                  Catatan
+                              </th>
+                          </tr>
 
-
-
-
+                          <tr>
+                              <td colspan="8">
+                                  @if ($can_edit)
+                                  <textarea class="form-control" name="catatan" placeholder="Inputkan catatan di sini..." onchange="saveUpdate(this)">{{ $data->catatan }}</textarea>
+                                  @else
+                                  {{ $data->catatan }}
+                                  @endif
+                              </td>
+                          </tr>
                       </table>
-
-
-
-
-
-
-
 
                     </div>
                 </div>
@@ -759,8 +786,6 @@ if (empty($data->penilaian_prestasi_kerja_my_approval)) {
             </div>
             @endif
         </div>
-
-
     </div>
 </div>
 
@@ -768,8 +793,31 @@ if (empty($data->penilaian_prestasi_kerja_my_approval)) {
     <div class="col-12">
         <div class="card overflow-scrolln">
             <div class="card-body text-center">
-                @if (empty($data->penilaian_prestasi_kerja_my_approval))
-                  <a class="btn btn-primary btn-lg" onClick="approve()"><i class="fa fa-telegram"></i> Kirim</a>
+                @if (empty($data->penilaian_prestasi_kerja_my_approval) || (!empty($data->penilaian_prestasi_kerja_my_approval) && in_array($data->penilaian_prestasi_kerja_my_approval->status, ['4','5'])) )
+                  @if (MyAccount()->id != $data->user_id)
+                  <a class="btn btn-danger btn-lg text-white" onClick="tolak()"><i class="fa fa-times"></i>
+                    Tolak
+                  </a>
+                  @endif
+
+                  @if (MyAccount()->id == $data->user_id)
+
+                      @if (!empty($data->penilaian_prestasi_kerja_my_approval) && in_array($data->penilaian_prestasi_kerja_my_approval->status, ['4']))
+                      <a class="btn btn-primary btn-lg" onClick="approve()"><i class="fa fa-telegram"></i>
+                        Kirim Perbaikan
+                      </a>
+                      @else
+                      <a class="btn btn-primary btn-lg" onClick="approve()"><i class="fa fa-telegram"></i>
+                        Kirim
+                      </a>
+                      @endif
+
+
+                  @else
+                  <a class="btn btn-primary btn-lg" onClick="approve()"><i class="fa fa-telegram"></i>
+                      Setujui
+                  </a>
+                  @endif
                 @endif
             </div>
         </div>
@@ -777,7 +825,52 @@ if (empty($data->penilaian_prestasi_kerja_my_approval)) {
 </div>
 
 
+<div class="row">
+    <div class="col-12">
+        <div class="card overflow-scrolln">
+            <div class="card-body text-center">
+                <h4>Riwayat Penolakan</h4>
 
+
+
+                <table class="table table-bordered table-sm">
+                    <tr>
+                        <th style="width: 15%;">
+                          Nama
+                        </th>
+                        <th style="width: 15%;">
+                          Unit Kerja
+                        </th>
+                        <th style="width: 15%;">
+                          Jabatan
+                        </th>
+                        <th style="width: 55%;">
+                          Notes Reject
+                        </th>
+                    </tr>
+
+                    @foreach($data->penilaian_prestasi_kerja_reject as $key => $value)
+                    <tr>
+                        <td>
+                          {{ $value->user->name }}
+                        </td>
+                        <td>
+                          {{ $value->user->unit_kerja->name }}
+                        </td>
+                        <td>
+                          {{ $value->user->jabatan->name }}
+                        </td>
+                        <td>
+                          {{ $value->notes }}
+                        </td>
+                    </tr>
+                    @endforeach
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal effect-sign" id="modalIndikatorKinerja" role="dialog">
     <div class="modal-dialog modal-xl " role="document">
@@ -809,6 +902,28 @@ if (empty($data->penilaian_prestasi_kerja_my_approval)) {
                 </div>
             </div>
             <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal effect-sign" id="modalTolak" role="dialog">
+    <div class="modal-dialog modal-md " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alasan Ditolak</h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="body-modal-sasaran-kinerja">
+                <textarea class="form-control" name="catatan_penolakan" placeholder="Tulis alasan penolakan..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-danger btn-sm text-white" onClick="saveTolak()"><i class="fa fa-times"></i>
+                  Tolak
+                </a>
             </div>
         </div>
     </div>
