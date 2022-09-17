@@ -14,6 +14,8 @@
                                   <option value="{{ fullUri([$data['key']."-show" => 25]) }}" {{ $data['selected'] == 25 ? 'selected=selected' : '' }}>25</option>
                                   <option value="{{ fullUri([$data['key']."-show" => 50]) }}" {{ $data['selected'] == 50 ? 'selected=selected"' : '' }}>50</option>
                                   <option value="{{ fullUri([$data['key']."-show" => 100]) }}" {{ $data['selected'] == 100 ? 'selected=selected' : '' }}>100</option>
+                                  <option value="{{ fullUri([$data['key']."-show" => 1000]) }}" {{ $data['selected'] == 1000 ? 'selected=selected' : '' }}>1000</option>
+                                  <option value="{{ fullUri([$data['key']."-show" => 10000]) }}" {{ $data['selected'] == 10000 ? 'selected=selected' : '' }}>10000</option>
                               </select>
                               data
                            </label>
@@ -44,7 +46,12 @@
                   </div>
                   <div class="row">
                      <div class="col-sm-12">
-                        <table class="table table-bordered text-nowrap border-bottom dataTable no-footer" id="responsive-datatable" role="grid" aria-describedby="responsive-datatable_info">
+                       @yield('filterSection')
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <table class="table table-bordered text-nowrap border-bottom dataTable no-footer table-sm" id="responsive-datatable" role="grid" aria-describedby="responsive-datatable_info">
                            <thead>
                              <tr>
                                  @foreach ($data['heads'] as $item)

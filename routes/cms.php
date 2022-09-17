@@ -75,6 +75,8 @@ $router->get('/pelatihan/new', 'CMS\Pelatihan\PelatihanController@New');
 $router->get('/pelatihan/edit/{id}', 'CMS\Pelatihan\PelatihanController@Edit');
 $router->get('/pelatihan/{id}', 'CMS\Pelatihan\PelatihanController@Detail');
 
+$router->get('/laporan_iki', 'CMS\Laporan\LaporanIkiController@Home');
+
 $router->get('/status_pegawai', 'CMS\StatusPegawai\StatusPegawaiController@Home');
 $router->get('/status_pegawai/new', 'CMS\StatusPegawai\StatusPegawaiController@New');
 $router->get('/status_pegawai/edit/{id}', 'CMS\StatusPegawai\StatusPegawaiController@Edit');

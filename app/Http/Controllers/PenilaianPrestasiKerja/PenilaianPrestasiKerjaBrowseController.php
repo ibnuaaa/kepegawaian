@@ -60,6 +60,14 @@ class PenilaianPrestasiKerjaBrowseController extends Controller
                 $query->where("$this->PenilaianPrestasiKerjaTable.bulan", $request->ArrQuery->bulan);
             }
 
+            if (isset($request->ArrQuery->dari_bulan)) {
+              $query->where("$this->PenilaianPrestasiKerjaTable.bulan", '>=', $request->ArrQuery->dari_bulan);
+            }
+
+            if (isset($request->ArrQuery->sampai_bulan)) {
+              $query->where("$this->PenilaianPrestasiKerjaTable.bulan", '<=' , $request->ArrQuery->sampai_bulan);
+            }
+
             if (isset($request->ArrQuery->tahun)) {
                 $query->where("$this->PenilaianPrestasiKerjaTable.tahun", $request->ArrQuery->tahun);
             }
