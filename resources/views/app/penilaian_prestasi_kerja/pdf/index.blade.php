@@ -553,8 +553,8 @@
 
 
 </table>
-<br/><br/>
-<table class="table" style="width: 100%; page-break-inside: avoid;">
+<div style="padding-top:6px;">
+<table class="table" style="width: 100%;">
     <tr>
       <th colspan="3" class="text-center">
           PERSETUJUAN PENILAIAN
@@ -604,7 +604,7 @@
     </tr>
 
 </table>
-
+</div>
 <?php date_default_timezone_set("Asia/Jakarta"); ?>
 
 <footer>
