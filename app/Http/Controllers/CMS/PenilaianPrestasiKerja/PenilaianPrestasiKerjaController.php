@@ -27,6 +27,10 @@ use App\Models\IndikatorKinerja;
 use App\Models\UnitKerja;
 use App\Models\Jabatan;
 use App\Models\User;
+use App\Models\UploadAbsensi;
+use App\Models\UploadAbsensiDetail;
+use App\Models\PenilaianPrestasiKerjaItem;
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -217,7 +221,36 @@ class PenilaianPrestasiKerjaController extends Controller
             ->equal('id', $id)
             ->get('first');
 
+        $UploadAbsensi = UploadAbsensi::where('month', $PenilaianPrestasiKerja['records']->bulan)->where('year', $PenilaianPrestasiKerja['records']->tahun)->first();
 
+        $nilai_absensi = 0;
+        if (!empty($UploadAbsensi)) {
+            $UploadAbsensiDetail = UploadAbsensiDetail::where('nip', $PenilaianPrestasiKerja['records']->user->nip)
+              ->where('upload_absensi_id', $UploadAbsensi->id)
+              ->first();
+
+            if (!empty($UploadAbsensiDetail)) {
+                $nilai_absensi = $UploadAbsensiDetail->nilai;
+
+
+
+                $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('penilaian_prestasi_kerja_id', $id)
+                    ->where('indikator_tetap_id', '3')
+                    ->first();
+                $PenilaianPrestasiKerjaItem->realisasi = $nilai_absensi;
+                $PenilaianPrestasiKerjaItem->capaian = $nilai_absensi / $PenilaianPrestasiKerjaItem->target;
+                $PenilaianPrestasiKerjaItem->nilai_kinerja = $PenilaianPrestasiKerjaItem->capaian * $PenilaianPrestasiKerjaItem->bobot;
+                $PenilaianPrestasiKerjaItem->save();
+
+            }
+        }
+
+
+
+
+        $PenilaianPrestasiKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
+            ->equal('id', $id)
+            ->get('first');
 
         if (!isset($PenilaianPrestasiKerja['records']->id)) {
             throw new ModelNotFoundException('Not Found Batch');

@@ -50,6 +50,9 @@
                               @if (getPermissions('report_skp')['checked'])
                               <li><a href="{!! url('/report_skp'); !!}" class="slide-item"> Rekap SKP</a></li>
                               @endif
+                              @if (getPermissions('upload_absensi')['checked'])
+                              <li><a href="{!! url('/upload_absensi'); !!}" class="slide-item"> Upload Absensi</a></li>
+                              @endif
                             </ul>
                         </li>
                         @endif

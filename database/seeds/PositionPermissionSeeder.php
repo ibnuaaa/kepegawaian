@@ -227,6 +227,12 @@ class PositionPermissionSeeder extends Seeder
                 'position_id' => 1,
                 'permission_id' => 36,
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 37,
+                'position_id' => 1,
+                'permission_id' => 37,
+                'created_at' => Carbon::now()
             ]
         ])->keyBy($this->key);
     }

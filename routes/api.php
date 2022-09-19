@@ -57,6 +57,7 @@ $router->post($prefix.'/upload', ['uses' => 'File\FileController@Upload', 'middl
 
 $router->post($prefix.'/storage/save', ['uses' => 'Storage\StorageController@Save', 'middleware' => ['LogActivity:Storage.Save','Storage.Save']]);
 $router->post($prefix.'/storage/save_excel', ['uses' => 'Storage\StorageController@SaveExcel', 'middleware' => ['LogActivity:Storage.SaveExcel','Storage.SaveExcel']]);
+$router->post($prefix.'/storage/save_upload_absensi_excel', ['uses' => 'Storage\StorageController@SaveUploadAbsensiExcel', 'middleware' => ['LogActivity:Storage.SaveUploadAbsensiExcel','Storage.SaveUploadAbsensiExcel']]);
 $router->post($prefix.'/storage/save_excel_ikt', ['uses' => 'Storage\StorageController@SaveExcelIkt', 'middleware' => ['LogActivity:Storage.SaveExcelIkt','Storage.SaveExcelIkt']]);
 $router->delete($prefix.'/storage/delete_by_key/{uuid}', ['uses' => 'Storage\StorageController@DeleteByKey', 'middleware' => ['LogActivity:Storage.DeleteByKey','Storage.DeleteByKey']]);
 
@@ -315,6 +316,14 @@ $router->delete($prefix.'/indikator_skp/{id}', ['uses' => 'IndikatorSkp\Indikato
 $router->post($prefix.'/user', ['uses' => 'User\UserController@Insert', 'middleware' => ['LogActivity:User.Insert','User.Insert']]);
 $router->put($prefix.'/user/change_password', ['uses' => 'User\UserController@ChangePassword', 'middleware' => ['LogActivity:User.ChangePassword','User.ChangePassword']]);
 $router->put($prefix.'/user/{id}', ['uses' => 'User\UserController@Update', 'middleware' => ['LogActivity:User.Update','User.Update']]);
+
+// upload_absensi
+$router->get($prefix.'/upload_absensi', ['uses' => 'UploadAbsensi\UploadAbsensiBrowseController@get', 'middleware' => ['LogActivity:UploadAbsensi.View','ArrQuery']]);
+$router->get($prefix.'/upload_absensi/{query:.+}', ['uses' => 'UploadAbsensi\UploadAbsensiBrowseController@get', 'middleware' => ['UploadAbsensi:UploadAbsensi.View','ArrQuery']]);
+$router->post($prefix.'/upload_absensi', ['uses' => 'UploadAbsensi\UploadAbsensiController@Insert', 'middleware' => ['LogActivity:UploadAbsensi.Insert','UploadAbsensi.Insert']]);
+$router->put($prefix.'/upload_absensi/{id}', ['uses' => 'UploadAbsensi\UploadAbsensiController@Update', 'middleware' => ['LogActivity:UploadAbsensi.Update','UploadAbsensi.Update']]);
+$router->delete($prefix.'/upload_absensi/{id}', ['uses' => 'UploadAbsensi\UploadAbsensiController@Delete', 'middleware' => ['LogActivity:UploadAbsensi.Delete','UploadAbsensi.Delete']]);
+
 
 // e_kinerja_iki
 $router->get($prefix.'/e_kinerja_iki', ['uses' => 'EKinerjaIki\EKinerjaIkiBrowseController@get', 'middleware' => ['LogActivity:EKinerjaIki.View','ArrQuery']]);

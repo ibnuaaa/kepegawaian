@@ -227,6 +227,12 @@ class PermissionSeeder extends Seeder
                 'name' => 'laporan_iki',
                 'label' => 'laporan_iki',
                 'created_at' => Carbon::now()
+            ],
+            [
+                'id' => 37,
+                'name' => 'upload_absensi',
+                'label' => 'upload_absensi',
+                'created_at' => Carbon::now()
             ]
         ])->keyBy($this->key);
     }

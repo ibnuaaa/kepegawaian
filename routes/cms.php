@@ -132,6 +132,11 @@ $router->get('/notifikasi', 'CMS\Notifikasi\NotifikasiController@Home');
 $router->get('/audit_trail', 'CMS\AuditTrail\AuditTrailController@Home');
 $router->get('/audit_trail/log_data/{id}', 'CMS\AuditTrail\AuditTrailController@LogData');
 
+$router->get('/upload_absensi', 'CMS\UploadAbsensi\UploadAbsensiController@Home');
+$router->get('/upload_absensi/new', 'CMS\UploadAbsensi\UploadAbsensiController@New');
+$router->get('/upload_absensi/edit/{id}', 'CMS\UploadAbsensi\UploadAbsensiController@Edit');
+$router->get('/upload_absensi/{id}', 'CMS\UploadAbsensi\UploadAbsensiController@Detail');
+
 $router->get('/e_kinerja_iki', 'CMS\EKinerjaIki\EKinerjaIkiController@Home');
 $router->get('/e_kinerja_iki/new', 'CMS\EKinerjaIki\EKinerjaIkiController@New');
 $router->get('/e_kinerja_iki/edit/{id}', 'CMS\EKinerjaIki\EKinerjaIkiController@Edit');

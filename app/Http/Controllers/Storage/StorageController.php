@@ -8,6 +8,9 @@ use App\Models\EKinerjaIkiDetail;
 use App\Models\EKinerjaIki;
 use App\Models\EKinerjaIktDetail;
 use App\Models\EKinerjaIkt;
+use App\Models\UploadAbsensiDetail;
+use App\Models\UploadAbsensi;
+
 
 
 use App\Traits\Browse;
@@ -276,10 +279,10 @@ class StorageController extends Controller
         $category = '';
         foreach ($sheetData as $key => $val) {
             if ($key > 0) {
-                
+
                 if (!empty($val[0])) $category = $val[0];
 
-                $EKinerjaIkiDetail = new EKinerjaIkiDetail();    
+                $EKinerjaIkiDetail = new EKinerjaIkiDetail();
                 $EKinerjaIkiDetail->e_kinerja_iki_id = $e_kinerja_iki_id;
                 $EKinerjaIkiDetail->category = $category;
                 $EKinerjaIkiDetail->no = $val[1];
@@ -292,8 +295,8 @@ class StorageController extends Controller
                 $EKinerjaIkiDetail->save();
             }
         }
-        
-        
+
+
         Json::set('data', 'success');
         return response()->json(Json::get(), 201);
     }
@@ -337,16 +340,16 @@ class StorageController extends Controller
         $sheetData = $spreadsheet->getActiveSheet()->toArray();
 
         $e_kinerja_ikt_id = $ObjectId;
-        
+
         $EKinerjaIktDetail = EKinerjaIktDetail::where('e_kinerja_ikt_id',$e_kinerja_ikt_id)->delete();
 
         $category = '';
         foreach ($sheetData as $key => $val) {
             if ($key > 0) {
-                
+
                 // if (!empty($val[0])) $category = $val[0];
 
-                $EKinerjaIkiDetail = new EKinerjaIktDetail();    
+                $EKinerjaIkiDetail = new EKinerjaIktDetail();
                 $EKinerjaIkiDetail->e_kinerja_ikt_id = $e_kinerja_ikt_id;
                 $EKinerjaIkiDetail->no = $val[0];
                 $EKinerjaIkiDetail->judul_indikator = $val[1];
@@ -356,11 +359,64 @@ class StorageController extends Controller
                 $EKinerjaIkiDetail->save();
             }
         }
-        
-        
+
+
         Json::set('data', 'success');
         return response()->json(Json::get(), 201);
     }
+
+
+    public function SaveUploadAbsensiExcel(Request $request)
+    {
+        $File = $request->Payload->all()['File'];
+        $Object = $request->Payload->all()['Object'];
+        $ObjectId = $request->Payload->all()['ObjectId'];
+
+        $FileName = $File->key . '.' . $File->extension;
+        $SizeFile = Storage::disk('temporary')->size($FileName);
+        $MimeType = Storage::disk('temporary')->mimeType($FileName);
+
+
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+
+        $Folder = $Object . '_' . $ObjectId;
+        if ($ObjectId && $Object) {
+            if (!Storage::disk('local')->has($Folder)) {
+                // Storage::disk('local')->makeDirectory($Folder, $mode = 0777, true, true);
+            }
+        }
+        Storage::disk('local')->put(
+            // $Folder . '/' . $FileName,
+            $FileName,
+            Storage::disk('temporary')->get($FileName), 'public'
+        );
+
+        $spreadsheet = $reader->load('../storage/app/' . $FileName);
+        $sheetData = $spreadsheet->getActiveSheet()->toArray();
+
+        $upload_absensi_id = $ObjectId;
+
+        $UploadAbsensiDetail = UploadAbsensiDetail::where('upload_absensi_id',$upload_absensi_id)->delete();
+
+        $category = '';
+        foreach ($sheetData as $key => $val) {
+            if ($key > 0) {
+
+                $UploadAbsensiDetail = new UploadAbsensiDetail();
+                $UploadAbsensiDetail->upload_absensi_id = $upload_absensi_id;
+                $UploadAbsensiDetail->nip = $val[0];
+                $UploadAbsensiDetail->nilai = $val[2];
+                $UploadAbsensiDetail->save();
+            }
+        }
+
+
+        Json::set('data', 'success');
+        return response()->json(Json::get(), 201);
+    }
+
+
+
 
     public function SyncData($request, $id)
     {

@@ -175,6 +175,10 @@ class MiddlewareServiceProvider extends ServiceProvider
         'UserJabatanFungsionalRequest.Update' => \App\Http\Middleware\UserJabatanFungsionalRequest\Update::class,
         'UserJabatanFungsionalRequest.Delete' => \App\Http\Middleware\UserJabatanFungsionalRequest\Delete::class,
 
+        'UploadAbsensi.Insert' => \App\Http\Middleware\UploadAbsensi\Insert::class,
+        'UploadAbsensi.Update' => \App\Http\Middleware\UploadAbsensi\Update::class,
+        'UploadAbsensi.Delete' => \App\Http\Middleware\UploadAbsensi\Delete::class,
+
         'EKinerjaIki.Insert' => \App\Http\Middleware\EKinerjaIki\Insert::class,
         'EKinerjaIki.Update' => \App\Http\Middleware\EKinerjaIki\Update::class,
         'EKinerjaIki.Delete' => \App\Http\Middleware\EKinerjaIki\Delete::class,
@@ -207,6 +211,7 @@ class MiddlewareServiceProvider extends ServiceProvider
 
         'Storage.Save' => \App\Http\Middleware\Storage\Save::class,
         'Storage.SaveExcel' => \App\Http\Middleware\Storage\SaveExcel::class,
+        'Storage.SaveUploadAbsensiExcel' => \App\Http\Middleware\Storage\SaveUploadAbsensiExcel::class,
         'Storage.SaveExcelIkt' => \App\Http\Middleware\Storage\SaveExcelIkt::class,
         'Storage.Fetch' => \App\Http\Middleware\Storage\Fetch::class,
         'Storage.FetchTmp' => \App\Http\Middleware\Storage\FetchTmp::class,
