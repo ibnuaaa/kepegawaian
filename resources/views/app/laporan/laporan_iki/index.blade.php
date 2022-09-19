@@ -98,7 +98,7 @@
         <th style="width: 112px">{{ $item->label }}</th>
         @else
         <th>
-            {{ $item->label }}
+            {!! $item->label !!}
         </th>
         @endif
         @endscopedslot

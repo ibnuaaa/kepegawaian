@@ -94,10 +94,11 @@ class LaporanIkiController extends Controller
                 (object)['name' => 'nip', 'label' => 'nip'],
                 (object)['name' => 'nama', 'label' => 'nama'],
                 (object)['name' => 'bulan', 'label' => 'bulan'],
-                (object)['name' => 'nilai_kuantitas', 'label' => 'nilai kuantitas'],
-                (object)['name' => 'nilai_kualitas', 'label' => 'nilai kualitas'],
-                (object)['name' => 'nilai_perilaku', 'label' => 'nilai perilaku'],
-                (object)['name' => 'total_iki', 'label' => 'total_iki'],
+                (object)['name' => 'nilai_kuantitas', 'label' => 'nilai<br>kuantitas'],
+                (object)['name' => 'nilai_kualitas', 'label' => 'nilai<br>kualitas'],
+                (object)['name' => 'nilai_perilaku', 'label' => 'nilai<br>perilaku'],
+                (object)['name' => 'nilai_tambahan', 'label' => 'nilai<br>tambahan'],
+                (object)['name' => 'total_iki', 'label' => 'total<br>iki'],
             ],
             'records' => []
         ];
