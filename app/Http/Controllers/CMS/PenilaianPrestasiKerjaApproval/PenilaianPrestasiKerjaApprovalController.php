@@ -62,6 +62,7 @@ class PenilaianPrestasiKerjaApprovalController extends Controller
                 (object)['name' => 'No', 'label' => 'No'],
                 (object)['name' => 'name', 'label' => 'Nama Pegawai'],
                 (object)['name' => 'periode', 'label' => 'Periode'],
+                (object)['name' => 'catatan', 'label' => 'Catatan'],
                 (object)['name' => 'created_at', 'label' => 'Terbuat Pada'],
                 (object)['name' => 'action', 'label' => 'Aksi']
             ],

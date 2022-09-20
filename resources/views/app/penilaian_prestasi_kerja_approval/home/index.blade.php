@@ -57,6 +57,9 @@
                 <p>{{ !empty($item->penilaian_prestasi_kerja->bulan) ? monthIndo($item->penilaian_prestasi_kerja->bulan) : '' }} {{ !empty($item->penilaian_prestasi_kerja->tahun) ? $item->penilaian_prestasi_kerja->tahun : '' }}</p>
             </td>
             <td class="v-align-middle">
+                <p>{{ $item->penilaian_prestasi_kerja->catatan }}</p>
+            </td>
+            <td class="v-align-middle">
                 <p>{{ $item->created_at }}</p>
             </td>
             <td class="v-align-middle">
