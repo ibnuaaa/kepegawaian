@@ -19,6 +19,11 @@ class PenilaianPrestasiKerjaItem extends Model
         return $this->hasOne(IndikatorKinerja::class, 'id', 'indikator_kinerja_id')->with('indikator_kinerja_child')->with('parents');
     }
 
+    public function penilaian_prestasi_kerja()
+    {
+        return $this->hasOne(PenilaianPrestasiKerja::class, 'id', 'penilaian_prestasi_kerja_id')->with('user');
+    }
+
     public function indikator_tetap()
     {
         return $this->hasOne(IndikatorTetap::class, 'id', 'indikator_tetap_id')->with('indikator_tetap_dasar_nilai');

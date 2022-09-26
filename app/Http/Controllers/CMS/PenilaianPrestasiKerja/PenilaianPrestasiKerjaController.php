@@ -24,12 +24,15 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
 use App\Models\IndikatorKinerja;
+use App\Models\IndikatorTetap;
 use App\Models\UnitKerja;
 use App\Models\Jabatan;
 use App\Models\User;
 use App\Models\UploadAbsensi;
 use App\Models\UploadAbsensiDetail;
 use App\Models\PenilaianPrestasiKerjaItem;
+use App\Models\PenilaianPrestasiKerja;
+
 use App\Models\PenilaianIku;
 
 
@@ -218,10 +221,57 @@ class PenilaianPrestasiKerjaController extends Controller
     public function Edit(Request $request, $id)
     {
 
+
+        $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where('id', $id)->with('user')->first();
+        // $arr_penilaian_perilaku = [];
+
+
+
+        // foreach ($PenilaianPrestasiKerjaItem as $key => $value) {
+        //   $arr_penilaian_perilaku[$value->indikator_tetap_id] = 1;
+        // }
+
+
+        // pengecekan indikator perilaku & kualitas
+        // get indikator tetap
+        $IndikatorTetap = IndikatorTetap::all();
+        foreach ($IndikatorTetap as $key => $value) {
+            $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('penilaian_prestasi_kerja_id', $id)->where('indikator_tetap_id', $value->id)->first();
+
+            if (empty($PenilaianPrestasiKerjaItem)) {
+              $PenilaianPrestasiKerjaItem = new PenilaianPrestasiKerjaItem();
+              $PenilaianPrestasiKerjaItem->penilaian_prestasi_kerja_id = $id;
+              $PenilaianPrestasiKerjaItem->user_id = Auth::user()->id;
+              $PenilaianPrestasiKerjaItem->indikator_tetap_id = $value->id;
+              $PenilaianPrestasiKerjaItem->type = $value->type;
+            }
+
+            if ($PenilaianPrestasiKerja->user->jabatan->is_staff) {
+                $PenilaianPrestasiKerjaItem->bobot = $value->bobot_staff;
+            } else {
+                $PenilaianPrestasiKerjaItem->bobot = $value->bobot_pimpinan;
+            }
+
+
+            $PenilaianPrestasiKerjaItem->target = $value->target;
+
+            if (empty($value->realisasi)) {
+              $PenilaianPrestasiKerjaItem->realisasi = $value->target;
+              $PenilaianPrestasiKerjaItem->realisasi_approved = $value->target;
+            } else {
+                if (!empty($PenilaianPrestasiKerjaItem->realisasi) && $PenilaianPrestasiKerjaItem->realisasi > $value->target) {
+                  $PenilaianPrestasiKerjaItem->realisasi = $value->target;
+                  $PenilaianPrestasiKerjaItem->realisasi_approved = $value->target;
+                }
+            }
+            $PenilaianPrestasiKerjaItem->save();
+
+        }
+
+
         $PenilaianPrestasiKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
             ->equal('id', $id)
             ->get('first');
-
 
         if (empty($PenilaianPrestasiKerja['records']->penilaian_iku)) {
             $PenilaianIku = new PenilaianIku();
@@ -229,6 +279,7 @@ class PenilaianPrestasiKerjaController extends Controller
             $PenilaianIku->save();
 
         }
+
 
         $UploadAbsensi = UploadAbsensi::where('month', $PenilaianPrestasiKerja['records']->bulan)->where('year', $PenilaianPrestasiKerja['records']->tahun)->first();
 
@@ -247,6 +298,7 @@ class PenilaianPrestasiKerjaController extends Controller
                     ->where('indikator_tetap_id', '3')
                     ->first();
                 $PenilaianPrestasiKerjaItem->realisasi = $nilai_absensi;
+                $PenilaianPrestasiKerjaItem->realisasi_approved = $nilai_absensi;
                 $PenilaianPrestasiKerjaItem->capaian = $nilai_absensi / $PenilaianPrestasiKerjaItem->target;
                 $PenilaianPrestasiKerjaItem->nilai_kinerja = $PenilaianPrestasiKerjaItem->capaian * $PenilaianPrestasiKerjaItem->bobot;
                 $PenilaianPrestasiKerjaItem->save();
