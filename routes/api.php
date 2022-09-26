@@ -87,7 +87,6 @@ $router->post($prefix.'/indikator_tetap', ['uses' => 'IndikatorTetap\IndikatorTe
 $router->put($prefix.'/indikator_tetap/{id}', ['uses' => 'IndikatorTetap\IndikatorTetapController@Update', 'middleware' => ['LogActivity:IndikatorTetap.Update','IndikatorTetap.Update']]);
 $router->delete($prefix.'/indikator_tetap/{id}', ['uses' => 'IndikatorTetap\IndikatorTetapController@Delete', 'middleware' => ['LogActivity:IndikatorTetap.Delete','IndikatorTetap.Delete']]);
 
-
 // user_pendidikan
 $router->get($prefix.'/user_pendidikan', ['uses' => 'UserPendidikan\UserPendidikanBrowseController@get', 'middleware' => ['LogActivity:UserPendidikan.View','ArrQuery']]);
 $router->get($prefix.'/user_pendidikan/{query:.+}', ['uses' => 'UserPendidikan\UserPendidikanBrowseController@get', 'middleware' => ['UserPendidikan:UserPendidikan.View','ArrQuery']]);
@@ -267,6 +266,14 @@ $router->post($prefix.'/penilaian_prestasi_kerja', ['uses' => 'PenilaianPrestasi
 $router->put($prefix.'/penilaian_prestasi_kerja/{id}', ['uses' => 'PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Update', 'middleware' => ['LogActivity:PenilaianPrestasiKerja.Update','PenilaianPrestasiKerja.Update']]);
 $router->delete($prefix.'/penilaian_prestasi_kerja/{id}', ['uses' => 'PenilaianPrestasiKerja\PenilaianPrestasiKerjaController@Delete', 'middleware' => ['LogActivity:PenilaianPrestasiKerja.Delete','PenilaianPrestasiKerja.Delete']]);
 
+// penilaian_iku
+$router->get($prefix.'/penilaian_iku', ['uses' => 'PenilaianIku\PenilaianIkuBrowseController@get', 'middleware' => ['ArrQuery']]);
+$router->get($prefix.'/penilaian_iku/{query:.+}', ['uses' => 'PenilaianIku\PenilaianIkuBrowseController@get', 'middleware' => ['ArrQuery']]);
+$router->post($prefix.'/penilaian_iku', ['uses' => 'PenilaianIku\PenilaianIkuController@Insert', 'middleware' => ['LogActivity:PenilaianIku.Insert','PenilaianIku.Insert']]);
+$router->put($prefix.'/penilaian_iku/{id}', ['uses' => 'PenilaianIku\PenilaianIkuController@Update', 'middleware' => ['LogActivity:PenilaianIku.Update','PenilaianIku.Update']]);
+$router->delete($prefix.'/penilaian_iku/{id}', ['uses' => 'PenilaianIku\PenilaianIkuController@Delete', 'middleware' => ['LogActivity:PenilaianIku.Delete','PenilaianIku.Delete']]);
+
+
 // penilaian_prestasi_kerja_approval
 $router->get($prefix.'/penilaian_prestasi_kerja_approval', ['uses' => 'PenilaianPrestasiKerjaApproval\PenilaianPrestasiKerjaApprovalBrowseController@get', 'middleware' => ['ArrQuery']]);
 $router->get($prefix.'/penilaian_prestasi_kerja_approval/{query:.+}', ['uses' => 'PenilaianPrestasiKerjaApproval\PenilaianPrestasiKerjaApprovalBrowseController@get', 'middleware' => ['ArrQuery']]);
@@ -282,14 +289,12 @@ $router->post($prefix.'/penilaian_perilaku_kerja', ['uses' => 'PenilaianPerilaku
 $router->put($prefix.'/penilaian_perilaku_kerja/{id}', ['uses' => 'PenilaianPerilakuKerja\PenilaianPerilakuKerjaController@Update', 'middleware' => ['LogActivity:PenilaianPerilakuKerja.Update','PenilaianPerilakuKerja.Update']]);
 $router->delete($prefix.'/penilaian_perilaku_kerja/{id}', ['uses' => 'PenilaianPerilakuKerja\PenilaianPerilakuKerjaController@Delete', 'middleware' => ['LogActivity:PenilaianPerilakuKerja.Delete','PenilaianPerilakuKerja.Delete']]);
 
-
 // penilaian_prestasi_kerja_item
 $router->get($prefix.'/penilaian_prestasi_kerja_item', ['uses' => 'PenilaianPrestasiKerjaItem\PenilaianPrestasiKerjaItemBrowseController@get', 'middleware' => ['LogActivity:PenilaianPrestasiKerjaItem.View','ArrQuery']]);
 $router->get($prefix.'/penilaian_prestasi_kerja_item/{query:.+}', ['uses' => 'PenilaianPrestasiKerjaItem\PenilaianPrestasiKerjaItemBrowseController@get', 'middleware' => ['PenilaianPrestasiKerjaItem:PenilaianPrestasiKerjaItem.View','ArrQuery']]);
 $router->post($prefix.'/penilaian_prestasi_kerja_item', ['uses' => 'PenilaianPrestasiKerjaItem\PenilaianPrestasiKerjaItemController@Insert', 'middleware' => ['LogActivity:PenilaianPrestasiKerjaItem.Insert','PenilaianPrestasiKerjaItem.Insert']]);
 $router->put($prefix.'/penilaian_prestasi_kerja_item/{id}', ['uses' => 'PenilaianPrestasiKerjaItem\PenilaianPrestasiKerjaItemController@Update', 'middleware' => ['LogActivity:PenilaianPrestasiKerjaItem.Update','PenilaianPrestasiKerjaItem.Update']]);
 $router->delete($prefix.'/penilaian_prestasi_kerja_item/{id}', ['uses' => 'PenilaianPrestasiKerjaItem\PenilaianPrestasiKerjaItemController@Delete', 'middleware' => ['LogActivity:PenilaianPrestasiKerjaItem.Delete','PenilaianPrestasiKerjaItem.Delete']]);
-
 
 // indikator_kinerja
 $router->get($prefix.'/indikator_kinerja', ['uses' => 'IndikatorKinerja\IndikatorKinerjaBrowseController@get', 'middleware' => ['LogActivity:IndikatorKinerja.View','ArrQuery']]);
@@ -311,7 +316,6 @@ $router->get($prefix.'/indikator_skp/{query:.+}', ['uses' => 'IndikatorSkp\Indik
 $router->post($prefix.'/indikator_skp', ['uses' => 'IndikatorSkp\IndikatorSkpController@Insert', 'middleware' => ['LogActivity:IndikatorSkp.Insert','IndikatorSkp.Insert']]);
 $router->put($prefix.'/indikator_skp/{id}', ['uses' => 'IndikatorSkp\IndikatorSkpController@Update', 'middleware' => ['LogActivity:IndikatorSkp.Update','IndikatorSkp.Update']]);
 $router->delete($prefix.'/indikator_skp/{id}', ['uses' => 'IndikatorSkp\IndikatorSkpController@Delete', 'middleware' => ['LogActivity:IndikatorSkp.Delete','IndikatorSkp.Delete']]);
-
 
 $router->post($prefix.'/user', ['uses' => 'User\UserController@Insert', 'middleware' => ['LogActivity:User.Insert','User.Insert']]);
 $router->put($prefix.'/user/change_password', ['uses' => 'User\UserController@ChangePassword', 'middleware' => ['LogActivity:User.ChangePassword','User.ChangePassword']]);

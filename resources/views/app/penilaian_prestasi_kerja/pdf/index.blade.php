@@ -529,16 +529,16 @@
           Capaian Kinerja Unit (IKU)
         </td>
         <td>
-          &nbsp;
+          {{$data->penilaian_iku->target}}
         </td>
         <td>
-          &nbsp;
+          {{$data->penilaian_iku->realisasi}}
         </td>
         <td colspan="2">
-          &nbsp;
+          {{$data->penilaian_iku->capaian_unit}}
         </td>
         <td>
-          &nbsp;
+          {{$data->penilaian_iku->iku}}
         </td>
     </tr>
 

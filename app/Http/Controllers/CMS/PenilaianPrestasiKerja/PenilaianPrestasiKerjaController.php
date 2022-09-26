@@ -30,6 +30,7 @@ use App\Models\User;
 use App\Models\UploadAbsensi;
 use App\Models\UploadAbsensiDetail;
 use App\Models\PenilaianPrestasiKerjaItem;
+use App\Models\PenilaianIku;
 
 
 use Illuminate\Support\Facades\Auth;
@@ -220,6 +221,14 @@ class PenilaianPrestasiKerjaController extends Controller
         $PenilaianPrestasiKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
             ->equal('id', $id)
             ->get('first');
+
+
+        if (empty($PenilaianPrestasiKerja['records']->penilaian_iku)) {
+            $PenilaianIku = new PenilaianIku();
+            $PenilaianIku->penilaian_prestasi_kerja_id = $id;
+            $PenilaianIku->save();
+
+        }
 
         $UploadAbsensi = UploadAbsensi::where('month', $PenilaianPrestasiKerja['records']->bulan)->where('year', $PenilaianPrestasiKerja['records']->tahun)->first();
 

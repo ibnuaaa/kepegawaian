@@ -711,16 +711,78 @@ if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id)
                               </td>
                           </tr>
                           @endforeach
-                          @if ($can_edit)
+
+
                           <tr>
-                              <td class="text-left" colspan="7">
-                                  <a class="btn btn-primary btn-sm" href="#" onclick="return saveNewIndikatorTambahan();">
-                                      <i class="fa fa-plus"></i>
-                                      Tambah Kegiatan
-                                  </a>
+                              <th class="text-center" colspan="8">
+                                  <br><br>
+                              </th>
+                          </tr>
+                          <tr>
+                              <th class="text-center" colspan="8">
+                                  INDEKS KINERJA UNIT (IKU)
+                              </th>
+                          </tr>
+
+                          <tr>
+                              <th class="text-center">
+                                  No
+                              </th>
+                              <th class="text-center" style="min-width: 200px;">
+                                  Jenis & Nama Kegiatan
+                              </th>
+                              <th class="text-center">
+                                  Target
+                              </th>
+                              <th class="text-center">
+                                  Realisasi
+                              </th>
+                              <th class="text-center" colspan="2">
+                                  Capaian Unit
+                              </th>
+                              <th class="text-center">
+                                  Nilai Kinerja
+                              </th>
+                          </tr>
+
+                          <tr>
+                              <td class="text-center" colspan="2">
+                                  Indeks Kinerja Unit (IKU)
+                              </td>
+                              <td align="center">
+                                  @if ($can_edit)
+                                  <input type="text" name="target" class="form-control text-center" value="{{ $data->penilaian_iku->target }}" data-id="{{ $data->penilaian_iku->id }}" onChange="savePeilaianIku(this)"  style="width: 80px;">
+                                  @else
+                                  {{ $data->penilaian_iku->target }}
+                                  @endif
+                              </td>
+                              <td align="center">
+                                  @if ($can_edit)
+                                  <input type="text" name="realisasi" class="form-control text-center" value="{{ $data->penilaian_iku->realisasi }}" data-id="{{ $data->penilaian_iku->id }}" onChange="savePeilaianIku(this)"  style="width: 80px;">
+                                  @else
+                                  {{ $data->penilaian_iku->realisasi }}
+                                  @endif
+                              </td>
+                              <td align="center" colspan="2">
+                                  @if ($can_edit)
+                                  <input type="text" name="capaian_unit" class="form-control text-center" value="{{ $data->penilaian_iku->capaian_unit }}" data-id="{{ $data->penilaian_iku->id }}" onChange="savePeilaianIku(this)"  style="width: 80px;">
+                                  @else
+                                  {{ $data->penilaian_iku->capaian_unit }}
+                                  @endif
+                              </td>
+                              <td align="center">
+                                  @if ($can_edit)
+                                  <input type="text" name="iku" class="form-control text-center" value="{{ $data->penilaian_iku->iku }}" data-id="{{ $data->penilaian_iku->id }}" onChange="savePeilaianIku(this)"  style="width: 80px;">
+                                  @else
+                                  {{ $data->penilaian_iku->iku }}
+                                  @endif
+                              </td>
+                              <td class="text-center">
+
                               </td>
                           </tr>
-                          @endif
+
+
 
                           <tr>
                               <td class="text-center" colspan="6">
