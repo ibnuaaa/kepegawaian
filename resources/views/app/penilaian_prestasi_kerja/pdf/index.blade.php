@@ -494,6 +494,8 @@
     @if ($show_iku)
     <tr>
         <td class="text-center" colspan="8">
+
+
             <br/>
         </td>
     </tr>
@@ -543,7 +545,8 @@
     <tr>
         <td colspan="8">
             Catatatn Khusus (Incidental Record) dari Atasan :
-            <br><br><br>
+            <br>
+            {{ $data->catatan }}
         </td>
     </tr>
     @endif

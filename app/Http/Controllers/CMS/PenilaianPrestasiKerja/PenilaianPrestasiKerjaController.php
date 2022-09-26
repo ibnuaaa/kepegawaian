@@ -498,11 +498,11 @@ class PenilaianPrestasiKerjaController extends Controller
 
 
         // get document group_jabatan
-        $show_iku = false;
-        if ($is_staff || in_array($Jabatan['records']->group_jabatan, [3,4])) {
-            // $show_iku = true;
+        // $show_iku = false;
+        // if ($is_staff || in_array($Jabatan['records']->group_jabatan, [3,4])) {
+            $show_iku = true;
             // hide dulu aja
-        }
+        // }
 
         $pdf = PDF::loadView('app.penilaian_prestasi_kerja.pdf.index', [
             'select' => [],
@@ -637,7 +637,7 @@ class PenilaianPrestasiKerjaController extends Controller
             // $show_iku = true;
             // hide dulu aja
         }
-
+        die();
         $pdf = PDF::loadView('app.penilaian_prestasi_kerja.pdf_iku.index', [
             'select' => [],
             'data' => $PenilaianPrestasiKerja['records'],

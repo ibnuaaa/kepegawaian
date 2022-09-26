@@ -106,7 +106,7 @@ if ($menu == 'sdm') {
                                     <label class="col-md-2 form-label">Foto Profil</label>
                                     <div class="col-md-9">
                                         @if(($page == 'profile' || $page == 'admin_update_profile'))
-                                        <input type="file" onchange="prepareUpload(this, 'foto_profile{{ !$id ? '_request' : '' }}', '{{ $data->id }}', false, ['png','jpg','jpeg','bmp']);" multiple>
+                                        <input type="file" onchange="prepareUpload(this, 'foto_profile{{ !$id ? '_request' : '' }}', '{{ $data->id }}', false, ['png','jpg','jpeg','bmp','jpeg']);" multiple>
                                         @endif
                                         <div style="clear: both;"></div>
                                         <div class="img-preview mt-2" id="img-preview">
@@ -1350,8 +1350,8 @@ if ($menu == 'sdm') {
                                                 <td class="{{ $val->user_golongan_id && $val->user_golongan && $val->tmt != $val->user_golongan->tmt ? 'bg-changed' : '' }}">
                                                     <input name="tmt" value="{{ $val->tmt }}" data-id="{{ $val->id }}" id="myDatepicker" onChange="saveGolongan(this)" class="form-control " type="text" required>
                                                 </td>
-                                                
-                                                <td>                                                
+
+                                                <td>
                                                     @if(($page == 'profile'  || $page == 'admin_update_profile'))
                                                     <input type="file" onchange="prepareUpload(this, 'foto_perjanjian_kerja{{ !$id ? '_request' : '' }}', '{{ $val->id }}', false, ['pdf']);" multiple>
                                                     @endif
