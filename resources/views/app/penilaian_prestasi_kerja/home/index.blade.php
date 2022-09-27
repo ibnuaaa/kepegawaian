@@ -76,9 +76,7 @@
                     @if (!$props['jabatan']->is_staff)
                     <a href="{{ url('/penilaian_prestasi_kerja/pdf_iku/'.$item->id) }}" class="btn btn-info btn-xs"><i class="fa fa-file-pdf-o"></i> Download IKU</a>
                     @endif
-                    @if (!empty($props['jabatan']->is_staff) && $props['jabatan']->is_staff)
                     <a href="{{ url('/penilaian_prestasi_kerja/logbook/'.$item->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-list-alt"></i> Logbook</a>
-                    @endif
                     @if (!$props['jabatan']->is_staff)
                     <a href="{{ url('/penilaian_prestasi_kerja/id/'.$item->id) }}" class="btn btn-success btn-xs"><i class="fa fa-file"></i> Buat Program / Kegiatan </a>
                     @endif
