@@ -205,7 +205,7 @@ if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id)
                                   Target
                               </th>
                               <th class="text-center">
-                                  Realisasi
+                                  <a href="#" onclick="return openModalDetailRealisasiAtasan();">Realisasi</a>
                               </th>
 
                               <th class="text-center">
@@ -986,6 +986,40 @@ if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id)
                 <a class="btn btn-danger btn-sm text-white" onClick="saveTolak()"><i class="fa fa-times"></i>
                   Tolak
                 </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal effect-sign" id="modalDetailRealisasiAtasan" role="dialog">
+    <div class="modal-dialog modal-xl " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detail</h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="body-modal-sasaran-kinerja">
+              <table class="table table-bordered table-sm">
+              @foreach ($realisasi as $key => $val)
+                <tr>
+                  <?php for ($i=0; $i < $val['level']; $i++): ?>
+                    <td style="width:10%;"></td>
+                  <?php endfor; ?>
+
+                  <td style="width:10%;">
+                    {{  $val['indikator_kinerja']->name }}
+                  </td>
+                  <td style="width:10%;">
+                    {{ round($val['value'], 2)}}
+                  </td>
+                </tr>
+              @endforeach
+              </table>
+            </div>
+            <div class="modal-footer">
+
             </div>
         </div>
     </div>

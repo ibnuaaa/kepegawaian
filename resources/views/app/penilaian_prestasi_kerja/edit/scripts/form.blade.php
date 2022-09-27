@@ -100,6 +100,12 @@ function tolak() {
   $('#modalTolak').modal('show');
 }
 
+function openModalDetailRealisasiAtasan() {
+  $('#modalDetailRealisasiAtasan').modal('show');
+
+  return false;
+}
+
 function saveTolak() {
     var data = {
       penilaian_prestasi_kerja_id: '{{ $data->id }}',
