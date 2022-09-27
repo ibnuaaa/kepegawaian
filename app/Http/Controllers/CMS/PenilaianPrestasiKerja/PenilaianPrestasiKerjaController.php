@@ -221,16 +221,7 @@ class PenilaianPrestasiKerjaController extends Controller
     public function Edit(Request $request, $id)
     {
 
-
         $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where('id', $id)->with('user')->first();
-        // $arr_penilaian_perilaku = [];
-
-
-
-        // foreach ($PenilaianPrestasiKerjaItem as $key => $value) {
-        //   $arr_penilaian_perilaku[$value->indikator_tetap_id] = 1;
-        // }
-
 
         // pengecekan indikator perilaku & kualitas
         // get indikator tetap
@@ -255,7 +246,7 @@ class PenilaianPrestasiKerjaController extends Controller
 
             $PenilaianPrestasiKerjaItem->target = $value->target;
 
-            if (empty($value->realisasi)) {
+            if (empty($PenilaianPrestasiKerjaItem->realisasi)) {
               $PenilaianPrestasiKerjaItem->realisasi = $value->target;
               $PenilaianPrestasiKerjaItem->realisasi_approved = $value->target;
             } else {
@@ -264,6 +255,11 @@ class PenilaianPrestasiKerjaController extends Controller
                   $PenilaianPrestasiKerjaItem->realisasi_approved = $value->target;
                 }
             }
+
+            $PenilaianPrestasiKerjaItem->capaian = $PenilaianPrestasiKerjaItem->realisasi/$PenilaianPrestasiKerjaItem->target;
+            $PenilaianPrestasiKerjaItem->nilai_kinerja = $PenilaianPrestasiKerjaItem->capaian * $PenilaianPrestasiKerjaItem->bobot;
+
+
             $PenilaianPrestasiKerjaItem->save();
 
         }
@@ -291,23 +287,17 @@ class PenilaianPrestasiKerjaController extends Controller
 
             if (!empty($UploadAbsensiDetail)) {
                 $nilai_absensi = $UploadAbsensiDetail->nilai;
-
-
-
-                $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('penilaian_prestasi_kerja_id', $id)
-                    ->where('indikator_tetap_id', '3')
-                    ->first();
-                $PenilaianPrestasiKerjaItem->realisasi = $nilai_absensi;
-                $PenilaianPrestasiKerjaItem->realisasi_approved = $nilai_absensi;
-                $PenilaianPrestasiKerjaItem->capaian = $nilai_absensi / $PenilaianPrestasiKerjaItem->target;
-                $PenilaianPrestasiKerjaItem->nilai_kinerja = $PenilaianPrestasiKerjaItem->capaian * $PenilaianPrestasiKerjaItem->bobot;
-                $PenilaianPrestasiKerjaItem->save();
-
             }
         }
 
-
-
+        $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('penilaian_prestasi_kerja_id', $id)
+            ->where('indikator_tetap_id', '3')
+            ->first();
+        $PenilaianPrestasiKerjaItem->realisasi = $nilai_absensi;
+        $PenilaianPrestasiKerjaItem->realisasi_approved = $nilai_absensi;
+        $PenilaianPrestasiKerjaItem->capaian = $nilai_absensi / $PenilaianPrestasiKerjaItem->target;
+        $PenilaianPrestasiKerjaItem->nilai_kinerja = $PenilaianPrestasiKerjaItem->capaian * $PenilaianPrestasiKerjaItem->bobot;
+        $PenilaianPrestasiKerjaItem->save();
 
         $PenilaianPrestasiKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
             ->equal('id', $id)
