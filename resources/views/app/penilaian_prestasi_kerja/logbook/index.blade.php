@@ -161,11 +161,19 @@
                                         <br>
                                         <b>Target: {{$value->target}}</b>
                                     </td>
+                                    @if ($value->indikator_kinerja->tipe_indikator == 'kegiatan')
                                     @for ($i= 0; $i < $num_days; $i++)
                                     <td>
+
                                         <input type="text" class="form-control" value="{{ !empty($nilai[$value->indikator_kinerja_id][$i+1]) ? $nilai[$value->indikator_kinerja_id][$i+1] : '' }}" style="width: 60px; text-align:center;" onchange="saveLogbook(this, '{{ $value->indikator_kinerja_id }}', '{{ $i + 1 }}')">
+
                                     </td>
                                     @endfor
+                                    @else
+                                    <td colspan="{{$num_days}}">
+                                        Otomatis
+                                    </td>
+                                    @endif
                                     <td id="total_{{ $value->indikator_kinerja_id }}" class="text-center" style="padding-top: 10px !important;">
                                       {{$value->realisasi}}
                                     </td>

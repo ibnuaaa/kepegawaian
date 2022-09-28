@@ -271,11 +271,7 @@ if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id)
                               </td>
                               <td align="center">
                                     @if ($can_edit)
-                                        @if (!empty($jabatan->is_staff) && $jabatan->is_staff == 1)
                                         <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" disabled="disabled" data-id="{{ $val->id }}" style="width: 80px;text-align:center;">
-                                        @else
-                                        <input type="text" name="realisasi" class="form-control" value="{{ $val->realisasi }}" onChange="saveSKP(this)" data-id="{{ $val->id }}" style="width: 80px;text-align:center;">
-                                        @endif
                                     @else
                                         {{ $val->realisasi_approved }}
                                     @endif

@@ -220,7 +220,6 @@ class PenilaianPrestasiKerjaController extends Controller
 
     public function Edit(Request $request, $id)
     {
-
         $PenilaianPrestasiKerja = PenilaianPrestasiKerja::where('id', $id)->with('user')->with('penilaian_prestasi_kerja_item')->first();
 
         $bulan = $PenilaianPrestasiKerja->bulan;
@@ -230,9 +229,7 @@ class PenilaianPrestasiKerjaController extends Controller
         $realisasi = [];
 
         foreach ($PenilaianPrestasiKerja->penilaian_prestasi_kerja_item as $key => $value) {
-
             $IndikatorKinerjaSingle = IndikatorKinerja::where('id', $value->indikator_kinerja_id)->first();
-
             $IndikatorKinerja = IndikatorKinerja::where('parent_id', $value->indikator_kinerja_id)->get();
 
             if ($IndikatorKinerjaSingle->tipe_indikator != 'kegiatan') {
@@ -250,36 +247,39 @@ class PenilaianPrestasiKerjaController extends Controller
 
                     if($value1->tipe_indikator == 'kegiatan') {
 
-                      $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('indikator_kinerja_id', $value1->id)->with('penilaian_prestasi_kerja')
-                          ->where(function ($query) use($request,$bulan,$tahun) {
-                              $query->whereHas("penilaian_prestasi_kerja", function ($query) use($request,$bulan,$tahun) {
-                                  $query->where('bulan',$bulan);
-                                  $query->where('tahun',$tahun);
-                              });
-                          })->get();
-                      $total_persentase_iki = 0;
-                      $jml_persentase_iki = 0;
-                      $rataiki = 0;
-                      foreach ($PenilaianPrestasiKerjaItem as $keyitem => $item) {
-                          // hitung total realisasi dalam persen
-                          $jml_persentase_iki++;
-                          $persentase = ($item->realisasi_approved / $item->target) * 100;
-                          $total_persentase_iki += $persentase;
+                      // $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('indikator_kinerja_id', $value1->id)->with('penilaian_prestasi_kerja')
+                      //     ->where(function ($query) use($request,$bulan,$tahun) {
+                      //         $query->whereHas("penilaian_prestasi_kerja", function ($query) use($request,$bulan,$tahun) {
+                      //             $query->where('bulan',$bulan);
+                      //             $query->where('tahun',$tahun);
+                      //         });
+                      //     })->get();
+                      // $total_persentase_iki = 0;
+                      // $jml_persentase_iki = 0;
+                      // $rataiki = 0;
+                      // foreach ($PenilaianPrestasiKerjaItem as $keyitem => $item) {
+                      //     // hitung total realisasi dalam persen
+                      //     $jml_persentase_iki++;
+                      //     $persentase = ($item->realisasi_approved / $item->target) * 100;
+                      //     $total_persentase_iki += $persentase;
+                      //
+                      // }
+                      //
+                      // if($jml_persentase_iki && $total_persentase_iki) $rataiki = $total_persentase_iki / $jml_persentase_iki;
 
-                      }
+                      $ratarata = $this->getIkiBerdasarIkiBulanTahun($request, $value1->id, $bulan, $tahun);
 
-                      if($jml_persentase_iki && $total_persentase_iki) $rataiki = $total_persentase_iki / $jml_persentase_iki;
                       // cetak('level-1-keg' . ' - ' .  $value1->id. ' - ' .$rataiki);
 
                       $realisasi_item['indikator_kinerja'] = $value1;
-                      $realisasi_item['value'] = $rataiki;
+                      $realisasi_item['value'] = $ratarata['rataiki'];
                       $realisasi_item['level'] = 1;
                       $realisasi[] = $realisasi_item;
 
-                      if($jml_persentase_iki) $jml_persentase_0++;
+                      if($ratarata['jml_persentase_iki']) $jml_persentase_0++;
 
 
-                      $total_persentase_0 += $rataiki;
+                      $total_persentase_0 += $ratarata['rataiki'];
 
 
 
@@ -289,38 +289,36 @@ class PenilaianPrestasiKerjaController extends Controller
                         foreach ($IndikatorKinerja as $key2 => $value2) {
                             if ($value2->tipe_indikator == 'kegiatan') {
 
-                                $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('indikator_kinerja_id', $value2->id)->with('penilaian_prestasi_kerja')
-                                    ->where(function ($query) use($request,$bulan,$tahun) {
-                                        $query->whereHas("penilaian_prestasi_kerja", function ($query) use($request,$bulan,$tahun) {
-                                            $query->where('bulan',$bulan);
-                                            $query->where('tahun',$tahun);
-                                        });
-                                    })->get();
-                                $total_persentase_iki = 0;
-                                $jml_persentase_iki = 0;
-                                $rataiki = 0;
-                                foreach ($PenilaianPrestasiKerjaItem as $keyitem => $item) {
-                                    // hitung total realisasi dalam persen
-                                    $jml_persentase_iki++;
-                                    $persentase = ($item->realisasi_approved / $item->target) * 100;
-                                    $total_persentase_iki += $persentase;
-
-
-
-                                }
-
-                                if($jml_persentase_iki && $total_persentase_iki) $rataiki = $total_persentase_iki / $jml_persentase_iki;
+                                // $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('indikator_kinerja_id', $value2->id)->with('penilaian_prestasi_kerja')
+                                //     ->where(function ($query) use($request,$bulan,$tahun) {
+                                //         $query->whereHas("penilaian_prestasi_kerja", function ($query) use($request,$bulan,$tahun) {
+                                //             $query->where('bulan',$bulan);
+                                //             $query->where('tahun',$tahun);
+                                //         });
+                                //     })->get();
+                                // $total_persentase_iki = 0;
+                                // $jml_persentase_iki = 0;
+                                // $rataiki = 0;
+                                // foreach ($PenilaianPrestasiKerjaItem as $keyitem => $item) {
+                                //     // hitung total realisasi dalam persen
+                                //     $jml_persentase_iki++;
+                                //     $persentase = ($item->realisasi_approved / $item->target) * 100;
+                                //     $total_persentase_iki += $persentase;
+                                // }
+                                //
+                                // if($jml_persentase_iki && $total_persentase_iki) $rataiki = $total_persentase_iki / $jml_persentase_iki;
+                                $ratarata = $this->getIkiBerdasarIkiBulanTahun($request, $value2->id, $bulan, $tahun);
                                 // cetak('level-2-keg' . ' - ' .  $value2->id. ' - ' .$rataiki);
 
                                 $realisasi_item['indikator_kinerja'] = $value2;
-                                $realisasi_item['value'] = $rataiki;
+                                $realisasi_item['value'] = $ratarata['rataiki'];
                                 $realisasi_item['level'] = 2;
                                 $realisasi[] = $realisasi_item;
 
-                                if($jml_persentase_iki) $jml_persentase_1++;
+                                if($ratarata['jml_persentase_iki']) $jml_persentase_1++;
 
 
-                                $total_persentase_1 += $rataiki;
+                                $total_persentase_1 += $ratarata['rataiki'];
 
 
                             } else {
@@ -336,33 +334,34 @@ class PenilaianPrestasiKerjaController extends Controller
                                 foreach ($IndikatorKinerja as $key3 => $value3) {
                                   if ($value3->tipe_indikator == 'kegiatan') {
 
-                                      $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('indikator_kinerja_id', $value3->id)->with('penilaian_prestasi_kerja')
-                                          ->where(function ($query) use($request,$bulan,$tahun) {
-                                              $query->whereHas("penilaian_prestasi_kerja", function ($query) use($request,$bulan,$tahun) {
-                                                  $query->where('bulan',$bulan);
-                                                  $query->where('tahun',$tahun);
-                                              });
-                                          })->get();
-                                      $total_persentase_iki = 0;
-                                      $jml_persentase_iki = 0;
-                                      $rataiki = 0;
-                                      foreach ($PenilaianPrestasiKerjaItem as $keyitem => $item) {
-                                          // hitung total realisasi dalam persen
-                                          $jml_persentase_iki++;
-                                          $persentase = ($item->realisasi_approved / $item->target) * 100;
-                                          $total_persentase_iki += $persentase;
-                                      }
-
-                                      if($jml_persentase_iki && $total_persentase_iki) $rataiki = $total_persentase_iki / $jml_persentase_iki;
+                                      // $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('indikator_kinerja_id', $value3->id)->with('penilaian_prestasi_kerja')
+                                      //     ->where(function ($query) use($request,$bulan,$tahun) {
+                                      //         $query->whereHas("penilaian_prestasi_kerja", function ($query) use($request,$bulan,$tahun) {
+                                      //             $query->where('bulan',$bulan);
+                                      //             $query->where('tahun',$tahun);
+                                      //         });
+                                      //     })->get();
+                                      // $total_persentase_iki = 0;
+                                      // $jml_persentase_iki = 0;
+                                      // $rataiki = 0;
+                                      // foreach ($PenilaianPrestasiKerjaItem as $keyitem => $item) {
+                                      //     // hitung total realisasi dalam persen
+                                      //     $jml_persentase_iki++;
+                                      //     $persentase = ($item->realisasi_approved / $item->target) * 100;
+                                      //     $total_persentase_iki += $persentase;
+                                      // }
+                                      //
+                                      // if($jml_persentase_iki && $total_persentase_iki) $rataiki = $total_persentase_iki / $jml_persentase_iki;
+                                      $ratarata = $this->getIkiBerdasarIkiBulanTahun($request, $value3->id, $bulan, $tahun);
                                       // cetak('level-3-keg' . ' - ' .  $value3->id. ' - ' .$rataiki);
                                       $realisasi_item['indikator_kinerja'] = $value3;
-                                      $realisasi_item['value'] = $rataiki;
+                                      $realisasi_item['value'] = $ratarata['rataiki'];
                                       $realisasi_item['level'] = 3;
                                       $realisasi[] = $realisasi_item;
 
-                                      if($jml_persentase_iki) $jml_persentase_2++;
+                                      if($ratarata['jml_persentase_iki']) $jml_persentase_2++;
 
-                                      $total_persentase_2 += $rataiki;
+                                      $total_persentase_2 += $ratarata['rataiki'];
 
                                   } else {
 
@@ -634,6 +633,34 @@ class PenilaianPrestasiKerjaController extends Controller
             'user_atasan_penilai' => $user_atasan_penilai,
             'realisasi' => $realisasi
         ]);
+    }
+
+    public function getIkiBerdasarIkiBulanTahun(Request $request, $indikator_kinerja_id, $bulan,$tahun) {
+        $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('indikator_kinerja_id', $indikator_kinerja_id)->with('penilaian_prestasi_kerja')
+            ->where(function ($query) use($request,$bulan,$tahun) {
+                $query->whereHas("penilaian_prestasi_kerja", function ($query) use($request,$bulan,$tahun) {
+                    $query->where('bulan',$bulan);
+                    $query->where('tahun',$tahun);
+                });
+            })->get();
+        $total_persentase_iki = 0;
+        $jml_persentase_iki = 0;
+        $rataiki = 0;
+        foreach ($PenilaianPrestasiKerjaItem as $keyitem => $item) {
+            // hitung total realisasi dalam persen
+            $jml_persentase_iki++;
+            $persentase = 0;
+            if($item->realisasi_approved && $item->target)$persentase = ($item->realisasi_approved / $item->target) * 100;
+            $total_persentase_iki += $persentase;
+        }
+
+        if($jml_persentase_iki && $total_persentase_iki) $rataiki = $total_persentase_iki / $jml_persentase_iki;
+
+        return [
+          'rataiki' => $rataiki,
+          'jml_persentase_iki' => $jml_persentase_iki
+
+        ];
     }
 
 
