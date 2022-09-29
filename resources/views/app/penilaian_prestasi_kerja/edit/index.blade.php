@@ -400,7 +400,7 @@ if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id)
                                   @if ($can_edit)
                                       @if ($data->user_id == MyAccount()->id)
                                           @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
-                                            <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                            <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" disabled class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                                           @else
                                             <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
                                                 <span id="realisasi_{{ $val->id }}">{{ $val->realisasi ? $val->realisasi : 'Nilai' }}</span> <span class="caret"></span>
@@ -545,7 +545,7 @@ if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id)
                                       @if ($can_edit)
                                           @if ($data->user_id == MyAccount()->id)
                                               @if (count($val->indikator_tetap->indikator_tetap_dasar_nilai) == 0)
-                                                <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
+                                                <input type="text" id="realisasi_{{ $val->id }}" name="realisasi" disabled class="form-control text-center" value="{{ $val->realisasi }}" onChange="saveSKP(this)"  data-id="{{ $val->id }}" style="width: 80px;">
                                               @else
                                                 <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
                                                     <span id="realisasi_{{ $val->id }}">{{ $val->realisasi ? $val->realisasi : 'Nilai' }}</span> <span class="caret"></span>
@@ -949,13 +949,12 @@ if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id)
                                     <th style="vertical-align: top !important;">NO</th>
                                     <th style="vertical-align: top !important;width: 50%;">INDIKATOR KINERJA</th>
                                     <th style="vertical-align: top !important;width: 40%;">
-                                      UNIT KERJA
-                                      <br><br>
-                                      <select class="form-control form-select" name="unit_kerja_id" onChange="selectUnitKerja()">
-                                          <option value="0">-= Tampilkan Semua Unit Kerja =-</option>
-                                          {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', 0) : '' !!}
-                                      </select>
-
+                                        UNIT KERJA
+                                        <br><br>
+                                        <select class="form-control form-select" name="unit_kerja_id" onChange="selectUnitKerja()">
+                                            <option value="0">-= Tampilkan Semua Unit Kerja =-</option>
+                                            {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', 0) : '' !!}
+                                        </select>
                                     </th>
 
                                     <th style="vertical-align: top !important;width: 120px;">AKSI</th>

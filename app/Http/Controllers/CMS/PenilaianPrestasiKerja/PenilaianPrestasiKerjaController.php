@@ -488,6 +488,8 @@ class PenilaianPrestasiKerjaController extends Controller
             }
         }
 
+
+        // Absensi
         $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('penilaian_prestasi_kerja_id', $id)
             ->where('indikator_tetap_id', '3')
             ->first();
@@ -496,6 +498,20 @@ class PenilaianPrestasiKerjaController extends Controller
         $PenilaianPrestasiKerjaItem->capaian = $nilai_absensi / $PenilaianPrestasiKerjaItem->target;
         $PenilaianPrestasiKerjaItem->nilai_kinerja = $PenilaianPrestasiKerjaItem->capaian * $PenilaianPrestasiKerjaItem->bobot;
         $PenilaianPrestasiKerjaItem->save();
+
+        // kepuasan pelanggan
+        $kepuasan_pelanggan = getConfig('kepuasan_pelanggan');
+        $PenilaianPrestasiKerjaItem = PenilaianPrestasiKerjaItem::where('penilaian_prestasi_kerja_id', $id)
+            ->where('indikator_tetap_id', '14')
+            ->first();
+        $PenilaianPrestasiKerjaItem->realisasi = $kepuasan_pelanggan;
+        $PenilaianPrestasiKerjaItem->realisasi_approved = $kepuasan_pelanggan;
+        $PenilaianPrestasiKerjaItem->capaian = $kepuasan_pelanggan / $PenilaianPrestasiKerjaItem->target;
+        $PenilaianPrestasiKerjaItem->nilai_kinerja = $PenilaianPrestasiKerjaItem->capaian * $PenilaianPrestasiKerjaItem->bobot;
+        $PenilaianPrestasiKerjaItem->save();
+
+
+
 
         $PenilaianPrestasiKerja = PenilaianPrestasiKerjaBrowseController::FetchBrowse($request)
             ->equal('id', $id)
