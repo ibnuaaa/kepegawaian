@@ -1311,13 +1311,13 @@ if ( ! function_exists('treeChildJabatan'))
 
 if ( ! function_exists('treeSelectUnitKerja'))
 {
-    function treeSelectUnitKerja($data, $dataParent, $selected_id=0){
+    function treeSelectUnitKerja($data, $dataParent, $selected_id=0, $prefix = ''){
+
 
         $html = "";
         if (!empty($data)) {
             foreach ($data as $item) {
-
-                $html .= '<option value="'.$item->id.'"  '.($item->id ==  $selected_id? 'selected=selected' : '').'>'.$item->name.'</option>' . (count($item->children) > 0 ? treeSelectUnitKerja($item->children, $item, $selected_id) : '') ;
+                $html .= '<option value="'.$item->id.'"  '.($item->id ==  $selected_id? 'selected=selected' : '').'>'.$prefix.$item->name.'</option>' . (count($item->children) > 0 ? treeSelectUnitKerja($item->children, $item, $selected_id, ($prefix.  '---')) : '') ;
             }
         }
 
@@ -1518,7 +1518,7 @@ if ( ! function_exists('treeChildIndikatorKinerjaModal'))
                   }
 
                   $html .= '
-                    <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" >
+                    <tr data-node-id="' . $item->id . '" data-node-pid="' . (!empty($dataParent->id) ? $dataParent->id : 0) . '" id="indikator'.$item->unit_kerja_id.'">
                         <td style="height: 10px !important;white-space: nowrap;">
                           '.(($prefix ? ($prefix .'.') : ''). $num).'
                         </td>

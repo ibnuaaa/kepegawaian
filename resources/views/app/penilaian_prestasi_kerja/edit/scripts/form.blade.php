@@ -350,5 +350,29 @@ function approve(){
 
 }
 
+function selectUnitKerja() {
+    var unit_kerja_id = $('select[name=unit_kerja_id]').val();
+
+
+    if (unit_kerja_id == '0') {
+      $( '#tabel-indikator tr' ).each(function( index ) {
+        $(this).css("display", "");
+      });
+    } else {
+      $( '#tabel-indikator tr' ).each(function( index ) {
+        // console.log( index + ": " + $( this ).text() );
+        // $( this ).hide();
+        $(this).css("display", "none");
+      });
+      // $('body #indikator-'+unit_kerja_id).hide();
+      $( '#tabel-indikator #indikator'+unit_kerja_id ).each(function( index ) {
+        // console.log( index + ": " + $( this ).text() );
+        // $( this ).hide();
+        $(this).css("display", "");
+      });
+    }
+    // console.log($('body #indikator-'+unit_kerja_id))
+}
+
 
 </script>

@@ -36,7 +36,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {!! treeChildUnitKerja($data, '') !!}
+                          {!! treeChildUnitKerja($data, '') !!}
                     </tbody>
                 </table>
             </div>

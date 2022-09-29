@@ -621,7 +621,7 @@ class PenilaianPrestasiKerjaController extends Controller
             $user_atasan_penilai = User::where('jabatan_id', $user_penilai->jabatan->parent_id)->first();
         }
 
-
+        $UnitKerjaTree = UnitKerja::tree();
 
         return view('app.penilaian_prestasi_kerja.edit.index', [
             'selected' => [],
@@ -631,6 +631,7 @@ class PenilaianPrestasiKerjaController extends Controller
             'indikator_kinerja' => $IndikatorKinerjaTree,
             'tipe_indikator_ditampilkan' => $tipe_indikator_ditampilkan,
             'user_atasan_penilai' => $user_atasan_penilai,
+            'unit_kerja' => $UnitKerjaTree,
             'realisasi' => $realisasi
         ]);
     }

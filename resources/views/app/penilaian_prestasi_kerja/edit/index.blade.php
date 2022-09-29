@@ -946,13 +946,22 @@ if (!empty($user_atasan_penilai) && $user_atasan_penilai->id == MyAccount()->id)
                         <table id="basic" class="table table-bordered table-condensed-custom">
                             <thead>
                                 <tr>
-                                    <th>NO</th>
-                                    <th style="width: 50%;">INDIKATOR KINERJA</th>
-                                    <th style="width: 40%;">UNIT KERJA</th>
-                                    <th style="width: 120px;">AKSI</th>
+                                    <th style="vertical-align: top !important;">NO</th>
+                                    <th style="vertical-align: top !important;width: 50%;">INDIKATOR KINERJA</th>
+                                    <th style="vertical-align: top !important;width: 40%;">
+                                      UNIT KERJA
+                                      <br><br>
+                                      <select class="form-control form-select" name="unit_kerja_id" onChange="selectUnitKerja()">
+                                          <option value="0">-= Tampilkan Semua Unit Kerja =-</option>
+                                          {!! !empty($unit_kerja) && count($unit_kerja) > 0 ? treeSelectUnitKerja($unit_kerja, '', 0) : '' !!}
+                                      </select>
+
+                                    </th>
+
+                                    <th style="vertical-align: top !important;width: 120px;">AKSI</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tabel-indikator">
                                 {!! treeChildIndikatorKinerjaModal($indikator_kinerja, '', '', 0, $indikator_kerja_ids, $tipe_indikator_ditampilkan, $data) !!}
                             </tbody>
                         </table>
